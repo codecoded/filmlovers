@@ -1,0 +1,37 @@
+
+$watchedColor:       rgb(80, 150, 80);
+$lovedColor:         #ff3333;
+$unlovedColor:       #ff3333;
+$ownedColor:         rgb(192, 192, 50);
+$actionedHover:      #bbb;
+
+.film-actions{
+  .unactioned{
+    &:hover{
+      opacity: 0.8 ;
+    }
+  }
+  .icon-eye-open {
+    &.actioned{
+      color:$watchedColor;
+    }
+  }
+
+  .icon-heart {
+    &.actioned{
+      color:$lovedColor;
+    }
+  }
+
+  .icon-heart-empty {
+    &.actioned{
+      color:$unlovedColor;
+    }
+  }
+
+  .icon-barcode {
+    &.actioned{
+      color:$ownedColor;
+    }
+  }
+}

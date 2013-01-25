@@ -1,0 +1,45 @@
+<div class="row">
+  <!-- Side Bar -->
+  <div class="four mobile-four columns pagination-centered">
+    <%= image_tag "http://placehold.it/500x500&text=#{params[:query]}" %>
+    <div class="hide-for-small panel">
+      <h3>
+        Search Results
+      </h3>
+      <h5 class="subheader">
+        <%= params[:query] %>
+      </h5>
+    </div><a href="#"></a>
+    <div class="panel callout radius" align="center">
+      <h6>
+        Found <%= @film_search_results.count %> films
+      </h6>
+
+    </div>
+      <ul class="pagination">
+        <%= page_search_results(@film_search_results.page_no, @film_search_results.page_total) %>
+      </ul>
+
+  </div><!-- End Side Bar -->
+  <!-- Thumbnails -->
+  <div class="eight columns">
+    <div class="row films">
+      <%= render partial:'shared/film', collection: @film_search_results.films %><!-- End Thumbnails -->
+      <!-- Managed By -->
+      <div class="twelve columns">
+        <div class="panel">
+          <div class="row">
+            <div class="two mobile-two columns">
+              <img src="http://placehold.it/300x300&amp;text=Site%20Owner" />
+            </div>
+            <div class="ten mobile-two columns">
+              <strong>This Site Is Managed By</strong>
+              <hr />
+              Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Donec dignissim nibh fermentum odio ornare sagittis
+            </div>
+          </div>
+        </div>
+      </div><!-- End Managed By -->
+    </div>
+  </div>
+</div>

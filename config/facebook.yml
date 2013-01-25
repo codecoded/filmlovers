@@ -1,0 +1,16 @@
+development:
+  app_id: '116125521892926'
+  secret_key: '55bbf0c81bbfaeaaa1bbeacced2c1feb'
+  namespace: 'filmlovers'
+test:
+  app_id: '116125521892926'
+  secret_key: '55bbf0c81bbfaeaaa1bbeacced2c1feb'
+  namespace: 'filmlovers'
+staging:
+  app_id: '116125521892926'
+  secret_key: '55bbf0c81bbfaeaaa1bbeacced2c1feb'
+  namespace: 'filmlovers'
+production:
+  app_id: '116125521892926'
+  secret_key: '55bbf0c81bbfaeaaa1bbeacced2c1feb'
+  namespace: 'filmlovers'

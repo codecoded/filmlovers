@@ -1,0 +1,62 @@
+<div class="row" data-bind="with: user">
+  <div class="twelve columns">
+    <nav class="top-bar">
+      <ul>
+        <!-- Title Area -->
+        <li class="name">
+          <h1>
+            <a href="/">filmlovers</a>
+          </h1>
+        </li>
+        <li class="toggle-topbar">
+          <a href="#"></a>
+        </li>
+      </ul>
+      <section>
+        <!-- Left Nav Section -->
+        <% if logged_in? %>
+        <ul class="left">
+          <li class="has-dropdown">
+            <%= link_to "Films", films_path(current_user.username) %>
+            <ul class="dropdown">
+              <li>
+               <%= link_to "Watched", film_path(current_user.username, :watched) %>
+              </li>
+              <li>
+                <%= link_to "Loved", film_path(current_user.username, :loved) %>
+              </li>
+              <li>
+                <%= link_to "Unloved", film_path(current_user.username, :unloved) %>
+              </li>
+              <li>
+                <%= link_to "Owned", film_path(current_user.username, :owned) %>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a class="active" href="/lists/watched">Lists</a>
+          </li>
+        </ul><!-- Right Nav Section -->
+        <ul class="right">
+          <li class="has-dropdown">
+            <a href="#" data-bind="text:name"></a>
+            <ul class="dropdown">
+              <li>
+                <label>Options</label>
+              </li>
+              <li>
+                <%= link_to "Sign out", signout_path, id: "sign_out" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+        <ul class="right">
+          <li>
+            <a href="/auth/facebook" id="fb-login">Sign in</a>
+          </li>
+        </ul>
+        <% end %>
+      </section>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="full_overlay film">
+  <div class="content">
+    <h4>
+      <%= film.title %>
+      <br />
+    </h4>
+    <p>
+      <%= film.release_date %>
+      <%#= content_tag(:p, film.id) if Rails.env ='development' %>
+    </p>
+
+    <ul class="film-actions">
+      <% if logged_in? %>
+        <%= film_action_link :watched, film, "icon-eye-open icon-2x" %>
+        <%= film_action_link :loved, film, "icon-heart icon-2x" %>
+        <%= film_action_link :unloved, film, "icon-heart-empty icon-2x" %>
+        <%= film_action_link :owned, film, "icon-barcode icon-2x" %>
+      <% else %>
+        <i class="icon-eye"></i>
+      <% end %>
+      <%#= film_action_link :queued, film, "icon-pushpin" %>
+    </ul>
+  </div><%= image_tag(film.thumbnail, :title => film.title) %>
+</div>

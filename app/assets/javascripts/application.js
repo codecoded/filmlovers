@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= foundation
 //= require knockout
-//= require_tree ./models
 //= require_tree .

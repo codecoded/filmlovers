@@ -1,5 +1,5 @@
 class Films
-  FilmLists = [:watched, :loved, :unloved]
+  FilmLists = [:watched, :loved, :unloved, :owned]
 
   def self.[](list)
     @lists ||= {}

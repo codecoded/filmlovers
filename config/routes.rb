@@ -14,7 +14,7 @@ Filmlovers::Application.routes.draw do
 
   match 'genre/:id' => "search#genre", as: 'genre'
 
-  scope ':username' do
+  scope ':username', :constraints => { :username => /.*/ } do
     resources :films, 
       :only => [:index, :show], 
       :constraints => { :id => /watched|loved|unloved|queued|owned/ } do 

@@ -1,8 +1,9 @@
 $(function(){
-  $(".film-actions i").click( function(){
-    icon = $(this)
-    icon.toggleClass('actioned unactioned')
-    var data_method = icon.hasClass('actioned') ? 'put' : 'delete'
-    icon.parent().attr('data-method', data_method )
+
+  $('.film-actions a').live('ajax:success', function(xhr,data,status){
+    icon = $("i", this)
+    icon.toggleClass('actioned unactioned') 
+    var data_method = icon.hasClass('actioned') ? 'delete' : 'put'
+    $(this).data('method', data_method)
   })
 })

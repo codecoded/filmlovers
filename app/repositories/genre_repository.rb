@@ -12,7 +12,7 @@ class GenreRepository
   end
 
   def find
-    Genre.new(is_cached? ? load : fetch)
+    is_cached? ? load : fetch
   end
 
   def is_cached?
@@ -20,21 +20,13 @@ class GenreRepository
   end
 
   def load
-    doc = Genres.find_by_id id
+    doc = Genre.find id
     doc ? doc : fetch
-  end
-
-  def save!(doc)
-    cache.set Genres.save doc
-    save_results! doc['results']
-    doc
   end
 
   def save_results!(results)
     return unless results
-    results.each do |result|
-      Films.save!(result) unless Films.exists? result['id']
-    end
+    results.each {|result| Film.create! result}
   end
 
   def id
@@ -44,7 +36,10 @@ class GenreRepository
   protected 
 
   def fetch
-    save! Tmdb::Genre.films(genre_id)
+    genre = Genre.create! Tmdb::Genre.films(genre_id)
+    cache.set genre.id
+    save_results! genre.results
+    genre
   end
 
   def redis_key

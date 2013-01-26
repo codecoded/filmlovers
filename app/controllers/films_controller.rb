@@ -39,6 +39,6 @@ class FilmsController < ApplicationController
   end
 
   def film 
-    Film.find params[:film_id]
+    Film.fetch params[:film_id]
   end
 end

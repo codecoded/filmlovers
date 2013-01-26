@@ -8,7 +8,7 @@ class SearchRepository
   end
 
   def find
-    Search.new(is_cached? ? load : fetch)
+    is_cached? ? load : fetch
   end
 
   def is_cached?
@@ -16,21 +16,13 @@ class SearchRepository
   end
 
   def load
-    doc = Searches.find_by_id(id)
+    doc = Search.find_by id:id
     doc ? doc : fetch
-  end
-
-  def save!(doc)
-    cache.set Searches.save(doc)
-    save_results! doc['results']
-    doc
   end
 
   def save_results!(results)
     return unless search_type == :movie and results
-    results.each do |result|
-      Films.save!(result) unless Films.exists? result['id']
-    end
+    results.each {|result| Film.create! result}
   end
 
   def id
@@ -40,7 +32,10 @@ class SearchRepository
   protected 
 
   def fetch
-    save! Tmdb::Search.new(query, search_type).find(options)
+    search = Search.create!(Tmdb::Search.new(query, search_type).find(options))
+    cache.set search.id
+    save_results! search.results
+    search
   end
 
   def redis_key

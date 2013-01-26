@@ -12,7 +12,7 @@ class FilmRepository
   end
   
   def find
-    Film.new(is_cached? ? load : save!(fetch))
+    is_cached? ? load : fetch
   end
 
   def is_cached?
@@ -20,13 +20,8 @@ class FilmRepository
   end
 
   def load
-    doc = Films.find_by_id film_id
+    doc = Film.find film_id
     doc ? doc : fetch
-  end
-
-  def save!(doc)
-    cache.set Films.save! doc
-    doc
   end
 
   def redis_key
@@ -36,7 +31,9 @@ class FilmRepository
   protected 
 
   def fetch
-    Tmdb::Movie.find(film_id)
+    film = Film.create! Tmdb::Movie.find(film_id)
+    cache.set film.id
+    film
   end
 
 end

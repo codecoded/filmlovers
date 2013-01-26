@@ -8,7 +8,7 @@ class ListRepository
   end
 
   def find
-    List.new(is_cached? ? load : fetch)
+    is_cached? ? load : fetch
   end
 
   def is_cached?
@@ -16,14 +16,8 @@ class ListRepository
   end
 
   def load
-    doc = Lists.find_by_id id
+    doc = List.find id
     doc ? doc : fetch
-  end
-
-  def save!(doc)
-    doc['_id'] = id
-    cache.set Lists.save doc
-    doc
   end
 
   def redis_key
@@ -33,7 +27,9 @@ class ListRepository
   protected 
 
   def fetch
-    save! Tmdb::List.find(id)
+    list = List.new Tmdb::List.find(id)
+    cache.set list.id
+    lst
   end
 
 end

@@ -1,10 +1,5 @@
 class Search
-
-  attr_reader :doc, :credits
-
-  def initialize(doc)
-    @doc = doc
-  end
+  include Mongoid::Document
 
   def self.films(query, options={})
     find(query, :movie, options)
@@ -32,14 +27,6 @@ class Search
 
   def save!
     repository.save! doc
-  end
-
-  def results
-    @results ||= doc['results']
-  end
-
-  def method_missing(method, args={})
-    doc[method.to_s]
   end
 
   protected

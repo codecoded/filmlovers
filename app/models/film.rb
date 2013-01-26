@@ -1,14 +1,11 @@
 class Film
+  include Mongoid::Document
 
-  attr_reader :doc, :credits
+  field :_id, type: String, default: ->{ id }
 
   FilmLists = [:watched, :loved, :unloved, :queued]
 
-  def initialize(doc)
-    @doc = doc
-  end
-
-  def self.find(id)
+  def self.fetch(id)
     FilmRepository.find id
   end
   
@@ -17,15 +14,15 @@ class Film
   end
 
   def credits
-    @credits ||= Credits.new doc['casts']
+    @credits ||= Credits.new casts
   end
 
-  def images
-    @images = Images.new(doc['images'])
+  def images_library
+    @images = Images.new(self.images)
   end
 
   def poster(size='original')
-    AppConfig.image_uri_for [size, poster_path] if doc['poster_path']
+    AppConfig.image_uri_for [size, poster_path] if poster_path
   end
 
   def has_poster?
@@ -33,10 +30,7 @@ class Film
   end
 
   def backdrop(size='original')
-    AppConfig.image_uri_for [size, backdrop_path] if doc['backdrop_path']
+    AppConfig.image_uri_for [size, backdrop_path] if backdrop_path
   end
 
-  def method_missing(method, args={})
-    doc[method.to_s]
-  end
 end

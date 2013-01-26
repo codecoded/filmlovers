@@ -24,7 +24,7 @@ gem 'compass-rails'
 gem 'bson_ext'
 gem 'mongo'
 gem 'rest-client'
-gem 'mongoid'
+gem "mongoid", "~> 3.0.0"
 
 # Gems used only for assets and not required
 # in production environments by default.

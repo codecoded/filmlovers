@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails'#, '3.2.8'
 gem 'thin'
 
-gem 'mongo'
+# gem 'mongo'
 gem 'omniauth-facebook', '1.4.0'
 gem 'koala'
 gem 'redis'
@@ -11,12 +11,10 @@ gem 'rack-iframe'
 gem "awesome_print"
 gem 'log4r'
 gem 'fb-channel-file'
-gem 'knockoutjs-rails' 
 gem 'state_machine' # allow states on models
 gem 'swf_fu', '~> 2.0' # loading flash files
 gem 'pusher'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+
 gem 'compass-rails'
 
 gem 'bson_ext'
@@ -30,6 +28,9 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'zurb-foundation' # HTML Framework
+  gem 'knockoutjs-rails' 
+  gem 'jquery-rails'
+  gem 'jquery-ui-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

@@ -6,15 +6,15 @@ class Images
     @doc = doc
   end
 
-  def posters
-    @posters ||= Posters.new doc['posters']
+  def posters_library
+    @posters ||= Posters.new posters
   end
 
   def backdrops
-    @backdrops ||= doc['backdrops']
+    @backdrops ||= backdrops
   end
 
   def poster_for(size, film)
-    AppConfig.image_uri_for(['original', film])
+    AppConfig.image_uri_for(original, film)
   end
 end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails'#, '3.2.8'
 gem 'thin'
 
 gem 'mongo'
@@ -9,8 +9,6 @@ gem 'koala'
 gem 'redis'
 gem 'rack-iframe'
 gem "awesome_print"
-gem 'record-cache'
-gem "activerecord-import", ">= 0.2.0" # SR - For bulk insert
 gem 'log4r'
 gem 'fb-channel-file'
 gem 'knockoutjs-rails' 
@@ -31,7 +29,7 @@ gem "mongoid", "~> 3.0.0"
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  # gem 'zurb-foundation' # HTML Framework
+  gem 'zurb-foundation' # HTML Framework
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

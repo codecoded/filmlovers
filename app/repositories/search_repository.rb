@@ -12,17 +12,18 @@ class SearchRepository
   end
 
   def is_cached?
-    cache.exists?
+    false
+    # cache.exists?
   end
 
   def load
-    doc = Search.find_by id:id
+    doc = Search.find id
     doc ? doc : fetch
   end
 
   def save_results!(results)
     return unless search_type == :movie and results
-    results.each {|result| Film.create! result}
+    results.each {|result| Film.create result}
   end
 
   def id
@@ -32,8 +33,9 @@ class SearchRepository
   protected 
 
   def fetch
-    search = Search.create!(Tmdb::Search.new(query, search_type).find(options))
-    cache.set search.id
+    search = Search.new(Tmdb::Search.new(query, search_type).find(options))
+    # search.upsert
+    # cache.set search.id
     save_results! search.results
     search
   end

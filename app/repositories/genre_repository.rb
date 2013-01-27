@@ -16,7 +16,8 @@ class GenreRepository
   end
 
   def is_cached?
-    cache.exists?
+    false
+    # cache.exists?
   end
 
   def load
@@ -26,7 +27,7 @@ class GenreRepository
 
   def save_results!(results)
     return unless results
-    results.each {|result| Film.create! result}
+    results.each {|result| Film.create result}
   end
 
   def id
@@ -36,8 +37,9 @@ class GenreRepository
   protected 
 
   def fetch
-    genre = Genre.create! Tmdb::Genre.films(genre_id)
-    cache.set genre.id
+    genre = Genre.new(Tmdb::Genre.films(genre_id))
+    # genre.upsert
+    # cache.set genre.id
     save_results! genre.results
     genre
   end

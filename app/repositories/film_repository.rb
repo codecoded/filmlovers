@@ -31,7 +31,8 @@ class FilmRepository
   protected 
 
   def fetch
-    film = Film.create! Tmdb::Movie.find(film_id)
+    film = Film.new Tmdb::Movie.find(film_id)
+    film.upsert
     cache.set film.id
     film
   end

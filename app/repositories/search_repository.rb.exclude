@@ -33,8 +33,7 @@ class SearchRepository
   protected 
 
   def fetch
-    search = Search.new(Tmdb::Search.new(query, search_type).find(options))
-    # search.upsert
+    search = Search.new(Tmdb::API.search(query, options, search_type))
     # cache.set search.id
     save_results! search.results
     search

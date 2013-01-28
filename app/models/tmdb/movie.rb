@@ -11,11 +11,11 @@ class Tmdb::Movie
   end
 
   def find(with_attributes=[:all])
-    get with_attributes
+    @data = Tmdb::API.request method, append_to_response(with_attributes)
   end
 
-  def get(with_attributes)
-    @data = Tmdb::API.request method, append_to_response(with_attributes)
+  def get(options={})
+     @data = Tmdb::API.request method, options
   end
 
   def method

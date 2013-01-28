@@ -1,0 +1,26 @@
+class Tmdb::Genre
+
+  attr_reader :query, :data, :search_type, :options 
+
+  attr_reader :genre_id, :all_movies
+  def initialize(genre_id, include_all_movies = false)
+    @genre_id, @all_movies = genre_id, include_all_movies
+  end
+
+  def method
+    "genre"
+  end
+
+  def self.list
+    Tmdb::API.request "#{method}/list"
+  end
+
+  def find(with_options={})
+     @data = Tmdb::API.request "#{method}/#{genre_id}/movies", add_options(with_options)
+  end
+
+  def add_options(optionals)
+    {include_all_movies: all_movies}.merge(optionals)
+  end
+
+end

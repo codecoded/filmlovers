@@ -7,7 +7,7 @@ module Tmdb
   end
 
   def api
-    "http://api.themoviedb.org/3/"
+    CONFIG['api']
   end
 
 end

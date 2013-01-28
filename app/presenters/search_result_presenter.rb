@@ -1,9 +1,9 @@
 class SearchResultPresenter
 
-  attr_reader :user, :search
+  attr_reader :user, :search, :type
 
-  def initialize(user, search)
-    @user, @search = user, search
+  def initialize(user, search, type)
+    @user, @search, @type = user, search, type
   end
 
   def count

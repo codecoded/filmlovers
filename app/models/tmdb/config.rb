@@ -7,5 +7,6 @@ class Tmdb::Config
     def uri
       "configuration"
     end
+
   end 
 end

@@ -5,7 +5,4 @@ class List
 
   attr_reader :doc
 
-  def self.fetch(id)
-    ListRepository.new(id).find
-  end
 end

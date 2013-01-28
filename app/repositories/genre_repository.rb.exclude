@@ -1,9 +1,9 @@
 class GenreRepository
 
-  attr_reader :genre_id, :cache
+  attr_reader :genre_id, :cache, :options
 
-  def initialize(genre_id)
-    @genre_id = genre_id
+  def initialize(genre_id, options={})
+    @genre_id, @options = genre_id, options
     @cache = Redis::StringStore.new redis_key
   end
 
@@ -37,7 +37,7 @@ class GenreRepository
   protected 
 
   def fetch
-    genre = Genre.new(Tmdb::Genre.films(genre_id))
+    genre = Genre.new(Tmdb::Genre.new(genre_id).find(options))
     # genre.upsert
     # cache.set genre.id
     save_results! genre.results

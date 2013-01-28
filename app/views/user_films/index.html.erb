@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="eight columns">
+    <% if logged_in? %>
+    <div class="row films">
+      <%= link_to "Watched", film_path(current_user.username, :watched) %>
+      <%= link_to "Loved", film_path(current_user.username, :loved) %>
+      <%= link_to "Unloved", film_path(current_user.username, :unloved) %>
+      <%= link_to "Owned", film_path(current_user.username, :owned) %>
+      <%= link_to "Queued", film_path(current_user.username, :queued) %>
+    </div>
+    <% else %>
+    <div class="row films">
+      <i class="icon-eye"></i>
+    </div>
+    <% end %>
+  </div>
+</div>

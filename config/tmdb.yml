@@ -5,4 +5,4 @@ development:
 production:
   key: 'b14b8fd215a745572dc0510e8cddfee4'
   namespace: 'filmlovers-development'
-  api: "http://private-8016-themoviedb.apiary.io"
+  api: "http://api.themoviedb.org/3/"

@@ -10,7 +10,7 @@ class TmdbFilmSearch
 
   def save_films(results)
     return unless results
-    results.each {|result| Film.create result}
+    results.each {|result| Film.with(safe:false).create result}
   end
 
 end

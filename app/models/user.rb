@@ -2,13 +2,15 @@ class User
   include Mongoid::Document
 
   field :username
+  field :first_name
+  field :last_name
   field :name
   field :email
   field :gender
-  field :oauth_token
-  field :oauth_expires_at, type: DateTime
+  field :dob, type: DateTime
 
-  has_many :film_lists
+  embeds_many :film_lists
+  embeds_many :passports
 
   def films
     @films ||= FilmLoverLists.new("user:#{id}:films")
@@ -19,15 +21,36 @@ class User
   end  
 
   def self.from_omniauth(auth)
-    User.find_or_initialize_by(auth.slice(:provider, :uid)).tap do |user|
-      user.name = auth.info.name
-      user.email = auth.info.email
-      user.gender = auth.extra.raw_info.gender
-      user.username = auth.info.nickname
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at) if auth.credentials.expires_at
-      user.save!
-    end    
+    passport = Passport.from_omniauth(auth)
+    user = find_by_passport passport 
+    user.update_from_omniauth auth
+    user.find_passport(passport.uid, passport.provider).update_from_omniauth(auth)
+    user
   end
 
+  def update_from_omniauth(auth)
+   update_attributes(
+    {
+      first_name: auth.info.first_name,
+      last_name: auth.info.last_name,
+      name: auth.info.name,
+      email: auth.info.email,
+      gender: auth.extra.raw_info.gender
+    })   
+
+    update_username(auth.info.nickname) if username.blank? 
+  end
+
+  def update_username(username)
+    update_attribute :username, username
+  end
+
+  def find_passport(uid, provider)
+     passports.find_by(uid: uid, provider: provider)
+  end
+
+  def self.find_by_passport(passport)
+    user = User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first
+    user ? user : User.new(passports:[passport])
+  end
 end

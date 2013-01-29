@@ -12,7 +12,7 @@ class Tmdb::API
     end
 
     def add_api_key(params)
-      {params: {api_key:Tmdb.key}.merge(params)}
+      {params: {api_key:Tmdb.key, per_page:50}.merge(params)}
     end
 
     def new_get_request(url, params={})

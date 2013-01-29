@@ -4,7 +4,7 @@ class FilmList
   field :name
   field :description
 
-  belongs_to :user
+  embedded_in :user
 
   def films
     queue.films

@@ -12,13 +12,6 @@ class User
   embeds_many :film_lists
   embeds_many :passports
 
-  def films
-    @films ||= FilmLoverLists.new("user:#{id}:films")
-  end
-
-  def films_queue
-    @queue ||= FilmsQueue.new "user:#{id}:films:queued"
-  end  
 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)
@@ -27,6 +20,20 @@ class User
     user.find_passport(passport.uid, passport.provider).update_from_omniauth(auth)
     user
   end
+
+  def self.find_by_passport(passport)
+    user = User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first
+    user ? user : User.new(passports:[passport])
+  end
+
+  def films
+    @films ||= FilmLoverLists.new("user:#{id}:films")
+  end
+
+  def films_queue
+    @queue ||= FilmsQueue.new "user:#{id}:films:queued"
+  end  
+
 
   def update_from_omniauth(auth)
    update_attributes(
@@ -38,7 +45,7 @@ class User
       gender: auth.extra.raw_info.gender
     })   
 
-    update_username(auth.info.nickname) if username.blank? 
+    update_username(auth.info.nickname) unless username?
   end
 
   def update_username(username)
@@ -49,8 +56,11 @@ class User
      passports.find_by(uid: uid, provider: provider)
   end
 
-  def self.find_by_passport(passport)
-    user = User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first
-    user ? user : User.new(passports:[passport])
+  def username?
+     !username.blank? 
+  end
+
+  def to_param
+    username? ? username : id
   end
 end

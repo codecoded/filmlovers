@@ -16,8 +16,5 @@ class ApplicationController < ActionController::Base
     @user_service ||= UserService.new current_user
   end
 
-  def username
-    current_user.username
-  end
   helper_method :current_user, :user_service, :username, :logged_in?
 end

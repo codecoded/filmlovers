@@ -34,7 +34,15 @@ class UserFilmsController < ApplicationController
   end
 
   def user
-    @user ||= User.where(username: params[:username]).first
+    if BSON::ObjectId.legal? user_id
+      @user ||= User.find(user_id)
+    else
+      @user ||= User.find_by(username: user_id)
+    end
+  end
+
+  def user_id
+    params[:user_id]
   end
 
   def list_name

@@ -2,6 +2,10 @@ class FilmsController < ApplicationController
 
   before_filter :init_film_search
 
+  def show
+    FilmPresenter.new Film.find(params[:film_id])
+  end
+
   def trend
     @search_service.fetch { Tmdb::API.films params[:trend], page_options}
     present params[:trend] and render :index

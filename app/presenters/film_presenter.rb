@@ -21,6 +21,10 @@ class FilmPresenter
    has_poster? ? film.poster('w185') : 'http://placehold.it/185x237&text=no%20poster%20found'
   end
 
+  def backdrop
+    film.backdrop
+  end
+
   def release_date
     film.release_date ? "#{Date.parse(film.release_date).year}" : ''
   end

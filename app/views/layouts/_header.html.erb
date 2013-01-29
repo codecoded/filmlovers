@@ -17,19 +17,19 @@
         <% if logged_in? %>
         <ul class="left">
           <li class="has-dropdown">
-            <%= link_to "Films", films_path(current_user.username) %>
+            <%= link_to "Films", films_path(current_user) %>
             <ul class="dropdown">
               <li>
-               <%= link_to "Watched", film_path(current_user.username, :watched) %>
+               <%= link_to "Watched", user_film_path(current_user, :watched) %>
               </li>
               <li>
-                <%= link_to "Loved", film_path(current_user.username, :loved) %>
+                <%= link_to "Loved", user_film_path(current_user, :loved) %>
               </li>
               <li>
-                <%= link_to "Unloved", film_path(current_user.username, :unloved) %>
+                <%= link_to "Unloved", user_film_path(current_user, :unloved) %>
               </li>
               <li>
-                <%= link_to "Owned", film_path(current_user.username, :owned) %>
+                <%= link_to "Owned", user_film_path(current_user, :owned) %>
               </li>
             </ul>
           </li>

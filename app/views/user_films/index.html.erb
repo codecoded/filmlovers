@@ -2,11 +2,11 @@
   <div class="eight columns">
     <% if logged_in? %>
     <div class="row films">
-      <%= link_to "Watched", film_path(current_user.username, :watched) %>
-      <%= link_to "Loved", film_path(current_user.username, :loved) %>
-      <%= link_to "Unloved", film_path(current_user.username, :unloved) %>
-      <%= link_to "Owned", film_path(current_user.username, :owned) %>
-      <%= link_to "Queued", film_path(current_user.username, :queued) %>
+      <%= link_to "Watched", user_film_path(current_user, :watched) %>
+      <%= link_to "Loved", user_film_path(current_user, :loved) %>
+      <%= link_to "Unloved", user_film_path(current_user, :unloved) %>
+      <%= link_to "Owned", user_film_path(current_user, :owned) %>
+      <%#= link_to "Queued", user_film_path(current_user, :queued) %>
     </div>
     <% else %>
     <div class="row films">

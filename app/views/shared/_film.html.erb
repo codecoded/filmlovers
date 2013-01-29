@@ -1,5 +1,6 @@
 <div class="full_overlay film">
   <div class="content">
+     <%= link_to film_path(film.film.id) do %>
     <h4>
       <%= film.title %>
       <br />
@@ -8,7 +9,7 @@
       <%= film.release_date %>
       <%#= content_tag(:p, film.id) if Rails.env ='development' %>
     </p>
-
+ <% end %>
     <ul class="film-actions">
       <% if logged_in? %>
         <%= film_action_link :watched, film, "icon-eye-open icon-2x" %>
@@ -20,5 +21,9 @@
       <% end %>
       <%#= film_action_link :queued, film, "icon-pushpin" %>
     </ul>
-  </div><%= image_tag(film.thumbnail, :title => film.title) %>
+    
+  </div>
+ 
+    <%= image_tag(film.thumbnail, :title => film.title) %>
+ 
 </div>

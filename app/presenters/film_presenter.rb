@@ -3,7 +3,7 @@ class FilmPresenter
 
   attr_reader :user, :film, :thumbnail_size
 
-  def_delegators :film, :title, :has_poster?, :id
+  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?
 
   def initialize(user, film, thumbnail_size='w185')
     @user, @film, @thumbnail_size = user, film, thumbnail_size

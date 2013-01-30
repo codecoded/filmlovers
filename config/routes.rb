@@ -4,8 +4,10 @@ Filmlovers::Application.routes.draw do
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
+
   match 'signout', to: 'sessions#destroy', as: 'signout'
 
+  match 'login', to: 'app#login', as: 'login'
   get 'current_user' => 'sessions#currentuser'
 
   # scope 'user/:user_id' do

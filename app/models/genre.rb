@@ -3,5 +3,7 @@ class Genre
 
   # field :_id, type: String, default: ->{ id }
 
-
+  def to_param
+    name
+  end
 end

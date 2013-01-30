@@ -19,11 +19,12 @@ class Passport
       })
   end
 
-  def update_from_omniauth(auth)
-    update_attributes(
-      {
-        oauth_token: auth.credentials.token,
-        oauth_expires_at: (Time.at(auth.credentials.expires_at) if auth.credentials.expires_at)
-      })
+  def update_from_passport(passport)
+    fields = ['oauth_token', 'oauth_expires_at']
+    update_attributes passport.attributes.slice(fields)
+  end
+
+  def to_s
+    "{passport: {provider: #{provider}, uid: #{uid}, oauth_expires_at: #{oauth_expires_at}}}"
   end
 end

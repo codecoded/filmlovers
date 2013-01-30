@@ -16,8 +16,7 @@ class User
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)
     user = find_by_passport passport 
-    user.update_from_omniauth auth
-    user.find_passport(passport.uid, passport.provider).update_from_omniauth(auth)
+    user.update_from_omniauth(auth) if user.new_record?
     user
   end
 
@@ -34,6 +33,11 @@ class User
     @queue ||= FilmsQueue.new "user:#{id}:films:queued"
   end  
 
+  def upsert_passport(passport)
+    current_passport = find_passport(passport.uid, passport.provider)
+    Log.info current_passport
+    current_passport ? current_passport.update_from_passport(passport) : (passports << passport) 
+  end
 
   def update_from_omniauth(auth)
    update_attributes(

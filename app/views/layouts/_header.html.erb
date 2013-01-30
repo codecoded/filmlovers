@@ -52,7 +52,7 @@
         <% else %>
         <ul class="right">
           <li>
-            <a href="/auth/facebook" id="fb-login">Sign in</a>
+            <%= link_to "Sign in", login_path, remote: true,:html => {:id => "signin-link"} %>
           </li>
         </ul>
         <% end %>

@@ -18,14 +18,14 @@
   </div>
   
   <!-- First Band (Image) -->
-    
+  <% if @film_view.has_backdrop? %>
   <div class="row">
     <div class="twelve columns">
       <%= image_tag @film_view.backdrop('w1280') %>
       <hr />
     </div>
   </div>
-
+  <% end %>
   <!-- End Header and Nav -->
 
   <div class="row">
@@ -33,13 +33,13 @@
      <%= image_tag @film_view.film.poster('original') %>
     </div>
     <div class="five columns">
-      <h4 id="overview">Overview</h4>
+      <h4 id="overview"><%= tagline(@film_view.film) %></h4>
       <div class="row">
 
         <div class="twelve columns">
            <p>
             <% @film_view.film.genres.each do |genre| %>
-              <%= link_to root_path do %>
+              <%= link_to films_genre_path(genre['name']) do %>
                 <%= content_tag :span, genre['name'], {:class => 'genre link'} %>
               <% end %>
             <% end %>
@@ -96,24 +96,4 @@
     </div>
   </div>
   
-  
-  <!-- Footer -->
-  
-  <footer class="row">
-    <div class="twelve columns">
-      <hr />
-      <div class="row">
-        <div class="six columns">
-          <p>&copy; Copyright no one at all. Go to town.</p>
-        </div>
-        <div class="six columns">
-          <ul class="link-list right">
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-            <li><a href="#">Link 4</a></li>
-          </ul>
-        </div>
-      </div>
-    </div> 
-  </footer>
+  <%= render partial: 'layouts/footer' %>

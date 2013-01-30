@@ -80,7 +80,7 @@
       </div>
     </div>
     <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:sci_fi) do %><img src="http://placehold.it/500x500&amp;text=Sci-fi" /> <% end %>
+      <%= link_to films_genre_path(:science_fiction) do %><img src="http://placehold.it/500x500&amp;text=Science Fiction" /> <% end %>
       <div class="panel">
         <p>
           Films that beep
@@ -96,33 +96,42 @@
       </div>
     </div>
   </div><!-- End Thumbnails -->
-  <!-- Footer -->
-  <footer class="row">
-    <div class="twelve columns">
+    <div class="row">
+    <div class="twelve show-for-small columns">
       <hr />
-      <div class="row">
-        <div class="six columns">
-          <p>
-            © Copyright no one at all. Go to town.
-          </p>
-        </div>
-        <div class="six columns">
-          <ul class="link-list right">
-            <li>
-              <a href="#">Link 1</a>
-            </li>
-            <li>
-              <a href="#">Link 2</a>
-            </li>
-            <li>
-              <a href="#">Link 3</a>
-            </li>
-            <li>
-              <a href="#">Link 4</a>
-            </li>
-          </ul>
-        </div>
+    </div>
+    <div class="three mobile-two columns">
+      <%= link_to films_genre_path(:animation) do %><img src="http://placehold.it/500x500&amp;text=Animation" /> <% end %>
+      <div class="panel">
+        <p>
+          Keep the imagination going
+        </p>
       </div>
     </div>
-  </footer><!-- End Footer -->
+    <div class="three mobile-two columns">
+      <%= link_to films_genre_path(:eastern) do %><img src="http://placehold.it/500x500&amp;text=Eastern" /> <% end %>
+      <div class="panel">
+        <p>
+          Something a little exotic
+        </p>
+      </div>
+    </div>
+    <div class="three mobile-two columns">
+      <%= link_to films_genre_path(:horror) do %><img src="http://placehold.it/500x500&amp;text=Horror" /> <% end %>
+      <div class="panel">
+        <p>
+          Dare you keep the lights off?
+        </p>
+      </div>
+    </div>
+    <div class="three mobile-two columns">
+      <%= link_to films_genre_path(:foreign) do %><img src="http://placehold.it/500x500&amp;text=Foreign" /> <% end %>
+      <div class="panel">
+        <p>
+          It's all a little foreign
+        </p>
+      </div>
+    </div>
+  </div><!-- End Thumbnails -->
+  <%= render partial: 'layouts/footer' %>
 </div>

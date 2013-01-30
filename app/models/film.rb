@@ -30,7 +30,11 @@ class Film
   end
 
   def backdrop(size='original')
-    AppConfig.image_uri_for [size, backdrop_path] if backdrop_path
+    AppConfig.image_uri_for [size, backdrop_path] if has_backdrop?
+  end
+
+  def has_backdrop?
+    backdrop_path
   end
 
 end

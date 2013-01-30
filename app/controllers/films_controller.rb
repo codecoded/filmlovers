@@ -18,7 +18,7 @@ class FilmsController < ApplicationController
 
   def genre
     genre_id = Genres.find_by_name params[:genre_id]
-    @search_service.fetch { Tmdb::API.genre genre_id.id , page_options} if genre_id
+    @search_service.fetch { Tmdb::API.genre genre_id.id , page_options.merge({include_all_movies:true})} if genre_id
     present :genre and render :index
   end
   protected

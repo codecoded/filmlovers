@@ -10,6 +10,9 @@ module FilmHelper
     content_tag :span, "(#{film_view.year})"
   end
 
+  def tagline(film_view)
+    film_view.tagline ? film_view.tagline :  "Overview"
+  end
   # def film_actioned_link(action, film, icon)
   #   content_tag :li do
   #     link_to update_user_film_path(current_user, action, film.id), method: :delete, remote: true do

@@ -7,6 +7,7 @@ gem 'thin'
 
 # gem 'mongo'
 gem 'omniauth-facebook', '1.4.0'
+gem 'omniauth-netflix'
 gem 'koala'
 gem 'redis'
 gem 'rack-iframe'
@@ -18,7 +19,7 @@ gem 'swf_fu', '~> 2.0' # loading flash files
 gem 'pusher'
 gem 'knockoutjs-rails' 
 gem 'jquery-rails', '2.1.4'
-gem 'jquery-ui-rails'
+# gem 'jquery-ui-rails'
 gem 'compass-rails'
 
 gem 'bson_ext'

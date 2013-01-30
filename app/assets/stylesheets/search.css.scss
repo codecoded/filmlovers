@@ -30,6 +30,10 @@
    img{
     height:237px;
     width:154px;
+    &.small{
+      height:137px;
+      width:92px;
+    }
    }
   }
 }

@@ -11,3 +11,15 @@
   }
 }
 
+.link{
+  background-color: rgb(255, 255, 255);
+  border: solid 1px rgba(90, 206, 213, 0.37);
+  padding: 2px 4px;
+  border-radius: 5px;
+  margin: px;
+  white-space: nowrap;
+  line-height: 27px;
+  &:hover{
+    background-color: rgb(223, 255, 250);
+  }
+}

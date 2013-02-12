@@ -1,6 +1,8 @@
 object @user
 
-attributes  :name, :username
+attributes  :name
+
+node(:username) {|user| user.to_param}
 
 node :stats do |user|
   {

@@ -1,5 +1,5 @@
 <div id="userList" >
-<%= form_for([current_user, @presenter.films_list], url: films_list_path(current_user.username , @presenter.films_list.id)) do |list| %>
+<%= form_for([current_user, @presenter.films_list], url: user_list_path(current_user.username , @presenter.films_list.id)) do |list| %>
   <label>How will this list be known?</label>
   <%= list.text_field :name, placeholder: 'Title' %>
   <label>What's the reasoning?</label>

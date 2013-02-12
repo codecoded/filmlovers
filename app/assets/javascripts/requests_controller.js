@@ -8,7 +8,6 @@ var requestsController = {
       var template = '/templates/' + $(this).data('template')
 
       $.get(template, function(template_data,status){
-
         var container = document.getElementById('container')
         $(container).html(template_data)
         new FilmsPageModel(json_data).applyBindings(container)

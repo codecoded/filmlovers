@@ -1,4 +1,4 @@
-function FilmsQueueModel(user, films){
+function FilmsQueueModel(films){
   self = this
   self.films = ko.observableArray(films)
 
@@ -17,7 +17,7 @@ function FilmsQueueModel(user, films){
 FilmsQueueModel.load = function(user, container) {
   $.getJSON(user.username() + '/queue/show.json/', function(json) { 
     films = $.map(json, function (film) {return new FilmModel(film) })
-    viewModel.queue = new FilmsQueueModel(user, films)
+    viewModel.queue = new FilmsQueueModel(films)
     ko.applyBindings(viewModel.queue, container)
     Queue.init()
   })

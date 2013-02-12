@@ -17,7 +17,7 @@
         <% if logged_in? %>
         <ul class="left">
           <li class="has-dropdown">
-            <%= link_to "Films", user_film_index_path(user_id:current_user), remote:true, data: {template: :films} %>
+            <%= link_to "Films", user_film_index_path(user_id:current_user.id), remote:true, data: {template: :films} %>
             <ul class="dropdown">
               <li>
                <%= link_to "Watched", user_film_path(current_user, :watched), remote:true, data: {template: :films} %>

@@ -10,10 +10,13 @@ function FilmModel(data){
 
   self.stats = new FilmStatsModel(data.stats)
 
-  self.action = ko.observableArray([])
-  self.actions = $.map(data.actions, function(user_action){
-    return new UserFilmActionModel(self, user_action)
-  })
+  self.actions = ko.observableArray([])
+  if(data.actions)
+    self.actions = $.map(data.actions, function(user_action){ return new UserFilmActionModel(self, user_action) })
 
 }
 
+
+FilmModel.arrayFromJSON = function(json){
+  return $.map(json, function (film) {return new FilmModel(film) })
+}

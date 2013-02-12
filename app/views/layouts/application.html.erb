@@ -30,7 +30,9 @@
     </div>
     <div class="push"></div>
     <div id="footer">
+      <% if logged_in? %>
       <%= render partial:"layouts/footer" %>
+      <% end %>
     </div>
   </body>
 </html>

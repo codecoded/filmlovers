@@ -15,10 +15,6 @@ class SessionsController < ApplicationController
 
   def currentuser
     render json:{name:''} and return unless current_user
-    respond_to do |format|
-      format.json { render json:{
-          name: current_user.name,
-        }}
-    end
+    @user = current_user
   end
 end

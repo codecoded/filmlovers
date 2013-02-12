@@ -1,20 +1,33 @@
-function UserModel(){
+function UserModel(data){
 
   var self = this
 
-  self.name  = ko.observable(0)
 
-  self.filmStats = new FilmStatsModel()
   self.loggedIn = ko.observable(false)
   self.loggedOut = ko.observable(false)
+  
+  self.filmStats = new FilmStatsModel(data.stats)
 
-  self.update_from_json = function(json){
-    self.name(json.name)
+  if(!data) return
+
+  self.name  = ko.observable(data.name)
+  self.username = ko.observable(data.username)
+
+
+
+  self.actionFilm = function(film, action){
+    film.registerAction(action)
+    self.incrementStat(action)
   }
-  self.load = function(){
-    $.get('/current_user.json', function(json){
-      self.update_from_json(json)
-    })
+
+  self.updateStat = function(action_name, value){
+    stat = self.filmStats[action_name]
+    stat(stat() + value)    
   }
 }
 
+UserModel.load = function(){
+    $.getJSON('/current_user', function(json){
+      return new UserModel(json)
+    })
+  }

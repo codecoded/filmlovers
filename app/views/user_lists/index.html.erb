@@ -1,0 +1,13 @@
+<% if logged_in? %>
+<div class="row">
+  <div class="eight columns">
+    Create or modify lists here!
+    <%= link_to 'New List', new_user_list_path, {:class => 'radius button'} %>
+  </div>
+</div>
+<div class="row">
+  <div class="eight columns">
+    <%= render(partial:'films_list', collection: @films_lists_presenters) if @films_lists_presenters %>
+  </div>
+</div>
+<% end %>

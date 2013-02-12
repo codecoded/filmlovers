@@ -3,22 +3,25 @@ class FilmPresenter
 
   attr_reader :user, :film, :thumbnail_size
 
-  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?
+  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?
 
   def initialize(user, film, thumbnail_size='w185')
     @user, @film, @thumbnail_size = user, film, thumbnail_size
   end
 
   def self.from_films(user, films)
-    films.map {|film| FilmPresenter.new user, film }
+    films.map {|film| FilmPresenter.new user, film } if !films.empty?
   end
   
   def actioned?(action)
-    user.films[action].is_member? film.id
+    action == :queued ? user.films_queue.exists?(film.id) : user.films[action].is_member?(film.id)
+  end
+
+  def stats(action)
+    film.users[action].count
   end
 
   def thumbnail(size='w185')
-
    has_poster? ? film.poster(size ? size : thumbnail_size) : 'http://placehold.it/185x237&text=no%20poster%20found'
   end
 
@@ -35,12 +38,20 @@ class FilmPresenter
     @director ? @director['name'] : ''
   end
 
+  def trailer
+    "http://www.youtube.com/embed/#{film.trailer}" if film.has_trailer?
+  end
+
   def year
-    year ||= Date.parse(film.release_date).year
+    @year ||= (Date.parse(film.release_date).year if film.release_date)
+  end
+
+  def similar_films?
+    film.similar_movies
   end
 
   def similar_films
-    return unless film.similar_movies
+    return unless similar_films?
     film.similar_movies['results'].map {|f| FilmPresenter.new user, Film.new(f), 'w92'}
   end
 end

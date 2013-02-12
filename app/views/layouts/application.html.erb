@@ -19,10 +19,18 @@
     <%= csrf_meta_tags %>    
   </head>
   <body>
+
     <%= render :template => 'facebook/sdk' %>
-     <section class="row" id="main">
-      <%= render partial:"layouts/header" %>
+    <header id="header">
+     <%= render partial:"layouts/header" %>
+    </header>
+    <div class="row" id="container">
       <%= yield %>
-    </secition>
+      
+    </div>
+    <div class="push"></div>
+    <div id="footer">
+      <%= render partial:"layouts/footer" %>
+    </div>
   </body>
 </html>

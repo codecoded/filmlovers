@@ -3,36 +3,44 @@ class FilmsController < ApplicationController
   before_filter :init_film_search
 
   def show
-    FilmPresenter.new Film.find(params[:film_id])
+    @film_view = FilmPresenter.new current_user, Film.fetch(params[:id])
   end
 
   def trend
-    @search_service.fetch { Tmdb::API.films params[:trend], page_options}
-    present params[:trend] and render :index
+    results = Rails.cache.fetch params[:trend] do
+      @tmdb_service.by_trend params[:trend], page_options
+    end
+    present(results, params[:trend]) and render_template
   end
 
   def search
-    @search_service.fetch { Tmdb::API.search params[:query], page_options}
-    present :search and render :index
+    results = @tmdb_service.search params[:query], page_options
+    present(results, params[:query]) and render_template
   end
 
   def genre
-    genre_id = Genres.find_by_name params[:genre_id]
-    @search_service.fetch { Tmdb::API.genre genre_id.id , page_options.merge({include_all_movies:true})} if genre_id
-    present :genre and render :index
+    results = Rails.cache.fetch  params[:genre_id] do
+      @tmdb_service.by_genre params[:genre_id], page_options
+    end
+    present(results, params[:genre_id]) and render_template
   end
+
   protected
 
+  def render_template
+    render :index, layout:nil
+  end
+
   def init_film_search
-    @search_service = TmdbFilmSearch.new
+    @tmdb_service = TmdbFilmsSearch.new
   end
 
   def page_options
     params[:page] ? {page: params[:page].to_i} : {} 
   end
 
-  def present(type)
-    @film_search_results = FilmSearchResultPresenter.new current_user, @search_service.search_results, type
+  def present(results_page, description='')
+    @films_page = FilmsPagePresenter.new(current_user, results_page, description)
   end
 
 end

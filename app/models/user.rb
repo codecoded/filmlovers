@@ -9,7 +9,7 @@ class User
   field :gender
   field :dob, type: DateTime
 
-  embeds_many :film_lists
+  embeds_many :films_lists
   embeds_many :passports
 
 
@@ -50,6 +50,10 @@ class User
     })   
 
     update_username(auth.info.nickname) unless username?
+  end
+
+  def passport_provider?(provider)
+    passports.where("provider" => provider.to_s).exists?
   end
 
   def update_username(username)

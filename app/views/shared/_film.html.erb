@@ -1,29 +1,39 @@
-<div class="full_overlay film">
+<div class="full_overlay film" id='<%="film#{film.film.id}"%>' draggable='true'  ondragstart="drag(event)"  >
+   <%= link_to film_path(film.film.id) do %>
   <div class="content">
-     <%= link_to film_path(film.film.id) do %>
-    <h4>
-      <%= film.title %>
-      <br />
-    </h4>
-    <p>
-      <%= film.release_date %>
-      <%#= content_tag(:p, film.id) if Rails.env ='development' %>
-    </p>
- <% end %>
+    <div class="film-title">
+      <h4 data-bind:"text: title"/>
+      <p data-bind:"text: release_date"></p>
+    </div>
     <ul class="film-actions">
       <% if logged_in? %>
-        <%= film_action_link :watched, film, "icon-eye-open icon-2x" %>
-        <%= film_action_link :loved, film, "icon-heart icon-2x" %>
-        <%= film_action_link :unloved, film, "icon-heart-empty icon-2x" %>
-        <%= film_action_link :owned, film, "icon-home icon-2x" %>
+      <div class="film-actions-horizontal">
+
+        <a href="#" data-bind="click: $root.actionFilm" rel="nofollow">
+          <i class="icon-eye-open" data-bind="css: state('watched')"></i>
+        </a>
+
+        <a href="#" data-bind="click: $root.actionFilm" rel="nofollow">
+          <i class="icon-eye-heart" data-bind="css: state('loved')"></i>
+        </a>
+
+        <a href="#" data-bind="click: $root.actionFilm" rel="nofollow">
+          <i class="icon-eye-home" data-bind="css: state('owned')"></i>
+        </a>
+        
+        <a href="#" data-bind="click: $root.actionFilm" rel="nofollow">
+          <i class="icon-eye-pushpin" data-bind="css: state('queued')"></i>
+        </a>
+        
+      </div>
       <% else %>
         <i class="icon-eye"></i>
       <% end %>
       <%#= film_action_link :queued, film, "icon-pushpin" %>
     </ul>
-    
   </div>
- 
+  <% end %>
+   <%= link_to film_path(film.film.id) do %>
     <%= image_tag(film.thumbnail, :title => film.title) %>
- 
+  <% end %>
 </div>

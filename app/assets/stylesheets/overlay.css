@@ -221,38 +221,41 @@ TABLE OF CONTENTS
   height:237px;
 }
 .full_overlay p {
-  color:#FFFFFF;
+  color:black;
   padding:10px;
 }
-  .full_overlay .content {
-    position: absolute;
-    left: 0px;
-    /* Set the width and the height according to the size of your pictures */
-    width: 154px;
-    height:237px;
-    /* Set a 0 opacity to hide the content */
-    filter: alpha(opacity=0);
-    opacity: 0;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    /* Semi-transparent background for modern browsers, black for older browsers */
-    background:#000000;
-    background: rgba(0,0,0,0.8);
-    /* CSS3 transitions, creates the fading effect */
-    -webkit-transition: opacity 0.4s ease-in-out;
-    -moz-transition: opacity 0.4s ease-in-out;
-    -o-transition: opacity 0.4s ease-in-out;
-    transition: opacity 0.4s ease-in-out;
-  }
-  .content h2, .content p {
-    /* Text styling */
-    padding:10px;
-    color:#ffffff;
-  }
-  .full_overlay:hover .content {
-    /* Setting a 100% opacity on mouse hover to show the content */
-    filter: alpha(opacity=100);
-    opacity: 1;
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-  }
+.full_overlay .content {
+  position: absolute;
+  left: 0px;
+  /* Set the width and the height according to the size of your pictures */
+  width: 154px;
+  height:50%;
+  /* Set a 0 opacity to hide the content */
+  filter: alpha(opacity=0);
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  /* Semi-transparent background for modern browsers, black for older browsers */
+  color: black;
+  border: solid 2px black;
+  border-radius: 5px;
+  background-color: white;
+  /* CSS3 transitions, creates the fading effect */
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+}
+.content h2, .content p {
+  /* Text styling */
+  padding:10px;
+  color:black;
+}
+.full_overlay:hover .content {
+  /* Setting a 100% opacity on mouse hover to show the content */
+  filter: alpha(opacity=1);
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
 
 

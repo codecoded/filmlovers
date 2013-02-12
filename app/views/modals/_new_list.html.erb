@@ -1,0 +1,10 @@
+<div id="newListModal" class="reveal-modal">
+<%= form_for(list, remote:true) do |list| %>
+  <label>How will this list be known?</label>
+  <%= list.text_field :name, placeholder: 'Title' %>
+  <label>What's the reasoning?</label>
+  <%= list.text_area :description, placeholder: 'Description' %>
+  <input type="submit" class="button radius right close-reveal-modal" value="Create" />
+<% end %>
+  <a class="close-reveal-modal">×</a>
+</div>

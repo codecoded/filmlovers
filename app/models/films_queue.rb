@@ -14,6 +14,10 @@ class FilmsQueue
     set.range
   end
 
+  def count
+    set.count
+  end
+  
   def insert(film_id)
     set.add Time.now.to_i, film_id
   end
@@ -22,4 +26,7 @@ class FilmsQueue
     set.remove film_id
   end
 
+  def exists?(film_id)
+    set.exists? film_id
+  end
 end

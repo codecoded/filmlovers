@@ -1,0 +1,10 @@
+<div class="three mobile-two columns">
+  <%= link_to films_genre_path(genre), data:{template: :films}, remote:true do %>
+    <img src="http://placehold.it/500x500&amp;text=<%=genre%>" />
+  <% end %>
+  <div class="panel">
+    <p>
+      <%= description %>
+    </p>
+  </div>
+</div>

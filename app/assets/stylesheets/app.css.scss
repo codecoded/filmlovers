@@ -1,15 +1,3 @@
-.film-actions
-{
-  color:white;
-  list-style: none;
-  left: 5px;
-  top: 170px;
-  position: absolute;
-  li{
-    float:left;
-    // background-color: black;
-  }
-}
 
 .link{
   background-color: rgb(255, 255, 255);
@@ -22,4 +10,16 @@
   &:hover{
     background-color: rgb(223, 255, 250);
   }
+}
+
+#footer{
+  position: fixed;
+  bottom: 0;
+  background-color: #222;
+  width: 100%;
+  height: 100px;
+}
+
+.push{
+  height:150px;
 }

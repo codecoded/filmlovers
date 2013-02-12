@@ -7,7 +7,6 @@ class AppController < ApplicationController
   end
 
   def login
-        render partial:"scripts/modal", locals:{html_partial: 'login'}, layout:nil
-
+    render partial:"scripts/modal", locals:{html_partial: 'login'}, layout:nil
   end
 end

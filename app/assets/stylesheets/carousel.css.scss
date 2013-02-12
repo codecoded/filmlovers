@@ -1,0 +1,61 @@
+.image_carousel {
+  padding-top: 5px;
+  position: relative;
+  width: 700px;
+  margin: 0px auto;
+}
+
+.image_carousel {
+  .film-small{
+    margin: 2px;
+    display: block;
+    float: left;
+    img{
+      height: 90px;
+      width: 60px; 
+    }
+  }
+}
+
+a.prev, a.next {
+  width: 45px;
+  height: 50px;
+  display: block;
+  position: absolute;
+  top: 38px;
+}
+
+a.prev {     
+  left: -22px;
+}
+
+
+a.prev.disabled { 
+  i{
+    display: none;
+  } 
+}
+
+a.next {      
+  right: -10px;
+}
+
+a.next.disabled 
+{ 
+  i{
+    display: none
+  }
+}
+
+a.prev.disabled, a.next.disabled {
+  cursor: default;
+}
+
+a.prev span, a.next span {
+  display: none;
+}
+
+.clearfix {
+  float: none;
+  clear: both;
+}

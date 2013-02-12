@@ -1,0 +1,36 @@
+<div class="row">
+  <!-- Side Bar -->
+  <div class="two mobile-four columns pagination-centered">
+    <div class="film-actions-vertical">
+    <div class="tiled"><i class="icon-eye-open icon-4x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+    <div class="tiled"><i class="icon-heart icon-4x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+    <div class="tiled"><i class="icon-pushpin icon-4x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+    </div>
+    <div class="hide-for-small panel">
+      <h3>
+        Search Results
+      </h3>
+      <h5 class="subheader">
+        <%= params[:query] %>
+      </h5>
+    </div><a href="#"></a>
+    <div class="panel callout radius" align="center">
+      <h6>
+        Found <%#= @film_search_results.count %> films
+      </h6>
+
+    </div>
+      <ul class="pagination">
+        <%#= page_search_results(@film_search_results.page_no, @film_search_results.page_total) %>
+      
+      </ul>
+
+  </div>
+  <!-- End Side Bar -->
+  <!-- Thumbnails -->
+  <div class="twelve columns" data-bind="with: films_found" id="films_list">
+    <div class="row films" data-bind="foreach: films">
+      <%= render partial:'films/preview' %><!-- End Thumbnails -->
+    </div>
+  </div>
+</div>

@@ -28,12 +28,12 @@
         </div>
         <div class="row">
           <div class="six mobile-two columns">
-            <%= link_to films_trend_path(:now_playing) do %>
+            <%= link_to films_trend_path(:now_playing), remote:true, data:{template: :films} do %>
               <img src="http://placehold.it/500x500&amp;text=Now Playing" /> 
             <% end %>
           </div>
           <div class="six mobile-two columns">
-            <%= link_to films_trend_path(:upcoming) do %>
+            <%= link_to films_trend_path(:upcoming), remote:true, data:{template: :films} do %>
               <img src="http://placehold.it/500x500&amp;text=Upcoming" /> 
             <% end %>
           </div>
@@ -45,7 +45,7 @@
   <div class="row">
     <div class="twelve columns">
       <div class="radius panel">
-          <%= form_tag(films_search_path, method: :get) do%>
+          <%= form_tag(films_search_path, method: :get, remote:true, data:{template: :films} ) do%>
           <div class="row collapse">
             <div class="ten mobile-three columns">
               <input type="text" name="query" />
@@ -60,78 +60,15 @@
   </div><!-- End Search Bar -->
   <!-- Thumbnails -->
   <div class="row">
-    <div class="twelve show-for-small columns">
-      <hr />
-    </div>
-    <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:action) do %><img src="http://placehold.it/500x500&amp;text=Action" /> <% end %>
-      <div class="panel">
-        <p>
-          Hot-paced action films!
-        </p>
-      </div>
-    </div>
-    <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:comedy) do %><img src="http://placehold.it/500x500&amp;text=Comedy" /> <% end %>
-      <div class="panel">
-        <p>
-          Split your sides
-        </p>
-      </div>
-    </div>
-    <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:science_fiction) do %><img src="http://placehold.it/500x500&amp;text=Science Fiction" /> <% end %>
-      <div class="panel">
-        <p>
-          Films that beep
-        </p>
-      </div>
-    </div>
-    <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:drama) do %><img src="http://placehold.it/500x500&amp;text=Drama" /> <% end %>
-      <div class="panel">
-        <p>
-          For every moment
-        </p>
-      </div>
-    </div>
+    <%= render partial:'genre_tile', locals:{genre: :action, description: 'Hot-paced action films!'} %>
+    <%= render partial:'genre_tile', locals:{genre: :comedy, description: 'Split your sides'} %>
+    <%= render partial:'genre_tile', locals:{genre: :science_fiction, description: ' Films that beep'} %>
+    <%= render partial:'genre_tile', locals:{genre: :drama, description: ' For every moment'} %>
   </div><!-- End Thumbnails -->
-    <div class="row">
-    <div class="twelve show-for-small columns">
-      <hr />
-    </div>
-    <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:animation) do %><img src="http://placehold.it/500x500&amp;text=Animation" /> <% end %>
-      <div class="panel">
-        <p>
-          Keep the imagination going
-        </p>
-      </div>
-    </div>
-    <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:eastern) do %><img src="http://placehold.it/500x500&amp;text=Eastern" /> <% end %>
-      <div class="panel">
-        <p>
-          Something a little exotic
-        </p>
-      </div>
-    </div>
-    <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:horror) do %><img src="http://placehold.it/500x500&amp;text=Horror" /> <% end %>
-      <div class="panel">
-        <p>
-          Dare you keep the lights off?
-        </p>
-      </div>
-    </div>
-    <div class="three mobile-two columns">
-      <%= link_to films_genre_path(:foreign) do %><img src="http://placehold.it/500x500&amp;text=Foreign" /> <% end %>
-      <div class="panel">
-        <p>
-          It's all a little foreign
-        </p>
-      </div>
-    </div>
-  </div><!-- End Thumbnails -->
-  <%= render partial: 'layouts/footer' %>
+  <div class="row">
+    <%= render partial:'genre_tile', locals:{genre: :animation, description: 'Keep the imagination going'} %>
+    <%= render partial:'genre_tile', locals:{genre: :eastern, description: 'Something a little exotic'} %>
+    <%= render partial:'genre_tile', locals:{genre: :Horror, description: 'Dare you keep the lights off?'} %>
+    <%= render partial:'genre_tile', locals:{genre: :Foreign, description: 'It\'s all a little foreign'} %>
+  </div>
 </div>

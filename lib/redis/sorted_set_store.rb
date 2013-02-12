@@ -30,6 +30,9 @@ class Redis::SortedSetStore
     $redis.zrank key, member
   end
 
+  def exists?(member)
+    rank(member) != nil
+  end
 
   def count
     $redis.zcard key

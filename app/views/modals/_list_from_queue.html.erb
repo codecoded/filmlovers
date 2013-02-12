@@ -1,0 +1,18 @@
+
+
+<div id="queueListModal" class="reveal-modal">
+  <h2>
+    Add films to list:
+  </h2>
+  <div class="row">
+    <div class="six columns">
+      <%= select_tag :list_id, options_for_select(@lists) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <%= link_to 'New List', new_user_list_path(film_ids:[500,501]), {:class => 'radius button'} %>
+    </div>
+  </div>
+  <a class="close-reveal-modal">×</a>
+</div>

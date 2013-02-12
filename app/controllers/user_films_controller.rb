@@ -1,27 +1,29 @@
 class UserFilmsController < ApplicationController
   
   before_filter :validate_username
+  skip_before_filter :validate_current_user, :except => [:update, :destroy]
 
   def index
   end
   
   def show
-    @films = FilmPresenter.from_films user, user_service.films_in_list(list_name)
+    results = user_service.films_in_list(list_name)
+    present(results) and render_template
   end
 
   def update
-    validate_current_user
-    user_service.add film, list_name
-    respond_to do |format|
-      format.json  { render json: {response: :ok} }
-    end
+    count = queue? ? user_service.queue(film) : user_service.add(film, list_name)
+    render_ok count
   end
 
   def destroy
-    validate_current_user
-    user_service.remove film, list_name
+    count = queue? ? user_service.dequeue(film) : user_service.remove(film, list_name)
+    render_ok count
+  end
+
+  def render_ok(count)
     respond_to do |format|
-      format.json  { render json: {response: :ok} }
+      format.json  { render json: {count: count} }
     end
   end
 
@@ -41,12 +43,25 @@ class UserFilmsController < ApplicationController
     end
   end
 
+  def render_template
+    render 'films/index', layout:nil
+  end
+
+  def present(films)
+    results_page =  ResultsPage.new(films)
+    @films_page = FilmsPagePresenter.new current_user, results_page
+  end
+
   def user_id
     params[:user_id]
   end
 
   def list_name
     params[:id].to_sym
+  end
+
+  def queue?
+    list_name == :queued
   end
 
   def film 

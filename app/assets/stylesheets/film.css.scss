@@ -2,13 +2,25 @@
 $watchedColor:       rgb(80, 150, 80);
 $lovedColor:         #ff3333;
 $unlovedColor:       #ff3333;
+$queuedColor:        black;
 $ownedColor:         rgb(192, 192, 50);
 $actionedHover:      #bbb;
 
+
 .film-actions{
+  color:white;
+  list-style: none;
+  left: 5px;
+  top: 200px;
+  position: absolute;
+  li{
+    float:left;
+    // background-color: black;
+  }
+
   .unactioned{
     &:hover{
-      opacity: 0.8 ;
+      opacity: 1 ;
     }
   }
   .icon-eye-open {
@@ -29,9 +41,46 @@ $actionedHover:      #bbb;
     }
   }
 
+  .icon-pushpin {
+    &.actioned{
+      color:$queuedColor;
+    }
+  }
+
   .icon-home {
     &.actioned{
       color:$ownedColor;
     }
+  }
+
+}
+
+.film-actions-horizontal{
+  text-align: center;
+  .tiled{
+    margin: 0px 3px;
+    border: solid 3px black;
+    border-radius: 3px;
+    width: 30px;
+    height: 30px;
+    padding-top: 2px;
+    background-color: white;
+    color: black;
+    opacity: 1
+  }
+  i{
+    position: relative;
+    top:0px;
+    font-size:16pt;
+  }
+}
+.film-actions-vertical{
+  .tiled{
+    margin: 2px 0px;
+    border: solid 4px black;
+    padding: 2px;
+    border-radius: 5px;
+    width: 70px;
+    height:70px;
   }
 }

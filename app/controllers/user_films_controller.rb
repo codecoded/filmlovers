@@ -3,12 +3,14 @@ class UserFilmsController < ApplicationController
   before_filter :validate_username
   skip_before_filter :validate_current_user, :except => [:update, :destroy]
 
+
   def index
+    render layout:nil if request.xhr?
   end
   
   def show
     results = user_service.films_in_list(list_name)
-    present(results) and render_template
+    present(results) 
   end
 
   def update
@@ -21,6 +23,7 @@ class UserFilmsController < ApplicationController
     render_ok count
   end
 
+  protected 
   def render_ok(count)
     respond_to do |format|
       format.json  { render json: {count: count} }
@@ -43,13 +46,11 @@ class UserFilmsController < ApplicationController
     end
   end
 
-  def render_template
-    render 'films/index', layout:nil
-  end
 
   def present(films)
     results_page =  ResultsPage.new(films)
     @films_page = FilmsPagePresenter.new current_user, results_page
+    render layout:nil if request.xhr?
   end
 
   def user_id

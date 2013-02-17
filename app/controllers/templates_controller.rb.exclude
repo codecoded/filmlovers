@@ -2,7 +2,7 @@ class TemplatesController < ApplicationController
 
 
   def films
-    render 'templates/films', layout:nil
+    render 'templates/films', layout:nil 
   end
 
   def queue

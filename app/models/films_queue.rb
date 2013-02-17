@@ -6,6 +6,10 @@ class FilmsQueue
     @set = Redis::SortedSetStore.new key
   end
 
+  def [](film_id)
+    set.score(film_id)
+  end
+
   def id
     set.key
   end

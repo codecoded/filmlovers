@@ -1,7 +1,63 @@
-<div class="row">
-  <div class="twelve columns">
-    <div class="row films">
-      <%= render(partial:'shared/film', collection: @films) if @films %>
+<%= render layout: 'layouts/viewmodel', locals: {model: 'FilmsPageModel'} do %>
+  <div class="row" >
+    <!-- Side Bar -->
+    <div class="two mobile-four columns pagination-centered">
+      <div class="film-actions-vertical">
+      <div class="tiled"><i class="icon-eye-open icon-4x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+      <div class="tiled"><i class="icon-heart icon-4x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+      <div class="tiled"><i class="icon-pushpin icon-4x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+      </div>
+      <div class="hide-for-small panel">
+        
+        <label>
+          Viewing Films
+        </label>
+        <h5 class="subheader" data-bind="text: description">
+          <%= params[:query] %>
+        </h5>
+        
+      </div><a href="#"></a>
+      <div class="panel callout radius" align="center">
+        <p>
+          Page <span data-bind="text: page_no"/> of <span data-bind="text: total_pages">
+        <p>
+        <h6>
+          <span data-bind="text: total_results"/> films
+        </h6>
+     
+
+      </div>
+        <ul class="pagination">
+          <%#= page_search_results(@film_search_results.page_no, @film_search_results.page_total) %>
+        
+        </ul>
+
+    </div>
+    <!-- End Side Bar --> 
+    <!-- Thumbnails -->
+    <div class="ten columns" >
+      <div class="row films" data-bind="foreach: films">
+        <div class="full_overlay film" draggable='true'  ondragstart="drag(event)"  data-bind="attr: { id: id}">
+        <!-- <a data-bind="attr: { href: url, title: title }"> -->
+          <div class="content">
+            <div class="film-title">
+              <h4 data-bind="text: title"/>
+              <p data-bind="text: release_date"></p>
+            </div>      
+            <% if logged_in? %>
+              <%= render partial: 'films/film_actions_large' %>
+            <% end %>
+          </div>
+        <!-- </a> -->
+
+          <a data-bind="attr: { href: url, title: title }">
+            <img data-bind="attr: {src: thumbnail, title: title }"/>
+          </a>
+         <%#= link_to film_path(film.film.id) do %>
+          <%#= image_tag(film.thumbnail, :title => film.title) %>
+        <%# end %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+<% end %>

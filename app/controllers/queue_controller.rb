@@ -3,12 +3,18 @@ class QueueController < UserController
 
   def list
     @lists = current_user.films_lists.all.map { |list| [list.name, list.id] }
-    render partial:"scripts/modal", locals:{html_partial: 'list_from_queue'}, layout:nil 
+    render partial:'list_from_queue', layout:nil 
   end
 
   def show
     results = user_service.films_in_list(:queued)
     present(results) 
+  end
+
+  def update_list
+    list = current_user.films_list(params)
+    service = UserFilmListService.new(list)
+    service.copy_films_from_queue params[:films_ids]
   end
 
   def present(films)

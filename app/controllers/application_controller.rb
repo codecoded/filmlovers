@@ -16,5 +16,9 @@ class ApplicationController < ActionController::Base
     @user_service ||= UserService.new current_user
   end
 
-  helper_method :current_user, :user_service, :username, :logged_in?
+  def current_url(new_params)
+    url_for params.merge(new_params)
+  end
+
+  helper_method :current_user, :user_service, :username, :logged_in?, :current_url
 end

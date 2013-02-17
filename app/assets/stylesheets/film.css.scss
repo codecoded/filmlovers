@@ -6,6 +6,46 @@ $queuedColor:        black;
 $ownedColor:         rgb(192, 192, 50);
 $actionedHover:      #bbb;
 
+.films{
+  height:auto;
+  margin:1px;
+  width:auto;
+  padding:10px 0px;
+  float:left;
+  .film
+  {
+    margin: 10px;
+    float:left;
+   h4{
+    font-size:12pt;
+    // color: white;
+    padding-left:10px;
+    margin-bottom:2px;
+   }
+   p{
+    // color: #ddd;
+    font-style: italic;
+    margin: 0px;
+    padding-left:10px;
+   }
+   a{
+    // color:white;
+   }
+   img{
+    height:237px;
+    width:154px;
+    &.small{
+      height:137px;
+      width:92px;
+    }
+   }
+
+  }
+}
+
+.film-selected{
+  border: solid 1px;
+}
 
 .film-actions{
   color:white;
@@ -84,3 +124,4 @@ $actionedHover:      #bbb;
     height:70px;
   }
 }
+

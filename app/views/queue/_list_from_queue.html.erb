@@ -1,5 +1,3 @@
-
-
 <div id="queueListModal" class="reveal-modal">
   <h2>
     Add films to list:
@@ -11,8 +9,12 @@
   </div>
   <div class="row">
     <div class="six columns">
-      <%= link_to 'New List', new_user_list_path(film_ids:[500,501]), {:class => 'radius button'} %>
+      <a href='<%= new_user_list_path %>' data-bind="click: listsUrl" class='radius button close-reveal-modal' data-remote="true">New List</a>
     </div>
   </div>
   <a class="close-reveal-modal">×</a>
 </div>
+
+<script>
+ko.applyBindings(viewModel.queue, document.getElementById('queueListModal'))
+</script>

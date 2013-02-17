@@ -7,6 +7,7 @@ function FilmModel(data){
   self.url = ko.observable(data.url)
   self.thumbnail = ko.observable(data.thumbnail)
   self.full_title = self.title + "(" + self.year + ")"
+  self.selected = ko.observable(false)
 
   self.stats = new FilmStatsModel(data.stats)
 
@@ -14,9 +15,12 @@ function FilmModel(data){
   if(data.actions)
     self.actions = $.map(data.actions, function(user_action){ return new UserFilmActionModel(self, user_action) })
 
+  self.select = function(){ self.selected(!self.selected())}
 }
 
 
 FilmModel.arrayFromJSON = function(json){
+  if(!json)
+    return new Array()
   return $.map(json, function (film) {return new FilmModel(film) })
 }

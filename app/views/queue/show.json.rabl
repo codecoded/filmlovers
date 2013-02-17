@@ -1,5 +1,6 @@
 object @films_queue
 
+return {} unless @films_queue
 attributes :id, :title, :release_date
 
 node(:url) {|film| film_path(film.film.id)}

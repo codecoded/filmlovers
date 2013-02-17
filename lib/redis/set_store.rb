@@ -30,7 +30,7 @@ class Redis::SetStore
   end
 
   def delete_set!
-    delete key
+    $redis.del key
   end
 
 end

@@ -2,7 +2,7 @@
 <div data-bind="style: {display: 'block'}" class="image_carousel" style="display:none">
   <%= render partial: 'app/queue'%>
   <div id="foo2" data-bind="foreach: films" >
-    <a class="film-small" data-bind="attr: {href: url}">
+    <a class="film-small" data-bind="attr: {href: url}, css:{'film-selected': selected}, click: select">
       <img data-bind="attr: {src: thumbnail, title: title}" class="small"/>
     </a>
   </div>

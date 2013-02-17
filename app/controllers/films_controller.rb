@@ -2,14 +2,18 @@ class FilmsController < ApplicationController
 
   before_filter :init_film_search
 
+  def index
+    render layout:nil
+  end
+
   def show
     @film_view = FilmPresenter.new current_user, Film.fetch(params[:id])
   end
 
   def trend
-    results = Rails.cache.fetch params[:trend] do
-      @tmdb_service.by_trend params[:trend], page_options
-    end
+    # results = Rails.cache.fetch params[:trend] do
+     results =  @tmdb_service.by_trend params[:trend], page_options
+    # end
     present(results, params[:trend]) and render_template
   end
 
@@ -19,9 +23,9 @@ class FilmsController < ApplicationController
   end
 
   def genre
-    results = Rails.cache.fetch  params[:genre_id] do
-      @tmdb_service.by_genre params[:genre_id], page_options
-    end
+    # results = Rails.cache.fetch  params[:genre_id] do
+    results =   @tmdb_service.by_genre params[:genre_id], page_options
+    # end
     present(results, params[:genre_id]) and render_template
   end
 

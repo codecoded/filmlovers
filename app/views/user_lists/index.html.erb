@@ -1,13 +1,24 @@
-<% if logged_in? %>
-<div class="row">
-  <div class="eight columns">
-    Create or modify lists here!
-    <%= link_to 'New List', new_user_list_path, {:class => 'radius button'} %>
+<%= render layout: 'layouts/viewmodel', locals: {model: 'ListsModel'} do %>
+
+<div id="films_lists">
+  <div class="row">
+    <div class="eight columns">
+      Create or modify lists here!
+      <%= link_to 'New List', new_user_list_path, {:class => 'radius button', remote:true} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="eight columns" data-bind="foreach: lists">
+      <h2> 
+        <small>
+          <a data-bind="text: name, attr: {href: url, 'data-remote':true, 'data-viewmodel':true}" ></a>
+          <%#= link_to films_list.name, user_list_path( current_user, films_list.films_list) %>
+        </small>
+      </h2>
+      <p data-bind="text: description"> </p>
+      <%= render partial: "films/film" %>
+    </div>
   </div>
 </div>
-<div class="row">
-  <div class="eight columns">
-    <%= render(partial:'films_list', collection: @films_lists_presenters) if @films_lists_presenters %>
-  </div>
-</div>
+
 <% end %>

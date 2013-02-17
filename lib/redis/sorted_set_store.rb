@@ -57,4 +57,8 @@ class Redis::SortedSetStore
   def score(member)
     $redis.zscore key, member
   end
+
+  def delete
+    $redis.del key
+  end
 end

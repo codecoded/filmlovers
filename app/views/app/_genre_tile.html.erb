@@ -1,5 +1,5 @@
 <div class="three mobile-two columns">
-  <%= link_to films_genre_path(genre), data:{template: :films}, remote:true do %>
+  <%= link_to films_genre_path(genre), data:{  remote:true, viewmodel:true} do %>
     <img src="http://placehold.it/500x500&amp;text=<%=genre%>" />
   <% end %>
   <div class="panel">

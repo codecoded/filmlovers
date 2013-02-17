@@ -1,0 +1,9 @@
+
+<div id="viewContent" style="display:none" data-bind="visible: true">
+  <%= yield %>
+</div>
+
+<script>
+RequestsController.linkView('<%= current_url(format: :json) %>', 
+  <%= model %>, <%= "$('#viewContent')".html_safe %>)
+</script>

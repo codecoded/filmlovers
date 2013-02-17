@@ -1,0 +1,26 @@
+<!-- Thumbnails -->
+<div class="ten columns" >
+  <div class="row films" data-bind="foreach: films">
+    <input type="hidden" data-bind="value: id" name="films[]"/>
+    <div class="full_overlay film" draggable='true'  ondragstart="drag(event)"  data-bind="attr: { id: id}">
+    <!-- <a data-bind="attr: { href: url, title: title }"> -->
+      <div class="content">
+        <div class="film-title">
+          <h4 data-bind="text: title"/>
+          <p data-bind="text: release_date"></p>
+        </div>      
+        <% if logged_in? %>
+          <%= render partial: 'films/film_actions_large' %>
+        <% end %>
+      </div>
+    <!-- </a> -->
+
+      <a data-bind="attr: { href: url, title: title }">
+        <img data-bind="attr: {src: thumbnail, title: title }"/>
+      </a>
+     <%#= link_to film_path(film.film.id) do %>
+      <%#= image_tag(film.thumbnail, :title => film.title) %>
+    <%# end %>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@
         <!-- Title Area -->
         <li class="name">
           <h1>
-            <a href="/">filmlovers</a>
+            <%= link_to 'filmlovers', root_path, remote:true %>
           </h1>
         </li>
         <li class="toggle-topbar">
@@ -17,28 +17,28 @@
         <% if logged_in? %>
         <ul class="left">
           <li class="has-dropdown">
-            <%= link_to "Films", user_film_index_path(user_id:current_user.id), remote:true, data: {template: :films} %>
+            <%= link_to "Films", user_film_index_path(current_user),  remote:true %>
             <ul class="dropdown">
               <li>
-               <%= link_to "Watched", user_film_path(current_user, :watched), remote:true, data: {template: :films} %>
+               <%= link_to "Watched", user_film_path(current_user, :watched), remote:true%>
                 <label  data-bind="text: filmStats.watched"/>
               </li>
               <li>
-                <%= link_to "Loved", user_film_path(current_user, :loved), remote:true, data: {template: :films} %>
+                <%= link_to "Loved", user_film_path(current_user, :loved), remote:true %>
                 <label  data-bind="text: filmStats.loved"/>
               </li>
               <li>
-                <%= link_to "Owned", user_film_path(current_user, :owned), remote:true, data: {template: :films} %>
+                <%= link_to "Owned",  user_film_path(current_user, :owned),  remote:true %>
                 <label  data-bind="text: filmStats.owned"/>
               </li>
               <li>
-                <%= link_to "Queued", user_film_path(current_user, :queued), remote:true, data: {template: :films} %>
+                <%= link_to "Queued", user_film_path(current_user, :queued),  remote:true %>
                 <label  data-bind="text: filmStats.queued"/>
               </li>
             </ul>
           </li>
           <li>
-            <%= link_to "Lists", user_lists_path(current_user) %>
+            <%= link_to "Lists", user_lists_path(current_user), data:{  remote:true, viewmodel:true} %>
           </li>
           <% if current_user.passport_provider? :netflix %>
             <li>
@@ -61,7 +61,7 @@
         <% else %>
         <ul class="right">
           <li>
-            <%= link_to "Sign in", login_path, remote: true,:html => {:id => "signin-link"} %>
+            <%= link_to "Sign in", login_path, data: {modal: true},:html => {:id => "signin-link"} %>
           </li>
         </ul>
         <% end %>

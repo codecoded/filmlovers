@@ -7,22 +7,16 @@ function FilmsPageModel(films_page) {
   self.total_pages = ko.observable(films_page.total_pages)
   self.description = ko.observable(films_page.description)
   
-  console.log(FilmModel.arrayFromJSON(films_page.films))
   self.films = ko.observableArray(FilmModel.arrayFromJSON(films_page.films))
-
-  self.applyBindings = function(container){
-    viewModel.films_found = self
-    ko.applyBindings(viewModel, container)
-  }
 }
 
 
-FilmsPageModel.load = function(uri, view, container) {
-  $.getJSON(uri, function(films_data) { 
-    $.get(view, function(template_data, status){
-      $(container).html(template_data)
-      FilmModel.arrayFromJSON(films_data).applyBindings(container)
-    })
-  })
-}
+// FilmsPageModel.load = function(uri, view, container) {
+//   $.getJSON(uri, function(films_data) { 
+//     $.get(view, function(template_data, status){
+//       $(container).html(template_data)
+//       FilmModel.arrayFromJSON(films_data).applyBindings(container)
+//     })
+//   })
+// }
 

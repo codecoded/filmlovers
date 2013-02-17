@@ -1,7 +1,7 @@
 <div id="queueController">
   <ul id="navigationMenu">
     <li>
-      <%= link_to queue_path(current_user, :list), :class=> 'services', remote:true do %>
+      <%= link_to queue_path(current_user, :list), :class=> 'services', data: {modal: true} do %>
         <span>Add to list</span>
       <% end %>
     </li>

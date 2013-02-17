@@ -1,27 +1,31 @@
 $(function(){
-  requestsController.init()
+  RequestsController.init()
 })
 
-var requestsController = {
+var RequestsController = {
   init: function(){
-    $('a[data-template="films"], form[data-template="films"]').live('ajax:success', function(xhr, json_data,status){
-      var template = '/templates/' + $(this).data('template')
+    
 
-      $.get(template, function(template_data,status){
-        var container = document.getElementById('container')
-        $(container).html(template_data)
-        new FilmsPageModel(json_data).applyBindings(container)
-      })
+    $('a, form').live('ajax:success', function(xhr, view, status)
+    {
+      xhr.stopPropagation()    
+      RequestsController.display(view)
     })
+  },
 
-    // $('a[data-template="films"], form[data-template="films"]').click(function(event){
-    //   event.preventDefault()
+  display: function(view){
+    $('#container').html(view)
+  },
 
-    //   var uri = $(this).attr('href')
-    //   var template = '/templates/' + $(this).data('template')
-    //   var container = document.getElementById('container')
-    //   FilmsModel.load(uri, template, container)
-    // })
+  linkView: function(href, model, view){
+    $.getJSON(href, function(json_data){
+      RequestsController.bindView(new model(json_data), view)
+    })
+  },
 
+  bindView: function(model, view){
+    content = $(view)   
+    ko.applyBindings(model, content[0])
+    // $('#container').html(content)
   }
 }

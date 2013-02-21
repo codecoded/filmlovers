@@ -24,3 +24,9 @@ FilmModel.arrayFromJSON = function(json){
     return new Array()
   return $.map(json, function (film) {return new FilmModel(film) })
 }
+
+FilmModel.arrayToJSON = function(films){
+  if(!films)
+    return new Array()
+  return $.map(films, function (film) {return film.id() })
+}

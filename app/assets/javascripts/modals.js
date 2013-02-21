@@ -1,18 +1,4 @@
-$(function(){
-  ModalController.init()
-})
-
 var ModalController = {
-
-  init: function(){
-
-    $("a[data-modal]").live('click', function(event){
-      event.preventDefault();
-      $.get($(this).attr('href'), function(data, status){
-        ModalController.queue_modal(data)
-      })
-    })
-  },
 
   queue_modal: function(modal_html){
     $('body').append(modal_html)
@@ -48,5 +34,10 @@ var ModalController = {
   modal_closed: function(){
     $(this).remove()
     ModalController.show_next()
+  },
+
+  close_modal: function(){
+    if(this.modal_is_open())
+      this.next_modal().trigger('reveal:close');
   }
 }

@@ -1,12 +1,12 @@
 var FacebookAPI = {
 
   logged_in: function(){
-    viewModel.user.loggedIn(true)
-    viewModel.user.loggedOut(false)
+    ViewModel.user.loggedIn(true)
+    ViewModel.user.loggedOut(false)
   },
   logged_out: function(){
-    viewModel.user.loggedIn(false)
-    viewModel.user.loggedOut(true)
+    ViewModel.user.loggedIn(false)
+    ViewModel.user.loggedOut(true)
   },
   login: function login(){
 

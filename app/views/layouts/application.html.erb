@@ -20,11 +20,13 @@
   </head>
   <body>
 
+
     <%= render :template => 'facebook/sdk' %>
     <header id="header">
      <%= render partial:"layouts/header" %>
     </header>
     <div class="row" id="container">
+          
       <%= yield %>
       
     </div>

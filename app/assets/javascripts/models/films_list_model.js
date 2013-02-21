@@ -4,10 +4,17 @@ function FilmsListModel(data){
   self.id = data.id
   self.name = ko.observable(data.name)
   self.description = ko.observable(data.description)
-  self.url = data.parent_url
+  self.parent_url = data.parent_url
   self.url = data.url
 
   self.films = ko.observableArray(FilmModel.arrayFromJSON(data.films))
+
+  self.fetch = function(film_id){
+    $.getJSON('/films/' + film_id, function(data){
+      console.log(data)
+      self.add(new FilmModel(data))
+    })
+  }
 
   self.add   = function(film_to_add){ 
     self.films.unshift(film_to_add)
@@ -27,26 +34,30 @@ function FilmsListModel(data){
 
   self.toJSON = function(){
     return {
-      '_method': self.dataMethod,
       'films_list':{
         'name': self.name,
-        'description': self.description
+        'description': self.description,
+        'film_ids': FilmModel.arrayToJSON(self.films())
       }
     }
   }
 
-  // self.save = function(){
-  //   console.log('save caleld')
-  //   $.ajax({
-  //     url: self.url,
-  //     type: self.dataMethod(),
-  //     data: self.toJSON(),
-  //     dataType: 'json',
-  //     success: function(data){
-  //       RequestsController.display(data)
-  //     }  
-  //   })
-  // }
+  self.save = function(){
+    $.ajax({
+      url: self.url,
+      type: self.dataMethod(),
+      data: self.toJSON(),
+      dataType: 'json',
+      success: function(response){
+        ViewModel.filmListSaved(self, response)
+      }  
+    })
+  }
+}
+
+FilmsListModel.load = function(uri){
+  $.get(uri, function(data){
+  })
 }
 
 FilmsListModel.arrayFromJSON = function(json){

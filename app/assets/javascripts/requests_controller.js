@@ -13,6 +13,10 @@ var RequestsController = {
     })
   },
 
+  get: function(uri){
+    $.get(uri, RequestsController.display)
+  },
+
   display: function(view){
     $('#container').html(view)
   },

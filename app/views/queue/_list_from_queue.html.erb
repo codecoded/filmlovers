@@ -1,20 +1,25 @@
-<div id="queueListModal" class="reveal-modal">
-  <h2>
-    Add films to list:
-  </h2>
+<div id="queueListModal" class="reveal-modal" data-bind="with: ViewModel.queue">
+   <div class="row" >
+    <div class="twelve columns">
+      <label>
+        Add films to list:
+      </label>
+    </div>
+  </div>
+  <div class="row films" data-bind="foreach: selected()">
+    <a class="film film-small" data-bind="attr: {href: url}, css:{'film-selected': selected}, click: select">
+      <img data-bind="attr: {src: thumbnail, title: title}" class="small"/>
+    </a>
+  </div>
   <div class="row">
     <div class="six columns">
-      <%= select_tag :list_id, options_for_select(@lists) %>
+      <%= select_tag :list_id, options_for_select(@lists)%>
     </div>
   </div>
   <div class="row">
     <div class="six columns">
-      <a href='<%= new_user_list_path %>' data-bind="click: listsUrl" class='radius button close-reveal-modal' data-remote="true">New List</a>
+      <a href='<%= new_user_list_path %>' data-bind="click: listsUrl" class='radius button close-reveal-modal'>New List</a>
     </div>
   </div>
   <a class="close-reveal-modal">×</a>
 </div>
-
-<script>
-ko.applyBindings(viewModel.queue, document.getElementById('queueListModal'))
-</script>

@@ -1,0 +1,8 @@
+<!-- Thumbnails -->
+<div class="ten columns" >
+  <div class="row films" data-bind="foreach: films">
+    <a class="film film-small" data-bind="attr: {href: url}, css:{'film-selected': selected}, click: select">
+      <img data-bind="attr: {src: thumbnail, title: title}" class="small"/>
+    </a>
+  </div>
+</div>

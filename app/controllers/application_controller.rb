@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     @user_service ||= UserService.new current_user
   end
 
-  def current_url(new_params)
+  def current_url(new_params={})
     url_for params.merge(new_params)
   end
 

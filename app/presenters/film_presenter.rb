@@ -13,6 +13,10 @@ class FilmPresenter
     films.map {|film| FilmPresenter.new user, film } if !films.empty?
   end
   
+  def self.from_film_ids(user, film_ids)
+    from_films user, Film.find(film_ids)
+  end
+
   def actioned?(action)
     action == :queued ? user.films_queue.exists?(film.id) : user.films[action].is_member?(film.id)
   end

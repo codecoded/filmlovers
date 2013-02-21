@@ -1,16 +1,14 @@
 $(function(){
-  $('#fb-login').click(FacebookAPI.login)
-  $('#fb-logout').click(FacebookAPI.logout)
-  // $('.film-search').click(function(event){
-  //   event.preventDefault()
-  //   console.log('s')
-  //   $(this).closest('form').submit()
-  // })
 
-  // $('.target-container').live('ajax:success', function(xhr, data, status){
-  //   $('#container').html(data)
-  // })
+  ViewModel.init()
+
+  $('#fb-login').click(FacebookAPI.login)
+  $('#fb-logout').click(FacebookAPI.logout)  
+
+  $('#lnkQueueListModal').on('click', ViewModel.displayQueueListModal)
+
 })
+
 
 function allowDrop(ev)
 {

@@ -101,7 +101,7 @@
           <% @film_view.similar_films.each do |film| %>
             <div class="film">
               <% if film.film.id %>
-              <%= link_to film_path(film.film.id) do %>
+              <%= link_to film_path(film.film.id), remote:true do %>
                 <%= image_tag(film.thumbnail('w90'), :title => film.title, :class => 'small') %>
               <%end %>
               <% end %>

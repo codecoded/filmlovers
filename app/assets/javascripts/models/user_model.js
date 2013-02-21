@@ -1,7 +1,5 @@
 function UserModel(data){
-
   var self = this
-
 
   self.loggedIn = ko.observable(false)
   self.loggedOut = ko.observable(false)
@@ -13,8 +11,6 @@ function UserModel(data){
   self.name  = ko.observable(data.name)
   self.username = ko.observable(data.username)
 
-
-
   self.actionFilm = function(film, action){
     film.registerAction(action)
     self.incrementStat(action)
@@ -25,9 +21,3 @@ function UserModel(data){
     stat(stat() + value)    
   }
 }
-
-UserModel.load = function(){
-    $.getJSON('/current_user', function(json){
-      return new UserModel(json)
-    })
-  }

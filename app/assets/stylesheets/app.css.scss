@@ -1,4 +1,8 @@
 
+body{
+  overflow-y: scroll;
+}
+
 .link{
   background-color: rgb(255, 255, 255);
   border: solid 1px rgba(90, 206, 213, 0.37);
@@ -22,4 +26,8 @@
 
 .push{
   height:150px;
+}
+
+.panel{
+  padding: 10px;
 }

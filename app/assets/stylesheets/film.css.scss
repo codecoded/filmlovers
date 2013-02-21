@@ -10,23 +10,23 @@ $actionedHover:      #bbb;
   height:auto;
   margin:1px;
   width:auto;
-  padding:10px 0px;
-  float:left;
+  // padding:10px 0px;
+  // float:left;
   .film
   {
     margin: 10px;
     float:left;
    h4{
-    font-size:12pt;
+    font-size:10pt;
     // color: white;
-    padding-left:10px;
+    padding-left:8px;
     margin-bottom:2px;
    }
    p{
     // color: #ddd;
     font-style: italic;
     margin: 0px;
-    padding-left:10px;
+    padding-left:8px;
    }
    a{
     // color:white;
@@ -34,12 +34,16 @@ $actionedHover:      #bbb;
    img{
     height:237px;
     width:154px;
-    &.small{
-      height:137px;
-      width:92px;
-    }
    }
-
+  }
+  .film-small{
+    margin: 1px;
+    display: block;
+    float: left;
+    img{
+      height: 90px;
+      width: 60px; 
+    }
   }
 }
 
@@ -57,42 +61,53 @@ $actionedHover:      #bbb;
     float:left;
     // background-color: black;
   }
+}
 
-  .unactioned{
-    &:hover{
-      opacity: 1 ;
-    }
+.film-actions-queue{
+  color:white;
+  list-style: none;
+  position: absolute;
+  top: 60px;
+  margin-left: 15px;
+  li{
+    float:left;
+    // background-color: black;
   }
-  .icon-eye-open {
-    &.actioned{
-      color:$watchedColor;
-    }
-  }
+}
 
-  .icon-heart {
-    &.actioned{
-      color:$lovedColor;
-    }
+.unactioned{
+  &:hover{
+    opacity: 1 ;
   }
-
-  .icon-heart-empty {
-    &.actioned{
-      color:$unlovedColor;
-    }
+}
+.icon-eye-open {
+  &.actioned{
+    color:$watchedColor;
   }
+}
 
-  .icon-pushpin {
-    &.actioned{
-      color:$queuedColor;
-    }
+.icon-heart {
+  &.actioned{
+    color:$lovedColor;
   }
+}
 
-  .icon-home {
-    &.actioned{
-      color:$ownedColor;
-    }
+.icon-heart-empty {
+  &.actioned{
+    color:$unlovedColor;
   }
+}
 
+.icon-pushpin {
+  &.actioned{
+    color:$queuedColor;
+  }
+}
+
+.icon-home {
+  &.actioned{
+    color:$ownedColor;
+  }
 }
 
 .film-actions-horizontal{

@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require foundation
-//= require jquery_ujs
 //= require knockout
 //= require_tree .

@@ -14,18 +14,17 @@
       <h5 class="subheader" data-bind="text: description">
         <%= params[:query] %>
       </h5>
-    </div><a href="#"></a>
+    </div>
     <div class="panel callout radius" align="center">
       <p>
-        Page <span data-bind="text: page_no"/> of <span data-bind="text: total_pages">
+         <a data-bind="attr: {href: url_previous}, visible: url_previous, click: ViewModel.loadFilmsPage"> <i class="icon-chevron-left"></i></a>
+        Page <span data-bind="text: page_no"/> of <span data-bind="text: total_pages"/> 
+        <a data-bind="attr: {href: url_next}, visible: url_next, click: ViewModel.loadFilmsPage"> <i class="icon-chevron-right"></i></a>
       <p>
       <h6>
         <span data-bind="text: total_results"/> films
       </h6>
     </div>
-    <ul class="pagination">
-      <%#= page_search_results(@film_search_results.page_no, @film_search_results.page_total) %>
-    </ul>
   </div>
   <!-- End Side Bar --> 
   <%= render partial: 'films/film' %>

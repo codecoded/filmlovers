@@ -36,10 +36,10 @@ function UserFilmActionModel(film, data){
       dataType: 'json',
       success: function(data){
         self.isActioned(!self.isActioned())
-        viewModel.user.updateStat(self.name(), self.isActioned() ? 1 : -1)
+        ViewModel.user.updateStat(self.name(), self.isActioned() ? 1 : -1)
 
         if(self.isQueueAction()){
-          self.isActioned() ? viewModel.queue.queueFilm(self.film) : viewModel.queue.dequeueFilm(self.film)
+          self.isActioned() ? ViewModel.queue.queueFilm(self.film) : ViewModel.queue.dequeueFilm(self.film)
         }
 
         return self.count(data.count)    

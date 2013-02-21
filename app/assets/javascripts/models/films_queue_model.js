@@ -2,7 +2,6 @@ function FilmsQueueModel(data){
   self = this
   self.films = ko.observableArray(FilmModel.arrayFromJSON(data))
 
-  self.listsUrl = data.listsUrl
 
   self.queueFilm   = function(film_to_add){ 
     self.films.unshift(film_to_add)
@@ -18,21 +17,23 @@ function FilmsQueueModel(data){
   }
 
   self.listsUrl = function(model, event){
+
+    event.preventDefault()
     var href = $(event.target).attr('href')
-    var ids = self.selected().map(function(film){return film.id()})
-
-    var newHref = href + '?' + $.param({'film_ids': ids})
-
-    $(event.target).attr('href', newHref)
+    // var ids = self.selectedIds()
+    // var newHref = href + '?' + $.param({'film_ids': ids})
+    console.log(href)
+    RequestsController.get(href + '?' + $.param({'film_ids': self.selectedIds()}))
+    // $(event.target).attr('href', newHref)
   }
 
-}
+  self.selectedIds = function(){
+    return self.selected().map(function(film){return film.id()})
+  }
 
-FilmsQueueModel.load = function(user, container) {
-  $.getJSON(user.username() + '/queue/show.json/', function(json) { 
-    console.log(json)
-    viewModel.queue = new FilmsQueueModel(json)
-    ko.applyBindings(viewModel.queue, container)
-    Queue.init()
-  })
+  self.addToList = function(view,event){
+    var href = $('option:selected', $(event.target)).first().val()
+    RequestsController.get(href + '?' + $.param({'film_ids': self.selectedIds()}))
+  }
+
 }

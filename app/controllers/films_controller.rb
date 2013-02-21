@@ -1,6 +1,7 @@
 class FilmsController < ApplicationController
 
   before_filter :init_film_search
+  # respond_to :json, :html
 
   def index
     render layout:nil
@@ -8,6 +9,9 @@ class FilmsController < ApplicationController
 
   def show
     @film_view = FilmPresenter.new current_user, Film.fetch(params[:id])
+    @film = @film_view
+    # respond_with @film_view
+    render layout:nil if request.xhr?
   end
 
   def trend
@@ -20,6 +24,11 @@ class FilmsController < ApplicationController
   def search
     results = @tmdb_service.search params[:query], page_options
     present(results, params[:query]) and render_template
+  end
+
+  def quick_search
+    results = @tmdb_service.search params[:q]
+    present(results, params[:q])
   end
 
   def genre

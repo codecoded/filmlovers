@@ -7,8 +7,9 @@
       <%= link_to 'New List', new_user_list_path, {:class => 'radius button', remote:true} %>
     </div>
   </div>
-  <div class="row">
-    <div class="eight columns" data-bind="foreach: lists">
+  <!-- ko foreach: lists -->
+  <div class="row" >
+    <div class="eight columns">
       <h2> 
         <small>
           <a data-bind="text: name, attr: {href: url, 'data-remote':true, 'data-viewmodel':true}" ></a>
@@ -16,9 +17,9 @@
         </small>
       </h2>
       <p data-bind="text: description"> </p>
-      <%= render partial: "films/film" %>
+      <%= render partial: "films/film_small" %>
     </div>
   </div>
+  <!-- /ko -->
 </div>
-
 <% end %>

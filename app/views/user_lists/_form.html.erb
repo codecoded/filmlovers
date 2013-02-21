@@ -4,7 +4,56 @@
   <input type="text" name="films_list[name]" data-bind="value: name" placeholder='Title'/>
   <label>What's the reasoning?</label>
   <textarea  name="films_list[description]" data-bind="value: description" placeholder='Description' cols="40" rows="20"></textarea>
-  <%= render partial: 'films/film' %>
-  <%= submit_tag 'Save', :class=>"button radius" %>
-  <a data-bind="attr: {href: url}" data-method="delete" data-remote=true data-confirm="Are you sure?" rel="nofollow" class ='radius button'>Delete</a>
+
+  <div class="row">
+    <div class="twelve columns">
+      <div class="row collapse">
+        <div class="one mobile-one columns">
+          <span class="prefix"><img src="assets/search.png"></span>
+        </div>
+        <div class="six mobile-three columns">
+          <input type="text" id="quick_search" size="30" value="" autocomplete="off" class="ss-input">
+        </div>
+        <div class="three mobile-three columns">
+          <%= submit_tag 'Save', :class=>"button radius" %>
+    <a data-bind="attr: {href: url}" data-method="delete" data-remote=true data-confirm="Are you sure?" rel="nofollow" class ='radius button'>Delete</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="ten columns" >
+    <div class="row films" data-bind="foreach: films">
+      <input type="hidden" data-bind="value: id" name="films[]"/>
+      <div class="full_overlay film" draggable='true'  ondragstart="drag(event)"  data-bind="attr: { id: id}">
+        <div class="content">
+          <div class="film-title">
+            <h4 data-bind="text: title"/>
+            <p data-bind="text: release_date"></p>
+          </div>      
+          <ul class="film-actions">
+            <div class="film-actions-horizontal">
+              <div class="tiled left">
+                <a data-bind="click: $root.remove">
+                  <i class="icon-remove"></i>
+                </a>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <a data-bind="attr: { href: url, title: title }" data-remote="true">
+          <img data-bind="attr: {src: thumbnail, title: title }"/>
+        </a>
+      </div>
+    </div>
+  </div>
+
 </form>
+
+<script>
+$(function(){
+  $('#quick_search').smartSuggest({src: '/films/quick_search', showImages:true })
+})
+</script>

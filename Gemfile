@@ -30,7 +30,7 @@ gem 'bson_ext'
 gem 'mongo'
 gem 'rest-client'
 gem "mongoid", "~> 3.0.0"
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', '3.5.6.55'
 gem 'will_paginate', '~> 3.0.0'
 
 gem 'rabl'

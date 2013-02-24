@@ -10,9 +10,8 @@ class FilmsPagePresenter
   end
 
   def films
-    @films ||= results.map {|result| FilmPresenter.new(user, result)}
+    @films ||= FilmPresenter.from_films(user, results)
   end
-
 
   def next_params
     next? ? {page: page_no+1} : {}

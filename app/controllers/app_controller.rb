@@ -1,13 +1,13 @@
 class AppController < ApplicationController
   
   def index
-    render layout:nil if request.xhr?
+    render_template
   end
 
   def preview
   end
 
   def login
-    render partial:'login', layout:nil
+    render partial: 'login' 
   end
 end

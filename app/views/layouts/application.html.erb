@@ -22,13 +22,11 @@
 
 
     <%= render :template => 'facebook/sdk' %>
-    <header id="header">
-     <%= render partial:"layouts/header" %>
+    <header id="header" class="row">
+      <%= render partial:"layouts/header" %>
     </header>
-    <div class="row" id="container">
-          
+    <div id="container" class="row">
       <%= yield %>
-      
     </div>
     <div class="push"></div>
     <div id="footer">

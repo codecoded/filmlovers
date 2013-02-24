@@ -1,25 +1,27 @@
 <%= render layout: 'layouts/viewmodel', locals: {model: 'ListsModel'} do %>
 
-<div id="films_lists">
+
   <div class="row">
-    <div class="eight columns">
+    <div class="twelve columns">
       Create or modify lists here!
       <%= link_to 'New List', new_user_list_path, {:class => 'radius button', remote:true} %>
     </div>
   </div>
   <!-- ko foreach: lists -->
-  <div class="row" >
-    <div class="eight columns">
-      <h2> 
-        <small>
+  <div class="row list-summary">  
+    <div class="six columns">
+      <label> 
           <a data-bind="text: name, attr: {href: url, 'data-remote':true, 'data-viewmodel':true}" ></a>
-          <%#= link_to films_list.name, user_list_path( current_user, films_list.films_list) %>
-        </small>
-      </h2>
-      <p data-bind="text: description"> </p>
-      <%= render partial: "films/film_small" %>
+      </label>    
+    
+      <div class="row">
+        <%= render partial: "films/film_small" %>
+      </div>
+
     </div>
+     <p data-bind="text: description"> </p>
   </div>
   <!-- /ko -->
-</div>
+
+
 <% end %>

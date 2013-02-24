@@ -4,26 +4,25 @@ class FilmsController < ApplicationController
   # respond_to :json, :html
 
   def index
-    render layout:nil
+    render_template
   end
 
   def show
     @film_view = FilmPresenter.new current_user, Film.fetch(params[:id])
     @film = @film_view
-    # respond_with @film_view
-    render layout:nil if request.xhr?
+    render_template
   end
 
   def trend
     # results = Rails.cache.fetch params[:trend] do
      results =  @tmdb_service.by_trend params[:trend], page_options
     # end
-    present(results, params[:trend]) and render_template
+    present(results, params[:trend]) and render_template :index
   end
 
   def search
     results = @tmdb_service.search params[:query], page_options
-    present(results, params[:query]) and render_template
+    present(results, params[:query]) and render_template :index
   end
 
   def quick_search
@@ -35,14 +34,10 @@ class FilmsController < ApplicationController
     # results = Rails.cache.fetch  params[:genre_id] do
     results =   @tmdb_service.by_genre params[:genre_id], page_options
     # end
-    present(results, params[:genre_id]) and render_template
+    present(results, params[:genre_id]) and render_template :index
   end
 
   protected
-
-  def render_template
-    render :index, layout:nil
-  end
 
   def init_film_search
     @tmdb_service = TmdbFilmsSearch.new

@@ -2,6 +2,17 @@
 
 // Settings file containing Foundation defaults
 
+// orbit-wrapper .slider-nav span { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0); opacity: 0; -webkit-transition: opacity 400ms; -moz-transition: opacity 400ms; -o-transition: opacity 400ms; transition: opacity 400ms; }
+// .orbit-wrapper:hover .slider-nav span { filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100); opacity: 1; }
+
+
+#featured { background: url(spinner.gif) center center #f4f4f4 no-repeat;  }
+#featured img { display: none; }
+
+#featured.orbit { background: none; }
+#featured.orbit img { display: block; }
+
+
 // Grid Settings
 
 $rowWidth: 1200px;

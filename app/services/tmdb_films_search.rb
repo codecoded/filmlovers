@@ -13,7 +13,7 @@ class TmdbFilmsSearch
   def by_genre(genre_id, page_options={})
     @genre = genre_id.is_a?(String) ? Genres.find_by_name(genre_id) : Genres.find(genre_id)
     fetch { 
-      Tmdb::API.genre @genre.id , page_options.merge({include_all_movies: true})
+      Tmdb::API.genre @genre.id , page_options.merge({include_all_movies: true, adult:true})
       } if @genre
   end
 

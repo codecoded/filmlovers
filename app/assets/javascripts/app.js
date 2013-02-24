@@ -6,6 +6,7 @@ $(function(){
   $('#fb-logout').click(FacebookAPI.logout)  
 
   $('#lnkQueueListModal').on('click', ViewModel.displayQueueListModal)
+  $('#signin-link').on('click', ViewModel.displaySignInModal)
 
 })
 

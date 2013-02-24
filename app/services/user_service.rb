@@ -29,7 +29,8 @@ class UserService
   end
 
   def films_in_list(list)
-    list_films(list).map {|film_id| Film.find(film_id.to_i)}
+    # list_films(list).map {|film_id| Film.find(film_id.to_i)}
+    list_films(list)
   end
 
   def films_list(id)

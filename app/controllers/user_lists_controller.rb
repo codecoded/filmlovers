@@ -1,18 +1,19 @@
 class UserListsController < UserController
   
-
+  
   def index
     @films_page = current_user.films_lists.map {|list| FilmsListPresenter.new  list}
-    render layout:nil if request.xhr?
+    @films_count = AppSettings::PREVIEW_LIMIT
+    render_template
   end
   
   def new
-    @films_page = FilmsListPresenter.from_queue(current_user, params[:film_ids])
+    @films_page = FilmsListPresenter.from_queue(current_user, film_ids)
     render layout:nil if request.xhr?
   end
 
   def show
-    @films_page = FilmsListPresenter.new(films_list, params[:film_ids] ||= [])
+    @films_page = FilmsListPresenter.new(films_list, film_ids)
     render layout:nil if request.xhr?
   end
   
@@ -34,6 +35,10 @@ class UserListsController < UserController
     list_service.set_films(params[:films]) if params[:films]
     flash[:update_message] = "Film list updated"
     show_index
+  end
+
+  def film_ids
+    params[:film_ids] ? params[:film_ids] : []
   end
 
   def show_index

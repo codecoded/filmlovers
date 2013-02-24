@@ -9,12 +9,12 @@ class FilmPresenter
     @user, @film, @thumbnail_size = user, film, thumbnail_size
   end
 
-  def self.from_films(user, films)
-    films.map {|film| FilmPresenter.new user, film } if !films.empty?
-  end
+  # def self.from_films(user, films)
+  #   films.map {|film| FilmPresenter.new user, film } if !films.empty?
+  # end
   
-  def self.from_film_ids(user, film_ids)
-    from_films user, Film.find(film_ids)
+  def self.from_films(user, film_ids)
+    Film.find(film_ids).map {|film| FilmPresenter.new user, film } if !film_ids.empty?
   end
 
   def actioned?(action)
@@ -44,6 +44,10 @@ class FilmPresenter
 
   def trailer
     "http://www.youtube.com/embed/#{film.trailer}" if film.has_trailer?
+  end
+
+  def backdrops
+    film.images_library.backdrops
   end
 
   def year

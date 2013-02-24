@@ -1,4 +1,4 @@
-class ListRepository
+class PersonRepository
 
   attr_reader :id, :cache
 
@@ -7,6 +7,10 @@ class ListRepository
     @cache = Redis::StringStore.new redis_key
   end
 
+  def self.find(id)
+    new(id).find
+  end
+  
   def find
     is_cached? ? load : fetch
   end
@@ -16,20 +20,21 @@ class ListRepository
   end
 
   def load
-    doc = List.find id
+    doc = Person.find id
     doc ? doc : fetch
   end
 
   def redis_key
-    "list:#{id}"
+    "person:#{id}"
   end
 
   protected 
 
   def fetch
-    list = List.new Tmdb::List.find(id)
-    cache.set list.id
-    lst
+    person = Person.new Tmdb::Person.find(id)
+    person.upsert
+    cache.set person.id
+    person
   end
 
 end

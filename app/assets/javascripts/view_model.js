@@ -31,6 +31,14 @@ var ViewModel = {
     })
   },
 
+  displaySignInModal: function(e){
+    e.preventDefault()
+    console.log('tes')
+    $.get($(this).attr('href'), function(data, status){
+      ModalController.queue_modal(data)
+    })
+  },
+
   addFilmsToList: function(list_url){
     RequestsController.get(list_url + '?' + $.param({'film_ids': ViewModel.queue.selectedIds()}))
     ModalController.close_modal()
@@ -45,6 +53,11 @@ var ViewModel = {
     $.getJSON(ViewModel.href(event), function(data){
       filmModel.update(new FilmsPageModel(data))
     })
+  },
+
+  showFilm: function(filmURI){
+    RequestsController.get(filmURI)
+    Bindings.showFilm()
   },
 
   href: function(target){

@@ -37,6 +37,13 @@ Filmlovers::Application.routes.draw do
     match ':id', to: 'films#show', as: 'film'
   end
 
+  scope 'persons' do
+    match 'index', to: 'persons#index', as: 'persons'
+    get 'search', to: "persons#search", as: 'persons_search'
+    get 'quick_search', to: "persons#quick_search", as: 'persons_quick_search'
+    match ':id', to: 'persons#show', as: 'person'
+  end
+
   scope ':user_id', :constraints => { :user_id => /.*/ } do
     resources :films, 
       :only => [:index, :show], to: 'user_films',

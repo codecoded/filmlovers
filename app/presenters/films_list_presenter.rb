@@ -18,8 +18,9 @@ class FilmsListPresenter
     new user.films_lists.new, film_ids
   end
 
-  def films
-    @films_presenters ||= FilmPresenter.from_film_ids user, @film_ids
+  def films(count=nil)
+    film_ids = count ? @film_ids.take(count) : @film_ids
+    @films_presenters ||= FilmPresenter.from_films user, film_ids
   end
 
 end

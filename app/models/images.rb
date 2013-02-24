@@ -3,15 +3,15 @@ class Images
   attr_reader :doc, :posters, :backdrops
 
   def initialize(doc)
-    @doc = doc
+    @doc = OpenStruct.new doc
   end
 
   def posters_library
-    @posters ||= Posters.new posters
+    @posters ||= Posters.new doc.posters
   end
 
   def backdrops
-    @backdrops ||= backdrops
+    @backdrops ||= doc.backdrops
   end
 
   def poster_for(size, film)

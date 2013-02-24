@@ -25,5 +25,9 @@ var Bindings = {
 
   ko_data: function(elementId){
     return ko.dataFor(document.getElementById(elementId))
+  },
+
+  showFilm: function(){
+    $("#featured").orbit({fluid:true});
   }
 }

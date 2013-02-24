@@ -1,27 +1,31 @@
 
     
   <!-- Header and Nav -->
-  
+<div class="twelve columns">
   <div class="row">
     <div class="seven columns">
-      <h1><%= @film_view.title %> </h1><label><%= directed_by(@film_view) %> <%= year(@film_view)%><label>
-      
+      <h1 class="film-title"><%= @film_view.title %> </h1><label><%= directed_by(@film_view) %> <%= year(@film_view)%><label>  
     </div>
     <div class="five columns">
       <ul class="nav-bar right">
         <li><a href="#overview">Overview</a></li>
-        <li><a href="#cast">Cast</a></li>
-        <li><a href="#">Trailers</a></li>
-        <li><a href="#">Similar</a></li>
+        <li><a href="#credits">Credits</a></li>
+        <% if @film_view.has_trailer?   %> <li><a href="#trailers" id="trailersLink" data-reveal-id="filmTrailersModal" data-animation="none" >Trailers</a></li><% end %>
+        <% if @film_view.similar_films? %> <li><a href="#similar">Similar</a></li> <% end %>
       </ul>
     </div>
   </div>
   
+
   <!-- First Band (Image) -->
   <% if @film_view.has_backdrop? %>
   <div class="row">
-    <div class="twelve columns">
-      <%= image_tag @film_view.backdrop('w1280') %>
+    <div class="twelve columns centered">
+      <div id='featured'>
+        <% @film_view.backdrops.each do | backdrop | %>
+          <%= image_tag AppConfig.image_uri_for(['w1280', backdrop['file_path']]) %>
+        <% end %>
+      </div>
       <hr />
     </div>
   </div>
@@ -29,8 +33,16 @@
   <!-- End Header and Nav -->
 
   <div class="row">
-    <div class="three columns">
-     <%= image_tag @film_view.film.poster('original') %>
+    <div class="two columns">
+     <%= image_tag @film_view.film.poster('w342') %>
+    </div>
+    <div class="one columns ">
+      <div class="film-actions-vertical pagination-centered">
+        <div class="tiled"><i class="icon-eye-open icon-3x"></i></div>
+        <div class="tiled"><i class="icon-heart icon-3x" ></i></div>
+        <div class="tiled"><i class="icon-home icon-3x" ></i></div>
+        <div class="tiled"><i class="icon-pushpin icon-3x" ></i></div>
+      </div>
     </div>
     <div class="five columns">
       <h4 id="overview"><%= tagline(@film_view.film) %></h4>
@@ -48,58 +60,71 @@
         </div>
       </div>
     </div>
-    <div class="four columns credits">
-      <h4 id="cast">Cast</h4>
-      <div class="row">
-        <div class="twelve columns crew">
-          <p>
-            <% @film_view.film.credits.cast.each do |cast| %>
-              <%= link_to root_path do %>
-                <%= content_tag :span, cast['name'], {:class => 'person link'} %>
-              <% end %>
-            <% end %>
-          </p>
-        </div>
-      </div>
-      <h4>Crew</h4>
-      <div class="row">
-        <div class="twelve columns crew">
-          <p>
-            <% @film_view.film.credits.crew.each do |cast| %>
-              <%= link_to root_path do %>
-                <%= content_tag :span, cast['name'], {:class => 'person link'} %>
-              <% end %>
-            <% end %>
-          </p>
-        </div>
-      </div>
+    <div class="four columns credits" id="credits">
+      <dl class="tabs">
+        <dd class="active"><a href="#cast">Cast</a></dd>
+        <dd><a href="#crew">Crew</a></dd>
+      </dl>
+      <ul class="tabs-content">
+        <li class="active" id="castTab">
+          <div class="row">
+            <div class="twelve columns crew">
+              <ul class="disc credits">
+                <% @film_view.film.credits.cast.each do |person| %>
+                <li style="border-bottom: dotted 1px lightblue;">
+                  <%= link_to person_path(person.id), remote:true do %>
+                    <%= content_tag :span, person.name, {:class => 'person link'} %>
+                  <% end %>
+                  <span class="right"> <%= person.character %> </span>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li id="crewTab">
+          <div class="row">
+            <div class="twelve columns crew">
+              <ul class="disc credits">
+              <% @film_view.film.credits.crew.each do |person| %>
+                <li style="border-bottom: dotted 1px lightblue;">
+                  <%= link_to person_path(person.id), remote:true do %>
+                    <%= content_tag :span, person.name, {:class => 'person link'} %>
+                  <% end %>
+                  <span class="right"> <%= person.job %> </span>
+                </li>
+                <% end %>
+              </ul> 
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
   
   
   <!-- Third Band (Image Right with Text) -->
-  <% if @film_view.has_trailer? %>
+<!--   <%#if @film_view.has_trailer? %>
+    <div class="row" id="trailers">
+     <h4>Trailers</h4>
       <div class="row">
-       <h4>Trailers</h4>
-        <div class="row">
-          <div class="twelve columns">
-            <div class="flex-video">
-              <iframe  src='<%= @film_view.trailer %>' frameborder="0" allowfullscreen></iframe>
-            </div>
+        <div class="twelve columns">
+          <div class="flex-video">
+            <iframe  src='<%#= @film_view.trailer %>' frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
       </div>
     </div>
-  <% end %>
+  <%# end %> -->
 
   <% if @film_view.similar_films? %>
   <div class="row">
      <h4>Similar Films</h4>
-      <div class="row">
+      <div class="row" id="similar">
         <div class="twelve columns">
           <div class="row films">
           <% @film_view.similar_films.each do |film| %>
-            <div class="film">
+            <div class="film-small">
               <% if film.film.id %>
               <%= link_to film_path(film.film.id), remote:true do %>
                 <%= image_tag(film.thumbnail('w90'), :title => film.title, :class => 'small') %>
@@ -112,3 +137,22 @@
     </div>
   </div>
   <% end %>
+
+</div>
+<div id="filmTrailersModal" class="reveal-modal xlarge">
+  <div class="row" id="trailers">
+      <div class="twelve columns">
+        <div class="flex-video">
+          <iframe  src='<%= @film_view.trailer %>' frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+  </div>
+  <a class="close-reveal-modal">×</a>
+</div>
+
+
+<script type="text/javascript">
+  $(function() {
+    $("#featured").orbit({directionalNav:true, fluid:false, timer:false});
+   });
+</script>

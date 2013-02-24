@@ -20,5 +20,17 @@ class ApplicationController < ActionController::Base
     url_for params.merge(new_params)
   end
 
+  def get_layout
+    request.xhr? ? {layout:nil} : {}
+  end
+
+  def render_template(view=nil)
+    if view
+      render view, get_layout
+    else
+      render get_layout
+    end
+  end
+
   helper_method :current_user, :user_service, :username, :logged_in?, :current_url
 end

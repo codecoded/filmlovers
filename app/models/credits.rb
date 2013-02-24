@@ -6,11 +6,15 @@ class Credits
     @data = OpenStruct.new casts_hash
   end
 
+  def profile_picture(person)
+    AppConfig.image_uri_for ['w45', person['profile_path']]
+  end
+
   def cast
-    data.cast
+    @cast||= data.cast.map {|c| Person.new c}
   end
 
   def crew
-    data.crew
+    @creq ||= data.crew.map {|c| Person.new c}
   end
 end

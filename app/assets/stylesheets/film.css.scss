@@ -6,6 +6,18 @@ $queuedColor:        black;
 $ownedColor:         rgb(192, 192, 50);
 $actionedHover:      #bbb;
 
+// #featured img { display: none; }
+// #featured.orbit img { display: block; }
+
+.film-title{
+  font-style: italic;
+}
+
+ul.credits{
+  height:400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 .films{
   height:auto;
   margin:1px;
@@ -44,6 +56,12 @@ $actionedHover:      #bbb;
       height: 90px;
       width: 60px; 
     }
+    .tiled{
+      opacity: 0
+    }
+    &:hover .tiled{
+      opacity: 1
+    }
   }
 }
 
@@ -69,10 +87,12 @@ $actionedHover:      #bbb;
   position: absolute;
   top: 60px;
   margin-left: 15px;
+  opacity: 0;
   li{
     float:left;
     // background-color: black;
   }
+  
 }
 
 .unactioned{
@@ -135,8 +155,8 @@ $actionedHover:      #bbb;
     border: solid 4px black;
     padding: 2px;
     border-radius: 5px;
-    width: 70px;
-    height:70px;
+    width: 60px;
+    height:60px;
   }
 }
 

@@ -8,6 +8,10 @@ gem 'thin'
 # gem 'mongo'
 gem 'omniauth-facebook', '1.4.0'
 gem 'omniauth-netflix'
+gem "omniauth-google-oauth2"
+gem 'omniauth-vimeo'
+gem 'omniauth-twitter'
+
 gem 'koala'
 gem 'redis'
 gem 'rack-iframe'

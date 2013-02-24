@@ -16,7 +16,8 @@
     
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>    
+    <%= csrf_meta_tags %> 
+    <%= render partial: 'layouts/google_analytics' %> 
   </head>
   <body>
 
@@ -34,5 +35,6 @@
       <%= render partial:"layouts/footer" %>
       <% end %>
     </div>
+
   </body>
 </html>

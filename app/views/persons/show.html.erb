@@ -26,6 +26,7 @@
       <dl class="tabs">
         <dd class="active"><a href="#cast">Cast</a></dd>
         <dd><a href="#crew">Crew</a></dd>
+        <dd><a href="#films">Films</a></dd>
       </dl>
       <ul class="tabs-content">
         <li class="active" id="castTab">
@@ -60,25 +61,24 @@
             </div>
           </div>
         </li>
-      </ul>
-    </div>
-  </div>
-  
-  <div class="row">
-     <h4>Films</h4>
-      <div class="row" id="similar">
-        <div class="twelve columns">
-          <div class="row films">
-          <% @person_view.films.each do |film| %>
-            <div class="film-small">
-              <% if film.film.id %>
-              <%= link_to film_path(film.film.id), remote:true do %>
-                <%= image_tag(film.thumbnail('w90'), :title => film.title, :class => 'small') %>
-              <%end %>
+        <li id="filmsTab">
+          <div class="row" id="similar">
+            <div class="twelve columns crew">
+              <ul class="disc credits">
+              <% @person_view.films.each do |film_view| %>
+                <div class="film-small">
+                <% if film_view.film.id %>
+                  <%= link_to film_path(film_view.film.id), remote:true do %>
+                    <%= image_tag(film_view.thumbnail('w45'), :title => film_view.title, :class => 'small') %>
+                  <%end %>
+                   <span class="right"> <%= film_view.title %> </span>
+                <% end %>
+                </div>
               <% end %>
+              </ul>
             </div>
-          <% end %>
-        </div>
-      </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>

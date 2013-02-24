@@ -30,16 +30,22 @@ function UserFilmActionModel(film, data){
   })
 
   self.action = function(){
+
     $.ajax({
       url: self.url(),
       type: self.dataMethod(),
       dataType: 'json',
       success: function(data){
         self.isActioned(!self.isActioned())
-        ViewModel.user.updateStat(self.name(), self.isActioned() ? 1 : -1)
+        statIncr = self.isActioned() ? 1 : -1
+        ViewModel.user.updateStat(self.name(), statIncr)
 
         if(self.isQueueAction()){
           self.isActioned() ? ViewModel.queue.queueFilm(self.film) : ViewModel.queue.dequeueFilm(self.film)
+        }
+        else
+        {
+          self.film.stats.updateStat(self.name(), statIncr)
         }
 
         return self.count(data.count)    

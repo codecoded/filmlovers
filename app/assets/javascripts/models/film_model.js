@@ -5,6 +5,7 @@ function FilmModel(data){
   self.release_date = ko.observable(data.release_date)
   self.director = ko.observable(data.director)
   self.url = ko.observable(data.url)
+  self.year = data.year
   self.thumbnail = ko.observable(data.thumbnail)
   self.full_title = self.title + "(" + self.year + ")"
   self.selected = ko.observable(false)

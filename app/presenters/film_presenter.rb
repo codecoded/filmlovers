@@ -3,7 +3,7 @@ class FilmPresenter
 
   attr_reader :user, :film, :thumbnail_size
 
-  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?
+  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?, :overview
 
   def initialize(user, film, thumbnail_size='w185')
     @user, @film, @thumbnail_size = user, film, thumbnail_size
@@ -26,7 +26,7 @@ class FilmPresenter
   end
 
   def thumbnail(size='w185')
-   has_poster? ? film.poster(size ? size : thumbnail_size) : 'http://placehold.it/185x237&text=no%20poster%20found'
+   has_poster? ? film.poster(size ? size : thumbnail_size) : "http://placehold.it/#{size.slice(1..-1)}&text=no%20poster%20found"
   end
 
   def backdrop(size='original')

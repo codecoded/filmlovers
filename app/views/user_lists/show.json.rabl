@@ -7,5 +7,5 @@ node(:lists_url) {|films_page| user_lists_path( )}
 
 
 node(:films) do |films_page|
-  partial "films/show", :object => films_page.films(@films_count)
+  partial "films/film_summary", :object => films_page.films(@films_count)
 end

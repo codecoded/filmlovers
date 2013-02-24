@@ -5,5 +5,11 @@ function FilmStatsModel(data){
   self.loved = ko.observable(data ? data.loved : 0)
   self.owned = ko.observable(data ? data.owned : 0)
   self.queued = ko.observable(data ? data.queued : 0)
+
+  self.updateStat = function(stat_name, value){
+    stat = self[stat_name]
+    stat(stat() + value)    
+  }
+
 }
 

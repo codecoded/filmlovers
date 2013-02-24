@@ -17,6 +17,9 @@ ul.credits{
   height:400px;
   overflow-x: hidden;
   overflow-y: scroll;
+  span{
+    font-size: 10pt;
+  }
 }
 .films{
   height:auto;
@@ -157,6 +160,11 @@ ul.credits{
     border-radius: 5px;
     width: 60px;
     height:60px;
+    label.count{
+      font-size: 8pt;
+      position: relative;
+      top: -5px;
+    }
   }
 }
 

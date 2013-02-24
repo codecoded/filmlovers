@@ -30,10 +30,16 @@
       <%= yield %>
     </div>
     <div class="push"></div>
-    <div id="footer">
+    <div id="footer" class="row">
+      <div class="twelve columns">
       <% if logged_in? %>
       <%= render partial:"layouts/footer" %>
       <% end %>
+
+      <div class="social-links right">
+        <a href="https://plus.google.com/u/0/b/102126390982504640495/communities/115013069818203491300" rel="publisher" target="_blank">Find us on Google+</a>
+      </div>
+    </div>
     </div>
 
   </body>

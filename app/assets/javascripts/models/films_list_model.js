@@ -6,7 +6,8 @@ function FilmsListModel(data){
   self.description = ko.observable(data.description)
   self.parent_url = data.parent_url
   self.url = data.url
-
+  self.edit_url = data.edit_url
+  
   self.films = ko.observableArray(FilmModel.arrayFromJSON(data.films))
 
   self.fetch = function(film_id){

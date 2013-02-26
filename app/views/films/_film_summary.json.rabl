@@ -3,7 +3,7 @@ object @film
 attributes :id, :title, :release_date
 
 node(:url) {|film| film_path(film.film.id)}
-node(:thumbnail) {|film| film.thumbnail('w185')}
+node(:thumbnail) {|film| film.thumbnail('w92')}
 
 node :stats do |film|
   {

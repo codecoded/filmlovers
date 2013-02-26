@@ -1,7 +1,37 @@
 <%= render layout: 'layouts/viewmodel', locals: {model: 'FilmsListModel'} do %>
 <div class="row">
-  <div id="userList" class="eleven columns centered">
-    <%= render 'form' %>
+  <div id="userList" class="twelve columns centered">
+    <h2 data-bind="text: name"> </h2>
+    <p data-bind="text: description"></p>
+    <a data-bind="attr: {href: edit_url}" data-remote=true  class ='radius button right'>Edit</a>
+    <!-- Thumbnails -->
+    <div class="twelve columns" >
+      <div class="row films">
+        <ol data-bind="foreach: films" >
+          <li class="twelve columns">  
+
+
+            <a data-bind="attr: { href: url, title: title }" data-remote="true" class="one columns">
+              <img data-bind="attr: {src: thumbnail, title: title }"/>
+            </a>
+            <div class="six columns">
+              <h4 data-bind="text: title"/>
+              <h5 data-bind="text: release_date"></h5>
+            </div> 
+            <div class="four columns">
+              <div class="film-actions-vertical pagination-centered" data-bind="foreach: actions">
+                <div class="tiled left">
+                  <a data-bind="click: action">
+                    <i data-bind="css: actionCSS" class="icon-2x"></i>
+                    <label class="count" ></label>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
   </div>
 </div>
 <% end %>

@@ -54,7 +54,7 @@ Filmlovers::Application.routes.draw do
           delete ':film_id', to: 'user_films#destroy', as: 'update'
         end
       end
-    resources :lists, to: 'user_lists', as: 'user_lists', except: [:edit]
+    resources :lists, to: 'user_lists', as: 'user_lists'
     # match 'lists/:id', to: 'user_lists#create', via: :post
     match 'queue/:action', :constraints => {:action => /list|recommend|show/}, to: "queue", as: 'queue', via: :get
   end

@@ -7,6 +7,11 @@ class UserListsController < UserController
     render_template
   end
   
+  def edit
+     @films_page = FilmsListPresenter.new(films_list, film_ids)
+    render_template
+  end
+
   def new
     @films_page = FilmsListPresenter.from_queue(current_user, film_ids)
     render layout:nil if request.xhr?
@@ -14,7 +19,7 @@ class UserListsController < UserController
 
   def show
     @films_page = FilmsListPresenter.new(films_list, film_ids)
-    render layout:nil if request.xhr?
+    render_template
   end
   
   def create

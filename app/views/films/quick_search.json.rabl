@@ -15,7 +15,7 @@ node(:data) do |films_page|
       primary: film.title,
       secondary: film.release_date,
       image: film.thumbnail('w45'),
-      onclick: "ko.dataFor(document.getElementById('viewContent')).fetch(" + film.id + ")"
+      onclick: "ko.dataFor(document.getElementById('viewContent')).fetch(" + film.id + "); "
     }
   end
 end

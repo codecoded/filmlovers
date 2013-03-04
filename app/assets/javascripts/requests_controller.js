@@ -3,10 +3,11 @@ $(function(){
 })
 
 var RequestsController = {
+  lastUri: null,
   init: function(){
     
 
-    $('a, form').live('ajax:success', function(xhr, view, status)
+    $('form').live('ajax:success', function(xhr, view, status)
     {
       xhr.stopPropagation()    
       RequestsController.display(view)
@@ -14,10 +15,11 @@ var RequestsController = {
   },
 
   get: function(uri){
+    this.addPushState(uri)
     $.get(uri, RequestsController.display)
   },
 
-  display: function(view){
+  display: function(view){   
     $('#container').html(view)
   },
 
@@ -34,5 +36,18 @@ var RequestsController = {
       directionalNav:true, fluid:false, timer:false
     })
     // $('#container').html(content)
+  },
+
+  addPushState: function(uri){
+    loc = location.href
+    console.log('Addding pushstate: ' + loc)
+    history.pushState({lastUrl:loc}, null, uri)
+    this.google()
+  },
+
+  google: function(){
+    if(typeof(_gaq)==='undefined') 
+      return
+    return _gaq.push(['_trackPageview', '/some-page'])
   }
 }

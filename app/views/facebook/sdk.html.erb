@@ -16,10 +16,11 @@
     {
         if (response.status === 'connected') 
         {
-          FacebookAPI.logged_in()
+          FacebookAPI.loggedIn = true
         } 
         else if (response.status === 'not_authorized') 
         {
+           FacebookAPI.loggedIn = false
         } 
         else 
         {

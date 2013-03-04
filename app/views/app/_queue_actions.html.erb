@@ -1,7 +1,7 @@
 <div id="queueController">
   <ul id="navigationMenu">
     <li>
-      <%= link_to queue_path(current_user, :list), :class=> 'services', :id=>'lnkQueueListModal' do %>
+      <%= link_to queue_path(current_user, :list), :class=> 'services', :id=>'lnkQueueListModal', data:{'no_pjax'=>true} do %>
         <span>Add to list</span>
       <% end %>
     </li>

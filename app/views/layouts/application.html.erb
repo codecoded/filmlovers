@@ -17,29 +17,29 @@
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %> 
-    <%= render partial: 'layouts/google_analytics' if Rails.env.production? %> 
+    <%= render partial: 'layouts/google_analytics' %> 
   </head>
-  <body>
-
-
+  <body >
     <%= render :template => 'facebook/sdk' %>
     <header id="header" class="row">
       <%= render partial:"layouts/header" %>
     </header>
-    <div id="container" class="row">
+
+    <div id="container" class="row" data-pjax-container>
       <%= yield %>
     </div>
+
     <div class="push"></div>
     <div id="footer" class="row">
       <div class="twelve columns">
       <% if logged_in? %>
-      <%= render partial:"layouts/footer" %>
+        <%= render partial:"layouts/footer" %>
       <% end %>
 
       <div class="social-links right">
         <a href="https://plus.google.com/u/0/b/102126390982504640495/communities/115013069818203491300" rel="publisher" target="_blank">Find us on Google+</a>
       </div>
-    </div>
+      </div>
     </div>
 
   </body>

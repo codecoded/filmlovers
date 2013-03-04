@@ -1,6 +1,6 @@
 
 <div data-bind="style: {display: 'block'}" class="image_carousel" style="display:none">
-  <%= render partial: 'app/queue'%>
+  <%= render partial: 'app/queue_actions'%>
   <div id="foo2" data-bind="foreach: films" class="films" >
 
     <div class="film-small" >
@@ -13,9 +13,9 @@
           </div>
         </div>
       </ul>
-      <a class="film-small" data-bind="attr: {href: url}, css:{'film-selected': selected}, click: select">
+      <span class="film-small" data-bind="css:{'film-selected': selected}, click: select">
         <img data-bind="attr: {src: thumbnail, title: title}" class="small"/>
-      </a>
+      </span>
     </div>
   </div>
   <div class="clearfix"></div>

@@ -1,33 +1,21 @@
-$(function(){
 
-  ViewModel.init()
+// function allowDrop(ev)
+// {
+//   ev.preventDefault();
+// }
 
-  $('#fb-login').click(FacebookAPI.login)
-  $('#fb-logout').click(FacebookAPI.logout)  
+// function drag(ev)
+// {
+//   ev.dataTransfer.setData("Text",ev.target.id);
+//   console.log(ev.target)
+// }
 
-  $('#lnkQueueListModal').on('click', ViewModel.displayQueueListModal)
-  $('#signin-link').on('click', ViewModel.displaySignInModal)
+// function drop(ev)
+// {
 
-})
-
-
-function allowDrop(ev)
-{
-  ev.preventDefault();
-}
-
-function drag(ev)
-{
-  ev.dataTransfer.setData("Text",ev.target.id);
-  console.log(ev.target)
-}
-
-function drop(ev)
-{
-
-  ev.preventDefault();
-  var data=ev.dataTransfer.getData("Text");
-  console.log(data)
-  ev.target.appendChild(document.getElementById(data));
-  console.log('dropped')
-}
+//   ev.preventDefault();
+//   var data=ev.dataTransfer.getData("Text");
+//   console.log(data)
+//   ev.target.appendChild(document.getElementById(data));
+//   console.log('dropped')
+// }

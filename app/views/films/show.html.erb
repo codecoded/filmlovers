@@ -10,7 +10,7 @@
       <ul class="nav-bar right">
         <li><a href="#overview">Overview</a></li>
         <li><a href="#credits">Credits</a></li>
-        <% if @film_view.has_trailer?   %> <li><a href="#trailers" id="trailersLink" data-reveal-id="filmTrailersModal" data-animation="none" >Trailers</a></li><% end %>
+        <% if @film_view.has_trailer?   %> <li><a href="#" id="trailersLink" data-reveal-id="filmTrailersModal" data-animation="none" >Trailers</a></li><% end %>
       </ul>
     </div>
   </div>
@@ -37,12 +37,10 @@
     </div>
     <div class="one columns ">
       <div class="film-actions-vertical pagination-centered" data-bind="foreach: actions">
-        <div class="tiled">
-          <a data-bind="click: action">
+        <button class="tiled" data-bind="click: action">
             <i data-bind="css: actionCSS" class="icon-3x"></i>
             <label class="count" data-bind="text: $root.stats[name()]"></label>
-          </a>
-        </div>
+        </button>
       </div>
     </div>
     <div class="five columns">
@@ -133,7 +131,7 @@
         </div>
       </div>
   </div>
-  <a class="close-reveal-modal">×</a>
+  <label class="close-reveal-modal">×</label>
 </div>
 
 

@@ -2,6 +2,7 @@ object @film
 
 attributes :id, :title, :release_date
 
+node(:position) {|film| @position ? @position : 1}
 node(:url) {|film| film_path(film.film.id)}
 node(:thumbnail) {|film| film.thumbnail('w92')}
 

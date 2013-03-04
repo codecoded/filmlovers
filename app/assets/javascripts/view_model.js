@@ -5,6 +5,7 @@ var ViewModel = {
 
   init: function(){
     ViewModel.loadUser(ViewModel.loadQueue)
+    Bindings.init()
   },
 
   loadUser: function(callback){
@@ -16,7 +17,8 @@ var ViewModel = {
   },
 
   loadQueue: function(){
-    $.getJSON(ViewModel.user.username() + '/queue/show.json/', function(json) { 
+    console.log('loading queue for ' + ViewModel.user.username)
+    $.getJSON('/' + ViewModel.user.username + '/queue/show.json/', function(json) { 
       ViewModel.queue = new FilmsQueueModel(json)
       Bindings.setQueue(ViewModel.queue)
       Queue.init()
@@ -25,6 +27,7 @@ var ViewModel = {
 
   displayQueueListModal: function(e){
     e.preventDefault()
+
     $.get($(this).attr('href'), function(data, status){
       ModalController.queue_modal(data)
       Bindings.setQueueListModal(ViewModel.queue)
@@ -44,13 +47,18 @@ var ViewModel = {
     ModalController.close_modal()
   },
 
-  filmListSaved: function(filmList, response){
-    RequestsController.get(filmList.parent_url)
+  filmListSuccess: function(event, filmList, response){
+    console.log(filmList)
+    RequestsController.get(filmList.lists_url)
   },
 
+
   loadFilmsPage: function(filmModel, event){
-     event.preventDefault()
+    event.preventDefault()
+    event.stopPropagation()
+    history.pushState(null, null, ViewModel.href(event,'.json'))
     $.getJSON(ViewModel.href(event), function(data){
+
       filmModel.update(new FilmsPageModel(data))
     })
   },
@@ -60,7 +68,12 @@ var ViewModel = {
     Bindings.showFilm()
   },
 
-  href: function(target){
-    return $(target.currentTarget).attr('href')
+  href: function(target, removeString){
+    href = $(target.currentTarget).attr('href') || ''
+    return href.replace(removeString, '')
   }
 }
+
+$(function(){
+  ViewModel.init()
+})

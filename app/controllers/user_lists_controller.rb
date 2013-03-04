@@ -1,47 +1,47 @@
 class UserListsController < UserController
   
-  
+  before_filter :films_list, except: [:index, :new, :create]
+
   def index
-    @films_page = current_user.films_lists.map {|list| FilmsListPresenter.new  list}
+    @films_list = user.films_lists
     @films_count = AppSettings::PREVIEW_LIMIT
     render_template
   end
   
   def edit
-     @films_page = FilmsListPresenter.new(films_list, film_ids)
     render_template
   end
 
   def new
-    @films_page = FilmsListPresenter.from_queue(current_user, film_ids)
-    render layout:nil if request.xhr?
+    @films_list = user.films_lists.new
+    render_template
   end
 
   def show
-    @films_page = FilmsListPresenter.new(films_list, film_ids)
     render_template
   end
   
   def create
-    list = current_user.films_lists.create params[:films_list]
-    list_service = UserFilmListService.new list
-    list_service.set_films(params[:films]) if params[:films]
+    @films_list = current_user.films_lists.create params[:films_list]
+
     flash[:created_message] = "Film list created"
-    show_index
+    respond_to do |format|
+      format.json {render 'show'}
+    end
   end
 
   def destroy
+    @films_page = FilmsListPresenter.new(films_list, [])
     list_service.delete_list
-    show_index
   end
 
   def update
     list_service.update! params[:films_list]
-    list_service.set_films(params[:films]) if params[:films]
     flash[:update_message] = "Film list updated"
-    show_index
+    render_template :show
   end
 
+  protected 
   def film_ids
     params[:film_ids] ? params[:film_ids] : []
   end
@@ -51,7 +51,7 @@ class UserListsController < UserController
   end
  
   def films_list
-    @film_list ||= user_service.films_list(params[:id])
+    @films_list ||= user_service.films_list(params[:id])
   end
 
   def list_service

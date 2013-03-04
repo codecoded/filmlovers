@@ -1,74 +1,76 @@
-<div class="row">
-  <div class="twelve columns">
-    <!-- Navigation -->
-    <!-- Header Content -->
-    <div class="row" id="routes">
-      <div class="six columns">
-        <img src="http://placehold.it/500x500&amp;text=Image" />
-        <br />
-      </div>
-      <div class="six columns">
-        <h3 class="show-for-small">
+
+<div class="twelve columns">
+  <!-- Navigation -->
+  <!-- Header Content -->
+  <div class="row">
+    <div class="twelve columns">
+      <h3 class="show-for-small"></h3>
+      <div class="panel">
+        <h4 class="hide-for-small">
           filmlovers
-        </h3>
+        </h4>
         <hr />
-        <h3 class="show-for-small"></h3>
-        <div class="panel">
-          <h4 class="hide-for-small">
-            filmlovers
-          </h4>
-          <hr />
-          <h4 class="hide-for-small"></h4>
-          <h5 class="subheader"></h5>
-          <blockquote>
-            <p>
-              Natalie: Do you believe in love at first sight? John: Yes I do. Saves a lot of time. <cite>The Stickup</cite>
-            </p>
-          </blockquote>
-        </div>
-        <div class="row">
-          <div class="six mobile-two columns">
-            <%= link_to films_trend_path(:now_playing), data:{remote: true, viewmodel:true} do %>
-              <img src="http://placehold.it/500x500&amp;text=Now Playing" /> 
-            <% end %>
-          </div>
-          <div class="six mobile-two columns">
-            <%= link_to films_trend_path(:upcoming),  data:{  remote:true, viewmodel:true} do %>
-              <img src="http://placehold.it/500x500&amp;text=Upcoming" /> 
-            <% end %>
-          </div>
-        </div>
+        <h4 class="hide-for-small"></h4>
+        <h5 class="subheader"></h5>
+        <blockquote>
+          <p>
+            Natalie: Do you believe in love at first sight? John: Yes I do. Saves a lot of time. <cite>The Stickup</cite>
+          </p>
+        </blockquote>
       </div>
     </div>
-  </div><!-- End Header Content -->
-  <!-- Search Bar -->
+  </div>
   <div class="row">
     <div class="twelve columns">
       <div class="radius panel">
-          <%= form_tag(films_search_path, method: :get,  data:{  remote:true, viewmodel:true}) do%>
+          <%= form_tag(films_search_path, method: :get,  remote:true) do%>
           <div class="row collapse">
             <div class="ten mobile-three columns">
               <input type="text" name="query" />
             </div>
             <div class="two mobile-one columns">
-              <%= submit_tag 'Search', :class=>"postfix button expand", data:{view: films_path}, :disable_with => "Searching..." %>
+              <%= submit_tag 'Search', :class=>"postfix button expand", :disable_with => "Searching..." %>
             </div>
           </div>
         <% end %>
       </div>
     </div>
-  </div><!-- End Search Bar -->
+  </div>
+  <div class="row ">
+    <div class="four mobile-two columns">
+      <%= link_to films_trend_path(:now_playing) do %>
+        <%=image_tag 'now_playing.jpg', width:'100%' %>
+        <label>Now Playing</label>
+      <% end %>
+    </div>
+    <div class="four mobile-two columns">
+      <%= link_to films_trend_path(:popular) do %>
+        <%=image_tag 'now_playing.jpg', width:'100%' %>
+        <label>Popular</label>
+      <% end %>
+    </div>
+    <div class="four mobile-two columns">
+      <%= link_to films_trend_path(:upcoming) do %>
+        <%=image_tag 'now_playing.jpg', width:'100%' %>
+        <label>Upcoming</label>
+      <% end %>
+    </div>
+</div>
+ <div class="row">
   <!-- Thumbnails -->
-  <div class="row">
-    <%= render partial:'genre_tile', locals:{genre: :action, description: 'Hot-paced action films!'} %>
-    <%= render partial:'genre_tile', locals:{genre: :comedy, description: 'Split your sides'} %>
-    <%= render partial:'genre_tile', locals:{genre: :science_fiction, description: ' Films that beep'} %>
-    <%= render partial:'genre_tile', locals:{genre: :drama, description: ' For every moment'} %>
-  </div><!-- End Thumbnails -->
-  <div class="row">
-    <%= render partial:'genre_tile', locals:{genre: :animation, description: 'Keep the imagination going'} %>
-    <%= render partial:'genre_tile', locals:{genre: :eastern, description: 'Something a little exotic'} %>
-    <%= render partial:'genre_tile', locals:{genre: :Horror, description: 'Dare you keep the lights off?'} %>
-    <%= render partial:'genre_tile', locals:{genre: :Foreign, description: 'It\'s all a little foreign'} %>
+    <div class="twelve columns">
+      <%= render partial:'genre_tile', locals:{genre: :action, description: 'Action'} %>
+      <%= render partial:'genre_tile', locals:{genre: :comedy, description: 'Comedy'} %>
+      <%= render partial:'genre_tile', locals:{genre: :science_fiction, description: 'Sci-Fi'} %>
+      <%= render partial:'genre_tile', locals:{genre: :drama, description: 'Drama'} %>  
+      <%= render partial:'genre_tile', locals:{genre: :animation, description: 'Animation'} %>
+      <%= render partial:'genre_tile', locals:{genre: :eastern, description: 'Eastern'} %> 
+      <%= render partial:'genre_tile', locals:{genre: :horror, description: 'Horror'} %>
+      <%= render partial:'genre_tile', locals:{genre: :foreign, description: 'Foreign'} %>
+      <%= render partial:'genre_tile', locals:{genre: :adventure, description: 'Adventure'} %>
+      <%= render partial:'genre_tile', locals:{genre: :indie, description: 'Indie'} %>
+      <%= render partial:'genre_tile', locals:{genre: :suspense, description: 'Suspense'} %>
+      <%= render partial:'genre_tile', locals:{genre: :romance, description: 'Romance'} %>
+    </div>
   </div>
 </div>

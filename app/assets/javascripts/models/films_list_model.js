@@ -4,25 +4,24 @@ function FilmsListModel(data){
   self.id = data.id
   self.name = ko.observable(data.name)
   self.description = ko.observable(data.description)
-  self.parent_url = data.parent_url
+  self.lists_url = data.lists_url
   self.url = data.url
   self.edit_url = data.edit_url
   
-  self.films = ko.observableArray(FilmModel.arrayFromJSON(data.films))
+  self.films = ko.observableArray(FilmListItemModel.arrayFromJSON(data.film_list_items))
 
   self.fetch = function(film_id){
     $.getJSON('/films/' + film_id, function(data){
-      console.log(data)
-      self.add(new FilmModel(data))
+      self.addFilmItem(new FilmListItemModel({'position':1, 'film': data}))
     })
   }
 
-  self.add   = function(film_to_add){ 
+  self.addFilmItem   = function(film_to_add){ 
     self.films.unshift(film_to_add)
   }
 
-  self.remove = function(film_to_remove){
-    self.films.remove(function(film){ return film_to_remove.id() == film.id()  })
+  self.removeFilmItem = function(film_to_remove){
+    self.films.remove(function(film){ return film_to_remove.id == film.id  })
   }
 
   self.selected = function(){
@@ -36,9 +35,10 @@ function FilmsListModel(data){
   self.toJSON = function(){
     return {
       'films_list':{
-        'name': self.name,
-        'description': self.description,
-        'film_ids': FilmModel.arrayToJSON(self.films())
+        '_id': self.id,
+        'name': self.name(),
+        'description': self.description(),
+        'film_list_items': FilmListItemModel.arrayToJSON(self.films())
       }
     }
   }
@@ -50,7 +50,20 @@ function FilmsListModel(data){
       data: self.toJSON(),
       dataType: 'json',
       success: function(response){
-        ViewModel.filmListSaved(self, response)
+        ViewModel.filmListSuccess(self, response)
+      }  
+    })
+  }
+
+  self.remove = function() {
+    console.log(self.url)
+    $.ajax({
+      url: self.url,
+      type: 'delete',
+      data: {},
+      dataType: 'json',
+      success: function(response){
+        ViewModel.filmListSuccess(self, response)
       }  
     })
   }
@@ -83,3 +96,5 @@ function ListsModel(data){
     return $.grep(self.lists(), function(item, index){ return item.selected()})
   }
 }
+
+

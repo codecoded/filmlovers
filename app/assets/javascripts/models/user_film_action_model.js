@@ -35,7 +35,7 @@ function UserFilmActionModel(film, data){
       url: self.url(),
       type: self.dataMethod(),
       dataType: 'json',
-      success: function(data){
+      success: function(data, xhr, s){
         self.isActioned(!self.isActioned())
         statIncr = self.isActioned() ? 1 : -1
         ViewModel.user.updateStat(self.name(), statIncr)
@@ -47,7 +47,6 @@ function UserFilmActionModel(film, data){
         {
           self.film.stats.updateStat(self.name(), statIncr)
         }
-
         return self.count(data.count)    
       }  
     })

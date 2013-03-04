@@ -8,8 +8,8 @@ function UserModel(data){
 
   if(!data) return
 
-  self.name  = ko.observable(data.name)
-  self.username = ko.observable(data.username)
+  self.name  = data.name
+  self.username = data.username
 
   self.actionFilm = function(film, action){
     film.registerAction(action)

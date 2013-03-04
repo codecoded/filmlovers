@@ -1,9 +1,9 @@
 
-$watchedColor:       rgb(80, 150, 80);
+$watchedColor:       #379437;
 $lovedColor:         #ff3333;
 $unlovedColor:       #ff3333;
-$queuedColor:        black;
-$ownedColor:         rgb(192, 192, 50);
+$queuedColor:        #FF0070;
+$ownedColor:         #4387BD;
 $actionedHover:      #bbb;
 
 // #featured img { display: none; }
@@ -133,18 +133,19 @@ ul.credits{
   }
 }
 
+
+
 .film-actions-horizontal{
   text-align: center;
-  .tiled{
-    margin: 0px 3px;
+  button{
     border: solid 3px black;
     border-radius: 3px;
     width: 30px;
     height: 30px;
     padding-top: 2px;
     background-color: white;
-    color: black;
-    opacity: 1
+    opacity: 1;
+    padding: 0px;
   }
   i{
     position: relative;
@@ -153,13 +154,14 @@ ul.credits{
   }
 }
 .film-actions-vertical{
-  .tiled{
+  button{
     margin: 2px 0px;
     border: solid 4px black;
     padding: 2px;
     border-radius: 5px;
     width: 60px;
     height:60px;
+    background-color: white;
     label.count{
       font-size: 8pt;
       position: relative;

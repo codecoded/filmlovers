@@ -5,7 +5,7 @@
       <!-- Title Area -->
       <li class="name">
         <h1>
-          <%= link_to 'filmlovers', root_path, remote:true %>
+          <%= link_to 'filmlovers', root_path%>
         </h1>
       </li>
       <li class="toggle-topbar">
@@ -17,28 +17,28 @@
       <% if logged_in? %>
       <ul class="left">
         <li class="has-dropdown">
-          <%= link_to "Films", user_film_index_path(current_user),  remote:true %>
+          <%= link_to "Films", user_film_index_path(current_user)  %>
           <ul class="dropdown">
             <li>
-             <%= link_to "Watched", user_film_path(current_user, :watched), remote:true%>
+             <%= link_to "Watched", user_film_path(current_user, :watched) %>
               <label  data-bind="text: filmStats.watched"/>
             </li>
             <li>
-              <%= link_to "Loved", user_film_path(current_user, :loved), remote:true %>
+              <%= link_to "Loved", user_film_path(current_user, :loved) %>
               <label  data-bind="text: filmStats.loved"/>
             </li>
             <li>
-              <%= link_to "Owned",  user_film_path(current_user, :owned),  remote:true %>
+              <%= link_to "Owned",  user_film_path(current_user, :owned) %>
               <label  data-bind="text: filmStats.owned"/>
             </li>
             <li>
-              <%= link_to "Queued", user_film_path(current_user, :queued),  remote:true %>
+              <%= link_to "Queued", user_film_path(current_user, :queued) %>
               <label  data-bind="text: filmStats.queued"/>
             </li>
           </ul>
         </li>
         <li>
-          <%= link_to "Lists", user_lists_path(current_user), data:{  remote:true, viewmodel:true} %>
+          <%= link_to "Lists", user_lists_path(current_user) %>
         </li>
         <% if current_user.passport_provider? :facebook %>
           <li><a href="/">Facebook</a></li>
@@ -82,14 +82,14 @@
               <label>Options</label>
             </li>
             <li>
-              <%= link_to "Sign out", signout_path, id: "sign_out" %>
+              <%= link_to "Sign out", signout_path, id: "sign_out", data:{'no_pjax'=>true} %>
             </li>
           </ul>
         </li>
       <% else %>
       <ul class="right">
         <li>
-          <%= link_to "Sign in", login_path, id:  "signin-link" %>
+          <%= link_to "Sign in", login_path, id:  "signin-link", data:{'no_pjax'=>true} %>
         </li>
       </ul>
       <% end %>

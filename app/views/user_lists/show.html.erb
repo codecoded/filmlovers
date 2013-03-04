@@ -3,29 +3,28 @@
   <div id="userList" class="twelve columns centered">
     <h2 data-bind="text: name"> </h2>
     <p data-bind="text: description"></p>
-    <a data-bind="attr: {href: edit_url}" data-remote=true  class ='radius button right'>Edit</a>
+    <a data-bind="attr: {href: edit_url}" class ='radius button right'>Edit</a>
+
+
+
     <!-- Thumbnails -->
     <div class="twelve columns" >
       <div class="row films">
         <ol data-bind="foreach: films" >
           <li class="twelve columns">  
-
-
-            <a data-bind="attr: { href: url, title: title }" data-remote="true" class="one columns">
-              <img data-bind="attr: {src: thumbnail, title: title }"/>
+            <a data-bind="attr: { href: film.url, title: film.title }"  class="one columns">
+              <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
             </a>
             <div class="six columns">
-              <h4 data-bind="text: title"/>
-              <h5 data-bind="text: release_date"></h5>
+              <h4 data-bind="text: film.title"/>
+              <h5 data-bind="text: film.release_date"></h5>
             </div> 
             <div class="four columns">
-              <div class="film-actions-vertical pagination-centered" data-bind="foreach: actions">
-                <div class="tiled left">
-                  <a data-bind="click: action">
-                    <i data-bind="css: actionCSS" class="icon-2x"></i>
-                    <label class="count" ></label>
-                  </a>
-                </div>
+              <div class="film-actions-vertical pagination-centered" data-bind="foreach: film.actions">
+                <button data-bind="click: action">
+                  <i data-bind="css: actionCSS" class="icon-2x"></i>
+                  <label class="count" ></label>
+                </button>
               </div>
             </div>
           </li>

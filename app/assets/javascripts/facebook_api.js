@@ -1,5 +1,6 @@
 var FacebookAPI = {
-
+  loggedIn: false,
+  
   logged_in: function(){
     ViewModel.user.loggedIn(true)
     ViewModel.user.loggedOut(false)

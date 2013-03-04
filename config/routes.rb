@@ -30,7 +30,7 @@ Filmlovers::Application.routes.draw do
 
   scope 'films' do
     match 'index', to: 'films#index', as: 'films'
-    match 'trends/:trend', :constraints => {:trend => /now_playing|latest|upcoming/}, to: 'films#trend', as:'films_trend'
+    match 'trends/:trend', :constraints => {:trend => /now_playing|latest|upcoming|popular/}, to: 'films#trend', as:'films_trend'
     get 'search', to: "films#search", as: 'films_search'
     get 'quick_search', to: "films#quick_search", as: 'films_quick_search'
     match 'genre/:genre_id', to: "films#genre", as: 'films_genre'

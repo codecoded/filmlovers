@@ -3,7 +3,7 @@ class QueueController < UserController
 
   def list
     @lists = [['Please Select...', -1]]
-    @lists += current_user.films_lists.all.map { |list| [list.name, user_list_path(current_user, list.id)] }
+    @lists += current_user.films_lists.all.map { |list| [list.name, edit_user_list_path(current_user, list.id)] }
     render partial:'list_from_queue', layout:nil 
   end
 

@@ -36,6 +36,7 @@ class UserFilmListService
   end
 
   def update!(attributes)
+    film_list.film_list_items.delete_all
     film_list.update_attributes! attributes
   end
 

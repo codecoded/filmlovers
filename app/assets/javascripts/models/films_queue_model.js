@@ -19,7 +19,7 @@ function FilmsQueueModel(data){
   self.listsUrl = function(model, event){
 
     event.preventDefault()
-    var href = $(event.target).attr('href')
+    var href = $(event.target).data('href')
     // var ids = self.selectedIds()
     // var newHref = href + '?' + $.param({'film_ids': ids})
     console.log(href)

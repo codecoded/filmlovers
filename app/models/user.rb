@@ -20,6 +20,7 @@ class User
     user
   end
 
+
   def self.find_by_passport(passport)
     user = User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first
     user ? user : User.new(passports:[passport])
@@ -69,6 +70,6 @@ class User
   end
 
   def to_param
-    username? ? username : id
+    username? ? username : id.to_s
   end
 end

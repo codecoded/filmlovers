@@ -7,6 +7,7 @@ class FilmsList
   validates_presence_of :name
   
   embedded_in :user
+  embeds_many :film_list_items
 
   def films
     queue.films.map {|film_id| Film.find(film_id.to_i)}
@@ -19,4 +20,9 @@ class FilmsList
   def queue
     @queue ||= FilmsQueue.new "user:#{user.id}:lists:#{id}"
   end
+
+  def to_param
+    id.to_s
+  end
 end
+

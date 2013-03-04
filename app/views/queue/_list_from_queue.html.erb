@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="row films" data-bind="foreach: selected()">
-    <a class="film film-small" data-bind="attr: {href: url}, css:{'film-selected': selected}, click: select">
+    <a class="film film-small" data-bind="attr: {href: url}, css:{'film-selected': selected}, click: select" data-no-pjax>
       <img data-bind="attr: {src: thumbnail, title: title}" class="small"/>
     </a>
   </div>
@@ -18,7 +18,7 @@
   </div>
   <div class="row">
     <div class="six columns">
-      <a href='<%= new_user_list_path %>' data-bind="click: listsUrl" class='radius button close-reveal-modal'>New List</a>
+      <input type="button" data-bind="click: listsUrl" data-href='<%= new_user_list_path %>' class='radius button close-reveal-modal' value="New List"/>
     </div>
   </div>
   <a class="close-reveal-modal">×</a>

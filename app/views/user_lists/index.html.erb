@@ -11,11 +11,16 @@
   <div class="row list-summary">  
     <div class="six columns">
       <label> 
-          <a data-bind="text: name, attr: {href: url, 'data-remote':true, 'data-viewmodel':true}" ></a>
+          <a data-bind="text: name, attr: {href: url}" ></a>
       </label>    
     
       <div class="row">
-        <%= render partial: "films/film_small" %>
+      <!-- Thumbnails -->
+        <div class="ten columns films" data-bind="foreach: films">
+          <div class="film film-small" >
+            <img data-bind="attr: {src: film.thumbnail, title: film.title}" class="small"/>
+          </div>
+        </div>
       </div>
 
     </div>

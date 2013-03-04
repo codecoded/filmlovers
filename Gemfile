@@ -32,7 +32,6 @@ gem 'rest-client'
 gem "mongoid", "~> 3.0.0"
 gem 'newrelic_rpm', '3.5.6.55'
 gem 'will_paginate', '~> 3.0.0'
-
 gem 'rabl'
 
 # Gems used only for assets and not required

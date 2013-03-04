@@ -1,3 +1,4 @@
-collection @films_page
+collection @films_list
+
 
 extends ('user_lists/show')

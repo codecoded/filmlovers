@@ -131,7 +131,7 @@
 													link_open += (item['url'] != undefined) ? item['url'] : 'javascript: void(0);';
 													link_open += '" ';
 													link_open += (item['onclick'] != undefined) ? ' onclick="'+fill_code.replace("%", item[options.fillBoxWith])+(options.executeCode ? item['onclick'] : '')+'" ' : ' onclick="'+fill_code.replace("%", item[options.fillBoxWith])+'" ';
-													link_open += '>';
+													link_open += ' data-no-pjax >';
 													// Open the item wrapper DIV and the anchor.
 													output += '<li class="'+options.classPrefix+'result" title="'+item['primary']+'">'+link_open+"\n";
 

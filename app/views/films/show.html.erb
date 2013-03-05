@@ -2,7 +2,7 @@
 <% set_meta_tags :og => {
   :title    => @film_view.title,
   :type     => 'video.movie',
-  :url      => request.fullpath,
+  :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
   :image    => @film_view.film.poster('w342'),
   :video    => @film_view.trailer,
   :director => @film_view.director

@@ -1,11 +1,21 @@
 <%= render layout: 'layouts/viewmodel', locals: {model: 'FilmsListModel'} do %>
+<% if !viewing_own? %>
+
+  <div class="row">
+    <div class="twelve columns centered">
+      <h4><%= @films_list.user.username %></h4>
+    </div>
+  </div>
+
+<% end %>
+
+
 <div class="row">
   <div id="userList" class="twelve columns centered">
-    <h2 data-bind="text: name"> </h2>
+    <h3 data-bind="text: name"> </h3>
     <p data-bind="text: description"></p>
-    <a data-bind="attr: {href: edit_url}" class ='radius button right'>Edit</a>
 
-
+    <%= content_tag :a, 'Edit', data:{bind: 'attr: {href: edit_url}'}, :class=>'radius button right' if viewing_own?%>
 
     <!-- Thumbnails -->
     <div class="twelve columns" >
@@ -16,7 +26,7 @@
               <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
             </a>
             <div class="six columns">
-              <h4 data-bind="text: film.title"/>
+              <h4 data-bind="text: film.title"></h4>
               <h5 data-bind="text: film.release_date"></h5>
             </div> 
             <div class="four columns">

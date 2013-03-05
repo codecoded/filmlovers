@@ -1,6 +1,6 @@
 class UserListsController < UserController
   
-  before_filter :films_list, except: [:index, :new, :create]
+  before_filter :films_list, except: [:index, :new, :create, :show]
 
   def index
     @films_list = user.films_lists
@@ -19,6 +19,7 @@ class UserListsController < UserController
   end
 
   def show
+    @films_list = UserService.new(user).films_list(params[:id])
     render_template
   end
   

@@ -36,7 +36,7 @@ var RequestsController = {
       directionalNav:true, fluid:false, timer:false
     })
 
-    FB.XFBML.parse();
+    if(typeof(FB)!='undefined')FB.XFBML.parse();
     // $('#container').html(content)
   },
 

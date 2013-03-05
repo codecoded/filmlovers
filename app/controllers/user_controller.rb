@@ -22,4 +22,9 @@ class UserController < ApplicationController
     params[:user_id]
   end
   
+  def viewing_own?
+    user.id == current_user.id
+  end
+
+  helper_method :viewing_own?
 end

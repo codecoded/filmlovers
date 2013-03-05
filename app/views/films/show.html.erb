@@ -1,13 +1,30 @@
-
-<% set_meta_tags :og => {
+<!-- <#% set_meta_tags :og => {
   :title    => @film_view.title,
   :type     => 'video.movie',
   :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
   :image    => @film_view.film.poster('w342'),
   :video    => @film_view.trailer,
   :director => @film_view.director
+} %> -->
+
+<% set_meta_tags :og => {
+  :title    => @film_view.title,
+  :type     => 'movie',
+  :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
+  :image    => @film_view.film.poster('w342'),
+  :site_name   =>'filmlovers - find, share, discover',
+  :video    => @film_view.trailer,
+  :description => @film_view.film.overview
 } %>
+
+<% set_meta_tags :fb => {
+  :admins => '537020179',
+  :app_id => '116125521892926'
+} %>
+
+
 <%= render layout: 'layouts/viewmodel', locals: {model: 'FilmModel'} do %>
+
 
 
   <!-- Header and Nav -->

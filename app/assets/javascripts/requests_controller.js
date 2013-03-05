@@ -35,6 +35,8 @@ var RequestsController = {
     $("#featured").orbit({
       directionalNav:true, fluid:false, timer:false
     })
+
+    FB.XFBML.parse();
     // $('#container').html(content)
   },
 

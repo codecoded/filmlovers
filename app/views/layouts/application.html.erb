@@ -13,10 +13,13 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "filmlovers" %></title>
-    
+    <%= display_meta_tags :site => 'filmlovers - find, share, discover' %>
+
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %> 
+
+
     <%= render partial: 'layouts/google_analytics' %> 
   </head>
   <body >
@@ -41,6 +44,6 @@
       </div>
       </div>
     </div>
-
+    <div id="modals"></div>
   </body>
 </html>

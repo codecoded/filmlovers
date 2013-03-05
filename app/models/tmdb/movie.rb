@@ -29,7 +29,8 @@ class Tmdb::Movie
   end
 
   def append_all
-    [:alternative_titles, :casts, :images, :keywords, :releases, :trailers, :translations, :similar_movies, :lists, :changes]
+    # [:alternative_titles, :casts, :images, :keywords, :releases, :trailers, :translations, :similar_movies, :lists, :changes]
+    [:alternative_titles, :casts, :images, :keywords, :releases, :trailers, :translations, :similar_movies]
   end 
 
 end

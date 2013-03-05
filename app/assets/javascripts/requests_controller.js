@@ -32,7 +32,7 @@ var RequestsController = {
   bindView: function(model, view){
     content = $(view)   
     ko.applyBindings(model, content[0])
-        $("#featured").orbit({
+    $("#featured").orbit({
       directionalNav:true, fluid:false, timer:false
     })
     // $('#container').html(content)

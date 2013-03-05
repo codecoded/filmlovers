@@ -14,4 +14,8 @@ class ResultsPage
     (total_results / page_size.to_f).ceil
   end
 
+  def more_pages?
+    page_no < total_pages
+  end
+
 end

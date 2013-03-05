@@ -1,4 +1,14 @@
+
+<% set_meta_tags :og => {
+  :title    => @film_view.title,
+  :type     => 'video.movie',
+  :url      => request.fullpath,
+  :image    => @film_view.film.poster('w342'),
+  :video    => @film_view.trailer,
+  :director => @film_view.director
+} %>
 <%= render layout: 'layouts/viewmodel', locals: {model: 'FilmModel'} do %>
+
 
   <!-- Header and Nav -->
 <div class="twelve columns">
@@ -7,6 +17,7 @@
       <h1 class="film-title" data-bind="text: title"></h1><label>Directed by <span data-bind="text: director"></span> <span data-bind="text: '(' + year + ')', visible: year"></span><label>  
     </div>
     <div class="five columns">
+
       <ul class="nav-bar right">
         <li><a href="#overview">Overview</a></li>
         <li><a href="#credits">Credits</a></li>
@@ -44,6 +55,7 @@
       </div>
     </div>
     <div class="five columns">
+      <div class="fb-like right" data-href='<%= "http://www.filmlovers.co.uk/films/#{@film_view.id}"%>' data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
       <h4 id="overview"><%= tagline(@film_view.film) %></h4>
       <div class="row">
 
@@ -127,7 +139,7 @@
   <div class="row" id="trailers">
       <div class="twelve columns">
         <div class="flex-video">
-          <iframe  src='<%= @film_view.trailer %>' frameborder="0" allowfullscreen></iframe>
+          <iframe  src='<%= @film_view.trailer %>?iv_load_policy=3&modestbranding=1&origin=localhost&rel=0&showinfo=0&controls=0' frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
   </div>

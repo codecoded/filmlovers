@@ -60,5 +60,8 @@ Filmlovers::Application.routes.draw do
   end
 
 
+  scope 'queue' do
+    put 'list/:id', to: 'queue#update_list', as: 'queue_to_list'
+  end
   
 end

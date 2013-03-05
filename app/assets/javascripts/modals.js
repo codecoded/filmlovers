@@ -1,7 +1,7 @@
 var ModalController = {
 
   queue_modal: function(modal_html){
-    $('body').append(modal_html)
+    $('#modals').append(modal_html)
 
     if(this.modal_is_open())
       return false
@@ -20,15 +20,15 @@ var ModalController = {
   },
 
   modal_is_open: function(){
-    return $(".reveal-modal.open").length > 0
+    return $(".reveal-modal.open", $('#modals')).length > 0
   },
 
   modals_queued: function(){
-    return $(".reveal-modal").length > 0
+    return $(".reveal-modal", $('#modals')).length > 0
   },
 
   next_modal: function(){
-    return $(".reveal-modal").first()
+    return $(".reveal-modal", $('#modals')).first()
   },
 
   modal_closed: function(){

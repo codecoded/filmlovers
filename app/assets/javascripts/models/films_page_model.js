@@ -22,6 +22,8 @@ FilmsPageModel.prototype.update = function(filmModel){
   this.url_previous(filmModel.url_previous())
   this.url_next(filmModel.url_next())
   this.page_no(filmModel.page_no())
+  this.page_size(filmModel.page_size())
+  this.total_pages(filmModel.total_pages())
   this.total_results(filmModel.total_results())
   this.description(filmModel.description())
 

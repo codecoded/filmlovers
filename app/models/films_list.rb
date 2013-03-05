@@ -10,15 +10,19 @@ class FilmsList
   embeds_many :film_list_items
 
   def films
-    queue.films.map {|film_id| Film.find(film_id.to_i)}
+    Film.find film_ids
   end
 
   def film_ids
-    queue.films.map &:to_i
+    film_list_items.distinct :film_id
   end
 
-  def queue
-    @queue ||= FilmsQueue.new "user:#{user.id}:lists:#{id}"
+  def append_films(film_ids)
+    film_ids.each {|id| append_film id}
+  end
+
+  def append_film(film_id)
+    film_list_items.create film_id: film_id, position: film_list_items.count
   end
 
   def to_param

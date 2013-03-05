@@ -38,10 +38,6 @@ var Bindings = {
     this.changeEvent('#queueListModal',function(e){
       ViewModel.addFilmsToList($('option:selected', $(this)).first().val())
     })
-
-    // $('select', '#queueListModal').on('change', function(e){
-    //   ViewModel.addFilmsToList($('option:selected', $(this)).first().val())
-    // })
   },
 
   ko_apply: function(model, elementId){

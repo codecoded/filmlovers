@@ -1,32 +1,51 @@
 <%= render layout: 'layouts/viewmodel', locals: {model: 'ListsModel'} do %>
 
-
-  <div class="row">
-    <div class="twelve columns">
-      Create or modify lists here!
-      <%= link_to 'New List', new_user_list_path, {:class => 'radius button', remote:true} %>
-    </div>
+<!-- <div class="row">
+  <div class="six columns centered">
+    <dl class="sub-nav">
+      <dd class="active"><a href="#">All</a></dd>
+      <dd><a href="#">Active</a></dd>
+      <dd><a href="#">Pending</a></dd>
+      <dd><a href="#">Suspended</a></dd>
+    </dl>
   </div>
-  <!-- ko foreach: lists -->
-  <div class="row list-summary">  
-    <div class="six columns">
-      <label> 
-          <a data-bind="text: name, attr: {href: url}" ></a>
-      </label>    
-    
-      <div class="row">
-      <!-- Thumbnails -->
-        <div class="ten columns films" data-bind="foreach: films">
-          <div class="film film-small" >
-            <img data-bind="attr: {src: film.thumbnail, title: film.title}" class="small"/>
+</div> -->
+
+<div class="row">
+
+</div>
+
+<div class="row centered">
+  <div class="eight columns">
+    <dl>
+      <dt><h5>Your lists</h5></dt>
+    <!-- ko foreach: lists -->
+      <dd>
+        <div class="row list-summary">  
+          <div class="six columns">
+            <label> 
+                <a data-bind="text: name, attr: {href: url}" ></a>
+            </label>    
+        
+            <div class="row">
+            <!-- Thumbnails -->
+              <div class="twelve columns films" data-bind="foreach: films">
+                <div class="film film-small" >
+                  <img data-bind="attr: {src: film.thumbnail, title: film.title}" class="small"/>
+                </div>
+              </div>
+            </div>
           </div>
+          <div class="six columns">
+           <p data-bind="text: description"> </p>
+         </div>
         </div>
-      </div>
-
-    </div>
-     <p data-bind="text: description"> </p>
+      </dd>
+    <!-- /ko -->
+    </dl>
   </div>
-  <!-- /ko -->
-
-
+  <div class="two columns">
+    <%= link_to 'New List', new_user_list_path, {:class => 'radius button', remote:true} %>
+  </div>
+</div>
 <% end %>

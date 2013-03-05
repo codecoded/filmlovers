@@ -6,11 +6,9 @@
     <div class="film-small" >
       <ul class="film-actions-queue" data-bind="with: actions[3]">
         <div class="film-actions-horizontal">
-          <div class="tiled left">
-            <a data-bind="click: action">
-              <i class="icon-eject"></i>
-            </a>
-          </div>
+          <button data-bind="click: action" class="tiled left">
+            <i class="icon-eject"></i>
+          </button>
         </div>
       </ul>
       <span class="film-small" data-bind="css:{'film-selected': selected}, click: select">

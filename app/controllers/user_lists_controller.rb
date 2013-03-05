@@ -5,6 +5,7 @@ class UserListsController < UserController
   def index
     @films_list = user.films_lists
     @films_count = AppSettings::PREVIEW_LIMIT
+    @thumbnail_size = 'w90'
     render_template
   end
   
@@ -31,7 +32,6 @@ class UserListsController < UserController
   end
 
   def destroy
-    @films_page = FilmsListPresenter.new(films_list, [])
     list_service.delete_list
   end
 

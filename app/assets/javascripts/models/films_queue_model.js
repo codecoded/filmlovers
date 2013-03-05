@@ -7,9 +7,18 @@ function FilmsQueueModel(data){
     self.films.unshift(film_to_add)
     Queue.init()
   }
+
   self.dequeueFilm = function(film_to_remove){
-    self.films.remove(function(film){ return film_to_remove.id() == film.id()  })
+    self.films.remove(function(film) { 
+      return film_to_remove.id() == film.id() 
+    })
     Queue.init()
+  }
+
+  self.dequeueSelected = function(){
+    return self.selected().map(function(film){
+      self.dequeueFilm(film)
+    })
   }
 
   self.selected = function(){
@@ -31,9 +40,9 @@ function FilmsQueueModel(data){
     return self.selected().map(function(film){return film.id()})
   }
 
-  self.addToList = function(view,event){
-    var href = $('option:selected', $(event.target)).first().val()
-    RequestsController.get(href + '?' + $.param({'film_ids': self.selectedIds()}))
-  }
+  // self.addToList = function(view,event){
+  //   var href = $('option:selected', $(event.target)).first().val()
+  //   RequestsController.get(href + '?' + $.param({'film_ids': self.selectedIds()}))
+  // }
 
 }

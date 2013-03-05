@@ -43,8 +43,17 @@ var ViewModel = {
   },
 
   addFilmsToList: function(list_url){
-    RequestsController.get(list_url + '?' + $.param({'film_ids': ViewModel.queue.selectedIds()}))
-    ModalController.close_modal()
+    $.ajax({
+      url: list_url,
+      type: 'put',
+      data: {film_ids: ViewModel.queue.selectedIds()},
+      dataType: 'json',
+      success: function(response){
+        ViewModel.queue.dequeueSelected()
+        ModalController.close_modal()
+      }  
+    })
+
   },
 
   filmListSuccess: function(event, filmList, response){
@@ -58,7 +67,7 @@ var ViewModel = {
     event.stopPropagation()
     history.pushState(null, null, ViewModel.href(event,'.json'))
     $.getJSON(ViewModel.href(event), function(data){
-
+      
       filmModel.update(new FilmsPageModel(data))
     })
   },

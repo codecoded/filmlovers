@@ -23,7 +23,7 @@ class UserController < ApplicationController
   end
   
   def viewing_own?
-    user.id == current_user.id
+    user.id == (logged_in? and current_user.id)
   end
 
   helper_method :viewing_own?

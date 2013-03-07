@@ -7,7 +7,6 @@ var Bindings = {
     $(document).on('click', 'a:not([data-no-pjax])', function(event) {
       if(ViewModel.href(event).indexOf('#')==0)
        return
-      console.log('ajax request to: ' + ViewModel.href(event))
       event.preventDefault()
       RequestsController.get(ViewModel.href(event))
     })

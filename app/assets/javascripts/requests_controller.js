@@ -46,6 +46,6 @@ var RequestsController = {
   google: function(){
     if(typeof(_gaq)==='undefined') 
       return
-    return _gaq.push(['_trackPageview', '/some-page'])
+    return _gaq.push(['_trackPageview', window.location])
   }
 }

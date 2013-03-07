@@ -64,19 +64,19 @@
               <label>Add Passport</label>
             </li>
             <% if !current_user.passport_provider? :facebook %>
-              <li><a href="/auth/facebook">Facebook</a></li>
+              <li><a href="/auth/facebook" data-no-pjax>Facebook</a></li>
             <% end %>
             <% if !current_user.passport_provider? :twitter %>
-              <li><a href="/auth/twitter">Twitter</a></li>
+              <li><a href="/auth/twitter" data-no-pjax>Twitter</a></li>
             <% end %>      
             <% if !current_user.passport_provider? :netflix %>
-              <li><a href="/auth/netflix">Netflix</a></li>
+              <li><a href="/auth/netflix" data-no-pjax>Netflix</a></li>
             <% end %>
             <% if !current_user.passport_provider? :vimeo %>
-              <li><a href="/auth/vimeo">Vimeo</a></li>
+              <li><a href="/auth/vimeo" data-no-pjax>Vimeo</a></li>
             <% end %>
             <% if !current_user.passport_provider? :google_oauth2 %>
-              <li><a href="/auth/google_oauth2">Google</a></li>
+              <li><a href="/auth/google_oauth2" data-no-pjax>Google</a></li>
             <% end %>             
             <li>
               <label>Options</label>

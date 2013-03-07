@@ -2,7 +2,7 @@ function FilmListItemModel(data){
   var self = this
   self.film = new FilmModel(data.film)
   self.position = ko.observable(data.position)
-  self.id = self.film.id
+  self.id = self.film.id()
 }
 
 

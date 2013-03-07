@@ -66,8 +66,7 @@ var ViewModel = {
     event.preventDefault()
     event.stopPropagation()
     history.pushState(null, null, ViewModel.href(event,'.json'))
-    $.getJSON(ViewModel.href(event), function(data){
-      
+    $.getJSON(ViewModel.href(event), function(data){      
       filmModel.update(new FilmsPageModel(data))
     })
   },

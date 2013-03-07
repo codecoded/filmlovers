@@ -1,46 +1,49 @@
 <%= render layout: 'layouts/viewmodel', locals: {model: 'FilmsListModel'} do %>
 <% if !viewing_own? %>
 
-  <div class="row">
-    <div class="twelve columns centered">
-      <h4><%= @films_list.user.username %></h4>
-    </div>
+<div class="row">
+  <div class="twelve columns centered">
+    <h4><%= @films_list.user.username %></h4>
   </div>
+</div>
 
 <% end %>
 
-
-<div class="row">
-  <div id="userList" class="twelve columns centered">
+<div class="row" >
+  <div  class="twelve columns centered">
     <h3 data-bind="text: name"> </h3>
     <p data-bind="text: description"></p>
 
     <%= content_tag :a, 'Edit', data:{bind: 'attr: {href: edit_url}'}, :class=>'radius button right' if viewing_own?%>
-
-    <!-- Thumbnails -->
-    <div class="twelve columns" >
-      <div class="row films">
-        <ol data-bind="foreach: films" >
-          <li class="twelve columns">  
-            <a data-bind="attr: { href: film.url, title: film.title }"  class="one columns">
-              <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
-            </a>
-            <div class="six columns">
-              <h4 data-bind="text: film.title"></h4>
-              <h5 data-bind="text: film.release_date"></h5>
-            </div> 
-            <div class="four columns">
-              <div class="film-actions-vertical pagination-centered" data-bind="foreach: film.actions">
-                <button data-bind="click: action">
-                  <i data-bind="css: actionCSS" class="icon-2x"></i>
-                  <label class="count" ></label>
-                </button>
-              </div>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </div>
   </div>
 </div>
+<div class="row films" id="userList">
+
+  <ol data-bind="foreach: films" class="twelve columns">
+    <li >  
+      <div class="row">
+        <div class="one column">
+          <span data-bind="text: position"></span>
+        </div>
+        <div class="two columns">
+          <a data-bind="attr: { href: film.url, title: film.title }" >
+            <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
+          </a>
+        </div>
+      <div class="six columns">
+        <h4 data-bind="text: film.title"></h4>
+        <h5 data-bind="text: film.release_date"></h5>
+      </div> 
+      <div class="four columns">
+        <div class="film-actions-vertical pagination-centered" data-bind="foreach: film.actions">
+          <button data-bind="click: action">
+            <i data-bind="css: actionCSS" class="icon-2x"></i>
+            <label class="count" ></label>
+          </button>
+        </div>
+      </div>
+    </li>
+  </ol>
+</div>
+
 <% end %>

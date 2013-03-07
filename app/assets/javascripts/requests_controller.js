@@ -5,8 +5,6 @@ $(function(){
 var RequestsController = {
   lastUri: null,
   init: function(){
-    
-
     $('form').live('ajax:success', function(xhr, view, status)
     {
       xhr.stopPropagation()    
@@ -25,19 +23,17 @@ var RequestsController = {
 
   linkView: function(href, model, view){
     $.getJSON(href, function(json_data){
-      RequestsController.bindView(new model(json_data), view)
+      var modelData = new model(json_data)
+      RequestsController.bindView(modelData, view)
+      $(document).trigger(model.name + ':binded', modelData)
     })
   },
 
   bindView: function(model, view){
     content = $(view)   
     ko.applyBindings(model, content[0])
-    $("#featured").orbit({
-      directionalNav:true, fluid:false, timer:false
-    })
-
+    $("#featured").orbit({directionalNav:true, fluid:false, timer:false})
     if(typeof(FB)!='undefined')FB.XFBML.parse();
-    // $('#container').html(content)
   },
 
   addPushState: function(uri){

@@ -10,6 +10,10 @@ function FilmsListModel(data){
   
   self.films = ko.observableArray(FilmListItemModel.arrayFromJSON(data.film_list_items))
 
+  self.films.sort(function(film1, film2){
+    return film1.position() == film2.position() ? 0 : (film1.position() < film2.position() ? -1 : 1)
+  })
+
   self.fetch = function(film_id){
     $.getJSON('/films/' + film_id, function(data){
       self.addFilmItem(new FilmListItemModel({'position':1, 'film': data}))
@@ -23,6 +27,10 @@ function FilmsListModel(data){
   self.removeFilmItem = function(film_to_remove){
     self.films.remove(function(film){ return film_to_remove.id == film.id  })
   }
+
+  self.find = function(film_id){
+    return $.grep(self.films(), function(item, index){ return item.id == film_id})[0]
+  },
 
   self.selected = function(){
     return $.grep(self.films(), function(item, index){ return item.selected()})
@@ -67,6 +75,7 @@ function FilmsListModel(data){
       }  
     })
   }
+
 }
 
 FilmsListModel.load = function(uri){

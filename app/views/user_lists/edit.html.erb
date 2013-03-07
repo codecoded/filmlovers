@@ -4,4 +4,15 @@
     <%= render 'form' %>
   </div>
 </div>
+
+
+
 <% end %>
+
+<script>
+$(function(){
+  $('#quick_search').smartSuggest({src: '/films/quick_search', showImages:true })
+  // Bindings.Lists.init(Bindings.ko_data('viewContent'))
+  // $('.sortable').sortable({ forcePlaceholderSize: true, containment:'window', cursor: 'move', forceHelperSize: true, helper: "clone"});
+})
+</script>

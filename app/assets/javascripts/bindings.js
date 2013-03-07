@@ -9,7 +9,6 @@ var Bindings = {
        return
       console.log('ajax request to: ' + ViewModel.href(event))
       event.preventDefault()
-
       RequestsController.get(ViewModel.href(event))
     })
 
@@ -17,6 +16,7 @@ var Bindings = {
     this.clickEvent('#lnkQueueListModal', ViewModel.displayQueueListModal)
     this.clickEvent('#signin-link', ViewModel.displaySignInModal)
     this.clickEvent('#fb-login', FacebookAPI.login)
+
   },
 
   setUser: function(model){

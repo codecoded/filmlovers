@@ -44,7 +44,7 @@ class FilmPresenter
   end
 
   def trailer
-    "http://www.youtube.com/embed/#{film.trailer}" if film.has_trailer?
+    "https://www.youtube.com/embed/#{film.trailer}" if film.has_trailer?
   end
 
   def backdrops

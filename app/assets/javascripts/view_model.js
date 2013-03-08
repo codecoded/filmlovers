@@ -1,11 +1,13 @@
 var ViewModel = {
   user: null,
   queue: null,
+  friendsList: null,
   filmsPage: ko.observable(),
 
   init: function(){
     ViewModel.loadUser(ViewModel.loadQueue)
     Bindings.init()
+    FacebookAPI.init()
   },
 
   loadUser: function(callback){
@@ -22,6 +24,15 @@ var ViewModel = {
       ViewModel.queue = new FilmsQueueModel(json)
       Bindings.setQueue(ViewModel.queue)
       Queue.init()
+    })
+  },
+
+  loadFriends: function(){
+    FacebookAPI.friends(function(response) {
+      friends = $.map(response, function(friend){ return new FBFriendModel(friend) })
+
+      ViewModel.friendsList = new FriendsList(friends)
+      $(document).trigger('friends:loaded')
     })
   },
 

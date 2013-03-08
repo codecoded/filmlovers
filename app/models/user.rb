@@ -11,6 +11,7 @@ class User
 
   embeds_many :films_lists
   embeds_many :passports
+  embeds_many :friends
 
 
   def self.from_omniauth(auth)

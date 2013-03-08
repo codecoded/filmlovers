@@ -6,38 +6,42 @@
     FB.init(
     {
       appId      : '<%= Facebook::app_id %>', // App ID
-      channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+      // channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
       status     : true, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
       xfbml      : true  // parse XFBML
     })
 
-    FB.getLoginStatus(function(response) 
-    {
-        if (response.status === 'connected') 
-        {
-          FacebookAPI.loggedIn = true
-        } 
-        else if (response.status === 'not_authorized') 
-        {
-           FacebookAPI.loggedIn = false
-        } 
-        else 
-        {
-            // not_logged_in
-            FacebookAPI.login();
-        }
-    });
+
+
+  FB.getLoginStatus(function(response) 
+  {
+      if (response.status === 'connected') 
+      {
+        $(document).trigger('facebook:connected')
+        FacebookAPI.loggedIn = true
+      } 
+      else if (response.status === 'not_authorized') 
+      {
+         FacebookAPI.loggedIn = false
+      } 
+      else 
+      {
+          // not_logged_in
+          FacebookAPI.login();
+      }
+  });
+
   };
+
+
 
   // Load the SDK Asynchronously
   (function(d){
      var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
      if (d.getElementById(id)) {return;}
      js = d.createElement('script'); js.id = id; js.async = true;
-     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=116125521892926";
+     js.src = '//connect.facebook.net/en_US/all.js';
      ref.parentNode.insertBefore(js, ref);
    }(document));
-
-
 </script>

@@ -26,8 +26,8 @@ Bindings.Lists = {
 
   sort: function(){
     $('li[data-item-id]').each(function(index, item){
-      film = Bindings.Lists.model.find(item.getAttribute('data-item-id'))
-      film.position(index+1)
+      item = Bindings.Lists.model.find(item.getAttribute('data-item-id'))
+      item.position(index+1)
     })    
   }
 }

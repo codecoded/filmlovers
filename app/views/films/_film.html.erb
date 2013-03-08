@@ -1,8 +1,8 @@
 <!-- Thumbnails -->
 <div class="ten columns" >
-  <div class="row films" data-bind="foreach: films">
+  <div class="films" data-bind="foreach: films">
     <input type="hidden" data-bind="value: id" name="films[]"/>
-    <div class="full_overlay film" draggable='true'  ondragstart="drag(event)"  data-bind="attr: { id: id}">
+    <div class="full_overlay film"  data-bind="attr: { id: id}">
     <!-- <a data-bind="attr: { href: url, title: title }"> -->
       <div class="content">
         <div class="film-title">

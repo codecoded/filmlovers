@@ -46,6 +46,10 @@ Filmlovers::Application.routes.draw do
     match ':id', to: 'persons#show', as: 'person'
   end
 
+  scope 'channels' do
+    get 'facebook', to: 'channels#facebook', as: 'channel_facebook'
+  end
+
   scope ':user_id', :constraints => { :user_id => /.*/ } do
     resources :films, 
       :only => [:index, :show], to: 'user_films',

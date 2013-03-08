@@ -1,15 +1,25 @@
 var FacebookAPI = {
+
   loggedIn: false,
-  
+  friendsQuery: "SELECT uid,username FROM user WHERE uid IN (SELECT uid2 FROM friend WHERE uid1 = me()) AND is_app_user = 1",
+
+  init: function(){
+    $(document).on('facebook:connected', function(){
+      ViewModel.loadFriends()
+    })
+  },
+
   logged_in: function(){
     ViewModel.user.loggedIn(true)
     ViewModel.user.loggedOut(false)
   },
+
   logged_out: function(){
     ViewModel.user.loggedIn(false)
     ViewModel.user.loggedOut(true)
   },
-  login: function login(){
+
+  login: function(){
 
     // FB.login(function(response) 
     // {
@@ -25,7 +35,7 @@ var FacebookAPI = {
     // })
   },
 
-  logout: function logout(){
+  logout: function(){
     FB.logout(function(response) 
     {
       FacebookAPI.logged_out()
@@ -33,4 +43,12 @@ var FacebookAPI = {
     })
   },
 
+  friends: function(callback){
+    FacebookAPI.fql(FacebookAPI.friendsQuery, callback)
+    // FB.api('/me/friends?fields=id,name,installed', callback );
+  },
+
+  fql: function(querystring, callback){
+    FB.api({method:'fql.query', query:querystring}, callback)
+  }
 }

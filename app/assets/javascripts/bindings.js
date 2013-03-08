@@ -11,11 +11,16 @@ var Bindings = {
       RequestsController.get(ViewModel.href(event))
     })
 
-    $(document).on('filmslist:saved',  ViewModel.filmListSaved)
+    // $(document).on('filmslist:saved',  ViewModel.filmListSaved)
+
     this.clickEvent('#lnkQueueListModal', ViewModel.displayQueueListModal)
     this.clickEvent('#signin-link', ViewModel.displaySignInModal)
     this.clickEvent('#fb-login', FacebookAPI.login)
 
+    $(document).on('friends:loaded', function(){
+      Bindings.ko_apply(ViewModel.friendsList, 'channel-facebook')
+    })
+    
   },
 
   setUser: function(model){

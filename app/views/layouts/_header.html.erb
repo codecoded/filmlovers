@@ -41,18 +41,18 @@
           <%= link_to "Lists", user_lists_path(current_user) %>
         </li>
         <% if current_user.passport_provider? :facebook %>
-          <li><a href="/">Facebook</a></li>
+          <li><a href="/channels/facebook">Facebook</a></li>
         <% end %>
-        <% if current_user.passport_provider? :twitter %>
+        <% if current_user.passport_provider? :twitter_ %>
           <li><a href="/">Twitter</a></li>
         <% end %>
-        <% if current_user.passport_provider? :netflix %>
+        <% if current_user.passport_provider? :netflix_ %>
           <li><a href="/">Netflix</a></li>
         <% end %>
-        <% if current_user.passport_provider? :vimeo %>
+        <% if current_user.passport_provider? :vimeo_ %>
           <li><a href="/">Vimeo</a></li>
         <% end %>
-        <% if current_user.passport_provider? :google_oauth2 %>
+        <% if current_user.passport_provider? :google_oauth2_ %>
           <li><a href="/">Google</a></li>
         <% end %>
       </ul><!-- Right Nav Section -->

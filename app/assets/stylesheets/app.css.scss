@@ -33,7 +33,7 @@ body{
   padding: 10px;
 }
 
-img + label{
+.genre img + label, .trend img + label{
   position: relative;
   top: -1.1em;
   color: white;

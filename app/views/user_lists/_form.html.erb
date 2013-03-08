@@ -31,18 +31,18 @@
           <li data-bind="attr: {'data-item-id': film.id()}">  
             <div class="row">
               <div class="one column">
-                <span data-bind="text: position"></span>
+                <label data-bind="text: position" class="position"></label>
               </div>
-              <div class="two columns">
+              <div class="one column">
                 <a data-bind="attr: { href: film.url, title: film.title }" >
                   <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
                 </a>
               </div>
-              <div class="six columns">
-                <h4 data-bind="text: film.title"></h4>
-                <h5 data-bind="text: film.release_date"></h5>
-              </div> 
               <div class="four columns">
+                <label data-bind="text: film.title" class="title"></label>
+                <label data-bind="text: film.release_date"></label>
+              </div> 
+              <div class="two columns">
                 <div class="film-actions-vertical pagination-centered">
                   <button data-bind="click: $root.removeFilmItem">
                     <i class="icon-remove icon-2x"></i>
@@ -52,27 +52,6 @@
             </div>
           </li>
         </ol>
-
-<!--         <ol data-bind="foreach: films" class="sortable eight">
-          
-          <li class="twelve columns" data-bind="attr: {'data-item-id': film.id()}">  
-            <span data-bind="text: position"></span>
-            <a data-bind="attr: { href: film.url, title: film.title }" data-remote="true" class="one columns">
-              <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
-            </a>
-            <div class="six columns">
-              <h4 data-bind="text: film.title"/>
-              <h5 data-bind="text: film.release_date"></h5>
-            </div> 
-            <div class="four columns">
-              <div class="film-actions-vertical pagination-centered">
-                <button data-bind="click: $parent.removeFilmItem">
-                  <i class="icon-remove icon-2x"></i>
-                 </button>
-              </div>
-            </div>
-          </li>
-        </ol> -->
       </div>
     </div>
 
@@ -80,7 +59,5 @@
 <script>
 $(function(){
   $('#quick_search').smartSuggest({src: '/films/quick_search', showImages:true })
-  $(".sortable" ).on( "sortstart", function( event, ui ) {console.log(ui)} );
-
 })
 </script>

@@ -8,11 +8,21 @@
     li{
       border: solid 1px rgba(90, 206, 213, 0.37);
       border-radius: 10px;
-      padding: 10px;
+      padding: 3px;
       margin: 3px 0px;
       background-color: rgb(241, 241, 241);
       display: inline-block;
       width: 100%;
+      line-height: 1;
+      .title{
+        font-size:1.2em;
+        font-style: italic;
+      }
+      .position {
+        text-align: center;
+        padding-top: 30%;
+        font-size: 2em;
+      }
       a img{
         // padding: 10px;
       }

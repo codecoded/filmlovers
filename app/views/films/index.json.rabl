@@ -20,7 +20,7 @@ node(:total_pages){|films_page| films_page.results_page.total_pages }
 node :films do |films_page|
 
   films_page.films.map do |film|
-    partial "films/film_summary", :object => film
+    partial "films/summary", :object => film
   end
 end
 

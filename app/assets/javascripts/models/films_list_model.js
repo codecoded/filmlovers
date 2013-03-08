@@ -10,18 +10,24 @@ function FilmsListModel(data){
   
   self.films = ko.observableArray(FilmListItemModel.arrayFromJSON(data.film_list_items))
 
-  self.films.sort(function(film1, film2){
-    return film1.position() == film2.position() ? 0 : (film1.position() < film2.position() ? -1 : 1)
-  })
+  self.sortFilms = function(){
+    self.films.sort(function(film1, film2){
+      return film1.position() == film2.position() ? 0 : (film1.position() < film2.position() ? -1 : 1)
+    })
+  }
+
+  self.sortFilms()
+
 
   self.fetch = function(film_id){
-    $.getJSON('/films/' + film_id, function(data){
-      self.addFilmItem(new FilmListItemModel({'position':1, 'film': data}))
+    $.getJSON('/films/' + film_id +'/summary', function(data){
+      self.addFilmItem(new FilmListItemModel({'position':self.films().length+1, 'film': data}))
+      self.sortFilms()
     })
   }
 
   self.addFilmItem   = function(film_to_add){ 
-    self.films.unshift(film_to_add)
+    self.films.push(film_to_add)
   }
 
   self.removeFilmItem = function(film_to_remove){

@@ -10,7 +10,7 @@ class UserListsController < UserController
   end
   
   def edit
-    @thumbnail_size = 'w92'
+    @thumbnail_size = 'w45'
     render_template
   end
 
@@ -21,7 +21,7 @@ class UserListsController < UserController
 
   def show
     @films_list = UserService.new(user).films_list(params[:id])
-    @thumbnail_size = 'w92'
+    @thumbnail_size = 'w45'
     render_template
   end
   

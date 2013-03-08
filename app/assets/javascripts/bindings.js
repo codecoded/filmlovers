@@ -28,6 +28,10 @@ var Bindings = {
     this.ko_apply(model, 'viewContent')
   },
 
+  refreshViewContent: function(){
+    this.setViewContent(this.ko_data('viewContent'))
+  },
+
   setQueue: function(model){
     this.ko_apply(model, 'footer')
   },

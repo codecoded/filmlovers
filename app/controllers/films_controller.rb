@@ -13,6 +13,12 @@ class FilmsController < ApplicationController
     render_template
   end
 
+  def summary
+    @film = FilmPresenter.new current_user, Film.fetch(params[:id])
+    @thumbnail_size = 'w45'
+    render partial: 'summary'
+  end
+
   def trend
     # results = Rails.cache.fetch params[:trend] do
      results =  @tmdb_service.by_trend params[:trend], page_options

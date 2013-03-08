@@ -9,30 +9,28 @@
 
 <% end %>
 
-<div class="row" >
+
   <div  class="twelve columns centered">
     <h3 data-bind="text: name"> </h3>
     <p data-bind="text: description"></p>
 
     <%= content_tag :a, 'Edit', data:{bind: 'attr: {href: edit_url}'}, :class=>'radius button right' if viewing_own?%>
   </div>
-</div>
-<div class="row films" id="userList">
+<div class="twelve columns films" id="userList">
 
-  <ol data-bind="foreach: films" class="twelve columns">
+  <ol data-bind="foreach: films" >
     <li >  
-      <div class="row">
-        <div class="one column">
-          <span data-bind="text: position"></span>
-        </div>
-        <div class="two columns">
-          <a data-bind="attr: { href: film.url, title: film.title }" >
-            <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
-          </a>
-        </div>
-      <div class="six columns">
-        <h4 data-bind="text: film.title"></h4>
-        <h5 data-bind="text: film.release_date"></h5>
+      <div class="one column">
+        <label data-bind="text: $index() + 1" class="position"></label>
+      </div>
+      <div class="one columns">
+        <a data-bind="attr: { href: film.url, title: film.title }" >
+          <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
+        </a>
+      </div>
+      <div class="four columns">
+        <label data-bind="text: film.title" class="title"></label>
+        <label data-bind="text: film.release_date"></label>
       </div> 
       <div class="four columns">
         <div class="film-actions-vertical pagination-centered" data-bind="foreach: film.actions">

@@ -20,10 +20,14 @@ Bindings.Lists = {
     // sorter.sortable({start: Bindings.Lists.model.sortstart, stop:  Bindings.Lists.model.sortstop, update:  Bindings.Lists.model.sortupdate})
 
     sorter.on( "sortupdate", function(event, ui){
-      $('[data-item-id]', sorter).each(function(index, item){
-        film = Bindings.Lists.model.find(item.getAttribute('data-item-id'))
-        film.position(index+1)
-      })
+      Bindings.Lists.sort()
     });   
+  },
+
+  sort: function(){
+    $('li[data-item-id]').each(function(index, item){
+      film = Bindings.Lists.model.find(item.getAttribute('data-item-id'))
+      film.position(index+1)
+    })    
   }
 }

@@ -5,16 +5,6 @@
         <label data-bind="text: username"></label>
       <% end %>
     </div>
-
-    <div  class="left friend-avatar">
-      <%= link_to '#', 'data-bind' => "attr: { href: '/' + username + '/lists' }", remote: true do %>
-        <img data-bind='attr: { src: avatarURL }'>
-        <label data-bind="text: username"></label>
-      <% end %>
-    </div>
- 
-    </div>
-        
   </div>
 
 

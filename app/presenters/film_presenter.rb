@@ -25,6 +25,11 @@ class FilmPresenter
     film.users[action].count
   end
 
+  def score
+    return 0 if stats(:watched) == 0
+    (stats(:loved) / stats(:watched)) * 100
+  end
+
   def thumbnail(size='w154')
     size = size ? size : 'w154'
     has_poster? ? film.poster(size ? size : thumbnail_size) : "http://placehold.it/#{size.slice(1..-1)}&text=no%20poster%20found"

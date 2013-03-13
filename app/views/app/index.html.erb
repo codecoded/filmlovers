@@ -1,8 +1,44 @@
 
 <div class="twelve columns">
   <!-- Navigation -->
-  <!-- Header Content -->
-  <div class="row">
+  <div class="row" id="search_row">
+    <div class="twelve columns">
+      <div class="radius panel">
+          <%= form_tag(films_search_path, method: :get,  remote:true) do%>
+          <div class="row collapse">
+            <div class="ten mobile-three columns">
+              <input type="text" name="query" />
+            </div>
+            <div class="two mobile-one columns">
+              <%= submit_tag 'Search', :class=>"postfix button expand", :disable_with => "Searching..." %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="four mobile-two columns trend">
+      <%= link_to films_trend_path(:now_playing) do %>
+        <%=image_tag 'now_playing.jpg', width:'100%' %>
+        <label>In Cinemas</label>
+      <% end %>
+    </div>
+    <div class="four mobile-two columns trend">
+      <%= link_to films_trend_path(:popular) do %>
+        <%=image_tag 'now_playing.jpg', width:'100%' %>
+        <label>Popular</label>
+      <% end %>
+    </div>
+    <div class="four mobile-two columns trend">
+      <%= link_to films_trend_path(:upcoming) do %>
+        <%=image_tag 'now_playing.jpg', width:'100%' %>
+        <label>Upcoming</label>
+      <% end %>
+    </div>
+  </div>
+  <div class="row" id="banner-row">
     <div class="twelve columns">
       <h3 class="show-for-small"></h3>
       <div class="panel">
@@ -20,42 +56,6 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="twelve columns">
-      <div class="radius panel">
-          <%= form_tag(films_search_path, method: :get,  remote:true) do%>
-          <div class="row collapse">
-            <div class="ten mobile-three columns">
-              <input type="text" name="query" />
-            </div>
-            <div class="two mobile-one columns">
-              <%= submit_tag 'Search', :class=>"postfix button expand", :disable_with => "Searching..." %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <div class="row ">
-    <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:now_playing) do %>
-        <%=image_tag 'now_playing.jpg', width:'100%' %>
-        <label>Now Playing</label>
-      <% end %>
-    </div>
-    <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:popular) do %>
-        <%=image_tag 'now_playing.jpg', width:'100%' %>
-        <label>Popular</label>
-      <% end %>
-    </div>
-    <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:upcoming) do %>
-        <%=image_tag 'now_playing.jpg', width:'100%' %>
-        <label>Upcoming</label>
-      <% end %>
-    </div>
-</div>
  <div class="row">
   <!-- Thumbnails -->
     <div class="twelve columns">
@@ -73,4 +73,6 @@
       <%= render partial:'genre_tile', locals:{genre: :romance, description: 'Romance'} %>
     </div>
   </div>
+
+  <!-- <a onmouseover="UE.Popin.preload();" href="#" onclick="UE.Popin.show(); return false;">feedback</a> -->
 </div>

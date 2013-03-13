@@ -10,4 +10,11 @@ module FilmsHelper
     end
   end
 
+ def thumbnail(film, size='w154')
+    size = size ? size : 'w154'
+    src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=no%20poster%20found"
+    image_tag src, :title=>film.title, :class=>'small'
+  end
+
+
 end

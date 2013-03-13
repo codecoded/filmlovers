@@ -42,5 +42,33 @@
 
 
 .list-summary{
-  border-bottom: dashed 1px black;
+  border-bottom: solid 1px black;
+  border: solid 1px transparent;
+  border-radius: 7px;
+  padding: 10px 5px;
+  label.count{
+    text-align: center;
+    font-size: 12pt;
+  }
+  &:hover{
+    border-color: black;
+  }
+}
+
+.user-list{
+  padding:0px;
+  .film{
+    img.small{
+      width: 90px;
+      height: 130px;      
+    }
+
+  } 
+  .film:not(:first-child){
+    margin-left: -60px;
+    position: relative;
+    img.small{
+      border-left: solid #5C5C5C 1px;
+    }
+  }
 }

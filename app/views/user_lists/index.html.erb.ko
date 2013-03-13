@@ -3,32 +3,32 @@
 <%= link_to('New List', new_user_list_path, {:class => 'radius button', remote:true}) if viewing_own? %>
 <dl>
   <dt><h5><%= viewing_own? ? 'Your lists' : "#{@user.username} lists" %> </h5></dt>
-  <% @films_list.each do |list| %>
+<!-- <!-- ko foreach: lists -->
   <dd>
-    <%= link_to user_list_path(current_user, list) do %>
+    <a data-bind="attr: {href: url}" href="#">
       <div class="row list-summary"> 
         <div class="four columns">       
           <div class="row">
+          <!-- Thumbnails -->
             <div class="twelve columns user-list" data-bind="foreach: films">
-              <% list.films.take(10).each do |film| %>
-                <div class="left film">
-                  <%= thumbnail(film, 'w90') %>
-                </div>
-              <% end %>
+              <div class="left film">
+                <img data-bind="attr: {src: film.thumbnail, title: film.title}" class="small"/>
+              </div>
             </div>
           </div>
         </div> 
         <div class="one column">
-          <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
+          <label data-bind="text: films().length + ' films'" class="count"></label>
         </div>
         <div class="seven columns">
-          <label><%= list.name %></label>  
-          <p><%= list.description %></p>
+          <label data-bind="text: name"> 
+          </label>  
+           <p data-bind="text: description"> </p>
         </div> 
       </div>
-    <% end %>
+     </a>
   </dd>
-  <% end %>
+<!-- /ko --> -->
 </dl>
 
 <% end %>

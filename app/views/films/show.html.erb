@@ -30,9 +30,12 @@
 
   <!-- Header and Nav -->
 <div class="twelve columns">
+  <h3 style="float:right; display:inline"><i class="icon-heart"> <%= @film_view.score %> </i></h3>
   <div class="row">
     <div class="seven columns">
-      <h1 class="film-title" data-bind="text: title"></h1><label>Directed by <span data-bind="text: director"></span> <span data-bind="text: '(' + year + ')', visible: year"></span><label>  
+      <h1 class="film-title" data-bind="text: title"></h1>
+
+      <label>Directed by <span data-bind="text: director"></span> <span data-bind="text: '(' + year + ')', visible: year"></span><label>  
     </div>
     <div class="five columns">
 
@@ -63,6 +66,7 @@
   <div class="row">
     <div class="two columns">
      <%= image_tag @film_view.film.poster('w342') %>
+    <%= render partial: 'shared/amazon_search', locals: {title: "#{@film_view.title} #{@film_view.year}"} %>
     </div>
     <div class="one columns ">
       <div class="film-actions-vertical pagination-centered" data-bind="foreach: actions">
@@ -89,6 +93,9 @@
             <% end %>
           </p>
           <p><%= @film_view.film.overview %></p>
+
+
+
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 module AppSettings
 
-  PREVIEW_LIMIT = 5
+  PREVIEW_LIMIT = 10
   LIST_CAPACITY = 100
 
 end

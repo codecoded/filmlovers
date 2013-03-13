@@ -4,7 +4,7 @@ class UserListsController < UserController
 
   def index
     @films_list = user.films_lists
-    @films_count = AppSettings::PREVIEW_LIMIT
+    @films_count = 10
     @thumbnail_size = 'w90'
     render_template
   end

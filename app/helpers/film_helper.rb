@@ -13,6 +13,30 @@ module FilmHelper
   def tagline(film_view)
     film_view.tagline ? film_view.tagline :  "Overview"
   end
+
+  def action_button(action, film)
+    url = update_user_film_path(current_user, action, film.id)
+    actioned = film.actioned?(action)
+    method =  actioned ? :delete : :put
+    button_tag type: :button, name: action, :class=> 'film-action', data: {href: url, method: method, remote: true } do 
+      icon_for action, actioned
+    end    
+  end
+
+  def icon_for(action, is_actioned)
+    icons = {
+      watched: 'icon-eye-open', 
+      loved: 'icon-heart', 
+      owned: 'icon-home', 
+      queued: 'icon-pushpin'}
+
+    action_css = is_actioned ? 'actioned' : 'unactioned'
+
+    css = "#{icons[action]} #{action_css}"
+
+    content_tag :i, nil,:class=> css
+  end
+
   # def film_actioned_link(action, film, icon)
   #   content_tag :li do
   #     link_to update_user_film_path(current_user, action, film.id), method: :delete, remote: true do

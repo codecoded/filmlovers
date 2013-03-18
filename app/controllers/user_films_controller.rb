@@ -9,8 +9,9 @@ class UserFilmsController < ApplicationController
   end
   
   def show
-    results = user_service.films_in_list(list_name)
-    present(results) 
+    results_page = user_service.paged_list(list_name, params[:page].to_i, 30)
+    @films_page = FilmsPagePresenter.new current_user, results_page, list_name
+    render layout:nil if request.xhr?
   end
 
   def update
@@ -47,12 +48,6 @@ class UserFilmsController < ApplicationController
   end
 
 
-  def present(films)
-    results_page =  ResultsPage.new(films)
-    @films_page = FilmsPagePresenter.new current_user, results_page
-    render layout:nil if request.xhr?
-  end
-
   def user_id
     params[:user_id]
   end
@@ -68,4 +63,5 @@ class UserFilmsController < ApplicationController
   def film 
     Film.find params[:film_id].to_i
   end
+
 end

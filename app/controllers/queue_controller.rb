@@ -9,7 +9,7 @@ class QueueController < ApplicationController
   end
 
   def show
-    results = user_service.films_in_list(:queued)
+    results = user_service.list_films(:queued)
     present(results) 
   end
 

@@ -28,9 +28,14 @@ class UserService
     list == :queued  ? films_queue.films : user.films[list].members 
   end
 
-  def films_in_list(list)
-    # list_films(list).map {|film_id| Film.find(film_id.to_i)}
-    list_films(list)
+  def list_size(list)
+    list == :queued  ? films_queue.count : user.films[list].count 
+  end
+
+  def paged_list(list, page_no = 1, page_size = 20)
+    film_ids = list_films list
+    page_results = film_ids.slice(page_no * page_size, page_size)
+    ResultsPage.new page_results || {}, list_size(list), page_size, page_no
   end
 
   def films_list(id)

@@ -19,3 +19,5 @@
 //   ev.target.appendChild(document.getElementById(data));
 //   console.log('dropped')
 // }
+
+FL.Films.init()

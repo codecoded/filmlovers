@@ -1,0 +1,28 @@
+
+<div class="ten columns" id="filmsContent" >
+
+  <div class="films">
+
+    <% @films_page.films.each do |film| %>
+      <%= content_tag :div, :class=> "full_overlay film", id: film.id do %>
+        <div class="content">
+          <div class="film-title">
+            <h4><%= film.title %></h4>
+            <p><%= film.release_date %></p>
+          </div>      
+          <% if logged_in? %>
+            <%= render partial: 'films/actions', locals: {film: film} %>
+          <% end %>
+        </div>
+
+        <%= link_to film_path(film.id), title: film.title do %>
+          <%= image_tag film.thumbnail, title: film.title %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+</div>
+      <%= page_link @films_page.next?, @films_page.next_params, "icon-chevron-right", "filmsLinkNext" %>
+<div id="lastPostsLoader"></div>

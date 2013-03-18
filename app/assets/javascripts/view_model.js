@@ -14,7 +14,7 @@ var ViewModel = {
     $.getJSON('/current_user', function(data){
       ViewModel.user = new UserModel(data)
       Bindings.setUser(ViewModel.user)
-      if(callback) callback()
+      // if(callback) callback()
     })
   },
 

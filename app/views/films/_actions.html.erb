@@ -1,0 +1,7 @@
+<ul class="film-actions">
+  <div class="film-actions-horizontal">
+    <% [:watched, :loved, :owned, :queued].each do |action| %>
+    <%= action_button action, film %>
+    <% end %>
+  </div>
+</ul>

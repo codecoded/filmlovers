@@ -11,6 +11,7 @@ class FilmsPagePresenter
 
   def films
     @films ||= FilmPresenter.from_films(user, results)
+    @films || {}
   end
 
   def next_params

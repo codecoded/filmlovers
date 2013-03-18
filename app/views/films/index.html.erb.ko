@@ -1,0 +1,32 @@
+<%= render layout: 'layouts/viewmodel', locals: {model: 'FilmsPageModel'} do %>
+<div class="row" >
+  <!-- Side Bar -->
+  <div class="two mobile-four columns pagination-centered">
+    <div class="film-actions-vertical">
+      <div class="tiled"><i class="icon-eye-open icon-3x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+      <div class="tiled"><i class="icon-heart icon-3x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+      <div class="tiled"><i class="icon-pushpin icon-3x" ondragover='allowDrop(event)' ondrop='drop(event)' ></i></div>
+    </div>
+    <div class="hide-for-small panel">
+      <label>
+        Viewing Films
+      </label>
+      <h5 class="subheader" data-bind="text: description">
+        <%= params[:query] %>
+      </h5>
+    </div>
+    <div class="panel callout radius" align="center">
+      <p>
+         <a data-bind="attr: {href: url_previous}, visible: url_previous, click: ViewModel.loadFilmsPage"> <i class="icon-chevron-left"></i></a>
+        Page <span data-bind="text: page_no"></span> of <span data-bind="text: total_pages"></span>
+        <a data-bind="attr: {href: url_next}, visible: url_next, click: ViewModel.loadFilmsPage"> <i class="icon-chevron-right"></i></a>
+      <p>
+      <h6>
+        <span data-bind="text: total_results"/> films
+      </h6>
+    </div>
+  </div>
+  <!-- End Side Bar --> 
+  <%= render partial: 'films/film' %>
+</div>
+<% end %>

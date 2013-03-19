@@ -1,8 +1,5 @@
-
 <div class="ten columns" id="filmsContent" >
-
   <div class="films">
-
     <% @films_page.films.each do |film| %>
       <%= content_tag :div, :class=> "full_overlay film", id: film.id do %>
         <div class="content">
@@ -20,9 +17,7 @@
         <% end %>
       <% end %>
     <% end %>
-
   </div>
-
 </div>
-      <%= page_link @films_page.next?, @films_page.next_params, "icon-chevron-right", "filmsLinkNext" %>
+  <%= page_link @films_page.next?, @films_page.next_params, "icon-chevron-right", "filmsLinkNext" %>
 <div id="lastPostsLoader"></div>

@@ -25,6 +25,43 @@ body{
   z-index:999;
 }
 
+#quick_search_header{
+  // border-radius: 10px;
+  margin-top:8px;
+}
+
+.tile{
+  border: solid 2px black;
+  border-radius: 10px;
+  background-color: white;
+  opacity: 0;
+
+  &.small{
+    width: 30px;
+    height: 30px;
+    padding-top: 2px;
+  }
+  &.counter{
+    width: 75px;
+    height: 30px;
+    padding-top: 1px;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    i{
+      float: left;
+      padding-top: 0px;
+      color: red;
+    }
+    label{
+      position: relative;
+      top: 3px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+  }
+}
+
 .push{
   height:150px;
 }
@@ -50,4 +87,33 @@ body{
 
 ul, ol, dl{
   line-height: 1;
+}
+
+.heading_divider{
+  border-bottom: solid 3px lightSlateGray;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+}
+
+.section_description{
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 500;
+  color: #2B2525;
+}
+
+#films_recently_watched{
+  .film-small{
+    float: left;
+    padding: 0 2px;
+    border: solid 4px transparent;
+    border-radius: 5px;
+    position: relative;
+    &:hover{
+      border-color: #9CD6EC;
+    }
+    &:hover .tile{
+      opacity: 0.85;
+    }
+  }
 }

@@ -1,8 +1,8 @@
 
   <input name="_method" type="hidden" data-bind="value: dataMethod()">
-  <label>How will this list be known?</label>
+  <label>Title:</label>
   <input type="text" name="films_list[name]" data-bind="value: name" placeholder='Title'/>
-  <label>What's the reasoning?</label>
+  <label>Overview:</label>
   <textarea  name="films_list[description]" data-bind="value: description" placeholder='Description' cols="40" rows="20"></textarea>
 
     <div class="twelve columns">
@@ -10,14 +10,13 @@
         <div class="one mobile-one columns">
           <span class="prefix"><%= image_tag "search.png"%></span>
         </div>
-        <div class="six mobile-three columns">
+        <div class="four mobile-three columns">
           <input type="text" id="quick_search" size="30" value="" autocomplete="off" class="ss-input">
         </div>
         <div class="three mobile-three columns">
           <a data-bind="attr: {href: url}" data-remote=true class ='radius button'>Cancel</a>
           <button data-bind="click: save" class="button radius">Save</button>
           <button data-bind="click: $root.remove" class="button radius">Delete</button>
-
         </div>
 
       </div>

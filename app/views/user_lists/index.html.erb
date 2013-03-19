@@ -1,34 +1,33 @@
-<%= render layout: 'layouts/viewmodel', locals: {model: 'ListsModel'} do %>
+<div id="viewContent" class="twelve columns">
 
-<%= link_to('New List', new_user_list_path, {:class => 'radius button', remote:true}) if viewing_own? %>
-<dl>
-  <dt><h5><%= viewing_own? ? 'Your lists' : "#{@user.username} lists" %> </h5></dt>
-  <% @films_list.each do |list| %>
-  <dd>
-    <%= link_to user_list_path(list.user, list) do %>
-      <div class="row list-summary"> 
-        <div class="four columns">       
-          <div class="row">
-            <div class="twelve columns user-list" data-bind="foreach: films">
-              <% list.films.take(10).each do |film| %>
-                <div class="left film">
-                  <%= thumbnail(film, 'w90') %>
-                </div>
-              <% end %>
+  <%= link_to('New List', new_user_list_path, {:class => 'radius button', remote:true}) if viewing_own? %>
+  <h5><%= viewing_own? ? 'Your lists' : "#{@user.username} lists" %> </h5>
+  <ul class="user-list">
+    <% @films_list.each do |list| %>
+    <li>
+      <%= link_to user_list_path(list.user, list) do %>
+        <div class="row list-summary"> 
+          <div class="four columns">       
+            <div class="row">
+              <div class="twelve columns user-list" >
+                <% list.films.take(10).each do |film| %>
+                  <div class="left film">
+                    <%= poster(film, 'w90') %>
+                  </div>
+                <% end %>
+              </div>
             </div>
+          </div> 
+          <div class="one column">
+            <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
           </div>
-        </div> 
-        <div class="one column">
-          <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
+          <div class="seven columns">
+            <label><%= list.name %></label>  
+            <p><%= list.description %></p>
+          </div> 
         </div>
-        <div class="seven columns">
-          <label><%= list.name %></label>  
-          <p><%= list.description %></p>
-        </div> 
-      </div>
+      <% end %>
+    </li>
     <% end %>
-  </dd>
-  <% end %>
-</dl>
-
-<% end %>
+  </ul>
+</div>

@@ -6,8 +6,8 @@ class FilmsScoreChart
     @set = Redis::SortedSetStore.new key
   end
 
-  def films
-    set.range_with_scores
+  def films(count=-1)
+    set.range_with_scores_reversed 0, count
   end
 
   def incr(film)
@@ -18,8 +18,8 @@ class FilmsScoreChart
     set.decr film.id
   end
 
-  def film(film)
-    FilmCounter.new self, film.id
+  def score_for(film_id)
+    set.score film_id
   end
 
 end

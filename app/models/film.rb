@@ -45,5 +45,15 @@ class Film
     trailers[source.to_s][0]['source'] if has_trailer?(source)
   end
 
+  def score_for(list_name)
+    Films[list_name].score_for(id) || 0
+  end
+
+  def score
+    watched = score_for :watched
+    return 0 unless watched > 0
+    ((score_for(:loved) / watched) * 100).round(0)
+  end
+
 end
 

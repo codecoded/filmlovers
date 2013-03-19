@@ -8,6 +8,7 @@
 } %> -->
 
 <% set_meta_tags :title => @film_view.title %>
+<% set_meta_tags :description => tagline(@film_view.film) %>
 <% set_meta_tags :og => {
   :title    => @film_view.title,
   :type     => 'movie',

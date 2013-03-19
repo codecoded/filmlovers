@@ -3,7 +3,7 @@ class FilmPresenter
 
   attr_reader :user, :film, :thumbnail_size
 
-  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?, :overview
+  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?, :overview, :score
 
   def initialize(user, film, thumbnail_size='w185')
     @user, @film, @thumbnail_size = user, film, thumbnail_size
@@ -25,10 +25,10 @@ class FilmPresenter
     film.users[action].count
   end
 
-  def score
-    return 0 if stats(:watched) == 0
-    (stats(:loved) / stats(:watched)) * 100
-  end
+  # def score
+  #   return 0 if stats(:watched) == 0
+  #   (stats(:loved) / stats(:watched)) * 100
+  # end
 
   def thumbnail(size='w154')
     size = size ? size : 'w154'

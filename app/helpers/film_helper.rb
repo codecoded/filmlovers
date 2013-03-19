@@ -1,8 +1,7 @@
 module FilmHelper
 
   def directed_by(film_view)
-    return unless film_view.director
-    content_tag :span,  "Directed by #{film_view.director}"
+    content_tag(:span,  "Directed by #{film_view.director}") if film_view.director
   end
 
   def year(film_view)
@@ -31,28 +30,14 @@ module FilmHelper
       queued: 'icon-pushpin'}
 
     action_css = is_actioned ? 'actioned' : 'unactioned'
-
     css = "#{icons[action]} #{action_css}"
-
-    content_tag :i, nil,:class=> css
+    content_tag :i, nil,:class => css
   end
 
-  # def film_actioned_link(action, film, icon)
-  #   content_tag :li do
-  #     link_to update_user_film_path(current_user, action, film.id), method: :delete, remote: true do
-  #         content_tag :i, nil, :class=>"#{icon} actioned"
-  #     end
-  #   end
-  # end
-
-  # def film_unactioned_link(action, film, icon)
-  #   method = film.actioned?(action) ? :delete : :put 
-  #   css_class = method? == :delete ? "actioned" : "unactiond"
-  #   content_tag :li do
-  #     link_to update_user_film_path(current_user, action, film.id), method: :put, remote: true do
-  #         content_tag :i, nil, :class=>"#{icon} #{css_class} "
-  #     end
-  #   end
-  # end
+  def poster(film, size='w154')
+    size = size ? size : 'w154'
+    src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=no%20poster%20found"
+    image_tag src, :title=>film.title, :class=>'small'
+  end
 
 end

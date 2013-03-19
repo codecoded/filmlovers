@@ -57,6 +57,11 @@
         <% end %>
       </ul><!-- Right Nav Section -->
       <ul class="right">
+        <li class="name">
+          <%= form_tag(films_search_path, method: :get,  remote:true) do%>
+          <input type="text" id="quick_search_header" name="query">
+          <% end %>
+        </li>
         <li class="has-dropdown">
           <a href="#" data-bind="text:name"></a>
           <ul class="dropdown">
@@ -81,6 +86,7 @@
             <li>
               <label>Options</label>
             </li>
+
             <li>
               <%= link_to "Sign out", signout_path, id: "sign_out", data:{'no_pjax'=>true} %>
             </li>

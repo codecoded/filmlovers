@@ -14,8 +14,8 @@
         <% FilmsRepository.top_for(:watched, 10).each do |film| %>
           <div class="film-small">
             <button class="tile counter">
-              <i class="icon-heart icon-2x"></i>
-              <label><%= film.score %></label>
+              <i class="icon-eye-open icon-2x"></i>
+              <label><%= film.score_for :watched %></label>
             </button>
             <%= link_to film, remote:true do %>
               <%= poster(film, 'w90') %>

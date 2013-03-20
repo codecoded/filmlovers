@@ -4,9 +4,8 @@ function UserModel(data){
   self.loggedIn = ko.observable(false)
   self.loggedOut = ko.observable(false)
   
-  self.filmStats = new FilmStatsModel(data.stats)
-
   if(!data) return
+  self.filmStats = new FilmStatsModel(data.stats)
 
   self.name  = data.name
   self.username = data.username

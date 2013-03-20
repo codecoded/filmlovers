@@ -13,7 +13,7 @@ var RequestsController = {
   },
 
   get: function(uri){
-    this.addPushState(uri)
+    // this.addPushState(uri)
     $.get(uri, RequestsController.display)
   },
 
@@ -36,12 +36,12 @@ var RequestsController = {
     if(typeof(FB)!='undefined')FB.XFBML.parse();
   },
 
-  addPushState: function(uri){
-    loc = location.href
-    console.log('Addding pushstate: ' + loc)
-    history.pushState({lastUrl:loc}, null, uri)
-    this.google()
-  },
+  // addPushState: function(uri){
+  //   loc = location.href
+  //   console.log('Addding pushstate: ' + loc)
+  //   history.pushState({lastUrl:loc}, null, uri)
+  //   this.google()
+  // },
 
   google: function(){
     if(typeof(_gaq)==='undefined') 

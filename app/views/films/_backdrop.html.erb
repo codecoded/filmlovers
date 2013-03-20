@@ -1,0 +1,13 @@
+<!-- backdrops -->
+<% if @film_view.has_backdrop? %>
+  <div class="row">
+    <div class="twelve columns centered">
+      <div id='featured'>
+        <% @film_view.backdrops.each do | backdrop | %>
+          <%= backdrop_image backdrop %>
+        <% end %>
+      </div>
+      <hr />
+    </div>
+  </div>
+<% end %>

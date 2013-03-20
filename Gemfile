@@ -33,7 +33,7 @@ gem "mongoid", "~> 3.0.0"
 gem 'newrelic_rpm', '3.5.6.55'
 gem 'will_paginate', '~> 3.0.0'
 gem 'rabl'
-
+gem "eventmachine", "~> 1.0.3"
 gem 'meta-tags', :require => 'meta_tags'
 
 # Gems used only for assets and not required

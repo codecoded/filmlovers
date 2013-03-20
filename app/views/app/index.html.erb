@@ -17,7 +17,7 @@
               <i class="icon-eye-open icon-2x"></i>
               <label><%= film.score_for :watched %></label>
             </button>
-            <%= link_to film, remote:true do %>
+            <%= link_to film do %>
               <%= poster(film, 'w90') %>
             <% end %>
           </div>

@@ -7,9 +7,7 @@
             <h4><%= film.title %></h4>
             <p><%= film.release_date %></p>
           </div>      
-          <% if logged_in? %>
-            <%= render partial: 'films/actions', locals: {film: film} %>
-          <% end %>
+          <%= render partial: 'films/actions', locals: {film_presenter: film} %>
         </div>
 
         <%= link_to film_path(film.id), title: film.title do %>

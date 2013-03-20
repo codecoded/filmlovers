@@ -6,7 +6,7 @@
     FB.init(
     {
       appId      : '<%= Facebook::app_id %>', // App ID
-      // channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
+      channelUrl : '"<%= #{request.protocol}#{request.host_with_port}/channel.html"', // Channel File
       status     : true, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
       xfbml      : true  // parse XFBML

@@ -1,0 +1,25 @@
+<!-- <#% set_meta_tags :og => {
+  :title    => @film_view.title,
+  :type     => 'video.movie',
+  :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
+  :image    => @film_view.film.poster('w342'),
+  :video    => @film_view.trailer,
+  :director => @film_view.director
+} %> -->
+
+<% set_meta_tags :title => film.title %>
+<% set_meta_tags :description => tagline(film) %>
+<% set_meta_tags :og => {
+  :title    => film.title,
+  :type     => 'movie',
+  :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
+  :image    => film.poster('w342'),
+  :site_name   =>'filmlovers - find, share, discover',
+  :video    => film.trailer,
+  :description => film.overview
+} %>
+
+<% set_meta_tags :fb => {
+  :admins => '537020179',
+  :app_id => '116125521892926'
+} %>

@@ -2,8 +2,24 @@ FL = {}
 FL.Films = {}
 
 FL.Films = {
+  initialised: false,
+
   init: function(){
+    
+    if(FL.Films.initialised) return
+
     FL.Films.initListeners()
+    FL.Films.initialised = true
+  },
+
+  initListeners: function(){
+    $(document).on('ajax:success', 'a', FL.Films.displayContent)
+    $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
+    console.log('listeners initialised')
+  },
+
+  displayContent: function(xhr, data, status){
+    $('#container').html(data)
   },
 
   endlessScroll: function(){
@@ -38,9 +54,6 @@ FL.Films = {
     })
   },
 
-  initListeners: function(){
-    $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
-  },
 
   btnFilmActionClicked: function(event){
     button = $(this)
@@ -54,19 +67,10 @@ FL.Films = {
       url: href,
       type: method,
       dataType: 'json',
-      success: function(data, xhr, s){
+      success: function(xhr, data, status){
         ViewModel.user.updateStat(action, incr)
         button.data('method', (to_action ? 'delete' : 'put'))
-        button.find('i').toggleClass('actioned unactioned')
-        console.log('film updated')
-        // if(action=='queued'){
-        //   // self.isActioned() ? ViewModel.queue.queueFilm(self.film) : ViewModel.queue.dequeueFilm(self.film)
-        // }
-        // else
-        // {
-        //   self.film.stats.updateStat(self.name(), statIncr)
-        // }
-        // return self.count(data.count)    
+        button.find('i').toggleClass('actioned unactioned')   
       }  
     })
   }

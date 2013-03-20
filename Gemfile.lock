@@ -52,7 +52,7 @@ GEM
       compass (>= 0.12.2, < 0.14)
     daemons (1.1.9)
     erubis (2.7.0)
-    eventmachine (1.0.1)
+    eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faraday (0.8.6)
@@ -219,6 +219,7 @@ DEPENDENCIES
   bson_ext
   coffee-rails (~> 3.2.1)
   compass-rails
+  eventmachine (~> 1.0.3)
   fb-channel-file
   jquery-rails (= 2.1.4)
   knockoutjs-rails

@@ -1,7 +1,7 @@
-<ul class="film-actions">
-  <div class="film-actions-horizontal">
-    <% [:watched, :loved, :owned, :queued].each do |action| %>
-    <%= action_button action, film %>
-    <% end %>
-  </div>
-</ul>
+<% if logged_in? %>
+  <ul class="film-actions">
+    <div class="film-actions-horizontal">
+      <%= render partial: "films/action_buttons", locals: {film_presenter: film_presenter} %>
+    </div>  
+  </ul>
+<% end %>

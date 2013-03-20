@@ -36,6 +36,7 @@ class UserListsController < UserController
 
   def destroy
     list_service.delete_list
+    redirect_to action: :index
   end
 
   def update

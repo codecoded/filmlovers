@@ -1,21 +1,21 @@
 <div class="ten columns" id="filmsContent" >
   <div class="films">
-    <% @films_page.films.each do |film| %>
-      <%= content_tag :div, :class=> "full_overlay film", id: film.id do %>
+    <% @films_page.films.each do |film_presenter| %>
+      <%= content_tag :div, :class=> "full_overlay film #{'watched' if film_presenter.actioned?(:watched)}", id: film_presenter.id do %>
+
         <div class="content">
           <div class="film-title">
-            <h4><%= film.title %></h4>
-            <p><%= film.release_date %></p>
+            <h4><%= film_presenter.title %></h4>
+            <p><%= film_presenter.release_date %></p>
           </div>      
-          <%= render partial: 'films/actions', locals: {film_presenter: film} %>
+          <%= render partial: 'films/actions', locals: {film_presenter: film_presenter} %>
         </div>
 
-        <%= link_to film_path(film.id), title: film.title do %>
-          <%= image_tag film.thumbnail, title: film.title %>
-        <% end %>
+        <%= film_poster_link film_presenter.film %>
+
       <% end %>
     <% end %>
   </div>
 </div>
-  <%= page_link @films_page.next?, @films_page.next_params, "icon-chevron-right", "filmsLinkNext" %>
-<div id="lastPostsLoader"></div>
+
+<%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>

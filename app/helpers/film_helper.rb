@@ -4,6 +4,12 @@ module FilmHelper
     content_tag(:span,  "Directed by #{film_view.director}") if film_view.director
   end
 
+  def film_poster_link(film, poster_size='w154')
+    link_to film_path(film), title: film.title do 
+      poster(film, poster_size)
+    end
+  end
+
   def year(film_view)
     return unless film_view.year
     content_tag :span, "(#{film_view.year})"

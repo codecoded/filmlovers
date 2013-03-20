@@ -14,11 +14,12 @@
           <input type="text" id="quick_search" size="30" value="" autocomplete="off" class="ss-input">
         </div>
         <div class="three mobile-three columns">
-          <a data-bind="attr: {href: url}" data-remote=true class ='radius button'>Cancel</a>
+          <%= link_to 'Cancel', user_list_path(current_user), :class=>'button radius' %>
           <button data-bind="click: save" class="button radius">Save</button>
-          <button data-bind="click: $root.remove" class="button radius">Delete</button>
+          <% if !@films_list.new_record?%>
+            <%= link_to 'Delete', user_list_path(current_user, @films_list), method: :delete, :class=>'button radius' %>
+          <% end %>
         </div>
-
       </div>
     </div>
 

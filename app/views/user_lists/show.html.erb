@@ -10,12 +10,12 @@
 <% end %>
 
 
-  <div  class="twelve columns centered">
-    <h3 data-bind="text: name"> </h3>
-    <p data-bind="text: description"></p>
+<div  class="twelve columns centered">
+  <h3 data-bind="text: name"> </h3>
+  <p data-bind="text: description"></p>
 
-    <%= content_tag :a, 'Edit', data:{bind: 'attr: {href: edit_url}'}, :class=>'radius button right' if viewing_own?%>
-  </div>
+  <%= content_tag :a, 'Edit', data:{bind: 'attr: {href: edit_url}'}, :class=>'radius button right' if viewing_own?%>
+</div>
 <div class="twelve columns films" id="userList">
 
   <ol data-bind="foreach: films" >
@@ -29,8 +29,10 @@
         </a>
       </div>
       <div class="four columns">
-        <label data-bind="text: film.title" class="title"></label>
-        <label data-bind="text: film.release_date"></label>
+        <a data-bind="attr: { href: film.url, title: film.title }" >
+          <label data-bind="text: film.title" class="title"></label>
+          <label data-bind="text: film.release_date"></label>
+        </a>
       </div> 
       <div class="four columns">
         <div class="film-actions-vertical pagination-centered" data-bind="foreach: film.actions">

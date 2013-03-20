@@ -226,24 +226,21 @@ TABLE OF CONTENTS
 }
 .full_overlay .content {
   position: absolute;
-  left: 0px;
-  /* Set the width and the height according to the size of your pictures */
+  top: -4px;
   width: 154px;
-  height:50%;
-  /* Set a 0 opacity to hide the content */
+  height: 50%;
   filter: alpha(opacity=0);
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  /* Semi-transparent background for modern browsers, black for older browsers */
   color: black;
   border: solid 2px black;
   border-radius: 5px;
   background-color: white;
-  /* CSS3 transitions, creates the fading effect */
   -webkit-transition: opacity 0.4s ease-in-out;
   -moz-transition: opacity 0.4s ease-in-out;
   -o-transition: opacity 0.4s ease-in-out;
   transition: opacity 0.4s ease-in-out;
+  left: -4px;
 }
 .content h2, .content p {
   /* Text styling */

@@ -70,7 +70,9 @@ FL.Films = {
       success: function(xhr, data, status){
         // ViewModel.user.updateStat(action, incr)
         button.data('method', (to_action ? 'delete' : 'put'))
-        button.find('i').toggleClass('actioned unactioned')   
+        button.find('i').toggleClass('actioned unactioned')  
+        if(action=='watched')
+           button.parents('.film').toggleClass('watched')
       }  
     })
   }

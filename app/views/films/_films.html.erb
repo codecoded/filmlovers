@@ -1,8 +1,7 @@
 <div class="ten columns" id="filmsContent" >
   <div class="films">
     <% @films_page.films.each do |film_presenter| %>
-      <%= content_tag :div, :class=> "full_overlay film #{'watched' if film_presenter.actioned?(:watched)}", id: film_presenter.id do %>
-
+      <%= content_tag :div, :class=> "full_overlay film #{'watched' if logged_in? and film_presenter.actioned?(:watched)}", id: film_presenter.id do %>
         <div class="content">
           <div class="film-title">
             <h4><%= film_presenter.title %></h4>

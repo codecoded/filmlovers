@@ -16,6 +16,10 @@ body{
   }
 }
 
+.top-bar{
+  margin-bottom: 0px;
+}
+
 #footer{
   position: fixed;
   bottom: 0;
@@ -66,9 +70,35 @@ body{
   height:150px;
 }
 
-.panel{
-  padding: 10px;
+// .panel{
+//   padding: 10px;
+// }
+
+.banner{
+  &.sign-in-backdrop{
+    position: relative;
+    background: url(/assets/backdrop-sign-in_3.jpg) top center no-repeat;
+    min-height: 400px;
+    background-clip: content-box;
+    #greeting-text{
+      text-align: center; 
+    }
+    h1, h2{
+      margin-top: 40px;
+    }
+    h1, h2, h3{
+      color: white;
+      text-align: center;  
+    }
+    h2{
+      font-size: 2em;
+    }
+    h3{
+      font-size: 1.5em;
+    }
+  }
 }
+
 
 .genre img + label, .trend img + label{
   position: relative;

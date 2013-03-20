@@ -17,25 +17,19 @@
       <% if logged_in? %>
       <ul class="left">
         <li class="has-dropdown">
-          <%= link_to "Films", user_film_index_path(current_user)  %>
+         <a> Films</a>
           <ul class="dropdown">
-            <li>
-             <%= link_to "Watched", user_film_path(current_user, :watched) %>
-              <label  data-bind="text: filmStats.watched"/>
-            </li>
-            <li>
-              <%= link_to "Loved", user_film_path(current_user, :loved) %>
-              <label  data-bind="text: filmStats.loved"/>
-            </li>
-            <li>
-              <%= link_to "Owned",  user_film_path(current_user, :owned) %>
-              <label  data-bind="text: filmStats.owned"/>
-            </li>
-            <li>
-              <%= link_to "Queued", user_film_path(current_user, :queued) %>
-              <label  data-bind="text: filmStats.queued"/>
-            </li>
-          </ul>
+            <li><label>Current</label></li>
+            <li><%= link_to 'In Cinemas', films_trend_path(:now_playing) %></li>
+            <li><%= link_to 'Upcoming', films_trend_path(:upcoming) %></li>
+            <li><%= link_to 'Popular', films_trend_path(:popular) %></li>
+            <li><label>Top Genres</label></li>
+            <li><%= link_to 'Action', films_genre_path(:action) %></li>
+            <li><%= link_to 'Adventure', films_genre_path(:adventure) %></li>
+            <li><%= link_to 'Comedy', films_genre_path(:comedy) %></li>
+            <li><%= link_to 'Sci-Fi', films_genre_path(:science_fiction) %></li>
+            <li><%= link_to 'Drama', films_genre_path(:drama) %></li>
+          </uL>
         </li>
         <li>
           <%= link_to "Lists", user_lists_path(current_user) %>
@@ -65,6 +59,8 @@
         <li class="has-dropdown">
           <a href="#"><%= current_user.name %></a>
           <ul class="dropdown">
+            <li><label>Films</label></li>
+            <%= render partial: 'layouts/action_links' %>       
             <li>
               <label>Add Passport</label>
             </li>

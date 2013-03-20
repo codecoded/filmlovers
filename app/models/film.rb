@@ -46,7 +46,7 @@ class Film
   end
 
   def score_for(list_name)
-    (Films[list_name].score_for(id) || 0).round(0)
+    Films[list_name].score_for(id) || 0
   end
 
   def score

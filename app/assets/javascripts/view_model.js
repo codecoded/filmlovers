@@ -5,18 +5,18 @@ var ViewModel = {
   filmsPage: ko.observable(),
 
   init: function(){
-    ViewModel.loadUser(ViewModel.loadQueue)
-    Bindings.init()
+    // ViewModel.loadUser(ViewModel.loadQueue)
+    // Bindings.init()
     FacebookAPI.init()
   },
 
-  loadUser: function(callback){
-    $.getJSON('/current_user', function(data){
-      ViewModel.user = new UserModel(data)
-      Bindings.setUser(ViewModel.user)
-      // if(callback) callback()
-    })
-  },
+  // loadUser: function(callback){
+  //   $.getJSON('/current_user', function(data){
+  //     ViewModel.user = new UserModel(data)
+  //     Bindings.setUser(ViewModel.user)
+  //     // if(callback) callback()
+  //   })
+  // },
 
   // loadQueue: function(){
   //   console.log('loading queue for ' + ViewModel.user.username)
@@ -30,8 +30,9 @@ var ViewModel = {
   loadFriends: function(){
     FacebookAPI.friends(function(response) {
       friends = $.map(response, function(friend){ return new FBFriendModel(friend) })
-      ViewModel.friendsList = new FriendsList(friends)
-      $(document).trigger('friends:loaded')
+      // ViewModel.friendsList = new FriendsList(friends)
+      Bindings.ko_apply(new FriendsList(friends), 'channel-facebook')
+      // $(document).trigger('friends:loaded')
     })
   },
 
@@ -93,5 +94,5 @@ var ViewModel = {
 }
 
 $(function(){
-  ViewModel.init()
+  // ViewModel.init()
 })

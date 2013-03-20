@@ -15,7 +15,7 @@ FL.Films = {
   initListeners: function(){
     $(document).on('ajax:success', 'a', FL.Films.displayContent)
     $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
-    console.log('listeners initialised')
+    $(document).on('click', '#signin-link', ViewModel.displaySignInModal)
   },
 
   displayContent: function(xhr, data, status){
@@ -68,7 +68,7 @@ FL.Films = {
       type: method,
       dataType: 'json',
       success: function(xhr, data, status){
-        ViewModel.user.updateStat(action, incr)
+        // ViewModel.user.updateStat(action, incr)
         button.data('method', (to_action ? 'delete' : 'put'))
         button.find('i').toggleClass('actioned unactioned')   
       }  

@@ -23,7 +23,10 @@
     <div class="row">
       <div class="two columns">
         <%= image_tag @film_view.film.poster('w342') %>
-        <%= render partial: 'shared/amazon_search', locals: {title: "#{@film_view.title} #{@film_view.year}"} %>
+        <div id="shopLinks">
+          <%= render partial: 'shared/amazon_search', locals: {title: "#{@film_view.title} #{@film_view.year}"} %>
+          <%= render partial: 'shared/itunes', locals: {title: "#{@film_view.title}"} %>
+        </div>
       </div>
       <% if logged_in? %>
       <div class="one columns ">

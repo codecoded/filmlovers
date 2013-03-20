@@ -1,0 +1,7 @@
+<% itunes_url = u "http://ax.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=movie&country=GB&term=#{title}" %>
+<% aff_link = "http://clkuk.tradedoubler.com/click?p=23708&a=2247239&g=19223668&url=#{itunes_url}&partnerId=2003" %>
+
+<%= link_to aff_link, target: 'itunes_store' do %>
+  <%= image_tag 'itunes.png', border: 0 %>
+<% end %>
+

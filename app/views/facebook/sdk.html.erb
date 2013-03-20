@@ -3,35 +3,26 @@
   // Additional JS functions here
   window.fbAsyncInit = function() 
   {
-    FB.init(
-    {
+    FB.init({
       appId      : '<%= Facebook::app_id %>', // App ID
-      channelUrl : '"<%= #{request.protocol}#{request.host_with_port}/channel.html"', // Channel File
-      status     : true, // check login status
+      channelUrl : '<%= "#{request.protocol}#{request.host_with_port}/channel.html" %>', // Channel File
+      status     : false, // check login status
       cookie     : true, // enable cookies to allow the server to access the session
       xfbml      : true  // parse XFBML
     })
 
-
-
-  FB.getLoginStatus(function(response) 
-  {
-      if (response.status === 'connected') 
-      {
-        $(document).trigger('facebook:connected')
-        FacebookAPI.loggedIn = true
-      } 
-      else if (response.status === 'not_authorized') 
-      {
-         FacebookAPI.loggedIn = false
-      } 
-      else 
-      {
-          // not_logged_in
-          FacebookAPI.login();
-      }
-  });
-
+    FB.getLoginStatus(function(response) 
+    {
+        if (response.status === 'connected') 
+        {
+          $(document).trigger('facebook:connected')
+          FacebookAPI.loggedIn = true
+        } 
+        else if (response.status === 'not_authorized') 
+           FacebookAPI.loggedIn = false
+        else 
+            FacebookAPI.login();
+    });
   };
 
 

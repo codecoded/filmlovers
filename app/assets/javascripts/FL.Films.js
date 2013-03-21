@@ -15,6 +15,7 @@ FL.Films = {
   initListeners: function(){
     $(document).on('ajax:success', 'a', FL.Films.displayContent)
     $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
+    $(document).on('click', 'i[data-action]', FL.Films.iconFilmActionClicked)
     $(document).on('click', '#signin-link', ViewModel.displaySignInModal)
   },
 
@@ -39,14 +40,13 @@ FL.Films = {
         $.ajax({
           url: next,
           success: function(html){
-            console.log('loaded')
             loading = false
             
             if(!html)
               return $('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
         
             $('#filmsLinkNext').remove()
-            $("#filmsContent .films").append($(html).find('.film'))
+            $("#filmsContent").append($(html).find('.film'))
             $("#filmsContent").append($(html).find('#filmsLinkNext'))
           } 
         })
@@ -68,11 +68,35 @@ FL.Films = {
       type: method,
       dataType: 'json',
       success: function(xhr, data, status){
-        // ViewModel.user.updateStat(action, incr)
         button.data('method', (to_action ? 'delete' : 'put'))
         button.find('i').toggleClass('actioned unactioned')  
-        if(action=='watched')
-           button.parents('.film').toggleClass('watched')
+        // if(action=='watched')
+        //   button.parents('.film').toggleClass('watched')
+      }  
+    })
+  },
+
+  iconFilmActionClicked: function(event){
+    icon = $(this)
+    
+    href = icon.data('href')
+    method = icon.data('method')
+    to_action = method == 'put'
+    incr = to_action ? 1 : -1
+    action = icon.data('action')
+    $.ajax({
+      url: href,
+      type: method,
+      dataType: 'json',
+      success: function(xhr, data, status){
+        icon.data('method', (to_action ? 'delete' : 'put'))
+        icon.toggleClass('actioned unactioned') 
+        if(action=='queued')
+          return
+        
+        counter = icon.prev('label')
+        counter.text(parseInt(counter.text()) + incr)
+        
       }  
     })
   }

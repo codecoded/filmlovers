@@ -24,45 +24,104 @@ ul.credits{
 
 .films{
   height:auto;
-  margin:1px;
+  // margin:1px;
   width:auto;
   // padding:10px 0px;
   // float:left;
 
   .film
   {
-    margin: 10px;
+    margin: 4px;
     float:left;
-    border:  solid 4px transparent;
+    width: 188px;
+    // border:  solid 4px transparent;
     border-radius: 5px;
+    position: relative;
     &.watched{
       // border-radius: 7px;
-      border-color:   $watchedColor;
+      // border-color:   $watchedColor;
     }
-    &:hover{
-      // border-color: #9CD6EC;
-    }
-   h4{
-      font-size:10pt;
-      // color: white;
-      padding-left:8px;
-      margin-bottom:2px;
-    }
-    p{
-      // color: #ddd;
-      font-style: italic;
-      margin: 0px;
-      padding-left:8px;
-    }
-    a{
-      // color:white;
-    }
-    img{
-      height:100%;
-      width:154px;
-      // border: 4px solid transparent;
-    }
+    // &:hover{
+    //   // border-color: #9CD6EC;
+    // }     
 
+    &:hover .film-title, 
+    .film-info{
+      height: 231px;
+      &:hover + .film-director{
+        opacity: 1;
+      }
+      h4{
+        font-size:10pt;
+        // color: white;
+        padding-left:8px;
+        margin-bottom:2px;
+      }
+      p{
+        // color: #ddd;
+        font-style: italic;
+        margin: 0px;
+        padding-left:8px;
+      }
+      a{
+        // color:white;
+      }
+
+      img{
+        height:100%;
+        width:154px;
+        border-radius: 0px 5px 0px 0px;
+        // border: 4px solid transparent;
+      }
+      .film-stats{
+        width: 34px;
+        color: white;
+        background-color: #1D1C1C;
+        float: left;
+        height: 100%;
+        text-align: center;
+        border: solid 2px #4E4848;
+        border-right: none;
+        border-bottom: none;
+        border-collapse: collapse;
+        border-radius: 5px 0px 0px 0px;
+        label{
+          padding-top: 15px;
+          cursor: default;
+        }
+        i{
+          font-size: 1.4em;
+          opacity: 0.7;
+          border-bottom: 1px solid gray;
+          padding-bottom: 10px;
+          &:hover{
+            opacity: 1
+          }
+          &:active{
+            -webkit-transform: scale(2,4); /* Safari and Chrome */
+          }
+
+        }
+      }
+    }
+    .film-heading-border{
+      height: 20px;
+      text-align: center;
+      color: white;
+      background-color: #1D1C1C;
+      font-size: 0.7em;
+      width: 100%;
+      line-height: 2em;
+      font-style: normal;
+      opacity: 0;  
+      &.film-title{
+        border-radius: 5px 5px 0px 0px
+      }
+      &.film-director{
+        border-radius: 0px 0px 5px 5px
+      }    
+
+    }
   }
   .film-small{
     margin: 1px;

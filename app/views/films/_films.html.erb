@@ -1,20 +1,7 @@
-<div class="ten columns" id="filmsContent" >
-  <div class="films">
-    <% @films_page.films.each do |film_presenter| %>
-      <%= content_tag :div, :class=> "full_overlay film #{'watched' if logged_in? and film_presenter.actioned?(:watched)}", id: film_presenter.id do %>
-        <div class="content">
-          <div class="film-title">
-            <h4><%= film_presenter.title %></h4>
-            <p><%= film_presenter.release_date %></p>
-          </div>      
-          <%= render partial: 'films/actions', locals: {film_presenter: film_presenter} %>
-        </div>
-
-        <%= film_poster_link film_presenter.film %>
-
-      <% end %>
-    <% end %>
-  </div>
+<div class="ten columns films" id="filmsContent" >
+  <!-- <div class="films"> -->
+    <%= render partial: 'films/film', collection: @films_page.films, as: :film_presenter %>
+  <!-- </div> -->
 </div>
 
 <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>

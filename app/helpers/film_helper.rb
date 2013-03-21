@@ -1,7 +1,7 @@
 module FilmHelper
 
   def directed_by(film_view)
-    content_tag(:span,  "Directed by #{film_view.director}") if film_view.director
+    "Directed by #{film_view.director}" if film_view.director
   end
 
   def film_poster_link(film, poster_size='w154')
@@ -11,8 +11,12 @@ module FilmHelper
   end
 
   def year(film_view)
-    return unless film_view.year
-    content_tag :span, "(#{film_view.year})"
+    return "" unless film_view.year
+    "(#{film_view.year})"
+  end
+
+  def title_with_year(film_view)
+    "#{film_view.title} " << year(film_view)
   end
 
   def tagline(film_view)
@@ -26,6 +30,22 @@ module FilmHelper
     button_tag type: :button, name: action, :class=> 'film-action', data: {href: url, method: method, remote: true } do 
       icon_for(action,actioned)
     end    
+  end
+
+  def action_icon(action, presenter)
+    url = update_user_film_path(current_user, action, presenter.id)
+    actioned = presenter.actioned?(action)
+    method =  actioned ? :delete : :put
+
+    icons = {
+      watched: 'icon-eye-open', 
+      loved: 'icon-heart', 
+      owned: 'icon-home', 
+      queued: 'icon-pushpin'}
+
+    action_css = actioned ? 'actioned' : 'unactioned'
+    css = "#{icons[action]} #{action_css}"
+    content_tag :i, nil, :class => css, data: {href: url, method: method, action: action, remote: true } 
   end
 
   def icon_for(action, is_actioned)

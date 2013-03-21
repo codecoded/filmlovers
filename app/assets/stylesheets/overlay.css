@@ -219,6 +219,7 @@ TABLE OF CONTENTS
   /* Set the width and the height according to the size of your pictures */
   width:154px;
   height:237px;
+  float: right;
 }
 .full_overlay p {
   color:black;

@@ -1,0 +1,22 @@
+<div class="film">
+<!--   <div class="film-heading-border film-title">
+    <%#= title_with_year film_presenter %>
+  </div>
+ -->
+  <div class="film-info">
+    <div class="film-stats">
+      <%=content_tag :label, film_presenter.stats(:watched) %>
+      <%= action_icon :watched, film_presenter %>
+      <%=content_tag :label, film_presenter.stats(:loved) %>
+      <%= action_icon :loved, film_presenter %>
+      <%=content_tag :label, film_presenter.stats(:owned) %>
+      <%= action_icon :owned, film_presenter %>
+      <label>&nbsp</label>
+      <%= action_icon :queued, film_presenter %>
+    </div>
+    <%= film_poster_link film_presenter.film %>
+  </div>
+<div class="film-heading-border film-director">
+   <%= title_with_year film_presenter %>
+  </div> 
+</div>

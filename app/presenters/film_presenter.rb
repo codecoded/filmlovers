@@ -18,6 +18,7 @@ class FilmPresenter
   end
 
   def actioned?(action)
+    return false unless user
     action == :queued ? user.films_queue.exists?(film.id) : user.films[action].is_member?(film.id)
   end
 

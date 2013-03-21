@@ -33,18 +33,21 @@ module FilmHelper
   end
 
   def action_icon(action, presenter)
+    icons = {
+        watched: 'icon-eye-open', 
+        loved: 'icon-heart', 
+        owned: 'icon-home', 
+        queued: 'icon-pushpin'}
+
+   
+    return content_tag(:i,nil,  :class => icons[action]) unless current_user
+
     url = update_user_film_path(current_user, action, presenter.id)
+   
     actioned = presenter.actioned?(action)
     method =  actioned ? :delete : :put
-
-    icons = {
-      watched: 'icon-eye-open', 
-      loved: 'icon-heart', 
-      owned: 'icon-home', 
-      queued: 'icon-pushpin'}
-
-    action_css = actioned ? 'actioned' : 'unactioned'
-    css = "#{icons[action]} #{action_css}"
+    action_css = actioned ? 'actioned' : 'unactioned' 
+    css = "#{icons[action]} #{action_css}"  
     content_tag :i, nil, :class => css, data: {href: url, method: method, action: action, remote: true } 
   end
 

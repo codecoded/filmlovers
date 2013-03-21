@@ -23,6 +23,7 @@ class FilmPresenter
   end
 
   def stats(action)
+    return if action == :queued
     film.users[action].count
   end
 

@@ -1,7 +1,5 @@
 <div class="ten columns films" id="filmsContent" >
-  <!-- <div class="films"> -->
     <%= render partial: 'films/film', collection: @films_page.films, as: :film_presenter %>
-  <!-- </div> -->
+    <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>
 </div>
 
-<%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>

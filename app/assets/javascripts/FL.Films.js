@@ -26,7 +26,7 @@ FL.Films = {
   endlessScroll: function(){
     self = this
     loading = false
-    threshold = 400
+    threshold = 300
 
     $(window).scroll(function()
     {

@@ -1,3 +1,4 @@
+require 'results_page'
 class FilmsController < ApplicationController
 
   before_filter :init_film_search
@@ -20,9 +21,10 @@ class FilmsController < ApplicationController
   end
 
   def trend
-    # results = Rails.cache.fetch params[:trend] do
-     results =  @tmdb_service.by_trend params[:trend], page_options
-    # end
+    cache_key = "trend_#{params[:trend]}_page_" + (params[:page] || '')
+    results = Rails.cache.fetch cache_key do
+      results = @tmdb_service.by_trend params[:trend], page_options
+    end
     present(results, params[:trend]) and render_template :index
   end
 
@@ -37,9 +39,10 @@ class FilmsController < ApplicationController
   end
 
   def genre
-    # results = Rails.cache.fetch  params[:genre_id] do
-    results =   @tmdb_service.by_genre params[:genre_id], page_options
-    # end
+    cache_key = "genre_#{params[:genre_id]}_page_" + (params[:page] || '')
+    results = Rails.cache.fetch cache_key do
+      results = @tmdb_service.by_genre params[:genre_id], page_options
+    end
     present(results, params[:genre_id]) and render_template :index
   end
 

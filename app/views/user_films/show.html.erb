@@ -1,1 +1,12 @@
-<%= render template: 'films/index' %>
+<% set_meta_tags :description => "A complete list of all the films you have #{params[:id].to_sym}" %>
+
+<div class="row" id="filmsIndex" >
+    <div class="twelve columns films centered" id="filmsContent" >
+        <%= render partial: 'films/film', collection: @films_page.films, as: :film_presenter %>
+        <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>
+    </div>
+</div>
+
+<script type="text/javascript">
+  FL.Films.endlessScroll()
+</script>

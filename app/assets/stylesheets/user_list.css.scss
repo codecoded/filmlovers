@@ -75,3 +75,12 @@ ul.user-list{
     }
   }
 }
+
+.user-actions{
+  .button{
+    float: right;
+    position: absolute;
+    right: 0px;
+    bottom: -22px;
+  }
+}

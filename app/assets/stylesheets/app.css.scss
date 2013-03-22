@@ -167,6 +167,7 @@ body{
 // }
 
 .banner{
+  text-shadow: 2px 2px 2px black;
   &.sign-in-backdrop{
     position: relative;
     background: url(/assets/backdrop-sign-in_3.jpg) top center no-repeat;

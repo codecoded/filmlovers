@@ -1,49 +1,55 @@
-<%= render layout: 'layouts/viewmodel', locals: {model: 'FilmsListModel'} do %>
-<% if !viewing_own? %>
+<div id="viewContent"  class="twelve columns" >
 
-<div class="row">
-  <div class="twelve columns centered">
-    <h4><%= @films_list.user.username %></h4>
+  <div class="row collapse" id="user-films-banner">
+    <div class="one columns">
+      <%= image_tag @user.gravatar_url %>
+    </div>
+    <div class="three columns user-name">
+       <h3><%= @user.name %></h3>
+        <p><%= @films_list.description %></p>
+    </div>
+    <div class="three columns user-actions">
+       <h3 class="list-name">
+        <span id="user-films-count"><%= @films_list.film_ids.count %></span> films
+      </h3>
+      <%= link_to('Edit', edit_user_list_path(current_user, @films_list), :class => 'radius button') if viewing_own? %>
+    </div>
   </div>
-</div>
-
-<% end %>
 
 
-<div  class="twelve columns centered">
-  <h3 data-bind="text: name"> </h3>
-  <p data-bind="text: description"></p>
-
-  <%= content_tag :a, 'Edit', data:{bind: 'attr: {href: edit_url}'}, :class=>'radius button right' if viewing_own?%>
-</div>
 <div class="twelve columns films" id="userList">
-
-  <ol data-bind="foreach: films" >
-    <li >  
-      <div class="one column">
-        <label data-bind="text: $index() + 1" class="position"></label>
-      </div>
-      <div class="one columns">
-        <a data-bind="attr: { href: film.url, title: film.title }" >
-          <img data-bind="attr: {src: film.thumbnail, title: film.title }"/>
-        </a>
-      </div>
-      <div class="four columns">
-        <a data-bind="attr: { href: film.url, title: film.title }" >
-          <label data-bind="text: film.title" class="title"></label>
-          <label data-bind="text: film.release_date"></label>
-        </a>
-      </div> 
-      <div class="four columns">
-        <div class="film-actions-vertical pagination-centered" data-bind="foreach: film.actions">
-          <button data-bind="click: action">
-            <i data-bind="css: actionCSS" class="icon-2x"></i>
-            <label class="count" ></label>
-          </button>
+  <ol>
+    <% @films_list.films.each_with_index do |film, index| %>
+      <li >  
+        <div class="one column">
+          <label class="position"><%= index + 1%> </label>
         </div>
-      </div>
-    </li>
+        <div class="one columns">
+          <%= link_to film_path(film), title: film.title do %>
+            <%= poster(film, 'w45') %>
+          <% end %>
+        </div>
+        <div class="four columns">
+          <%= link_to film_path(film), title: film.title do %>
+            <label class="title"><%= film.title %></label>
+            <% if !film.director.blank? %>
+              <label><%= film.director %></label>
+            <% end %>
+            <label><%= film.year %></label>
+          <% end %>
+        </div> 
+        <div class="four columns">
+          <div class="film-actions-vertical pagination-centered" >
+            <% [:watched, :loved, :owned, :queued].each do |action| %>
+              <button>
+                <%= action_icon action, FilmPresenter.new(current_user, film) %>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </li>
+    <% end %>
   </ol>
 </div>
 
-<% end %>
+<div>

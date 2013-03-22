@@ -41,6 +41,16 @@ class Film
     !trailers[source.to_s].blank?
   end
 
+  def year
+    return unless release_date
+    release_date.to_date.year
+  end
+
+  def director
+    @director ||= credits.crew.find {|member| member['job']=='Director'}
+    @director ? @director['name'] : ''
+  end
+
   def trailer(source=:youtube)
     trailers[source.to_s][0]['source'] if has_trailer?(source)
   end

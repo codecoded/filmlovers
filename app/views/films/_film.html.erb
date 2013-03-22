@@ -1,8 +1,7 @@
-<div class="film">
-<!--   <div class="film-heading-border film-title">
+<%= div_for film_presenter.film do %>
+<!--<div class="film-heading-border film-title">
     <%#= title_with_year film_presenter %>
-  </div>
- -->
+  </div>-->
   <div class="film-info">
     <div class="film-stats">
       <% [:watched, :loved, :owned, :queued].each do |action| %>
@@ -15,4 +14,4 @@
   <div class="film-heading-border film-director">
     <%= title_with_year film_presenter %>
   </div> 
-</div>
+<% end %>

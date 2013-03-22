@@ -7,7 +7,7 @@ class ResultsPage
   end
 
  def self.from_tmdb(films, tmdb_result)
-    new films.map(&:id), tmdb_result['total_results'], 20, tmdb_result['page']
+    new films, tmdb_result['total_results'], 20, tmdb_result['page']
   end
 
   def total_pages

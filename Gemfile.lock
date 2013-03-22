@@ -60,6 +60,7 @@ GEM
     fb-channel-file (0.0.1)
       rails (>= 3.0)
     fssm (0.2.10)
+    gravtastic (3.2.6)
     hashie (1.2.0)
     hike (1.2.1)
     httpauth (0.2.0)
@@ -221,6 +222,7 @@ DEPENDENCIES
   compass-rails
   eventmachine (~> 1.0.3)
   fb-channel-file
+  gravtastic
   jquery-rails (= 2.1.4)
   knockoutjs-rails
   koala

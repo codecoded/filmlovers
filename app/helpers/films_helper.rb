@@ -7,5 +7,7 @@ module FilmsHelper
     end
   end
 
-
+  def user_films_sort_option(user, action, order=:title, by=:asc, text)
+    content_tag :option, text, value: user_film_path(user, action, order: order, by: by)
+  end
 end

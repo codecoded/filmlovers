@@ -1,12 +1,38 @@
 <% set_meta_tags :description => "A complete list of all the films you have #{params[:id].to_sym}" %>
 
-<div class="row" id="filmsIndex" >
+ <div class="twelve columns">
+  <div class="row collapse" id="user-films-banner">
+    <div class="one columns">
+      <%= image_tag @films_page.user.gravatar_url %>
+    </div>
+    <div class="three columns user-name">
+       <h3><%= @films_page.user.name %></h3>
+    </div>
+    <div class="three columns ">
+       <h3 class="list-name">
+        <span id="user-films-count"><%= @films_page.results_page.total_results %></span> films <%= params[:id].to_sym %>
+      </h3>
+       <p id="sort-link"><label>Sort by</label>
+        <select id="sort-option">
+          <%= user_films_sort_option @films_page.user, params[:id], :release_date, :desc, "Newest Release"  %>
+          <%= user_films_sort_option @films_page.user, params[:id], :release_date, :asc, "Oldest Release"  %>
+          <%= user_films_sort_option @films_page.user, params[:id], :title, :asc, "Title A-Z"  %>
+          <%= user_films_sort_option @films_page.user, params[:id], :title, :desc, "Title Z-A"  %>
+        </select>
+       </p>
+    </div>
+  </div>
+  <div class="row" id="filmsIndex" >
     <div class="twelve columns films centered" id="filmsContent" >
         <%= render partial: 'films/film', collection: @films_page.films, as: :film_presenter %>
         <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>
     </div>
+  </div>
 </div>
-
-<script type="text/javascript">
-  FL.Films.endlessScroll()
+<script>
+ $(document).on('film:<%= params[:id].to_sym %>:unactioned', function(event, film){
+    film.remove()
+    counter = $('#user-films-count')
+    counter.text(parseInt(counter.text()) - 1)
+})
 </script>

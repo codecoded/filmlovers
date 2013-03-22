@@ -9,6 +9,7 @@ FL.Films = {
     if(FL.Films.initialised) return
 
     FL.Films.initListeners()
+    FL.Films.endlessScroll()
     FL.Films.initialised = true
   },
 
@@ -17,6 +18,8 @@ FL.Films = {
     $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
     $(document).on('click', 'i[data-action]', FL.Films.iconFilmActionClicked)
     $(document).on('click', '#signin-link', ViewModel.displaySignInModal)
+    $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
+
   },
 
   displayContent: function(xhr, data, status){
@@ -26,17 +29,19 @@ FL.Films = {
   endlessScroll: function(){
     self = this
     loading = false
-    threshold = 300
+    threshold = 450
 
     $(window).scroll(function()
     {
       currentPos = $(window).scrollTop() + threshold 
       totalHeight = $(document).height() - $(window).height()
+
       if(currentPos >= totalHeight && !loading)
       {
-        loading = true
         next = $('#filmsLinkNext').attr('href')
-        if(!next) return
+        if(!next) return false
+          
+        loading = true
         $.ajax({
           url: next,
           success: function(html){
@@ -54,6 +59,11 @@ FL.Films = {
     })
   },
 
+  sortUserFilms: function(){
+    url = $(this).attr('value')
+    console.log(url)
+    $('#filmsIndex').load(url + ' #filmsContent')
+  },
 
   btnFilmActionClicked: function(event){
     button = $(this)
@@ -91,11 +101,16 @@ FL.Films = {
       success: function(xhr, data, status){
         icon.data('method', (to_action ? 'delete' : 'put'))
         icon.toggleClass('actioned unactioned') 
+
+        if(!to_action)
+          $(document).trigger('film:' + action + ':unactioned', [icon.parents('.film')])
+
         if(action=='queued')
           return
         
         counter = icon.prev('label')
         counter.text(parseInt(counter.text()) + incr)
+
         
       }  
     })

@@ -32,10 +32,11 @@ class UserService
     list == :queued  ? films_queue.count : user.films[list].count 
   end
 
-  def paged_list(list, page_no = 1, page_size = 20)
+  def paged_list(list, order=:release_date, by = :desc, page_no = 1, page_size = 20)
     film_ids = list_films list
-    page_results = film_ids.slice(page_no * page_size, page_size)
-    ResultsPage.new page_results || {}, list_size(list), page_size, page_no
+    results = FilmsRepository.films_by(film_ids, order, by).slice(page_no * page_size, page_size)
+    # page_results = film_ids.slice(page_no * page_size, page_size)
+    ResultsPage.new results || {}, list_size(list), page_size, page_no
   end
 
   def films_list(id)

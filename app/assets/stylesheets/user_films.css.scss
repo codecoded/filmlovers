@@ -1,0 +1,28 @@
+#user-films-banner{
+  border-bottom: 2px solid black;
+  margin-bottom: 20px;
+  height: 82px;
+  position: relative;
+  .user-name{
+    position: relative;
+  }
+  .list-name{
+    float: right;
+  }
+  #sort-link{
+    top: 50px;
+    float: right;
+    right: 0px;
+    position: absolute;
+    label{
+      display: inline;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: black;
+      vertical-align: bottom;
+    }
+  }
+  #sort-option{
+    width: 120px;
+  }
+}

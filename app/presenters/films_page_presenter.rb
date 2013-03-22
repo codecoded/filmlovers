@@ -2,6 +2,7 @@ class FilmsPagePresenter
   extend Forwardable
 
   attr_reader :user, :results_page, :description
+  attr_accessor :films
 
   def_delegators :results_page, :page_no, :total_pages, :results
 
@@ -10,8 +11,7 @@ class FilmsPagePresenter
   end
 
   def films
-    @films ||= FilmPresenter.from_films(user, results)
-    @films || {}
+    @films ||= results.map {|film| FilmPresenter.new user, film}
   end
 
   def next_params

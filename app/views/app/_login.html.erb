@@ -1,48 +1,44 @@
-<div id="myModal" class="reveal-modal">
-  <h2>
-    filmlovers login
-  </h2>
-  <div class="row">
-    <div class="six columns">
-      <a class="radius button" href="/auth/facebook" data-no-pjax>
-        <strong>Sign in with Facebook</strong>
-      </a> 
+
+<div id="signInModal" class="reveal-modal">
+  <div class="fader"></div>
+  <div>
+  <div class="row pagination-centered">
+    <div class="twelve columns">
+      <h2>Here's the sign up</h2>
+      <h3>Don't be afraid, it's free!</h3>
     </div>
   </div>
   <div class="row">
-    <div class="six columns">
+    <div class="seven columns sign-in-description">
+      <p>After you have signed up, you can start keeping a history of films you have watched, the ones you love, even the ones you own! </p>
+      <p>And creating your own film lists is a great way to recommend films to friends, and discover new ones yourself!</p> 
+    </div>
+    <div class="five columns">
+      <a href="/auth/facebook" data-no-pjax>
+        <%= image_tag 'facebook-connect-button.png' %>
+      </a> 
       <a class="radius button alert" href="/auth/netflix" data-no-pjax>
         <strong>Sign in with Netflix</strong>
-      </a> 
-    </div>
-  </div>
-  <div class="row">
-    <div class="six columns">
+      </a>
       <a class="radius button" href="/auth/twitter">
         <strong>Sign in with Twitter</strong>
       </a> 
-    </div>
-  </div>
-  <div class="row">
-    <div class="six columns">
       <a class="radius button success" href="/auth/google_oauth2" data-no-pjax>
         <strong>Sign in with Google</strong>
       </a> 
-    </div>
-  </div>
-  <div class="row">
-    <div class="six columns">
-      <a class="radius button" href="/auth/vimeo" data-no-pjax>
+<!--       <a class="radius button" href="/auth/vimeo" data-no-pjax>
         <strong>Sign in with Vimeo</strong>
-      </a> 
+      </a>  -->
     </div>
   </div>
-  <div class="row">
-     <div class="six columns">
-      <strong>No good?</strong>
+  <div class="row pagination-centered">
+     <div class="twelve columns">
+      <strong>None of the above?</strong>
       <br />
-      <a href="/users/sign_up">Sign up with your email address</a>
+      We are adding more ways to get involved - so check again soon!
+      <!-- <a href="/users/sign_up">Sign up with your email address</a> -->
     </div>
   </div>
   <a class="close-reveal-modal">×</a>
+</div>
 </div>

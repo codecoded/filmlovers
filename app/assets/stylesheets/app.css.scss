@@ -8,7 +8,7 @@ body{
   border: solid 1px rgba(90, 206, 213, 0.37);
   padding: 2px 4px;
   border-radius: 5px;
-  margin: px;
+  // margin: px;
   white-space: nowrap;
   line-height: 27px;
   &:hover{
@@ -19,6 +19,50 @@ body{
 .top-bar{
   margin-bottom: 0px;
 }
+
+#signInModal{
+  border: 4px solid black;
+  background: url(/assets/backdrop-modal-sign-in.jpg) top center no-repeat;
+  color: white !important;
+  height: 420px;
+  width: 520px;
+
+  .fader{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+    background: #363434;
+    left: 0;
+    top: 0;
+  }
+
+  h2, h3{
+    margin: 0px;
+    color: white;
+  }
+  h3{
+    font-size: 12pt;
+  }
+  p{
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  a{
+    margin-bottom: 10px;
+    img{
+      padding-bottom: 10px
+    }
+  }
+
+  border-radius: 20px;
+
+  .sign-in-description{
+    text-align: left;
+  } 
+}
+
 
 #footer{
   position: fixed;

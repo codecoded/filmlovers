@@ -4,7 +4,7 @@
   <div>
   <div class="row pagination-centered">
     <div class="twelve columns">
-      <h2>Here's the sign up</h2>
+      <h2>Here's, sign up!</h2>
       <h3>Don't be afraid, it's free!</h3>
     </div>
   </div>
@@ -13,18 +13,19 @@
       <p>After you have signed up, you can start keeping a history of films you have watched, the ones you love, even the ones you own! </p>
       <p>And creating your own film lists is a great way to recommend films to friends, and discover new ones yourself!</p> 
     </div>
-    <div class="five columns">
-      <a href="/auth/facebook" data-no-pjax>
-        <%= image_tag 'facebook-connect-button.png' %>
+    <div class="five columns sign-in-links">
+      <a href="/auth/facebook" class="radius button" data-no-pjax id="authFacebook">
+         <i class="icon-facebook"></i><strong>facebook</strong>
       </a> 
-      <a class="radius button alert" href="/auth/netflix" data-no-pjax>
-        <strong>Sign in with Netflix</strong>
+      <a class="radius button alert" href="/auth/netflix" data-no-pjax id="authNetflix">
+        <%= image_tag '/assets/netflix-n-logo.png' %>
+        <strong>Netflix</strong>
       </a>
-      <a class="radius button" href="/auth/twitter">
-        <strong>Sign in with Twitter</strong>
+      <a class="radius button" href="/auth/twitter" id="authTwitter">
+        <i class="icon-twitter"></i><strong>twitter</strong>
       </a> 
-      <a class="radius button success" href="/auth/google_oauth2" data-no-pjax>
-        <strong>Sign in with Google</strong>
+      <a class="radius button success" href="/auth/google_oauth2" data-no-pjax id="authGoogle">
+         <i class="icon-google-plus"></i><strong>Google</strong>
       </a> 
 <!--       <a class="radius button" href="/auth/vimeo" data-no-pjax>
         <strong>Sign in with Vimeo</strong>

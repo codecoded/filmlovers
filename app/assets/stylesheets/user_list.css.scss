@@ -5,6 +5,7 @@
 
 
   ol{
+    margin-left: 0px;
     li{
       border: solid 1px rgba(90, 206, 213, 0.37);
       border-radius: 10px;
@@ -45,16 +46,15 @@ ul.user-list{
 }
 
 .list-summary{
-  border-bottom: solid 1px black;
-  border: solid 1px transparent;
+  border: solid 2px black;
   border-radius: 7px;
-  padding: 10px 5px;
+  cursor: pointer;
   label.count{
     text-align: center;
     font-size: 12pt;
   }
   &:hover{
-    border-color: black;
+    background-color: #F3F3F3;
   }
 }
 

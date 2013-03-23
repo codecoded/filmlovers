@@ -1,6 +1,6 @@
 <div id="channel-facebook" class="twelve columns" style="display:none" data-bind="foreach: friends, visible: true">
   <div  class="left friend-avatar">
-    <%= link_to '#', 'data-bind' => "attr: { href: '/' + username + '/lists' }", remote: true do %>
+    <%= link_to '#', 'data-bind' => "attr: { href: '/' + username + '/lists' }" do %>
       <img data-bind='attr: { src: avatarURL }'>
       <label data-bind="text: username"></label>
     <% end %>

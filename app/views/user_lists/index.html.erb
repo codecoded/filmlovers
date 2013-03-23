@@ -13,33 +13,52 @@
       <%= link_to('New List', new_user_list_path, :class => 'radius button') if viewing_own? %>
     </div>
   </div>
-
-  <ul class="user-list">
-    <% @films_list.each do |list| %>
-    <li>
-      <%= link_to user_list_path(list.user, list) do %>
-        <div class="row list-summary"> 
-          <div class="four columns">       
-            <div class="row">
-              <div class="twelve columns user-list" >
-                <% list.films.take(10).each do |film| %>
-                  <div class="left film">
-                    <%= poster(film, 'w90') %>
-                  </div>
-                <% end %>
-              </div>
+ 
+  <div class="row collapse user-list">
+    
+    <div class="nine columns">
+       <% @films_list.each do |list| %>
+      <%= content_tag :fieldset, :class => 'row list-summary', data:{href: user_list_path(list.user, list)} do %>
+        <legend><%=list.name %></legend>
+      
+        <div class="five columns user-list">       
+          <% list.films.take(10).each do |film| %>
+            <div class="left film">
+              <%= poster(film, 'w90') %>
             </div>
-          </div> 
-          <div class="one column">
-            <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
-          </div>
-          <div class="seven columns">
-            <label><%= list.name %></label>  
-            <p><%= list.description %></p>
-          </div> 
+          <% end %>
+        </div> 
+        <div class="one columns">
+          <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
         </div>
+        <div class="six columns">
+          <p><%= list.description %></p>
+        </div> 
+      </fieldset>
       <% end %>
-    </li>
-    <% end %>
-  </ul>
+      <% end %>
+    </div>
+    <div class="three columns">
+      <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-4191965276344416";
+        /* 120_240_modern_default */
+        google_ad_slot = "9854720726";
+        google_ad_width = 120;
+        google_ad_height = 240;
+        //-->
+      </script>
+      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      </script>
+      <!--START MERCHANT:merchant name blinkbox from affiliatewindow.com.-->
+      <a href="http://www.awin1.com/cread.php?s=157421&v=2481&q=92058&r=157428" target="_blank">
+        <img src="http://www.awin1.com/cshow.php?s=157421&v=2481&q=92058&r=157428" border="0">
+      </a>
+      <!--END MERCHANT:merchant name blinkbox from affiliatewindow.com-->                    
+    </div>
+  </div>
+  
 </div>
+
+<script>
+$(document).on('click', '.list-summary', function(){window.location = $(this).data('href')})
+</script>

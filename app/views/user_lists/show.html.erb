@@ -6,7 +6,7 @@
     </div>
     <div class="three columns user-name">
        <h3><%= @user.name %></h3>
-        <p><%= @films_list.description %></p>
+        <p><%= @films_list.name %></p>
     </div>
     <div class="three columns user-actions">
        <h3 class="list-name">
@@ -16,40 +16,48 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="three columns">
+      <div class="panel">
+        <p><%= @films_list.description %></p>
+      </div>
+      <div class="pagination-centered"><%= render partial: 'shared/netflix_234x60' %></div>
+    </div>
+    <div class="nine columns films" id="userList">
+      <ol>
+        <% @films_list.films.each_with_index do |film, index| %>
+          <li >  
+            <div class="one column">
+              <label class="position"><%= index + 1%> </label>
+            </div>
+            <div class="one columns">
+              <%= link_to film_path(film), title: film.title do %>
+                <%= poster(film, 'w45') %>
+              <% end %>
+            </div>
+            <div class="four columns">
+              <%= link_to film_path(film), title: film.title do %>
+                <label class="title"><%= film.title %></label>
+                <% if !film.director.blank? %>
+                  <label><%= film.director %></label>
+                <% end %>
+                <label><%= film.year %></label>
+              <% end %>
+            </div> 
+            <div class="five columns">
+              <div class="film-actions-vertical pagination-centered" >
+                <% [:watched, :loved, :owned, :queued].each do |action| %>
+                  <button>
+                    <%= action_icon action, FilmPresenter.new(current_user, film) %>
+                  </button>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ol>
+    </div>
 
-<div class="twelve columns films" id="userList">
-  <ol>
-    <% @films_list.films.each_with_index do |film, index| %>
-      <li >  
-        <div class="one column">
-          <label class="position"><%= index + 1%> </label>
-        </div>
-        <div class="one columns">
-          <%= link_to film_path(film), title: film.title do %>
-            <%= poster(film, 'w45') %>
-          <% end %>
-        </div>
-        <div class="four columns">
-          <%= link_to film_path(film), title: film.title do %>
-            <label class="title"><%= film.title %></label>
-            <% if !film.director.blank? %>
-              <label><%= film.director %></label>
-            <% end %>
-            <label><%= film.year %></label>
-          <% end %>
-        </div> 
-        <div class="four columns">
-          <div class="film-actions-vertical pagination-centered" >
-            <% [:watched, :loved, :owned, :queued].each do |action| %>
-              <button>
-                <%= action_icon action, FilmPresenter.new(current_user, film) %>
-              </button>
-            <% end %>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ol>
-</div>
+  </div>
 
 <div>

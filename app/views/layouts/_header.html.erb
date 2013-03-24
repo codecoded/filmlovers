@@ -73,9 +73,6 @@
             <% if !current_user.passport_provider? :netflix %>
               <li><a href="/auth/netflix" data-no-pjax>Netflix</a></li>
             <% end %>
-            <% if !current_user.passport_provider? :vimeo %>
-              <li><a href="/auth/vimeo" data-no-pjax>Vimeo</a></li>
-            <% end %>
             <% if !current_user.passport_provider? :google_oauth2 %>
               <li><a href="/auth/google_oauth2" data-no-pjax>Google</a></li>
             <% end %>             
@@ -90,6 +87,16 @@
         </li>
       <% else %>
       <ul class="right">
+        <li class="has-dropdown">
+          <a href="#">Sign In</a>
+          <ul class="dropdown">
+            <li><label>Passports</label></li>
+            <%= passport_link :facebook, "Facebook" %>
+            <%= passport_link :twitter, "Twitter" %>
+            <%= passport_link :netflix, "Netflix" %>      
+            <%= passport_link :google_oauth2, "Google" %>
+          </ul>
+        </li>
         <li>
           <%= link_to "Sign Up", login_path, id:  "signin-link", data:{'no_pjax'=>true} %>
         </li>

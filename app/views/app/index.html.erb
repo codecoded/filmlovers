@@ -38,6 +38,60 @@
   </div>
   <% end %>
 
+  <div class="row" id="icon-descriptions">
+    <div class="three columns">
+      <div class="radius panel pagination-centered">
+        <h4>Watched</h4>
+         <i class="icon-eye-open icon-3x actioned"></i>
+         <p>remember films you have watched.</p>
+      </div>
+    </div>
+    <div class="three columns">
+      <div class="radius panel pagination-centered">
+        <h4>Loved</h4>
+         <i class="icon-heart icon-3x actioned"></i>
+         <p>you know when you loved a film!</p>
+      </div>
+    </div>
+    <div class="three columns">
+      <div class="radius panel pagination-centered">
+        <h4>Owned</h4>
+        <i class="icon-home icon-3x actioned"></i>
+        <p>what films do you have at home?</p>
+      </div>
+    </div>
+    <div class="three columns">
+      <div class="radius panel pagination-centered">
+        <h4>Other</h4>
+        <i class="icon-pushpin icon-3x actioned"></i>
+        <p>save for later, or to add to your lists</P>
+      </div>
+    </div>
+  </div>
+
+  <div class="row ">
+    <div class="twelve columns">
+      <h6 class="heading_divider">Current Films</h6>
+    </div>
+    <div class="four mobile-two columns trend">
+      <%= link_to films_trend_path(:now_playing) do %>
+        <%=image_tag 'cinema.png', width:'100%' %>
+        <label>In Cinemas</label>
+      <% end %>
+    </div>
+    <div class="four mobile-two columns trend">
+      <%= link_to films_trend_path(:popular) do %>
+        <%=image_tag 'cinema.png', width:'100%' %>
+        <label>Popular</label>
+      <% end %>
+    </div>
+    <div class="four mobile-two columns trend">
+      <%= link_to films_trend_path(:upcoming) do %>
+        <%=image_tag 'cinema.png', width:'100%' %>
+        <label>Upcoming</label>
+      <% end %>
+    </div>
+  </div>
 
   <div class="row" id="search_row">
     <div class="twelve columns">
@@ -53,30 +107,6 @@
           </div>
         <% end %>
       </div>
-    </div>
-  </div>
-
-  <div class="row ">
-    <div class="twelve columns">
-      <h6 class="heading_divider">Current Films</h6>
-    </div>
-    <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:now_playing) do %>
-        <%=image_tag 'now_playing.jpg', width:'100%' %>
-        <label>In Cinemas</label>
-      <% end %>
-    </div>
-    <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:popular) do %>
-        <%=image_tag 'now_playing.jpg', width:'100%' %>
-        <label>Popular</label>
-      <% end %>
-    </div>
-    <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:upcoming) do %>
-        <%=image_tag 'now_playing.jpg', width:'100%' %>
-        <label>Upcoming</label>
-      <% end %>
     </div>
   </div>
 

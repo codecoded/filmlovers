@@ -5,7 +5,9 @@
       <!-- Title Area -->
       <li class="name">
         <h1>
-          <%= link_to 'filmlovers', root_path%>
+          <%= link_to root_path do %>
+           filmlovers
+          <% end %>
         </h1>
       </li>
       <li class="toggle-topbar">
@@ -17,7 +19,7 @@
       <% if logged_in? %>
       <ul class="left">
         <li class="has-dropdown">
-         <a> Films</a>
+         <a>  <%= awesome "film" %> films</a>
           <ul class="dropdown">
             <li><label>Current</label></li>
             <li><%= link_to 'In Cinemas', films_trend_path(:now_playing) %></li>
@@ -32,13 +34,15 @@
           </uL>
         </li>
         <li>
-          <%= link_to "Lists", user_lists_path(current_user) %>
+          <%= link_to user_lists_path(current_user) do %>
+            <%= awesome 'list' %> lists
+          <% end %>
         </li>
         <% if current_user.passport_provider? :facebook %>
-          <li><a href="/channels/facebook">Facebook</a></li>
+          <li><a href="/channels/facebook"><%= awesome 'facebook'%> facebook</a></li>
         <% end %>
         <% if current_user.passport_provider? :twitter_ %>
-          <li><a href="/">Twitter</a></li>
+          <li><a href="/">twitter</a></li>
         <% end %>
         <% if current_user.passport_provider? :netflix_ %>
           <li><a href="/">Netflix</a></li>
@@ -81,14 +85,16 @@
             </li>
 
             <li>
-              <%= link_to "Sign out", signout_path, id: "sign_out", data:{'no_pjax'=>true} %>
+              <%= link_to signout_path, id: "sign_out", data:{'no_pjax'=>true} do %>
+                 <%= awesome 'signout'%> "Sign out"
+              <% end %>
             </li>
           </ul>
         </li>
       <% else %>
       <ul class="right">
         <li class="has-dropdown">
-          <a href="#">Sign In</a>
+          <a href="#"><i class="icon-signin"></i>Sign In</a>
           <ul class="dropdown">
             <li><label>Passports</label></li>
             <%= passport_link :facebook, "Facebook" %>

@@ -1,5 +1,8 @@
 <% [:watched, :loved, :owned, :queued].each do |action| %>
   <li>
-    <%= link_to action.capitalize, user_film_path(current_user, action) %>
+    <%= link_to user_film_path(current_user, action) do %>
+    <%= icon_for action, false %>
+    <%= action.capitalize %>
+    <% end %>
   </li>
 <% end %>

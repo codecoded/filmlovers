@@ -1,17 +1,25 @@
 <%= div_for film_presenter.film do %>
-<!--<div class="film-heading-border film-title">
-    <%#= title_with_year film_presenter %>
-  </div>-->
+  <div class="film-heading-border film-title">
+    options <%= awesome 'chevron-down' %>
+    <ul class="nav nav-list film-actions-menu">
+        <li><a href="#"><i class="icon-list"></i> add to list</a></li>
+        <li><a href="#"><i class="icon-bolt"></i> follow</a></li>
+        <li><a href="#"><i class="icon-share"></i> share</a></li>
+        <li><a href="#"><i class="icon-film"></i> discover</a></li>
+      </ul>
+  </div>
   <div class="film-info">
     <div class="film-stats">
       <% [:watched, :loved, :owned, :queued].each do |action| %>
         <%= content_tag :label, film_presenter.stats(action) || "&nbsp;".html_safe %>
         <%= action_icon action, film_presenter %>
       <% end %>
+
     </div>
     <%= film_poster_link film_presenter.film %>
   </div>
   <div class="film-heading-border film-director">
     <%= title_with_year film_presenter %>
+
   </div> 
 <% end %>

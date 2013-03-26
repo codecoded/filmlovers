@@ -1,13 +1,24 @@
 <%= div_for film_presenter.film do %>
+
   <div class="film-heading-border film-title">
+
     options <%= awesome 'chevron-down' %>
+   
     <ul class="nav nav-list film-actions-menu">
-        <li><a href="#"><i class="icon-list"></i> add to list</a></li>
-        <li><a href="#"><i class="icon-bolt"></i> follow</a></li>
-        <li><a href="#"><i class="icon-share"></i> share</a></li>
-        <li><a href="#"><i class="icon-film"></i> discover</a></li>
-      </ul>
+       <% if logged_in? %>
+          <li><a href="#"><i class="icon-list"></i> add to list</a></li>
+          <li><a href="#"><i class="icon-bolt"></i> follow</a></li>
+          <li><a href="#"><i class="icon-share"></i> share</a></li>
+          <li><a href="#"><i class="icon-film"></i> discover</a></li>
+      <% else %>
+          <li><a href="/login" class="signup"><i class="icon-list"></i> add to list</a></li>
+          <li><a href="/login" class="signup"><i class="icon-bolt"></i> follow</a></li>
+          <li><a href="/login" class="signup"><i class="icon-share"></i> share</a></li>
+          <li><a href="/login" class="signup"><i class="icon-film"></i> discover</a></li>
+      <% end %>
+    </ul>
   </div>
+
   <div class="film-info">
     <div class="film-stats">
       <% [:watched, :loved, :owned, :queued].each do |action| %>

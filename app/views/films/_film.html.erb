@@ -6,15 +6,19 @@
    
     <ul class="nav nav-list film-actions-menu">
        <% if logged_in? %>
-          <li><a href="#"><i class="icon-list"></i> add to list</a></li>
-          <li><a href="#"><i class="icon-bolt"></i> follow</a></li>
+          <li>
+            <%= link_to queue_path(current_user, :list, film_ids: film_presenter.id), :class=>'display-modal' do %>
+              <%= awesome 'list' %> add to list
+            <% end %>
+          </li>
+<!--           <li><a href="#"><i class="icon-bolt"></i> follow</a></li>
           <li><a href="#"><i class="icon-share"></i> share</a></li>
-          <li><a href="#"><i class="icon-film"></i> discover</a></li>
+          <li><a href="#"><i class="icon-film"></i> discover</a></li> -->
       <% else %>
-          <li><a href="/login" class="signup"><i class="icon-list"></i> add to list</a></li>
-          <li><a href="/login" class="signup"><i class="icon-bolt"></i> follow</a></li>
-          <li><a href="/login" class="signup"><i class="icon-share"></i> share</a></li>
-          <li><a href="/login" class="signup"><i class="icon-film"></i> discover</a></li>
+          <li><a href="/login" class="display-modal"><i class="icon-list"></i> add to list</a></li>
+<!--           <li><a href="/login" class="display-modal"><i class="icon-bolt"></i> follow</a></li>
+          <li><a href="/login" class="display-modal"><i class="icon-share"></i> share</a></li>
+          <li><a href="/login" class="display-modal"><i class="icon-film"></i> discover</a></li> -->
       <% end %>
     </ul>
   </div>

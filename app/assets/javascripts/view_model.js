@@ -31,7 +31,8 @@ var ViewModel = {
     FacebookAPI.friends(function(response) {
       friends = $.map(response, function(friend){ return new FBFriendModel(friend) })
       // ViewModel.friendsList = new FriendsList(friends)
-      Bindings.ko_apply(new FriendsList(friends), 'channel-facebook')
+      ko.applyBindings(new FriendsList(friends), document.getElementById('channel-facebook'))
+      // Bindings.ko_apply(new FriendsList(friends), 'channel-facebook')
       // $(document).trigger('friends:loaded')
     })
   },
@@ -41,17 +42,15 @@ var ViewModel = {
 
   //   $.get($(this).attr('href'), function(data, status){
   //     ModalController.queue_modal(data)
-  //     Bindings.setQueueListModal(ViewModel.queue)
   //   })
   // },
 
-  displaySignInModal: function(e){
-    e.preventDefault()
-    console.log('tes')
-    $.get($(this).attr('href'), function(data, status){
-      ModalController.queue_modal(data)
-    })
-  },
+  // displayModal: function(e){
+  //   e.preventDefault()
+  //   $.get($(this).attr('href'), function(data, status){
+  //     ModalController.queue_modal(data)
+  //   })
+  // },
 
   // addFilmsToList: function(list_url){
   //   $.ajax({

@@ -17,15 +17,22 @@ FL.Films = {
     $(document).on('ajax:success', 'a', FL.Films.displayContent)
     $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
     $(document).on('click', 'i[data-action]', FL.Films.iconFilmActionClicked)
-    $(document).on('click', '#signin-link, a.signup', ViewModel.displaySignInModal)
+    $(document).on('click', '#signin-link, a.display-modal', FL.Films.displayModal)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
-
+    $(document).on('change', '#userListsOptions', FL.Films.navigateToOption )
   },
 
   displayContent: function(xhr, data, status){
     $('#container').html(data)
   },
 
+  displayModal: function(e){
+    e.preventDefault()
+    $.get($(this).attr('href'), function(data, status){
+      ModalController.queue_modal(data)
+    })
+  },
+  
   endlessScroll: function(){
     self = this
     loading = false
@@ -61,10 +68,14 @@ FL.Films = {
 
   sortUserFilms: function(){
     url = $(this).attr('value')
-    console.log(url)
     $('#filmsIndex').load(url + ' #filmsContent')
   },
 
+  navigateToOption: function(){
+    window.location = $(this).attr('value')
+  },
+
+  
   btnFilmActionClicked: function(event){
     button = $(this)
     
@@ -110,8 +121,6 @@ FL.Films = {
         
         counter = icon.prev('label')
         counter.text(parseInt(counter.text()) + incr)
-
-        
       }  
     })
   }

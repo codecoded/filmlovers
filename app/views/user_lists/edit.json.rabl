@@ -8,5 +8,4 @@ node(:lists_url) {|films_list| user_lists_path( )}
 
 node(:film_list_items) do |films_list|
   partial("user_lists/film_list_item", :object => films_list.film_list_items) 
-  #partial("user_lists/film_list_item", :object => FilmPresenter.from_films(current_user, films_list.film_list_items.map(&:film_id)))  if films_list.film_list_items
 end

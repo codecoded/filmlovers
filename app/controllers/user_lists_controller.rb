@@ -11,11 +11,14 @@ class UserListsController < UserController
   
   def edit
     @thumbnail_size = 'w45'
+    pos = @films_list.film_list_items.count 
+    new_films = film_ids.map {|film_id| @films_list.film_list_items.new(film_id: film_id, position: pos+=1) }
     render_template
   end
 
   def new
     @films_list = user.films_lists.new
+    @films_list.film_list_items.new(film_id: params[:film_ids].first, position: 1)
     render_template
   end
 

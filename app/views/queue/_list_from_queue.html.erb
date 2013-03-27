@@ -1,25 +1,35 @@
-<div id="queueListModal" class="reveal-modal" data-bind="with: ViewModel.queue">
+<div id="queueListModal" class="reveal-modal twelve columns">
+    <span class="close-reveal-modal">×</span>
    <div class="row" >
-    <div class="twelve columns">
-      <label>
-        Add films to list:
-      </label>
+     <div class="twelve columns">
+        <h5 class="film-title pull-left"><%= title_with_year @film_view %></h5>
+        <h6 class="film-director pull-right"><%= @film_view.director %></h6>
+      <div>
+   </div>
+   <div class="row" style="clear:both">
+    <div class="five columns">
+       <%= film_poster_link(@film_view.film) %>
     </div>
-  </div>
-  <div class="row films" data-bind="foreach: selected()">
-    <a class="film film-small" data-bind="attr: {href: url}, css:{'film-selected': selected}, click: select" data-no-pjax>
-      <img data-bind="attr: {src: thumbnail, title: title}" class="small"/>
-    </a>
+    <div class="seven columns">     
+      <p class="film-summary"><%= truncate @film_view.overview, separator: ' ', length: 180, :omission => '...' %></p>
+    </div>
+
   </div>
   <div class="row">
     <div class="six columns">
-      <%= select_tag :list_id, options_for_select(@lists)%>
+      <div>
+        <label>
+          add to list
+        </label>
+        <%= select_tag :userListsOptions, options_for_select(@lists)%>
+      </div>
+
+      
     </div>
-  </div>
-  <div class="row">
     <div class="six columns">
-      <input type="button" data-bind="click: listsUrl" data-href='<%= new_user_list_path %>' class='radius button close-reveal-modal' value="New List"/>
+      <label> <%= link_to 'start a new list', new_user_list_path(film_ids:[@film_view.id]), :class=>'close-reveal-modal' %></label>
+     
     </div>
   </div>
-  <span class="close-reveal-modal">×</span>
+
 </div>

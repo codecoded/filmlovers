@@ -21,9 +21,8 @@
         <span ><%= @films_page.results_page.total_results %> films</span>
       </h6>
     </div>
-    <!--START MERCHANT:merchant name blinkbox from affiliatewindow.com.-->
-      <a href="http://www.awin1.com/cread.php?s=346816&v=2481&q=163556&r=157428" target="_blank"><img src="http://www.awin1.com/cshow.php?s=346816&v=2481&q=163556&r=157428" border="0"></a>
-    <!--END MERCHANT:merchant name blinkbox from affiliatewindow.com-->                         
+    <%= render partial: 'shared/netflix_234x60' %>
+    <%= render partial: 'shared/blinkbox_120x600' %>
   </div>
    <%= render partial: 'films/films' %>
 </div>

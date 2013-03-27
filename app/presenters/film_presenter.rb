@@ -8,10 +8,6 @@ class FilmPresenter
   def initialize(user, film, thumbnail_size='w185')
     @user, @film, @thumbnail_size = user, film, thumbnail_size
   end
-
-  # def self.from_films(user, films)
-  #   films.map {|film| FilmPresenter.new user, film } if !films.empty?
-  # end
   
   def self.from_films(user, film_ids)
     Film.find(film_ids).map {|film| FilmPresenter.new user, film } if !film_ids.empty?
@@ -27,14 +23,9 @@ class FilmPresenter
     film.users[action].count
   end
 
-  # def score
-  #   return 0 if stats(:watched) == 0
-  #   (stats(:loved) / stats(:watched)) * 100
-  # end
-
   def thumbnail(size='w154')
     size = size ? size : 'w154'
-    has_poster? ? film.poster(size ? size : thumbnail_size) : "http://placehold.it/#{size.slice(1..-1)}&text=no%20poster%20found"
+    has_poster? ? film.poster(size ? size : thumbnail_size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
   end
 
   def backdrop(size='original')
@@ -50,9 +41,9 @@ class FilmPresenter
     @director ? @director['name'] : ''
   end
 
-  def trailer
-    "https://www.youtube.com/embed/#{film.trailer}" if film.has_trailer?
-  end
+  # def trailer
+  #   "https://www.youtube.com/embed/#{film.trailer}" if film.has_trailer?
+  # end
 
   def backdrops
     film.images_library.backdrops

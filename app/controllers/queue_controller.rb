@@ -4,7 +4,9 @@ class QueueController < ApplicationController
 
   def list
     @lists = [['Please Select...', -1]]
-    @lists += current_user.films_lists.all.map { |list| [list.name, queue_to_list_path(list.id)] }
+    @film_view = FilmPresenter.new  current_user, Film.fetch(params[:film_ids])
+    @lists += current_user.films_lists.all.map { |list| [list.name, edit_user_list_path(current_user, list, film_ids: [params[:film_ids]])] }
+
     render partial:'list_from_queue', layout:nil 
   end
 

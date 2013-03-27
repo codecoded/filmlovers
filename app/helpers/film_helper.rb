@@ -5,7 +5,7 @@ module FilmHelper
   end
 
   def film_poster_link(film, poster_size='w154')
-    link_to film_path(film), title: film.title do 
+    link_to film_path(film.id), title: film.title do 
       poster(film, poster_size)
     end
   end
@@ -51,7 +51,7 @@ module FilmHelper
     content_tag :i, nil, :class => css, data: {href: url, method: method, action: action, remote: true } 
   end
 
-  def icon_for(action, is_actioned)
+  def icon_for(action, is_actioned=false)
     icons = {
       watched: 'icon-eye-open', 
       loved: 'icon-heart', 
@@ -65,7 +65,7 @@ module FilmHelper
 
   def poster(film, size='w154')
     size = size ? size : 'w154'
-    src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=no%20poster%20found"
+    src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
     image_tag src, :title=>film.title, :class=>'small'
   end
 

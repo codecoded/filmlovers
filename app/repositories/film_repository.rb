@@ -20,8 +20,7 @@ class FilmRepository
   end
 
   def load
-    doc = Film.find film_id
-    doc ? doc : fetch
+    Film.find(film_id) || fetch
   end
 
   def redis_key

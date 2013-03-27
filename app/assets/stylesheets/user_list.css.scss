@@ -84,3 +84,13 @@ ul.user-list{
     bottom: -22px;
   }
 }
+
+#queueListModal{
+  border-radius: 10px;
+  background-color: gray;
+  color: white;
+  border: solid 1px black;
+  h5, h6{
+    margin:0px 0px 10px 0px;
+  }
+}

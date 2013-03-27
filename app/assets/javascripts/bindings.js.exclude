@@ -22,13 +22,13 @@ var Bindings = {
     
   },
 
-  setUser: function(model){
-    this.ko_apply(model, 'header')
-  },
+  // setUser: function(model){
+  //   this.ko_apply(model, 'header')
+  // },
 
-  setViewContent: function(model){
-    this.ko_apply(model, 'viewContent')
-  },
+  // setViewContent: function(model){
+  //   this.ko_apply(model, 'viewContent')
+  // },
 
   // refreshViewContent: function(){
   //   this.setViewContent(this.ko_data('viewContent'))
@@ -45,9 +45,9 @@ var Bindings = {
   //   })
   // },
 
-  ko_apply: function(model, elementId){
-    ko.applyBindings(model, document.getElementById(elementId))
-  },
+  // ko_apply: function(model, elementId){
+  //   ko.applyBindings(model, document.getElementById(elementId))
+  // },
 
   // ko_data: function(elementId){
   //   return ko.dataFor(document.getElementById(elementId))
@@ -57,13 +57,13 @@ var Bindings = {
   //   $("#featured").orbit({fluid:true});
   // },
 
-  changeEvent: function(selector, eventHandler){
-    $(document).on('change', selector, eventHandler)
-  },
+  // changeEvent: function(selector, eventHandler){
+  //   $(document).on('change', selector, eventHandler)
+  // },
 
-  clickEvent: function(selector, eventHandler){
-    $(document).on('click', selector, eventHandler)
-  },
+  // clickEvent: function(selector, eventHandler){
+  //   $(document).on('click', selector, eventHandler)
+  // },
 
   // popstateHandler: function(event){
   //  if(event.state !== null)

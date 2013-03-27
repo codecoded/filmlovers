@@ -8,7 +8,9 @@ node(:lists_url) {|films_list| user_lists_path( )}
 
 
 if @films_list.films
-  node(:films) do |films_list|
-    partial "films/show", :object => films_list.films
-  end
+node(:film_list_items) do |films_list|
+  partial("user_lists/film_list_item", :object => films_list.film_list_items) 
+end
+
+  
 end

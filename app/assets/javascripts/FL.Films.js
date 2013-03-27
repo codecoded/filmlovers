@@ -19,7 +19,7 @@ FL.Films = {
     $(document).on('click', 'i[data-action]', FL.Films.iconFilmActionClicked)
     $(document).on('click', '#signin-link, a.display-modal', FL.Films.displayModal)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
-    $(document).on('change', '#userListsOptions', FL.Films.navigateToOption )
+    $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
   },
 
   displayContent: function(xhr, data, status){
@@ -75,7 +75,24 @@ FL.Films = {
     window.location = $(this).attr('value')
   },
 
-  
+  addFilmTolist: function(){
+    url = $(this).attr('value')
+    $.ajax({
+      url: url,
+      type: 'put',
+      success: function(html){
+        $('#alerts').append(html)
+
+        window.setTimeout(function(){
+          $('.alert-box .close').first().click()
+        }, 5000)
+
+        if($('#queueListModal').length>0)
+          $('#queueListModal .close-reveal-modal').click()
+      } 
+    })
+  },
+
   btnFilmActionClicked: function(event){
     button = $(this)
     

@@ -13,7 +13,6 @@
     <div class="seven columns">     
       <p class="film-summary"><%= truncate @film_view.overview, separator: ' ', length: 180, :omission => '...' %></p>
     </div>
-
   </div>
   <div class="row">
     <div class="six columns">
@@ -22,13 +21,10 @@
           add to list
         </label>
         <%= select_tag :userListsOptions, options_for_select(@lists)%>
-      </div>
-
-      
+      </div>      
     </div>
     <div class="six columns">
       <label> <%= link_to 'start a new list', new_user_list_path(film_ids:[@film_view.id]), :class=>'close-reveal-modal' %></label>
-     
     </div>
   </div>
 

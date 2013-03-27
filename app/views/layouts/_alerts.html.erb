@@ -1,0 +1,12 @@
+<% if flash[:success] %>
+  <div class="alert-box seven columns centered">
+    <span class="message"><%= flash[:success] %></span>        
+    <a href="" class="close">&times;</a>
+  </div>
+<% end %>
+<% if flash[:error] %>
+  <div class="alert-box alert seven columns centered">
+    <span class="message"><%= flash[:error] %></span>        
+    <a href="" class="close">&times;</a>
+  </div>
+<% end %>  

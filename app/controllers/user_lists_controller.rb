@@ -18,7 +18,10 @@ class UserListsController < UserController
 
   def new
     @films_list = user.films_lists.new
-    @films_list.film_list_items.new(film_id: params[:film_ids].first, position: 1)
+
+    if params[:film_ids]
+      @films_list.film_list_items.new(film_id: params[:film_ids].first, position: 1)
+    end
     render_template
   end
 

@@ -19,6 +19,22 @@ body{
 .top-bar{
   margin-bottom: 0px;
 }
+#alerts{
+  position: absolute;
+  top: 0px;
+  margin: 0px auto;
+  text-align: center;
+  width: 50%;
+  left: 25%;
+  z-index: 100;  
+  .alert-box{
+    border-radius: 0px 0px 10px 10px;
+    a{
+      color: white;
+      text-decoration: underline;
+    }
+  }
+}
 
 #signInModal{
   border: 2px solid black;

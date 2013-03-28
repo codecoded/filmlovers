@@ -81,14 +81,13 @@ FL.Films = {
       url: url,
       type: 'put',
       success: function(html){
-        $('#alerts').append(html)
-
+        $('#modal-alerts').append(html)
         window.setTimeout(function(){
-          $('.alert-box .close').first().click()
-        }, 5000)
+          $('.alert-box').fadeOut(function(){$(this).remove()})
+        }, 3500)
 
-        if($('#queueListModal').length>0)
-          $('#queueListModal .close-reveal-modal').click()
+        // if($('#queueListModal').length>0)
+        //   $('#queueListModal .close-reveal-modal').click()
       } 
     })
   },

@@ -10,11 +10,11 @@ class FilmsList
   embeds_many :film_list_items
 
   def films
-    Film.find film_ids
+    film_ids.map {|id| Film.find id}
   end
 
   def film_ids
-    film_list_items.distinct :film_id
+    film_list_items.sort_by(&:position).uniq(&:film_id).map &:film_id
   end
 
   def append_films(film_ids)

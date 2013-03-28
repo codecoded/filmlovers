@@ -13,7 +13,7 @@ class ListedFilmsController < ApplicationController
     listed_film = list.film_list_items.find_by film_id: film.id
     return film_already_added if listed_film
 
-    @list_film = list.film_list_items.create(film_id: film.id, position: list.film_list_items.count)
+    @list_film = list.film_list_items.create(film_id: film.id, position: list.film_list_items.count+1)
     respond_with listed_film
   end
 

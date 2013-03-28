@@ -1,12 +1,9 @@
-
 <% if flash[:error] %>
-  <div class="alert-box alert seven columns centered">
+  <div class="alert-box alert twelve columns centered">
     <span class="message"><%= flash[:error] %></span>        
-    <a href="" class="close">&times;</a>
   </div>
 <% else %>  
-  <div class="alert-box seven columns centered">
+  <div class="alert-box success twelve columns centered">
     <span class="message"><%= "Film #{@film.title} added to list '#{link_to @list.name, user_lists_path(current_user, @list)}'".html_safe %></span>      
-    <a href="" class="close">&times;</a>
   </div>
 <% end %>

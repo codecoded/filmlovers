@@ -36,6 +36,23 @@ body{
   }
 }
 
+#modal-alerts{
+  position: absolute;
+  top: 0px;
+  margin: 0px auto;
+  text-align: center;
+  width: 100%;
+  left: 0px;
+  z-index: 100;  
+  .alert-box{
+    border-radius: 10px 10px 0px 0px;
+    a{
+      color: white;
+      text-decoration: underline;
+    }
+  }
+}
+
 #signInModal{
   border: 2px solid black;
   background: url(/assets/backdrop-modal-sign-in.jpg) top center no-repeat;

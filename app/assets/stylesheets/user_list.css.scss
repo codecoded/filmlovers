@@ -90,6 +90,11 @@ ul.user-list{
   background-color: gray;
   color: white;
   border: solid 1px black;
+  .close-reveal-modal{
+    z-index: 999;
+    color:white;
+    text-shadow: 0 -1px 1px black;
+  }
   h5, h6{
     margin:0px 0px 10px 0px;
   }

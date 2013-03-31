@@ -56,7 +56,7 @@
       </ul><!-- Right Nav Section -->
       <ul class="right">
         <li class="name">
-          <%= form_tag(films_search_path, method: :get,  remote:true) do%>
+          <%= form_tag(films_search_path, method: :get) do%>
           <input type="text" id="quick_search_header" name="query">
           <% end %>
         </li>
@@ -84,7 +84,7 @@
               <label>Options</label>
             </li>
             <li>
-              <%= link_to signout_path, id: "sign_out", data:{'no_pjax'=>true} do %>
+              <%= link_to signout_path, id: "sign_out" do %>
                  <%= awesome 'signout'%> "Sign out"
               <% end %>
             </li>
@@ -120,7 +120,7 @@
           </ul>
         </li>
         <li>
-          <%= link_to "Sign Up", login_path, id:  "signin-link", data:{'no_pjax'=>true} %>
+          <%= link_to "Sign Up", login_path, id:  "signin-link" %>
         </li>
       </ul>
       <% end %>

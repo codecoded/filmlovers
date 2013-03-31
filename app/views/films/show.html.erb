@@ -29,8 +29,8 @@
         </div>
       </div>
       <% if logged_in? %>
-      <div class="one columns ">
-        <div class="film-actions-vertical pagination-centered">
+      <div class="one columns " id="film-main-actions">
+        <div class="film-actions-vertical pagination-centered" >
           <%= render partial: 'films/action_buttons', locals: {film_presenter: @film_view, labels: true} %>
         </div>
       </div>

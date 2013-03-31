@@ -73,6 +73,10 @@ module FilmHelper
      image_tag AppConfig.image_uri_for(['w1280', backdrop['file_path']])
   end
 
+  def backdrop(film, size)
+     image_tag film.backdrop size
+  end
+
   def trailer(film)
     return unless film.has_trailer?
     src = "http://www.youtube.com/embed/#{film.trailer}?iv_load_policy=3&modestbranding=1&origin=localhost&rel=0&showinfo=0&controls=1"
@@ -83,6 +87,10 @@ module FilmHelper
     link_to films_genre_path(genre['name']) do
       content_tag :span, genre['name'], {:class => 'genre link'}
     end
+  end
+
+  def overview(film, truncate_at=180)
+     truncate film.overview, separator: ' ', length: truncate_at, :omission => '...'
   end
 
 end

@@ -13,7 +13,7 @@
        <%= film_poster_link(@film_view.film) %>
     </div>
     <div class="seven columns">     
-      <p class="film-summary"><%= truncate @film_view.overview, separator: ' ', length: 180, :omission => '...' %></p>
+      <p class="film-summary"><%= overview @film_view.film %></p>
     </div>
   </div>
   <div class="row">

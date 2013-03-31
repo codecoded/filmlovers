@@ -301,7 +301,9 @@ ul.credits{
     font-size:16pt;
   }
 }
-.film-actions-vertical{
+
+#film-main-actions{
+  .film-actions-vertical{
   button{
     margin: 2px 0px;
     border: solid 4px black;
@@ -319,5 +321,6 @@ ul.credits{
       font-size: 3em;
     }
   }
+}
 }
 

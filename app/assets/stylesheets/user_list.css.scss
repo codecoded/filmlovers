@@ -2,26 +2,38 @@
   textarea{
     height:100px
   }
-
-
   ol{
     margin-left: 0px;
     li{
       border: solid 1px rgba(90, 206, 213, 0.37);
       border-radius: 10px;
-      padding: 3px;
-      margin: 3px 0px;
+      // padding: 3px;
+      // margin: 3px 0px;
       background-color: rgb(241, 241, 241);
       display: inline-block;
       width: 100%;
       line-height: 1;
+      p{
+        margin-bottom: 5px;
+        font-size: 8pt;
+      }
+      p + a{
+        font-size: 8pt;
+      }
+      > div{
+        padding: 5px;
+      }
       .title{
-        font-size:1.2em;
+        font-size: 1.2em;
         font-style: italic;
+        font-weight: bold;
+        // padding-bottom: 10px;
+      }
+      .film-summary{
       }
       .position {
         text-align: center;
-        padding-top: 30%;
+        padding-top: 15%;
         font-size: 2em;
       }
       a img{
@@ -36,9 +48,27 @@
 
       }
     }
-    
   }
 
+.film-actions-vertical{
+  button{
+    margin: 2px 0px;
+    border: solid 2px black;
+    padding: 2px;
+    border-radius: 5px;
+    width: 45px;
+    height:45px;
+    background-color: white;
+    label.count{
+      font-size: 10pt;
+      position: relative;
+      bottom: 0px;
+    }
+    i{
+      font-size: 18pt;
+    }
+  }
+}
 }
 
 ul.user-list{
@@ -65,7 +95,6 @@ ul.user-list{
       width: 90px;
       height: 130px;      
     }
-
   } 
   .film:not(:first-child){
     margin-left: -60px;

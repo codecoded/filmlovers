@@ -118,6 +118,8 @@ FL.Films = {
     
     href = icon.data('href')
     method = icon.data('method')
+    id = icon.data('id')
+
     to_action = method == 'put'
     incr = to_action ? 1 : -1
     action = icon.data('action')
@@ -134,8 +136,8 @@ FL.Films = {
 
         if(action=='queued')
           return
-        
-        counter = icon.prev('label')
+        // counter = icon.prev('label')
+        counter = $("label[for='" + id + "'][data-counter='" + action + "']")
         counter.text(parseInt(counter.text()) + incr)
       }  
     })

@@ -1,7 +1,15 @@
 module FilmHelper
 
   def directed_by(film_view)
-    "Directed by #{film_view.director}" if film_view.director
+    "Directed by: #{film_view.director}" if film_view.director
+  end
+
+  def starring(film)
+   "Starring: #{film.credits.cast.take(3).map(&:name).join(', ')}" if film.credits.cast
+  end
+
+  def runtime(film)
+    film.runtime > 0 ? "#{film.runtime} Mins" : "-- Mins"
   end
 
   def film_poster_link(film, poster_size='w154')
@@ -48,7 +56,7 @@ module FilmHelper
     method =  actioned ? :delete : :put
     action_css = actioned ? 'actioned' : 'unactioned' 
     css = "#{icons[action]} #{action_css}"  
-    content_tag :i, nil, :class => css, data: {href: url, method: method, action: action, remote: true } 
+    content_tag :i, nil, :class => css, data: {href: url, method: method, action: action, remote: true, id: presenter.id } 
   end
 
   def icon_for(action, is_actioned=false)

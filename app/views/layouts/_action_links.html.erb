@@ -1,4 +1,4 @@
-<% [:watched, :loved, :owned, :queued].each do |action| %>
+<% [:watched, :loved, :owned].each do |action| %>
   <li>
     <%= link_to user_film_path(current_user, action) do %>
     <%= icon_for action, false %>

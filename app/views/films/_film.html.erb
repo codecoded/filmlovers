@@ -1,40 +1,32 @@
 <%= div_for film_presenter.film do %>
 
   <div class="film-heading-border film-title">
-
-    options <%= awesome 'chevron-down' %>
-   
-    <ul class="nav nav-list film-actions-menu">
-       <% if logged_in? %>
-          <li>
-            <%= link_to queue_path(current_user, :list, film_ids: film_presenter.id), :class=>'display-modal' do %>
-              <%= awesome 'list' %> add to list
-            <% end %>
-          </li>
-<!--           <li><a href="#"><i class="icon-bolt"></i> follow</a></li>
-          <li><a href="#"><i class="icon-share"></i> share</a></li>
-          <li><a href="#"><i class="icon-film"></i> discover</a></li> -->
-      <% else %>
-          <li><a href="/login" class="display-modal"><i class="icon-list"></i> add to list</a></li>
-<!--           <li><a href="/login" class="display-modal"><i class="icon-bolt"></i> follow</a></li>
-          <li><a href="/login" class="display-modal"><i class="icon-share"></i> share</a></li>
-          <li><a href="/login" class="display-modal"><i class="icon-film"></i> discover</a></li> -->
-      <% end %>
-    </ul>
+    <%#= render partial:'films/film_options', locals:{film_presenter: film_presenter} %>
+     <%= title_with_year film_presenter %>
   </div>
 
   <div class="film-info">
-    <div class="film-stats">
-      <% [:watched, :loved, :owned, :queued].each do |action| %>
-        <%= content_tag :label, film_presenter.stats(action) || "&nbsp;".html_safe %>
+     <%= film_poster_link film_presenter.film %>
+    <div class="film-action-buttons">
+      <% [:watched, :loved, :owned].each do |action| %>
         <%= action_icon action, film_presenter %>
       <% end %>
-
+      <%= link_to queue_path(current_user, :list, film_ids: film_presenter.id), :class=>'display-modal unactioned' do %>
+        <%= awesome 'list' %>
+      <% end %>
     </div>
-    <%= film_poster_link film_presenter.film %>
+   
   </div>
   <div class="film-heading-border film-director">
-    <%= title_with_year film_presenter %>
+    <% [:watched, :loved, :owned].each do |action| %>
+      <span>
+        <%= icon_for action, film_presenter.actioned?(action) %>
+        <%= label_tag film_presenter.film.id, data: {counter: action} do %> 
+          <%= film_presenter.stats(action) %>
+        <% end %>
+      </span>
+    <% end %>
 
   </div> 
 <% end %>
+

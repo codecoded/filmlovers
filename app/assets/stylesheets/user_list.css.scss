@@ -24,10 +24,10 @@
         padding: 5px;
       }
       .title{
-        font-size: 1.2em;
+        font-size: 1em;
         font-style: italic;
         font-weight: bold;
-        // padding-bottom: 10px;
+        padding-bottom: 5px;
       }
       .film-summary{
       }
@@ -36,8 +36,16 @@
         padding-top: 15%;
         font-size: 2em;
       }
+      .shop{
+        a img{
+          height:24px;
+        }
+      }
       a img{
         // padding: 10px;
+      }
+      a.overview-toggle{
+        font-size: 8pt;
       }
       .tiled{
         margin: 12px !important;

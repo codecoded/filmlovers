@@ -31,8 +31,11 @@
 </div>
 <script>
  $(document).on('film:<%= params[:id].to_sym %>:unactioned', function(event, film){
-    film.remove()
-    counter = $('#user-films-count')
-    counter.text(parseInt(counter.text()) - 1)
+    film.toggle(function(){
+      counter = $('#user-films-count')
+      counter.text(parseInt(counter.text()) - 1)
+      film.remove()
+    })
+
 })
 </script>

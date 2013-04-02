@@ -33,7 +33,7 @@ ul.credits{
   {
     margin: 1px 3px;
     float:left;
-    width: 188px;
+    width: 154px;
     // border:  solid 4px transparent;
     border-radius: 5px;
     position: relative;
@@ -77,8 +77,10 @@ ul.credits{
         // border-radius: 0px 5px 0px 0px;
         // border: 4px solid transparent;
       }
-
-      .film-stats{
+      &:hover .film-action-buttons{
+        opacity: 0.8
+      }
+      .film-action-list{
         width: 34px;
         color: white;
         background-color: #1D1C1C;
@@ -109,6 +111,31 @@ ul.credits{
 
         }
       }
+      .film-action-buttons{
+        position: relative;
+        text-align: center;
+        bottom: 38px;
+        opacity: 0;
+        a{
+          color:black;
+        }
+        i{
+          bottom: 10px;
+          font-size: 14pt;
+          border: solid 1px #000;
+          background-color: #FFF;
+          padding: 3px;
+          width: 28px;
+          height: 26px;
+          display: inline-block;
+          text-align: center;
+          border-radius: 5px;
+
+          &:hover{
+            cursor: pointer;
+          }
+        }
+      }
     }
     .film-heading-border{
       height: 20px;
@@ -120,11 +147,38 @@ ul.credits{
       line-height: 2em;
       font-style: normal;
       opacity: 0;  
+      overflow: hidden;
+      span{
+        font-size: 8pt;
+        &:hover{
+          color:white !important;
+          cursor: pointer;
+          label{
+            color: white;
+          }
+        }
+        // &.actioned{
+        //   color:white;
+        //   label{
+        //     color: #FFF500;
+        //   }
+        // }
+        label{
+          display: inline;
+          font-size: 8pt;
+        }
+        i{
+          padding: 0px 3px;
+          font-size: 9pt;
+        }
+      }
       &.film-title{
         border-radius: 5px 5px 0px 0px
       }
       &.film-director{
-        border-radius: 0px 0px 5px 5px
+        border-radius: 0px 0px 5px 5px;
+        opacity: 1;
+        color: #444;
       }    
       .film-actions-menu{
           display: none;

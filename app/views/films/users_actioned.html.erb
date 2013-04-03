@@ -3,7 +3,7 @@
     <div class="user-avatar left">
       <%= link_to user_lists_path(user) do %>
         <%= image_tag user.gravatar_url %>
-        <label><%= user.username %></label>
+        <label><%= user.name %></label>
        <% end %>
       <% [:watched, :loved, :owned].each do |action| %>
         <%= icon_for action %>

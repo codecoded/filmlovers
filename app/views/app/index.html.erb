@@ -23,8 +23,12 @@
         <% FilmsRepository.top_for(:watched, 10).each do |film| %>
           <div class="film-small">
             <button class="tile counter">
+               <%= link_to users_actioned_film_path(film, :watched) do %> 
               <i class="icon-eye-open icon-2x"></i>
-              <label><%= film.score_for(:watched).round 0 %></label>
+              <label>
+                  <%= film.score_for(:watched).round 0 %>
+              </label>
+               <% end %>
             </button>
             <%= link_to film do %>
               <%= poster(film, 'w90') %>

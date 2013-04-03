@@ -26,3 +26,23 @@
     width: 120px;
   }
 }
+
+.user-avatar{
+  padding: 10px 0;
+  border: solid 2px #5A5656;
+  border-radius: 10px;
+  text-align: center;
+  margin: 4px;
+  width: 150px;
+  height: 150px;
+  background-color: #222;
+  color: #C9C9C9;
+  line-height: 1.3em;
+  img{
+    // border: solid 2px #4D4D4D;
+    border-radius: 60px;
+  }
+  label{
+    color:white;
+  }
+}

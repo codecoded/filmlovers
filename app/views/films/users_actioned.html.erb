@@ -1,6 +1,6 @@
 <div id="filmsActioned" class="twelve columns">
   <% @users.each do |user| %>
-    <div class="friend-avatar">
+    <div class="user-avatar left">
       <%= link_to user_lists_path(user) do %>
         <%= image_tag user.gravatar_url %>
         <label><%= user.username %></label>

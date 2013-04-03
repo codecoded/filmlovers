@@ -22,15 +22,15 @@
          <a>  <%= awesome "film" %> films</a>
           <ul class="dropdown">
             <li><label>Current</label></li>
-            <li><%= link_to 'In Cinemas', films_trend_path(:now_playing) %></li>
-            <li><%= link_to 'Upcoming', films_trend_path(:upcoming) %></li>
-            <li><%= link_to 'Popular', films_trend_path(:popular) %></li>
+            <li><%= link_to 'In Cinemas', trend_path(:now_playing) %></li>
+            <li><%= link_to 'Upcoming', trend_path(:upcoming) %></li>
+            <li><%= link_to 'Popular', trend_path(:popular) %></li>
             <li><label>Top Genres</label></li>
-            <li><%= link_to 'Action', films_genre_path(:action) %></li>
-            <li><%= link_to 'Adventure', films_genre_path(:adventure) %></li>
-            <li><%= link_to 'Comedy', films_genre_path(:comedy) %></li>
-            <li><%= link_to 'Sci-Fi', films_genre_path(:science_fiction) %></li>
-            <li><%= link_to 'Drama', films_genre_path(:drama) %></li>
+            <li><%= link_to 'Action', genre_path(:action) %></li>
+            <li><%= link_to 'Adventure', genre_path(:adventure) %></li>
+            <li><%= link_to 'Comedy', genre_path(:comedy) %></li>
+            <li><%= link_to 'Sci-Fi', genre_path(:science_fiction) %></li>
+            <li><%= link_to 'Drama', genre_path(:drama) %></li>
           </uL>
         </li>
         <li>

@@ -29,9 +29,11 @@
         </div>
       </div>
       <% if logged_in? %>
-      <div class="one columns " id="film-main-actions">
+      <div class="one columns" id="film-main-actions">
         <div class="film-actions-vertical pagination-centered" >
-          <%= render partial: 'films/action_buttons', locals: {film_presenter: @film_view, labels: true} %>
+          <% [:watched, :loved, :owned].each do |action| %>
+            <%= action_button action, @film_view %>
+          <% end %>
         </div>
       </div>
       <% end %>
@@ -41,7 +43,11 @@
           <div class="twelve columns">
             <%= render partial: 'shared/twitter', locals: {film: @film_view.film} %>
             <%= render partial: 'shared/facebook_like', locals: {film: @film_view.film} %>
-            <%= render partial: 'genre_links', locals: {film: @film_view.film} %>
+            <p>
+              <% @film_view.film.genres.each do |genre| %>
+                <%= genre_link genre %>
+              <% end %>
+            </p>
             <p><%= @film_view.film.overview %></p>
           </div>
         </div>

@@ -92,7 +92,7 @@ module FilmHelper
   end
 
   def genre_link(genre)
-    link_to films_genre_path(genre['name']) do
+    link_to genre_path(genre['name']) do
       content_tag :span, genre['name'], {:class => 'genre link'}
     end
   end

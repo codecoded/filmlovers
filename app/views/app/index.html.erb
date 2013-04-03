@@ -74,19 +74,19 @@
       <h6 class="heading_divider">Current Films</h6>
     </div>
     <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:now_playing) do %>
+      <%= link_to trend_path(:now_playing) do %>
         <%=image_tag 'cinema.png', width:'100%' %>
         <label>In Cinemas</label>
       <% end %>
     </div>
     <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:popular) do %>
+      <%= link_to trend_path(:popular) do %>
         <%=image_tag 'cinema.png', width:'100%' %>
         <label>Popular</label>
       <% end %>
     </div>
     <div class="four mobile-two columns trend">
-      <%= link_to films_trend_path(:upcoming) do %>
+      <%= link_to trend_path(:upcoming) do %>
         <%=image_tag 'cinema.png', width:'100%' %>
         <label>Upcoming</label>
       <% end %>
@@ -96,7 +96,7 @@
   <div class="row" id="search_row">
     <div class="twelve columns">
       <div class="radius panel">
-          <%= form_tag(films_search_path, method: :get,  remote:true) do%>
+          <%= form_tag(films_search_path, method: :get) do%>
           <div class="row collapse">
             <div class="ten mobile-three columns">
               <input type="text" name="query" />

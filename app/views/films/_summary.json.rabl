@@ -1,4 +1,4 @@
-object @film
+object @film_view
 
 attributes :id, :title, :release_date
 

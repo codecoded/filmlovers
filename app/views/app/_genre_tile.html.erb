@@ -1,5 +1,5 @@
 <div class="two mobile-two columns genre">
-  <%= link_to films_genre_path(genre) do %>
+  <%= link_to genre_path(genre) do %>
     <%= image_tag "genres/#{genre}.jpg" %>
     <%= content_tag :label, description %>
   <% end %>

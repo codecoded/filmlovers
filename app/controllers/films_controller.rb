@@ -9,23 +9,14 @@ class FilmsController < ApplicationController
   end
 
   def show
-    @film_view = FilmPresenter.new current_user, Film.fetch(params[:id])
-    @film = @film_view
+    @film_view = FilmPresenter.new current_user, film
     render_template
   end
 
   def summary
-    @film = FilmPresenter.new current_user, Film.fetch(params[:id])
+    @film_view = FilmPresenter.new current_user, film
     @thumbnail_size = 'w45'
     render partial: 'summary'
-  end
-
-  def trend
-    cache_key = "trend_#{params[:trend]}_page_" + (params[:page] || '')
-    results = Rails.cache.fetch cache_key do
-      results = @tmdb_service.by_trend params[:trend], page_options
-    end
-    present(results, params[:trend]) and render_template :index
   end
 
   def search
@@ -38,12 +29,8 @@ class FilmsController < ApplicationController
     present(results, params[:q])
   end
 
-  def genre
-    cache_key = "genre_#{params[:genre_id]}_page_" + (params[:page] || '')
-    results = Rails.cache.fetch cache_key do
-      results = @tmdb_service.by_genre params[:genre_id], page_options
-    end
-    present(results, params[:genre_id]) and render_template :index
+  def users_actioned
+    @users = User.find film.users[user_action].members
   end
 
   protected
@@ -59,5 +46,15 @@ class FilmsController < ApplicationController
   def present(results_page, description='')
     @films_page = FilmsPagePresenter.new(current_user, results_page, description)
   end
+
+  def film
+    @film ||= Film.fetch(params[:id])
+  end
+
+  def user_action
+    params[:user_action].to_sym
+  end
+
+  helper_method :action, :film
 
 end

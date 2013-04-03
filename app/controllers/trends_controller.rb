@@ -3,7 +3,7 @@ class TrendsController < ApplicationController
 
 
   def show
-    cache_key = "trend_#{trend}_page_" + (params[:page] || '')
+    cache_key = "trend_#{trend}_page_" + (params[:page] || '1')
     results = Rails.cache.fetch cache_key do
       results = TmdbFilmsSearch.new.by_trend trend, page_options
     end

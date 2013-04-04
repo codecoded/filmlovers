@@ -181,6 +181,8 @@ GEM
     sassy-math (1.5)
       compass (~> 0.11)
     signature (0.1.6)
+    sitemap_generator (3.4)
+      builder
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -246,6 +248,7 @@ DEPENDENCIES
   rest-client
   ruby-prof
   sass-rails (~> 3.2.3)
+  sitemap_generator
   state_machine
   swf_fu (~> 2.0)
   thin

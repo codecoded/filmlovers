@@ -36,6 +36,7 @@ gem 'rabl'
 gem "eventmachine", "~> 1.0.3"
 gem 'meta-tags', :require => 'meta_tags'
 gem 'gravtastic'
+gem 'sitemap_generator'
 
 # Gems used only for assets and not required
 # in production environments by default.

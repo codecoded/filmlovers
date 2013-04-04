@@ -55,6 +55,6 @@ class FilmsController < ApplicationController
     params[:user_action].to_sym
   end
 
-  helper_method :action, :film
+  helper_method :user_action, :film
 
 end

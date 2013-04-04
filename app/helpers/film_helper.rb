@@ -77,6 +77,12 @@ module FilmHelper
     image_tag src, :title=>film.title, :class=>'small'
   end
 
+  def poster_link(film, size='w154')
+    link_to film_path(film), title: film.title do
+      poster film, size
+    end
+  end
+
   def backdrop_image(backdrop)
      image_tag AppConfig.image_uri_for(['w1280', backdrop['file_path']])
   end

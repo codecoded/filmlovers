@@ -360,26 +360,41 @@ ul.credits{
 
 #film-main-actions{
   .film-actions-vertical{
-  button{
-    margin: 2px 0px;
-    border: solid 4px black;
-    padding: 2px;
-    border-radius: 5px;
-    width: 60px;
-    height:60px;
-    background-color: white;
-    label.count{
-      font-size: 10pt;
-      position: relative;
-      bottom: 0px;
-    }
-    i{
-      font-size: 3em;
-    }
-    a{
-      color: black;
+    button{
+      margin: 2px 0px;
+      border: solid 4px black;
+      padding: 2px;
+      border-radius: 5px;
+      width: 60px;
+      height:60px;
+      background-color: white;
+      label.count{
+        font-size: 10pt;
+        position: relative;
+        bottom: 0px;
+      }
+      i{
+        font-size: 3em;
+      }
+      a{
+        color: black;
+      }
     }
   }
 }
-}
 
+#filmsActioned{
+  padding-top: 10px;
+  .counters{
+    font-size: 4em;
+    a{
+      color:black;
+    }
+    label{
+      padding-left: 10px;
+      display: inline;
+      font-size: 32pt;
+    }
+  }
+  // background:  url(http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w1280/lJz2X8dEM1eiKxupmPUI7WVwEtK.jpg) top center no-repeat;
+}

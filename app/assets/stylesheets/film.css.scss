@@ -150,22 +150,24 @@ ul.credits{
       overflow: hidden;
       span{
         font-size: 8pt;
+        color: #919191 !important;
+        a{
+          color:#919191;
+        }
         &:hover{
           color:white !important;
           cursor: pointer;
           label{
             color: white;
           }
+          i{
+            color: white;
+          }
         }
-        // &.actioned{
-        //   color:white;
-        //   label{
-        //     color: #FFF500;
-        //   }
-        // }
         label{
           display: inline;
           font-size: 8pt;
+          color: #919191 ;
         }
         i{
           padding: 0px 3px;
@@ -373,6 +375,9 @@ ul.credits{
     }
     i{
       font-size: 3em;
+    }
+    a{
+      color: black;
     }
   }
 }

@@ -34,6 +34,11 @@
           <% [:watched, :loved, :owned].each do |action| %>
             <%= action_button action, @film_view %>
           <% end %>
+          <button>
+          <%= link_to queue_path(current_user, :list, film_ids:  @film_view.id), :class=>'display-modal unactioned' do %>
+            <%= awesome 'list' %>
+            <% end %>       
+          </button>
         </div>
       </div>
       <% end %>

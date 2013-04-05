@@ -1,10 +1,10 @@
 <div id="filmsActioned" class="twelve columns">
 
   <div class="row film-banner">
-    <div class="one columns film">
+    <div class="two columns film">
       <%= poster_link film, 'w154' %>
     </div>
-    <div class="five columns">
+    <div class="six columns">
       <h3>
         <%= link_to film_path(film) do %>
           <%= title_with_year film %>
@@ -18,30 +18,32 @@
     </div>
   </div>
 
-  <div class="row user-list" id="contentUsers">
-    <div class="two columns">
-      <% [:watched, :loved, :owned].each do |action| %>
-        <div class="counter">
-          <%= link_to users_actioned_film_path(film, action) do %>
-            <%= icon_for action, user_action==action %>
-            <label><%= film.users[action].count %></label>
-          <% end %>
-        </div>
-      <% end %> 
-    </div>
-    <div class="ten columns">
-      <% @users.each do |user| %>
-        <div class="user-avatar left">
-          <%= link_to user_lists_path(user) do %>
-            <%= image_tag user.gravatar_url %>
-            <label><%= user.name %></label>
-           <% end %>
-          <% [:watched, :loved, :owned].each do |action| %>
-            <%= icon_for action %>
-            <label style="display:inline"><%= user.films[action].count %> </label>
-          <% end %>
-        </div>
-      <% end %>
+  <div id="contentHolder">
+    <div class="row user-list">
+      <div class="two columns">
+        <% [:watched, :loved, :owned].each do |action| %>
+          <div class="counter">
+            <%= link_to users_actioned_film_path(film, action) do %>
+              <%= icon_for action, user_action==action %>
+              <label><%= film.users[action].count %></label>
+            <% end %>
+          </div>
+        <% end %> 
+      </div>
+      <div class="ten columns">
+        <% @users.each do |user| %>
+          <div class="user-avatar left">
+            <%= link_to user_lists_path(user) do %>
+              <%= image_tag user.gravatar_url %>
+              <label><%= user.name %></label>
+             <% end %>
+            <% [:watched, :loved, :owned].each do |action| %>
+              <%= icon_for action %>
+              <label style="display:inline"><%= user.films[action].count %> </label>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

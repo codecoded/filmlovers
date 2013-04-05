@@ -18,6 +18,7 @@ FL.Films = {
     $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
     $(document).on('click', 'i[data-action]', FL.Films.iconFilmActionClicked)
     $(document).on('click', '#signin-link, a.display-modal', FL.Films.displayModal)
+    $(document).on('click', '#contentUsers a', FL.Films.lnkFilmsActionClicked)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
   },
@@ -141,5 +142,11 @@ FL.Films = {
         counter.text(parseInt(counter.text()) + incr)
       }  
     })
+  },
+
+  lnkFilmsActionClicked: function(event){
+    event.preventDefault()
+    url = $(this).attr('href')
+    $('#contentUsers').load(url + ' #contentUsers')
   }
 }

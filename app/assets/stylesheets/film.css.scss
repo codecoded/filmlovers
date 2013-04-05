@@ -385,7 +385,11 @@ ul.credits{
 
 #filmsActioned{
   padding-top: 10px;
-  .counters{
+  .film-banner{
+    border-bottom: 2px solid black;
+    margin-bottom: 20px;
+  }
+  .counter{
     font-size: 4em;
     a{
       color:black;

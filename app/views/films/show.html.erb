@@ -21,12 +21,18 @@
     <%= render partial: 'backdrop' %>
 
     <div class="row">
-      <div class="two columns">
+      <div class="two columns pagination-centered">
         <%= image_tag @film_view.film.poster('w342') %>
         <div id="shopLinks">
           <%= render partial: 'shared/amazon_search', locals: {title: "#{@film_view.title} #{@film_view.year}"} %>
           <%= render partial: 'shared/itunes', locals: {title: "#{@film_view.title}"} %>
         </div>
+        <div id="film-affiliate">
+          <a href="http://www.awin1.com/cread.php?s=302293&v=2481&q=142401&r=171645" target="_blank">
+            <img src="http://www.awin1.com/cshow.php?s=302293&v=2481&q=142401&r=171645" border="0">
+          </a>
+        </div>
+
       </div>
       <% if logged_in? %>
       <div class="one columns" id="film-main-actions">

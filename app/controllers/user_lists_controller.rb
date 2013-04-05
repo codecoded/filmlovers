@@ -1,4 +1,4 @@
-class UserListsController < UserController
+class UserListsController < UsersController
   
   before_filter :films_list, except: [:index, :new, :create, :show]
 

@@ -19,6 +19,7 @@ FL.Films = {
     $(document).on('click', 'i[data-action]', FL.Films.iconFilmActionClicked)
     $(document).on('click', '#signin-link, a.display-modal', FL.Films.displayModal)
     $(document).on('click', '.user-list .counter a', FL.Films.lnkFilmsActionClicked)
+    $(document).on('click', '#filmsIndex .counter a', FL.Films.lnkUsersFilmsClicked)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
   },
@@ -69,7 +70,7 @@ FL.Films = {
 
   sortUserFilms: function(){
     url = $(this).attr('value')
-    $('#filmsIndex').load(url + ' #filmsContent')
+    $('#contentHolder').load(url + ' #filmsIndex')
   },
 
   navigateToOption: function(){
@@ -148,5 +149,11 @@ FL.Films = {
     event.preventDefault()
     url = $(this).attr('href')
     $('#contentHolder').load(url + ' .user-list')
+  },
+
+  lnkUsersFilmsClicked: function(event){
+    event.preventDefault()
+    url = $(this).attr('href')
+    $('#contentHolder').load(url + ' #filmsIndex')
   }
 }

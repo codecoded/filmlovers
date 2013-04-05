@@ -29,7 +29,7 @@ class FilmsController < ApplicationController
     present(results, params[:q])
   end
 
-  def users_actioned
+  def users
     @users = User.find film.users[user_action].members
   end
 

@@ -1,0 +1,17 @@
+<div id="userProfile" class="twelve columns">
+
+  <div class="row collapse" id="user-films-banner">
+    <div class="one columns">
+      <%= image_tag user.gravatar_url %>
+    </div>
+    <div class="three columns user-name">
+       <h3><%= user.name %></h3>
+    </div>
+  </div>
+
+
+  <div id="contentHolder">
+    <%= render partial: 'users/films' %>
+  </div>
+</div>
+

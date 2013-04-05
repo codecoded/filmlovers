@@ -28,7 +28,7 @@
       <div class="two columns">
         <% [:watched, :loved, :owned].each do |action| %>
           <div class="counter">
-            <%= link_to users_actioned_film_path(film, action) do %>
+            <%= link_to users_film_path(film, action) do %>
               <%= icon_for action, user_action==action %>
               <label><%= film.users[action].count %></label>
             <% end %>
@@ -38,13 +38,15 @@
       <div class="ten columns">
         <% @users.each do |user| %>
           <div class="user-avatar left">
-            <%= link_to user_lists_path(user) do %>
+            <%= link_to user_path(user) do %>
               <%= image_tag user.gravatar_url %>
               <label><%= user.name %></label>
              <% end %>
             <% [:watched, :loved, :owned].each do |action| %>
-              <%= icon_for action %>
-              <label style="display:inline"><%= user.films[action].count %> </label>
+              <%= link_to user_film_path(user, action) do %>
+                <%= icon_for action %>
+                <label style="display:inline"><%= user.films[action].count %> </label>
+              <% end %>
             <% end %>
           </div>
         <% end %>

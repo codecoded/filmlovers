@@ -1,0 +1,38 @@
+ <div class="row films-list" id="filmsIndex">
+  <div class="two columns">
+    <% [:watched, :loved, :owned].each do |action| %>
+      <div class="counter">
+        <%= link_to user_path(user, user_action: action, order: order, by: by) do %>
+          <%= icon_for action, user_action==action %>
+          <label><%= user.films[action].count %></label>
+        <% end %>
+      </div>
+    <% end %> 
+     <p id="sort-link"><label>Sort by</label>
+      <select id="sort-option">
+        <%= user_films_sort_option user, user_action, :release_date, :desc, "Newest Release"  %>
+        <%= user_films_sort_option user, user_action, :release_date, :asc, "Oldest Release"  %>
+        <%= user_films_sort_option user, user_action, :title, :asc, "Title A-Z"  %>
+        <%= user_films_sort_option user, user_action, :title, :desc, "Title Z-A"  %>
+      </select>
+     </p>
+  </div>
+  <div class="ten columns films centered" id="filmsContent" >
+      <%= render partial: 'films/film', collection: @films_page.films, as: :film_presenter %>
+      <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>
+  </div>
+</div>
+
+
+<% if viewing_own? and current_user %>
+<script>
+ $(document).on('film:<%= user_action.to_sym %>:unactioned', function(event, film){
+    film.toggle(function(){
+      counter = $('#user-films-count')
+      counter.text(parseInt(counter.text()) - 1)
+      film.remove()
+    })
+
+})
+</script>
+<% end %>

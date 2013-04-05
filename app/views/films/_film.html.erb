@@ -22,7 +22,7 @@
   <div class="film-heading-border film-director">
     <% [:watched, :loved, :owned].each do |action| %>
       <span>
-        <%= link_to users_actioned_film_path(film_presenter.film, action) do %>
+        <%= link_to users_film_path(film_presenter.film, action) do %>
           <%= icon_for action, film_presenter.actioned?(action) %>
           <%= label_tag film_presenter.id, data: {counter: action} do %> 
             <%= film_presenter.stats(action) %>

@@ -9,18 +9,18 @@ class UserFilmsController < ApplicationController
   end
   
   def show
-    results_page = user_service.paged_list(list_name, order, by, params[:page].to_i, 70)
-    @films_page = FilmsPagePresenter.new current_user, results_page, list_name
+    results_page = UserService.new(user).paged_list(user_action, order, by, params[:page].to_i, 70)
+    @films_page = FilmsPagePresenter.new user, results_page, user_action
     render layout:nil if request.xhr?
   end
 
   def update
-    count = queue? ? user_service.queue(film) : user_service.add(film, list_name)
+    count = queue? ? user_service.queue(film) : user_service.add(film, user_action)
     render_ok count
   end
 
   def destroy
-    count = queue? ? user_service.dequeue(film) : user_service.remove(film, list_name)
+    count = queue? ? user_service.dequeue(film) : user_service.remove(film, user_action)
     render_ok count
   end
 
@@ -52,12 +52,12 @@ class UserFilmsController < ApplicationController
     params[:user_id]
   end
 
-  def list_name
+  def user_action
     params[:id].to_sym
   end
 
   def queue?
-    list_name == :queued
+    user_action == :queued
   end
 
   def film 
@@ -72,4 +72,6 @@ class UserFilmsController < ApplicationController
     params[:by] || :desc
   end
 
+
+  helper_method :user, :order, :by, :user_action
 end

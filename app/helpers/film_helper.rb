@@ -13,7 +13,7 @@ module FilmHelper
   end
 
   def film_poster_link(film, poster_size='w154')
-    link_to film_path(film.id), title: film.title do 
+    link_to film_path(film), title: film.title do 
       poster(film, poster_size)
     end
   end

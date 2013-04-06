@@ -33,7 +33,7 @@ class FilmRepository
     film = Film.new Tmdb::Movie.find(film_id)
     film.upsert
     cache.set film.id
-    film
+    Film.find(film_id)
   end
 
 end

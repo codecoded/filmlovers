@@ -38,13 +38,13 @@ FL.Films = {
   endlessScroll: function(){
     self = this
     loading = false
-    threshold = 450
+    threshold = 600
 
     $(window).scroll(function()
     {
       currentPos = $(window).scrollTop() + threshold 
       totalHeight = $(document).height() - $(window).height()
-
+      console.log(totalHeight)
       if(currentPos >= totalHeight && !loading)
       {
         next = $('#filmsLinkNext').attr('href')

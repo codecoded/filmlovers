@@ -5,6 +5,6 @@ class FilmsRepository
   end
 
   def self.films_by(film_ids, order, by=:asc, count=0)
-    Film.order_by([order, by]).limit(count).find(film_ids)
+    Film.only(:poster_path, :name, :title, :release_date).order_by([order, by]).limit(count).find(film_ids)
   end
 end

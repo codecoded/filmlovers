@@ -9,7 +9,7 @@ class UserFilmsController < ApplicationController
   end
   
   def show
-    results_page = UserService.new(user).paged_list(user_action, order, by, params[:page].to_i, 70)
+    results_page = UserService.new(user).paged_list(user_action, order, by, params[:page].to_i, 50)
     @films_page = FilmsPagePresenter.new current_user, results_page, user_action
     render layout:nil if request.xhr?
   end

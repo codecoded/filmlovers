@@ -18,15 +18,15 @@
     <div class="twelve columns">
       <h3 class="show-for-small"></h3>
       <div class="panel" id="films_recently_watched">
-        <p class="section_description">Popular films at filmlovers</p>
+        <p class="section_description">Popular films</p>
         <div class="eleven columns centered">
-        <% FilmsRepository.top_for(:watched, 10).each do |film| %>
+        <% FilmsRepository.top_for(:loved, 10).each do |film| %>
           <div class="film-small">
             <button class="tile counter">
-               <%= link_to users_film_path(film, :watched) do %> 
-              <i class="icon-eye-open icon-2x"></i>
+               <%= link_to users_film_path(film, :loved) do %> 
+              <i class="icon-heart actioned icon-2x"></i>
               <label>
-                  <%= film.score_for(:watched).round 0 %>
+                  <%= film.score_for(:loved).round 0 %>
               </label>
                <% end %>
             </button>

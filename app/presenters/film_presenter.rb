@@ -55,6 +55,6 @@ class FilmPresenter
 
   def similar_films
     return unless similar_films?
-    film.similar_movies['results'].map {|f| FilmPresenter.new user, Film.new(f), 'w92'}
+    film.similar_movies['results'].compact.map {|f| FilmPresenter.new user, Film.new(f), 'w92'}
   end
 end

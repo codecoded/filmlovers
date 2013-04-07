@@ -2,7 +2,7 @@ class Film
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :_id, type: Integer, default: ->{ id.to_id }
+  field :_id, type: Integer, default: ->{ id.to_id if id}
   field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}"}
   field :fetched, type: DateTime, default: nil
 

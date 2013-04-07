@@ -41,10 +41,6 @@ class FilmPresenter
     @director ? @director['name'] : ''
   end
 
-  # def trailer
-  #   "https://www.youtube.com/embed/#{film.trailer}" if film.has_trailer?
-  # end
-
   def backdrops
     film.images_library.backdrops
   end

@@ -5,7 +5,7 @@
       <% @film_view.similar_films.each do |film_view| %>
         <div class="film-small">
         <% if film_view.film.id %>
-          <%= link_to film_path(film_view.film.id), remote:true do %>
+          <%= link_to film_path(film_view.film.id) do %>
             <%= poster(film_view.film, 'w45') %>
           <%end %>
            <span class="right"> <%= film_view.title %> </span>

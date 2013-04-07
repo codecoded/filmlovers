@@ -2,12 +2,7 @@ require 'results_page'
 class GenresController < ApplicationController
 
   def show
-    cache_key = "genre_#{genre}_page_" + (params[:page] || '')
-
-    results = Rails.cache.fetch cache_key do
-      results = TmdbFilmsSearch.new.by_genre genre.id, page_options
-    end
-
+    results = TmdbFilmsSearch.new.by_genre genre.id, page_options
     present(results, params[:genre_id]) 
   end
 

@@ -13,7 +13,7 @@
         <% [:watched, :loved, :owned].each do |action| %>
           <%= action_icon action, film_presenter %>
         <% end %>
-        <%= link_to queue_path(current_user, :list, film_ids: film_presenter.id), :class=>'display-modal unactioned' do %>
+        <%= link_to queue_path(current_user, :list, film_ids: film_presenter.film), :class=>'display-modal unactioned' do %>
           <%= awesome 'list' %>
         <% end %>
       </div>

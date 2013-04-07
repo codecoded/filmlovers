@@ -7,7 +7,7 @@
   :director => @film_view.director
 } %> -->
 
-<% set_meta_tags :title => film.title %>
+<% set_meta_tags :title => title_with_year(film) %>
 <% set_meta_tags :description => tagline(film) %>
 <% set_meta_tags :og => {
   :title    => film.title,

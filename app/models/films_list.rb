@@ -9,8 +9,8 @@ class FilmsList
   embedded_in :user
   embeds_many :film_list_items
 
-  def films
-    film_ids.map {|id| Film.find id}
+  def films 
+    film_ids.map {|id| Film.fetch id}
   end
 
   def film_ids

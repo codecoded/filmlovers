@@ -18,24 +18,24 @@
     
     <div class="nine columns">
        <% @films_list.each do |list| %>
-      <%= content_tag :fieldset, :class => 'row list-summary', data:{href: user_list_path(list.user, list)} do %>
-        <legend><%=list.name %></legend>
-      
-        <div class="five columns user-list">       
-          <% list.films.take(10).each do |film| %>
-            <div class="left film">
-              <%= poster(film, 'w90') %>
-            </div>
-          <% end %>
-        </div> 
-        <div class="one columns">
-          <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
-        </div>
-        <div class="six columns">
-          <p><%= list.description %></p>
-        </div> 
-      </fieldset>
-      <% end %>
+        <%= content_tag :fieldset, :class => 'row list-summary', data:{href: user_list_path(list.user, list)} do %>
+          <legend><%=list.name %></legend>
+        
+          <div class="five columns user-list">       
+            <% list.films.take(10).each do |film| %>
+              <div class="left film">
+                <%= poster(film, 'w90') %>
+              </div>
+            <% end %>
+          </div> 
+          <div class="one columns">
+            <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
+          </div>
+          <div class="six columns">
+            <p><%= list.description %></p>
+          </div> 
+        </fieldset>
+        <% end %>
       <% end %>
     </div>
     <div class="three columns">

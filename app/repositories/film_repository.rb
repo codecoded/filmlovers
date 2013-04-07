@@ -16,11 +16,15 @@ class FilmRepository
   end
 
   def is_cached?
-    cache.exists?
+    film and film.fetched != nil
   end
 
   def load
-    Film.find(film_id) || fetch
+    film || fetch
+  end
+
+  def film
+    @film ||= film_id.is_a?(Integer) ? Film.find(film_id) : Film.find_by(_title_id: film_id)
   end
 
   def redis_key
@@ -30,10 +34,13 @@ class FilmRepository
   protected 
 
   def fetch
-    film = Film.new Tmdb::Movie.find(film_id)
-    film.upsert
-    cache.set film.id
-    Film.find(film_id)
+    id = film ? film._id : film_id
+    _film = Film.new Tmdb::Movie.find(id)
+    _film.fetched = Time.now.utc
+    _film.upsert
+    _film
+    # cache.set film_id
+    # Film.find(film_id)
   end
 
 end

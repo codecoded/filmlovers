@@ -1,7 +1,10 @@
 class Film
   include Mongoid::Document
+  include Mongoid::Timestamps
 
-  field :_id, type: String, default: ->{ id }
+  field :_id, type: Integer, default: ->{ id.to_id }
+  field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}"}
+  field :fetched, type: DateTime, default: nil
 
   FilmLists = [:watched, :loved, :unloved, :queued]
 
@@ -63,6 +66,10 @@ class Film
     watched = score_for :watched
     return 0 unless watched > 0
     ((score_for(:loved) / watched) * 100).round(0)
+  end
+
+  def to_param
+    "#{title.parameterize}-#{year}"
   end
 
 end

@@ -15,7 +15,7 @@
           <ul class="disc credits">
             <% @film_view.film.credits.cast.each do |person| %>
             <li style="border-bottom: dotted 1px lightblue;">
-              <%= link_to person_path(person.id), remote:true do %>
+              <%= link_to person_path(person.id) do %>
                 <%= content_tag :span, person.name, {:class => 'person link'} %>
               <% end %>
               <span class="right"> <%= person.character %> </span>
@@ -31,7 +31,7 @@
           <ul class="disc credits">
           <% @film_view.film.credits.crew.each do |person| %>
             <li style="border-bottom: dotted 1px lightblue;">
-              <%= link_to person_path(person.id), remote:true do %>
+              <%= link_to person_path(person.id) do %>
                 <%= content_tag :span, person.name, {:class => 'person link'} %>
               <% end %>
               <span class="right"> <%= person.job %> </span>

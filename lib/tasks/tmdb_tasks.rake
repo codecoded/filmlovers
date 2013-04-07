@@ -28,9 +28,8 @@ namespace :tmdb do
 
   def fetch_films(results_page)
     timestamp = Time.now 
-
     results_page.results.each do |film_id| 
-      film = Film.fetch film_id
+      film = Film.fetch film_id.id
       Log.debug "Film: #{film.title}"
     end
 

@@ -24,7 +24,7 @@ class FilmRepository
   end
 
   def film
-    @film ||= film_id.is_a?(Integer) ? Film.find(film_id) : Film.find_by(_title_id: film_id)
+    @film ||= film_id.is_a?(Integer) ? Film.find(film_id.to_i) : Film.find_by(_title_id: film_id)
   end
 
   def redis_key

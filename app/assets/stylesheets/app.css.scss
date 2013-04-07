@@ -18,6 +18,16 @@ body{
 
 .top-bar{
   margin-bottom: 0px;
+  .name 
+  {
+    h3{
+    margin: 0px;
+
+    a{ 
+      font-size: 1em !important;
+    }
+  }
+  }
 }
 #alerts{
   position: absolute;

@@ -1,7 +1,7 @@
 class FilmsRepository
 
   def self.top_for(list_name, count=10)
-    Film.find Films[list_name].films(count-1)
+    Film.only(:poster_path, :name, :title, :release_date).find Films[list_name].films(count-1).map {|id,score| id}
   end
 
   def self.films_by(film_ids, order, by=:asc, count=0)

@@ -44,7 +44,6 @@ FL.Films = {
     {
       currentPos = $(window).scrollTop() + threshold 
       totalHeight = $(document).height() - $(window).height()
-      console.log(totalHeight)
       if(currentPos >= totalHeight && !loading)
       {
         next = $('#filmsLinkNext').attr('href')

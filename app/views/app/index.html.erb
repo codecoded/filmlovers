@@ -14,54 +14,39 @@
 <% else %>
 
 
-  <div class="row" id="banner-row">
-    <div class="twelve columns">
-      <h3 class="show-for-small"></h3>
-      <div class="panel" id="films_recently_watched">
-        <p class="section_description">Popular films</p>
-        <div class="eleven columns centered">
-        <% FilmsRepository.top_for(:loved, 10).each do |film| %>
-          <div class="film-small">
-            <button class="tile counter">
-               <%= link_to users_film_path(film, :loved) do %> 
-              <i class="icon-heart actioned icon-2x"></i>
-              <label>
-                  <%= film.score_for(:loved).round 0 %>
-              </label>
-               <% end %>
-            </button>
-            <%= link_to film do %>
-              <%= poster(film, 'w90') %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-        <div style="clear:both"></div>
-      </div>
+  <div class="row banner  welcome-backdrop" id="banner-sign-in">
+    <div class="six columns centered">
+      <p id="greeting-text">
+        <h1>filmlovers</h1>
+        <h2>Watch, share and discover films </h2>
+      </p>
     </div>
   </div>
-  <% end %>
+<% end %>
 
   <div class="row" id="icon-descriptions">
     <div class="four columns">
       <div class="radius panel pagination-centered">
-        <h4>Watched</h4>
+        <h4><%= Films[:watched].count %> films watched</h4>
          <i class="icon-eye-open icon-3x actioned"></i>
          <p>remember films you have watched.</p>
+        <%= render partial: 'films_recently_actioned', locals:{action: :watched} %>
       </div>
     </div>
     <div class="four columns">
       <div class="radius panel pagination-centered">
-        <h4>Loved</h4>
+        <h4><%= Films[:loved].count %> films loved</h4>
          <i class="icon-heart icon-3x actioned"></i>
          <p>you know when you loved a film!</p>
+         <%= render partial: 'films_recently_actioned', locals:{action: :loved} %>
       </div>
     </div>
     <div class="four columns">
       <div class="radius panel pagination-centered">
-        <h4>Owned</h4>
+        <h4><%= Films[:owned].count %> films owned</h4>
         <i class="icon-home icon-3x actioned"></i>
         <p>what films do you have at home?</p>
+        <%= render partial: 'films_recently_actioned', locals:{action: :owned} %>
       </div>
     </div>
 <!--     <div class="three columns">

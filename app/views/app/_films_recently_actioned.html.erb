@@ -1,0 +1,17 @@
+<div class="films_recently_actioned">
+  <% FilmsRepository.top_for(action, 3).each do |film| %>
+    <div class="film-small">
+      <button class="tile counter">
+         <%= link_to users_film_path(film, action) do %> 
+         <%= icon_for action %>
+        <label>
+            <%= film.score_for(action).round 0 %>
+        </label>
+         <% end %>
+      </button>
+      <%= link_to film do %>
+        <%= poster(film, 'w90') %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

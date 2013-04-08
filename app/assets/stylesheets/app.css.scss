@@ -220,12 +220,7 @@ body{
 
 .banner{
   text-shadow: 2px 2px 2px black;
-  &.sign-in-backdrop{
-    position: relative;
-    background: url(/assets/backdrop-sign-in_2.jpg) top center no-repeat;
-    min-height: 400px;
-    background-clip: content-box;
-    #greeting-text{
+      #greeting-text{
       text-align: center; 
     }
     h1, h2{
@@ -241,6 +236,18 @@ body{
     h3{
       font-size: 1.4em;
     }
+  &.sign-in-backdrop{
+    position: relative;
+    background: url(/assets/backdrop-sign-in_2.jpg) top center no-repeat;
+    min-height: 400px;
+    background-clip: content-box;
+  }
+  &.welcome-backdrop{
+    position: relative;
+    background: url(/assets/backdrop-sign-in_1.jpg) top center no-repeat;
+    min-height: 300px;
+    background-clip: content-box;
+    background-position-y: -100px
   }
 }
 
@@ -277,13 +284,16 @@ ul, ol, dl{
   color: #2B2525;
 }
 
-#films_recently_watched{
+.films_recently_actioned{
   .film-small{
-    float: left;
     padding: 0 2px;
-    border: solid 4px transparent;
+    // border: solid 4px transparent;
     border-radius: 5px;
     position: relative;
+    display: inline;
+    i{
+      font-size: 2em
+    }
     &:hover{
       border-color: #9CD6EC;
     }

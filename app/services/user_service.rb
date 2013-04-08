@@ -14,6 +14,8 @@ class UserService
     return unless user.films[list].add film.id
     film.users[list].add user.id
     Films[list].incr film
+
+    fb_action film, list
     user.films[list].count
   end
 

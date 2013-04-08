@@ -9,7 +9,14 @@
 
 <% set_meta_tags :title => films_list.name %>
 <% set_meta_tags :description => films_list.description %>
-
+<% set_meta_tags :og => {
+  :title    => film.title,
+  :type     => 'website',
+  :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
+  :image    => backdrop films_list.films.first, 'w154',
+  :site_name   =>'filmlovers - find, share, discover',
+  :description => films_list.description 
+} %>
 
 <% set_meta_tags :fb => {
   :admins => '537020179',

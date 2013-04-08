@@ -18,6 +18,10 @@ class FilmsScoreChart
     set.decr film.id
   end
 
+  def count
+    set.length
+  end
+
   def score_for(film_id)
     set.score film_id
   end

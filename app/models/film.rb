@@ -50,6 +50,7 @@ class Film
   end
 
   def director
+    return '' unless credits and credits.crew
     @director ||= credits.crew.find {|member| member['job']=='Director'}
     @director ? @director['name'] : ''
   end

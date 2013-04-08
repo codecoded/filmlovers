@@ -7,19 +7,28 @@
   :director => @film_view.director
 } %> -->
 
+
+
 <% set_meta_tags :title => title_with_year(film) %>
 <% set_meta_tags :description => tagline(film) %>
+
 <% set_meta_tags :og => {
   :title    => film.title,
-  :type     => 'movie',
+  :type     => 'video.movie',
   :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
   :image    => film.poster('w342'),
   :site_name   =>'filmlovers - find, share, discover',
-  :video    => film.trailer,
+  :video    => "http://www.youtube.com/embed/#{film.trailer}",
   :description => film.overview
+} %>
+
+<% set_meta_tags :video =>{
+  duration: film.runtime,
+  # director: film.director,
+  release_date: film.release_date
 } %>
 
 <% set_meta_tags :fb => {
   :admins => '537020179',
-  :app_id => '116125521892926'
+  :app_id => Facebook::app_id 
 } %>

@@ -50,5 +50,18 @@ var FacebookAPI = {
 
   fql: function(querystring, callback){
     FB.api({method:'fql.query', query:querystring}, callback)
+  },
+
+  watchFilm: function postLike() {
+    FB.api(
+      'me/video.watches',
+      'post',
+      {
+        movie: "http://45j3.localtunnel.com/films/ted-2012"
+      },
+      function(response) {
+        console.log(response)
+      }
+    );
   }
 }

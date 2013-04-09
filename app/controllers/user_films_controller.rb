@@ -1,6 +1,8 @@
 class UserFilmsController < ApplicationController
   
   before_filter :validate_username
+  after_filter :publish_story, only: [:update]
+  # after_filter :delete_story, only: [:destroy]
   skip_before_filter :validate_current_user, :except => [:update, :destroy]
 
 
@@ -15,16 +17,17 @@ class UserFilmsController < ApplicationController
   end
 
   def update
-    count = queue? ? user_service.queue(film) : user_service.add(film, user_action)
+    count = user_service.add(film, user_action)
     render_ok count
   end
 
   def destroy
-    count = queue? ? user_service.dequeue(film) : user_service.remove(film, user_action)
+    count = user_service.remove(film, user_action)
     render_ok count
   end
 
   protected 
+
   def render_ok(count)
     respond_to do |format|
       format.json  { render json: {count: count} }
@@ -47,17 +50,12 @@ class UserFilmsController < ApplicationController
     end
   end
 
-
   def user_id
     params[:user_id]
   end
 
   def user_action
     params[:id].to_sym
-  end
-
-  def queue?
-    user_action == :queued
   end
 
   def film 
@@ -72,6 +70,27 @@ class UserFilmsController < ApplicationController
     params[:by] || :desc
   end
 
+  def publish_story
+    action = case user_action
+              when :loved; "video.watches"
+              when :watched;  "#{Facebook::namespace}:love"
+              else; nil
+            end
+    return unless action and facebook_passport
+    Thread.new do
+      Facebook::UserAPI.new(facebook_passport).publish_story action, :movie, film_url(film)
+    end
+    rescue
+      Log.debug 'failed to publish story'
+  end
+
+
+  def delete_story
+  end
+
+  def facebook_passport
+    current_user.passport_for(:facebook)
+  end
 
   helper_method :user, :order, :by, :user_action
 end

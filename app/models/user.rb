@@ -1,5 +1,6 @@
 class User
   include Mongoid::Document
+  include Mongoid::Timestamps
   include Gravtastic
 
   gravtastic
@@ -58,7 +59,11 @@ class User
   end
 
   def passport_provider?(provider)
-    passports.where("provider" => provider.to_s).exists?
+    passport_for(provider)
+  end
+
+  def passport_for(provider)
+    passports.find_by(provider: provider.to_s)
   end
 
   def update_username(username)

@@ -54,4 +54,8 @@ class UserService
     films_queue.remove film.id
     films_queue.count
   end
+
+  def fb_action(film, list)
+
+  end
 end

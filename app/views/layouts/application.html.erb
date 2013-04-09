@@ -25,15 +25,18 @@
   <body >
     <%= render :template => 'facebook/sdk' %>
     <div id="alerts" class="row"></div>
-    <header id="header" class="row collapse">
-      <%= render partial:"layouts/header" %>
-    </header>
 
-    <div id="container" class="row" data-pjax-container>
-      <%= yield %>
+    <div id="wrap">
+      <header id="header" class="row collapse">
+        <%= render partial:"layouts/header" %>
+      </header>
+
+      <div id="container" class="row">
+        <%= yield %>
+      </div>
+      <div id="modals"></div>
     </div>
-
-    <div id="modals"></div>
+   
     <%= render partial:"layouts/footer" %>
   </body>
 </html>

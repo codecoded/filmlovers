@@ -1,5 +1,36 @@
-.social-links{
+
+#footer{
+  // position: fixed;
+  bottom: 0;
+  background-color: #222;
+  // height: 75px;
+  z-index:999;
+  margin-top: 40px;
   position: relative;
-  top: -2em;
-  padding-right: 5px;
+  ul{
+    list-style: none;
+    li{
+      float: left;
+      padding: 0px 20px;
+      font-size: 12pt;
+      a{
+        color: white;
+      }
+    }
+  }
+  .copyright{
+    font-size: 8pt;
+    color: gray;
+    padding: 15px 0px;
+  }
+  i{
+    font-size: 32pt;
+  }
+  .social-links{
+    position: absolute;
+    padding-right: 5px;
+    right: 50px;
+    bottom: 5px;
+  }
+
 }

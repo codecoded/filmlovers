@@ -1,0 +1,33 @@
+<div class="push"></div>
+<div id="footer" class="row">
+  <div class="twelve columns">
+  <% if logged_in? %>
+    <div data-bind="style: {display: 'block'}" class="image_carousel" style="display:none">
+      <%= render partial: 'app/queue_actions'%>
+      <div id="foo2" data-bind="foreach: films" class="films" >
+
+        <div class="film-small" >
+          <ul class="film-actions-queue" data-bind="with: actions[3]">
+            <div class="film-actions-horizontal">
+              <button data-bind="click: action" class="tiled left">
+                <i class="icon-eject"></i>
+              </button>
+            </div>
+          </ul>
+          <span class="film-small" data-bind="css:{'film-selected': selected}, click: select">
+            <img data-bind="attr: {src: thumbnail, title: title}" class="small"/>
+          </span>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <a class="prev" id="foo2_prev" href="#"><i class="icon-chevron-left icon-2x"></i> </a>
+      <a class="next" id="foo2_next" href="#"><i class="icon-chevron-right icon-2x"></i></a>
+      
+    </div>
+  <% end %>
+    <div class="social-links right">
+      <a href="https://plus.google.com/u/0/b/102126390982504640495/communities/115013069818203491300" rel="publisher" target="_blank">Find us on Google+</a>
+    </div>
+  </div>
+
+</div>

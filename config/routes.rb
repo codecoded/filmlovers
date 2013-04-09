@@ -45,7 +45,9 @@ Filmlovers::Application.routes.draw do
     put 'list/:id', to: 'queue#update_list', as: 'queue_to_list'
   end
 
-
+  scope 'site' do
+    get ':action', to: 'site', as: 'site'
+  end
 
   scope ':user_id', :constraints => { :user_id => /.*/ } do
     resources :films, :only => [:index, :show], to: 'user_films', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 

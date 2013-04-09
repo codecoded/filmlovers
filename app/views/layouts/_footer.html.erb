@@ -1,33 +1,42 @@
-<div class="push"></div>
-<div id="footer" class="row">
+
+<div id="footer" class="row pagination-centered">
+  <div class="five columns centered">
+    <nav>
+      <ul>
+        <li>
+          <%= link_to 'about', site_path('about') %>
+        </li>
+        <li>
+           <%= link_to 'help', site_path('help') %>
+        </li>
+        <li>
+           <%= link_to 'feedback', site_path('feedback') %>
+        </li>
+        <li>
+          <%= link_to 'terms', site_path('terms') %>
+        </li>        
+        <li>
+           <%= link_to 'contact', site_path('contact') %>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
   <div class="twelve columns">
-  <% if logged_in? %>
-    <div data-bind="style: {display: 'block'}" class="image_carousel" style="display:none">
-      <%= render partial: 'app/queue_actions'%>
-      <div id="foo2" data-bind="foreach: films" class="films" >
-
-        <div class="film-small" >
-          <ul class="film-actions-queue" data-bind="with: actions[3]">
-            <div class="film-actions-horizontal">
-              <button data-bind="click: action" class="tiled left">
-                <i class="icon-eject"></i>
-              </button>
-            </div>
-          </ul>
-          <span class="film-small" data-bind="css:{'film-selected': selected}, click: select">
-            <img data-bind="attr: {src: thumbnail, title: title}" class="small"/>
-          </span>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-      <a class="prev" id="foo2_prev" href="#"><i class="icon-chevron-left icon-2x"></i> </a>
-      <a class="next" id="foo2_next" href="#"><i class="icon-chevron-right icon-2x"></i></a>
-      
+    <div class="copyright">
+      <span>© filmlovers ltd 2013.</span>
+      <span>film data supplied by <a href="http://themoviedb.org" target="_blank">TMDb</a></span>
     </div>
-  <% end %>
-
-  <div class="social-links right">
-    <a href="https://plus.google.com/u/0/b/102126390982504640495/communities/115013069818203491300" rel="publisher" target="_blank">Find us on Google+</a>
   </div>
-  </div>
+    <div class="social-links">
+      <a href="https://plus.google.com/u/0/b/102126390982504640495/communities/115013069818203491300" rel="publisher" target="_blank">
+        <%= awesome 'google-plus-sign' %>
+      </a>
+      <a href="https://www.facebook.com/FilmLoversUK?ref=hl" rel="publisher" target="_blank">
+        <%= awesome 'facebook-sign' %>
+      </a>
+      <a href="http://twitter.com/heyfilmlovers" rel="publisher" target="_blank">
+        <%= awesome 'twitter-sign' %>
+      </a>
+    </div>
 </div>

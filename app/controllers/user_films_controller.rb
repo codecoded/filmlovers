@@ -72,8 +72,8 @@ class UserFilmsController < ApplicationController
 
   def publish_story
     action = case user_action
-              when :loved; "video.watches"
-              when :watched;  "#{Facebook::namespace}:love"
+              when :loved; "#{Facebook::namespace}:love"
+              # when :watched;  "#{Facebook::namespace}:love"
               else; nil
             end
     return unless action and facebook_passport

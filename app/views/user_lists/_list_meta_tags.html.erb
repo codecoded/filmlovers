@@ -10,8 +10,17 @@
 <% set_meta_tags :title => films_list.name %>
 <% set_meta_tags :description => films_list.description %>
 
+<% set_meta_tags :og => {
+  :title    => films_list.name,
+  :type     => "collection",
+  :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
+  :image    => films_list.films.first.poster('w342'),
+  :site_name   =>'filmlovers - find, share, discover',
+  :description => films_list.description
+} %>
+
 
 <% set_meta_tags :fb => {
   :admins => '537020179',
-  :app_id => '116125521892926'
+  :app_id => Facebook::app_id
 } %>

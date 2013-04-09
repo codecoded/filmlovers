@@ -8,7 +8,7 @@
     </div>
     <div class="three columns user-name">
        <h3><%= @user.name %></h3>
-        <p><%= @films_list.name %></p>
+       
     </div>
     <div class="three columns user-actions">
        <h3 class="list-name">
@@ -19,15 +19,12 @@
   </div>
 
   <div class="row">
-    <div class="three columns">
+    <div class="nine columns films" id="userList">
+      
       <div class="panel">
+        <h3 class="list-name"><%= @films_list.name %></h3>
         <p><%= @films_list.description %></p>
       </div>
-      <div class="pagination-centered">
-        <%= render partial: 'shared/lovefilm_300x250' %>                      
-      </div>
-    </div>
-    <div class="nine columns films" id="userList">
       <ol>
         <% @films_list.films.each_with_index do |film, index| %>
           <li >  
@@ -68,7 +65,12 @@
         <% end %>
       </ol>
     </div>
+    <div class="three columns">
 
+      <div class="pagination-centered">
+        <%= render partial: 'shared/lovefilm_300x250' %>                      
+      </div>
+    </div>
   </div>
 
 <div>

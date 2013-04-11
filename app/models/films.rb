@@ -6,7 +6,7 @@ class Films
   end
 
   def self.count_for(action)
-    [action].count
+    self[action].count
   end
 
 end

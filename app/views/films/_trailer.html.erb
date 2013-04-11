@@ -1,3 +1,6 @@
+<% set_meta_tags :title => "#{title_with_year(film)} - trailer" %>
+
+
 <div class="row" id="film-content-trailer">
   <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
   <div class="eight columns">

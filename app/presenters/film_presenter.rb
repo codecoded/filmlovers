@@ -15,11 +15,10 @@ class FilmPresenter
 
   def actioned?(action)
     return false unless user
-    action == :queued ? user.films_queue.exists?(film.id) : user.films[action].is_member?(film.id)
+    user.film_actioned? film, action
   end
 
   def stats(action)
-    return if action == :queued
     film.users[action].count
   end
 
@@ -39,10 +38,6 @@ class FilmPresenter
   def director
     @director ||= film.credits.crew.find {|member| member['job']=='Director'}
     @director ? @director['name'] : ''
-  end
-
-  def backdrops
-    film.images_library.backdrops
   end
 
   def year

@@ -1,8 +1,8 @@
 
     
   <!-- Header and Nav -->
-  
-  <div class="row">
+  <div class="twelve columns">
+  <div class="row collapse">
     <div class="seven columns">
       <h1><%= @person_view.name %> </h1>
       
@@ -10,17 +10,13 @@
   </div>
   
 
-  <div class="row" id="biography">
+  <div class="row collapse" id="biography">
     <div class="three columns">
      <%= image_tag @person_view.person.profile('w342') %>
     </div>
     <div class="five columns">
       <h4>Biography</h4>
-      <div class="row">
-        <div class="twelve columns">
-          <p><%= @person_view.biography %></p>
-        </div>
-      </div>
+      <p><%= @person_view.biography %></p>
     </div>
      <div class="four columns credits" id="credits">
       <dl class="tabs">
@@ -63,7 +59,7 @@
         </li>
         <li id="filmsTab">
           <div class="row" id="similar">
-            <div class="twelve columns crew">
+            <div class="e columns crew">
               <ul class="disc credits">
               <% @person_view.films.each do |film_view| %>
                 <div class="film-small">
@@ -82,3 +78,4 @@
       </ul>
     </div>
   </div>
+</div>

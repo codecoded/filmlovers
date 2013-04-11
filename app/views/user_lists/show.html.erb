@@ -54,9 +54,9 @@
             </div> 
             <div class="three columns">
               <div class="film-actions-vertical pagination-centered" >
-                <% [:watched, :loved, :owned, :queued].each do |action| %>
+                <% [:watched, :loved, :owned].each do |action| %>
                   <button>
-                    <%= action_icon action, FilmPresenter.new(current_user, film) %>
+                    <%= action_icon action, film %>
                   </button>
                 <% end %>
               </div>

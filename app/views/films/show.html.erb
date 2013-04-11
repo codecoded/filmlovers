@@ -1,82 +1,46 @@
-<%= render partial: 'film_meta_tags', locals: {film: @film_view.film} %>
+<%= render partial: 'film_meta_tags', locals: {film: film} %>
 
-<div id="viewContent" class="twelve columns">
-    <!-- Header and Nav -->
-  <div class="twelve columns">
-    <h3 style="float:right; display:inline"><i class="icon-heart"> <%= @film_view.film.score %> </i></h3>
-    <div class="row">
-      <div class="seven columns">
-        <h1 class="film-title"><%= @film_view.title %></h1>
-        <label>Directed by <span><%= @film_view.director %></span> <span><%= year(@film_view) %></span><label>  
-      </div>
-      <div class="five columns">
-        <ul class="nav-bar right">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#credits">Credits</a></li>
-          <% if @film_view.has_trailer?   %> <li><a href="#" id="trailersLink" data-reveal-id="filmTrailersModal" data-animation="none" >Trailers</a></li><% end %>
-        </ul>
-      </div>
-    </div>
-    
-    <%= render partial: 'backdrop' %>
+<div id="filmsActioned" class="twelve columns">
 
-    <div class="row">
-      <div class="two columns pagination-centered">
-        <%= image_tag @film_view.film.poster('w342') %>
-        <div id="shopLinks">
-          <%= render partial: 'shared/amazon_search', locals: {title: "#{@film_view.title} #{@film_view.year}"} %>
-          <%= render partial: 'shared/itunes', locals: {title: "#{@film_view.title}"} %>
-        </div>
-        <div id="film-affiliate">
-          <a href="http://www.awin1.com/cread.php?s=302293&v=2481&q=142401&r=171645" target="_blank">
-            <img src="http://www.awin1.com/cshow.php?s=302293&v=2481&q=142401&r=171645" border="0">
-          </a>
-        </div>
-
-      </div>
-      <% if logged_in? %>
-      <div class="one columns" id="film-main-actions">
-        <div class="film-actions-vertical pagination-centered" >
-          <% [:watched, :loved, :owned].each do |action| %>
-            <%= action_button action, @film_view %>
-          <% end %>
-          <button>
-          <%= link_to queue_path(current_user, :list, film_ids:  @film_view.id), :class=>'display-modal unactioned' do %>
-            <%= awesome 'list' %>
-            <% end %>       
-          </button>
-        </div>
-      </div>
-      <% end %>
-      <div class="five columns">
-        <h4 id="overview"><%= tagline(@film_view.film) %></h4>
-        <div class="row">
-          <div class="twelve columns">
-            <%= render partial: 'shared/twitter', locals: {film: @film_view.film} %>
-            <%= render partial: 'shared/facebook_like', locals: {film: @film_view.film} %>
-            <p>
-              <% @film_view.film.genres.each do |genre| %>
-                <%= genre_link genre %>
-              <% end %>
-            </p>
-            <p><%= @film_view.film.overview %></p>
-          </div>
-        </div>
-      </div>
-      <%= render partial: 'cast_credits' %>
+  <div class="row affiliate collapse">
+    <div class="two columns right">
+      <%= render partial: 'shared/twitter', locals: {film: film} %>
+      <%= render partial: 'shared/facebook_like', locals: {film: film} %>
     </div>
   </div>
-  <div id="filmTrailersModal" class="reveal-modal xlarge">
-    <div class="row" id="trailers">
-        <div class="twelve columns">
-          <div class="flex-video">
-            <%= trailer(@film_view.film) %>
-          </div>
-        </div>
+  <div class="film-banner twelve columns">
+<!--     <div class="one columns film">
+      <%#= poster_link film, 'w92' %>
+    </div> -->
+    <div class="seven columns">  
+      <h3 class="film-title">
+        <%= link_to film_path(film) do %>
+          <%= title_with_year film %>
+        <% end %>
+      </h3>
+      <h6><%= directed_by film %></h6>
+      <h6><%#= starring film %></h6>
+      <h4 id="overview"><%#= tagline(film) %></h4>
     </div>
-    <label class="close-reveal-modal">×</label>
+
+    <div class="five columns nav-container">
+
+      <dl class="sub-nav right">
+        <% {overview: 'book', images: 'picture', cast: 'group', trailer: 'film'}.each do |view, icon| %>
+          <%= render partial: 'film_sub_nav_link', locals: {view: view, icon: icon} %>
+        <% end %>
+        <% [:watched, :loved, :owned].each do |action| %>
+        <dd>
+            <%= link_to users_film_path(film, action) do %>
+              <%= icon_for action %>
+            <% end %>
+        </dd>
+        <% end %> 
+        <%= render partial: 'film_sub_nav_link', locals: {view: 'similar', icon: 'search'} %>
+      </dl>
+    </div>
   </div>
+
+    <%= render partial: params[:view] || 'overview'%>
 </div>
-
-<script> $("#featured").orbit({directionalNav:true, fluid:false, timer:false})</script>
 

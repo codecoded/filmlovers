@@ -11,7 +11,7 @@
      <% if logged_in? %>
       <div class="film-action-buttons">
         <% [:watched, :loved, :owned].each do |action| %>
-          <%= action_icon action, film_presenter %>
+          <%= action_icon action, film_presenter.film %>
         <% end %>
         <%= link_to queue_path(current_user, :list, film_ids: film_presenter.film), :class=>'display-modal unactioned' do %>
           <%= awesome 'list' %>
@@ -25,7 +25,7 @@
         <%= link_to users_film_path(film_presenter.film, action) do %>
           <%= icon_for action, film_presenter.actioned?(action) %>
           <%= label_tag film_presenter.id, data: {counter: action} do %> 
-            <%= film_presenter.stats(action) %>
+            <%= film_presenter.film.actions_for(action).count %>
           <% end %>
         <% end %>
       </span>

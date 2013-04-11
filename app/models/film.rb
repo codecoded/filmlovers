@@ -2,6 +2,8 @@ class Film
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  has_many :film_user_actions, validate: false, dependent: :destroy
+
   field :_id, type: Integer, default: ->{ id.to_id if id}
   field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}"}
   field :fetched, type: DateTime, default: nil
@@ -32,12 +34,21 @@ class Film
     AppConfig.image_uri_for [size, poster_path] if poster_path
   end
 
+  def studios?
+    production_companies and production_companies.length > 0
+  end
+
+
   def has_backdrop?
     backdrop_path
   end
 
   def backdrop(size='original')
     AppConfig.image_uri_for [size, backdrop_path] if has_backdrop?
+  end
+
+  def backdrops
+    images_library.backdrops
   end
 
   def has_trailer?(source=:youtube)
@@ -59,18 +70,26 @@ class Film
     trailers[source.to_s][0]['source'] if has_trailer?(source)
   end
 
-  def score_for(list_name)
-    Films[list_name].score_for(id) || 0
-  end
-
   def score
-    watched = score_for :watched
+    watched = actions_for(:watched).count
     return 0 unless watched > 0
-    ((score_for(:loved) / watched) * 100).round(0)
+    ((actions_for(:loved).count / watched) * 100).round(0)
   end
 
   def to_param
     "#{title.parameterize}-#{year}"
+  end
+
+  def similar?
+    similar_movies
+  end
+
+  def similar
+    similar_movies['results'].compact.map {|f| Film.find(f['id']) || Film.create(f)}
+  end
+
+  def actions_for(action)
+    film_user_actions.where(action: action)
   end
 
 end

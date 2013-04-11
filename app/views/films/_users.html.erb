@@ -1,0 +1,20 @@
+<div class="twelve columns" id="film-content-users">
+  <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
+  <div class="eight columns">
+    <h4><%= "#{pluralize @users.count, 'film lover'} #{user_action} #{film.title}" %> </h4>
+    <% @users.each do |user| %>
+      <div class="user-avatar left">
+        <%= link_to user_path(user) do %>
+          <%= image_tag user.gravatar_url %>
+          <label><%= user.name %></label>
+         <% end %>
+        <% [:watched, :loved, :owned].each do |action| %>
+          <%= link_to user_film_path(user, action) do %>
+            <%= icon_for action %>
+            <label style="display:inline"><%= user.actions_for(action).count %> </label>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

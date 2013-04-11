@@ -1,0 +1,8 @@
+<div class="twelve columns" id="film-content-similar">
+  <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
+  <div class="eight columns films" id="filmsContent" >
+  <% if film.similar? %>
+    <%= render partial: 'films/film', collection: film.similar.map {|f| FilmPresenter.new current_user, f}, as: :film_presenter %>
+  <% end %>
+  </div>
+</div>

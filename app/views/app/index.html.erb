@@ -27,7 +27,7 @@
   <div class="row" id="icon-descriptions">
     <div class="four columns">
       <div class="radius panel pagination-centered">
-        <h4><%= Films[:watched].count %> films watched</h4>
+        <h4><%= Films.count_for(:watched) %> films watched</h4>
          <i class="icon-eye-open icon-3x actioned"></i>
          <p>remember films you have watched.</p>
         <%= render partial: 'films_recently_actioned', locals:{action: :watched} %>
@@ -35,7 +35,7 @@
     </div>
     <div class="four columns">
       <div class="radius panel pagination-centered">
-        <h4><%= Films[:loved].count %> films loved</h4>
+        <h4><%= Films.count_for(:loved) %> films loved</h4>
          <i class="icon-heart icon-3x actioned"></i>
          <p>you know when you loved a film!</p>
          <%= render partial: 'films_recently_actioned', locals:{action: :loved} %>
@@ -43,7 +43,7 @@
     </div>
     <div class="four columns">
       <div class="radius panel pagination-centered">
-        <h4><%= Films[:owned].count %> films owned</h4>
+        <h4><%= Films.count_for(:owned) %> films owned</h4>
         <i class="icon-home icon-3x actioned"></i>
         <p>what films do you have at home?</p>
         <%= render partial: 'films_recently_actioned', locals:{action: :owned} %>

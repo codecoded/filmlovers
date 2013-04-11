@@ -19,6 +19,7 @@ Filmlovers::Application.routes.draw do
       get 'quick_search'    
     end
     member do
+      get ':view',          to: 'films#view', :constraints => { :view => /images|overview|cast|trailer|similar/ }, as: 'view'
       get 'summary',        to: "films#summary",        as: 'film_summary'
       get ':user_action',   to: "films#users", as: 'users', :constraints => { :user_action => /watched|loved|owned/ }
     end

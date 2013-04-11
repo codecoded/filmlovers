@@ -1,13 +1,10 @@
 <!-- backdrops -->
-<% if @film_view.has_backdrop? %>
-  <div class="row">
-    <div class="twelve columns centered">
+<% if film.has_backdrop? %>
       <div id='featured'>
-        <% @film_view.backdrops.each do | backdrop | %>
+        <% film.backdrops.each do | backdrop | %>
           <%= backdrop_image backdrop %>
         <% end %>
       </div>
-      <hr />
-    </div>
-  </div>
 <% end %>
+
+<script> $("#featured").orbit({directionalNav:true, fluid:false, timer:false})</script>

@@ -10,7 +10,13 @@ $actionedHover:      #bbb;
 // #featured.orbit img { display: block; }
 
 .film-title{
-  font-style: italic;
+  // font-style: italic;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 1.5em;
+  a{
+    color: black;
+  }
 }
 
 ul.credits{
@@ -52,6 +58,7 @@ ul.credits{
     &:hover .film-director{
       opacity: 1;
     }
+
     .film-info{
       height: 231px;
 
@@ -121,7 +128,7 @@ ul.credits{
         }
         i{
           bottom: 10px;
-          font-size: 14pt;
+          font-size: 14pt !important;
           border: solid 1px #000;
           background-color: #FFF;
           padding: 3px;
@@ -142,7 +149,7 @@ ul.credits{
       text-align: center;
       color: white;
       background-color: #1D1C1C;
-      font-size: 0.7em;
+      font-size: 0.7em !important;
       width: 100%;
       line-height: 2em;
       font-style: normal;
@@ -171,7 +178,7 @@ ul.credits{
         }
         i{
           padding: 0px 3px;
-          font-size: 9pt;
+          font-size: 9pt !important;
         }
       }
       &.film-title{
@@ -383,18 +390,72 @@ ul.credits{
   }
 }
 
+
+#film-content-trailer{
+   iframe{
+      // height: ;
+      width: 780px;
+      height: 439px;
+  } 
+}
+
+
+#film-content-overview{
+  span, p, h5, label{
+    font-size: 12pt;
+  }
+  .link{
+    padding: 0px 5px;
+  }
+  a:nth-child(2) .link{
+    padding-left:0px;
+  }
+  label{
+    // float:left;
+    // clear: both;
+    padding: 10px 0px 5px 0px;
+    font-weight: bold;
+  }
+  a{
+    color: #0D4050;
+  }
+}
+
+
+#film-content-users{
+
+}
+
+#film-content-similar{
+
+}
+
+
 #filmsActioned{
   padding-top: 10px;
-  .film-banner{
-    border-bottom: 2px solid black;
-    margin-bottom: 20px;
+  h6, h5{
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
-      iframe{
-      height: 230px;
-      width: 385px
-    }
+
+  .film-title{
+     font-size: 24pt;
+     padding-bottom: 5px;
+  }
+  .film-banner{
+    // border-bottom: 2px solid black;
+    // margin-bottom: 20px;
+    position: relative;
+    height: 75px;
+
+  }
+
+  i{
+    font-size: 2em;
+  }
+
+
   .counter{
-    font-size: 4em;
     a{
       color:black;
     }
@@ -405,5 +466,32 @@ ul.credits{
     }
 
   }
+
+
+  .affiliate{
+    height: 21px;
+  }
+  .nav-container
+  {
+    height: 100%;
+    position: relative;
+    .sub-nav
+    {
+      position: relative;
+      bottom: -50%;
+      right: 0px;
+    }
+  }
+  dd{
+    display: block;
+    margin-bottom: 0px;
+    a{
+      color: black;
+    }
+  }
+    dt{
+      margin-bottom: 0px;
+    }
   // background:  url(http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w1280/lJz2X8dEM1eiKxupmPUI7WVwEtK.jpg) top center no-repeat;
 }
+

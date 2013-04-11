@@ -14,7 +14,7 @@ class Facebook::UserAPI
   end
 
   def publish_story(action, object, url)
-    graph.put_connections('me', action, object => url)
+    graph.put_connections('me', action, object => url)['id']
   end
 
   def delete_request(request_id)

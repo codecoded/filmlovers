@@ -5,6 +5,7 @@ class UserFilmsController < ApplicationController
   # after_filter :delete_story, only: [:destroy]
   skip_before_filter :validate_current_user, :except => [:update, :destroy]
 
+  respond_to :json, :html
 
   def index
     render layout:nil if request.xhr?
@@ -17,21 +18,18 @@ class UserFilmsController < ApplicationController
   end
 
   def update
-    count = user_service.add(film, user_action)
-    render_ok count
+    @film_user_action = FilmUserAction.do film, user, user_action
+    respond_with @film_user_action
   end
 
   def destroy
-    count = user_service.remove(film, user_action)
-    render_ok count
+    respond_with FilmUserAction.undo film, user, user_action
   end
 
   protected 
 
-  def render_ok(count)
-    respond_to do |format|
-      format.json  { render json: {count: count} }
-    end
+  def film_user_action
+    FilmUserAction.find_or_initialize_by film: film, user: user, action: user_action
   end
 
   def validate_current_user
@@ -71,14 +69,16 @@ class UserFilmsController < ApplicationController
   end
 
   def publish_story
-    action = case user_action
+    fb_action = case user_action
               when :loved; "#{Facebook::namespace}:love"
               # when :watched;  "#{Facebook::namespace}:love"
               else; nil
             end
-    return unless action and facebook_passport
+    return unless fb_action and facebook_passport
     Thread.new do
-      Facebook::UserAPI.new(facebook_passport).publish_story action, :movie, film_url(film)
+      fb_id = Facebook::UserAPI.new(facebook_passport).publish_story(fb_action, :movie, film_url(film))
+      @film_user_action.update_attributes!(facebook_id:fb_id)
+      Log.info 'published story'
     end
     rescue
       Log.debug 'failed to publish story'

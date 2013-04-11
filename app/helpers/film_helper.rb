@@ -9,7 +9,7 @@ module FilmHelper
   end
 
   def runtime(film)
-    film.runtime > 0 ? "#{film.runtime} Mins" : "-- Mins"
+    film.runtime || 0 > 0 ? "#{film.runtime} Mins" : "-- Mins"
   end
 
   def film_poster_link(film, poster_size='w154')
@@ -40,7 +40,7 @@ module FilmHelper
     end    
   end
 
-  def action_icon(action, presenter)
+  def action_icon(action, film)
     icons = {
         watched: 'icon-eye-open', 
         loved: 'icon-heart', 
@@ -50,13 +50,13 @@ module FilmHelper
    
     return content_tag(:i,nil,  :class => icons[action]) unless current_user
 
-    url = update_user_film_path(current_user, action, presenter.id)
+    url = update_user_film_path(current_user, action, film.id)
    
-    actioned = presenter.actioned?(action)
+    actioned = current_user.film_actioned?(film, action)
     method =  actioned ? :delete : :put
     action_css = actioned ? 'actioned' : 'unactioned' 
     css = "#{icons[action]} #{action_css}"  
-    content_tag :i, nil, :class => css, data: {href: url, method: method, action: action, remote: true, id: presenter.id } 
+    content_tag :i, nil, :class => css, data: {href: url, method: method, action: action, remote: true, id: film.id } 
   end
 
   def icon_for(action, is_actioned=false)
@@ -100,6 +100,12 @@ module FilmHelper
   def genre_link(genre)
     link_to genre_path(genre['name']) do
       content_tag :span, genre['name'], {:class => 'genre link'}
+    end
+  end
+
+  def person_link(person)
+    link_to person_path(person.id) do
+      content_tag :span, person.name, {:class => 'person link'}
     end
   end
 

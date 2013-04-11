@@ -28,22 +28,27 @@
 }
 
 .user-avatar{
-  padding: 10px 0;
+  padding: 0px 0;
   border: solid 2px #5A5656;
   border-radius: 10px;
   text-align: center;
-  margin: 4px;
-  width: 150px;
-  height: 150px;
-  background-color: #222;
+  margin: 2px;
+  width: 140px;
+  height: 140px;
+  background-color: #fff;
   color: #C9C9C9;
   line-height: 1.3em;
   img{
     // border: solid 2px #4D4D4D;
-    border-radius: 60px;
+    // border-radius: 60px;
   }
   label{
-    color:white;
+    color: #3B3C3F;
     font-size: 9pt;
+  }  
+  i{
+    font-size: 1em !important;
+    color: #5F5F5F;;
   }
+
 }

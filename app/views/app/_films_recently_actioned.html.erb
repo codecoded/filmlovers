@@ -5,7 +5,7 @@
          <%= link_to users_film_path(film, action) do %> 
          <%= icon_for action %>
         <label>
-            <%= film.score_for(action).round 0 %>
+            <%= film.actions_for(action).count %>
         </label>
          <% end %>
       </button>

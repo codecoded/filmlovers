@@ -13,6 +13,11 @@ class FilmsController < ApplicationController
     render_template
   end
 
+  def view
+    render 'show'
+  end
+
+
   def summary
     @film_view = FilmPresenter.new current_user, film
     @thumbnail_size = 'w45'
@@ -30,7 +35,9 @@ class FilmsController < ApplicationController
   end
 
   def users
-    @users = User.find film.users[user_action].members
+    @users =film.actions_for(user_action).map &:user
+    params[:view] = 'users'
+    render 'show'
   end
 
   protected

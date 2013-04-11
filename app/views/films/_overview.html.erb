@@ -1,0 +1,47 @@
+<div class="twelve columns" id="film-content-overview">
+
+    <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
+    <div class="six columns">
+      <h5><%= tagline(film) %></h5>
+      <div class="cast">
+        <label>starring</label>
+        <% film.credits.cast.take(3).each do |person| %>
+          <%= person_link person %>
+        <% end %>
+      </div>
+      <div class="genre">
+        <label>genre</label>
+        <% film.genres.each do |genre| %>
+          <%= genre_link genre %>
+        <% end %>
+      </div>
+       <% if film.runtime %>
+        <div class="synopsis">
+          <label>synopsis</label>
+          <p><%= film.overview %></p>
+        </div>
+      <% end %>
+      <% if film.runtime %>
+        <div class="duration">
+          <label>runtime</label>
+          <span><%= runtime film %></span>
+        </div>
+      <% end %>
+       <% if film.studios?%>
+        <div class="studios">
+          <label>studios</label>
+          <span>
+            <%= film.production_companies.map {|f|f['name']}.join(', ') %>
+          </span>
+        </div>
+      <% end %>
+      <% if film.homepage %>
+        <div class="website">
+          <label>website</label>
+          <span><%= link_to film.homepage, film.homepage, target: '_blank' %></span>
+        </div>
+      <% end %>
+    </div>
+    <div class="three columns">
+    </div>
+</div>

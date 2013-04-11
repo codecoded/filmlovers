@@ -17,6 +17,9 @@ class User
   embeds_many :passports
   embeds_many :friends
 
+  has_many :film_user_actions, validate: false, dependent: :destroy
+
+
 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)
@@ -24,7 +27,6 @@ class User
     user.update_from_omniauth(auth) if user.new_record?
     user
   end
-
 
   def self.find_by_passport(passport)
     user = User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first
@@ -78,6 +80,14 @@ class User
      !username.blank? 
   end
 
+  def actions_for(action)
+    film_user_actions.where(action: action)
+  end
+
+  def film_actioned?(film, action)
+    film_user_actions.where(film: film, action: action).exists?
+  end
+  
   def to_param
     username? ? username : id.to_s
   end

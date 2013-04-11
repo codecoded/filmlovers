@@ -1,0 +1,18 @@
+<div class="four columns  pagination-centered">
+  <%= poster film_presenter.film, 'w342' %>
+  <% if logged_in? %>
+  <div  id="film-main-actions">
+    <div class="film-actions-vertical" >
+      <% [:watched, :loved, :owned].each do |action| %>
+        <%= action_button action, film_presenter %>
+      <% end %>
+      <button>
+      <%= link_to queue_path(current_user, :list, film_ids:  film_presenter.id), :class=>'display-modal unactioned' do %>
+        <%= awesome 'list' %>
+        <% end %>       
+      </button>
+    </div>
+  </div>
+  <% end %>
+  <%= render partial: 'shared/lovefilm_300x250' %>
+</div>

@@ -15,7 +15,7 @@
 <% set_meta_tags :og => {
   :title    => film.title,
   :type     => "video.movie",
-  :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
+  :url      => film_url(film),
   :image    => film.poster('w342'),
   :site_name   =>'filmlovers - find, share, discover',
   # :video    => "http://www.youtube.com/embed/#{film.trailer}",

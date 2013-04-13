@@ -8,7 +8,7 @@ namespace :tmdb do
 
     fetch_trend :now_playing
     fetch_trend :upcoming
-    fetch_trend :popular,  args[:page_no] 
+    fetch_trend :popular,  args[:page_no].to_i 
   end
 
 

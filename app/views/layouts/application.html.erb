@@ -15,8 +15,9 @@
     
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
-    <% set_meta_tags :title => "filmlovers - watch, share, discover films with friends" %>
-    <% set_meta_tags :description => "Welcome to filmlovers. Discover the films your friends love, and share the films you have watched, and keep track of films you own. Create your own film lists and discover the latest films at cinemas or upcoming." %>
+    <%= display_meta_tags :site => "filmlovers - watch, share, discover films with friends" %>
+    <% title "filmlovers - watch, share, discover films with friends" %>
+    <% description "Welcome to filmlovers. Discover the films your friends love, and share the films you have watched, and keep track of films you own. Create your own film lists and discover the latest films at cinemas or upcoming." %>
 
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>

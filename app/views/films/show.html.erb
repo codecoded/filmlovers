@@ -25,9 +25,10 @@
     <div class="five columns nav-container">
 
       <dl class="sub-nav right">
-        <% {overview: 'book', images: 'picture', cast: 'group', trailer: 'film'}.each do |view, icon| %>
-          <%= render partial: 'film_sub_nav_link', locals: {view: view, icon: icon} %>
-        <% end %>
+        <%= render partial: 'film_sub_nav_link', locals: {view: :overview, icon: :book}   %>
+        <%= render partial: 'film_sub_nav_link', locals: {view: :images, icon: :picture}  if film.has_backdrop? %>
+        <%= render partial: 'film_sub_nav_link', locals: {view: :trailer, icon: :film}  if film.has_trailer? %>
+        <%= render partial: 'film_sub_nav_link', locals: {view: :cast, icon: :group}  %>
         <% [:watched, :loved, :owned].each do |action| %>
         <dd>
             <%= link_to users_film_path(film, action) do %>

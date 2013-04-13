@@ -23,6 +23,9 @@
             <li><%= link_to 'Upcoming', trend_path(:upcoming) %></li>
             <li><%= link_to 'In Cinemas', trend_path(:now_playing) %></li>           
             <li><%= link_to 'Popular', trend_path(:popular) %></li>
+            <li><%= link_to 'Watched', actioned_films_path(:watched) %></li>
+            <li><%= link_to 'Loved', actioned_films_path(:loved) %></li>           
+            <li><%= link_to 'Owned', actioned_films_path(:owned) %></li>
             <li><label>Top Genres</label></li>
             <li><%= link_to 'Action', genre_path(:action) %></li>
             <li><%= link_to 'Adventure', genre_path(:adventure) %></li>

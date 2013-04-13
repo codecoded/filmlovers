@@ -2,15 +2,13 @@ namespace :tmdb do
 
   
 
-  task :poll, [:runs] => :environment do |t, args|
-    args.with_defaults(:runs => 100)
-    runs = args[:runs].to_i
+  task :poll, [:page_no] => :environment do |t, args|
 
     @tmdb_films = Filmlovers::TmdbFilmsSearch.new
 
     fetch_trend :now_playing
     fetch_trend :upcoming
-    fetch_trend :popular
+    fetch_trend :popular,  args[:page_no] 
   end
 
 

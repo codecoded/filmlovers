@@ -9,4 +9,30 @@ class Films
     self[action].count
   end
 
+  def self.actioned(action,count=0)
+    ids = Films[action].
+          order_by([:updated_at.desc]).
+          group_by(&:film_id).
+          map{|film_id, films| {id: film_id, score: films.length}}.
+          take(count).map {|film| film[:id]}
+    Film.only(:poster_path, :name, :title, :release_date).find ids
+  end
+
+  def self.recently_actioned(action,count=0)
+    ids = Films[action].
+          order_by([:updated_at.desc]).
+          group_by(&:film_id).
+          map{|film_id, films| {id: film_id, score: films.length}}.
+          take(count).map {|film| film[:id]}
+    Film.only(:poster_path, :name, :title, :release_date).find ids
+  end
+
+
+  def self.paged_actioned(action, order=:release_date, by = :desc, page_no = 0, page_size = 20)
+    film_ids = Films[action].map &:film_id
+    results = FilmsRepository.films_by(film_ids, :release_date, :desc).slice(page_no * page_size, page_size)
+    ResultsPage.new results || {}, film_ids.count, page_size, page_no
+  end
+
+
 end

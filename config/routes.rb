@@ -15,8 +15,10 @@ Filmlovers::Application.routes.draw do
     collection do
       resources 'genres',   only: [:show, :index]
       resources 'trends',   only: [:show, :index], :constraints => {:id => /now_playing|latest|upcoming|popular/}
+      # 
       get 'search'
       get 'quick_search'    
+      get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'
     end
     member do
       get ':view',          to: 'films#view', :constraints => { :view => /images|overview|cast|trailer|similar/ }, as: 'view'

@@ -28,7 +28,9 @@
     <div class="four columns">
       <div class="radius panel pagination-centered">
         <h4><%= Films.count_for(:watched) %> films watched</h4>
-         <i class="icon-eye-open icon-3x actioned"></i>
+          <%= link_to actioned_films_path(:watched) do %>
+            <%= awesome 'eye-open', 'icon-3x actioned' %>
+          <% end %>
          <p>keep track of all the films you have seen</p>
         <%= render partial: 'films_recently_actioned', locals:{action: :watched} %>
       </div>
@@ -36,15 +38,19 @@
     <div class="four columns">
       <div class="radius panel pagination-centered">
         <h4><%= Films.count_for(:loved) %> films loved</h4>
-         <i class="icon-heart icon-3x actioned"></i>
-         <p>you know when you loved a film!</p>
+         <%= link_to actioned_films_path(:loved) do %>
+          <%= awesome 'heart', 'icon-3x actioned' %>
+         <% end %>
+         <p>let your friends know the films you loved!</p>
          <%= render partial: 'films_recently_actioned', locals:{action: :loved} %>
       </div>
     </div>
     <div class="four columns">
       <div class="radius panel pagination-centered">
         <h4><%= Films.count_for(:owned) %> films owned</h4>
-        <i class="icon-home icon-3x actioned"></i>
+        <%= link_to actioned_films_path(:loved) do %>
+         <%= awesome 'home', 'icon-3x actioned' %>
+        <% end %>
         <p>what films do you have at home?</p>
         <%= render partial: 'films_recently_actioned', locals:{action: :owned} %>
       </div>

@@ -2,16 +2,6 @@
 
 <div id="filmsActioned" class="twelve columns">
 
-  <div class="row affiliate collapse">
-    <div class="twelve columns right">
-      <%= render partial: 'shared/twitter', locals: {film: film} %>
-      <%= render partial: 'shared/facebook_like', locals: {film: film} %>
-            <div id="shopLinks">
-          <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
-          <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
-        </div>
-    </div>
-  </div>
   <div class="film-banner">
     <div class="seven columns">  
       <h3 class="film-title">

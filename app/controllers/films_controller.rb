@@ -17,6 +17,11 @@ class FilmsController < ApplicationController
     render 'show'
   end
 
+  def actioned
+    results_page = Films.paged_actioned(params[:user_action], params[:order],  params[:by], params[:page].to_i, 50)
+    @films_page = FilmsPagePresenter.new current_user, results_page, params[:user_action]
+    render 'index'
+  end
 
   def summary
     @film_view = FilmPresenter.new current_user, film

@@ -1,56 +1,57 @@
 <div class="twelve columns" id="film-content-overview">
 
-    <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
-    <div class="six columns">
+  <h3><%= tagline(film) %></h3>
+  <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
+  <div class="nine columns">
 
 
-    <div class="twelve columns right">
-      <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
-      <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
-      <%= render partial: 'shared/twitter', locals: {film: film} %>
-      <%= render partial: 'shared/facebook_like', locals: {film: film} %>
+  <div class="twelve columns right">
+    <%= render partial: 'backdrop', locals: {film: film} %>
+    <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
+    <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
+    <%= render partial: 'shared/twitter', locals: {film: film} %>
+    <%= render partial: 'shared/facebook_like', locals: {film: film} %>
+  </div>
+
+    
+    <div class="cast">
+      <label>starring</label>
+      <% film.credits.cast.take(3).each do |person| %>
+        <%= person_link person %>
+      <% end %>
     </div>
-
-      <h5><%= tagline(film) %></h5>
-      <div class="cast">
-        <label>starring</label>
-        <% film.credits.cast.take(3).each do |person| %>
-          <%= person_link person %>
-        <% end %>
+    <div class="genre">
+      <label>genre</label>
+      <% film.genres.each do |genre| %>
+        <%= genre_link genre %>
+      <% end %>
+    </div>
+     <% if film.runtime %>
+      <div class="synopsis">
+        <label>synopsis</label>
+        <p><%= film.overview %></p>
       </div>
-      <div class="genre">
-        <label>genre</label>
-        <% film.genres.each do |genre| %>
-          <%= genre_link genre %>
-        <% end %>
+    <% end %>
+    <% if film.runtime %>
+      <div class="duration">
+        <label>runtime</label>
+        <span><%= runtime film %></span>
       </div>
-       <% if film.runtime %>
-        <div class="synopsis">
-          <label>synopsis</label>
-          <p><%= film.overview %></p>
-        </div>
-      <% end %>
-      <% if film.runtime %>
-        <div class="duration">
-          <label>runtime</label>
-          <span><%= runtime film %></span>
-        </div>
-      <% end %>
-       <% if film.studios?%>
-        <div class="studios">
-          <label>studios</label>
-          <span>
-            <%= film.production_companies.map {|f|f['name']}.join(', ') %>
-          </span>
-        </div>
-      <% end %>
-      <% if film.homepage %>
-        <div class="website">
-          <label>website</label>
-          <span><%= link_to film.homepage, film.homepage, target: '_blank' %></span>
-        </div>
-      <% end %>
-    </div>
-    <div class="three columns">
-    </div>
+    <% end %>
+     <% if film.studios?%>
+      <div class="studios">
+        <label>studios</label>
+        <span>
+          <%= film.production_companies.map {|f|f['name']}.join(', ') %>
+        </span>
+      </div>
+    <% end %>
+    <% if film.homepage %>
+      <div class="website">
+        <label>website</label>
+        <span><%= link_to film.homepage, film.homepage, target: '_blank' %></span>
+      </div>
+    <% end %>
+  </div>
+  
 </div>

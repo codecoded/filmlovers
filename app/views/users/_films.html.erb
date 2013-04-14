@@ -1,28 +1,30 @@
- <div class="row films-list" id="filmsIndex">
-  <div class="two columns">
-    <% [:watched, :loved, :owned].each do |action| %>
-      <div class="counter">
-        <%= link_to user_path(user, user_action: action, order: order, by: by) do %>
-          <%= icon_for action, user_action==action %>
-          <label><%= user.films[action].count %></label>
-        <% end %>
-      </div>
-    <% end %> 
-     <p id="sort-link"><label>Sort by</label>
-      <select id="sort-option">
-        <%= user_films_sort_option user, user_action, :release_date, :desc, "Newest Release"  %>
-        <%= user_films_sort_option user, user_action, :release_date, :asc, "Oldest Release"  %>
-        <%= user_films_sort_option user, user_action, :title, :asc, "Title A-Z"  %>
-        <%= user_films_sort_option user, user_action, :title, :desc, "Title Z-A"  %>
-      </select>
-     </p>
+<% set_meta_tags :description => "A complete list of all the films you have #{user_action}" %>
+
+  <div class="row">
+
   </div>
-  <div class="ten columns films centered" id="filmsContent" >
-      <%= render partial: 'films/film', collection: @films_page.films, as: :film_presenter %>
-      <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>
+
+  <div id="contentHolder">
+<div class="ten columns films centered" id="filmsContent" >
+  <div class="twelve columns">
+    <div class="seven column">
+      <h5> <%= " #{pluralize @films_page.films.count, 'films'} #{user_action}" %> </h5>
+    </div>
+    <div class="two columns">
+      <label>Sort by</label>
+        <select id="sort-option">
+          <%= user_films_sort_option user, user_action, :release_date, :desc, "Newest Release"  %>
+          <%= user_films_sort_option user, user_action, :release_date, :asc, "Oldest Release"  %>
+          <%= user_films_sort_option user, user_action, :title, :asc, "Title A-Z"  %>
+          <%= user_films_sort_option user, user_action, :title, :desc, "Title Z-A"  %>
+        </select>
+    </div>
   </div>
+  <%= render partial: 'films/film', collection: @films_page.films, as: :film_presenter %>
+  <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>
 </div>
 
+</div>
 
 <% if viewing_own? and current_user %>
 <script>

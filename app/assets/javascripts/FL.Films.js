@@ -69,7 +69,7 @@ FL.Films = {
 
   sortUserFilms: function(){
     url = $(this).attr('value')
-    $('#contentHolder').load(url + ' #filmsIndex')
+    $('#contentHolder').load(url + ' #filmsContent')
   },
 
   navigateToOption: function(){

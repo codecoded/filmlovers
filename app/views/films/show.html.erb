@@ -1,36 +1,3 @@
-<%= render partial: 'film_meta_tags', locals: {film: film} %>
-
-<div id="filmsActioned" class="twelve columns">
-
-  <div class="film-banner">
-    <div class="seven columns">  
-      <h3 class="film-title">
-        <%= link_to film_path(film) do %>
-          <%= title title_with_year film %>
-        <% end %>
-      </h3>
-      <h6><%= directed_by film %></h6>
-    </div>
-
-    <div class="five columns nav-container">
-
-      <dl class="sub-nav right">
-        <%= render partial: 'film_sub_nav_link', locals: {view: :overview, icon: :book}   %>
-        <%= render partial: 'film_sub_nav_link', locals: {view: :images, icon: :picture}  if film.has_backdrop? %>
-        <%= render partial: 'film_sub_nav_link', locals: {view: :trailer, icon: :film}  if film.has_trailer? %>
-        <%= render partial: 'film_sub_nav_link', locals: {view: :cast, icon: :group}  %>
-        <% [:watched, :loved, :owned].each do |action| %>
-        <dd>
-            <%= link_to users_film_path(film, action) do %>
-              <%= icon_for action %>
-            <% end %>
-        </dd>
-        <% end %> 
-        <%= render partial: 'film_sub_nav_link', locals: {view: 'similar', icon: 'search'} %>
-      </dl>
-    </div>
-  </div>
-
+<%= render layout: 'layouts/film', object: film do %>
     <%= render partial: params[:view] || 'overview'%>
-</div>
-
+<% end %>

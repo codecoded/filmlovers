@@ -1,16 +1,29 @@
 
 #userProfile{
   padding-top: 10px;
-  .film-banner{
-    border-bottom: 2px solid black;
-    margin-bottom: 20px;
+  i{
+    font-size: 2em;
   }
+
+  .user-banner{
+    // border-bottom: 2px solid black;
+    // margin-bottom: 20px;
+    position: relative;
+    // height: 75px;
+
+  }
+
+  h6, h5{
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
   iframe{
       height: 230px;
       width: 385px
     }
+
   .counter{
-    font-size: 4em;
     a{
       color:black;
     }
@@ -19,7 +32,31 @@
       display: inline;
       font-size: 32pt;
     }
+  }
 
+  .nav-container
+  {
+    // height: 100%;
+    // position: relative;
+    .sub-nav
+    {
+      // position: relative;
+      // bottom: -50%;
+      // right: 0px;
+    }
+  }
+
+  dd{
+    display: block;
+    margin-bottom: 0px;
+    text-align: center;
+    a{
+      color: black;
+    }
+  }
+  dt{
+    margin-bottom: 0px;
   }
   // background:  url(http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w1280/lJz2X8dEM1eiKxupmPUI7WVwEtK.jpg) top center no-repeat;
 }
+

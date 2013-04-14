@@ -64,7 +64,8 @@ module FilmHelper
       watched: 'icon-eye-open', 
       loved: 'icon-heart', 
       owned: 'icon-home', 
-      queued: 'icon-pushpin'}
+      queued: 'icon-pushpin',
+      list: 'icon-list'}
 
     action_css = is_actioned ? 'actioned' : 'unactioned'
     css = "#{icons[action]} #{action_css}"
@@ -88,7 +89,7 @@ module FilmHelper
   end
 
   def backdrop(film, size)
-     image_tag film.backdrop size
+     image_tag film.backdrop(size)
   end
 
   def trailer(film)

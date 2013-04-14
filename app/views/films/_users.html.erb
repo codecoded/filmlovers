@@ -2,7 +2,7 @@
 
 <div class="twelve columns" id="film-content-users">
   <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
-  <div class="eight columns">
+  <div class="nine columns">
     <h4><%= "#{pluralize @users.count, 'film lover'} #{user_action} #{film.title}" %> </h4>
     <% @users.each do |user| %>
       <div class="user-avatar left">

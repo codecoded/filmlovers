@@ -445,8 +445,8 @@ ul.credits{
   .film-banner{
     // border-bottom: 2px solid black;
     // margin-bottom: 20px;
-    position: relative;
-    height: 75px;
+    // position: relative;
+    // height: 75px;
 
   }
 
@@ -473,18 +473,19 @@ ul.credits{
   }
   .nav-container
   {
-    height: 100%;
-    position: relative;
+    // height: 100%;
+    // position: relative;
     .sub-nav
     {
-      position: relative;
-      bottom: -50%;
-      right: 0px;
+      // position: relative;
+      // bottom: -50%;
+      // right: 0px;
     }
   }
   dd{
     display: block;
     margin-bottom: 0px;
+    text-align: center;
     a{
       color: black;
     }
@@ -495,3 +496,26 @@ ul.credits{
   // background:  url(http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w1280/lJz2X8dEM1eiKxupmPUI7WVwEtK.jpg) top center no-repeat;
 }
 
+
+p.vignette {
+  position: relative;
+  // top: -300px;
+}
+p.vignette img {
+ display: block;
+}
+p.vignette:after {
+-moz-box-shadow: inset 0 0 10em #666;
+-webkit-box-shadow: inset 0 0 36em #666;
+box-shadow: inset 2em -3em 30em 11em #fff;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 10000;
+content: "";
+}
+p.vignette:before {
+  height: 400px;
+}

@@ -2,6 +2,15 @@
   textarea{
     height:100px
   }
+  .info
+  {
+    width:100%;
+    .list-name{
+      text-align: center;
+    }
+    text-align: justify;
+  }
+
   ol{
     margin-left: 0px;
     li{
@@ -87,9 +96,13 @@ ul.user-list{
   // border: solid 2px black;
   border-radius: 7px;
   cursor: pointer;
+  padding-bottom: 10px;
   label.count{
-    text-align: center;
     font-size: 12pt;
+  }
+  .list-title{
+    font-weight: bold;
+    margin: 0px 0px 5px 0px;
   }
   &:hover{
     background-color: #F3F3F3;
@@ -105,21 +118,33 @@ ul.user-list{
     }
   } 
   .film:not(:first-child){
-    margin-left: -60px;
+    margin-left: -35px;
     position: relative;
     img.small{
       border-left: solid #5C5C5C 1px;
     }
   }
+  hr{
+    line-height: 2px;
+    color: #000;
+    width: 61%;
+    text-align: center;
+    margin: 0px auto 35px auto;
+    border-width: 1px;
+    border-color: #999595;
+  }
+  .count{
+    font-size:10pt;
+  }
 }
 
 .user-actions{
-  .button{
-    float: right;
-    position: absolute;
-    right: 0px;
-    bottom: -22px;
-  }
+  // .button{
+  //   float: right;
+  //   position: absolute;
+  //   right: 0px;
+  //   bottom: -22px;
+  // }
 }
 
 #queueListModal{

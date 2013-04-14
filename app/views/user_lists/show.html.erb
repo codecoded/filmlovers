@@ -1,78 +1,68 @@
+<%= render layout: 'layouts/user', object: user  do %>
 <%= render partial: 'list_meta_tags', locals: {films_list: @films_list} %>
 
 <div id="viewContent"  class="twelve columns" >
 
-  <div class="row collapse" id="user-films-banner">
-    <div class="one columns">
-      <%= image_tag @user.gravatar_url %>
-    </div>
-    <div class="three columns user-name">
-       <h3><%= @user.name %></h3>
-       
-    </div>
-    <div class="three columns user-actions">
-       <h3 class="list-name">
-        <span id="user-films-count"><%= @films_list.film_ids.count %></span> films
-      </h3>
-      <%= link_to('Edit', edit_user_list_path(current_user, @films_list), :class => 'radius button') if viewing_own? %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="nine columns films" id="userList">
-      
-      <div class="panel">
-        <h3 class="list-name"><%= @films_list.name %></h3>
-        <p><%= @films_list.description %></p>
-      </div>
-      <ol>
-        <% @films_list.films.each_with_index do |film, index| %>
-          <li >  
-            <div class="two columns">
-              <%= link_to film_path(film), title: film.title do %>
-                <%= backdrop(film, 'w154') %>
-              <% end %>
-            </div>
-            <div class="six columns">
-              <%= link_to film_path(film), title: film.title do %>
-                <label class="title"><%= "#{index+1}. #{film.title}" %></label>
-              <% end %>
-              <div class="film-summary" style="max-height:50px;overflow-y:hidden">
-                <p><%=overview film, 145%></p>
-              </div>
-              <div class="film-summary" style="display:none">
-                <p><%= film.overview %></p>
-                <p><%= directed_by film %></p>
-                <p><%= starring film %></p>
-                <p><%= runtime film %> | <%= film.year %></p>
-              </div>
-              <%= link_to 'more info', 'javascript:void(0)', title: film.title, :class=>'overview-toggle' %>
-            </div> 
-            <div class="one columns pagination-centered shop" >
-                <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
-                <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
-            </div> 
-            <div class="three columns">
-              <div class="film-actions-vertical pagination-centered" >
-                <% [:watched, :loved, :owned].each do |action| %>
-                  <button>
-                    <%= action_icon action, film %>
-                  </button>
-                <% end %>
-              </div>
-            </div>
-          </li>
+    <% if viewing_own? %>
+      <div class="nine columns user-actions right">        
+        <%= link_to edit_user_list_path(current_user, @films_list), :class=>'right' do %>
+          <%= awesome 'pencil' %> edit
         <% end %>
-      </ol>
-    </div>
-    <div class="three columns">
-
-      <div class="pagination-centered">
-        <%= render partial: 'shared/lovefilm_300x250' %>                      
       </div>
+    <% end %>
+
+  <div class="nine columns films" id="userList">
+    <div class="info">
+      <h3 class="list-name"><%= @films_list.name %></h3>
+      <p><%= @films_list.description %></p>
+      <hr/>
+    </div>
+
+    <ol>
+      <% @films_list.films.each_with_index do |film, index| %>
+        <li >  
+          <div class="two columns">
+            <%= link_to film_path(film), title: film.title do %>
+              <%= backdrop(film, 'w154') %>
+            <% end %>
+          </div>
+          <div class="six columns">
+            <%= link_to film_path(film), title: film.title do %>
+              <label class="title"><%= "#{index+1}. #{film.title}" %></label>
+            <% end %>
+            <div class="film-summary" style="max-height:50px;overflow-y:hidden">
+              <p><%=overview film, 145%></p>
+            </div>
+            <div class="film-summary" style="display:none">
+              <p><%= film.overview %></p>
+              <p><%= directed_by film %></p>
+              <p><%= starring film %></p>
+              <p><%= runtime film %> | <%= film.year %></p>
+            </div>
+            <%= link_to 'more info', 'javascript:void(0)', title: film.title, :class=>'overview-toggle' %>
+          </div> 
+          <div class="one columns pagination-centered shop" >
+              <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
+              <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
+          </div> 
+          <div class="three columns">
+            <div class="film-actions-vertical pagination-centered" >
+              <% [:watched, :loved, :owned].each do |action| %>
+                <button>
+                  <%= action_icon action, film %>
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+  <div class="three columns">
+    <div class="pagination-centered">
+      <%= render partial: 'shared/lovefilm_300x250' %>                      
     </div>
   </div>
-
 </div>
 
   <script>
@@ -84,3 +74,4 @@
       // $(this).siblings('.film-summary-main').toggle();
     });
 </script>
+<% end %>

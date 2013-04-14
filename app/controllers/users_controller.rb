@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def user_action
-    (params[:user_action] || :watched).to_sym
+    (params[:id] || :watched).to_sym
   end
 
   def order

@@ -16,6 +16,7 @@ html, body {height: 100%;}
   }
 }
 
+
 .top-bar{
   margin-bottom: 0px;
   .name 
@@ -162,8 +163,12 @@ html, body {height: 100%;}
 #icon-descriptions{
   padding-top: 20px;
   .panel{
-    background-color: white;
+    background-color: #232A2C;
     border-radius: 20px;
+    color: white;
+    h4{
+     color: white
+   }
   }
 }
 #quick_search_header{

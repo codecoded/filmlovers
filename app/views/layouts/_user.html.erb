@@ -1,0 +1,31 @@
+<div id="userProfile" class="twelve columns">
+
+  <div class="user-banner row">
+    <div class="one columns user-image">
+      <%= image_tag user.gravatar_url %>
+    </div>
+    <div class="three columns user-name">
+       <h3><%= user.name %></h3>
+    </div>
+    <div class="five columns nav-container">
+
+      <dl class="sub-nav right">
+        <% [:watched, :loved, :owned].each do |action| %>
+        <dd>
+            <%= link_to user_film_path(user, action) do %>
+              <%= icon_for action %> <label><%= user.actions_for(action).count %></label>
+            <% end %>
+        </dd>
+        <% end %> 
+         <dd>
+          <%= link_to user_lists_path(user) do %>
+            <%= awesome :list %> <label> <%=user.films_lists.count %> </label>
+          <% end %>
+        </dd>
+      </dl>
+    </div>
+  </div>
+
+    <%= yield %>
+</div>
+

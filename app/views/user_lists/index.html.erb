@@ -1,51 +1,42 @@
-<div id="viewContent" class="twelve columns">
-  <div class="row collapse" id="user-films-banner">
-    <div class="one columns">
-      <%= image_tag @user.gravatar_url %>
-    </div>
-    <div class="three columns user-name">
-       <h3><%= @user.name %></h3>
-    </div>
-    <div class="three columns user-actions">
-       <h3 class="list-name">
-        <span id="user-films-count"><%= @films_list.count %></span> lists
-      </h3>
-      <%= link_to('New List', new_user_list_path, :class => 'radius button') if viewing_own? %>
-    </div>
-  </div>
- 
-  <div class="row collapse user-list">
-    
-    <div class="nine columns">
-       <% @films_list.each do |list| %>
-        <%= content_tag :fieldset, :class => 'row list-summary collapse', data:{href: user_list_path(list.user, list)} do %>
-          <legend><%=list.name %></legend>
-        
-          <div class="five columns user-list">       
-            <% list.films.take(10).each do |film| %>
-              <div class="left film">
-                <%= poster(film, 'w90') %>
-              </div>
-            <% end %>
-          </div> 
-          <div class="one columns">
-            <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
-          </div>
-          <div class="six columns">
-            <p><%= list.description %></p>
-          </div> 
-        </fieldset>
-        <% end %>
+<%= render layout: 'layouts/user', object: user do %>
+  <div id="viewContent" class="twelve columns">
+    <div class="row collapse user-list">
+      <% if viewing_own? %>
+        <div class="nine columns user-actions right">        
+          <%= link_to new_user_list_path, :class=>'right' do %>
+            <%= awesome 'edit' %> new list
+          <% end %>
+        </div>
       <% end %>
-    </div>
-    <div class="three columns">
-      <%= render partial:'shared/google_ads_skyscraper' %>
-      <%= render partial:'shared/lovefilm_120x600' %>             
+
+      <div class="eight columns">
+         <% @films_list.each do |list| %>
+          <%= content_tag :div, :class => 'row list-summary collapse', data:{href: user_list_path(list.user, list)} do %>
+          
+            <div class="five columns">       
+              <% list.films.take(5).each do |film| %>
+                <div class="left film">
+                  <%= poster(film, 'w90') %>
+                </div>
+              <% end %>
+            </div> 
+            <div class="six columns">
+              <h4 class="list-title"><%=list.name %></h4>
+              <%= content_tag :label, "#{list.films.length} films", :class => 'count' %>
+              <p><%= shorten list.description %></p>
+            </div> 
+          <% end %>
+            <hr/>
+        <% end %>
+      </div>
+      <div class="two columns">
+        <%#= render partial:'shared/google_ads_skyscraper' %>
+        <%= render partial:'shared/lovefilm_120x600' %>             
+      </div>
     </div>
   </div>
-  
-</div>
 
-<script>
-$(document).on('click', '.list-summary', function(){window.location = $(this).data('href')})
-</script>
+  <script>
+  $(document).on('click', '.list-summary', function(){window.location = $(this).data('href')})
+  </script>
+<% end %>

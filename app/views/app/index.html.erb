@@ -1,4 +1,4 @@
-<% description "Welcome to filmlovers. Discover the films your friends love, and share the films you have watched, and keep track of films you own. Create your own film lists and discover the latest films at cinemas or upcoming." %>
+<% description "Welcome to filmlovers. Discover films your friends love, share your films lists, and keep track of films you own. Create custome film lists and discover the latest upcoming films at cinemas." %>
 <% set_meta_tags keywords: "films, lists, popular films, movies, latest releases, new films, upcoming films, share films, films loved, film owned, films watched, film lists" %>
 
 <div class="twelve columns">
@@ -72,19 +72,19 @@
     </div>
     <div class="four mobile-two columns trend">
       <%= link_to trend_path(:now_playing) do %>
-        <%=image_tag 'cinema.png', width:'100%' %>
-        <label>In Cinemas</label>
+        <%=image_tag 'now_playing.jpg', width:'100%' %>
+        <label>Now Playing</label>
       <% end %>
     </div>
     <div class="four mobile-two columns trend">
       <%= link_to trend_path(:popular) do %>
-        <%=image_tag 'cinema.png', width:'100%' %>
+        <%=image_tag 'popular.jpg', width:'100%' %>
         <label>Popular</label>
       <% end %>
     </div>
     <div class="four mobile-two columns trend">
       <%= link_to trend_path(:upcoming) do %>
-        <%=image_tag 'cinema.png', width:'100%' %>
+        <%=image_tag 'coming_soon.jpg', width:'100%' %>
         <label>Upcoming</label>
       <% end %>
     </div>

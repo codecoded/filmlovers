@@ -53,7 +53,7 @@ Filmlovers::Application.routes.draw do
   end
 
   scope ':user_id', :constraints => { :user_id => /.*/ } do
-    resources :films, :only => [:index, :show], to: 'user_films', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 
+    resources :films, :only => [:index, :show], to: 'users#show', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 
         member do 
           put ':film_id',     to: 'user_films#update',  as: 'update'
           delete ':film_id',  to: 'user_films#destroy', as: 'update'

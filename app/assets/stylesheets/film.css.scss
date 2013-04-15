@@ -6,7 +6,9 @@ $queuedColor:        #861949;
 $ownedColor:         #4387BD;
 $actionedHover:      #bbb;
 
-// #featured img { display: none; }
+.orbit-wrapper  { 
+  margin-bottom: 10px;
+}
 // #featured.orbit img { display: block; }
 
 .film-title{
@@ -439,7 +441,7 @@ ul.credits{
   }
 
   .film-title{
-     font-size: 24pt;
+     font-size: 20pt;
      padding-bottom: 5px;
   }
   .film-banner{
@@ -486,8 +488,19 @@ ul.credits{
     display: block;
     margin-bottom: 0px;
     text-align: center;
+    width: 70px;
+    padding: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
     a{
       color: black;
+    }
+    a:hover, .actioned
+    {
+      color: $ownedColor;
+      label, .actioned{
+        color: $ownedColor
+      }
     }
   }
     dt{

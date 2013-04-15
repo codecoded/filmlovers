@@ -41,7 +41,8 @@ $fontSmoothing: antialiased;
 // $headerFontWeight: bold;
 // $headerFontStyle: normal;
 // $headerFontColor: #222;
-$bodyFontFamily: Arial, "Verdana", "Helvetica Neue", "Helvetica", Helvetica, sans-serif;
+$bodyFontFamily: "runda-1","runda-2","Helvetica Neue",Helvetica,Arial,sans-serif;
+// Arial, "Verdana", "Helvetica Neue", "Helvetica", Helvetica, sans-serif;
 // $bodyFontWeight: normal;
 // $bodyFontStyle: normal;
 // $bodyFontColor: $txtColor;
@@ -106,24 +107,24 @@ $bodyFontFamily: Arial, "Verdana", "Helvetica Neue", "Helvetica", Helvetica, san
 
 // Top Bar Settings
 
-$topBarBgColor: #222;
-// $topBarHeight: 45px;
+$topBarBgColor: white;
+$topBarHeight: 40px;
 // $topBarHeightMobile: 45px;
-// $topBarBtmMargin: 30px;
-// $topBarTitleWeight: bold;
-// $topBarTitleSize: 17px;
-// $topBarLinkColor: #fff;
+$topBarBtmMargin: 0px;
+ $topBarTitleWeight: bold;
+ $topBarTitleSize: 14px;
+ $topBarLinkColor: black;
 // $topBarLinkWeight: bold;
-// $topBarLinkSize: 13px;
-// $topBarDropBgColor: #222;
-// $topBarDropLinkColor: #fff;
-// $topBarDropToggleSize: 5px;
-// $topBarDropToggleColor: #fff;
-// $topBarDropToggleAlpha: 0.5;
-// $topBarSearchWidth: 200px;
+$topBarLinkSize: 13px;
+$topBarDropBgColor: black;
+$topBarDropLinkColor: white;
+$topBarDropToggleSize: 4px;
+$topBarDropToggleColor: black;
+$topBarDropToggleAlpha: 0.8;
+$topBarSearchWidth: 200px;
 // $topBarBreakPoint: 940px; // Change to 9999px for always mobile layout
-// $topBarNavToggleSize: 8px;
-// $topBarNavToggleColor: #fff;
+$topBarNavToggleSize: 8px;
+$topBarNavToggleColor: #fff;
 
 // UI Settings
 

@@ -64,7 +64,7 @@ class FilmsController < ApplicationController
   end
 
   def user_action
-    params[:user_action].to_sym
+    params[:user_action].to_sym if params[:user_action]
   end
 
   helper_method :user_action, :film

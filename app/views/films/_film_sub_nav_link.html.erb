@@ -1,5 +1,5 @@
 <dd>
   <%= link_to view_film_path(film, view) do %>
-    <%= awesome icon %>
+    <%= awesome(icon, (params[:view] || :overview).to_sym==view.to_sym ? 'actioned' : 'unactioned')  %> <%= label film, view %>
   <% end %>
 </dd>

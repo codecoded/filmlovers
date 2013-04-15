@@ -4,7 +4,7 @@
 <div id="filmsActioned" class="twelve columns">
 
   <div class="film-banner">
-    <div class="seven columns">  
+    <div class="six columns">  
       <h3 class="film-title">
         <%= link_to film_path(film) do %>
           <%= title title_with_year film %>
@@ -13,21 +13,22 @@
       <h6><%= directed_by film %></h6>
     </div>
 
-    <div class="four columns nav-container">
+    <div class="six columns nav-container">
 
       <dl class="sub-nav right">
         <%= render partial: 'film_sub_nav_link', locals: {view: :overview, icon: :book}   %>
         <%= render partial: 'film_sub_nav_link', locals: {view: :images, icon: :picture}  if film.has_backdrop? %>
         <%= render partial: 'film_sub_nav_link', locals: {view: :trailer, icon: :film}  if film.has_trailer? %>
         <%= render partial: 'film_sub_nav_link', locals: {view: :cast, icon: :group}  %>
+        <%= render partial: 'film_sub_nav_link', locals: {view: 'similar', icon: 'search'} %>
         <% [:watched, :loved, :owned].each do |action| %>
         <dd>
             <%= link_to users_film_path(film, action) do %>
-              <%= icon_for action %> <label><%= film.actions_for(action).count %>
+              <%= icon_for action, (user_action||'')==action %> <label><%= film.actions_for(action).count %>
             <% end %>
         </dd>
         <% end %> 
-        <%= render partial: 'film_sub_nav_link', locals: {view: 'similar', icon: 'search'} %>
+       
       </dl>
     </div>
   </div>

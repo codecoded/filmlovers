@@ -2,7 +2,7 @@
 <% if film.has_backdrop? %>
   <div id='featured'>
     <% film.backdrops.each do | backdrop | %>
-      <%= backdrop_image backdrop %>
+      <%= backdrop_image backdrop, size  %>
     <% end %>
   </div>
 <% end %>

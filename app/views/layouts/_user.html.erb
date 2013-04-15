@@ -1,10 +1,10 @@
 <div id="userProfile" class="twelve columns">
 
-  <div class="user-banner row">
+  <div class="user-banner">
     <div class="one columns user-image">
       <%= image_tag user.gravatar_url %>
     </div>
-    <div class="three columns user-name">
+    <div class="six columns user-name">
        <h3><%= user.name %></h3>
     </div>
     <div class="five columns nav-container">
@@ -26,6 +26,6 @@
     </div>
   </div>
 
-    <%= yield %>
+  <%= yield %>
 </div>
 

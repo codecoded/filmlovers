@@ -1,4 +1,4 @@
-<% set_meta_tags title: title_with_year(film),description: tagline(film) %>
+<% set_meta_tags title: "#{title_with_year(film)} by #{film.director}" ,description: tagline(film) %>
 
 <% set_meta_tags :og => {
   :title    => film.title,

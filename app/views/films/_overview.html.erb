@@ -6,7 +6,7 @@
 
 
   <div class="twelve columns right">
-    <%= render partial: 'backdrop', locals: {film: film} %>
+    <%= render partial: 'backdrop', locals: {film: film, size: 'w780'} %>
     <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
     <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
     <%= render partial: 'shared/twitter', locals: {film: film} %>
@@ -32,7 +32,7 @@
         <p><%= film.overview %></p>
       </div>
     <% end %>
-    <% if film.runtime %>
+    <% if film.runtime and film.runtime > 0%>
       <div class="duration">
         <label>runtime</label>
         <span><%= runtime film %></span>

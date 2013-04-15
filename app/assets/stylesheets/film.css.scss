@@ -8,6 +8,7 @@ $actionedHover:      #bbb;
 
 .orbit-wrapper  { 
   margin-bottom: 10px;
+  box-shadow: 5px 5px 30px #222
 }
 // #featured.orbit img { display: block; }
 
@@ -36,6 +37,8 @@ ul.credits{
   width:auto;
   // padding:10px 0px;
   // float:left;
+
+
 
   .film
   {
@@ -368,6 +371,7 @@ ul.credits{
 }
 
 #film-main-actions{
+  padding: 14px 0px;
   .film-actions-vertical{
     button{
       margin: 2px 0px;
@@ -377,6 +381,7 @@ ul.credits{
       width: 60px;
       height:60px;
       background-color: white;
+      box-shadow: 7px 7px 30px #222;
       label.count{
         font-size: 10pt;
         position: relative;
@@ -421,6 +426,10 @@ ul.credits{
   a{
     color: #0D4050;
   }
+  #featured img{
+    width: 100%;
+    max-height: 438px;
+  }
 }
 
 
@@ -451,7 +460,9 @@ ul.credits{
     // height: 75px;
 
   }
-
+  .poster img{
+    box-shadow: 7px 7px 9px #838383;
+  }
   i{
     font-size: 2em;
   }
@@ -482,6 +493,14 @@ ul.credits{
       // position: relative;
       // bottom: -50%;
       // right: 0px;
+      i{
+        font-size: 2em;
+        box-shadow: 3px 3px 12px #6D6D6D;
+        background-color: rgba(0, 0, 0, 0);
+        border-radius: 100px;
+        padding: 6px;
+        margin-bottom: 5px;
+      }
     }
   }
   dd{
@@ -506,6 +525,9 @@ ul.credits{
     dt{
       margin-bottom: 0px;
     }
+  p{
+    text-align: justify;
+  }
   // background:  url(http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w1280/lJz2X8dEM1eiKxupmPUI7WVwEtK.jpg) top center no-repeat;
 }
 

@@ -84,8 +84,8 @@ module FilmHelper
     end
   end
 
-  def backdrop_image(backdrop)
-     image_tag AppConfig.image_uri_for(['w1280', backdrop['file_path']])
+  def backdrop_image(backdrop, size = 'w1280')
+     image_tag AppConfig.image_uri_for([size, backdrop['file_path']])
   end
 
   def backdrop(film, size)

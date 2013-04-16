@@ -39,6 +39,10 @@ class Film
   end
 
 
+  def duration
+    runtime if runtime and runtime.to_i > 0  
+  end
+
   def has_backdrop?
     backdrop_path
   end

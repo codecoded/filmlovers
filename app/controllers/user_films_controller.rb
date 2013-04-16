@@ -69,19 +69,19 @@ class UserFilmsController < ApplicationController
   end
 
   def publish_story
+
     fb_action = case user_action
               when :loved; "#{Facebook::namespace}:love"
-              # when :watched;  "#{Facebook::namespace}:love"
+              when :watched;  "video.watches"
               else; nil
             end
     return unless fb_action and facebook_passport
     Thread.new do
       fb_id = Facebook::UserAPI.new(facebook_passport).publish_story(fb_action, :movie, film_url(film))
       @film_user_action.update_attributes!(facebook_id:fb_id)
-      Log.info 'published story'
+      Log.info "#{film.title} published to facebook as #{user_action} by #{current_user.name}"
     end
-    rescue
-      Log.debug 'failed to publish story'
+
   end
 
 

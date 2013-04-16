@@ -14,11 +14,10 @@ before_fork do |server, worker|
   Signal.trap 'TERM' do
     puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
     Process.kill 'QUIT', Process.pid
-
   end
 
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
-  $redis.client.disconnect
+  defined?($redis) and $redis.client.disconnect
 end  
 
 after_fork do |server, worker|
@@ -28,6 +27,6 @@ after_fork do |server, worker|
   end
 
   defined?(ActiveRecord::Base) and ActiveRecord::Base.establish_connection
-  $redis.client.connect
+  defined?($redis) and $redis.client.connect
 
 end

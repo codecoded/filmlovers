@@ -75,7 +75,7 @@ module FilmHelper
   def poster(film, size='w154')
     size = size ? size : 'w154'
     src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
-    image_tag src, :title=>film.title, :class=>'small'
+    image_tag src, :title=>film.title, alt: "poster for #{film.title}", :class=>'small'
   end
 
   def poster_link(film, size='w154')
@@ -89,7 +89,7 @@ module FilmHelper
   end
 
   def backdrop(film, size)
-     image_tag film.backdrop(size)
+     image_tag film.backdrop(size), title: film.title
   end
 
   def trailer(film)

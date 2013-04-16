@@ -20,18 +20,18 @@
          <a>  <%= awesome "film" %> films</a>
           <ul class="dropdown">
             <li><label>Current</label></li>
-            <li><%= link_to 'Upcoming', trend_path(:upcoming) %></li>
-            <li><%= link_to 'In Cinemas', trend_path(:now_playing) %></li>           
-            <li><%= link_to 'Popular', trend_path(:popular) %></li>
-            <li><%= link_to 'Watched', actioned_films_path(:watched) %></li>
-            <li><%= link_to 'Loved', actioned_films_path(:loved) %></li>           
-            <li><%= link_to 'Owned', actioned_films_path(:owned) %></li>
+            <li><%= link_to 'Upcoming', trend_path(:upcoming), alt: 'upcoming films' %></li>
+            <li><%= link_to 'In Cinemas', trend_path(:now_playing), alt: 'films now playing in cinemas' %></li>           
+            <li><%= link_to 'Popular', trend_path(:popular), alt: 'popular films' %></li>
+            <li><%= link_to 'Watched', actioned_films_path(:watched), alt: 'films people have watched' %></li>
+            <li><%= link_to 'Loved', actioned_films_path(:loved), alt: 'films people love' %></li>           
+            <li><%= link_to 'Owned', actioned_films_path(:owned), alt: 'films people own' %></li>
             <li><label>Top Genres</label></li>
-            <li><%= link_to 'Action', genre_path(:action) %></li>
-            <li><%= link_to 'Adventure', genre_path(:adventure) %></li>
-            <li><%= link_to 'Comedy', genre_path(:comedy) %></li>
-            <li><%= link_to 'Sci-Fi', genre_path(:science_fiction) %></li>
-            <li><%= link_to 'Drama', genre_path(:drama) %></li>
+            <li><%= link_to 'Action', genre_path(:action), alt: 'action films' %></li>
+            <li><%= link_to 'Adventure', genre_path(:adventure), alt: 'adventure films' %></li>
+            <li><%= link_to 'Comedy', genre_path(:comedy), alt: 'comedy films' %></li>
+            <li><%= link_to 'Sci-Fi', genre_path(:science_fiction), alt: 'science fiction films' %></li>
+            <li><%= link_to 'Drama', genre_path(:drama), alt: 'drama films' %></li>
           </uL>
         </li>
         <li>
@@ -92,26 +92,26 @@
           </ul>
         </li>
       <% else %>
-            <ul class="left">
+      <ul class="left">
         <li class="has-dropdown">
          <a>  <%= awesome "film" %> films</a>
           <ul class="dropdown">
             <li><label>Current</label></li>
-            <li><%= link_to 'Upcoming', trend_path(:upcoming) %></li>
-            <li><%= link_to 'In Cinemas', trend_path(:now_playing) %></li>           
-            <li><%= link_to 'Popular', trend_path(:popular) %></li>
+            <li><%= link_to 'Upcoming', trend_path(:upcoming), alt: 'upcoming films' %></li>
+            <li><%= link_to 'In Cinemas', trend_path(:now_playing), alt: 'films now playing in cinemas' %></li>           
+            <li><%= link_to 'Popular', trend_path(:popular), alt: 'popular films' %></li>
             <li><label>Top Genres</label></li>
-            <li><%= link_to 'Action', genre_path(:action) %></li>
-            <li><%= link_to 'Adventure', genre_path(:adventure) %></li>
-            <li><%= link_to 'Comedy', genre_path(:comedy) %></li>
-            <li><%= link_to 'Sci-Fi', genre_path(:science_fiction) %></li>
-            <li><%= link_to 'Drama', genre_path(:drama) %></li>
+            <li><%= link_to 'Action', genre_path(:action), alt: 'action films' %></li>
+            <li><%= link_to 'Adventure', genre_path(:adventure), alt: 'adventure films' %></li>
+            <li><%= link_to 'Comedy', genre_path(:comedy), alt: 'comedy films' %></li>
+            <li><%= link_to 'Sci-Fi', genre_path(:science_fiction), alt: 'science fiction films' %></li>
+            <li><%= link_to 'Drama', genre_path(:drama), alt: 'drama films' %></li>
           </uL>
         </li>
       </ul>
       <ul class="right">
         <li class="has-dropdown">
-          <a href="#"><i class="icon-signin"></i>Sign In</a>
+          <a href="#" alt="sign in to filmlovers"><i class="icon-signin"></i>Sign In</a>
           <ul class="dropdown">
             <li><label>Passports</label></li>
             <%= passport_link :facebook, "Facebook" %>
@@ -121,7 +121,7 @@
           </ul>
         </li>
         <li>
-          <%= link_to "Sign Up", login_path, id:  "signin-link" %>
+          <%= link_to "Sign Up", login_path, id:  "signin-link", alt: 'sign up to filmlovers for free' %>
         </li>
       </ul>
       <% end %>

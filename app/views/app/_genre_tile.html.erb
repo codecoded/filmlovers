@@ -1,6 +1,6 @@
 <div class="two mobile-two columns genre">
-  <%= link_to genre_path(genre) do %>
-    <%= image_tag "genres/#{genre}.jpg" %>
+  <%= link_to genre_path(genre), alt: "view films in genre category #{genre}" do %>
+    <%= image_tag "genres/#{genre}.jpg", alt: "#{genre} films", title: "#{genre} films" %>
     <%= content_tag :label, description %>
   <% end %>
 </div>

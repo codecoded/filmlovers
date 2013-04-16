@@ -23,7 +23,7 @@
         <%= render partial: 'film_sub_nav_link', locals: {view: 'similar', icon: 'search'} %>
         <% [:watched, :loved, :owned].each do |action| %>
         <dd>
-            <%= link_to users_film_path(film, action) do %>
+            <%= link_to users_film_path(film, action), alt: "people who #{action} the film" do %>
               <%= icon_for action, (user_action||'')==action %> <label><%= film.actions_for(action).count %>
             <% end %>
         </dd>

@@ -84,13 +84,15 @@ module FilmHelper
     end
   end
 
-  def backdrop_image(backdrop, size = 'w1280')
-     image_tag AppConfig.image_uri_for([size, backdrop['file_path']])
-  end
 
   def backdrop(film, size)
-     image_tag film.backdrop(size), title: film.title
+    backdrop_image(film, film.backdrop, size)
   end
+  
+  def backdrop_image(film, backdrop, size = 'w1280')
+     image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
+  end
+
 
   def trailer(film)
     return unless film.has_trailer?

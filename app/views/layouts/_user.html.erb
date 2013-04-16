@@ -12,7 +12,7 @@
       <dl class="sub-nav right">
         <% [:watched, :loved, :owned].each do |action| %>
         <dd>
-            <%= link_to user_film_path(user, action) do %>
+            <%= link_to user_film_path(user, action), alt: action, title: action do %>
               <%= icon_for action %> <label><%= user.actions_for(action).count %></label>
             <% end %>
         </dd>

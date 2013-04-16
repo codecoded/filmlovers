@@ -1,4 +1,4 @@
-class ListedFilmsController < ApplicationController
+class FilmListsController < ApplicationController
   
   respond_to :html, :js, :json
 
@@ -6,14 +6,15 @@ class ListedFilmsController < ApplicationController
 
   layout :nil
 
+  def create
+    add_film
+  end
+
   def update
-
     return film_not_found unless film
-
     listed_film = list.film_list_items.find_by film_id: film.id
     return film_already_added if listed_film
-
-    @list_film = list.film_list_items.create(film_id: film.id, position: list.film_list_items.count+1)
+    @list_film = add_film
     respond_with listed_film
   end
 
@@ -22,14 +23,21 @@ class ListedFilmsController < ApplicationController
     # redirect_to action: :index
   end
 
+  helper_method :film, :list
   protected
+
+  def add_film
+    @index = list.film_list_items.count+1
+    list.film_list_items.create(film_id: film.id, position: @index)
+    flash[:notice] =  "Film #{film.title} added"
+  end
 
   def list
     @list ||= current_user.films_lists.find(params[:list_id])
   end
 
   def film
-    @film = Film.fetch params[:id]
+    @film ||= Film.fetch params[:id]
   end
 
   def film_not_found

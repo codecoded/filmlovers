@@ -4,6 +4,6 @@
   </div>
 <% else %>  
   <div class="alert-box success twelve columns centered">
-    <span class="message"><%= "Film #{@film.title} added to list '#{link_to @list.name, user_list_path(current_user, @list)}'".html_safe %></span>      
+    <span class="message"><%= "Film #{film.title} added to list '#{link_to list.name, user_list_path(current_user, list)}'".html_safe %></span>      
   </div>
 <% end %>

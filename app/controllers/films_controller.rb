@@ -34,10 +34,6 @@ class FilmsController < ApplicationController
     present(results, params[:query]) and render_template :index
   end
 
-  def quick_search
-    results = @tmdb_service.search params[:q]
-    present(results, params[:q])
-  end
 
   def users
     @users =film.actions_for(user_action).map &:user

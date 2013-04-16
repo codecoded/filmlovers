@@ -1,0 +1,29 @@
+<li >  
+  <%= hidden_field_tag  'films_list[film_list_items][][film_id]', film.id.to_i %>
+  <%= hidden_field_tag  'films_list[film_list_items][][position]', @index || index+1%>
+  <div class="three columns">
+    <% if film.has_backdrop? %>
+      <%= backdrop(film, film.backdrops[0], 'w154') %>
+    <% end %>
+  </div>
+  <div class="six columns">
+    <label class="title"><%= "#{@index || index+1}. #{film.title}" %></label>
+    <div class="film-summary" style="max-height:50px;overflow-y:hidden">
+      <p><%=overview film, 145%></p>
+    </div>
+    <div class="film-summary" style="display:none">
+      <p><%= film.overview %></p>
+      <p><%= directed_by film %></p>
+      <p><%= starring film %></p>
+      <p><%= runtime film %> | <%= film.year %></p>
+    </div>
+    <%= link_to 'more info', 'javascript:void(0)', title: film.title, :class=>'overview-toggle' %>
+  </div> 
+  <div class="two columns">
+    <div class="film-actions-vertical pagination-centered">
+      <button data-bind="click: $root.removeFilmItem">
+        <i class="icon-remove icon-2x"></i>
+       </button>
+    </div>
+  </div>
+</li>

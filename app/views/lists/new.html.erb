@@ -1,0 +1,10 @@
+
+<div id="viewContent"  class="twelve columns" >
+  <div class="row">
+    <div id="userList" class="twelve columns centered">
+      <%= form_for list, url: lists_path, method: :post do |l|%>
+        <%= render partial: 'form', locals:{list_form: l} %>
+      <% end %>
+    </div>
+  </div>
+</div>

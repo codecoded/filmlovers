@@ -3,14 +3,14 @@
     <div class="row collapse user-list">
       <% if viewing_own? %>
         <div class="nine columns user-actions right">        
-          <%= link_to new_user_list_path, :class=>'right' do %>
+          <%= link_to new_list_path, :class=>'right' do %>
             <%= awesome 'edit' %> new list
           <% end %>
         </div>
       <% end %>
 
       <div class="eight columns">
-         <% @films_list.each do |list| %>
+         <% lists.each do |list| %>
           <%= content_tag :div, :class => 'row list-summary collapse', data:{href: user_list_path(list.user, list)} do %>
           
             <div class="five columns">       

@@ -3,6 +3,7 @@ class Film
   include Mongoid::Timestamps
 
   has_many :film_user_actions, validate: false, dependent: :destroy
+  has_many :film_lists_items, validate: false, dependent: :destroy
 
   field :_id, type: Integer, default: ->{ id.to_id if id}
   field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}"}
@@ -47,9 +48,6 @@ class Film
     backdrop_path
   end
 
-  def backdrop(size='original')
-    AppConfig.image_uri_for [size, backdrop_path] if has_backdrop?
-  end
 
   def backdrops
     images_library.backdrops

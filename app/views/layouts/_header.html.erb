@@ -110,6 +110,11 @@
         </li>
       </ul>
       <ul class="right">
+              <li class="name">
+          <%= form_tag(search_films_path, method: :get) do%>
+          <input type="text" id="quick_search_header" name="query">
+          <% end %>
+        </li>
         <li class="has-dropdown">
           <a href="#" alt="sign in to filmlovers"><i class="icon-signin"></i>Sign In</a>
           <ul class="dropdown">

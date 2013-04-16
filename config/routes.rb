@@ -16,13 +16,12 @@ Filmlovers::Application.routes.draw do
       resources 'genres',   only: [:show, :index]
       resources 'trends',   only: [:show, :index], :constraints => {:id => /now_playing|latest|upcoming|popular/}
       # 
-      get 'search'
-      get 'quick_search'    
+      get 'search'   
       get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'
     end
     member do
       get ':view',          to: 'films#view', :constraints => { :view => /images|overview|cast|trailer|similar/ }, as: 'view'
-      get 'summary',        to: "films#summary",        as: 'film_summary'
+      get 'summary',        to: "films#summary",        as: 'summary'
       get ':user_action',   to: "films#users", as: 'users', :constraints => { :user_action => /watched|loved|owned/ }
     end
   end
@@ -40,8 +39,11 @@ Filmlovers::Application.routes.draw do
     end
   end
 
-  resources :lists, :except => [:show, :index] do
-    resources :films, to: 'listed_films', :only => [:update, :destroy]
+  resources :lists, :except => [:show] do
+    member do
+      get 'films_search'    
+    end
+    resources :films, to: 'film_lists', :only => [:update, :destroy, :show, :create]
   end
 
   scope 'queue' do
@@ -59,7 +61,7 @@ Filmlovers::Application.routes.draw do
           delete ':film_id',  to: 'user_films#destroy', as: 'update'
         end
       end
-    resources :lists,         to: 'user_lists',         as: 'user_lists'
+    resources :lists,         to: 'user_lists',         as: 'user_lists', :only => [:show, :index]
     match 'queue/:action',    to: "queue",              as: 'queue',:constraints => {:action => /list|recommend|show/},  via: :get
     # get '', to: 'show'
   end

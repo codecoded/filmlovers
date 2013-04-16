@@ -67,6 +67,19 @@ FL.Films = {
     })
   },
 
+  addListFilm: function(url){
+    $.ajax({
+      url: url,
+      type: 'post',
+      success: function(html){
+        $('.sortable').append(html)
+
+        // if($('#queueListModal').length>0)
+        //   $('#queueListModal .close-reveal-modal').click()
+      } 
+    })   
+  },
+
   sortUserFilms: function(){
     url = $(this).attr('value')
     $('#contentHolder').load(url + ' #filmsContent')

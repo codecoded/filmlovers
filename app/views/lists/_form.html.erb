@@ -1,0 +1,48 @@
+
+  <%= list_form.label :name, 'Title:' %>
+  <%= list_form.text_field(:name, placeholder: 'Title') %>
+  <%= list_form.label :description, 'Overview:' %>
+  <%= list_form.text_area(:description, cols: 40, rows: 20, placeholder:'Description') %>
+
+  <div class="twelve columns">
+    <div class="row collapse">
+      <div class="one mobile-one columns">
+        <span class="prefix"><%= image_tag "search.png"%></span>
+      </div>
+      <div class="four mobile-three columns">
+        <input type="text" id="quick_search" size="30" value="" autocomplete="off" class="ss-input">
+      </div>
+      <div class="three mobile-three columns">
+        <%= link_to 'Cancel',:back, :class=>'button radius' %>
+        <button data-bind="click: save" class="button radius">Save</button>
+        <% if !list.new_record?%>
+          <%= link_to 'Delete', list_path(list), method: :delete, :class=>'button radius' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thumbnails -->
+
+  <div class="row films" >
+    <ol class="nine columns sortable" >
+      <% list.films.each_with_index do |film, index| %>
+        <%= render partial: 'film_list_item', locals: {film: film, index: index} %>
+      <% end %>
+    </ol>
+  </div>
+
+<script>
+  text = 1
+  $(".overview-toggle").click(function () {
+    $(this).siblings('.film-summary').toggle();
+    caption = $(this).text() == 'more info' ? 'close' : 'more info'
+    $(this).text(caption)
+    // $(this).siblings('.film-summary-main').toggle();
+  });
+
+$(function(){
+  $('#quick_search').smartSuggest({src: 'films_search', showImages:true })
+})
+
+</script>

@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def user
+    return current_user unless user_id
     if BSON::ObjectId.legal? user_id
       @user ||= User.find(user_id)
     else

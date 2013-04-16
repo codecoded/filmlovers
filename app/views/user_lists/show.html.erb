@@ -1,11 +1,11 @@
 <%= render layout: 'layouts/user', object: user  do %>
-<%= render partial: 'list_meta_tags', locals: {films_list: @films_list} %>
+<%= render partial: 'list_meta_tags', locals: {films_list: list} %>
 
 <div id="viewContent"  class="twelve columns" >
 
     <% if viewing_own? %>
       <div class="nine columns user-actions right">        
-        <%= link_to edit_user_list_path(current_user, @films_list), :class=>'right' do %>
+        <%= link_to edit_list_path(list), :class=>'right' do %>
           <%= awesome 'pencil' %> edit
         <% end %>
       </div>
@@ -13,17 +13,19 @@
 
   <div class="nine columns films" id="userList">
     <div class="info">
-      <h3 class="list-name"><%= @films_list.name %></h3>
-      <p><%= @films_list.description %></p>
+      <h3 class="list-name"><%= list.name %></h3>
+      <p><%= list.description %></p>
       <hr/>
     </div>
 
     <ol>
-      <% @films_list.films.each_with_index do |film, index| %>
+      <% list.films.each_with_index do |film, index| %>
         <li >  
           <div class="two columns">
+            <% if film.has_backdrop? %>
             <%= link_to film_path(film), title: film.title do %>
-              <%= backdrop(film, 'w154') %>
+              <%= backdrop(film, film.backdrops[0], 'w154') %>
+            <% end %>
             <% end %>
           </div>
           <div class="six columns">
@@ -46,13 +48,15 @@
               <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
           </div> 
           <div class="three columns">
-            <div class="film-actions-vertical pagination-centered" >
-              <% [:watched, :loved, :owned].each do |action| %>
-                <button>
-                  <%= action_icon action, film %>
-                </button>
-              <% end %>
-            </div>
+            <% if logged_in? %>
+              <div class="film-actions-vertical pagination-centered" >
+                <% [:watched, :loved, :owned].each do |action| %>
+                  <button>
+                    <%= action_icon action, film %>
+                  </button>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </li>
       <% end %>
@@ -65,13 +69,13 @@
   </div>
 </div>
 
-  <script>
-    text = 1
-    $(".overview-toggle").click(function () {
-      $(this).siblings('.film-summary').toggle();
-      caption = $(this).text() == 'more info' ? 'close' : 'more info'
-      $(this).text(caption)
-      // $(this).siblings('.film-summary-main').toggle();
-    });
+<script>
+  text = 1
+  $(".overview-toggle").click(function () {
+    $(this).siblings('.film-summary').toggle();
+    caption = $(this).text() == 'more info' ? 'close' : 'more info'
+    $(this).text(caption)
+    // $(this).siblings('.film-summary-main').toggle();
+  });
 </script>
 <% end %>

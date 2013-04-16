@@ -1,13 +1,13 @@
-<% set_meta_tags :title => films_list.name %>
-<% set_meta_tags :description => films_list.description %>
+<% set_meta_tags :title => list.name %>
+<% set_meta_tags :description => list.description %>
 
 <% set_meta_tags :og => {
-  :title    => films_list.name,
+  :title    => list.name,
   :type     => "collection",
-  :url      => "#{request.protocol}#{request.host_with_port}#{request.fullpath}",
-  :image    => films_list.films.first.poster('w342'),
+  :url      => user_list_url(user, list),
+  :image    => (list.films.first.poster('w342') if list.films.first),
   :site_name   =>'filmlovers - find, share, discover',
-  :description => films_list.description
+  :description => list.description
 } %>
 
 

@@ -83,14 +83,9 @@ module FilmHelper
       poster film, size
     end
   end
-
-
-  def backdrop(film, size)
-    backdrop_image(film, film.backdrop, size)
-  end
   
-  def backdrop_image(film, backdrop, size = 'w1280')
-     image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
+  def backdrop(film, backdrop, size = 'w1280')
+    image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
   end
 
 

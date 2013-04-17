@@ -4,19 +4,19 @@
   <div class="twelve columns">
   <div class="row collapse">
     <div class="seven columns">
-      <h1><%= @person_view.name %> </h1>
+      <h1><%= person.name %> </h1>
       
     </div>
   </div>
   
 
-  <div class="row collapse" id="biography">
+  <div class="row " id="biography">
     <div class="three columns">
-     <%= image_tag @person_view.person.profile('w342') %>
+     <%= image_tag person.profile('w342') %>
     </div>
     <div class="five columns">
       <h4>Biography</h4>
-      <p><%= @person_view.biography %></p>
+      <p><%= person.biography %></p>
     </div>
      <div class="four columns credits" id="credits">
       <dl class="tabs">
@@ -29,7 +29,7 @@
           <div class="row">
             <div class="twelve columns crew">
               <ul class="disc credits">
-                <% @person_view.portfolio.cast.each do |person| %>
+                <% person.portfolio.cast.each do |person| %>
                 <li style="border-bottom: dotted 1px lightblue;">
                   <%= link_to film_path(person.id), remote:true do %>
                     <%= content_tag :span, person.title, {:class => 'person link'} %>
@@ -45,7 +45,7 @@
           <div class="row">
             <div class="twelve columns crew">
               <ul class="disc credits">
-              <% @person_view.portfolio.crew.each do |person| %>
+              <% person.portfolio.crew.each do |person| %>
                 <li style="border-bottom: dotted 1px lightblue;">
                   <%= link_to film_path(person.id), remote:true do %>
                     <%= content_tag :span, person.title, {:class => 'person link'} %>
@@ -59,15 +59,13 @@
         </li>
         <li id="filmsTab">
           <div class="row" id="similar">
-            <div class="e columns crew">
-              <ul class="disc credits">
-              <% @person_view.films.each do |film_view| %>
-                <div class="film-small">
-                <% if film_view.film.id %>
-                  <%= link_to film_path(film_view.film.id), remote:true do %>
-                    <%= image_tag(film_view.thumbnail('w45'), :title => film_view.title, :class => 'small') %>
-                  <%end %>
-                   <span class="right"> <%= film_view.title %> </span>
+            <div class="twelve columns crew">
+              <ul class="disc credits films">
+              <% person.films.each do |film| %>
+                <div class="film">
+                <% if film.id %>
+                  <%= poster_link film, 'w154' %>
+                  <!-- <span class="right"> <%#= film.title %> </span> -->
                 <% end %>
                 </div>
               <% end %>

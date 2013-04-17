@@ -17,6 +17,10 @@ class Person
   #   portfolio.cast.collect {|film| film['id'] }
   # end
 
+  def films
+    @films ||= credits['cast'].map {|f| Film.find(f['id']) || Film.create(f)}
+  end
+
   def has_profile?
     profile_path
   end

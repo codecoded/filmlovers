@@ -10,7 +10,7 @@ class PersonPresenter
   end
 
   def films
-    @films ||= person.credits['cast'].map {|f| FilmPresenter.new user, Film.new(f), 'w92'}
+    @films ||= person.credits['cast'].map {|f| Film.new(f)}
   end
 
 end

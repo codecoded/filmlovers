@@ -3,7 +3,7 @@ class Film
   include Mongoid::Timestamps
 
   has_many :film_user_actions, validate: false, dependent: :destroy
-  has_many :film_lists_items, validate: false, dependent: :destroy
+  # has_many :film_list_items, validate: false, dependent: :destroy
 
   field :_id, type: Integer, default: ->{ id.to_id if id}
   field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}"}

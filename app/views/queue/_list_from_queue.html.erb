@@ -4,16 +4,16 @@
   <span class="close-reveal-modal">×</span>
    <div class="row" >
      <div class="twelve columns">
-        <h5 class="film-title pull-left"><%= title_with_year @film_view %></h5>
-        <h6 class="film-director pull-right"><%= @film_view.director %></h6>
+        <h5 class="film-title pull-left"><%= title_with_year film %></h5>
+        <h6 class="film-director pull-right"><%= film.director %></h6>
       <div>
    </div>
    <div class="row" style="clear:both">
     <div class="five columns">
-       <%= film_poster_link(@film_view.film) %>
+       <%= film_poster_link(film) %>
     </div>
     <div class="seven columns">     
-      <p class="film-summary"><%= overview @film_view.film %></p>
+      <p class="film-summary"><%= overview film %></p>
     </div>
   </div>
   <div class="row">
@@ -26,7 +26,7 @@
       </div>      
     </div>
     <div class="six columns">
-      <label> <%= link_to 'start a new list', new_list_path(film_ids:[@film_view.id]), :class=>'close-reveal-modal' %></label>
+      <label> <%= link_to 'start a new list', new_list_path(film_ids:[film.id]), :class=>'close-reveal-modal' %></label>
     </div>
   </div>
 

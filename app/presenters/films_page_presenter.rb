@@ -11,7 +11,7 @@ class FilmsPagePresenter
   end
 
   def films
-    @films ||= results.map {|film| FilmPresenter.new user, film}
+    results
   end
 
   def next_params

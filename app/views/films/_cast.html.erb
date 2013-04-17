@@ -3,7 +3,7 @@
 
 <div class="twelve columns" id="film-content-cast">
   <%#= render partial: 'shared/netflix_234x60' %>
-  <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
+  <%= render partial:'film_poster'%>
   <div class="eight columns">
     <h4>Cast</h4>
     <% film.credits.cast.each do |person| %>

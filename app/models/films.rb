@@ -22,8 +22,22 @@ class Films
     ids = Films[action].
           order_by([:updated_at.desc]).
           group_by(&:film_id).
-          map{|film_id, films| {id: film_id, score: films.length}}.
+          map{|film_id, actions| {id: film_id, score: actions.length}}.
           take(count).map {|film| film[:id]}
+    find_all_summaries ids
+  end
+
+  def self.recent(count=5)
+    ids = FilmUserAction.
+        order_by([:updated_at.desc]).
+        group_by(&:film_id).
+        map{|film_id, actions| {id: film_id, score: actions.length}}.
+        take(count).
+        map {|film| film[:id]}
+    find_all_summaries ids
+  end
+
+  def self.find_all_summaries(ids)
     Film.only(:poster_path, :name, :title, :release_date).find ids
   end
 

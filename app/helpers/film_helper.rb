@@ -1,5 +1,9 @@
 module FilmHelper
 
+  def title_with_year(film)
+    "#{film.title} " << year(film)
+  end
+
   def directed_by(film_view)
     "Directed by: #{film_view.director}" if film_view.director
   end
@@ -18,25 +22,30 @@ module FilmHelper
     end
   end
 
-  def year(film_view)
-    return "" unless film_view.year
-    "(#{film_view.year})"
+
+  def actioned?(film, action)
+    return false unless current_user
+    current_user.film_actioned? film, action
   end
 
-  def title_with_year(film_view)
-    "#{film_view.title} " << year(film_view)
+
+  def year(film)
+    return "" unless film.year
+    "(#{film.year})"
   end
+
+
 
   def tagline(film_view)
     film_view.tagline ? film_view.tagline :  "Overview"
   end
 
-  def action_button(action, presenter)
-    url = update_user_film_path(current_user, action, presenter.id)
-    actioned = presenter.actioned?(action)
+  def action_button(action, film)
+    url = update_user_film_path(current_user, action, film.id)
+    actioned = actioned?(film, action)
     method =  actioned ? :delete : :put
     button_tag type: :button, name: action, :class=> 'film-action', data: {href: url, method: method, remote: true } do 
-      icon_for(action,actioned)
+      icon_for(action, actioned)
     end    
   end
 

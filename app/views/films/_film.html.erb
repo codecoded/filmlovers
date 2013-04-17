@@ -1,19 +1,19 @@
-<%= div_for film_presenter.film do %>
+<%= div_for film do %>
 
   
   <div class="film-heading-border film-title">
-     <%= title_with_year film_presenter %>
+     <%= title_with_year film %>
   </div>
 
   <div class="film-info">
-     <%= film_poster_link film_presenter.film %>
+     <%= film_poster_link film %>
 
      <% if logged_in? %>
       <div class="film-action-buttons">
         <% [:watched, :loved, :owned].each do |action| %>
-          <%= action_icon action, film_presenter.film %>
+          <%= action_icon action, film %>
         <% end %>
-        <%= link_to queue_path(current_user, :list, film_ids: film_presenter.film), :class=>'display-modal unactioned' do %>
+        <%= link_to queue_path(current_user, :list, film_ids: film), :class=>'display-modal unactioned' do %>
           <%= awesome 'list' %>
         <% end %>
       </div>
@@ -22,10 +22,10 @@
   <div class="film-heading-border film-director">
     <% [:watched, :loved, :owned].each do |action| %>
       <span>
-        <%= link_to users_film_path(film_presenter.film, action) do %>
-          <%= icon_for action, film_presenter.actioned?(action) %>
-          <%= label_tag film_presenter.id, data: {counter: action} do %> 
-            <%= film_presenter.film.actions_for(action).count %>
+        <%= link_to users_film_path(film, action) do %>
+          <%= icon_for action, actioned?(film, action) %>
+          <%= label_tag film.id, data: {counter: action} do %> 
+            <%= film.actions_for(action).count %>
           <% end %>
         <% end %>
       </span>

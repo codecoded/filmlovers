@@ -9,7 +9,6 @@ class FilmsController < ApplicationController
   end
 
   def show
-    @film_view = FilmPresenter.new current_user, film
     render_template
   end
 

@@ -1,7 +1,7 @@
 <% set_meta_tags :title => "#{title_with_year(film)} - people who #{user_action} the film" %>
 
 <div class="twelve columns" id="film-content-users">
-  <%= render partial:'film_poster', locals:{film_presenter: FilmPresenter.new(current_user, film)} %>
+  <%= render partial:'film_poster'%>
   <div class="nine columns">
     <h4><%= "#{pluralize @users.count, 'film lover'} #{user_action} #{film.title}" %> </h4>
     <% @users.each do |user| %>

@@ -4,11 +4,10 @@ class QueueController < ApplicationController
 
   def list
     @lists = [['Please Select...', -1]]
-    @film_view = FilmPresenter.new  current_user, Film.fetch(params[:film_ids])
     @lists += current_user.films_lists.all.map { |list| [list.name, list_film_path(list.to_param, params[:film_ids])] }
-
     render partial:'list_from_queue', layout:nil 
   end
+
 
   def show
     results = user_service.list_films(:queued)
@@ -29,4 +28,8 @@ class QueueController < ApplicationController
     @films_list ||= user_service.films_list(params[:id])
   end
 
+  def film
+    @film ||= Film.fetch(params[:film_ids])
+  end
+  helper_method :film
 end

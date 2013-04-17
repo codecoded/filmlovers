@@ -24,6 +24,20 @@
   </div>
 <% end %>
 
+  <div class="row" id="active-films">
+    <div class="twelve columns">
+      <h6 class="heading_divider">Active Films</h6>
+    </div>    
+    <div class="eleven columns centered">
+      <div class=" films">
+        <% Films.recent(6).each do |film| %>
+          <%= render partial: 'films/film', object: film %>
+        <% end %>
+      </div>      
+    </div>
+  </div>
+
+  </div>
   <div class="row" id="icon-descriptions">
     <div class="four columns">
       <div class="radius panel pagination-centered">

@@ -16,7 +16,7 @@
             </select>
         </div>
       </div>
-      <%= render partial: 'films/film', collection: @films_page.films, as: :film_presenter %>
+      <%= render partial: 'films/film', collection: @films_page.films %>
       <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>
     </div>
   </div>

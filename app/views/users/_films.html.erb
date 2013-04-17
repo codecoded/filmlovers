@@ -4,7 +4,7 @@
     <div class="ten columns films centered" id="filmsContent" >
       <div class="twelve columns">
         <div class="seven column">
-          <h5> <%= " #{pluralize @films_page.films.count, 'films'} #{user_action}" %> </h5>
+          <h5> <%= " #{pluralize user.actions_for(user_action).count , 'films'} #{user_action}" %> </h5>
         </div>
         <div class="two columns">
           <label>Sort by</label>

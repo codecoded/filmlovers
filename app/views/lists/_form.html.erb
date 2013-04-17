@@ -6,12 +6,15 @@
 
   <div class="twelve columns">
     <div class="row collapse">
+
       <div class="one mobile-one columns">
         <span class="prefix"><%= image_tag "search.png"%></span>
       </div>
+
       <div class="four mobile-three columns">
         <input type="text" id="quick_search" size="30" value="" autocomplete="off" class="ss-input">
       </div>
+
       <div class="three mobile-three columns">
         <%= link_to 'Cancel',:back, :class=>'button radius' %>
         <button data-bind="click: save" class="button radius">Save</button>
@@ -19,6 +22,7 @@
           <%= link_to 'Delete', list_path(list), method: :delete, :class=>'button radius' %>
         <% end %>
       </div>
+      
     </div>
   </div>
 

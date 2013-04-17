@@ -1,5 +1,5 @@
 
-<div class="twelve columns">
+<div class="twelve columns fixed contain-to-grid">
   <nav class="top-bar">
     <ul>
       <!-- Title Area -->
@@ -17,7 +17,7 @@
       <% if logged_in? %>
       <ul class="left">
         <li class="has-dropdown">
-         <a>  <%= awesome "film" %> films</a>
+         <a>  <%= awesome "film" %> films &nbsp;</a>
           <ul class="dropdown">
             <li><label>Current</label></li>
             <li><%= link_to 'Upcoming', trend_path(:upcoming), alt: 'upcoming films' %></li>

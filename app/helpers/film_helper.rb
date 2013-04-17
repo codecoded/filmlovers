@@ -120,4 +120,8 @@ module FilmHelper
      truncate film.overview, separator: ' ', length: truncate_at, :omission => '...'
   end
 
+  def release_date(film)
+    film.release_date ? "#{Date.parse(film.release_date).year}" : ''
+  end
+
 end

@@ -28,7 +28,7 @@ class ListsController < UsersController
     list.film_list_items.delete_all
     list.update_attributes! params[:films_list]
     flash[:update_message] = "Film list updated"
-    redirect_to user_lists_path current_user
+    redirect_to user_list_path(current_user, list)
   end
 
 

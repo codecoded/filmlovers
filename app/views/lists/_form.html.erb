@@ -14,6 +14,11 @@
           </div>
         </div>
       </div>
+      <div class="four columns">
+        <%#= content_tag :span, 'private?' %> 
+        <%= content_tag :icon, '',:class=>'icon-eye-close', title: 'only you can see this list?' %>
+        <%= list_form.check_box :is_private %>
+      </div>
     </div>
   </div>
 </div>

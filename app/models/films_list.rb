@@ -3,6 +3,7 @@ class FilmsList
 
   field :name
   field :description
+  field :is_private, type: Boolean, default: false
 
   validates_presence_of :name
   

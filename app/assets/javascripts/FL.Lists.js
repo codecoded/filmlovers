@@ -5,11 +5,17 @@ FL.Lists = {
     if(FL.Lists.initialised) return
 
     FL.Lists.initSort($('.sortable'))
+    FL.Lists.initListeners()
     FL.Lists.initialised = true
   },
 
-  initSort: function(sorter){
+  initListeners: function(){
+    $(document).on('click', ".overview-toggle", FL.Lists.overviewToggle)
+    $(document).on('click', "button[data-action=delete-film-item]", FL.Lists.deleteFilmItem)
+    $('#quick_search').smartSuggest({src: 'films_search', showImages: true })
+  },
 
+  initSort: function(sorter){
     sorter.sortable({ 
       forcePlaceholderSize: true, 
       containment:'window', 
@@ -17,20 +23,25 @@ FL.Lists = {
       forceHelperSize: true, 
       helper: "clone"})
 
-    // sorter.sortable({start: Bindings.Lists.model.sortstart, stop:  Bindings.Lists.model.sortstop, update:  Bindings.Lists.model.sortupdate})
-
-    sorter.on( "sortupdate", function(event, ui){
-      FL.Lists.sort()
-    });   
+    sorter.on("sortupdate", FL.Lists.sort);   
   },
 
-  sort: function(){
+  sort: function(event, ui){
     $('.sortable li').each(function(index, item){
       $(".index", item).text(index+1)
       $("#films_list_film_list_items__position", item).val(index+1)
-      // item = Bindings.Lists.model.find(item.getAttribute('data-item-id'))
-      // item.position(index+1)
     })    
-  }
+  },
 
+  overviewToggle: function(){
+    $(this).siblings('.film-summary').toggle()
+    caption = $(this).text() == 'more info' ? 'close' : 'more info'
+    $(this).text(caption)
+  },
+
+  deleteFilmItem: function(e){
+    e.preventDefault()
+    $(this).parents('li').remove()
+    FL.Lists.sort()
+  }  
 }

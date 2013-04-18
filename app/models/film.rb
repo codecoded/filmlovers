@@ -39,7 +39,6 @@ class Film
     production_companies and production_companies.length > 0
   end
 
-
   def duration
     runtime if runtime and runtime.to_i > 0  
   end
@@ -47,7 +46,6 @@ class Film
   def has_backdrop?
     backdrop_path
   end
-
 
   def backdrops
     images_library.backdrops

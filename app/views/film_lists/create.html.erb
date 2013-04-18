@@ -7,7 +7,10 @@
     <% end %>
   </div>
   <div class="six columns">
-    <label class="title"><%= "#{@index || index+1}. #{film.title}" %></label>
+    <%= content_tag :label, :class=>'title' do %>
+      <%= content_tag :span, @index || index+1, :class=>'index' %>. 
+      <%= film.title %>
+    <% end %>
     <div class="film-summary" style="max-height:50px;overflow-y:hidden">
       <p><%=overview film, 145%></p>
     </div>
@@ -21,7 +24,7 @@
   </div> 
   <div class="two columns">
     <div class="film-actions-vertical pagination-centered">
-      <button data-bind="click: $root.removeFilmItem">
+      <button data-action="delete-film-item">
         <i class="icon-remove icon-2x"></i>
        </button>
     </div>

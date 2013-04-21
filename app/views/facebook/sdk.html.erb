@@ -18,10 +18,10 @@
           $(document).trigger('facebook:connected')
           FacebookAPI.loggedIn = true
         } 
-        else if (response.status === 'not_authorized') 
+        else (response.status === 'not_authorized') 
            FacebookAPI.loggedIn = false
-        else 
-            FacebookAPI.login();
+        // else 
+        //     FacebookAPI.login();
     });
   };
 

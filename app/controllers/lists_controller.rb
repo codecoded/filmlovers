@@ -1,4 +1,4 @@
-class ListsController < ApplicationController
+class ListsController < UsersController
   
   respond_to :html, :json
   def index

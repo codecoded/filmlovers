@@ -1,4 +1,4 @@
-class FilmListsController < ApplicationController
+class FilmListsController < UsersController
   
   respond_to :html, :js, :json
 

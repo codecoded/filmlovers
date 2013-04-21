@@ -19,21 +19,21 @@ var FacebookAPI = {
     //   ViewModel.user.loggedOut(true)
     // },
 
-  // login: function(){
+  login: function(){
 
-  //   // FB.login(function(response) 
-  //   // {
-  //   //     if (response.authResponse) 
-  //   //     {
-  //   //       FacebookAPI.logged_in()
-  //   //     } 
-  //   //     else 
-  //   //     {
-  //   //       FacebookAPI.logged_out()
-  //   //       console.log('User cancelled login or did not fully authorize.');
-  //   //     }
-  //   // })
-  // },
+    FB.login(function(response) 
+    {
+        if (response.authResponse) 
+        {
+          FacebookAPI.logged_in()
+        } 
+        else 
+        {
+          FacebookAPI.logged_out()
+          console.log('User cancelled login or did not fully authorize.');
+        }
+    })
+  },
 
   logout: function(){
     FB.logout(function(response) 

@@ -15,6 +15,6 @@ class UserListsController < UsersController
   # end
 
   def list
-    @list ||= (lists.find(params[:id]) || lists.new)
+    @list ||= (user.films_lists.find(params[:id]) || lists.new)
   end
 end

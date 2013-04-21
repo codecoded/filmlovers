@@ -10,6 +10,11 @@ class FilmListsController < ApplicationController
     add_film
   end
 
+  def new
+    @index = list.film_list_items.count+1
+    list.film_list_items.new(film_id: film.id, position: @index)
+  end
+
   def update
     return film_not_found unless film
     listed_film = list.film_list_items.find_by film_id: film.id
@@ -33,7 +38,7 @@ class FilmListsController < ApplicationController
   end
 
   def list
-    @list ||= current_user.films_lists.find(params[:list_id])
+    @list ||= current_user.films_lists.find(params[:list_id]) || current_user.films_lists.new
   end
 
   def film

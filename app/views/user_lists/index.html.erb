@@ -10,7 +10,7 @@
       <% end %>
 
       <div class="eight columns">
-         <% lists.each do |list| %>
+         <% user_lists.each do |list| %>
           <%= content_tag :div, :class => 'row list-summary collapse', data:{href: user_list_path(list.user, list)} do %>
           
             <div class="five columns">       

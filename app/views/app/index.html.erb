@@ -24,20 +24,6 @@
   </div>
 <% end %>
 
-  <div class="row" id="active-films">
-    <div class="twelve columns">
-      <h6 class="heading_divider">Active Films</h6>
-    </div>    
-    <div class="eleven columns centered">
-      <div class=" films">
-        <% Films.recent(6).each do |film| %>
-          <%= render partial: 'films/film', object: film %>
-        <% end %>
-      </div>      
-    </div>
-  </div>
-
-  </div>
   <div class="row" id="icon-descriptions">
     <div class="four columns">
       <div class="radius panel pagination-centered">
@@ -69,15 +55,23 @@
         <%= render partial: 'films_recently_actioned', locals:{action: :owned} %>
       </div>
     </div>
-<!--     <div class="three columns">
-      <div class="radius panel pagination-centered">
-        <h4>Queued</h4>
-        <i class="icon-pushpin icon-3x actioned"></i>
-        <p>save for later, or to add to your lists</P>
-      </div>
-    </div> -->
   </div>
   
+
+  <div class="row" id="active-films">
+    <div class="twelve columns">
+      <h6 class="heading_divider">Recent Activity</h6>
+    </div>    
+    <div class="twelve columns centered">
+      <div class=" films">
+        <% Films.recent(5).each do |film| %>
+          <%= render partial: 'films/film', object: film %>
+        <% end %>
+      </div>      
+    </div>
+  </div>
+
+
   <div class="row ">
     <div class="twelve columns">
       <h6 class="heading_divider">Current Films</h6>

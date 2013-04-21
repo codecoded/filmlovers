@@ -15,7 +15,7 @@ node(:data) do |films_page|
       primary: film.title,
       secondary: release_date(film),
       image: (film.poster('w45') if film.has_poster?),
-      onclick: "FL.Films.addListFilm(' #{list_films_path(list, id: film)}')"
+      onclick: "FL.Lists.addFilm(' #{list_view_film_path(film)}')"
     }
   end
 end

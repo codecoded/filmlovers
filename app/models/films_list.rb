@@ -10,6 +10,8 @@ class FilmsList
   embedded_in :user
   embeds_many :film_list_items
 
+  scope :viewable, where(is_private: false)
+  
   def films 
     film_ids.map {|id| Film.fetch id}
   end

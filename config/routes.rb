@@ -16,13 +16,15 @@ Filmlovers::Application.routes.draw do
       resources 'genres',   only: [:show, :index]
       resources 'trends',   only: [:show, :index], :constraints => {:id => /now_playing|latest|upcoming|popular/}
       # 
-      get 'search'   
+      get 'search'  
+      get 'inline_search'   
       get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'
     end
     member do
       get ':view',          to: 'films#view', :constraints => { :view => /images|overview|cast|trailer|similar/ }, as: 'view'
       get 'summary',        to: "films#summary",        as: 'summary'
       get ':user_action',   to: "films#users", as: 'users', :constraints => { :user_action => /watched|loved|owned/ }
+      get 'list_view',      to: "films#list_view",  as: 'list_view'
     end
   end
 
@@ -40,10 +42,8 @@ Filmlovers::Application.routes.draw do
   end
 
   resources :lists, :except => [:show] do
-    member do
-      get 'films_search'    
-    end
-    resources :films, to: 'film_lists', :only => [:update, :destroy, :show, :create]
+
+    resources :films, to: 'film_lists', :only => [:update, :destroy, :show, :create, :new]
   end
 
   scope 'queue' do

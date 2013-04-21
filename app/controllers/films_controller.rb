@@ -1,8 +1,7 @@
 require 'results_page'
 class FilmsController < ApplicationController
 
-  before_filter :init_film_search
-  # respond_to :json, :html
+  respond_to :html, :json
 
   def index
     render_template
@@ -14,6 +13,10 @@ class FilmsController < ApplicationController
 
   def view
     render 'show'
+  end
+
+  def list_view
+    render partial: 'list_view'
   end
 
   def actioned
@@ -29,10 +32,12 @@ class FilmsController < ApplicationController
   end
 
   def search
-    results = @tmdb_service.search params[:query], page_options
-    present(results, params[:query]) and render_template :index
+    present(perform_search, params[:query]) and render_template :index
   end
 
+  def inline_search
+    respond_with present(perform_search, params[:q])
+  end
 
   def users
     @users =film.actions_for(user_action).map &:user
@@ -42,8 +47,8 @@ class FilmsController < ApplicationController
 
   protected
 
-  def init_film_search
-    @tmdb_service = TmdbFilmsSearch.new
+  def perform_search
+    TmdbFilmsSearch.new.search(params[:q] || params[:query], page_options)
   end
 
   def page_options

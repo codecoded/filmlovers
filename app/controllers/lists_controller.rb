@@ -1,4 +1,4 @@
-class ListsController < UsersController
+class ListsController < ApplicationController
   
   respond_to :html, :json
   def index
@@ -29,18 +29,6 @@ class ListsController < UsersController
     list.update_attributes! params[:films_list]
     flash[:update_message] = "Film list updated"
     redirect_to user_list_path(current_user, list)
-  end
-
-
-  def films_search
-    results = TmdbFilmsSearch.new.search params[:q]
-    @films_page = FilmsPagePresenter.new(current_user, results, params[:q])
-    respond_with @films_page
-  end
-
-
-  def add_item
-    
   end
 
   helper_method :list, :lists, :film

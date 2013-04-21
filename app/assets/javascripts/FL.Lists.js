@@ -12,7 +12,7 @@ FL.Lists = {
   initListeners: function(){
     $(document).on('click', ".overview-toggle", FL.Lists.overviewToggle)
     $(document).on('click', "button[data-action=delete-film-item]", FL.Lists.deleteFilmItem)
-    $('#quick_search').smartSuggest({src: 'films_search', showImages: true })
+    $('#quick_search').smartSuggest({src: '/films/inline_search', showImages: true })
   },
 
   initSort: function(sorter){
@@ -31,6 +31,17 @@ FL.Lists = {
       $(".index", item).text(index+1)
       $("#films_list_film_list_items__position", item).val(index+1)
     })    
+  },
+
+  addFilm: function(url){
+    $.ajax({
+      url: url,
+      type: 'get',
+      success: function(html){
+        $('.sortable').append(html)
+        FL.Lists.sort()
+      } 
+    })   
   },
 
   overviewToggle: function(){

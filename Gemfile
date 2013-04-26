@@ -25,7 +25,7 @@ gem 'pusher'
 gem 'knockoutjs-rails' 
 gem 'jquery-rails', '2.1.4'
 # gem 'jquery-ui-rails'
-#gem 'compass-rails'
+gem 'compass-rails'
 
 gem 'bson_ext'
 gem 'mongo'

@@ -1,5 +1,5 @@
 
-<div class="twelve columns fixed contain-to-grid">
+<div class="twelve columns fixed ">
   <nav class="top-bar">
     <ul>
       <!-- Title Area -->
@@ -62,7 +62,7 @@
           <% end %>
         </li>
         <li class="has-dropdown">
-          <a href="#"><%= current_user.name %></a>
+          <a href="#"><%= current_user.username %></a>
           <ul class="dropdown">
             <li><label>Films</label></li>
             <%= render partial: 'layouts/action_links' %>       
@@ -85,7 +85,7 @@
               <label>Options</label>
             </li>
             <li>
-              <%= link_to signout_path, id: "sign_out" do %>
+              <%= link_to destroy_user_session_path, id: "sign_out", method: :delete do %>
                  <%= awesome 'signout'%> "Sign out"
               <% end %>
             </li>
@@ -110,13 +110,13 @@
         </li>
       </ul>
       <ul class="right">
-              <li class="name">
+        <li class="name">
           <%= form_tag(search_films_path, method: :get) do%>
           <input type="text" id="quick_search_header" name="query">
           <% end %>
         </li>
         <li class="has-dropdown">
-          <a href="#" alt="sign in to filmlovers"><i class="icon-signin"></i>Sign In</a>
+          <a href="/users/sign_in" alt="sign in to filmlovers"><i class="icon-signin"></i>Sign In</a>
           <ul class="dropdown">
             <li><label>Passports</label></li>
             <%= passport_link :facebook, "Facebook" %>

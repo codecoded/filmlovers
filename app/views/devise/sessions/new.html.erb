@@ -1,0 +1,39 @@
+<%= image_tag 'backdrop-sign-in-main.jpg', :class=>'bg' %>
+
+<h2>Sign in</h2>
+
+<section>       
+  <div id="container_demo" >
+    <div id="signupWrapper">
+      <div id="login" class="animate form five columns centered">
+        <%= form_for(resource, :as => resource_name, :url =>  session_path(resource_name) , :autocomplete => 'on') do |f| %>
+          <h1> Sign in </h1> 
+
+          <p>
+            <%= f.label :username, 'Your username', :class=>'uname', data:{icon: 'u'} %>
+            <%= f.text_field :username, required: :required, placeholder: 'myscreename' %>
+          </p>
+
+          <p>
+            <%= f.label   :password, 'Your password', :class=>'youpasswd', data:{icon: 'p'} %>
+            <%= f.password_field :password, required: :required, placeholder: 'eg. X8df!90EO' %>
+          </p>
+
+          <p class="keeplogin"> 
+            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+            <label for="loginkeeping">Keep me logged in</label>
+          </p>
+
+          <p class="login button2"> 
+            <input type="submit" value="Login"/> 
+          </p>
+          <p class="change_link">  
+             Not a member yet ?
+            <%= link_to 'Join us',new_user_registration_path,  :class=>'to_register' %>
+
+          </p>
+        <% end %>
+      </div>
+    </div> 
+  </div>
+</section>

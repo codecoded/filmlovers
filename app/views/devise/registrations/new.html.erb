@@ -1,0 +1,42 @@
+<%= image_tag 'backdrop-sign-up.jpg', :class=>'bg' %>
+
+<section>       
+  <div id="container_demo" >
+    <div id="signupWrapper">
+      <div id="login" class="animate form five columns centered">
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :autocomplete => 'on') do |f| %>
+          <h1> Sign up </h1> 
+          <%= devise_error_messages! %>
+
+          <p>
+            <%= f.label :username, 'Your username', :class=>'uname', data:{icon: 'u'} %>
+            <%= f.text_field :username, required: :required, placeholder: 'myscreename' %>
+          </p>
+
+          <p>
+            <%= f.label :email, 'Your email',  :class=>'youmail', data:{icon: 'e'} %>
+            <%= f.email_field :email, required: :required, placeholder: 'mysupermail@mail.com' %>
+          </p>
+
+          <p>
+            <%= f.label   :password, 'Your password', :class=>'youpasswd', data:{icon: 'p'} %>
+            <%= f.password_field :password, required: :required, placeholder: 'eg. X8df!90EO' %>
+          </p>
+
+          <p>
+            <%= f.label :password_confirmation, 'Please confirm your password', :class=>'youpasswd', data:{icon: 'p'} %>
+            <%= f.password_field :password_confirmation, required: :required, placeholder: 'eg. X8df!90EO' %>
+          </p>
+
+          <p class="signin button2"> 
+            <input type="submit" value="Sign up"/> 
+          </p>
+          <p class="change_link">  
+            Already a member ?
+            <%= link_to 'Go and log in',new_user_session_path,  :class=>'to_register' %>
+          </p>
+        <% end %>
+      </div>
+    </div>  
+  </div>
+</section>

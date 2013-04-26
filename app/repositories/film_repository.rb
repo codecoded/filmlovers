@@ -4,7 +4,7 @@ class FilmRepository
 
   def initialize(film_id)
     @film_id = film_id
-    @cache = Redis::StringStore.new redis_key
+    # @cache = Redis::StringStore.new redis_key
   end
 
   def self.find(film_id)

@@ -1,9 +1,13 @@
 
+
+
 body{
   overflow-y: scroll;
 
 }
-html, body {height: 100%;}
+html, body {
+  height: 100%;
+}
 .link{
   background-color: rgb(255, 255, 255);
   // border: solid 1px rgba(90, 206, 213, 0.37);
@@ -242,16 +246,17 @@ p{
     }
   &.sign-in-backdrop{
     position: relative;
-    background: url(/assets/backdrop-sign-in_2.jpg) top center no-repeat;
+    background: url(/assets/filmlovers-backdrop-sign-in_2.jpg) top center no-repeat;
     min-height: 400px;
     background-clip: content-box;
+    background-position-y: -165px;
   }
   &.welcome-backdrop{
     position: relative;
-    background: url(/assets/backdrop-sign-in_1.jpg) top center no-repeat;
+    background: url(/assets/filmlovers-backdrop-sign-in-4.jpg) top center no-repeat;
     min-height: 300px;
     background-clip: content-box;
-    background-position-y: -100px
+    background-position-y: -70px
   }
 }
 

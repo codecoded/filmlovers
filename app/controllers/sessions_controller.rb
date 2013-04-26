@@ -4,9 +4,14 @@ class SessionsController < ApplicationController
     passport = Passport.from_omniauth(env["omniauth.auth"])
     user = current_user ? current_user : User.from_omniauth(env["omniauth.auth"])
     user.upsert_passport passport
-    session[:user_id] = user.id
+    env['warden'].set_user(user)
     redirect_to root_url
   end
+
+  def facebook
+    create
+  end
+
 
   def destroy
     reset_session

@@ -14,30 +14,32 @@ gem 'omniauth-vimeo'
 gem 'omniauth-twitter'
 
 gem 'koala'
-gem 'redis'
+#gem 'redis'
 gem 'rack-iframe'
-gem "awesome_print"
+
 gem 'log4r'
 gem 'fb-channel-file'
-gem 'state_machine' # allow states on models
+#gem 'state_machine' # allow states on models
 gem 'swf_fu', '~> 2.0' # loading flash files
 gem 'pusher'
 gem 'knockoutjs-rails' 
 gem 'jquery-rails', '2.1.4'
 # gem 'jquery-ui-rails'
-gem 'compass-rails'
+#gem 'compass-rails'
 
 gem 'bson_ext'
 gem 'mongo'
 gem 'rest-client'
 gem "mongoid", "~> 3.0.0"
 gem 'newrelic_rpm', '3.5.6.55'
-gem 'will_paginate', '~> 3.0.0'
+
+# gem 'will_paginate', '~> 3.0.0'
 gem 'rabl'
 gem "eventmachine", "~> 1.0.3"
 gem 'meta-tags', :require => 'meta_tags'
 gem 'gravtastic'
 gem 'sitemap_generator'
+gem 'devise'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -61,6 +63,10 @@ end
 
 group :development, :test do
   gem 'ruby-prof' # SR - for profiling / benchmarking
+  gem "awesome_print"
+  gem 'better_errors'
+  gem "binding_of_caller"
+  gem 'rack-mini-profiler'
 end
 
 

@@ -2,7 +2,8 @@ class Person
   include Mongoid::Document
 
   field :_id, type: String, default: ->{ id }
-
+  field :fetched, type: DateTime, default: nil
+  
   def self.fetch(id)
     PersonRepository.find id
   end

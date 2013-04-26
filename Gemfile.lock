@@ -32,6 +32,12 @@ GEM
     ansi (1.4.3)
     arel (3.0.2)
     awesome_print (1.1.0)
+    bcrypt-ruby (3.0.1)
+    better_errors (0.8.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+    binding_of_caller (0.7.1)
+      debug_inspector (>= 0.0.1)
     bson (1.8.4)
     bson_ext (1.8.4)
       bson (~> 1.8.4)
@@ -43,6 +49,7 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     chunky_png (1.2.8)
+    coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -54,9 +61,13 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
     daemons (1.1.9)
+    debug_inspector (0.0.2)
+    devise (2.2.3)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (~> 3.1)
+      warden (~> 1.2.1)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (1.4.0)
@@ -150,6 +161,7 @@ GEM
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     origin (1.0.11)
+    orm_adapter (0.4.0)
     polyglot (0.3.3)
     pusher (0.11.3)
       multi_json (~> 1.0)
@@ -161,6 +173,8 @@ GEM
       rack (>= 0.4)
     rack-iframe (0.0.3)
       rack
+    rack-mini-profiler (0.1.26)
+      rack (>= 1.1.3)
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -183,7 +197,6 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
-    redis (3.0.3)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ruby-prof (0.13.0)
@@ -202,7 +215,6 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    state_machine (1.2.0)
     swf_fu (2.0.4)
       coffee-script
       rails (>= 3.1)
@@ -221,7 +233,8 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    will_paginate (3.0.4)
+    warden (1.2.1)
+      rack (>= 1.0)
     zurb-foundation (3.2.5)
       compass (>= 0.12.2)
       modular-scale (= 1.0.6)
@@ -233,10 +246,12 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  better_errors
+  binding_of_caller
   bson_ext
   capistrano
   coffee-rails (~> 3.2.1)
-  compass-rails
+  devise
   eventmachine (~> 1.0.3)
   fb-channel-file
   gravtastic
@@ -258,16 +273,14 @@ DEPENDENCIES
   pusher
   rabl
   rack-iframe
+  rack-mini-profiler
   rails
-  redis
   rest-client
   ruby-prof
   sass-rails (~> 3.2.3)
   sitemap_generator
-  state_machine
   swf_fu (~> 2.0)
   thin
   turn
   uglifier (>= 1.0.3)
-  will_paginate (~> 3.0.0)
   zurb-foundation (< 4.0.0)

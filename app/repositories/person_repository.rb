@@ -4,7 +4,7 @@ class PersonRepository
 
   def initialize(id)
     @id = id
-    @cache = Redis::StringStore.new redis_key
+    # @cache = Redis::StringStore.new redis_key
   end
 
   def self.find(id)
@@ -16,12 +16,15 @@ class PersonRepository
   end
 
   def is_cached?
-    cache.exists?
+    person and person.fetched != nil
   end
 
   def load
-    doc = Person.find id
-    doc ? doc : fetch
+    person || fetch
+  end
+
+  def person
+    @person ||= id.numeric? ? Person.find(id.to_i) : Person.find_by(_title_id: id)
   end
 
   def redis_key
@@ -31,10 +34,11 @@ class PersonRepository
   protected 
 
   def fetch
-    person = Person.new Tmdb::Person.find(id)
-    person.upsert
-    cache.set person.id
-    person
+    _id = person ? person._id : id
+    _person = Person.new Tmdb::Person.find(_id)
+    _person.fetched = Time.now.utc
+    _person.upsert
+    _person
   end
 
 end

@@ -7,10 +7,6 @@
 
   <div class="twelve columns right">
     <%= render partial: 'backdrop', locals: {film: film, size: 'w780'} %>
-    <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
-    <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
-    <%= render partial: 'shared/twitter', locals: {film: film} %>
-    <%= render partial: 'shared/facebook_like', locals: {film: film} %>
   </div>
 
     

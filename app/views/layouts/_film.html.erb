@@ -11,6 +11,12 @@
         <% end %>
       </h3>
       <h6><%= directed_by film %></h6>
+      <div class="external-links">
+        <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
+        <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
+        <%= render partial: 'shared/twitter', locals: {film: film} %>
+        <%= render partial: 'shared/facebook_like', locals: {film: film} %>
+      </div>
     </div>
 
     <div class="six columns nav-container">
@@ -33,12 +39,8 @@
     </div>
   </div>
 
-  <div class="external-links four columns">
-    <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
-    <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
-    <%= render partial: 'shared/twitter', locals: {film: film} %>
-    <%= render partial: 'shared/facebook_like', locals: {film: film} %>
-  </div>
+
+
     <%= render partial: params[:view] || 'overview'%>
 </div>
 

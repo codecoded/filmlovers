@@ -61,6 +61,8 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
     daemons (1.1.9)
     debug_inspector (0.0.2)
     devise (2.2.3)
@@ -251,6 +253,7 @@ DEPENDENCIES
   bson_ext
   capistrano
   coffee-rails (~> 3.2.1)
+  compass-rails
   devise
   eventmachine (~> 1.0.3)
   fb-channel-file

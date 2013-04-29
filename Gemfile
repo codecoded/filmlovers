@@ -41,6 +41,9 @@ gem 'gravtastic'
 gem 'sitemap_generator'
 gem 'devise'
 
+gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '3-2-stable'
+gem 'client_side_validations-mongoid'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -66,7 +69,7 @@ group :development, :test do
   gem "awesome_print"
   gem 'better_errors'
   gem "binding_of_caller"
-  gem 'rack-mini-profiler'
+  # gem 'rack-mini-profiler'
 end
 
 

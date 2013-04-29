@@ -6,6 +6,8 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+
+
   ## Database authenticatable
   field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
@@ -23,6 +25,7 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
+
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -42,22 +45,25 @@ class User
 
   gravtastic
   
-  field :username
+  validates :username, :email, uniqueness: {case_sensitive: false}, presence: true
+  validates :username, format: {with: /^[-\w\._@]+$/i,  message: "should only contain letters, numbers, or .-_@"}, length: {minimum: 4}
+  # validates_presence_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
+
+  field :username,              :type => String, :default => ""
   field :first_name
   field :last_name
   field :name
-  field :email
+  # field :email
   field :gender
   field :dob, type: DateTime
+
+  has_many :film_user_actions, validate: false, dependent: :destroy
 
   embeds_many :films_lists
   embeds_many :passports
   embeds_many :friends
 
-  has_many :film_user_actions, validate: false, dependent: :destroy
 
-  validates_presence_of :username
-  validates_uniqueness_of :username, :email, :case_sensitive => false
 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)

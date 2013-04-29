@@ -15,5 +15,6 @@
 //= require jquery-ui
 //= require foundation
 //= require knockout
+//= require rails.validations
 
 //= require_tree .

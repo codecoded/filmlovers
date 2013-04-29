@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/bcardarella/client_side_validations.git
+  revision: 75d0dad8e4d49ba16c25e511b6514ea1408d2423
+  branch: 3-2-stable
+  specs:
+    client_side_validations (3.2.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,6 +56,9 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     chunky_png (1.2.8)
+    client_side_validations-mongoid (3.0.1)
+      client_side_validations (~> 3.2.5)
+      mongoid (~> 3.0.0)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -175,8 +185,6 @@ GEM
       rack (>= 0.4)
     rack-iframe (0.0.3)
       rack
-    rack-mini-profiler (0.1.26)
-      rack (>= 1.1.3)
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -252,6 +260,8 @@ DEPENDENCIES
   binding_of_caller
   bson_ext
   capistrano
+  client_side_validations!
+  client_side_validations-mongoid
   coffee-rails (~> 3.2.1)
   compass-rails
   devise
@@ -276,7 +286,6 @@ DEPENDENCIES
   pusher
   rabl
   rack-iframe
-  rack-mini-profiler
   rails
   rest-client
   ruby-prof

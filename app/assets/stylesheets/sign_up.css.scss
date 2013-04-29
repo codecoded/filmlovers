@@ -57,5 +57,14 @@ img.bg {
     .button2 input{
       height: 22px;
     }
+  .field_with_errors {
+  display: inline;
+}
+
+.field_with_errors .message {
+  color: #D00;
+  padding-left: 5px;
+  font-size: 12px;
+}
   }
 }

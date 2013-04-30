@@ -1,5 +1,7 @@
 class User
   include Mongoid::Document
+
+  exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers)
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -45,8 +47,10 @@ class User
 
   gravtastic
   
-  validates :username, :email, uniqueness: {case_sensitive: false}, presence: true
-  validates :username, format: {with: /^[-\w\._@]+$/i,  message: "should only contain letters, numbers, or .-_@"}, length: {minimum: 4}
+  validates :username, :email, uniqueness: {case_sensitive: false, message: "Sorry, this username is taken"}, presence: true
+  validates :username, format: {with: /^[-\w\._@]+$/i,  message: "Usernames can only contain letters, numbers, or .-_@"}, length: {minimum: 4}
+  validates :username, exclusion: {:in => exluded_names, message: "Sorry, this username is not available"}
+
   # validates_presence_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
 
   field :username,              :type => String, :default => ""

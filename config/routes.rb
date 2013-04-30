@@ -1,7 +1,6 @@
 Filmlovers::Application.routes.draw do
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "sessions" }
-
+  devise_for :users, :controllers => { :omniauth_callbacks => "sessions", :registrations => "registrations"}
   root :to => 'app#index'
 
   match 'auth/:provider/callback',  to: 'sessions#create'

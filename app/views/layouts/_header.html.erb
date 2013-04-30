@@ -62,7 +62,7 @@
           <% end %>
         </li>
         <li class="has-dropdown">
-          <a href="#"><%= current_user.username %></a>
+          <%= link_to current_user.username, edit_user_registration_path %>
           <ul class="dropdown">
             <li><label>Films</label></li>
             <%= render partial: 'layouts/action_links' %>       
@@ -70,23 +70,28 @@
               <label>Add Passport</label>
             </li>
             <% if !current_user.passport_provider? :facebook %>
-              <li><a href="/auth/facebook" data-no-pjax>Facebook</a></li>
+              <li> <a href="/auth/facebook" data-no-pjax> <%= awesome 'facebook'%> Facebook</a></li>
             <% end %>
             <% if !current_user.passport_provider? :twitter %>
-              <li><a href="/auth/twitter" data-no-pjax>Twitter</a></li>
+              <li> <a href="/auth/twitter" data-no-pjax><%= awesome 'twitter'%> Twitter</a></li>
             <% end %>      
             <% if !current_user.passport_provider? :netflix %>
-              <li><a href="/auth/netflix" data-no-pjax>Netflix</a></li>
+              <li><a href="/auth/netflix" data-no-pjax><%= awesome 'film'%> Netflix</a></li>
             <% end %>
             <% if !current_user.passport_provider? :google_oauth2 %>
-              <li><a href="/auth/google_oauth2" data-no-pjax>Google</a></li>
+              <li><a href="/auth/google_oauth2" data-no-pjax><%= awesome 'google-plus'%> Google</a></li>
             <% end %>             
             <li>
               <label>Options</label>
             </li>
             <li>
+               <%= link_to edit_user_registration_path do %>
+                <%= awesome 'user'%> Profile
+               <% end %>
+            </li>
+            <li>
               <%= link_to destroy_user_session_path, id: "sign_out", method: :delete do %>
-                 <%= awesome 'signout'%> "Sign out"
+                 <%= awesome 'signout'%> Sign out
               <% end %>
             </li>
           </ul>

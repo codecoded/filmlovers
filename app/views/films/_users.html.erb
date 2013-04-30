@@ -8,7 +8,7 @@
       <div class="user-avatar left">
         <%= link_to user_path(user) do %>
           <%= image_tag user.gravatar_url %>
-          <label><%= user.name %></label>
+          <label><%= user.username %></label>
          <% end %>
         <% [:watched, :loved, :owned].each do |action| %>
           <%= link_to user_film_path(user, action) do %>

@@ -8,7 +8,12 @@
       <div id="login" class="animate form five columns centered">
         <%= form_for(resource, :as => resource_name, :url =>  session_path(resource_name) , :autocomplete => 'on') do |f| %>
           <h1> Sign in </h1> 
-
+          <% if flash[:alert] %>
+            <div class="alert-box alert">
+              <%= flash[:alert] %>
+              <a href="" class="close">&times;</a>
+            </div>
+          <% end %>
           <p>
             <%= f.label :username, 'Your username', :class=>'uname', data:{icon: 'u'} %>
             <%= f.text_field :username, required: :required, placeholder: 'myscreename' %>
@@ -20,7 +25,7 @@
           </p>
 
           <p class="keeplogin"> 
-            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+            <%= f.check_box :remember_me %> 
             <label for="loginkeeping">Keep me logged in</label>
           </p>
 

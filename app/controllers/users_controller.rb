@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     end
   end
 
+
   def user_id
     params[:user_id]
   end

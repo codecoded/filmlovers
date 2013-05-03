@@ -16,7 +16,7 @@ class TmdbFilmsSearch
 
   def fetch(&block)
     tmdb_results = yield
-    films = save_films(tmdb_results['results'])
+    films = save_films(tmdb_results['results'].compact)
     ResultsPage.from_tmdb films, tmdb_results
   end
 

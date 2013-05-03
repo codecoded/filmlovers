@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   #layout 'layouts/user'
 
+
   def validate_current_user
     @is_current_user = user.id == current_user.id
   end

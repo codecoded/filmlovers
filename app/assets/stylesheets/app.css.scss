@@ -35,7 +35,15 @@ background-color: rgba(255, 255, 255, 0.73);
       margin: 0px;
       a{ 
         font-size: 1em !important;
+        margin: 0px;
+        padding: 0px;
       }
+    }
+    h4{
+      font-size: 7pt;
+      margin: 0px;
+      padding: 0px;
+      text-transform: uppercase;
     }
   }
    border-bottom: solid 1px black;
@@ -169,7 +177,6 @@ background-color: rgba(255, 255, 255, 0.73);
 
 
 
-
 #icon-descriptions{
   padding-top: 20px;
   .panel{
@@ -229,22 +236,26 @@ background-color: rgba(255, 255, 255, 0.73);
 
 .banner{
   text-shadow: 2px 2px 2px black;
-      #greeting-text{
-      text-align: center; 
-    }
-    h1, h2{
-      margin-top: 40px;
-    }
-    h1, h2, h3{
-      color: white;
-      text-align: center;  
-    }
-    h2{
-      font-size: 2em;
-    }
-    h3{
-      font-size: 1.4em;
-    }
+  #greeting-text{
+    text-align: center; 
+  }
+  h1{
+    margin-top: 40px;
+    margin-bottom: -5px;
+  }
+  h1, h2, h3{
+    color: white;
+    text-align: center;  
+  }
+  h2{
+    font-size: 11pt;
+    margin: 0px;
+    padding: 0px;
+    text-transform: uppercase;
+  }
+  h3{
+    font-size: 1.4em;
+  }
   &.sign-in-backdrop{
     position: relative;
     background: url(/assets/filmlovers-backdrop-sign-in.jpg) top center no-repeat;
@@ -282,6 +293,8 @@ background-color: rgba(255, 255, 255, 0.73);
 ul, ol, dl{
   line-height: 1;
 }
+
+
 
 .heading_divider{
   border-bottom: solid 3px lightSlateGray;

@@ -48,7 +48,7 @@ class User
   gravtastic
   
   validates :username, :email, uniqueness: {case_sensitive: false, message: "Sorry, this username is taken"}, presence: true
-  validates :username, format: {with: /^[-\w\._@]+$/i,  message: "Usernames can only contain letters, numbers, or .-_@"}, length: {minimum: 4}
+  validates :username, format: {with: /^[-\w\._@]+$/i,  message: "Usernames can only contain letters, numbers, or .-_@"}, length: {minimum: 3}
   validates :username, exclusion: {:in => exluded_names, message: "Sorry, this username is not available"}
 
   # validates_presence_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"

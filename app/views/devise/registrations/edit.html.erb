@@ -50,15 +50,21 @@
             </p>
           <% end %>
 
-          <p class="signin button2"> 
-            <%= link_to :back do %>
-              <input type="button" value="Back" class="left"/> 
-            <% end %>
-          </p>
+          <% if current_user.username? %>
+            <p class="signin button2"> 
+              <%= link_to :back do %>
+                <input type="button" value="Back" class="left"/> 
+              <% end %>
+            </p>
 
+            <p class="signin button2"> 
+              <input type="submit" value="Update"/> 
+            </p>
+          <% else %>
           <p class="signin button2"> 
-            <input type="submit" value="Update"/> 
-          </p>
+              <input type="submit" value="Update"/> 
+            </p>
+          <% end %>
         <% end %>
 
 

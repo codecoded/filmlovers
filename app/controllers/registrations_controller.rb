@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  def edit
+  end
 
   def update
     @user = User.find(current_user.id)

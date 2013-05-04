@@ -1,30 +1,28 @@
 
 <div id="footer" class="row pagination-centered">
-  <div class="five columns centered">
+  <div class="four columns centered">
     <nav>
       <ul>
         <li>
           <%= link_to 'about', site_path('about') %>
         </li>
         <li>
-           <%= link_to 'help', site_path('help') %>
-        </li>
+          <!-- A link to launch the Classic Widget -->
+          <a href="javascript:void(0)" data-uv-lightbox="classic_widget" data-uv-mode="full" data-uv-primary-color="#cc6d00" data-uv-link-color="#007dbf" data-uv-default-mode="feedback" data-uv-forum-id="200001">feedback</a>
+        </li>      
         <li>
-           <%= link_to 'feedback', site_path('feedback') %>
+          <a href="javascript:void(0)" data-uv-lightbox="classic_widget" data-uv-mode="full" data-uv-primary-color="#cc6d00" data-uv-link-color="#007dbf" data-uv-default-mode="support" data-uv-forum-id="200001">contact</a>
         </li>
         <li>
           <%= link_to 'terms', site_path('terms') %>
-        </li>        
-        <li>
-           <%= link_to 'contact', site_path('contact') %>
-        </li>
+        </li>  
       </ul>
     </nav>
 
   </div>
   <div class="twelve columns">
     <div class="copyright">
-      <span>© filmlovers ltd 2013.</span>
+      <span>© filmlovers ltd 2013, all rights reserved.</span>
       <span>film data supplied by <a href="http://themoviedb.org" target="_blank">TMDb</a></span>
     </div>
   </div>
@@ -40,3 +38,5 @@
       </a>
     </div>
 </div>
+
+

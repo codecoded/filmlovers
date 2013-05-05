@@ -1,5 +1,16 @@
 module FilmHelper
 
+
+  def icons
+    {
+      watched:  'icon-eye-open', 
+      loved:    'icon-heart', 
+      owned:    'icon-home', 
+      queued:   'icon-pushpin',
+      list:     'icon-list'
+    }
+  end
+
   def title_with_year(film)
     "#{film.title} " << year(film)
   end
@@ -22,19 +33,21 @@ module FilmHelper
     end
   end
 
+  def film_action_counter(film, action)
+    action_css = actioned?(film, action) ? 'actioned' : 'unactioned'
+    css = "#{icons[action]} #{action_css}"
+    content_tag :i, nil,:class => css, data: {action: action, id: film.id}
+  end
 
   def actioned?(film, action)
     return false unless current_user
     current_user.film_actioned? film, action
   end
 
-
   def year(film)
     return "" unless film.year
     "(#{film.year})"
   end
-
-
 
   def tagline(film_view)
     film_view.tagline ? film_view.tagline :  "Overview"
@@ -50,13 +63,11 @@ module FilmHelper
   end
 
   def action_icon(action, film)
-    icons = {
-        watched: 'icon-eye-open', 
-        loved: 'icon-heart', 
-        owned: 'icon-home', 
-        queued: 'icon-pushpin'}
-
-   
+    # icons = {
+    #     watched: 'icon-eye-open', 
+    #     loved: 'icon-heart', 
+    #     owned: 'icon-home', 
+    #     queued: 'icon-pushpin'}   
     return content_tag(:i,nil,  :class => icons[action]) unless current_user
 
     url = update_user_film_path(current_user, action, film.id)
@@ -69,17 +80,12 @@ module FilmHelper
   end
 
   def icon_for(action, is_actioned=false)
-    icons = {
-      watched: 'icon-eye-open', 
-      loved: 'icon-heart', 
-      owned: 'icon-home', 
-      queued: 'icon-pushpin',
-      list: 'icon-list'}
-
     action_css = is_actioned ? 'actioned' : 'unactioned'
     css = "#{icons[action]} #{action_css}"
-    content_tag :i, nil,:class => css
+    content_tag :i, nil,:class => css, data: {action: action, }
   end
+
+
 
   def poster(film, size='w154')
     size = size ? size : 'w154'

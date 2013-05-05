@@ -23,7 +23,7 @@
     <% [:watched, :loved, :owned].each do |action| %>
       <span>
         <%= link_to users_film_path(film, action) do %>
-          <%= icon_for action, actioned?(film, action) %>
+          <%= film_action_counter film, action %>
           <%= label_tag film.id, data: {counter: action} do %> 
             <%= film.actions_for(action).count %>
           <% end %>

@@ -130,7 +130,8 @@ FL.Films = {
       dataType: 'json',
       success: function(xhr, data, status){
         icon.data('method', (to_action ? 'delete' : 'put'))
-        icon.toggleClass('actioned unactioned') 
+        var film_counters = $("[data-id='" + id + "'][data-action='" + action + "']")
+        film_counters.toggleClass('actioned unactioned') 
 
         if(!to_action)
           $(document).trigger('film:' + action + ':unactioned', [icon.parents('.film')])

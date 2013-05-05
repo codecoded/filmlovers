@@ -3,8 +3,10 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'rails'#, '3.2.8'
-gem 'thin'
+#gem 'thin'
 
+# Use unicorn as the app server
+gem 'unicorn'
 
 # gem 'mongo'
 gem 'omniauth-facebook', '1.4.0'
@@ -80,8 +82,7 @@ end
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+
 
 # Deploy with Capistrano
 gem 'capistrano'

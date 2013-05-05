@@ -36,14 +36,14 @@ FL.Films = {
   },
   
   endlessScroll: function(){
-    self = this
-    loading = false
-    threshold = 600
+    var self = this
+    var loading = false
+    var threshold = 600
 
     $(window).scroll(function()
     {
-      currentPos = $(window).scrollTop() + threshold 
-      totalHeight = $(document).height() - $(window).height()
+      var currentPos = $(window).scrollTop() + threshold 
+      var totalHeight = $(document).height() - $(window).height()
       if(currentPos >= totalHeight && !loading)
       {
         next = $('#filmsLinkNext').attr('href')
@@ -68,7 +68,7 @@ FL.Films = {
   },
 
   sortUserFilms: function(){
-    url = $(this).attr('value')
+    var url = $(this).attr('value')
     $('#contentHolder').load(url + ' #filmsContent')
   },
 
@@ -77,7 +77,7 @@ FL.Films = {
   },
 
   addFilmTolist: function(){
-    url = $(this).attr('value')
+    var url = $(this).attr('value')
     $.ajax({
       url: url,
       type: 'put',
@@ -94,13 +94,13 @@ FL.Films = {
   },
 
   btnFilmActionClicked: function(event){
-    button = $(this)
+    var button = $(this)
     
-    href = button.data('href')
-    method = button.data('method')
-    to_action = method == 'put'
-    incr = to_action ? 1 : -1
-    action = button.attr('name')
+    var href = button.data('href')
+    var method = button.data('method')
+    var to_action = method == 'put'
+    var incr = to_action ? 1 : -1
+    var action = button.attr('name')
     $.ajax({
       url: href,
       type: method,
@@ -115,15 +115,15 @@ FL.Films = {
   },
 
   iconFilmActionClicked: function(event){
-    icon = $(this)
+    var icon = $(this)
     
-    href = icon.data('href')
-    method = icon.data('method')
-    id = icon.data('id')
+    var href = icon.data('href')
+    var method = icon.data('method')
+    var id = icon.data('id')
 
-    to_action = method == 'put'
-    incr = to_action ? 1 : -1
-    action = icon.data('action')
+    var to_action = method == 'put'
+    var incr = to_action ? 1 : -1
+    var action = icon.data('action')
     $.ajax({
       url: href,
       type: method,
@@ -146,13 +146,13 @@ FL.Films = {
 
   lnkFilmsActionClicked: function(event){
     event.preventDefault()
-    url = $(this).attr('href')
+    var url = $(this).attr('href')
     $('#contentHolder').load(url + ' .user-list')
   },
 
   lnkUsersFilmsClicked: function(event){
     event.preventDefault()
-    url = $(this).attr('href')
+    var url = $(this).attr('href')
     $('#contentHolder').load(url + ' #filmsIndex')
   }
 }

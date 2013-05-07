@@ -265,10 +265,11 @@ background-color: rgba(255, 255, 255, 0.73);
   }
   &.sign-in-backdrop{
     position: relative;
-    background: url(/assets/filmlovers-backdrop-sign-in.jpg) top center no-repeat;
+    // background: url(/assets/filmlovers-backdrop-sign-in.jpg) top center no-repeat;
+    background: url(/assets/filmlovers-backdrop-ray_harryhausen.jpg) top center no-repeat;
     min-height: 400px;
     background-clip: content-box;
-    background-position-y: -150px;
+    background-position-y: -300px;
   }
   &.welcome-backdrop{
     position: relative;

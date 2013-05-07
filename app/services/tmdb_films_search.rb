@@ -11,7 +11,7 @@ class TmdbFilmsSearch
   end
 
   def by_genre(genre_id, page_options={})
-    fetch { Tmdb::API.genre genre_id, page_options.merge({include_all_movies: true, adult: false}) } 
+    fetch { Tmdb::API.genre genre_id, page_options.merge({include_all_movies: true, include_adult: false}) } 
   end
 
   def fetch(&block)

@@ -5,12 +5,13 @@
 
   <%if !logged_in? %>
   <div class="row banner collapse sign-in-backdrop" id="banner-sign-in">
-    <div class="eight columns">
-      <p id="greeting-text">
-        <h1>Welcome to filmlovers</h1>
-        <h2>Watch, share and discover films </h2>
-        <h3> Sign up for <strong>free</strong> to create film lists and record your love of film</h3>
-      </p>
+    <div class="eight columns"  id="greeting-text">
+      <h1>Welcome to filmlovers</h1>
+      <h2>Watch, share and discover films </h2>
+      <h3> Sign up for <strong>free</strong> to create film lists and record your love of film</h3>
+      <%= link_to login_path, data: {modal: 'signup'}, alt: 'sign up to filmlovers for free' do %>
+        <%= image_tag 'sign-up.png', :class => 'sign-up-button', alt: 'sign up to filmlovers'  %>
+      <% end %>
     </div>
   </div>
 <% else %>

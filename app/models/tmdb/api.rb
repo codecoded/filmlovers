@@ -14,22 +14,18 @@ class Tmdb::API
     def add_api_key(params)
       {params: {api_key:Tmdb.key, per_page:50}.merge(params)}
     end
-
-    def new_get_request(url, params={})
-      RestClient::Request.new(method: :get, url: uri(url), headers: add_api_key(params))
-    end
-
+    
     def genre(id, options={})
       cache_key = "genre_#{id}_page_" + (options[:page].to_s || '1')
-      Rails.cache.fetch cache_key do
+      # Rails.cache.fetch cache_key do
         request "genre/#{id}/movies", options
-      end
+      # end
     end
 
     def genres(options={})
-      Rails.cache.fetch "genres" do
+      # Rails.cache.fetch "genres" do
         request "genre/list", options
-      end
+      # end
     end
 
     def search(query, options={}, type=:movie)
@@ -38,9 +34,9 @@ class Tmdb::API
 
     def films(type, options={})
       cache_key = "films_#{type}_page_" + (options[:page].to_s || '1')
-      Rails.cache.fetch cache_key do
+      # Rails.cache.fetch cache_key do
         request "movie/#{type}",options
-      end
+      # end
     end
 
     def list(id, options={})

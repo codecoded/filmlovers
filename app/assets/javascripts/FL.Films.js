@@ -17,7 +17,7 @@ FL.Films = {
     $(document).on('ajax:success', 'a', FL.Films.displayContent)
     $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
     $(document).on('click', 'i[data-action]', FL.Films.iconFilmActionClicked)
-    $(document).on('click', '#signin-link, a.display-modal', FL.Films.displayModal)
+    $(document).on('click', 'a[data-modal="signup"], a.display-modal', FL.Films.displayModal)
     $(document).on('click', '.user-list .counter a', FL.Films.lnkFilmsActionClicked)
     $(document).on('click', '#filmsIndex .counter a', FL.Films.lnkUsersFilmsClicked)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )

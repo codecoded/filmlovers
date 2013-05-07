@@ -1,5 +1,5 @@
 
-<div id="signInModal" class="reveal-modal">
+<div class="reveal-modal signInModal">
   <div class="fader"></div>
   <div>
   <div class="row pagination-centered">
@@ -14,17 +14,17 @@
       <p>And creating your own film lists is a great way to recommend films to friends, and discover new ones yourself!</p> 
     </div>
     <div class="five columns sign-in-links">
-      <a href="/auth/facebook" class="radius button" data-no-pjax id="authFacebook">
+      <a href="/auth/facebook" class="radius button authFacebook" >
          <i class="icon-facebook"></i><strong>facebook</strong>
       </a> 
-      <a class="radius button alert" href="/auth/netflix" data-no-pjax id="authNetflix">
+      <a class="radius button alert authNetflix" href="/auth/netflix">
         <%= image_tag '/assets/netflix-n-logo.png' %>
         <strong>Netflix</strong>
       </a>
       <a class="radius button" href="/auth/twitter" id="authTwitter">
         <i class="icon-twitter"></i><strong>twitter</strong>
       </a> 
-      <a class="radius button success" href="/auth/google_oauth2" data-no-pjax id="authGoogle">
+      <a class="radius button success authGoogle" href="/auth/google_oauth2">
          <i class="icon-google-plus"></i><strong>Google</strong>
       </a> 
 <!--       <a class="radius button" href="/auth/vimeo" data-no-pjax>

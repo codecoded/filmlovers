@@ -33,4 +33,8 @@ class Tmdb::Movie
     [:alternative_titles, :casts, :images, :keywords, :releases, :trailers, :translations, :similar_movies]
   end 
 
+  def changes(start_date = 1.day.ago, end_date = Time.now)
+    Tmdb::API.request "#{method}/changes", {start_date: start_date, end_date: end_date}
+  end
+
 end

@@ -42,6 +42,10 @@ class Tmdb::API
     def list(id, options={})
       request "list/#{id}", options
     end
+
+    def changes(type, options={})
+      request "#{type}/changes", options
+    end
   end
 
 end

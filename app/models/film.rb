@@ -14,6 +14,10 @@ class Film
   def self.fetch(id)
     FilmRepository.find id
   end
+
+  def self.force_fetch(id)
+    FilmRepository.new(id).send :fetch
+  end
   
   def users
     @lists ||= FilmLoverLists.new("film:#{id}:users")

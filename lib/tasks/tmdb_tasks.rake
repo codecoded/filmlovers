@@ -6,8 +6,10 @@ namespace :tmdb do
 
     @tmdb_films = Filmlovers::TmdbFilmsSearch.new
 
-    fetch_trend :now_playing
-    fetch_trend :upcoming
+    if args[:page_no].nil?
+      fetch_trend :now_playing
+      fetch_trend :upcoming
+    end
     fetch_trend :popular,  args[:page_no].to_i 
   end
 
@@ -28,8 +30,8 @@ namespace :tmdb do
   end
 
   def fetch_films(results_page)
-    Log.debug "Fetching films from page #{results_page.page_no} of #{results_page.total_results}"
-    index = 1
+    Log.debug "Page #{results_page.page_no} of #{results_page.total_pages}"
+    index = 0
     results_page.results.each do |film_id| 
       begin
         film = Film.fetch film_id.id
@@ -54,9 +56,9 @@ namespace :tmdb do
   end
 
   def force_fetch_films(results_page)
-    Log.debug "Fetching films from page #{results_page.page_no} of #{results_page.total_results}"
+    Log.debug "Page #{results_page.page_no} of #{results_page.total_pages}"
 
-    index = 1
+    index = 0
     results_page.results.each do |film_id| 
       begin
         film = Film.force_fetch film_id['id']

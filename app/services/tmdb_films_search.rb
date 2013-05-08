@@ -22,7 +22,7 @@ class TmdbFilmsSearch
 
   def save_films(results)
     return unless results
-    results.map {|result| Film.with(safe:false).create result}
+    results.reject{|f| f['release_date'].empty?}.map{|result| Film.with(safe:false).create result}
   end
 
 end

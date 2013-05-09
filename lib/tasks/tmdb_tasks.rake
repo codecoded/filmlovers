@@ -19,18 +19,8 @@ namespace :tmdb do
   end
 
   task :fetch_all, [:starting_id] => :environment do |t, args|
-    current_index = args[:starting_id].to_i
-    end_index =  Tmdb::API.films(:latest)['id']
-
-    while current_index < end_index do
-      begin
-        film = Film.fetch current_index
-        Log.debug "Film #{current_index} of #{end_index}: #{film.title}"
-      rescue
-        Log.debug "Film Id failed: #{current_index}"
-      end
-      current_index+=1
-    end
+    AdminConfig.instance.update_attribute(:fetched_index, args[:starting_id].to_i) if args[:starting_id].to_i > 0
+    AdminConfig.fetch_all
   end
 
   def fetch_trend(trend, page=1)

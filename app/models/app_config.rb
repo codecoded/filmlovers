@@ -1,7 +1,5 @@
 class AppConfig
 
-  field :fetched_index, type: Integer, default: 1
-
   class << self
 
     def instance

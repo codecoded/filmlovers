@@ -46,6 +46,7 @@ class Tmdb::API
     def changes(type, options={})
       request "#{type}/changes", options
     end
+
   end
 
 end

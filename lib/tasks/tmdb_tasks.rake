@@ -2,8 +2,8 @@ namespace :tmdb do
 
   
 
-  task :poll, [:page_no] => :environment do |t, args|
 
+  task :poll, [:page_no] => :environment do |t, args|
     @tmdb_films = Filmlovers::TmdbFilmsSearch.new
 
     if args[:page_no].nil?
@@ -16,6 +16,21 @@ namespace :tmdb do
   task :update_changes, [:start_date, :page_no] => :environment do |t, args|
     start_date = args[:start_date] ? eval(args[:start_date]) : 3.days.ago
     fetch_changed_movies start_date, args[:page_no] 
+  end
+
+  task :fetch_all, [:starting_id] => :environment do |t, args|
+    current_index = args[:starting_id].to_i
+    end_index =  Tmdb::API.films(:latest)['id']
+
+    while current_index < end_index do
+      begin
+        film = Film.fetch current_index
+        Log.debug "Film #{current_index} of #{end_index}: #{film.title}"
+      rescue
+        Log.debug "Film Id failed: #{current_index}"
+      end
+      current_index+=1
+    end
   end
 
   def fetch_trend(trend, page=1)

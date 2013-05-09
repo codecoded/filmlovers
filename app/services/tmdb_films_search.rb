@@ -14,6 +14,11 @@ class TmdbFilmsSearch
     fetch { Tmdb::API.genre genre_id, page_options.merge({include_all_movies: true, include_adult: false}) } 
   end
 
+  def latest
+    Tmdb::API.films :latest
+  end
+
+
   def fetch(&block)
     tmdb_results = yield
     films = save_films(tmdb_results['results'].compact)

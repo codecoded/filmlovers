@@ -1,8 +1,7 @@
 Filmlovers::Application.routes.draw do
 
-
-
   devise_for :users, :controllers => { :omniauth_callbacks => "sessions", :registrations => "registrations"}
+
   root :to => 'app#index'
 
   match 'auth/:provider/callback',  to: 'sessions#create'
@@ -45,7 +44,6 @@ Filmlovers::Application.routes.draw do
   end
 
   resources :lists, :except => [:show] do
-
     resources :films, to: 'film_lists', :only => [:update, :destroy, :show, :create, :new]
   end
 
@@ -56,6 +54,8 @@ Filmlovers::Application.routes.draw do
   scope 'site' do
     get ':action', to: 'site', as: 'site'
   end
+
+  resources 'friendships'
 
   scope ':user_id', :constraints => { :user_id => /.*/ } do
     resources :films, :only => [:index, :show], to: 'users#show', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 

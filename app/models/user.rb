@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
 
-  exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers)
+  exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers friendships friends)
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -62,11 +62,10 @@ class User
   field :dob, type: DateTime
 
   has_many :film_user_actions, validate: false, dependent: :destroy
+  has_many :friendships, validate: false
 
   embeds_many :films_lists
   embeds_many :passports
-  embeds_many :friends
-
 
 
   def self.from_omniauth(auth)
@@ -134,6 +133,10 @@ class User
 
   def film_actioned?(film, action)
     film_user_actions.where(film: film, action: action).exists?
+  end
+
+  def friends?(user)
+    friendships.where(friend: user).exists?
   end
   
   def to_param

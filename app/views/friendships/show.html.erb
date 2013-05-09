@@ -1,0 +1,12 @@
+<div class="user-avatar left">
+  <%= link_to user_path(friend) do %>
+    <%= image_tag friend.gravatar_url %>
+    <label><%= friend.username %></label>
+  <% end %>
+  <% [:watched, :loved, :owned].each do |action| %>
+    <%= link_to user_film_path(friend, action) do %>
+      <%= icon_for action %>
+      <label style="display:inline"><%= friend.actions_for(action).count %> </label>
+    <% end %>
+  <% end %>
+</div>

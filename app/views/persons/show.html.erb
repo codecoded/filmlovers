@@ -31,7 +31,7 @@
               <ul class="disc credits">
                 <% person.portfolio.cast.each do |person| %>
                 <li style="border-bottom: dotted 1px lightblue;">
-                  <%= link_to film_path(person.id), remote:true do %>
+                  <%= link_to film_path(person.id) do %>
                     <%= content_tag :span, person.title, {:class => 'person link'} %>
                   <% end %>
                   <span class="right"> <%= person.character %> </span>
@@ -47,7 +47,7 @@
               <ul class="disc credits">
               <% person.portfolio.crew.each do |person| %>
                 <li style="border-bottom: dotted 1px lightblue;">
-                  <%= link_to film_path(person.id), remote:true do %>
+                  <%= link_to film_path(person.id) do %>
                     <%= content_tag :span, person.title, {:class => 'person link'} %>
                   <% end %>
                   <span class="right"> <%= person.job %> </span>

@@ -43,6 +43,11 @@
             <%= awesome 'list' %> lists
           <% end %>
         </li>
+        <li>
+          <%= link_to friendships_path do %>
+            <%= awesome 'group' %> friendships
+          <% end %>
+        </li>
         <% if current_user.passport_provider? :facebook %>
           <li><a href="/channels/facebook"><%= awesome 'facebook'%> facebook</a></li>
         <% end %>
@@ -87,6 +92,11 @@
             <% end %>             
             <li>
               <label>Options</label>
+            </li>
+            <li>
+               <%= link_to friendships_path do %>
+                <%= awesome 'group'%> Friendships
+               <% end %>
             </li>
             <li>
                <%= link_to edit_user_registration_path do %>
@@ -142,3 +152,4 @@
     </section>
   </nav>
 </div>
+<div id="alerts"></div>

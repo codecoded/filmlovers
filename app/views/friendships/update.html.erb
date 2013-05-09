@@ -1,0 +1,9 @@
+<% if flash[:error] %>
+  <div class="alert-box alert twelve columns centered">
+    <span class="message"><%= flash[:error] %></span>        
+  </div>
+<% else %>  
+  <div class="alert-box success twelve columns centered">
+    <span class="message"><%= "Friendship with #{friend.username}created".html_safe %></span>      
+  </div>
+<% end %>

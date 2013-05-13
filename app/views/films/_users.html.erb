@@ -7,7 +7,7 @@
     <% @users.each do |user| %>
       <div class="user-avatar left">
         <%= link_to user_path(user) do %>
-          <%= image_tag user.gravatar_url %>
+          <%= avatar user %>
           <label><%= user.username %></label>
          <% end %>
         <% [:watched, :loved, :owned].each do |action| %>

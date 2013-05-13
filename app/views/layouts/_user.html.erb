@@ -2,11 +2,11 @@
 
   <div class="user-banner">
     <div class="one columns user-image">
-      <%= image_tag user.gravatar_url %>
+      <%= avatar user %>
     </div>
     <div class="six columns user-name">
        <h3><%= user.username %></h3>
-       <% if current_user.friends? user  %>
+       <% if current_user.friends_with? user  %>
         <%= link_to friendship_path(user), method: :delete, remote: true, data: {action: :friendship}, :class=>'tiny button radius alert' do %>
           <%= awesome 'remove', 'icon-large' %> <span>remove friendship</span>
         <% end %>

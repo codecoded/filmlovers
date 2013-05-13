@@ -135,12 +135,16 @@ class User
     film_user_actions.where(film: film, action: action).exists?
   end
 
-  def friends?(user)
+  def friends_with?(user)
     friends.where(friend: user).exists?
   end
 
   def friends
     friendships.where(state: :confirmed)
+  end
+
+  def channels
+    @channels ||= UserChannels.new self
   end
   
   def to_param

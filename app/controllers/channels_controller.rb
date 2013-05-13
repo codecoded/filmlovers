@@ -1,7 +1,7 @@
 class ChannelsController < ApplicationController
 
   def facebook
-    render_template
+    current_user.channels[:facebook].app_friends
   end
 
 end

@@ -1,6 +1,6 @@
 <div class="user-avatar left">
   <%= link_to user_path(friend) do %>
-    <%= image_tag friend.gravatar_url %>
+    <%= avatar friend %>
     <label><%= friend.username %></label>
   <% end %>
   <% [:watched, :loved, :owned].each do |action| %>

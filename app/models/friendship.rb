@@ -10,6 +10,7 @@ class Friendship
   validates :user,    uniqueness: {message: "you are already friends", scope: :friend}, presence: true
   validates_presence_of :friend
 
+  scope :confirmed, -> {where state: :confirmed}
 
   state_machine :initial => :pending do
 

@@ -1,17 +1,14 @@
-<div id="channel-facebook" class="twelve columns" style="display:none" data-bind="foreach: friends, visible: true">
-  <div  class="left friend-avatar">
-    <%= link_to '#', 'data-bind' => "attr: { href: '/' + username + '/' }" do %>
-      <img data-bind='attr: { src: avatarURL }'>
-      <label data-bind="text: username"></label>
+<% current_user.channels[:facebook].app_friends.each do |friend| %>
+  <div class="user-avatar left">
+    <%= link_to user_path(friend) do %>
+      <%= avatar friend%>
+      <label><%= friend.username %></label>
+     <% end %>
+    <% [:watched, :loved, :owned].each do |action| %>
+      <%= link_to user_film_path(friend, action) do %>
+        <%= icon_for action %>
+        <label style="display:inline"><%= friend.actions_for(action).count %> </label>
+      <% end %>
     <% end %>
   </div>
-</div>
-
-
-<script>
-  $(document).on('facebook:connected', ViewModel.loadFriends)
-// if(!ViewModel.friendsList)
-//   ViewModel.loadFriends()
-// else
-//   Bindings.ko_apply(ViewModel.friendsList, 'channel-facebook')
-</script>
+<% end %>

@@ -18,7 +18,7 @@ module ApplicationHelper
     if user.passport_provider? :facebook
       image_tag user.channels[:facebook].facebook.avatar, :class=>'avatar normal'
     else
-      imgage_tag user.gravatar_url, :class=>'avatar normal'
+      image_tag user.gravatar_url, :class=>'avatar normal'
     end
   end
 end

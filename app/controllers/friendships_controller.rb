@@ -16,7 +16,7 @@ class FriendshipsController < ApplicationController
 
   def update
     friendships.where(friend: friend).find_or_create_by.confirm!
-    friend.friendships.where(friend: current_user).find_or_create_by.confirm! if !friend.friends?(current_user)  
+    friend.friendships.where(friend: current_user).find_or_create_by.confirm! if !friend.friends_with?(current_user)  
     render layout:nil
   end
 

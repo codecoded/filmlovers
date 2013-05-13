@@ -14,11 +14,11 @@ module ApplicationHelper
      truncate text, separator: ' ', length: truncate_at, :omission => '...'
   end
 
-  def avatar(user)
+  def avatar(user, size='normal')
     if user.passport_provider? :facebook
-      image_tag user.channels[:facebook].facebook.avatar, :class=>'avatar normal'
+      image_tag user.channels[:facebook].facebook.avatar, :class=>"avatar #{size}"
     else
-      image_tag user.gravatar_url, :class=>'avatar normal'
+      image_tag user.gravatar_url, :class=>"avatar #{size}"
     end
   end
 end

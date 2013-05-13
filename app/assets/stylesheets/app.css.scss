@@ -286,6 +286,12 @@ background-color: rgba(255, 255, 255, 0.73);
     height: 80px;
     width: 80px;
   }
+  &.small
+  {
+    height: 40px;
+    width: 40px;
+  }
+
 }
 .genre img + label, .trend img + label{
   position: relative;

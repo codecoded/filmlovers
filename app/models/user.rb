@@ -136,7 +136,11 @@ class User
   end
 
   def friends?(user)
-    friendships.where(friend: user).exists?
+    friends.where(friend: user).exists?
+  end
+
+  def friends
+    friendships.where(state: :confirmed)
   end
   
   def to_param

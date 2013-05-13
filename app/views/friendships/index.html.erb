@@ -1,4 +1,4 @@
-<% friendships.each do |friendship| %>
+<% current_user.friends.each do |friendship| %>
   <div class="user-avatar left">
     <%= link_to user_path(friendship.friend) do %>
       <%= image_tag friendship.friend.gravatar_url %>

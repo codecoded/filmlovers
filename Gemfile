@@ -46,6 +46,8 @@ gem 'devise'
 gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '3-2-stable'
 gem 'client_side_validations-mongoid'
 
+gem 'state_machine'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

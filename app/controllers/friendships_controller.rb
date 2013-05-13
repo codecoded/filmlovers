@@ -15,14 +15,28 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-    friendships.create! friend: friend
+    friendships.where(friend: friend).find_or_create_by.confirm!
+    friend.friendships.where(friend: current_user).find_or_create_by.confirm! if !friend.friends?(current_user)  
     render layout:nil
   end
 
   def destroy
-    friendship.destroy
+    friendship.break!
+    friendships.befriended_by(friend).break!
     render layout:nil
   end
+
+  def block
+    current_user.friendships.befriended_by(friend).block!
+  end
+
+  def unblock
+    current_user.friendships.befriended_by(friend).unblock!
+  end
+
+  # def break
+  #   current_user.friendships
+  # end
 
   protected
 
@@ -31,7 +45,7 @@ class FriendshipsController < ApplicationController
   end
 
   def friendship
-    @friendship ||= friendships.where(friend: friend).first
+    @friendship ||= friendships.find_by_friend(friend)
   end
 
   def friend

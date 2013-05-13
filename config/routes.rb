@@ -55,7 +55,12 @@ Filmlovers::Application.routes.draw do
     get ':action', to: 'site', as: 'site'
   end
 
-  resources 'friendships', :constraints => { :id => /.*/ }
+  resources 'friendships', :constraints => { :id => /.*/ } do
+    member do
+      put 'block'
+      put 'unblock'
+    end
+  end
 
   scope ':user_id', :constraints => { :user_id => /.*/ } do
     resources :films, :only => [:index, :show], to: 'users#show', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 

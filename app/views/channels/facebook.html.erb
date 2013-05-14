@@ -10,7 +10,6 @@
           <th><%= icon_for :loved %>
           <th><%= icon_for :owned %>
           <th><%= icon_for :list %>
-          <!-- <th>Rating</th> -->
           <th>Actions</th>
         </tr>
       </thead>
@@ -23,11 +22,11 @@
                <% end %>
             </td>
             <td>
-              <%= friend.username %>
+             <%= link_to friend.username, user_path(friend) %>
             </td>
             <% [:watched, :loved, :owned].each do |action| %>
               <td>
-                <%= link_to user_film_path(friend, action) do %>
+                <%= link_to user_film_path(friend, action), alt: action, title: action do %>
                   <label style="display:inline"><%= friend.actions_for(action).count %> </label>
                  <% end %>              
               </td>   
@@ -37,10 +36,6 @@
                 <label> <%=friend.films_lists.viewable.count %> </label>
               <% end %>
             </td>    
-
-<!--             <td>
-              N/A
-            </td> -->
             <td>
              <% if current_user.friends_with? friend  %>
                 <%= link_to friendship_path(friend), method: :delete, remote: true, data: {action: :friendship}, :class=>'tiny button radius alert' do %>

@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   before_filter :validate_username
 
   #layout 'layouts/user'
-
+  def index
+  end
 
   def validate_current_user
     @is_current_user = user.id == current_user.id

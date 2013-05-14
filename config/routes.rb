@@ -11,7 +11,7 @@ Filmlovers::Application.routes.draw do
 
   get 'current_user' => 'sessions#currentuser'
 
-  get 'users', to: 'users#index'
+  get 'users', to: 'users#index', as: 'users'
 
   match 'templates/:action' => "templates#:action", as: 'templates'
 

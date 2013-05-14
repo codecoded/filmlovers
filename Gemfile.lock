@@ -87,6 +87,8 @@ GEM
       multipart-post (~> 1.1)
     fb-channel-file (0.0.1)
       rails (>= 3.0)
+    font-awesome-rails (3.1.1.0)
+      railties (>= 3.1)
     fssm (0.2.10)
     gravtastic (3.2.6)
     hashie (1.2.0)
@@ -269,6 +271,7 @@ DEPENDENCIES
   devise
   eventmachine (~> 1.0.3)
   fb-channel-file
+  font-awesome-rails
   gravtastic
   jquery-rails (= 2.1.4)
   knockoutjs-rails

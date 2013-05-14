@@ -71,6 +71,6 @@ module Filmlovers
 
     Mongoid.raise_not_found_error = false
     Mongoid.protect_sensitive_fields = false
-
+    RestClient.log = Rails.logger
   end
 end

@@ -1,6 +1,23 @@
 <% description "Discover films your friends love, share films lists, and keep track of films you own. Create custom film lists and discover the latest upcoming films at cinemas" %>
 <% set_meta_tags keywords: "films, lists, popular films, movies, latest releases, new films, upcoming films, share films, films loved, film owned, films watched, film lists" %>
 <% title "watch, share, discover films with friends" %>
+
+<% set_meta_tags :og => {
+  :title    => "watch, share, discover films with friends",
+  :type     => "website",
+  :url      => current_url, 
+  :image    => current_url + asset_path('filmlovers-200x200.jpg'),
+  :description => "Discover films your friends love, share films lists, and keep track of films you own. Create custom film lists and discover the latest upcoming films at cinemas",
+  :site_name   =>'filmlovers - wath, share, discover'
+} %>
+
+
+<% set_meta_tags :fb => {
+  :admins => '537020179',
+  :app_id => Facebook::app_id 
+} %>
+
+
 <div class="twelve columns">
 
   <%if !logged_in? %>
@@ -70,7 +87,13 @@
     </div>
   </div>
 
-
+  <div class="row">
+    <div class="twelve columns pagination-centered">
+      <a href="http://www.awin1.com/cread.php?s=246533&v=2481&q=118947&r=171645" target="_blank" alt="blinkbox advert">
+        <img src="http://www.awin1.com/cshow.php?s=246533&v=2481&q=118947&r=171645" border="0" alt="blinkbox promotion"></a>        
+    </div>
+  </div>
+  
   <div class="row ">
     <div class="twelve columns">
       <h6 class="heading_divider">Current Films</h6>
@@ -95,32 +118,10 @@
     </div>
   </div>
 
-  <div class="row" id="search_row">
-    <div class="twelve columns">
-      <div class="radius panel">
-          <%= form_tag(search_films_path, method: :get) do%>
-          <div class="row collapse">
-            <div class="ten mobile-three columns">
-              <input type="text" name="query" />
-            </div>
-            <div class="two mobile-one columns">
-              <%= submit_tag 'Search', :class=>"postfix button expand", :disable_with => "Searching...", alt: 'search for films' %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="twelve columns pagination-centered">
-      <a href="http://www.awin1.com/cread.php?s=246533&v=2481&q=118947&r=171645" target="_blank" alt="blinkbox advert">
-        <img src="http://www.awin1.com/cshow.php?s=246533&v=2481&q=118947&r=171645" border="0" alt="blinkbox promotion"></a>        
-    </div>
-  </div>
+
 
  <div class="row">
-    
     <div class="twelve columns">
       <h6 class="heading_divider">Discover by Genre</h6>
       <%= render partial:'genre_tile', locals:{genre: :action, description: 'Action'} %>
@@ -135,6 +136,12 @@
       <%= render partial:'genre_tile', locals:{genre: :indie, description: 'Indie'} %>
       <%= render partial:'genre_tile', locals:{genre: :suspense, description: 'Suspense'} %>
       <%= render partial:'genre_tile', locals:{genre: :romance, description: 'Romance'} %>
+    </div>
+    
+  </div>
+ <div class="row">
+    <div class="twelve columns pagination-centered">
+      <fb:like href="http://www.filmlovers.co.uk/" send="true" width="450" show_faces="true"></fb:like>
     </div>
   </div>
 

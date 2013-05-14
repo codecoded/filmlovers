@@ -38,6 +38,11 @@
             <li><%= link_to 'Drama', genre_path(:drama), alt: 'drama films' %></li>
           </uL>
         </li>
+       <li>
+          <%= link_to users_path do %>
+            <%= awesome 'group' %> users
+          <% end %>
+        </li>        
         <li>
           <%= link_to user_lists_path(current_user) do %>
             <%= awesome 'list' %> lists
@@ -45,7 +50,7 @@
         </li>
         <li>
           <%= link_to friendships_path do %>
-            <%= awesome 'group' %> friendships
+            <%= awesome 'globe' %> friendships
           <% end %>
         </li>
         <% if current_user.passport_provider? :facebook %>

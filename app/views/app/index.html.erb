@@ -3,16 +3,16 @@
 <% title "watch, share, discover films with friends" %>
 
 <% set_meta_tags :og => {
-  :title    => "watch, share, discover films with friends",
-  :type     => "website",
-  :url      => 'http://www.filmlovers.co.uk', 
+  # :title    => "filmlovers - watch, share, discover films with friends",
+  # :type     => "website",
+  # :url      => 'http://www.filmlovers.co.uk', 
   :image    => 'http://www.filmlovers.co.uk' + asset_path('filmlovers-200x200.jpg'),
-  :description => "Discover films your friends love, share films lists, and keep track of films you own. Create custom film lists and discover the latest upcoming films at cinemas",
-  :site_name   =>'filmlovers - wath, share, discover'
+  # :description => "Discover films your friends love, share films lists, and keep track of films you own. Create custom film lists and discover the latest upcoming films at cinemas",
+  # :site_name   =>'filmlovers - watch, share, discover'
 } %>
 
 
-<% set_meta_tags :fb => {
+<%# set_meta_tags :fb => {
   :admins => '537020179',
   :app_id => Facebook::app_id 
 } %>
@@ -141,7 +141,9 @@
   </div>
  <div class="row">
     <div class="twelve columns pagination-centered">
-      <fb:like href="http://www.filmlovers.co.uk/" send="true" width="450" show_faces="true" colorscheme="dark"></fb:like>
+      <iframe src="https://www.facebook.com/plugins/like.php?href=http://www.filmlovers.co.uk/"
+        scrolling="no" frameborder="0"
+        style="border:none; width:450px; height:80px"></iframe>
     </div>
   </div>
 

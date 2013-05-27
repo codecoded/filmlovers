@@ -16,7 +16,7 @@ class UserFilmsComparison
   end
 
   def overall
-    actions = [:watched, :loved, :owned]
+    actions = [:watched, :loved]
     total = actions.inject(0){ |total, action| total + percentage_for(action)}
     total.to_f / actions.count
   end

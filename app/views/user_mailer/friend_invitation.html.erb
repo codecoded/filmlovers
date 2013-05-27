@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1><%= @user.name %> wants to be friends at filmlovers.co.uk</h1>
+    <p>
+      filmlovers is a website that brings you, your friends, and your love of film together<br/>
+      Keep a record of all the films you have watch, loved or own, and if that's not enough, you can create your own personal films lists.
+    </br>
+      Find out what's playing at the cinemas, what films are coming up and explore a library of over 100,000 films to discover something new to watch 
+    </p>
+    <p>
+      <%= @user.name %> believes you and them should be friends at filmlovers. Once you have signed up, and created the friendship (if you so choose), you will be able to compare your love of films with your friends, and find out which of them you should listen to, and those, you shouldn't
+    </p>
+    <% if @message %>
+    <p>
+      <%= @user.name %> has this to say:</br>
+      <%= @message %>
+    </p>
+    <% end %>
+    <p>Hope to see you soon</p>
+  </body>
+</html>

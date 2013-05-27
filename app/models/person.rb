@@ -19,7 +19,9 @@ class Person
   # end
 
   def films
-    @films ||= credits['cast'].map {|f| Film.find(f['id']) || Film.create(f)}
+    cast_films = credits['cast'].map {|f| Film.find(f['id']) || Film.create(f)}
+    crew_films =  credits['crew'].map {|f| Film.find(f['id']) || Film.create(f)}
+    @films ||= (cast_films + crew_films).uniq
   end
 
   def has_profile?

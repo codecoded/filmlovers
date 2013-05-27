@@ -80,9 +80,9 @@ class User
     user ? user : User.new(passports:[passport])
   end
 
-  def films
-    @films ||= FilmLoverLists.new("user:#{id}:films")
-  end
+  # def films
+  #   @films ||= FilmLoverLists.new("user:#{id}:films")
+  # end
 
   def films_queue
     @queue ||= FilmsQueue.new "user:#{id}:films:queued"
@@ -145,6 +145,10 @@ class User
 
   def channels
     @channels ||= UserChannels.new self
+  end
+
+  def compare_to(user)
+    UserFilmsComparison.new(self, user)
   end
   
   def to_param

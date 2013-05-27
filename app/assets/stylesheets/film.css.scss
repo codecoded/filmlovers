@@ -513,6 +513,9 @@ ul.credits{
     margin-left: 0px;
     a{
       color: black;
+      label{
+        margin-top: 10px;
+      }
     }
     a:hover, .actioned
     {

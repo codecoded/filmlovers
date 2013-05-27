@@ -11,7 +11,7 @@
           <th><%= icon_for :loved %>
           <th><%= icon_for :owned %>
           <th><%= icon_for :list %>
-          <!-- <th>Rating</th> -->
+          <th>Rating</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -38,10 +38,9 @@
                 <label> <%=friend.films_lists.viewable.count %> </label>
               <% end %>
             </td>    
-
-<!--             <td>
-              N/A
-            </td> -->
+            <td>
+             <%= number_to_percentage(current_user.compare_to(friend).overall, precision: 1) %>
+            </td>
             <td>
               <%= render partial: 'friendships/friend_link', locals: {friend: friend} %>            
             </td>

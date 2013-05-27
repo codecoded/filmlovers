@@ -45,7 +45,7 @@ gem 'devise'
 
 gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '3-2-stable'
 gem 'client_side_validations-mongoid'
-
+gem 'figaro'
 gem 'state_machine'
 
 # Gems used only for assets and not required
@@ -74,6 +74,7 @@ group :development, :test do
   gem "awesome_print"
   gem 'better_errors'
   gem "binding_of_caller"
+  gem "letter_opener"
   # gem 'rack-mini-profiler'
 end
 

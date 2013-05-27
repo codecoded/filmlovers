@@ -10,7 +10,7 @@
           <%= title_with_year film %>
         <% end %>
       </h3>
-      <h6><%= directed_by film %></h6>
+      <h6><%= link_to  directed_by(film),person_path(film.crew_member('Director').id) %></h6>
       <div class="external-links">
         <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
         <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>

@@ -78,8 +78,12 @@ class Film
   end
 
   def year
-    return unless release_date
+    return if release_date.blank?
     release_date.to_date.year
+  end
+
+  def has_director?
+     crew_member 'Director'
   end
 
   def director

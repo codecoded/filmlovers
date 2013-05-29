@@ -348,12 +348,12 @@ ul, ol, dl{
   }
 }
 
-#active-films{
+.padded-films{
   margin-bottom: 15px;
   h4{
     margin-bottom: 0px;
   }
   .film{
-    margin: 1px 39px;
+    margin: 1px 39px !important;
   }
 }

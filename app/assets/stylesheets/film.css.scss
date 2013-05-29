@@ -55,7 +55,10 @@ ul.credits{
     // &:hover{
     //   // border-color: #9CD6EC;
     // }
-
+    &.empty{
+      height: 271px;
+      border: dashed;
+    }
     &:hover .film-title{
        opacity: 1;  
     }
@@ -559,3 +562,4 @@ content: "";
 p.vignette:before {
   height: 400px;
 }
+

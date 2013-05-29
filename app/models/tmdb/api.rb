@@ -17,15 +17,15 @@ class Tmdb::API
     
     def genre(id, options={})
       cache_key = "genre_#{id}_page_" + (options[:page].to_s || '1')
-      # Rails.cache.fetch cache_key do
+      Rails.cache.fetch cache_key, expires_in: 4.hours  do
         request "genre/#{id}/movies", options
-      # end
+      end
     end
 
     def genres(options={})
-      # Rails.cache.fetch "genres" do
+      Rails.cache.fetch "genres", expires_in: 4.hours  do
         request "genre/list", options
-      # end
+      end
     end
 
     def search(query, options={}, type=:movie)
@@ -34,9 +34,9 @@ class Tmdb::API
 
     def films(type, options={})
       cache_key = "films_#{type}_page_" + (options[:page].to_s || '1')
-      # Rails.cache.fetch cache_key do
+      Rails.cache.fetch cache_key, expires_in: 4.hours do
         request "movie/#{type}",options
-      # end
+      end
     end
 
     def list(id, options={})

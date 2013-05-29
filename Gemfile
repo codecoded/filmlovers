@@ -3,10 +3,10 @@ source 'https://rubygems.org'
 ruby '1.9.3'
 
 gem 'rails'#, '3.2.8'
-#gem 'thin'
+gem 'thin'
 
 # Use unicorn as the app server
-gem 'unicorn'
+# gem 'unicorn'
 
 # gem 'mongo'
 gem 'omniauth-facebook', '1.4.0'

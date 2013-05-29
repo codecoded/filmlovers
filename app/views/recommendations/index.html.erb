@@ -9,7 +9,7 @@
       <li class="active" id="recommendationsForYouTab">
         <ol >
           <% friends_recommmenations.each do |recommendation| %>
-            <%= render partial: 'for_user', locals: {film: recommendation.recommendable, user: recommendation.friend} %>
+            <%= render partial: 'for_user', locals: {film: recommendation.recommendable, user: recommendation.user} %>
           <% end %>
         </ol>
       </li>

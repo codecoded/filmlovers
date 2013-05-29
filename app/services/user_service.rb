@@ -10,20 +10,6 @@ class UserService
     user.films_queue
   end
 
-  # def add(film, list)
-  #   return unless user.films[list].add film.id
-  #   film.users[list].add user.id
-  #   Films[list].incr film
-  #   user.films[list].count
-  # end
-
-  # def remove(film, list)
-  #   return unless user.films[list].remove film.id
-  #   film.users[list].remove user.id
-  #   Films[list].decr film
-  #   user.films[list].count
-  # end
-
   def list_films(action)
     user.actions_for(action).map &:film_id
   end

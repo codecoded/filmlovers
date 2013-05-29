@@ -11,6 +11,8 @@ class Film
 
   FilmLists = [:watched, :loved, :unloved, :queued]
 
+  has_many :recommendations, as: :recommendable
+
   def self.fetch(id)
     FilmRepository.find id
   end
@@ -24,11 +26,27 @@ class Film
   end
 
   def credits
-    @credits ||= Credits.new casts
+    @credits ||= Credits.new casts if casts
+  end
+
+  def images
+    self[:images]
   end
 
   def images_library
-    @images = Images.new(self.images)
+    @images = Images.new(images) if images
+  end
+
+  def casts
+    self[:casts]
+  end
+
+  def overview
+    self[:overview]
+  end
+
+  def runtime
+    self[:runtime]
   end
 
   def has_poster?
@@ -48,7 +66,7 @@ class Film
   end
 
   def has_backdrop?
-    backdrop_path
+    backdrop_path and images
   end
 
   def backdrops

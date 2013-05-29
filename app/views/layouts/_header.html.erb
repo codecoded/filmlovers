@@ -19,102 +19,7 @@
     <section>
       <!-- Left Nav Section -->
       <% if logged_in? %>
-      <ul class="left">
-        <li class="has-dropdown">
-         <a>  <%= awesome "film" %> films &nbsp;</a>
-          <ul class="dropdown">
-            <li><label>Current</label></li>
-            <li><%= link_to 'Upcoming', trend_path(:upcoming), alt: 'upcoming films' %></li>
-            <li><%= link_to 'In Cinemas', trend_path(:now_playing), alt: 'films now playing in cinemas' %></li>           
-            <li><%= link_to 'Popular', trend_path(:popular), alt: 'popular films' %></li>
-            <li><%= link_to 'Watched', actioned_films_path(:watched), alt: 'films people have watched' %></li>
-            <li><%= link_to 'Loved', actioned_films_path(:loved), alt: 'films people love' %></li>           
-            <li><%= link_to 'Owned', actioned_films_path(:owned), alt: 'films people own' %></li>
-            <li><label>Top Genres</label></li>
-            <li><%= link_to 'Action', genre_path(:action), alt: 'action films' %></li>
-            <li><%= link_to 'Adventure', genre_path(:adventure), alt: 'adventure films' %></li>
-            <li><%= link_to 'Comedy', genre_path(:comedy), alt: 'comedy films' %></li>
-            <li><%= link_to 'Sci-Fi', genre_path(:science_fiction), alt: 'science fiction films' %></li>
-            <li><%= link_to 'Drama', genre_path(:drama), alt: 'drama films' %></li>
-          </uL>
-        </li>
-       <li>
-          <%= link_to users_path do %>
-            <%= awesome 'group' %> users
-          <% end %>
-        </li>        
-        <li>
-          <%= link_to user_lists_path(current_user) do %>
-            <%= awesome 'list' %> lists
-          <% end %>
-        </li>
-        <li>
-          <%= link_to friendships_path do %>
-            <%= awesome 'globe' %> friendships
-          <% end %>
-        </li>
-        <% if current_user.passport_provider? :facebook %>
-          <li><a href="/channels/facebook"><%= awesome 'facebook'%> facebook</a></li>
-        <% end %>
-        <% if current_user.passport_provider? :twitter_ %>
-          <li><a href="/">twitter</a></li>
-        <% end %>
-        <% if current_user.passport_provider? :netflix_ %>
-          <li><a href="/">Netflix</a></li>
-        <% end %>
-        <% if current_user.passport_provider? :vimeo_ %>
-          <li><a href="/">Vimeo</a></li>
-        <% end %>
-        <% if current_user.passport_provider? :google_oauth2_ %>
-          <li><a href="/">Google</a></li>
-        <% end %>
-      </ul><!-- Right Nav Section -->
-      <ul class="right">
-        <li class="name">
-          <%= form_tag(search_films_path, method: :get) do%>
-          <input type="text" id="quick_search_header" name="query">
-          <% end %>
-        </li>
-        <li class="has-dropdown">
-          <%= link_to current_user.username, edit_user_registration_path %>
-          <ul class="dropdown">
-            <li><label>Films</label></li>
-            <%= render partial: 'layouts/action_links' %>       
-            <li>
-              <label>Add Passport</label>
-            </li>
-            <% if !current_user.passport_provider? :facebook %>
-              <li> <a href="/auth/facebook" data-no-pjax> <%= awesome 'facebook'%> Facebook</a></li>
-            <% end %>
-            <% if !current_user.passport_provider? :twitter %>
-              <li> <a href="/auth/twitter" data-no-pjax><%= awesome 'twitter'%> Twitter</a></li>
-            <% end %>      
-            <% if !current_user.passport_provider? :netflix %>
-              <li><a href="/auth/netflix" data-no-pjax><%= awesome 'film'%> Netflix</a></li>
-            <% end %>
-            <% if !current_user.passport_provider? :google_oauth2 %>
-              <li><a href="/auth/google_oauth2" data-no-pjax><%= awesome 'google-plus'%> Google</a></li>
-            <% end %>             
-            <li>
-              <label>Options</label>
-            </li>
-            <li>
-               <%= link_to friendships_path do %>
-                <%= awesome 'group'%> Friendships
-               <% end %>
-            </li>
-            <li>
-               <%= link_to edit_user_registration_path do %>
-                <%= awesome 'user'%> Profile
-               <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, id: "sign_out", method: :delete do %>
-                 <%= awesome 'signout'%> Sign out
-              <% end %>
-            </li>
-          </ul>
-        </li>
+        <%= render partial:'layouts/logged_in_header' %>
       <% else %>
       <ul class="left">
         <li class="has-dropdown">
@@ -130,7 +35,7 @@
             <li><%= link_to 'Comedy', genre_path(:comedy), alt: 'comedy films' %></li>
             <li><%= link_to 'Sci-Fi', genre_path(:science_fiction), alt: 'science fiction films' %></li>
             <li><%= link_to 'Drama', genre_path(:drama), alt: 'drama films' %></li>
-          </uL>
+          </ul>
         </li>
       </ul>
       <ul class="right">

@@ -64,6 +64,8 @@ Filmlovers::Application.routes.draw do
     end
   end
 
+  resources 'recommendations'
+
   scope ':user_id', :constraints => { :user_id => /.*/ } do
     resources :films, :only => [:index, :show], to: 'users#show', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 
         member do 

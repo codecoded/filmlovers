@@ -10,6 +10,9 @@ class Friendship
   validates :user,    uniqueness: {message: "you are already friends", scope: :friend}, presence: true
   validates_presence_of :friend
 
+  index({ user: 1, friend: 1}, { unique: true, name: "friendship_index", background: true })
+
+
   scope :confirmed, -> {where state: :confirmed}
 
   state_machine :initial => :pending do

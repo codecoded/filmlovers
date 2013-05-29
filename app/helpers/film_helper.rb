@@ -20,7 +20,7 @@ module FilmHelper
   end
 
   def starring(film)
-   "Starring: #{film.credits.cast.take(3).map(&:name).join(', ')}" if film.credits.cast
+   "Starring: #{film.credits.cast.take(3).map(&:name).join(', ')}" if film.casts
   end
 
   def runtime(film)
@@ -101,6 +101,12 @@ module FilmHelper
   
   def backdrop(film, backdrop, size = 'w1280')
     image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
+  end
+
+  def backdrop_link(film, backdrop, size = 'w1280')
+    link_to film_path(film), title: film.title do
+      backdrop film, backdrop, size
+    end
   end
 
 

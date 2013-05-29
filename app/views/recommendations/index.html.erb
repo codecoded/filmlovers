@@ -1,0 +1,26 @@
+
+<%= render layout: 'layouts/user_simple' do%>
+  <div class="twelve columns">
+    <dl class="tabs two-up">
+      <dd class="active"><a href="#recommendationsForYou">Friends recommendations</a></dd>
+      <dd class="hide-for-small"><a href="#recommendationsByYou">You recommended</a></dd>
+    </dl>
+    <ul class="tabs-content" id="userList">
+      <li class="active" id="recommendationsForYouTab">
+        <ol >
+          <% friends_recommmenations.each do |recommendation| %>
+            <%= render partial: 'for_user', locals: {film: recommendation.recommendable, user: recommendation.friend} %>
+          <% end %>
+        </ol>
+      </li>
+      <li id="recommendationsByYouTab">
+        <ol >
+          <% user_recommendations.each do |recommendation| %>
+            <%= render partial: 'by_user', locals: {film: recommendation.recommendable, user: recommendation.user} %>
+          <% end %>
+        </ol>
+      </li>
+    </ul>
+  </div>
+<% end %>
+

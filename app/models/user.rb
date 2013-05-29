@@ -1,7 +1,7 @@
 class User
   include Mongoid::Document
 
-  exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers friendships friends)
+  exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers friendships friends recommendations recommend)
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -28,6 +28,7 @@ class User
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
 
+  index({ username: 1}, { unique: true, name: "user_username_index", background: true })
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -63,6 +64,7 @@ class User
 
   has_many :film_user_actions, validate: false, dependent: :destroy
   has_many :friendships, validate: false
+  has_many :recommendations
 
   embeds_many :films_lists
   embeds_many :passports
@@ -148,7 +150,7 @@ class User
   end
 
   def compare_to(user)
-    UserFilmsComparison.new(self, user)
+    UserComparison.new(self, user)
   end
   
   def to_param

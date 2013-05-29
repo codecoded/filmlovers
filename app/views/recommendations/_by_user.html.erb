@@ -1,4 +1,4 @@
-<li>
+<li class="recommendation">
   <div class="one columns">
      <%= avatar user %>
   </div>  
@@ -29,12 +29,8 @@
       <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
   </div> 
   <div class="two columns">
-    <div class="film-actions-vertical pagination-centered" >
-      <% [:watched, :loved, :owned].each do |action| %>
-        <button>
-          <%= action_icon action, film %>
-        </button>
-      <% end %>
-    </div>
+     <%= link_to recommendation_path(recommendation), method: :delete, remote: true, data: {action: :recommendation}, :class=>'tiny button radius alert' do %>
+      <%= awesome 'remove', 'icon-large' %> <span>delete</span>
+    <% end %>
   </div>
 </li>

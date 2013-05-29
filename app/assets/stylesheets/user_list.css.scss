@@ -2,6 +2,7 @@
   textarea{
     height:100px
   }
+
   .info
   {
     width:100%;
@@ -62,7 +63,12 @@
         i{
           cursor: pointer
         }
-
+      }
+      i.close{
+        position: absolute;
+        top: -13px;
+        right: -11px;
+        color: #B6B8C5;
       }
     }
   }

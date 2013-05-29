@@ -2,7 +2,7 @@ class Recommendation
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  before_validation :new_recommendation?
+  before_create :new_recommendation?
   after_create :notify
 
   belongs_to :user
@@ -16,6 +16,23 @@ class Recommendation
   index({ user: 1, friend: 1, recommendable: 1}, { unique: true, name: "recommendation_index", background: true })
 
   field :auto, type: Boolean, default: true
+
+  scope :visible, -> {where state: :visible}
+
+  state_machine :initial => :visible do
+
+    event :unrecommend do
+      transition :visible => :deleted
+    end
+
+    event :hide do
+      transition :visible => :hidden
+    end
+
+    event :show do
+      transition :hidden => :visible
+    end
+  end
 
   def self.recommended?(user, friend, recommendable)
     where(user: user, friend: friend, recommendable: recommendable).exists?

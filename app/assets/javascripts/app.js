@@ -7,4 +7,6 @@ $(function(){
       FL.Lists.init()
     if(FL.Users)
       FL.Users.init()
+    if(FL.Recommendations)
+      FL.Recommendations.init()
 })

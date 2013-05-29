@@ -16,7 +16,7 @@
       <li id="recommendationsByYouTab">
         <ol >
           <% user_recommendations.each do |recommendation| %>
-            <%= render partial: 'by_user', locals: {film: recommendation.recommendable, user: recommendation.user} %>
+            <%= render partial: 'by_user', locals: {film: recommendation.recommendable, user: recommendation.friend} %>
           <% end %>
         </ol>
       </li>

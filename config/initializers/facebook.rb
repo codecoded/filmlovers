@@ -23,6 +23,6 @@ module Facebook
   end
   
   def permissions
-    [ :publish_actions, :email ].join ','
+    [ :email ].join ','
   end
 end

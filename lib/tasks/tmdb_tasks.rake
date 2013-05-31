@@ -15,7 +15,7 @@ namespace :tmdb do
 
   task :update_changes, [:start_date, :page_no] => :environment do |t, args|
     start_date = args[:start_date] ? eval(args[:start_date]) : 3.days.ago
-    fetch_changed_movies start_date, args[:page_no] 
+    fetch_changed_movies start_date, args[:page_no] || 1
   end
 
   task :fetch_all, [:starting_id] => :environment do |t, args|
@@ -31,49 +31,49 @@ namespace :tmdb do
       results_page = @tmdb_films.by_trend trend, {page: page+=1}
       fetch_films results_page
     end
-    # fetch_trend(trend, page+=1) if results_page.more_pages?
   end
 
-  def fetch_films(results_page)
-    Log.debug "Page #{results_page.page_no} of #{results_page.total_pages}"
-    index = 0
-    results_page.results.each do |film_id| 
-      begin
-        film = Film.fetch film_id.id
-        Log.debug "Film #{index+=1} of #{results_page.results.count}: #{film.title}"
-      rescue
-         Log.debug "Film Id failed: #{film_id.id}"
-      end
-    end
-  end
-
-  def fetch_changed_movies(start_date, page_no=1)
-    @tmdb_changes = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
-    results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes
-    force_fetch_films results_page
+  def fetch_changed_movies(start_date, page_no)
+    tmdb_changes = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
+    results_page = ResultsPage.from_tmdb tmdb_changes['results'], tmdb_changes
+    fetch_films(results_page, true)
 
     while results_page.more_pages? do
       tmdb_changes = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no+=1}
-      results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes
-      force_fetch_films results_page
+      results_page = ResultsPage.from_tmdb tmdb_changes['results'], tmdb_changes
+      fetch_films results_page, true
     end
 
   end
 
-  def force_fetch_films(results_page)
+  def fetch_films(results_page, force=false)
     Log.debug "Page #{results_page.page_no} of #{results_page.total_pages}"
-
-    index = 0
+    index = 1
     results_page.results.each do |film_id| 
       begin
-        film = Film.force_fetch film_id['id']
-        Log.debug "Film #{index+=1} of #{results_page.results.count}: #{film.title}"
+        film = force ?  Film.force_fetch(film_id['id']) : Film.fetch(film_id.id)
+        Log.debug "Film #{index} of #{results_page.results.count}: #{film.title}"
       rescue
-         Log.debug "Film Id failed: #{film_id['id']}"
+         Log.debug "Film #{film_id.id} failed"
       end
-
+      index+=1
     end
-
   end
+
+  # def force_fetch_films(results_page)
+  #   Log.debug "Page #{results_page.page_no} of #{results_page.total_pages}"
+
+  #   index = 0
+  #   results_page.results.each do |film_id| 
+  #     begin
+  #       film = Film.force_fetch film_id['id']
+  #       Log.debug "Film #{index} of #{results_page.results.count}: #{film.title}"
+  #     rescue
+  #        Log.debug "Film #{film_id['id']} failed"
+  #     end
+  #     index+=1
+  #   end
+  # end
+
 
 end

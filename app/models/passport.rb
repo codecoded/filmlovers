@@ -19,6 +19,14 @@ class Passport
       })
   end
 
+  def self.from_facebook_request(signed_request)
+    request = Koala::Facebook::OAuth.new.parse_signed_request(signed_request)
+    passport = Passport.new({
+        provider: :facebook,
+        uid: request["user_id"],
+      })
+  end
+
   def update_from_passport(passport)
     fields = ['oauth_token', 'oauth_expires_at']
     update_attributes passport.attributes.slice(fields)

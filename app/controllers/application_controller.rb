@@ -1,7 +1,27 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  before_filter :facebook_authenticate
+  skip_before_filter :facebook_authenticate, if: -> {params[:signed_request].nil?}
+
+  # def facebook_authenticate
+  #   return if params[:signed_request] ? facebook_authenticate : logged_in?
+  #   redirect_to_auth
+  # end
+
   private
+
+
+  def facebook_authenticate
+    Log.debug 'authenticating'
+    user = FacebookAuth.authenticate(params[:signed_request])
+    !user.new_record? ? env['warden'].set_user(user) : redirect_to_auth
+  end
+
+  def redirect_to_auth
+    render('facebook/oauth_redirect', layout:nil)
+  end
+  
 
   def logged_in?
     user_signed_in?

@@ -1,0 +1,9 @@
+
+<script>
+  var oauth_url = 'https://www.facebook.com/dialog/oauth/';
+  oauth_url += '?client_id=<%= Facebook.app_id %>';
+  oauth_url += '&redirect_uri=' + encodeURIComponent('<%="#{Facebook.canvas_app_url}/auth/facebook/callback?"%>') + '<%=CGI.escape "#{request.query_string}"%>/';
+  oauth_url += '&scope=<%=Facebook.permissions %>'
+  console.log(oauth_url)
+  window.top.location = oauth_url;
+</script>

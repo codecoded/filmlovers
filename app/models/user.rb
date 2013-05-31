@@ -82,10 +82,6 @@ class User
     user ? user : User.new(passports:[passport])
   end
 
-  # def films
-  #   @films ||= FilmLoverLists.new("user:#{id}:films")
-  # end
-
   def films_queue
     @queue ||= FilmsQueue.new "user:#{id}:films:queued"
   end  

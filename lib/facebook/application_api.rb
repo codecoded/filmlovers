@@ -13,6 +13,10 @@ class Facebook::ApplicationAPI
     @instance ||= new
   end
 
+  def self.notifications(recipient_uid, href, template, ref=nil)
+    instance.graph.put_connections recipient_uid, 'notifications', template: template, href: href, ref: ref
+  end
+
   def delete_request(request_id)
     graph.delete_object request_id
   end

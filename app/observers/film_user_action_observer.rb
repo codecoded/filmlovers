@@ -6,7 +6,7 @@ class FilmUserActionObserver < Mongoid::Observer
     comparer = ComparisonService.new film_user_action.user
     Thread.new do
       comparer.friends_sorted_by_rating(20).each do |rated_friend|
-        film_user_action.user.recommendations.create friend: rated_friend[:friend], recommendable: film_user_action.film, auto: true
+        recommendation = film_user_action.user.recommendations.create friend: rated_friend[:friend], recommendable: film_user_action.film, auto: true
       end
     end
   end

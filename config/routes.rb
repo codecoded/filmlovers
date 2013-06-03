@@ -20,6 +20,7 @@ Filmlovers::Application.routes.draw do
       resources 'genres',   only: [:show, :index]
       resources 'trends',   only: [:show, :index], :constraints => {:id => /now_playing|latest|upcoming|popular/}
       # 
+      post ':id' => redirect("/films/%{id}")
       get 'search'  
       get 'inline_search'   
       get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'
@@ -30,6 +31,8 @@ Filmlovers::Application.routes.draw do
       get ':user_action',   to: "films#users", as: 'users', :constraints => { :user_action => /watched|loved|owned/ }
       get 'list_view',      to: "films#list_view",  as: 'list_view'
     end
+
+
   end
 
   resources 'persons', only: [:show, :index] do
@@ -63,6 +66,19 @@ Filmlovers::Application.routes.draw do
       put 'unblock'
     end
   end
+
+  namespace :facebook do
+    get  'credits' => "credits#index",               as:'shop'
+    post 'credits' => "credits#callback",            as:'shop_callback'
+    get  'invite'  => "friends#index",               as:'invite'
+    post 'invite'  => "friends#invite",              as:'send_invites'
+    scope 'social' do
+      match 'films/:id'       => 'social#share',     as: 'share', constraints: {type: /achievement|levelup|new_game/}, via: :get
+      match 'activity'        => "social#activity",  as: 'activity', via:[:get, :post]
+      get  'liked'            => "social#liked",     as:'liked'
+    end
+  end
+
 
   resources 'recommendations'
 

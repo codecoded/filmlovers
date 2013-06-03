@@ -3,7 +3,6 @@ class Recommendation
   include Mongoid::Timestamps
 
   before_create :new_recommendation?
-  after_create :notify
 
   belongs_to :user
   belongs_to :friend, :class_name => "User"
@@ -51,6 +50,4 @@ class Recommendation
     !(Recommendation.recommended?(user, friend, recommendable) or friend.film_actioned?(recommendable, :watched))
   end
 
-  def notify
-  end
 end

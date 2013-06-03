@@ -65,6 +65,7 @@ class User
   has_many :film_user_actions, validate: false, dependent: :destroy
   has_many :friendships, validate: false
   has_many :recommendations
+  has_many :facebook_events
 
   embeds_many :films_lists
   embeds_many :passports
@@ -147,6 +148,11 @@ class User
 
   def compare_to(user)
     UserComparison.new(self, user)
+  end
+
+  def facebook
+    return unless @facebook ||= passport_for(:facebook)
+    Facebook::UserAPI.new @facebook
   end
   
   def to_param

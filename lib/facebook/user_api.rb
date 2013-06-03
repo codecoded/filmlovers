@@ -17,6 +17,10 @@ class Facebook::UserAPI
     graph.put_connections('me', action, object => url)['id']
   end
 
+  def notifications(href, template, ref=nil)
+    Facebook::ApplicationAPI.notifications user.uid, href, template, ref
+  end
+
   def delete_request(request_id)
     graph.delete_object request_id
   end

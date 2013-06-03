@@ -1,6 +1,11 @@
 class FacebookPresenter
 
   def self.recommendation_message(recommendation)
+    
+    if !recommendation.user.facebook
+      return "You have a new film recommendation! #{recommendation.user.username} liked #{recommendation.recommendable.title}" 
+    end
+
     if recommendation.friend.facebook_events.recent.count < 2
       "You have a new film recommendation! @[#{recommendation.user.facebook.user.uid}] liked #{recommendation.recommendable.title}"
     else

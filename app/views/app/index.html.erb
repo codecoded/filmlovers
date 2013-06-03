@@ -43,6 +43,81 @@
 
 <% end %>
 
+  <div class="row">
+    <div class="twelve columns">
+      <h6 class="heading_divider">Filmlovers Top Listings</h6>
+    </div>        
+    <div class="four columns top_ten_list">
+      <dl>
+       <dt><h3>Watched...</h3></dt>
+        <dd>
+          <ol>
+            <% FilmsRepository.top_for(:watched, 5).each do |film| %>
+            <li>
+              <p>
+                <em><%= film_link film %></em> 
+                <%#= backdrop_small film %>
+              </p>
+            </li>
+            <% end %>
+          </ol>
+        </dd>
+      </dl>
+    </div>
+    <div class="four columns top_ten_list">
+      <dl>
+       <dt><h3>Loved...</h3></dt>
+        <dd>
+          <ol>
+            <% FilmsRepository.top_for(:loved, 5).each do |film| %>
+            <li>
+              <p>
+                <em><%= film_link film %></em> 
+              </p>
+            </li>
+            <% end %>
+          </ol>
+        </dd>
+      </dl>
+    </div>
+    <div class="four columns top_ten_list">
+      <dl>
+       <dt><h3>Owned...</h3></dt>
+        <dd>
+          <ol>
+            <% FilmsRepository.top_for(:owned, 5).each do |film| %>
+            <li>
+              <p>
+                 <em><%= film_link film %></em> 
+              </p>
+            </li>
+            <% end %>
+          </ol>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="twelve columns pagination-centered">
+      <a href="http://www.awin1.com/cread.php?s=246533&v=2481&q=118947&r=171645" target="_blank" alt="blinkbox advert">
+        <img src="http://www.awin1.com/cshow.php?s=246533&v=2481&q=118947&r=171645" border="0" alt="blinkbox promotion"></a>        
+    </div>
+  </div>
+
+  <div class="row padded-films">
+    <div class="twelve columns">
+      <h6 class="heading_divider">Recent Activity</h6>
+    </div>    
+    <div class="twelve columns centered">
+      <div class=" films">
+        <% Films.recent(5).each do |film| %>
+          <%= render partial: 'films/film', object: film %>
+        <% end %>
+      </div>      
+    </div>
+  </div>
+
   <div class="row" id="icon-descriptions">
     <div class="four columns">
       <div class="radius panel pagination-centered">
@@ -75,26 +150,8 @@
       </div>
     </div>
   </div>
-  
-  <div class="row">
-    <div class="twelve columns pagination-centered">
-      <a href="http://www.awin1.com/cread.php?s=246533&v=2481&q=118947&r=171645" target="_blank" alt="blinkbox advert">
-        <img src="http://www.awin1.com/cshow.php?s=246533&v=2481&q=118947&r=171645" border="0" alt="blinkbox promotion"></a>        
-    </div>
-  </div>
-  
-  <div class="row padded-films">
-    <div class="twelve columns">
-      <h6 class="heading_divider">Recent Activity</h6>
-    </div>    
-    <div class="twelve columns centered">
-      <div class=" films">
-        <% Films.recent(5).each do |film| %>
-          <%= render partial: 'films/film', object: film %>
-        <% end %>
-      </div>      
-    </div>
-  </div>
+
+
 
   <div class="row ">
     <div class="twelve columns">
@@ -120,29 +177,30 @@
     </div>
   </div>
 
- <div class="row">
+<!--  <div class="row">
     <div class="twelve columns">
       <h6 class="heading_divider">Discover by Genre</h6>
-      <%= render partial:'genre_tile', locals:{genre: :action, description: 'Action'} %>
-      <%= render partial:'genre_tile', locals:{genre: :comedy, description: 'Comedy'} %>
-      <%= render partial:'genre_tile', locals:{genre: :science_fiction, description: 'Sci-Fi'} %>
-      <%= render partial:'genre_tile', locals:{genre: :drama, description: 'Drama'} %>  
-      <%= render partial:'genre_tile', locals:{genre: :animation, description: 'Animation'} %>
-      <%= render partial:'genre_tile', locals:{genre: :eastern, description: 'Eastern'} %> 
-      <%= render partial:'genre_tile', locals:{genre: :horror, description: 'Horror'} %>
-      <%= render partial:'genre_tile', locals:{genre: :foreign, description: 'Foreign'} %>
-      <%= render partial:'genre_tile', locals:{genre: :adventure, description: 'Adventure'} %>
-      <%= render partial:'genre_tile', locals:{genre: :indie, description: 'Indie'} %>
-      <%= render partial:'genre_tile', locals:{genre: :suspense, description: 'Suspense'} %>
-      <%= render partial:'genre_tile', locals:{genre: :romance, description: 'Romance'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :action, description: 'Action'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :comedy, description: 'Comedy'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :science_fiction, description: 'Sci-Fi'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :drama, description: 'Drama'} %>  
+      <%#= render partial:'genre_tile', locals:{genre: :animation, description: 'Animation'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :eastern, description: 'Eastern'} %> 
+      <%#= render partial:'genre_tile', locals:{genre: :horror, description: 'Horror'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :foreign, description: 'Foreign'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :adventure, description: 'Adventure'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :indie, description: 'Indie'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :suspense, description: 'Suspense'} %>
+      <%#= render partial:'genre_tile', locals:{genre: :romance, description: 'Romance'} %>
     </div>
-    
-  </div>
+  </div> -->
+
  <div class="row">
     <div class="twelve columns pagination-centered">
       <fb:like href="http://www.filmlovers.co.uk/" send="true" width="450" show_faces="true" ></fb:like>
     </div>
   </div>
+
 
   <!-- <a onmouseover="UE.Popin.preload();" href="#" onclick="UE.Popin.show(); return false;">feedback</a> -->
 </div>

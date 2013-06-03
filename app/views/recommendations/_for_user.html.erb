@@ -3,11 +3,7 @@
      <%= avatar user %>
   </div>    
   <div class="two columns">
-      <% if film.has_backdrop? %>
-        <%= link_to film_path(film), title: film.title do %>
-          <%= backdrop(film, film.backdrops[0], 'w154') %>
-        <% end %>
-      <% end %>
+    <%= backdrop_small film %>
   </div>
   <div class="six columns">
     <%= link_to film_path(film), title: film.title do %>

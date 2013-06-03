@@ -11,6 +11,10 @@ module FilmHelper
     }
   end
 
+  def film_link(film)
+    link_to film.title, film, alt: film.title
+  end
+
   def title_with_year(film)
     "#{film.title} " << year(film)
   end
@@ -25,12 +29,6 @@ module FilmHelper
 
   def runtime(film)
     film.runtime || 0 > 0 ? "#{film.runtime} Mins" : "-- Mins"
-  end
-
-  def film_poster_link(film, poster_size='w154')
-    link_to film_path(film), title: film.title do 
-      poster(film, poster_size)
-    end
   end
 
   def film_action_counter(film, action)
@@ -63,11 +61,7 @@ module FilmHelper
   end
 
   def action_icon(action, film)
-    # icons = {
-    #     watched: 'icon-eye-open', 
-    #     loved: 'icon-heart', 
-    #     owned: 'icon-home', 
-    #     queued: 'icon-pushpin'}   
+ 
     return content_tag(:i,nil,  :class => icons[action]) unless current_user
 
     url = update_user_film_path(current_user, action, film.id)
@@ -86,6 +80,9 @@ module FilmHelper
   end
 
 
+  def poster_small(film)
+    poster_link film, 'w90'
+  end
 
   def poster(film, size='w154')
     size = size ? size : 'w154'
@@ -99,6 +96,11 @@ module FilmHelper
     end
   end
   
+  def backdrop_small(film)
+    return unless film.has_backdrop?
+    backdrop film, film.backdrops[0], 'w154'
+  end
+
   def backdrop(film, backdrop, size = 'w1280')
     image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
   end

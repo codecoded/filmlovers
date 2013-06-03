@@ -65,6 +65,10 @@ class Film
     runtime if runtime and runtime.to_i > 0  
   end
 
+  def backdrop_path
+    self[:backdrop_path]
+  end
+  
   def has_backdrop?
     backdrop_path and images
   end

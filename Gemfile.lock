@@ -117,6 +117,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.1.1)
       launchy (~> 2.2)
+    libv8 (3.11.8.17)
     log4r (1.1.10)
     mail (2.5.3)
       i18n (>= 0.4.0)
@@ -216,6 +217,7 @@ GEM
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.5)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     ruby-prof (0.13.0)
@@ -238,6 +240,9 @@ GEM
     swf_fu (2.0.4)
       coffee-script
       rails (>= 3.1)
+    therubyracer (0.11.4)
+      libv8 (~> 3.11.8.12)
+      ref
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -276,6 +281,7 @@ DEPENDENCIES
   compass-rails
   devise
   eventmachine (~> 1.0.3)
+  execjs
   fb-channel-file
   figaro
   font-awesome-rails
@@ -284,6 +290,7 @@ DEPENDENCIES
   knockoutjs-rails
   koala
   letter_opener
+  libv8
   log4r
   meta-tags
   minitest
@@ -306,6 +313,7 @@ DEPENDENCIES
   sitemap_generator
   state_machine
   swf_fu (~> 2.0)
+  therubyracer
   thin
   turn
   uglifier (>= 1.0.3)

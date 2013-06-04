@@ -68,7 +68,7 @@ class FilmPresenter < BasePresenter
   end
 
   def user_actioned?(action)
-    user_actions.include? action
+    current_user ? user_actions.include?(action) : false
   end
 
 

@@ -47,7 +47,11 @@ gem 'client_side_validations', github: 'bcardarella/client_side_validations', br
 gem 'client_side_validations-mongoid'
 gem 'figaro'
 gem 'state_machine'
+gem 'execjs'
 
+gem 'libv8'
+
+gem 'therubyracer'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

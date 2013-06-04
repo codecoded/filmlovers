@@ -1,10 +1,13 @@
-require 'results_page'
 class GenresController < ApplicationController
 
+  def index
+  end
+  
   def show
     results = TmdbFilmsSearch.new.by_genre genre.id, page_options
     present(results, params[:genre_id]) 
   end
+
 
   protected
 

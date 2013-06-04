@@ -66,7 +66,7 @@ module FilmHelper
 
     url = update_user_film_path(current_user, action, film.id)
    
-    actioned = current_user.film_actioned?(film, action)
+    actioned = actioned? film, action
     method =  actioned ? :delete : :put
     action_css = actioned ? 'actioned' : 'unactioned' 
     css = "#{icons[action]} #{action_css}"  

@@ -1,6 +1,7 @@
 <%= render layout: 'layouts/user_simple' do%>
 
   <div class="twelve columns">
+    <%= page_entries_info users %>
     <table class="friends">
       <thead>
         <tr>
@@ -51,7 +52,9 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate users %>
-  </div>
+    <%= link_to_previous_page users, 'Previous Page' %>
+    <%= link_to_next_page users, 'Next Page', :class=>'right' %>
+
+      </div>
 <% end %>
 

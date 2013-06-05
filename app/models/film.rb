@@ -8,7 +8,8 @@ class Film
   field :_id, type: Integer, default: ->{ id.to_id if id}
   field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}"}
   field :fetched, type: DateTime, default: nil
-
+  field :rating, type: Integer, default: 0
+  
   FilmLists = [:watched, :loved, :unloved, :queued]
 
   has_many :recommendations, as: :recommendable
@@ -24,6 +25,7 @@ class Film
   def users
     @lists ||= FilmLoverLists.new("film:#{id}:users")
   end
+
 
   def credits
     @credits ||= Credits.new casts if casts

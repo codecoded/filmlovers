@@ -19,8 +19,8 @@ module FilmHelper
     "#{film.title} " << year(film)
   end
 
-  def directed_by(film_view)
-    "Directed by: #{film_view.director}" if film_view.director
+  def directed_by(film)
+    "Directed by: #{film.director}" if film.director
   end
 
   def starring(film)

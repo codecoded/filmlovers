@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <% User.each do |friend| %>
+        <% users.each do |friend| %>
           <tr>
             <td>
               <%= link_to user_path(friend) do %>
@@ -51,6 +51,7 @@
         <% end %>
       </tbody>
     </table>
+    <%= paginate users %>
   </div>
 <% end %>
 

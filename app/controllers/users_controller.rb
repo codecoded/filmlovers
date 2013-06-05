@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   #layout 'layouts/user'
   def index
+    
   end
 
   def validate_current_user
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    results_page =  UserService.new(user).paged_list(user_action, order, by, params[:page].to_i, 70)
+    results_page =  UserService.new(user).paged_list(user_action, order, by, page_no, 70)
     @films_page = FilmsPagePresenter.new current_user, results_page, user_action
   end
 
@@ -40,13 +41,22 @@ class UsersController < ApplicationController
     (params[:id] || :watched).to_sym
   end
 
-  def order
-    params[:order] || :release_date
+  def order(default=:release_date)
+    params[:order] || default
+  end
+
+  def page_no
+    params[:page].to_i
   end
 
   def by
     params[:by] || :desc
   end
 
-  helper_method :viewing_own?, :user, :user_action, :order, :by
+  def users
+    User.order_by(:created_at.desc).page(page_no).per 10
+  end
+
+
+  helper_method :viewing_own?, :user, :user_action, :order, :by, :users
 end

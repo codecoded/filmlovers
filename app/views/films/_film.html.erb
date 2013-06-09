@@ -6,6 +6,13 @@
     </div>
 
     <div class="film-info">
+      <% if film.has_trailer? %>
+        <span class="play-trailer">
+          <%= link_to trailer_popup_film_path(film), :class=>'display-modal' do %>
+            <%= awesome 'play-sign' %>
+          <% end %>
+        </span>
+      <% end %>
       <%= poster_link film %>
 
       <% if logged_in? %>
@@ -33,3 +40,4 @@
     </div> 
   <% end %>
 <% end %>
+

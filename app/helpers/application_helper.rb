@@ -29,4 +29,8 @@ module ApplicationHelper
       image_tag user.gravatar_url, :class=>"avatar #{size}", title: user.username, alt: "profile picture for #{user.username}"
     end
   end
+
+  def advert(name)
+    render partial: "adverts/#{name}"
+  end
 end

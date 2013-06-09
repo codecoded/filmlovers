@@ -111,11 +111,14 @@ module FilmHelper
     end
   end
 
+  def trailer_url(film)
+    return unless film.has_trailer?
+    "http://www.youtube.com/embed/#{film.trailer}?iv_load_policy=3&modestbranding=1&origin=localhost&rel=0&showinfo=0&controls=1"
+  end
 
   def trailer(film)
     return unless film.has_trailer?
-    src = "http://www.youtube.com/embed/#{film.trailer}?iv_load_policy=3&modestbranding=1&origin=localhost&rel=0&showinfo=0&controls=1"
-    content_tag :iframe, nil, src: src, frameborder: 0, allowfullscreen: true
+    content_tag :iframe, nil, src: trailer_url(film), frameborder: 0, allowfullscreen: true
   end
 
   def genre_link(genre)

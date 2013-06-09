@@ -15,6 +15,10 @@ class FilmsController < ApplicationController
     render 'show'
   end
 
+  def trailer_popup
+    render partial: 'trailer_modal' 
+  end
+
   def list_view
     render partial: 'list_view'
   end

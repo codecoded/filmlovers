@@ -7,13 +7,13 @@ class FilmsRepository
       sort_by {|x| x[:score]}.
       reverse.
       take(count).
-      map {|film| Film.only(:poster_path, :name, :title, :release_date, :backdrop_path, :images).find film[:id]}
+      map {|film| Film.only(:poster_path, :name, :title, :release_date, :backdrop_path, :images, :trailers).find film[:id]}
       # map {|film| film[:id]}
 
     # Film.only(:poster_path, :name, :title, :release_date, :backdrop_path, :images).find top_films
   end
 
   def self.films_by(film_ids, order, by=:asc, count=0)
-    Film.only(:poster_path, :name, :title, :release_date).order_by([order, by]).limit(count).find(film_ids)
+    Film.only(:poster_path, :name, :title, :release_date, :trailers).order_by([order, by]).limit(count).find(film_ids)
   end
 end

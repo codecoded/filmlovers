@@ -30,6 +30,7 @@ Filmlovers::Application.routes.draw do
       get 'summary',        to: "films#summary",        as: 'summary'
       get ':user_action',   to: "films#users", as: 'users', :constraints => { :user_action => /watched|loved|owned/ }
       get 'list_view',      to: "films#list_view",  as: 'list_view'
+      get 'trailer_popup',  to: "films#trailer_popup" , as: 'trailer_popup'
     end
 
 

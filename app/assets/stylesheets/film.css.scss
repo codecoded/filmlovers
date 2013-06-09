@@ -563,3 +563,33 @@ p.vignette:before {
   height: 400px;
 }
 
+
+span.play-trailer
+{
+  position: absolute;
+  right: 9px;
+  top: 27px;
+
+  i{
+    font-size: 14pt;
+    color: #D6D6D6;
+  }
+}
+
+#filmTrailersModal{
+  background-color: #0F0F0F;
+  opacity: 0.8;
+  border-radius: 20px;
+  border: solid 1px #FFF;
+  width: 780px;
+  height: 600px;
+  iframe{
+    width: 640px;
+    height: 360px;
+  } 
+  .flex-video{
+    height: 345px ;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+}

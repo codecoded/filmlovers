@@ -18,6 +18,10 @@ class Film
     FilmRepository.find id
   end
 
+  def self.find_or_create(film)
+    Film.find(film['id']) || Film.with(safe:false).create(film)
+  end
+
   def self.force_fetch(id)
     FilmRepository.new(id).send :fetch
   end
@@ -37,6 +41,10 @@ class Film
 
   def images_library
     @images = Images.new(images) if images
+  end
+
+  def trailers
+    self[:trailers]
   end
 
   def casts
@@ -80,7 +88,7 @@ class Film
   end
 
   def has_trailer?(source=:youtube)
-    !trailers[source.to_s].blank?
+    trailers and !trailers[source.to_s].blank?
   end
 
   def year

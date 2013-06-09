@@ -38,7 +38,7 @@ class Films
   end
 
   def self.find_all_summaries(ids)
-    Film.only(:poster_path, :name, :title, :release_date).find ids
+    Film.only(:poster_path, :name, :title, :release_date, :trailers).find ids
   end
 
 

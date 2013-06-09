@@ -25,7 +25,7 @@ class RecommendationsController < ApplicationController
   end
 
   def friends_recommmenations
-    @friends_recommmenations ||= Recommendation.order_by(:created_at.desc).where(friend: current_user).visible
+    @friends_recommmenations ||= current_user.recommended.unwatched
   end
 
   helper_method :user_recommendations, :friends_recommmenations

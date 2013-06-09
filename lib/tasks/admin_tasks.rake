@@ -14,4 +14,19 @@ namespace :admin do
     end
   end
 
+  desc "Exchange Access Tokens"
+  task :exchange_tokens => :environment do
+    fb_api = Koala::Facebook::OAuth.new
+
+    User.where('passports.provider'=> :facebook).each do |user|
+      passport= user.passport_for(:facebook)
+      next unless passport.oauth_token
+      new_token = fb_api.exchange_access_token passport.oauth_token
+      passport.oauth_token = new_token
+      passport.oauth_expires_at = 60.days.from_now
+      passport.save!
+      Log.debug "Player #{player.name} updated"
+    end
+  end
+
 end

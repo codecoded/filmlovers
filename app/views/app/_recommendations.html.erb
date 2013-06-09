@@ -1,4 +1,4 @@
-<% recommendations = Recommendation.from_friends(current_user).visible.recent(5) %>
+<% recommendations = current_user.recommended.unwatched.visible.recent(5) %>
 
 <div class="row padded-films">
   <div class="twelve columns">
@@ -11,7 +11,6 @@
          <%= render partial: 'films/film', object: recommendations[index].recommendable %>
         <% else %>
           <div class="film empty">
-
             <div class="film-info"></div>
           </div>
         <% end %>

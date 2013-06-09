@@ -154,6 +154,10 @@ class User
     return unless @facebook ||= passport_for(:facebook)
     Facebook::UserAPI.new @facebook
   end
+
+  def recommended
+    @recommended ||= UserRecommendations.new self
+  end
   
   def to_param
     username? ? username : id.to_s

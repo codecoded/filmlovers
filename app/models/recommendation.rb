@@ -41,10 +41,6 @@ class Recommendation
     order_by(:created_at.desc).limit(limit)
   end
 
-  def self.from_friends(user)
-    where(friend: user)
-  end
-
   private
   def new_recommendation?
     !(Recommendation.recommended?(user, friend, recommendable) or friend.film_actioned?(recommendable, :watched))

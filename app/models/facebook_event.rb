@@ -6,8 +6,7 @@ class FacebookEvent
 
   validates_presence_of :user
 
-  index({ user: 1, event_type: 1}, 
-    { unique: false, name: "facebook_event_index", background: true })
+  index({ user: 1, event_type: 1}, { unique: false, name: "facebook_event_index", background: true })
 
   field :facebook_id, type: String
   field :event_type, type: String

@@ -8,7 +8,7 @@ Filmlovers::Application.routes.draw do
   match 'auth/failure',             to: redirect('/')
   match 'signout',                  to: 'sessions#destroy', as: 'signout'
   match 'login',                    to: 'app#login', as: 'login'
-
+  match 'pusher/auth' => 'pusher#auth', as: 'pusher_auth'
   get 'current_user' => 'sessions#currentuser'
 
   get 'users', to: 'users#index', as: 'users'

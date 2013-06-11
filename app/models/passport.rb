@@ -28,8 +28,7 @@ class Passport
   end
 
   def update_from_passport(passport)
-    fields = ['oauth_token', 'oauth_expires_at']
-    update_attributes passport.attributes.slice(fields)
+    update_attributes passport.attributes.slice('oauth_token', 'oauth_expires_at')
   end
 
   def to_s

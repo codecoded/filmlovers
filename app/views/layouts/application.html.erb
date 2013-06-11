@@ -20,9 +20,16 @@
     <%= display_meta_tags :site => "filmlovers" %>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "http://js.pusher.com/2.0/pusher.min.js" %>
+   
     <%= csrf_meta_tags %> 
     <%= render partial: 'layouts/userecho' %> 
     <%= render partial: 'layouts/google_analytics' %> 
+    <% if logged_in? %>
+      <script type="text/javascript">
+        pusher.init('<%= Pusher.key %>', '<%= current_user.notifier.channel %>')
+      </script>
+    <% end %>
   </head>
   <body >
        

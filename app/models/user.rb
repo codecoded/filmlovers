@@ -89,7 +89,6 @@ class User
 
   def upsert_passport(passport)
     current_passport = find_passport(passport.uid, passport.provider)
-    Log.info current_passport
     current_passport ? current_passport.update_from_passport(passport) : (passports << passport) 
   end
 
@@ -159,6 +158,14 @@ class User
     @recommended ||= UserRecommendations.new self
   end
   
+  def notifier
+    @notifier ||= UserNotifier.new(self)
+  end
+
+  def notify(notification)
+    notifier.message notification
+  end
+
   def to_param
     username? ? username : id.to_s
   end

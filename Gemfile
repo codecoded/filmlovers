@@ -4,7 +4,8 @@ ruby '1.9.3'
 
 gem 'rails'#, '3.2.8'
 gem 'thin'
-
+gem 'nokogiri'
+gem 'google_movies'
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -52,7 +53,7 @@ gem 'execjs'
 gem 'libv8'
 
 gem 'therubyracer'
-
+  
 gem 'kaminari'
 
 # Gems used only for assets and not required

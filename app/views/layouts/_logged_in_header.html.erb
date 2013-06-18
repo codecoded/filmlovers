@@ -33,9 +33,7 @@
     <% end %>
   </li>
   <li>
-    <%= link_to recommendations_path do %>
-      <%= awesome 'star-empty' %> recommendations
-    <% end %>
+      <%= recommendations_tab current_user %>
   </li>
 
   <% if current_user.passport_provider? :facebook %>

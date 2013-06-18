@@ -6,13 +6,15 @@
     </div>
     <div class="six columns user-name">
        <h3><%= user.username %></h3>
-       <% if current_user.friends_with? user  %>
-        <%= link_to friendship_path(user), method: :delete, remote: true, data: {action: :friendship}, :class=>'tiny button radius alert' do %>
-          <%= awesome 'remove', 'icon-large' %> <span>remove friendship</span>
-        <% end %>
-       <% else %>
-        <%= link_to friendship_path(user), method: :put, remote: true, data: {action: :friendship}, :class=>'tiny button radius success' do %>
-          <%= awesome 'link', 'icon-large' %> <span>create friendship</span>
+       <% if logged_in? %>
+         <% if current_user.friends_with? user  %>
+          <%= link_to friendship_path(user), method: :delete, remote: true, data: {action: :friendship}, :class=>'tiny button radius alert' do %>
+            <%= awesome 'remove', 'icon-large' %> <span>remove friendship</span>
+          <% end %>
+         <% else %>
+          <%= link_to friendship_path(user), method: :put, remote: true, data: {action: :friendship}, :class=>'tiny button radius success' do %>
+            <%= awesome 'link', 'icon-large' %> <span>create friendship</span>
+          <% end %>
         <% end %>
       <% end %>
     </div>

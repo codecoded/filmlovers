@@ -54,7 +54,7 @@ namespace :tmdb do
         film = force ?  Film.force_fetch(film_id['id']) : Film.fetch(film_id.id)
         Log.debug "Film #{index} of #{results_page.results.count}: #{film.title}"
       rescue
-         Log.debug "Film #{film_id.id} failed"
+         Log.debug "Film #{film_id} failed"
       end
       index+=1
     end

@@ -15,7 +15,7 @@ namespace :tmdb do
 
   task :update_changes, [:start_date, :page_no] => :environment do |t, args|
     start_date = args[:start_date] ? eval(args[:start_date]) : 3.days.ago
-    fetch_changed_movies start_date, args[:page_no] || 1
+    fetch_changed_movies start_date, (args[:page_no] || 1).to_i
   end
 
   task :fetch_all, [:starting_id] => :environment do |t, args|
@@ -34,16 +34,17 @@ namespace :tmdb do
   end
 
   def fetch_changed_movies(start_date, page_no)
-    tmdb_changes = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
-    results_page = ResultsPage.from_tmdb tmdb_changes['results'], tmdb_changes
+    results_page = tmdb_results(start_date, page_no) 
     fetch_films(results_page, true)
-
     while results_page.more_pages? do
-      tmdb_changes = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no+=1}
-      results_page = ResultsPage.from_tmdb tmdb_changes['results'], tmdb_changes
+      results_page = tmdb_results(start_date, page_no+=1) 
       fetch_films results_page, true
     end
+  end
 
+  def tmdb_results(start_date, page_no)
+    results = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
+    ResultsPage.new results['results'], results['total_results'], 100, page_no
   end
 
   def fetch_films(results_page, force=false)

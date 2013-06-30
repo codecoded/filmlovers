@@ -16,33 +16,33 @@
         </tr>
       </thead>
       <tbody>
-        <% current_user.friendships.confirmed.map(&:friend).each do |friend| %>
+        <% current_user.friendships.each do |friendship| %>
           <tr>
             <td>
-              <%= link_to user_path(friend) do %>
-                <%= avatar friend, 'small' %>
+              <%= link_to user_path(friendship.friend) do %>
+                <%= avatar friendship.friend, 'small' %>
                <% end %>
             </td>
             <td>
-              <%= link_to friend.username, user_path(friend) %>
+              <%= link_to friendship.friend.username, user_path(friendship.friend) %>
             </td>
             <% [:watched, :loved, :owned].each do |action| %>
               <td>
-                <%= link_to user_film_path(friend, action) do %>
-                  <label style="display:inline"><%= friend.actions_for(action).count %> </label>
+                <%= link_to user_film_path(friendship.friend, action) do %>
+                  <label style="display:inline"><%= friendship.friend.actions_for(action).count %> </label>
                  <% end %>              
               </td>   
             <% end %> 
             <td>
-              <%= link_to user_lists_path(friend) do %>
-                <label> <%=friend.films_lists.viewable.count %> </label>
+              <%= link_to user_lists_path(friendship.friend) do %>
+                <label> <%=friendship.friend.films_lists.viewable.count %> </label>
               <% end %>
             </td>    
             <td>
-             <%= number_to_percentage(current_user.compare_to(friend).overall, precision: 1) %>
+             <%= number_to_percentage(current_user.compare_to(friendship.friend).overall, precision: 1) %>
             </td>
             <td>
-              <%= render partial: 'friendships/friend_link', locals: {friend: friend} %>            
+              <%= render partial: "friendships/#{friendship.state}", locals: {friend: friendship.friend} %>            
             </td>
           </tr>
         <% end %>

@@ -2,10 +2,9 @@ class Friendship
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  after_create :confirm_friendship
+  embedded_in :user
 
-  belongs_to :user
-  belongs_to :friend, :class_name => "User"
+  field :friend_id, type: String
 
   validates :user,    uniqueness: {message: "you are already friends", scope: :friend}, presence: true
   validates_presence_of :friend
@@ -14,36 +13,29 @@ class Friendship
 
 
   scope :confirmed, -> {where state: :confirmed}
+  scope :received, -> {where state: :received}
 
   state_machine :initial => :pending do
 
+    event :request do
+      transition [:pending] => :requested
+    end
+
+    event :receive do
+      transition :pending => :received
+    end
+
+    event :ignore do
+      transition :received => :ignored
+    end
+
     event :confirm do
-      transition [:pending, :broken] => :confirmed
-    end
-
-    event :block do
-      transition :confirmed => :blocked
-    end
-
-    event :unblock do
-      transition :blocked => :confirmed
-    end
-
-    event :break do
-      transition :confirmed => :broken
+      transition any - :confirmed => :confirmed
     end    
   end
 
-
-  def self.find_by_friend(user)
-    where(friend: user).first
+  def friend
+    @friend ||= User.find friend_id
   end
 
-  def self.befriended_by(user)
-    where(user: user).first
-  end
-
-  def confirm_friendship
-    # confirm!
-  end
 end

@@ -27,13 +27,11 @@
       <%= awesome 'list' %> lists
     <% end %>
   </li>
-  <li>
-    <%= link_to friendships_path do %>
-      <%= awesome 'globe' %> friendships
-    <% end %>
+ <li>
+      <%= friendships_tab  %>
   </li>
   <li>
-      <%= recommendations_tab current_user %>
+      <%= recommendations_tab %>
   </li>
 
   <% if current_user.passport_provider? :facebook %>

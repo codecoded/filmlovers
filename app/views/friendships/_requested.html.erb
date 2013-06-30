@@ -1,0 +1,5 @@
+<div class="friendship">
+  <%= link_to friendship_path(friend), method: :delete, remote: true, data: {action: :cancel}, :class=>'tiny button radius alert' do %>
+    <span>cancel request</span>
+  <% end %>
+</div>

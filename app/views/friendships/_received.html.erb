@@ -1,0 +1,18 @@
+<div href="#" class="tiny button split dropdown friendship">
+  <%= link_to change_friendship_path(friend, :confirm), method: :put, remote: true, data: {action: :confirm, state: :received} do %>
+    Confirm
+  <% end %>
+  <span></span>
+  <ul>
+    <li>
+      <%= link_to change_friendship_path(friend, :ignore), method: :put, remote: true, data: {action: :ignore, state: :received} do %>
+        Ignore Request
+      <% end %>
+    </li>
+    <li>
+    <%= link_to friendship_path(friend), method: :delete, remote: true, data: {action: :delete, state: :received} do %>
+        Delete Request
+      <% end %>
+    </li>
+  </ul>
+</div>

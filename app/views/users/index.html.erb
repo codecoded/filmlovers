@@ -37,16 +37,12 @@
                 <label> <%=friend.films_lists.viewable.count %> </label>
               <% end %>
             </td>    
-            <td>
-             <% if current_user.friends_with? friend  %>
-                <%= link_to friendship_path(friend), method: :delete, remote: true, data: {action: :friendship}, :class=>'tiny button radius alert' do %>
-                  <%= awesome 'remove', 'icon-large' %> <span>remove friendship</span>
-                <% end %>
-               <% else %>
-                <%= link_to friendship_path(friend), method: :put, remote: true, data: {action: :friendship}, :class=>'tiny button radius success' do %>
-                  <%= awesome 'link', 'icon-large' %> <span>create friendship</span>
-                <% end %>
-            <% end %>              
+            <td class="friendship">
+              <% if friendship = current_user.friendship_with(friend)  %>
+                <%= render partial: "friendships/#{friendship.state}", locals: {friend: friend} %>            
+              <% else %>
+                <%= render partial: "friendships/pending", locals: {friend: friend} %>  
+              <% end %>              
             </td>
           </tr>
         <% end %>

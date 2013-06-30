@@ -1,4 +1,3 @@
-FL = {}
 FL.Films = {}
 
 FL.Films = {

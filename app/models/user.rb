@@ -63,13 +63,12 @@ class User
   field :dob, type: DateTime
 
   has_many :film_user_actions, validate: false, dependent: :destroy
-  has_many :friendships, validate: false
   has_many :recommendations
   has_many :facebook_events
 
   embeds_many :films_lists
   embeds_many :passports
-
+  embeds_many :friendships
 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)
@@ -133,12 +132,8 @@ class User
     film_user_actions.where(film: film, action: action).exists?
   end
 
-  def friends_with?(user)
-    friends.where(friend: user).exists?
-  end
-
-  def friends
-    friendships.where(state: :confirmed)
+  def friendship_with(user)
+    friendships.find_by(friend_id: user.id)
   end
 
   def channels

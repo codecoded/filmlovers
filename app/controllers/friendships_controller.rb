@@ -15,15 +15,18 @@ class FriendshipsController < ApplicationController
   end
 
   def update
-    friendships.where(friend: friend).find_or_create_by.confirm!
-    friend.friendships.where(friend: current_user).find_or_create_by.confirm! if !friend.friends_with?(current_user)  
-    render layout:nil
+    friendships.create(friend_id: friend.id).request! 
+    render partial: "friendships/#{friendship.state}"
+  end
+
+  def change
+    friendship.send params[:change_action]
+    render partial: "friendships/#{friendship.state}"
   end
 
   def destroy
-    friendship.break!
-    friendships.befriended_by(friend).break!
-    render layout:nil
+    friendship.delete
+    render partial: "friendships/pending"
   end
 
   def block
@@ -45,7 +48,7 @@ class FriendshipsController < ApplicationController
   end
 
   def friendship
-    @friendship ||= friendships.find_by_friend(friend)
+    @friendship ||= current_user.friendship_with(friend)
   end
 
   def friend

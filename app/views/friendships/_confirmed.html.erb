@@ -1,0 +1,14 @@
+<div href="#" class="tiny success button dropdown friendship">
+  Friends
+  <ul>
+    <li>
+      <%= link_to friendship_path(friend), method: :delete, remote: true, data: {action: :delete} do %>
+        Unfriend
+      <% end %>
+    </li>
+  </ul>
+</div>
+<!--
+  Notice that in a split button, the <span> is the dropdown
+  affordance and the main anchor is the primary button action.
+-->

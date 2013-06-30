@@ -1,0 +1,9 @@
+<% if current_user.friends_with? friend  %>
+  <%= link_to friendship_path(friend), method: :delete, remote: true, data: {action: :friendship}, :class=>'tiny button radius' do %>
+    <span>remove friendship</span>
+  <% end %>
+ <% else %>
+  <%= link_to friendship_path(friend), method: :put, remote: true, data: {action: :friendship}, :class=>'tiny button radius secondary' do %>
+   <span>create friendship</span>
+  <% end %>
+<% end %>              

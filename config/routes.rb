@@ -63,8 +63,7 @@ Filmlovers::Application.routes.draw do
 
   resources 'friendships', :constraints => { :id => /.*/ } do
     member do
-      put 'block'
-      put 'unblock'
+      put ':change_action', to: 'friendships#change', as: 'change', constraints: {type: /confirm|ignore/}
     end
   end
 

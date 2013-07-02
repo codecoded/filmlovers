@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
 
 
   def facebook_authenticate
-    Log.debug 'authenticating'
     user = FacebookAuth.authenticate(params[:signed_request])
     !user.new_record? ? env['warden'].set_user(user) : redirect_to_auth
   end

@@ -54,7 +54,7 @@ class UsersController < ApplicationController
   end
 
   def users
-    User.order_by(:created_at.desc).page(page_no).per 10
+    User.order_by(:username.asc).page(page_no).per 10
   end
 
 

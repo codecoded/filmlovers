@@ -1,7 +1,18 @@
 
 <%= render layout: 'layouts/user_simple' do%>
-
+  <div class="row">
+    <div class="four columns">
+      <dl class="sub-nav">
+        <dt>Filter:</dt>
+        <%= nav_link 'Confirmed', friendships_path(filter: :confirmed) %>
+        <%= nav_link 'Received', friendships_path(filter: :received) %>
+        <%= nav_link 'Requested', friendships_path(filter: :requested) %>
+        <%= nav_link 'Ignored', friendships_path(filter: :ignored) %>
+      </dl>
+    </div>
+  </div>
   <div class="twelve columns">
+
     <table class="friends">
       <thead>
         <tr>
@@ -16,7 +27,7 @@
         </tr>
       </thead>
       <tbody>
-        <% current_user.friendships.each do |friendship| %>
+        <% @friendships.each do |friendship| %>
           <tr>
             <td>
               <%= link_to user_path(friendship.friend) do %>

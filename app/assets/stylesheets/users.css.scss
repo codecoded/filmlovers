@@ -35,34 +35,36 @@
         padding: 6px;
         margin-bottom: 5px;
       }
+
+      dd{
+        display: block;
+        margin-bottom: 0px;
+        text-align: center;
+        width: 70px;
+        padding: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+        a{
+          color: black;
+          label{
+            margin-top: 10px;
+          }
+        }
+        a:hover, .actioned
+        {
+          color: #4387BD;
+          label, .actioned{
+            color: #4387BD
+          }
+        }
+      }
+      dt{
+          margin-bottom: 0px;
+      }
     }
   }
 
-  dd{
-    display: block;
-    margin-bottom: 0px;
-    text-align: center;
-    width: 70px;
-    padding: 0px;
-    margin-right: 0px;
-    margin-left: 0px;
-    a{
-      color: black;
-      label{
-        margin-top: 10px;
-      }
-    }
-    a:hover, .actioned
-    {
-      color: #4387BD;
-      label, .actioned{
-        color: #4387BD
-      }
-    }
-  }
-  dt{
-      margin-bottom: 0px;
-  }
+
   p{
     text-align: justify;
   }

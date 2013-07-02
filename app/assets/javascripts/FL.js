@@ -20,6 +20,10 @@ FL = {
     self.set = function(val){
       return counter.text(val);
     }
+
+    self.animate = function(){
+
+    }
     return self;
   }
-}
+};

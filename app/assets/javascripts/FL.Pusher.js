@@ -39,7 +39,7 @@ FL.Pusher = {
       case 'modal':
         return modalController.queue_modal(push_envelope.message, true)          
       case 'toast':
-        return alertsController.display_alert(push_envelope.message)     
+        return $().toastmessage('showSuccessToast', push_envelope.message);
       default:
         console.log(push_envelope.message)
     }

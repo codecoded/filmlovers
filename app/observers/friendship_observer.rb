@@ -13,7 +13,7 @@ class FriendshipObserver < Mongoid::Observer
     Log.debug "#{friendship.user.username} friend request confirmed with #{friendship.friend.username}"
     requesting_friendship = friendship.friend.friendship_with(friendship.user)
     return if !requesting_friendship.confirm #f !friends_friendship.confirmed?
-    requesting_friendship.user.notify "#{friendship.user.username} has accepted your friend request"
+    requesting_friendship.user.notifier.toast "#{friendship.user.username} has accepted your friend request"
   end
 
 

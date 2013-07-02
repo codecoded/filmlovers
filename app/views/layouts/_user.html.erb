@@ -7,7 +7,7 @@
     <div class="six columns user-name">
        <h3><%= user.username %></h3>
        <% if logged_in? %>
-         <% if current_user.friends_with? user  %>
+         <% if current_user.friendship_with user  %>
           <%= link_to friendship_path(user), method: :delete, remote: true, data: {action: :friendship}, :class=>'tiny button radius alert' do %>
             <%= awesome 'remove', 'icon-large' %> <span>remove friendship</span>
           <% end %>

@@ -19,6 +19,10 @@ class UserNotifier
   def message(message)
     Pusher[channel].trigger(EVENT, {message: message, type: :script})
   end
+
+  def toast(message)
+    Pusher[channel].trigger(EVENT, {message: message, type: :toast})
+  end
   # FIXME: Unicorn does not use EventMachine which trigger_async uses
 
   def push_many(channels, notification_view)

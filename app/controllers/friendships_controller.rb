@@ -3,6 +3,7 @@ class FriendshipsController < ApplicationController
   respond_to :json, :html
 
   def index
+    @friendships = friendships.where(state: filter)
   end
 
   def show
@@ -26,6 +27,7 @@ class FriendshipsController < ApplicationController
 
   def destroy
     friendship.delete
+    friend.friendship_with(current_user).delete
     render partial: "friendships/pending"
   end
 
@@ -44,7 +46,7 @@ class FriendshipsController < ApplicationController
   protected
 
   def friendships
-    @friendships ||= current_user.friendships
+    current_user.friendships
   end
 
   def friendship
@@ -53,6 +55,10 @@ class FriendshipsController < ApplicationController
 
   def friend
     @friend ||= User.find_by username: params[:id]
+  end
+
+  def filter
+    params[:filter] || :confirmed
   end
 
   helper_method :friendships, :friendship, :friend

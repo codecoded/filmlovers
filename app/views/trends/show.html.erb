@@ -1,34 +1,16 @@
 <% description "Discover films that are #{trend}" %>
 <% title "#{trend} films" %>
 
-<div class="row" id="filmsIndex">
-
-  <div class="two mobile-four columns pagination-centered">
-
-    <div class="film-actions-vertical">
-      <div class="tiled"><i class="icon-eye-open icon-3x" ></i></div>
-      <div class="tiled"><i class="icon-heart icon-3x"  ></i></div>
-      <div class="tiled"><i class="icon-home icon-3x"  ></i></div>
-    </div>
-
-    <div class="hide-for-small panel">
-      <label>
+<div class="row green-row panels text-center">
+  <div class="large-12 small-12 columns">
+      <h2>
         films by trend
-      </label>
+      </h2>
       <h5 class="subheader" >
         <%= trend %>
       </h5>
-    </div>
-
-    <div class="panel callout radius" align="center">
-      <h6>
-        <span ><%= @films_page.results_page.total_results %> films</span>
-      </h6>
-    </div>
-
-    <%= render partial: 'shared/netflix_234x60' %>
-    <%= render partial: 'shared/blinkbox_120x600' %>
   </div>
-
-   <%= render partial: 'films/films' %>
+</div>
+<div class="row" id="filmsIndex">
+  <%= render partial: 'films/films' %>
 </div>

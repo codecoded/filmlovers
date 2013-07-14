@@ -55,9 +55,14 @@ module FilmHelper
     url = update_user_film_path(current_user, action, film.id)
     actioned = actioned?(film, action)
     method =  actioned ? :delete : :put
-    button_tag type: :button, name: action, :class=> 'film-action', data: {href: url, method: method, remote: true } do 
+
+    content_tag :div, name: action, :class=> 'film-action', data: {href: url, method: method, remote: true } do 
       icon_for(action, actioned)
-    end    
+    end  
+
+    # button_tag type: :button, name: action, :class=> 'film-action', data: {href: url, method: method, remote: true } do 
+    #   icon_for(action, actioned)
+    # end    
   end
 
   def action_icon(action, film)
@@ -87,7 +92,7 @@ module FilmHelper
   def poster(film, size='w154')
     size = size ? size : 'w154'
     src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
-    image_tag src, :title=>film.title, alt: "poster for #{film.title}", :class=>'small'
+    image_tag src, :title=>film.title, alt: "poster for #{film.title}", size: '185x278'
   end
 
   def poster_link(film, size='w154')

@@ -1,0 +1,7 @@
+<div class="row margin-bottom">
+  <ol>
+  <% cinemas.sort_by(&:name).each do |cinema| %>
+    <li><%= link_to cinema.name, cinema_path(cinema) %></li>
+  <% end %>
+  </ol>
+</div>

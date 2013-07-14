@@ -7,7 +7,7 @@ class AppController < ApplicationController
   end
 
   def index
-    render_template
+    @user = User.new
   end
 
   def preview
@@ -16,4 +16,5 @@ class AppController < ApplicationController
   def login
     render partial: 'login' 
   end
+
 end

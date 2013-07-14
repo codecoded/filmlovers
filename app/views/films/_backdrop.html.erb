@@ -1,10 +1,12 @@
 <!-- backdrops -->
 <% if film.has_backdrop? %>
-  <div id='featured'>
-    <% film.backdrops.each do | backdrop | %>
-      <%= backdrop film, backdrop, size  %>
-    <% end %>
+  <div class="slideshow-wrapper">
+    <div class="preloader"></div>
+    <ul  data-orbit>
+      <% film.backdrops.each do | backdrop | %>
+        <li><%= backdrop film, backdrop, size  %></li>
+      <% end %>
+    </ul>
   </div>
 <% end %>
 
-<script> $("#featured").orbit({directionalNav:true, fluid:false, timer:false})</script>

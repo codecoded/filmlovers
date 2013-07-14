@@ -12,14 +12,17 @@ class FilmUserAction
 
   index({ user: 1, action: 1 }, { unique: false, name: "film_user_action_index", background: true })
 
-  # after_create :update_film_count, :update_user_count
+  set_callback :create,   :after, :update_film_count 
+  set_callback :destroy,  :after, :update_film_count 
 
   def self.do(film, user, action)
     find_or_create_by(film: film, user: user, action: action)
+    # film.counters.inc action, 1 
   end
 
   def self.undo(film, user, action)
     where(film: film, user: user, action: action).destroy
+    # film.counters.inc action, -1 
   end
 
   def to_param
@@ -32,5 +35,9 @@ class FilmUserAction
 
   def to_s
     "film_user_action_id=#{id} #{user} #{film} action=#{action} facebook_id=#{facebook_id}"
+  end
+
+  def update_film_count
+    film.counters.set action, film.actions_for(action).count
   end
 end

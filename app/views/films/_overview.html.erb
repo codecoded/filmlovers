@@ -1,11 +1,11 @@
-<div class="twelve columns" id="film-content-overview">
+<div class="large-12 columns" id="film-content-overview">
 
   <h3><%= tagline(film) %></h3>
   <%= render partial:'film_poster' %>
-  <div class="nine columns">
+  <div class="large-9 columns">
 
 
-  <div class="twelve columns right">
+  <div class="large-7 columns">
     <%= render partial: 'backdrop', locals: {film: film, size: 'w780'} %>
   </div>
 
@@ -34,6 +34,14 @@
         <span><%= runtime film %></span>
       </div>
     <% end %>
+     <% if film.release_date %>
+      <div class="release_date">
+        <label>release date</label>
+        <span>
+          <%= film.release_date.strftime('%d/%m/%Y') %>
+        </span>
+      </div>
+    <% end %>
      <% if film.studios?%>
       <div class="studios">
         <label>studios</label>
@@ -46,6 +54,12 @@
       <div class="website">
         <label>website</label>
         <span><%= link_to film.homepage, film.homepage, target: '_blank' %></span>
+      </div>
+    <% end %>
+    <% if film.imdb_id %>
+      <div class="imdb">
+        <label>IMDB</label>
+        <span><%= content_tag :a, "http://www.imdb.com/title/#{film.imdb_id}", href: "http://www.imdb.com/title/#{film.imdb_id}", target: '_blank' %></span>
       </div>
     <% end %>
   </div>

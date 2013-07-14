@@ -9,6 +9,24 @@ class ApplicationController < ActionController::Base
   #   redirect_to_auth
   # end
 
+  protected
+
+  def page_results(query, default_order, by=by)
+    query.order_by([order || default_order, by]).page(page_no).per AppConfig.page_size
+  end
+
+  def page_no
+    params[:page] ? params[:page].to_i : 1
+  end
+
+  def by
+    params[:by] || :desc
+  end
+
+  def order
+    params[:order]
+  end
+
   private
 
 

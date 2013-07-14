@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
-
-gem 'rails'#, '3.2.8'
+gem 'rails'
 gem 'thin'
 gem 'nokogiri'
 gem 'google_movies'
@@ -10,7 +8,7 @@ gem 'google_movies'
 # gem 'unicorn'
 
 # gem 'mongo'
-gem 'omniauth-facebook', '1.4.0'
+gem 'omniauth-facebook'#, '1.4.0'
 gem 'omniauth-netflix'
 gem "omniauth-google-oauth2"
 gem 'omniauth-vimeo'
@@ -23,20 +21,18 @@ gem 'rack-iframe'
 gem 'log4r'
 gem 'fb-channel-file'
 #gem 'state_machine' # allow states on models
-gem 'swf_fu', '~> 2.0' # loading flash files
 gem 'pusher'
 gem 'knockoutjs-rails' 
-gem 'jquery-rails', '2.1.4'
+gem 'jquery-rails'#, '2.1.4'
 # gem 'jquery-ui-rails'
 gem 'compass-rails'
 
 gem 'bson_ext'
 gem 'mongo'
 gem 'rest-client'
-gem "mongoid", "~> 3.0.0"
+gem "mongoid"
 gem 'newrelic_rpm', '3.5.6.55'
 
-# gem 'will_paginate', '~> 3.0.0'
 gem 'rabl'
 gem "eventmachine", "~> 1.0.3"
 gem 'meta-tags', :require => 'meta_tags'
@@ -44,25 +40,29 @@ gem 'gravtastic'
 gem 'sitemap_generator'
 gem 'devise'
 
-gem 'client_side_validations', github: 'bcardarella/client_side_validations', branch: '3-2-stable'
-gem 'client_side_validations-mongoid'
+# gem 'client_side_validations'#, github: 'bcardarella/client_side_validations', branch: '3-2-stable'
+# gem 'client_side_validations-mongoid'
 gem 'figaro'
 gem 'state_machine'
 gem 'execjs'
-
-gem 'libv8'
+gem 'simple_form'
+# gem 'libv8'
 
 gem 'therubyracer'
   
-gem 'kaminari'
+gem 'kaminari' #for pagination
+
+gem 'geocoder' # for postcode lookup
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'zurb-foundation', '< 4.0.0'
+  gem 'compass-rails'
+  # gem 'zurb-foundation', '~> 4.0.0'
   gem "font-awesome-rails"
+
   # gem 'turbolinks'
   
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes

@@ -1,22 +1,22 @@
 <% set_meta_tags :title => "#{title_with_year(film)} - cast" %>
 <% set_meta_tags :description => starring(film) %>
 
-<div class="twelve columns" id="film-content-cast">
+<div class="large-12 columns" id="film-content-cast">
   <%#= render partial: 'shared/netflix_234x60' %>
   <%= render partial:'film_poster'%>
-  <div class="eight columns">
+  <div class="large-9 columns">
     <h4>Cast</h4>
     <% film.credits.cast.each do |person| %>
       <div class="person left user-avatar">
         <%= link_to person_path(person.id) do %>
         <label> <%= person.character %> </label>        
-            <%= image_tag person.profile('w45') if person.has_profile?%>        
+          <%= image_tag person.profile('w45') if person.has_profile?%>        
         <label> <%= person.name %> </label>
         <% end %>
       </div>
     <% end %>
   </div>
-  <div class="nine columns">
+  <div class="large-9 columns">
     <h4>Crew</h4>
     <% film.credits.crew.each do |person| %>
       <div class="person left user-avatar">

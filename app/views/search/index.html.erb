@@ -1,0 +1,13 @@
+<div class="row margin-bottom" id="">
+<%if searcher.postcode? %>
+  <%= render partial: 'cinemas', object: searcher.cinemas %>
+<% else %>
+  <%= render partial: 'films', object: searcher.films %>
+<% end %>
+</div>
+
+<script>
+  $(function(){
+    window.setTimeout(function(){$('a[data-rel="search"]').click()}, 150)
+  })
+</script>

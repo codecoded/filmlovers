@@ -4,7 +4,7 @@ FL.Lists = {
   init: function(model){
     if(FL.Lists.initialised) return
 
-    FL.Lists.initSort($('.sortable'))
+    // FL.Lists.initSort($('.sortable'))
     FL.Lists.initListeners()
     FL.Lists.initialised = true
   },

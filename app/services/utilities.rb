@@ -25,4 +25,10 @@ module Utilities
     Filmlovers::Application.routes.url_helpers
   end
 
+  def file_to_json(file)
+    f = File.open(file)
+    doc = Nokogiri::XML(f)
+    f.close
+    Hash.from_xml doc.to_xml    
+  end
 end

@@ -34,5 +34,17 @@ class Person
     AppConfig.image_uri_for [size, profile_path] if has_profile?
   end
 
+  def age
+    return unless birthday
+    (Time.now.to_s(:number).to_i - birthday.to_time.to_s(:number).to_i)/10e9.to_i
+  end
+
+  def self.search(query, field=:name, order=:name, by=:asc)
+    order_by([order, by]).where(field => /#{query}/i)
+  end
+
+  def self.multiple_search(query)
+    search(query).map {|p| p.credits['cast'].map {|f| f['id']}.uniq}
+  end
 
 end

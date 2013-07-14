@@ -1,0 +1,18 @@
+<div class="full-row green-row panels" id="panelssearch">
+  <div class="row">
+    <div class="large-8 large-offset-2 small-12 columns">
+      <div class="large-12 small-12 columns">
+        <h2>Search filmlovers...</h2>
+      </div>
+      <%= form_tag(search_index_path, method: :get, id: 'search') do%>
+        <div class="large-9 small-12 columns">
+          <label for="searchinput"></label>
+          <%= text_field_tag 'query', params[:query], tabindex: 9, placeholder:"Enter your search", id: 'quick_search_header'  %>
+        </div>
+        <div class="large-3 small-12 columns">
+          <input type="submit" name="searchbutton" id="searchbutton" value="Search" tabindex="10">
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

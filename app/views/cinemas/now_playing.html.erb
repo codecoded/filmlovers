@@ -1,0 +1,19 @@
+<% description "Discover films that are now playing at UK Cinemas including cinema times and addresses" %>
+<% title "films now playing at UK cinemas" %>
+
+<div class="row margin-bottom">
+  <h2><%= "#{@films.count} films now playing in cinemas" %></h2>
+
+  <div id="search-results-container">
+    <div id="search-results">
+      <div class="large-12 columns text-center">
+        <%#= paginate @films, remote: true %>
+      </div>    
+      <div class="large-10 columns films" >
+        <% @films.each do |film| %>
+          <%= render partial: 'films/film', object: film %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

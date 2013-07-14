@@ -1,6 +1,7 @@
 
 $(function(){
-
+  $(document).foundation();
+  
   if(FL)
   {
     if(FL.Films)
@@ -13,5 +14,8 @@ $(function(){
       FL.Friendships.init()
     if(FL.Recommendations)
       FL.Recommendations.init()
+    if(FL.Search)
+      FL.Search.init()    
   }
 })
+

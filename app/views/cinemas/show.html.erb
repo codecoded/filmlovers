@@ -1,0 +1,31 @@
+
+<%= div_for cinema, class: 'row margin-bottom' do %>
+  <%= link_to '<< back', cinemas_path %>
+  <h2><%= cinema.name %> </h2>
+  <p>
+    <%= address %></br>
+    <%= content_tag :a, cinema.URL, href: "http://" + cinema.URL, target: :blank %>
+  </p>
+
+  <div>
+    <h3>Schedule</h3>
+    <% daily_schedules.current.each do |schedule | %>
+      <h4> <%= schedule.day.strftime('%A, %b %d') %> </h4>
+      <% schedule.show_times.each do |show| %>
+        <div> 
+          <strong><%= title_with_rating show  %> </strong>
+          <%= link_to('more info', film_path(show.film)) if show.film_id %>
+          <% if !show.times %>
+            <p> No times available </p>
+          <% else %>
+            <ol>
+            <% show.times.each do |time| %>
+            <li> <%= time %> </li>
+            <% end %>
+            </ol>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

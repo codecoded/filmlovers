@@ -19,4 +19,10 @@ module SearchHelper
     content.html_safe
   end
 
+  def self.multi_search(query)
+    {
+      films: Film.search(query),
+      persons: Person.search(query)
+    }
+  end
 end

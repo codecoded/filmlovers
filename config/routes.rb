@@ -7,11 +7,12 @@ Filmlovers::Application.routes.draw do
   match 'auth/:provider/callback',  to: 'sessions#create'
   match 'auth/failure',             to: redirect('/')
   match 'signout',                  to: 'sessions#destroy', as: 'signout'
-  match 'login',                    to: 'app#login', as: 'login'
+  match 'login',                    to: 'sessions#login', as: 'login'
   match 'pusher/auth' => 'pusher#auth', as: 'pusher_auth'
   get 'current_user' => 'sessions#currentuser'
 
   get 'users', to: 'users#index', as: 'users'
+  # resources :users
 
   match 'templates/:action' => "templates#:action", as: 'templates'
 
@@ -21,6 +22,8 @@ Filmlovers::Application.routes.draw do
       resources 'trends',   only: [:show, :index], :constraints => {:id => /now_playing|latest|upcoming|popular/}
       # 
       post ':id' => redirect("/films/%{id}")
+      get 'coming_soon'
+      get 'in_cinemas'
       get 'search'  
       get 'inline_search'   
       get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'
@@ -32,9 +35,17 @@ Filmlovers::Application.routes.draw do
       get 'list_view',      to: "films#list_view",  as: 'list_view'
       get 'trailer_popup',  to: "films#trailer_popup" , as: 'trailer_popup'
     end
-
-
   end
+
+  resources 'cinemas' do
+    collection do
+      get 'now_playing'
+      resources 'times'
+      resources 'films'
+    end
+  end
+
+  resources 'search', only: [:show, :index]
 
   resources 'persons', only: [:show, :index] do
     collection do 

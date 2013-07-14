@@ -7,7 +7,7 @@ var ViewModel = {
   init: function(){
     // ViewModel.loadUser(ViewModel.loadQueue)
     // Bindings.init()
-    FacebookAPI.init()
+    // FacebookAPI.init()
   },
 
   // loadUser: function(callback){

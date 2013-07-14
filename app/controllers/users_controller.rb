@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
-  before_filter :validate_username
+  before_filter :validate_username,:except => :create
 
   #layout 'layouts/user'
   def index
     
   end
+
+
 
   def validate_current_user
     @is_current_user = user.id == current_user.id
@@ -45,13 +47,6 @@ class UsersController < ApplicationController
     params[:order] || default
   end
 
-  def page_no
-    params[:page].to_i
-  end
-
-  def by
-    params[:by] || :desc
-  end
 
   def users
     User.order_by(:username.asc).page(page_no).per 10

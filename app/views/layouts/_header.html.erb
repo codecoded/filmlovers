@@ -1,65 +1,38 @@
-<% return if logged_in? and !current_user.username? %>
-
-<div class="twelve columns fixed ">
-  <nav class="top-bar">
-    <ul>
-      <!-- Title Area -->
-      <li class="name">
-        <div class="pagination-centered">
-          <h3>
-            <%= link_to 'filmlovers', root_path  %>
-          </h3>
-          <h4>watch, share, discover</h4>
-        </div>
-      </li>
-      <li class="toggle-topbar">
-        <a href="#"></a>
-      </li>
-    </ul>
-    <section>
-      <!-- Left Nav Section -->
-      <% if logged_in? %>
-        <%= render partial:'layouts/logged_in_header' %>
-      <% else %>
-      <ul class="left">
-        <li class="has-dropdown">
-         <a>  <%= awesome "film" %> films</a>
-          <ul class="dropdown">
-            <li><label>Current</label></li>
-            <li><%= link_to 'Upcoming', trend_path(:upcoming), alt: 'upcoming films' %></li>
-            <li><%= link_to 'In Cinemas', trend_path(:now_playing), alt: 'films now playing in cinemas' %></li>           
-            <li><%= link_to 'Popular', trend_path(:popular), alt: 'popular films' %></li>
-            <li><label>Top Genres</label></li>
-            <li><%= link_to 'Action', genre_path(:action), alt: 'action films' %></li>
-            <li><%= link_to 'Adventure', genre_path(:adventure), alt: 'adventure films' %></li>
-            <li><%= link_to 'Comedy', genre_path(:comedy), alt: 'comedy films' %></li>
-            <li><%= link_to 'Sci-Fi', genre_path(:science_fiction), alt: 'science fiction films' %></li>
-            <li><%= link_to 'Drama', genre_path(:drama), alt: 'drama films' %></li>
-          </ul>
-        </li>
+<div class="full-row masthead">
+  <div id="alerts" class="row"></div>
+  <div class="row">
+  <% if logged_in? %>
+    <div class="large-4 small-12 columns">
+      <ul class="top-nav">
+        <li class="sign-in">  <%= link_to 'Sign Out', destroy_user_session_path, id: "sign_out", method: :delete  %></li>
+        <!-- <li class="film_lists">  <%#= link_to 'Film lists', user_lists_path(current_user), id: "film_lists_link"  %></li>   -->
+        <!-- <li class="recommendations">  <%= link_to 'Recommendations', recommendations_path, id: "recommendations_link"  %></li>  -->
+        <!-- <li class="friends">  <%#= link_to 'Friends', friendships_path, id: "friends_link"  %></li> -->
       </ul>
-      <ul class="right">
-        <li class="name">
-          <%= form_tag(search_films_path, method: :get) do%>
-          <input type="text" id="quick_search_header" name="query">
-          <% end %>
-        </li>
-        <li class="has-dropdown">
-          <a href="/users/sign_in" alt="sign in to filmlovers"><i class="icon-signin"></i>Sign In</a>
-          <ul class="dropdown">
-            <li><label>Passports</label></li>
-            <%= passport_link :facebook, "Facebook" %>
-            <%= passport_link :twitter, "Twitter" %>
-            <%= passport_link :netflix, "Netflix" %>      
-            <%= passport_link :google_oauth2, "Google" %>
-          </ul>
-        </li>
-        <li>
-          <%= link_to "Sign Up", login_path,  data: {modal: 'signup'}, alt: 'sign up to filmlovers for free' %>
-        </li>
+    </div>
+  <% else %>
+    <div class="large-4 small-12 columns">
+      <ul class="top-nav">
+        <li class="sign-up"><a href="#" class="showPanel" data-rel="signup">Join</a></li>
+        <li class="sign-in"><a href="#" class="showPanel" data-rel="signin">Sign in</a></li>
+      </ul> 
+    </div>
+  <% end %>
+    <div class="large-4 small-12 columns text-center logo">
+      <a href="/"><img src="/assets/site-basics/filmlovers-logo.svg" width="138" height="166" alt="filmlovers" /></a>
+    </div>
+    <div class="large-4 small-12 columns">
+     <ul class="top-nav">
+        <li class="films"><a href="#" class="showPanel" data-rel="films">Films</a></li>
+        <li class="search"><a href="#" class="showPanel" data-rel="search">Search</a></li>
       </ul>
-      <% end %>
-    </section>
-  </nav>
+    </div>    
+  </div>
 </div>
-<div id="alerts"></div>
+
+<% if !logged_in? %>
+  <%= render template: 'devise/registrations/new' %>
+  <%= render template: 'devise/sessions/new' %>
+<% end %>
+<%= render partial: 'app/search_panel' %>
+<%= render partial: 'app/films_nav' %>

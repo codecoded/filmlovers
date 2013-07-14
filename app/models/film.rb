@@ -3,33 +3,39 @@ class Film
   include Mongoid::Timestamps
 
   has_many :film_user_actions, validate: false, dependent: :destroy
+  embeds_one :counters, class_name: "FilmCounters", autobuild: true
+
   # has_many :film_list_items, validate: false, dependent: :destroy
 
   field :_id, type: Integer, default: ->{ id.to_id if id}
   field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}"}
   field :fetched, type: DateTime, default: nil
   field :rating, type: Integer, default: 0
-  
+  field :tms_id, type: String
+  field :rotten_id, type: String
+  field :uk_rating, type: String
+
   FilmLists = [:watched, :loved, :unloved, :queued]
 
   has_many :recommendations, as: :recommendable
+
+  index({ title: 1, release_date: 1, adult: 1}, { name: "film_title_index", background: false })
 
   def self.fetch(id)
     FilmRepository.find id
   end
 
   def self.find_or_create(film)
-    Film.find(film['id']) || Film.with(safe:false).create(film)
+    find(film['id']) || with(safe:false).create(film)
   end
 
   def self.force_fetch(id)
     FilmRepository.new(id).send :fetch
   end
-  
+
   def users
     @lists ||= FilmLoverLists.new("film:#{id}:users")
   end
-
 
   def credits
     @credits ||= Credits.new casts if casts
@@ -69,6 +75,10 @@ class Film
 
   def studios?
     production_companies and production_companies.length > 0
+  end
+
+  def release_date
+    self['release_date'].to_date if self['release_date']
   end
 
   def duration
@@ -134,6 +144,10 @@ class Film
 
   def actions_for(action)
     film_user_actions.where(action: action)
+  end
+
+  def self.search(query, field=:title, order=:title, by=:asc)
+    order_by([order, by]).any_of({title: /#{query}/i}, {original_title: /#{query}/i}).where(adult: false)
   end
 
 end

@@ -1,7 +1,7 @@
 <% set_meta_tags :title => "#{title_with_year(film)} - images" %>
 
-<div class="row images">
-  <div class="twelve columns">
+<div class="row" id="film-images">
+  <div class="large-12 columns">
       <%= render partial: 'backdrop', locals: {film: film, size: 'w1280'} %>
   </div>
 </div>

@@ -27,17 +27,17 @@ class FilmPresenter < BasePresenter
     "(#{film.year})"
   end
 
-  def actions_count
-    @action ||= film.film_user_actions.group_by(&:action).map {|grouping, value| {action: grouping, count: value.length}}
-  end
+  # def actions_count
+  #   @action ||= film.film_user_actions.group_by(&:action).map {|grouping, value| {action: grouping, count: value.length}}
+  # end
 
-  def actions_count_for(action)
-    actions_count.find {|ac| ac[:action]==action} || {}
-  end
+  # def actions_count_for(action)
+  #   actions_count.find {|ac| ac[:action]==action} || {}
+  # end
 
-  def count_for(action)
-    actions_count_for(action)[:count].to_i
-  end
+  # def count_for(action)
+  #   actions_count_for(action)[:count].to_i
+  # end
 
   def user_actions
     @user_actions ||= current_user.film_user_actions.where(film: film).distinct(:action)

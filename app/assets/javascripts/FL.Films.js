@@ -14,8 +14,8 @@ FL.Films = {
 
   initListeners: function(){
     $(document).on('ajax:success', 'a[data-action="link"]', FL.Films.displayContent)
-    $(document).on('click', 'button.film-action', FL.Films.btnFilmActionClicked)
-    $(document).on('click', 'i[data-action]', FL.Films.iconFilmActionClicked)
+    $(document).on('click', 'div.film-action', FL.Films.btnFilmActionClicked)
+    $(document).on('click', '.film-action-buttons i[data-action]', FL.Films.iconFilmActionClicked)
     $(document).on('click', 'a[data-modal="signup"], a.display-modal', FL.Films.displayModal)
     $(document).on('click', '.user-list .counter a', FL.Films.lnkFilmsActionClicked)
     $(document).on('click', '#filmsIndex .counter a', FL.Films.lnkUsersFilmsClicked)
@@ -92,9 +92,9 @@ FL.Films = {
     })
   },
 
-  btnFilmActionClicked: function(event){
+  btnFilmActionClicked: function(e){
     var button = $(this)
-    
+
     var href = button.data('href')
     var method = button.data('method')
     var to_action = method == 'put'

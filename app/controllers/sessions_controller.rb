@@ -13,9 +13,13 @@ class SessionsController < ApplicationController
     create
   end
 
+  def login
+    
+  end
 
   def destroy
     reset_session
+    env['warden'].set_user(nil)
     redirect_to root_url
   end
 

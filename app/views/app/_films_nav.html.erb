@@ -1,0 +1,21 @@
+<div class="full-row green-row panels" id="panelsfilms">
+  <div class="row">
+    <div class="large-4 large-offset-2 small-12 columns">
+        <h2>Current films</h2>
+        <ul class="signup-options">
+          <li> <%= link_to 'Coming Soon', coming_soon_films_path %> </li>
+          <li> <%= link_to 'In Cinemas',  in_cinemas_films_path %> </li>
+          <li> <%= link_to 'Popular', trend_path(:popular) %> </li>
+        </ul>
+      </div>
+      <div class="large-4 small-12 columns end">
+        <h2>Browse by</h2>
+        <ul class="signup-options">
+          <li><a href="/films/genres">Genre</a></li>
+          <li><a href="#">Year</a></li>
+          <li><a href="#">Random</a></li>
+          <!-- <li><%#= link_to 'Cinema', cinemas_path %> </li> -->
+        </ul>
+      </div>
+    </div>
+</div>

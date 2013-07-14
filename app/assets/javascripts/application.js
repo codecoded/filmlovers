@@ -12,10 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
-//= require foundation
 //= require knockout
-//= require rails.validations
+//= require_directory ./vendor
 //= require FL
-//= require_tree .
+//= require_directory .
 

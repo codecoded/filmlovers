@@ -1,5 +1,23 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  layout false
+
+  def new
+  end
+
+  def create
+    @user = User.new(params[:user].slice(:username, :password, :email))
+
+    if @user.valid?
+      @user.save!
+      sign_in @user
+      render nothing: true, status: 200
+    else
+      render :new, status: 422
+    end
+    
+  end
+
   def edit
   end
 

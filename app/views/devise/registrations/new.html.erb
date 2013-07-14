@@ -1,41 +1,30 @@
-
-<%= image_tag 'backdrop-sign-up.jpg', :class=>'bg' %>
-
-<section>       
-  <div id="container_demo" >
-    <div id="signupWrapper">
-      <div id="login" class="animate form five columns centered">
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :autocomplete => 'on',:validate => true) do |f| %>
-          <h1> Sign up </h1> 
-          <p>
-            <%= f.label :username, 'Your username', :class=>'uname', data:{icon: 'u'} %>
-            <%= f.text_field :username, required: :required, placeholder: 'myscreename', :validate => true %>
-          </p>
-
-          <p>
-            <%= f.label :email, 'Your email',  :class=>'youmail', data:{icon: 'e'} %>
-            <%= f.email_field :email, required: :required, placeholder: 'mysupermail@mail.com' %>
-          </p>
-
-          <p>
-            <%= f.label   :password, 'Your password', :class=>'youpasswd', data:{icon: 'p'} %>
-            <%= f.password_field :password, required: :required, placeholder: 'eg. X8df!90EO' %>
-          </p>
-
-          <p>
-            <%= f.label :password_confirmation, 'Please confirm your password', :class=>'youpasswd', data:{icon: 'p'} %>
-            <%= f.password_field :password_confirmation, required: :required, placeholder: 'eg. X8df!90EO' %>
-          </p>
-
-          <p class="signin button2"> 
-            <input type="submit" value="Sign up"/> 
-          </p>
-          <p class="change_link">  
-            Already a member ?
-            <%= link_to 'Go and log in',new_user_session_path,  :class=>'to_register' %>
-          </p>
-        <% end %>
-      </div>
-    </div>  
+<div class="full-row green-row panels" id="panelssignup">
+  <div class="row">
+    <div class="large-4 small-12 columns">
+      <h2>Don't be afraid...it’s free!</h2>
+      <p>After you have signed up, you can start keeping a history of films you have watched, the ones you love, even the ones you own!</p>
+      <p>And creating your own film lists is a great way to recommend films to friends, and discover new ones yourself!</p>
+    </div>
+    <div class="large-4 small-12 columns">
+    <h2>Join simply in one click...</h2>
+    <ul class="signup-options">
+      <%= passport_link :facebook, "Facebook" %>
+      <%= passport_link :twitter, "Twitter" %>
+      <%= passport_link :netflix, "Netflix" %>      
+      <%= passport_link :google_oauth2, "Google" %>
+    </ul>
+    </div>
+    <div class="large-4 small-12 columns">
+      <h2>or more traditionally...</h2>
+        <%= simple_form_for(User.new, url: 'users', html:{id: 'signupform'}, remote: true) do |f| %>
+          <label for="username"></label>
+          <%= f.input :username, tabindex: 1, placeholder: 'Username', hint: false, label: false%>
+          <label for="email"></label>
+          <%= f.input :email, tabindex: 2, placeholder: 'Email', hint: false, label: false %>
+          <label for="password"></label>
+          <%= f.input :password, tabindex: 3, placeholder: 'Password', hint: false, label: false %>
+          <input type="submit" name="signupbutton" id="signupbutton" value="Join!" tabindex="4">
+       <% end %>
+    </div>
   </div>
-</section>
+</div>

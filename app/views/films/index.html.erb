@@ -2,11 +2,6 @@
 
 <div class="row" id="filmsIndex" >
   <div class="two mobile-four columns pagination-centered">
-    <div class="film-actions-vertical">
-      <div class="tiled"><i class="icon-eye-open icon-3x" ></i></div>
-      <div class="tiled"><i class="icon-heart icon-3x"  ></i></div>
-      <div class="tiled"><i class="icon-home icon-3x"  ></i></div>
-    </div>
     <div class="hide-for-small panel">
       <label>
         Viewing Films
@@ -20,8 +15,6 @@
         <span ><%= @films_page.results_page.total_results %> films</span>
       </h6>
     </div>
-    <%= render partial: 'shared/netflix_234x60' %>
-    <%= render partial: 'shared/blinkbox_120x600' %>
   </div>
    <%= render partial: 'films/films' %>
 </div>

@@ -1,0 +1,14 @@
+<h2><%= "Found #{films.count} films containing #{params[:query]}" %></h2>
+
+<div id="search-results-container">
+  <div id="search-results">
+    <div class="large-12 columns text-center">
+      <%= paginate films, remote: true %>
+    </div>    
+    <div class="large-10 columns films" >
+      <% films.each do |film| %>
+        <%= render partial: 'films/film', object: film %>
+      <% end %>
+    </div>
+  </div>
+</div>

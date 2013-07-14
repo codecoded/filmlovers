@@ -4,11 +4,11 @@ class FilmsController < ApplicationController
   respond_to :html, :json
 
   def index
-    render_template
+    # render_template
   end
 
   def show
-    render_template
+    # render_template
   end
 
   def view
@@ -35,6 +35,19 @@ class FilmsController < ApplicationController
     render partial: 'summary'
   end
 
+  def coming_soon
+    @films ||= page_results Films.coming_soon, :release_date, :asc
+    render 'index_new'
+  end
+
+  def in_cinemas
+    @films ||= page_results Films.in_cinemas, :release_date, :desc
+    render 'index_new'
+  end
+
+  def popular
+  end
+
   def search
     present(perform_search, params[:query]) and render_template :index
   end
@@ -51,12 +64,17 @@ class FilmsController < ApplicationController
 
   protected
 
+
+
   def perform_search
+    # page_size = 28
+    # films = Film.search(params[:query], :title, :release_date, :desc).page(page_no).per(page_size)
+    # ResultsPage.new films, films.count, page_size, page_no
     TmdbFilmsSearch.new.search(params[:q] || params[:query], page_options)
   end
 
   def page_options
-    params[:page] ? {page: params[:page].to_i} : {} 
+    params[:page] ? {page: page_no} : {} 
   end
 
   def present(results_page, description='')

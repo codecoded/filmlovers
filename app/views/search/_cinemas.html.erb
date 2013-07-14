@@ -1,0 +1,6 @@
+<h2><%= "Found #{cinemas.count} cinemas near #{params[:query].upcase}" %></h2>
+<ol>
+<% cinemas.sort_by(&:name).each do |cinema| %>
+  <li><%= link_to cinema.name, cinema_path(cinema) %></li>
+<% end %>
+</ol>

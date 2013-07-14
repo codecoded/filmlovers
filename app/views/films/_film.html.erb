@@ -32,7 +32,8 @@
           <%= link_to users_film_path(film, action) do %>
             <%= presenter.film_action_counter action %>
             <%= label_tag film.id, data: {counter: action} do %> 
-              <%= presenter.count_for(action) %>
+            <%= film.counters[action] %>
+              <%#= presenter.count_for(action) %>
             <% end %>
           <% end %>
         </span>

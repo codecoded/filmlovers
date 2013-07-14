@@ -10,6 +10,7 @@ $actionedHover:      #bbb;
   margin-bottom: 10px;
   box-shadow: 5px 5px 30px #222
 }
+
 // #featured.orbit img { display: block; }
 
 .film-title{
@@ -376,7 +377,7 @@ ul.credits{
 #film-main-actions{
   padding: 14px 0px;
   .film-actions-vertical{
-    button{
+    div.film-action{
       margin: 2px 0px;
       border: solid 4px black;
       padding: 2px;
@@ -411,6 +412,12 @@ ul.credits{
 
 
 #film-content-overview{
+
+
+  .orbit-prev, .orbit-next, .orbit-timer {
+    display: block;
+  }
+
   span, p, h5, label{
     font-size: 12pt;
   }
@@ -591,5 +598,11 @@ span.play-trailer
     height: 345px ;
     padding-bottom: 0px;
     margin-bottom: 0px;
+  }
+}
+
+#film-images{
+    .orbit-prev, .orbit-next, .orbit-timer {
+    display: block;
   }
 }

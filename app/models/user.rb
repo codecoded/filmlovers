@@ -5,10 +5,7 @@ class User
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable#, :validatable
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -48,9 +45,18 @@ class User
 
   gravtastic
   
-  validates :username, :email, uniqueness: {case_sensitive: false, message: "Sorry, this username is taken"}, presence: true
-  validates :username, format: {with: /^[-\w\._@]+$/i,  message: "Usernames can only contain letters, numbers, or .-_@"}, length: {minimum: 3}
+  validates_presence_of   :username, message: 'Please enter a username'
+  validates_presence_of   :email, message: 'Please enter an email'
+  validates_presence_of   :password, message: 'Please enter a password'
+  validates :username, uniqueness: {case_sensitive: false, message: "This username is already taken, please choose another!"}
+  validates :username, format: {with: /^[-\w\._@]+$/i,  message: "Usernames can only contain letters, numbers, or .-_@"}
+  validates_length_of :username, :within => 3..20, :too_long => "Username is a maximum of 20 characters", :too_short => "Username is a minimum of 3 characters"
   validates :username, exclusion: {:in => exluded_names, message: "Sorry, this username is not available"}
+  validates :email, uniqueness: {case_sensitive: false, message: "This email has already been registered!"}, presence: true
+  validates_format_of :email, :with  => Devise.email_regexp, message: "Sorry, this doesn't seem to be a valid email"
+  validates_length_of :password, :within => Devise.password_length, too_short: 'Password must be a minimun of 8 characters', too_long: 'Password must be a maximum of 128 characters'
+  validates_presence_of   :password, :on=>:create
+
 
   # validates_presence_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
 
@@ -58,6 +64,7 @@ class User
   field :first_name
   field :last_name
   field :name
+  # field :email
   # field :email
   field :gender
   field :dob, type: DateTime
@@ -156,6 +163,14 @@ class User
   def notifier
     @notifier ||= UserNotifier.new(self)
   end
+
+  # def logged_in
+  #   sign_in_count = sign_in_count ? sign_in_count+=1 : 1
+  #    last_sign_in_at = current_sign_in_at
+  #   current_sign_in_at = Time.now.utc
+   
+  #   save
+  # end
 
   def notify(notification)
     notifier.message notification

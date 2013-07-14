@@ -1,186 +1,125 @@
-<% description "Discover films your friends love, share films lists, and keep track of films you own. Create custom film lists and discover the latest upcoming films at cinemas" %>
-<% set_meta_tags keywords: "films, lists, popular films, movies, latest releases, new films, upcoming films, share films, films loved, film owned, films watched, film lists" %>
-<% title "watch, share, discover films with friends" %>
-
-<% set_meta_tags :og => {
-  :title    => "filmlovers - watch, share, discover films with friends",
-  :type     => "website",
-  :url      => 'http://www.filmlovers.co.uk', 
-  :image    => 'http://www.filmlovers.co.uk' + asset_path('filmlovers-200x200.jpg'),
-  :description => "Discover films your friends love, share films lists, and keep track of films you own. Create custom film lists and discover the latest upcoming films at cinemas",
-  :site_name   =>'filmlovers - watch, share, discover'
-} %>
-
-
-<% set_meta_tags :fb => {
-  :admins => '537020179',
-  :app_id => Facebook::app_id 
-} %>
-
-
-<div class="twelve columns">
-
-  <%if !logged_in? %>
-  <div class="row banner collapse sign-in-backdrop" id="banner-sign-in">
-    <div class="eight columns"  id="greeting-text">
-      <h1>Welcome to filmlovers</h1>
-      <h2>Watch, share and discover films </h2>
-      <h3> Sign up for <strong>free</strong> to create film lists and record your love of film</h3>
-      <%= link_to login_path, data: {modal: 'signup'}, alt: 'sign up to filmlovers for free' do %>
-        <%= image_tag 'sign-up.png', :class => 'sign-up-button', alt: 'sign up to filmlovers'  %>
-      <% end %>
-    </div>
-  </div>
-<% else %>
-  <div class="row banner  welcome-backdrop" id="banner-sign-in">
-    <div class="six columns centered" id="greeting-text">
-        <h1>filmlovers</h1>
-        <h2>Watch, share, discover </h2>
-    </div>
-  </div>
-
-  <%= render partial:'recommendations' %>
-
-<% end %>
-
+<div class="full-row hero margin-bottom">
   <div class="row">
-    <div class="twelve columns">
-      <h6 class="heading_divider">Filmlovers Top Listings</h6>
-    </div>        
-    <div class="four columns top_ten_list">
-      <dl>
-       <dt><h3>Watched...</h3></dt>
-        <dd>
-          <ol>
-            <% FilmsRepository.top_for(:watched, 5).each do |film| %>
-            <li>
-              <p>
-                <em><%= film_link film %></em> 
-                <%#= backdrop_small film %>
-              </p>
-            </li>
-            <% end %>
-          </ol>
-        </dd>
-      </dl>
-    </div>
-    <div class="four columns top_ten_list">
-      <dl>
-       <dt><h3>Loved...</h3></dt>
-        <dd>
-          <ol>
-            <% FilmsRepository.top_for(:loved, 5).each do |film| %>
-            <li>
-              <p>
-                <em><%= film_link film %></em> 
-              </p>
-            </li>
-            <% end %>
-          </ol>
-        </dd>
-      </dl>
-    </div>
-    <div class="four columns top_ten_list">
-      <dl>
-       <dt><h3>Owned...</h3></dt>
-        <dd>
-          <ol>
-            <% FilmsRepository.top_for(:owned, 5).each do |film| %>
-            <li>
-              <p>
-                 <em><%= film_link film %></em> 
-              </p>
-            </li>
-            <% end %>
-          </ol>
-        </dd>
-      </dl>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="twelve columns pagination-centered">
-      <a href="http://www.awin1.com/cread.php?s=246533&v=2481&q=118947&r=171645" target="_blank" alt="blinkbox advert">
-        <img src="http://www.awin1.com/cshow.php?s=246533&v=2481&q=118947&r=171645" border="0" alt="blinkbox promotion"></a>        
-    </div>
-  </div>
-
-  <div class="row padded-films">
-    <div class="twelve columns">
-      <h6 class="heading_divider">Recent Activity</h6>
-    </div>    
-    <div class="twelve columns centered">
-      <div class=" films">
-        <% Films.recent(5).each do |film| %>
-          <%= render partial: 'films/film', object: film %>
-        <% end %>
-      </div>      
-    </div>
-  </div>
-
-  <div class="row" id="icon-descriptions">
-    <div class="four columns">
-      <div class="radius panel pagination-centered">
-        <h4><%= Films.count_for(:watched) %> films watched</h4>
-          <%= link_to actioned_films_path(:watched), alt: 'view films that have been watched' do %>
-            <%= awesome 'eye-open', 'icon-3x actioned' %>
-          <% end %>
-         <p>keep track of all the films you have seen</p>
-        <%= render partial: 'films_recently_actioned', locals:{action: :watched} %>
-      </div>
-    </div>
-    <div class="four columns">
-      <div class="radius panel pagination-centered">
-        <h4><%= Films.count_for(:loved) %> films loved</h4>
-         <%= link_to actioned_films_path(:loved), alt: 'view films that are loved' do %>
-          <%= awesome 'heart', 'icon-3x actioned' %>
-         <% end %>
-         <p>let your friends know the films you loved!</p>
-         <%= render partial: 'films_recently_actioned', locals:{action: :loved} %>
-      </div>
-    </div>
-    <div class="four columns">
-      <div class="radius panel pagination-centered">
-        <h4><%= Films.count_for(:owned) %> films owned</h4>
-        <%= link_to actioned_films_path(:loved), alt: 'view films that people own' do %>
-         <%= awesome 'home', 'icon-3x actioned' %>
-        <% end %>
-        <p>what films do you have at home?</p>
-        <%= render partial: 'films_recently_actioned', locals:{action: :owned} %>
+    <div class="large-6 large-offset-3 small-10 small-offset-1 columns">
+      <div class="pod">
+        <h1 class="text-center">Watch, share &amp;<br />discover films</h1>
+        <p class="text-center">Filmlovers is an online social platform that allows you to create &amp; share film lists and record your love of film.</p>
+        <hr />
+        <div class="row">
+          <div class="large-5 small-12 columns">
+            <p class="text-right"><a href="#" class="showPanel primary button" data-rel="signup">Join</a></p>
+          </div>
+          <div class="large-7 small-12 columns">
+            <p class="text-left create">Create a <strong>FREE</strong> account or <a href="#features">take a look at what it offers</a>!</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</div>
 
-
-
+<div class="row margin-bottom">
+  <div class="large-3 small-6 columns text-center">
+      <p class="lovers">
+          <span><%= User.count %></span> filmlovers
+        </p>
+    </div>
+    <div class="large-3 small-6 columns text-center">
+      <p class="watched">
+          <span><%= Films.count_for(:watched) %></span> films watched
+        </p>
+    </div>
+    <div class="large-3 small-6 columns text-center">
+      <p class="loved">
+          <span><%= Films.count_for(:loved) %></span> films loved
+      </p>
+    </div>
+    <div class="large-3 small-6 columns text-center">
+      <p class="owned">
+          <span><%= Films.count_for(:owned) %></span> films owned
+      </p>
+    </div>
+</div>
+<div class="full-row tabs margin-bottom">
   <div class="row">
-    <div class="twelve columns">
-      <h6 class="heading_divider">Current Films</h6>
-    </div>
-    <div class="four mobile-two columns trend">
-      <%= link_to trend_path(:now_playing), alt: 'view films that are currently in cinemas, now playing' do %>
-        <%= image_tag 'now_playing.jpg', width:'100%', alt: 'films now playing', title: 'films now playing' %>
-        <label>Now Playing</label>
-      <% end %>
-    </div>
-    <div class="four mobile-two columns trend">
-      <%= link_to trend_path(:popular), alt: 'view films that are popular' do %>
-        <%= image_tag 'popular.jpg', width:'100%', alt: 'popular films', title: 'films that are popular' %>
-        <label>Popular</label>
-      <% end %>
-    </div>
-    <div class="four mobile-two columns trend">
-      <%= link_to trend_path(:upcoming) do %>
-        <%= image_tag 'coming_soon.jpg', width:'100%', alt: 'films coming soon', title: 'films coming soon' %>
-        <label>Upcoming</label>
-      <% end %>
+    <div class="large-12 small-12 columns">
+        <div class="section-container auto" data-section>
+          <%= render partial: 'top_actioned_films', locals: {action: :watched} %>
+          <%= render partial: 'top_actioned_films', locals: {action: :loved} %>
+          <%= render partial: 'top_actioned_films', locals: {action: :owned} %>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="row margin-bottom">
+  <%= render partial: 'shared/adverts/blinkbox_728x90' %>
+</div>
+<a id="features"></a>
+<div class="full-row green-row margin-bottom">
+  <div class="row">
+    <div class="large-8 small-12 large-offset-2 text-center columns">
+      <h2>What is filmlovers?</h2>
+    <hr />
+      <p>In short...a social record of your favourite films...a place to list, rate and share your love of film with your friends, colleagues and family...</p>
     </div>
   </div>
-
- <div class="row">
-    <div class="twelve columns pagination-centered">
-      <fb:like href="http://www.filmlovers.co.uk/" send="true" width="450" show_faces="true" ></fb:like>
+  <div class="row">
+    <div class="large-8 small-12 large-offset-2 text center columns">
+      <ul data-orbit data-options="timer_speed:7000; bullets:false;">
+        <li data-orbit-slide="organise">
+          <img src="assets/content/list-slide.gif" width="474" height="249" alt="Organise" />
+          <div class="orbit-caption">Keep a record of all the films you have seen, loved and owned.</div>
+        </li>
+        <li data-orbit-slide="lists">
+          <img src="assets/content/share-slide.gif" width="474" height="249" alt="Share your lists" />
+          <div class="orbit-caption">Create your own films list, and share it with friends, and help them discover new films.</div>
+        </li>
+        <li data-orbit-slide="recommend">
+          <img src="assets/content/recommend-slide.gif" width="474" height="249" alt="Recommend films" />
+          <div class="orbit-caption">Tell your friends about a great film, or let us help recommend you one based on you and your friends film history.</div>
+        </li>
+        <li data-orbit-slide="filmchannels">
+          <img src="assets/content/channels-slide.gif" width="474" height="249" alt="Film Channels" />
+          <div class="orbit-caption">Add additional accounts such as Netflix and Vimeo, and get all your film related accounts in one place.</div>
+        </li>
+      </ul>
+      <ul class="slider-nav">
+        <li>
+          <a href="#" data-orbit-link="organise">
+              <img src="assets/site-basics/list-icon-white.svg" width="90" height="90" alt="Organise" />
+              Organise
+            </a>
+        </li>
+        <li>
+          <a href="#" data-orbit-link="lists">
+              <img src="assets/site-basics/share-icon-white.svg" width="90" height="90" alt="Lists" />
+              Share
+            </a>
+        </li>
+        <li>
+          <a href="#" data-orbit-link="recommend">
+              <img src="assets/site-basics/recommend-icon-white.svg" width="90" height="90" alt="Recommend" />
+              Recommend
+            </a>
+        </li>
+        <li>
+          <a href="#" data-orbit-link="filmchannels">
+              <img src="assets/site-basics/netflix-icon-white.svg" width="90" height="90" alt="Film Channels" />
+              Film Channels
+            </a>
+        </li>
+      </ul>
     </div>
   </div>
-  <!-- <a onmouseover="UE.Popin.preload();" href="#" onclick="UE.Popin.show(); return false;">feedback</a> -->
+</div>
+<div class="row">
+  <div class="large-3 small-12 large-offset-3 columns">
+      <p class="text-right"><a href="#" class="showPanel primary button" data-rel="lowersignup">Join</a></p>
+    </div>
+    <div class="large-4 small-12 columns end">
+      <p class="text-left create">Create a <strong>FREE</strong> account using your social network logins!</p>
+    </div>
+</div>
+<div class="full-row green-row panels" id="panelslowersignup">
+  <%= render template: 'devise/registrations/new' %>
 </div>

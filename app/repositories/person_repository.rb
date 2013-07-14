@@ -31,6 +31,8 @@ class PersonRepository
     "person:#{id}"
   end
 
+
+
   protected 
 
   def fetch

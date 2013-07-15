@@ -4,5 +4,9 @@ development:
   api: "http://api.rottentomatoes.com/api/public/v1.0"
 production:
   key: 'vhpj992fvevypdt9mycx5zjp'
-  namespace: 'filmlovers-development'
+  namespace: 'filmlovers-staging'
+  api: "http://api.rottentomatoes.com/api/public/v1.0"
+production:
+  key: 'vhpj992fvevypdt9mycx5zjp'
+  namespace: 'filmlovers'
   api: "http://api.rottentomatoes.com/api/public/v1.0"

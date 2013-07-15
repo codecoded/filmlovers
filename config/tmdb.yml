@@ -2,7 +2,11 @@ development:
   key: 'b14b8fd215a745572dc0510e8cddfee4'
   namespace: 'filmlovers-development'
   api: "http://api.themoviedb.org/3/"
+staging:
+  key: 'b14b8fd215a745572dc0510e8cddfee4'
+  namespace: 'filmlovers-staging'
+  api: "http://api.themoviedb.org/3/"
 production:
   key: 'b14b8fd215a745572dc0510e8cddfee4'
-  namespace: 'filmlovers-development'
+  namespace: 'filmlovers'
   api: "http://api.themoviedb.org/3/"

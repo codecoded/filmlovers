@@ -39,6 +39,10 @@ module Films
     find_all_summaries ids
   end
 
+  def adult
+    Film.where(adult: true)
+  end
+
   def find_all_summaries(ids)
     Film.only(:poster_path, :name, :title, :release_date, :trailers).find ids
   end

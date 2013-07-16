@@ -19,11 +19,12 @@ Filmlovers::Application.routes.draw do
   resources 'films',        only: [:show, :index] do
     collection do
       resources 'genres',   only: [:show, :index]
-      resources 'trends',   only: [:show, :index], :constraints => {:id => /now_playing|latest|upcoming|popular/}
+      resources 'trends',   only: [:show, :index], :constraints => {:id => /now_playing|latest|upcoming/}
       # 
       post ':id' => redirect("/films/%{id}")
       get 'coming_soon'
       get 'in_cinemas'
+      get 'popular'
       get 'search'  
       get 'inline_search'   
       get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'

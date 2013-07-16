@@ -19,7 +19,9 @@ class Film
 
   has_many :recommendations, as: :recommendable
 
-  index({ title: 1, release_date: 1, adult: 1}, { name: "film_title_index", background: false })
+  index({ title: 1}, { name: "film_title_index", background: false })
+  index({ release_date: 1}, { name: "film_release_date_index", background: false })
+  index({ popularity: 1}, { name: "film_popularity_index", background: false })
 
   def self.fetch(id)
     FilmRepository.find id
@@ -66,7 +68,7 @@ class Film
   end
 
   def has_poster?
-    poster_path
+    self[:poster_path]
   end
 
   def poster(size='original')

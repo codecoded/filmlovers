@@ -46,6 +46,8 @@ class FilmsController < ApplicationController
   end
 
   def popular
+    @films ||= page_results Film, :popularity, :desc
+    render 'index_new'
   end
 
   def search

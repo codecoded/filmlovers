@@ -5,6 +5,7 @@ class AdminConfig
   field :name, type: String
   field :fetched_index, type: Integer, default: 1
   field :changes_since, type: DateTime, default: 15.days.ago
+  field :page_size, type: Integer, default: 21
 
   class << self
 

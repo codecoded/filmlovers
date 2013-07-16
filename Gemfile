@@ -48,6 +48,8 @@ gem 'execjs'
 gem 'simple_form'
 # gem 'libv8'
 
+gem 'masonry-rails'
+
 gem 'therubyracer'
   
 gem 'kaminari' #for pagination

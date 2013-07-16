@@ -35,6 +35,10 @@ class Film
     FilmRepository.new(id).send :fetch
   end
 
+  def title
+    self['title']
+  end
+
   def users
     @lists ||= FilmLoverLists.new("film:#{id}:users")
   end
@@ -146,6 +150,11 @@ class Film
 
   def actions_for(action)
     film_user_actions.where(action: action)
+  end
+
+  def uk_release_date
+    @uk_release_date ||= releases['countries'].find {|r| r['iso_3166_1']=='GB'}
+    @uk_release_date['release_date'] if @uk_release_date
   end
 
   def self.search(query, field=:title, order=:title, by=:asc)

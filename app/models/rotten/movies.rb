@@ -3,19 +3,19 @@ module Rotten
 
     def self.in_cinemas
       Rails.cache.fetch 'rotten_in_cinemas', expires_in: 4.hours do
-        import API.in_cinemas
+        import Rotten::API.in_cinemas
       end
     end
 
     def self.upcoming
       Rails.cache.fetch 'rotten_upcoming', expires_in: 4.hours do
-        import API.upcoming
+        import Rotten::API.upcoming
       end
     end
 
     def self.opening
       Rails.cache.fetch 'rotten_opening', expires_in: 4.hours do
-        import API.opening
+        import Rotten::API.opening
       end
     end
 

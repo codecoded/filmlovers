@@ -1,3 +1,160 @@
-<%= render layout: 'layouts/film', object: film do %>
-    <%= render partial: params[:view] || 'overview'%>
+<% present(film, FilmPresenter) do |presenter| %>
+  <div class="full-row inner-hero margin-bottom">
+    <div class="row">
+      <div class="large-12 small-12 columns">
+        <div class="right-fade"></div>
+        <div class="left-fade"></div>
+        <%= backdrop film, film.backdrops[0] %>
+        <!-- <img src="/assets/content/hero-image-man-of-steel.jpg" width="1280" height="720" alt="Man of Steel" /> -->
+      </div>
+    </div>
+  </div>
+  <div class="row margin-bottom">
+    <div class="large-8 small-12 columns">
+      <div class="pod margin-bottom synopsis">
+        <h1><%= presenter.title %></h1>
+        <h2><%= presenter.year_and_director %></h2>
+        <hr />
+        <h3>Synopsis</h3>
+        <p><%= film.overview %></p>
+      </div>
+      <div class="margin-bottom">
+        <div class="inner-tabs">
+          <div class="section-container auto" data-section>
+            <section>
+              <p class="title" data-section-title><a href="#panel1">Details</a></p>
+              <div class="content" data-section-content>
+                <div class="row">
+                  <div class="large-4 small-3 columns poster">
+                    <%= poster film %>
+                    <!-- <img src="/assets/content/man-of-steel-poster.jpg" width="185" height="278" alt="Man of Steel" /> -->
+                    <ul class="shop-online">
+                      <li><a href="#"><%= image_tag "site-basics/amazon-icon.png", size:'30', alt:"Buy online with Amazon" %></a></li>
+                      <li><a href="#"><%= image_tag "site-basics/apple-icon.png", size:'30', alt:"Buy online with Apple" %></a></li>
+                    </ul>
+                  </div>
+                  <div class="large-8 small-9 columns">
+                      <h4>Alternative titles</h4>
+                      <p><%= presenter.alternative_titles.join('<br/>').html_safe %></p>
+                      <h4>Budget</h4>
+                      <p><%= Utilities.to_currency film.budget ,{precision: 0} %></p>
+                      <h4>Status</h4>
+                      <p><%= film.status %></p>
+                      <h4>Runtime</h4>
+                      <p><%= presenter.runtime %></p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <p class="title" data-section-title><a href="#panel2">Trailer</a></p>
+              <div class="content" data-section-content>
+                <div class="row">
+                  <div class="large-12 small-12 columns">
+                    <div class="flex-video">
+                      <%= trailer film %>
+                      <!-- <iframe width="640" height="360" src="//www.youtube.com/embed/T6DJcgm3wNY" frameborder="0" allowfullscreen></iframe> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section>
+              <p class="title" data-section-title><a href="#panel3">Media</a></p>
+              <div class="content" data-section-content>
+                <div class="row">
+                  <div class="large-12 small-12 columns">
+                    <ul data-orbit>
+                      <% film.backdrops.each do | backdrop | %>
+                        <li><%= backdrop film, backdrop, 'w780'  %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="margin-bottom">
+          <div class="inner-tabs">
+            <div class="section-container auto" data-section>
+              <section>
+                <p class="title" data-section-title><a href="#panel1">Cast</a></p>
+                <div class="content" data-section-content>
+                  <div class="row">
+                    <div class="large-12 small-12 columns">
+                      <ul class="button-list">
+                        <% film.credits.cast.each do |person| %>
+                          <li><%= person.name %> </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section>
+                <p class="title" data-section-title><a href="#panel2">Crew</a></p>
+                <div class="content" data-section-content>
+                  <div class="row">
+                    <div class="large-12 small-12 columns">
+                      <ul class="button-list">
+                        <% film.credits.crew.each do |person| %>
+                          <li><%= person.name %> </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section>
+                <p class="title" data-section-title><a href="#panel3">Studios</a></p>
+                <div class="content" data-section-content>
+                  <div class="row">
+                    <div class="large-12 small-12 columns">
+                      <ul class="button-list">
+                        <% film.production_companies.each do |studio| %>
+                          <li><%= studio['name'] %> </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="large-4 small-12 columns">
+      <div class="margin-bottom pod actions">
+        <ul>
+          <li class="watched complete"><a href="#">Watched</a></li>
+          <li class="loved"><a href="#">Loved</a></li>
+          <li class="own"><a href="#">Own</a></li>
+          <li class="add"><a href="#">Add</a></li>
+          <li class="share"><a href="#">Share</a></li>
+        </ul>
+      </div>
+      <div class="margin-bottom banner">
+        <%= image_tag "content/300x250-banner.jpg", size: '300x250', alt: "Banner" %>
+      </div>
+      <div class="margin-bottom">
+        <h4>Similar films</h4>
+        <ul class="button-list">
+          <% presenter.similar_films.each do |similar_film| %>
+            <li><%= link_to  similar_film[:title], similar_film[:url] %> </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="margin-bottom">
+        <h4>Filmlovers who...</h4>
+        <ul class="button-list">
+          <li class="watched"><a href="#"><%= presenter.action_count(:watched) %> watched this film</a></li>
+          <li class="loved"><a href="#"><%= presenter.action_count(:loved) %> loved this film</a></li>
+          <li class="own"><a href="#"><%= presenter.action_count(:owned) %> own this film</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 <% end %>
+        

@@ -27,10 +27,6 @@ module FilmHelper
    "Starring: #{film.starring.join(', ')}" if film.casts
   end
 
-  def runtime(film)
-    film.runtime || 0 > 0 ? "#{film.runtime} Mins" : "-- Mins"
-  end
-
   def film_action_counter(film, action)
     action_css = actioned?(film, action) ? 'actioned' : 'unactioned'
     css = "#{icons[action]} #{action_css}"

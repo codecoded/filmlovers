@@ -1,0 +1,20 @@
+<% set_meta_tags :description => "View films categories as #{@films_page.description}" %>
+
+<div class="row" id="filmsIndex" >
+  <div class="two mobile-four columns pagination-centered">
+    <div class="hide-for-small panel">
+      <label>
+        Viewing Films
+      </label>
+      <h5 class="subheader" >
+        <%= @films_page.description %>
+      </h5>
+    </div>
+    <div class="panel callout radius" align="center">
+      <h6>
+        <span ><%= @films_page.results_page.total_results %> films</span>
+      </h6>
+    </div>
+  </div>
+   <%= render partial: 'films/films' %>
+</div>

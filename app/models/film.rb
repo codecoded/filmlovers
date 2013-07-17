@@ -169,5 +169,13 @@ class Film
     credits.cast.take(count).map(&:name)
   end
 
+  def alternative_titles
+    self['alternative_titles']['titles'] if alternative_titles?
+  end
+
+  def alternative_titles?
+    self['alternative_titles']
+  end
+
 end
 

@@ -27,6 +27,13 @@ class FilmPresenter < BasePresenter
     "(#{film.year})"
   end
 
+  def year_and_director
+    ("#{film.year} - Directed by " << link_to(film.director, person_path(film.director))).html_safe
+  end
+
+  def alternative_titles
+    film.alternative_titles.map {|t| t['title']}
+  end
   # def actions_count
   #   @action ||= film.film_user_actions.group_by(&:action).map {|grouping, value| {action: grouping, count: value.length}}
   # end
@@ -49,6 +56,15 @@ class FilmPresenter < BasePresenter
     content_tag :i, nil,:class => css, data: {action: action, id: film.id}
   end
 
+  def action_count(action)
+    film.actions_for(action).count
+  end
+
+  def cast
+    film.credits.cast.map do |person|
+
+    end
+  end
 
   def action_icon(action)
  
@@ -71,7 +87,18 @@ class FilmPresenter < BasePresenter
     current_user ? user_actions.include?(action) : false
   end
 
+  def runtime
+    film.runtime || 0 > 0 ? "#{film.runtime} Mins" : "-- Mins"
+  end
 
+  def similar_films
+    film.similar.map do |film|
+      {
+        url: film_path(film),
+        title: film.title
+      }
+    end
+  end
 
   # def self.from_films(user, film_ids)
   #   Film.find(film_ids).map {|film| FilmPresenter.new user, film } if !film_ids.empty?

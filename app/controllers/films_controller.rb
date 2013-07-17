@@ -37,17 +37,17 @@ class FilmsController < ApplicationController
 
   def coming_soon
     @films ||= page_results Films.coming_soon, :release_date, :asc
-    render 'index_new'
+    render 'index'
   end
 
   def in_cinemas
     @films ||= page_results Films.in_cinemas, :release_date, :desc
-    render 'index_new'
+    render 'index'
   end
 
   def popular
     @films ||= page_results Film, :popularity, :desc
-    render 'index_new'
+    render 'index'
   end
 
   def search

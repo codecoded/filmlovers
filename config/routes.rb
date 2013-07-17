@@ -16,7 +16,7 @@ Filmlovers::Application.routes.draw do
 
   match 'templates/:action' => "templates#:action", as: 'templates'
 
-  namespace :api_client do
+  namespace :api do
     namespace :v1 do
       resources :films do
         collection do

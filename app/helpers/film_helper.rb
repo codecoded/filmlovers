@@ -24,7 +24,7 @@ module FilmHelper
   end
 
   def starring(film)
-   "Starring: #{film.credits.cast.take(3).map(&:name).join(', ')}" if film.casts
+   "Starring: #{film.starring.join(', ')}" if film.casts
   end
 
   def runtime(film)

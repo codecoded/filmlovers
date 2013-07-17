@@ -11,11 +11,11 @@ class Tmdb::Person
   end
 
   def find(with_attributes=[:all])
-    @data = Tmdb::API.request method, append_to_response(with_attributes)
+    @data = Tmdb::Api.request method, append_to_response(with_attributes)
   end
 
   def get(options={})
-     @data = Tmdb::API.request method, options
+     @data = Tmdb::Api.request method, options
   end
 
   def method

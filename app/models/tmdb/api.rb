@@ -1,4 +1,4 @@
-class Tmdb::API
+class Tmdb::Api
 
   class << self
 

@@ -79,6 +79,10 @@ class Film
     AppConfig.image_uri_for [size, poster_path] if poster_path
   end
 
+  def backdrop(size='original')
+    AppConfig.image_uri_for([size, backdrops[0]['file_path']]) if has_backdrop?
+  end
+
   def studios?
     production_companies and production_companies.length > 0
   end
@@ -159,6 +163,10 @@ class Film
 
   def self.search(query, field=:title, order=:title, by=:asc)
     order_by([order, by]).any_of({title: /#{query}/i}, {original_title: /#{query}/i}).where(adult: false)
+  end
+
+  def starring(count=3)
+    credits.cast.take(count).map(&:name)
   end
 
 end

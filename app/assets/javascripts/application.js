@@ -16,7 +16,6 @@
 //= require_directory ./vendor
 //= require FL
 
-//= require masonry/jquery.masonry
-//= require masonry/jquery.infinitescroll.min
+
 //= require_directory .
 

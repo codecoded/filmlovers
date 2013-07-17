@@ -28,7 +28,8 @@ class FilmPresenter < BasePresenter
   end
 
   def year_and_director
-    ("#{film.year} - Directed by " << link_to(film.director, person_path(film.director))).html_safe
+    # ("#{film.year} - Directed by " << link_to(film.director, person_path(film.director))).html_safe
+     "#{film.year} - Directed by #{film.director}"
   end
 
   def alternative_titles
@@ -66,11 +67,23 @@ class FilmPresenter < BasePresenter
     end
   end
 
+  def action_list_item(action, text)
+    return content_tag(:li,nil,  :class => icons[action]) unless current_user
+    actioned = user_actioned? action
+    action_css = actioned ? 'complete' : nil 
+    url = update_user_film_path(current_user, action, film)
+    method =  actioned ? :delete : :put
+    css = "#{action} #{action_css}"  
+    content_tag :li, :class => css  do
+      link_to text, url, data: {method: method, action: action, remote: true, id: film.id }
+    end
+  end
+
   def action_icon(action)
  
     return content_tag(:i,nil,  :class => icons[action]) unless current_user
 
-    url = update_user_film_path(current_user, action, film.id)
+    url = update_user_film_path(current_user, action, film)
    
     actioned = user_actioned? action
     method =  actioned ? :delete : :put

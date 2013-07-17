@@ -1002,7 +1002,7 @@ ul.button-list li.loved a {
   -ms-background-size: 26px auto;
 }
 
-ul.button-list li.own a {
+ul.button-list li.owned a {
   padding-left: 36px;
   background-image: url(site-basics/own-icon-red.svg);
   background-repeat: no-repeat;
@@ -1058,7 +1058,7 @@ ul.button-list li.own a {
   background-image: url(site-basics/loved-icon-red.svg);
 }
 
-.actions ul li.own a {
+.actions ul li.owned a {
   background-image: url(site-basics/own-icon-red.png);
   background-image: url(site-basics/own-icon-red.svg);
 }
@@ -1087,7 +1087,7 @@ ul.button-list li.own a {
   background-image: url(site-basics/loved-icon-white.svg);
 }
 
-.actions ul li.complete.own a, .actions ul li.own a:hover {
+.actions ul li.complete.owned a, .actions ul li.owned a:hover {
   background-image: url(site-basics/own-icon-white.png);
   background-image: url(site-basics/own-icon-white.svg);
 }

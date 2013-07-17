@@ -31,7 +31,9 @@
 </div>
 
 <% if !logged_in? %>
-  <%= render template: 'devise/registrations/new' %>
+  <div class="full-row green-row panels" id="panelssignup">
+    <%= render template: 'devise/registrations/new' %>
+  </div>
   <%= render template: 'devise/sessions/new' %>
 <% end %>
 <%= render partial: 'app/search_panel' %>

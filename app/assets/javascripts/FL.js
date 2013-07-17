@@ -17,6 +17,10 @@ FL = {
       return self.set(self.val() + 1);
     }
 
+    self.change = function(amount){
+      return self.set(self.val() + amount);
+    }
+
     self.set = function(val){
       return counter.text(val);
     }

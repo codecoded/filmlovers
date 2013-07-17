@@ -85,8 +85,8 @@ module FilmHelper
     poster_link film, 'w90'
   end
 
-  def poster(film, size='w154')
-    size = size ? size : 'w154'
+  def poster(film, size='w185')
+    size = size ? size : 'w185'
     src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
     image_tag src, :title=>film.title, alt: "poster for #{film.title}", size: '185x278'
   end

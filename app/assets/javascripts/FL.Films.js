@@ -17,7 +17,7 @@ FL.Films = {
     $(document).on('click', 'div.film-action', FL.Films.btnFilmActionClicked)
     $(document).on('click', '.film-action-buttons i[data-action]', FL.Films.iconFilmActionClicked)
     $(document).on('click', 'a[data-modal="signup"], a.display-modal', FL.Films.displayModal)
-    $(document).on('click', '.user-list .counter a', FL.Films.lnkFilmsActionClicked)
+    $(document).on('click', 'a[data-action]', FL.Films.lnkFilmsActionClicked)
     $(document).on('click', '#filmsIndex .counter a', FL.Films.lnkUsersFilmsClicked)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
@@ -145,9 +145,28 @@ FL.Films = {
   },
 
   lnkFilmsActionClicked: function(event){
-    event.preventDefault()
-    var url = $(this).attr('href')
-    $('#contentHolder').load(url + ' .user-list')
+    event.preventDefault();
+    var anchor = $(this);
+    var href = anchor.attr('href');
+    var method = anchor.data('method');
+    var id = anchor.data('id');
+    var to_action = method == 'put'
+    var incr = to_action ? 1 : -1
+    var action = anchor.data('action')
+
+    $.ajax({
+      url: href,
+      type: method,
+      dataType: 'json',
+      success: function(xhr, data, status){
+        anchor.data('method', (to_action ? 'delete' : 'put'))
+        anchor.closest('li').toggleClass('complete') 
+        if(action=='queued')
+          return
+        FL.counter(id).change(incr)
+      }  
+    })
+
   },
 
   lnkUsersFilmsClicked: function(event){

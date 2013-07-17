@@ -15,7 +15,7 @@ class AdminConfig
 
 
     def fetch_all
-      end_index = Tmdb::API.films(:latest)['id']
+      end_index = Tmdb::Client.films(:latest)['id']
       while instance.fetched_index < end_index do
         current_index = instance.fetched_index 
         begin
@@ -30,12 +30,12 @@ class AdminConfig
     end
 
     def fetch_changed_movies()
-      @tmdb_changes = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
+      @tmdb_changes = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
       results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes
       fetch_films(results_page, true)
 
       while results_page.more_pages? do
-        tmdb_changes = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no+=1}
+        tmdb_changes = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no+=1}
         results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes
         fetch_films results_page, true
       end

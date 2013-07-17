@@ -3,19 +3,19 @@ class TmdbFilmsSearch
   attr_reader :films
 
   def by_trend(trend, page_options={})
-    fetch { Tmdb::API.films trend, page_options }
+    fetch { Tmdb::Client.films trend, page_options }
   end
 
   def search(query, page_options={})
-    fetch { Tmdb::API.search query, page_options}
+    fetch { Tmdb::Client.search query, page_options}
   end
 
   def by_genre(genre_id, page_options={})
-    fetch { Tmdb::API.genre genre_id, page_options.merge({include_all_movies: true, include_adult: true}) } 
+    fetch { Tmdb::Client.genre genre_id, page_options.merge({include_all_movies: true, include_adult: true}) } 
   end
 
   def latest
-    Tmdb::API.films :latest
+    Tmdb::Client.films :latest
   end
 
 

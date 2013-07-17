@@ -11,11 +11,11 @@ class Tmdb::Movie
   end
 
   def find(with_attributes=[:all])
-    @data = Tmdb::Api.request method, append_to_response(with_attributes)
+    @data = Tmdb::Client.request method, append_to_response(with_attributes)
   end
 
   def get(options={})
-     @data = Tmdb::Api.request method, options
+     @data = Tmdb::Client.request method, options
   end
 
   def method
@@ -34,7 +34,7 @@ class Tmdb::Movie
   end 
 
   def changes(start_date = 1.day.ago, end_date = Time.now)
-    Tmdb::Api.request "#{method}/changes", {start_date: start_date, end_date: end_date}
+    Tmdb::Client.request "#{method}/changes", {start_date: start_date, end_date: end_date}
   end
 
 end

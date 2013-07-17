@@ -43,7 +43,7 @@ namespace :tmdb do
   end
 
   def tmdb_results(start_date, page_no)
-    results = Tmdb::API.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
+    results = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
     ResultsPage.new results['results'], results['total_results'], 100, page_no
   end
 

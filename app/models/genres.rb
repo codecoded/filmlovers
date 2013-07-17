@@ -10,7 +10,7 @@ class Genres
 
   def self.lookup
     @lookups ||= Rails.cache.fetch('genres') do
-      Tmdb::API.genres['genres'].map {|genre| OpenStruct.new(genre)}
+      Tmdb::Client.genres['genres'].map {|genre| OpenStruct.new(genre)}
     end
   end
 end

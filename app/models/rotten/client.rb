@@ -1,4 +1,4 @@
-class Rotten::Api
+class Rotten::Client
 
       class << self
 

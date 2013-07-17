@@ -158,7 +158,7 @@ class Film
 
   def uk_release_date
     @uk_release_date ||= releases['countries'].find {|r| r['iso_3166_1']=='GB'}
-    @uk_release_date['release_date'] if @uk_release_date
+    @uk_release_date ? @uk_release_date['release_date'] : release_date
   end
 
   def self.search(query, field=:title, order=:title, by=:asc)

@@ -10,10 +10,14 @@ module Api
         find_films Films.in_cinemas
       end
 
+      def categories
+
+      end
+
       protected
 
-      def find_films(query)
-        @films = page_results query, :popularity, :asc
+      def find_films(query, sort_by=:popularity, direction=:desc)
+        @films = page_results query, sort_by, direction
         @films_count = @films.count
         @total_pages = (@films_count / AdminConfig.instance.page_size) + 1
         render :index, formats: :json

@@ -16,14 +16,19 @@ Filmlovers::Application.routes.draw do
 
   match 'templates/:action' => "templates#:action", as: 'templates'
 
-  namespace :api do
+  namespace :api, defaults: {format: 'json'}  do
     namespace :v1 do
+
       resources :films do
         collection do
+          resources 'genres',   only: [:show, :index] do
+            get 'page/:page', :action => :show, :on => :member, as: 'page'
+          end
+          get 'categories'
           get 'coming_soon'
           get 'coming_soon/page/:page', action: 'coming_soon', as: 'page_coming_soon'
           get 'in_cinemas'
-          get 'in_cinemas/page/:page',  action: 'in_cinemas'
+          get 'in_cinemas/page/:page',  action: 'in_cinemas',  as: 'page_in_cinemas'
         end
       end
     end

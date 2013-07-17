@@ -20,7 +20,7 @@ class GenresController < ApplicationController
   end
 
   def genre
-    Genres.find_by_name params[:id]
+    Genre.find_by_name params[:id]
   end
 
   def page_no

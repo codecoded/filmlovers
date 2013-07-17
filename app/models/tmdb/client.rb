@@ -23,9 +23,9 @@ class Tmdb::Client
     end
 
     def genres(options={})
-      Rails.cache.fetch "genres", expires_in: 4.hours  do
+      # Rails.cache.fetch "genres", expires_in: 4.hours  do
         request "genre/list", options
-      end
+      # end
     end
 
     def search(query, options={}, type=:movie)

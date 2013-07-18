@@ -20,7 +20,7 @@ FL.Users = {
   registrationError: function(data, xhr, response){
     var self = $(this);
     if(xhr.status===422){
-      self.closest('#panelssignup #signupform, #panelslowersignup #signupform').parent().html($('#signupform', xhr.responseText))     
+      self.closest('#panelssignup #signupform, #panelslowersignup #signupform').replaceWith($('#signupform', xhr.responseText))     
     }
   },
 

@@ -1,4 +1,17 @@
 
+<% if !logged_in? %>
+  <div class="row">
+    <div class="large-3 small-12 large-offset-3 columns">
+        <p class="text-right"><a href="#" class="showPanel primary button" data-rel="lowersignup">Join</a></p>
+      </div>
+      <div class="large-4 small-12 columns end">
+        <p class="text-left create">Create a <strong>FREE</strong> account using your social network logins!</p>
+      </div>
+  </div>
+  <div class="full-row green-row panels" id="panelslowersignup">
+    <%= render template: 'devise/registrations/new' %>
+  </div>
+<% end %>
 
 <div class="full-row white-row margin-bottom">
   <div class="row">

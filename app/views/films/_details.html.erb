@@ -10,16 +10,14 @@
         </ul>
       </div>
       <div class="large-8 small-9 columns">
-          <h4>Alternative titles</h4>
-          <p><%= presenter.alternative_titles.join('<br/>').html_safe %></p>
-          <h4>Budget</h4>
-          <p><%= Utilities.to_currency film.budget ,{precision: 0} %></p>
-          <h4>Runtime</h4>
-          <p><%= presenter.runtime %></p>
-          <h4>Status</h4>
-          <p><%= film.status %></p>
-          <h4>Release Date</h4>
-          <p><%= film.uk_release_date.to_date.strftime('%d %B %Y')  %></p>
+        <%= show_details 'Rating', presenter.rating %>
+        <%= show_details 'Original title', presenter.original_title%>
+        <%= show_details 'Budget', presenter.budget %>
+        <%= show_details 'Languages', presenter.languages %>
+        <%= show_details 'Runtime', presenter.runtime %>
+        <%= show_details 'Status', presenter.status %>
+        <%= show_details 'Release Date', presenter.release_date %>
+        <%= show_details 'Homepage', film.homepage %>
       </div>
     </div>
   </div>

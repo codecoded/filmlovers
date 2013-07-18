@@ -17,66 +17,26 @@
         <h1><%= presenter.title %></h1>
         <h2><%= presenter.year_and_director %></h2>
         <hr />
+
         <h3>Synopsis</h3>
+        <h4><%= film.tagline %></h4>
         <p><%= film.overview %></p>
       </div>
       <div class="margin-bottom">
         <div class="inner-tabs">
           <div class="section-container auto" data-section>
             <%= render partial: 'details', locals: {presenter: presenter} %>
-            <%= render partial: 'trailer' if film.has_trailer? %>
+            <%= render partial: 'trailer', locals: {presenter: presenter} if film.has_trailer? %>
             <%= render partial: 'media' if film.has_backdrop? %>
           </div>
         </div>
         <div class="margin-bottom">
           <div class="inner-tabs">
             <div class="section-container auto" data-section>
-              <section>
-                <p class="title" data-section-title><a href="#panel1">Cast</a></p>
-                <div class="content" data-section-content>
-                  <div class="row">
-                    <div class="large-12 small-12 columns">
-                      <ul class="button-list">
-                        <% film.credits.cast.each do |person| %>
-                          <li><%= person.name %> </li>
-                        <% end %>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              <% if film.crew? %>
-                <section>
-                  <p class="title" data-section-title><a href="#panel2">Crew</a></p>
-                  <div class="content" data-section-content>
-                    <div class="row">
-                      <div class="large-12 small-12 columns">
-                        <ul class="button-list">
-                          <% film.credits.crew.each do |person| %>
-                            <li><%= person.name %> </li>
-                          <% end %>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              <% end %>
-              <% if film.studios? %>
-                <section>
-                  <p class="title" data-section-title><a href="#panel3">Studios</a></p>
-                  <div class="content" data-section-content>
-                    <div class="row">
-                      <div class="large-12 small-12 columns">
-                        <ul class="button-list">
-                          <% film.production_companies.each do |studio| %>
-                            <li><%= studio['name'] %> </li>
-                          <% end %>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              <% end %>
+              <%= render partial: 'cast' %>
+              <%= render partial: 'crew' if film.crew? %>
+              <%= render partial: 'studios' if film.studios? %>
+              <%= render partial: 'locations' if film.locations? %>
             </div>
           </div>
         </div>
@@ -87,6 +47,16 @@
       <div class="margin-bottom banner">
         <%= image_tag "content/300x250-banner.jpg", size: '300x250', alt: "Banner" %>
       </div>
+      <%if film.genres? %>
+        <div class="margin-bottom">
+          <h4>Genres</h4>
+          <ul class="button-list">
+            <% film.genres.each do |genre| %>
+              <li><%= genre_link genre %> </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <%if film.similar? %>
         <div class="margin-bottom">
           <h4>Similar films</h4>

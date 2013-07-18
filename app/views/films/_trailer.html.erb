@@ -1,14 +1,33 @@
-<section>
-    <p class="title" data-section-title><a href="#panel2">Trailer</a></p>
-    <div class="content" data-section-content>
-      <div class="row">
-        <div class="large-12 small-12 columns text-center" id="film-content-trailer">
-          <div class="flex-video">
-            <%= trailer film %>
-            <!-- <iframe width="640" height="360" src="//www.youtube.com/embed/T6DJcgm3wNY" frameborder="0" allowfullscreen></iframe> -->
-          </div>
-           <%= advert "blinkbox" %>      
+<!-- <section>
+  <p class="title" data-section-title><a href="#panel2">Trailer</a></p>
+  <div class="content" data-section-content>
+    <div class="row">
+      <div class="large-12 small-12 columns text-center" id="film-content-trailer">
+        <div class="flex-video">
+          <%#= trailer film %>
         </div>
+         <%#= advert "blinkbox" %>      
       </div>
     </div>
-  </section>
+  </div>
+</section> -->
+
+<section>
+  <p class="title" data-section-title><a href="#panel2">Trailers</a></p>
+  <div class="content" data-section-content>
+    <div class="row">
+      <div class="large-12 small-12 columns text-center" id="film-content-trailer">
+        <ul data-orbit>
+         
+            <% presenter.youtube_trailers.each do |trailer| %>
+              <li>
+                 <div class="flex-video"><%= presenter.iframe_for trailer%> </div>
+                 </li>
+            <% end %>
+         
+        </ul>
+      </div>
+      <%= advert "blinkbox" %>      
+    </div>
+  </div>
+</section>

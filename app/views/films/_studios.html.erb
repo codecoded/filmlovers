@@ -1,0 +1,14 @@
+<section>
+  <p class="title" data-section-title><a href="#panel3">Studios</a></p>
+  <div class="content" data-section-content>
+    <div class="row">
+      <div class="large-12 small-12 columns">
+        <ul class="button-list">
+          <% film.production_companies.each do |studio| %>
+            <li><%= studio['name'] %> </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

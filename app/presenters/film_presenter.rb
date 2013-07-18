@@ -35,18 +35,7 @@ class FilmPresenter < BasePresenter
   def alternative_titles
     film.alternative_titles.map {|t| t['title']}
   end
-  # def actions_count
-  #   @action ||= film.film_user_actions.group_by(&:action).map {|grouping, value| {action: grouping, count: value.length}}
-  # end
-
-  # def actions_count_for(action)
-  #   actions_count.find {|ac| ac[:action]==action} || {}
-  # end
-
-  # def count_for(action)
-  #   actions_count_for(action)[:count].to_i
-  # end
-
+  
   def user_actions
     @user_actions ||= current_user.film_user_actions.where(film: film).distinct(:action)
   end
@@ -113,9 +102,13 @@ class FilmPresenter < BasePresenter
     end
   end
 
-  # def self.from_films(user, film_ids)
-  #   Film.find(film_ids).map {|film| FilmPresenter.new user, film } if !film_ids.empty?
-  # end
+  def status
+    film.status if film.status != 'Released'
+  end
+
+  def languages
+    film.spoken_languages.map {|l| l['name']}
+  end
 
   # def actioned?(action)
   #   return false unless user
@@ -135,10 +128,35 @@ class FilmPresenter < BasePresenter
   #   film.backdrop(size)
   # end
 
-  # def release_date
-  #   film.release_date ? "#{Date.parse(film.release_date).year}" : ''
-  # end
+  def release_date
+    film.uk_release_date.to_date.strftime('%d %B %Y') if film.release_date
+  end
 
+  def budget
+    return unless film.budget and film.budget > 0
+    Utilities.to_currency film.budget ,{precision: 0}
+  end
+
+  def original_title
+    film.original_title if film.original_title != film.title
+  end
+
+  def rating
+    film.uk_certification
+  end
+
+  def youtube_trailers
+    return unless film.has_trailer?
+    film.trailers['youtube'].map {|t| t['source'] }.select {|s| !s.start_with? 'http'} 
+  end
+
+ def youttube_url_for(trailer)
+    "http://www.youtube.com/embed/#{trailer}?iv_load_policy=3&modestbranding=1&origin=localhost&rel=0&showinfo=0&controls=1"
+  end
+
+  def iframe_for(trailer)
+    content_tag :iframe, nil, src: youttube_url_for(trailer), frameborder: 0, allowfullscreen: true
+  end
   # def director
   #   @director ||= film.credits.crew.find {|member| member['job']=='Director'}
   #   @director ? @director['name'] : ''
@@ -156,4 +174,6 @@ class FilmPresenter < BasePresenter
   #   return unless similar_films?
   #   film.similar_movies['results'].compact.map {|f| FilmPresenter.new user, Film.new(f), 'w92'}
   # end
+
+
 end

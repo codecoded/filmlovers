@@ -103,6 +103,7 @@ module FilmHelper
   end
 
   def backdrop(film, backdrop, size = 'w1280')
+    return unless backdrop
     image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
   end
 
@@ -138,8 +139,11 @@ module FilmHelper
      truncate film.overview, separator: ' ', length: truncate_at, :omission => '...'
   end
 
-  def release_date(film)
-    film.release_date ? "#{Date.parse(film.release_date).year}" : ''
+  def show_details(title, detail)
+    return unless !detail.blank?
+    detail = detail.kind_of?(Array) ? detail.join('<br/>').html_safe : detail
+    content_tag(:h4, title) + content_tag(:p, detail)
   end
+
 
 end

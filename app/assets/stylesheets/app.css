@@ -1061,7 +1061,7 @@ ul.button-list li.owned a {
   background-image: url(site-basics/loved-icon-red.svg);
 }
 
-.actions ul li.own a {
+.actions ul li.owned a {
   background-image: url(site-basics/own-icon-red.svg);
 }
 

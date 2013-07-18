@@ -100,7 +100,7 @@ class Film
   end
   
   def has_backdrop?
-    backdrop_path and images
+    !backdrops.empty?
   end
 
   def backdrops
@@ -160,9 +160,16 @@ class Film
     film_user_actions.where(action: action)
   end
 
+  def uk_release
+    @uk_release ||= release_for 'GB'
+  end
+
   def uk_release_date
-    @uk_release_date ||= releases['countries'].find {|r| r['iso_3166_1']=='GB'}
-    @uk_release_date ? @uk_release_date['release_date'] : release_date
+    @uk_release ? uk_release['release_date'] : release_date
+  end
+
+  def uk_certification
+    uk_release['certification'] if @uk_release
   end
 
   def self.search(query, field=:title, order=:title, by=:asc)
@@ -183,6 +190,19 @@ class Film
 
   def studios?
     !production_companies.empty?
+  end
+
+  def locations?
+    !production_countries.empty?
+  end
+
+  def genres?
+    self['genres']
+  end
+
+  def release_for(country_code)
+    return unless !releases['countries'].empty?
+    releases['countries'].find {|r| r['iso_3166_1']=='GB'}
   end
 end
 

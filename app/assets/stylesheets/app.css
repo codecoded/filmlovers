@@ -477,6 +477,7 @@ p.forgotten {
 
 .pod {
   background-color: #fff;
+  background-color: rgba(255,255,255,0.8);
   box-shadow: 0px 4px 0px rgba(0,0,0,0.2);
   -moz-box-shadow: 0px 4px 0px rgba(0,0,0,0.2);
   -webkit-box-shadow: 0px 4px 0px rgba(0,0,0,0.2);
@@ -487,9 +488,9 @@ p.forgotten {
 
 .pod.actions {
   background-color: #B6212D;
-    color: #68212D;
-    margin-left: -70px;
-    margin-top: -90px;
+  color: #68212D;
+  margin-left: -70px;
+  margin-top: -90px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -529,22 +530,18 @@ p.lovers, p.watched, p.loved, p.owned {
 }
 
 .lovers {
-  background-image: url(site-basics/lovers-icon.png);
   background-image: url(site-basics/lovers-icon.svg);
 }
 
 .watched {
-  background-image: url(site-basics/watched-icon.png);
   background-image: url(site-basics/watched-icon.svg);
 }
 
 .loved {
-  background-image: url(site-basics/loved-icon.png);
   background-image: url(site-basics/loved-icon.svg);
 }
 
 .owned {
-  background-image: url(site-basics/owned-icon.png);
   background-image: url(site-basics/owned-icon.svg);
 }
 
@@ -892,6 +889,14 @@ p.lovers, p.watched, p.loved, p.owned {
   -ms-box-shadow: 0px 4px 0px rgba(0,0,0,0.2);
 }
 
+@media only screen and (max-width: 768px) {
+	
+	.inner-hero {
+		height: auto;
+	}
+	
+}
+
 .inner-hero .left-fade {
   position: absolute;
   left: 15px;
@@ -1049,56 +1054,50 @@ ul.button-list li.owned a {
 }
 
 .actions ul li.watched a {
-  background-image: url(site-basics/watched-icon-red.png);
   background-image: url(site-basics/watched-icon-red.svg);
 }
 
 .actions ul li.loved a {
-  background-image: url(site-basics/loved-icon-red.png);
   background-image: url(site-basics/loved-icon-red.svg);
 }
 
-.actions ul li.owned a {
-  background-image: url(site-basics/own-icon-red.png);
+.actions ul li.own a {
   background-image: url(site-basics/own-icon-red.svg);
 }
 
 .actions ul li.add a {
-  background-image: url(site-basics/list-icon-red.png);
   background-image: url(site-basics/list-icon-red.svg);
 }
 
 .actions ul li.share a {
-  background-image: url(site-basics/share-icon-red.png);
   background-image: url(site-basics/share-icon-red.svg);
 }
 
-.actions ul li.complete a, .actions ul li a:hover {
+.actions ul li.complete a {
   color: #fff;
 }
 
-.actions ul li.complete.watched a, .actions ul li.watched a:hover {
-  background-image: url(site-basics/watched-icon-white.png);
+.actions ul li a:hover {
+	opacity: 0.8;
+}
+
+.actions ul li.complete.watched a {
   background-image: url(site-basics/watched-icon-white.svg);
 }
 
-.actions ul li.complete.loved a, .actions ul li.loved a:hover {
-  background-image: url(site-basics/loved-icon-white.png);
+.actions ul li.complete.loved a {
   background-image: url(site-basics/loved-icon-white.svg);
 }
 
-.actions ul li.complete.owned a, .actions ul li.owned a:hover {
-  background-image: url(site-basics/own-icon-white.png);
+.actions ul li.complete.owned a {
   background-image: url(site-basics/own-icon-white.svg);
 }
 
-.actions ul li.complete.add a, .actions ul li.add a:hover {
-  background-image: url(site-basics/list-icon-white.png);
+.actions ul li.complete.add a {
   background-image: url(site-basics/list-icon-white.svg);
 }
 
-.actions ul li.complete.share a, .actions ul li.share a:hover {
-  background-image: url(site-basics/list-icon-white.png);
+.actions ul li.complete.share a {
   background-image: url(site-basics/share-icon-white.svg);
 }
 

@@ -29,4 +29,17 @@ namespace :admin do
     end
   end
 
+  desc "Delete all adult film"
+  task :delete_adult => :environment do
+    Log.info "Deleting #{Films.adult.count} adult films"
+    Films.adult.delete_all
+    Log.info "#{Films.adult.count} adult films remaining"
+  end
+
+  desc "Delete all invalid films "
+  task :delete_invalid => :environment do
+    Log.info "Deleting #{Films.invalid.count} films"
+    Films.invalid.delete_all
+    Log.info "#{Films.invalid.count} invalid films remaining"
+  end  
 end

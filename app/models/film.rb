@@ -88,7 +88,7 @@ class Film
   end
 
   def release_date
-    self['release_date'].to_date if self['release_date']
+    @release_date ||= self['release_date'].to_date if self['release_date'] and !self['release_date'].empty?
   end
 
   def duration
@@ -126,8 +126,12 @@ class Film
   end
 
   def crew_member(job)
-    return '' unless credits and credits.crew
+    return '' unless crew?
     credits.crew.find {|member| member['job']==job}
+  end
+
+  def crew?
+    credits and !credits.crew.empty?
   end
 
   def trailer(source=:youtube)
@@ -145,7 +149,7 @@ class Film
   end
 
   def similar?
-    similar_movies
+    !similar_movies['results'].empty?
   end
 
   def similar
@@ -177,5 +181,8 @@ class Film
     self['alternative_titles']
   end
 
+  def studios?
+    !production_companies.empty?
+  end
 end
 

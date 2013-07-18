@@ -43,6 +43,10 @@ module Films
     Film.where(adult: true)
   end
 
+  def invalid
+    Film.or({release_date: nil}, {:release_date.exists => false}, {release_date: ''})
+  end
+
   def find_all_summaries(ids)
     Film.only(:poster_path, :name, :title, :release_date, :trailers).find ids
   end

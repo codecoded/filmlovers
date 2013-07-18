@@ -24,8 +24,8 @@
         <div class="inner-tabs">
           <div class="section-container auto" data-section>
             <%= render partial: 'details', locals: {presenter: presenter} %>
-            <%= render partial: 'trailer' %>
-            <%= render partial: 'media' %>
+            <%= render partial: 'trailer' if film.has_trailer? %>
+            <%= render partial: 'media' if film.has_backdrop? %>
           </div>
         </div>
         <div class="margin-bottom">
@@ -45,34 +45,38 @@
                   </div>
                 </div>
               </section>
-              <section>
-                <p class="title" data-section-title><a href="#panel2">Crew</a></p>
-                <div class="content" data-section-content>
-                  <div class="row">
-                    <div class="large-12 small-12 columns">
-                      <ul class="button-list">
-                        <% film.credits.crew.each do |person| %>
-                          <li><%= person.name %> </li>
-                        <% end %>
-                      </ul>
+              <% if film.crew? %>
+                <section>
+                  <p class="title" data-section-title><a href="#panel2">Crew</a></p>
+                  <div class="content" data-section-content>
+                    <div class="row">
+                      <div class="large-12 small-12 columns">
+                        <ul class="button-list">
+                          <% film.credits.crew.each do |person| %>
+                            <li><%= person.name %> </li>
+                          <% end %>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
-              <section>
-                <p class="title" data-section-title><a href="#panel3">Studios</a></p>
-                <div class="content" data-section-content>
-                  <div class="row">
-                    <div class="large-12 small-12 columns">
-                      <ul class="button-list">
-                        <% film.production_companies.each do |studio| %>
-                          <li><%= studio['name'] %> </li>
-                        <% end %>
-                      </ul>
+                </section>
+              <% end %>
+              <% if film.studios? %>
+                <section>
+                  <p class="title" data-section-title><a href="#panel3">Studios</a></p>
+                  <div class="content" data-section-content>
+                    <div class="row">
+                      <div class="large-12 small-12 columns">
+                        <ul class="button-list">
+                          <% film.production_companies.each do |studio| %>
+                            <li><%= studio['name'] %> </li>
+                          <% end %>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              <% end %>
             </div>
           </div>
         </div>
@@ -83,14 +87,16 @@
       <div class="margin-bottom banner">
         <%= image_tag "content/300x250-banner.jpg", size: '300x250', alt: "Banner" %>
       </div>
-      <div class="margin-bottom">
-        <h4>Similar films</h4>
-        <ul class="button-list">
-          <% presenter.similar_films.each do |similar_film| %>
-            <li><%= link_to  similar_film[:title], similar_film[:url] %> </li>
-          <% end %>
-        </ul>
-      </div>
+      <%if film.similar? %>
+        <div class="margin-bottom">
+          <h4>Similar films</h4>
+          <ul class="button-list">
+            <% presenter.similar_films.each do |similar_film| %>
+              <li><%= link_to  similar_film[:title], similar_film[:url] %> </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="margin-bottom">
         <h4>filmlovers who...</h4>
         <ul class="button-list">

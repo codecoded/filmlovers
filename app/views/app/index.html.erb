@@ -1,10 +1,13 @@
+
 <div class="full-row hero margin-bottom">
+ 
   <div class="row">
     <div class="large-6 large-offset-3 small-10 small-offset-1 columns">
       <div class="pod">
         <h1 class="text-center">Watch, share &amp;<br />discover films</h1>
         <p class="text-center">Filmlovers is an online social platform that allows you to create &amp; share film lists and record your love of film.</p>
         <hr />
+         <% if !logged_in? %>
         <div class="row">
           <div class="large-5 small-12 columns">
             <p class="text-right"><a href="#" class="showPanel primary button" data-rel="signup">Join</a></p>
@@ -13,9 +16,11 @@
             <p class="text-left create">Create a <strong>FREE</strong> account or <a href="#features">take a look at what it offers</a>!</p>
           </div>
         </div>
+          <% end %>
       </div>
     </div>
   </div>
+
 </div>
 
 <div class="row margin-bottom">

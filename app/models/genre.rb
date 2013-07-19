@@ -5,7 +5,7 @@ class Genre
 
 
   def self.find_by_name(name)
-    all.find_by { |g| g.to_param == name }
+    all.select{ |g| g.to_param == name }.first
   end
 
   def to_param

@@ -3,7 +3,9 @@ class SearchController < ApplicationController
   respond_to :html, :json, :js
   
   def index
-    
+    @searcher ||= Searcher.new(query)
+    @results = page_results @searcher.search, :popularity, :desc 
+    render layout:nil if request.xhr?   
   end
 
   def show
@@ -14,9 +16,7 @@ class SearchController < ApplicationController
   end
 
   def searcher
-    @searcher ||= Searcher.new query, page_no
-  end
 
-  helper_method :searcher
+  end
 
 end

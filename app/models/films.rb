@@ -75,7 +75,7 @@ module Films
   end
 
   def search(query, field=:title, order=:title, by=:asc)
-    Film.order_by([order, by]).where(field => /\b#{query}\b/i)
+    Film.where(field => /\b#{query}\b/i)
   end
 
   def cast_search(name)
@@ -90,6 +90,14 @@ module Films
     ids ||= Rotten::Movies.in_cinemas.map(&:film_id).compact.uniq
     # ids = Cinema.all.map {|c| c.daily_schedules.current.map {|d| d.show_times.map {|s| s.film_id} }}.flatten.compact.uniq
     Film.in id: ids
+  end
+
+  def search(query, field=:title)
+    Film.any_of({title: /#{query}/i}, {original_title: /#{query}/i})
+  end
+
+  def by_genre(genres)
+    Film.any_in('genres.name' => genres)
   end
 
   def coming_soon

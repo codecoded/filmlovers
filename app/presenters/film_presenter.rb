@@ -157,6 +157,10 @@ class FilmPresenter < BasePresenter
   def iframe_for(trailer)
     content_tag :iframe, nil, src: youttube_url_for(trailer), frameborder: 0, allowfullscreen: true
   end
+
+  def genres
+    film.genres.map {|g| Genre.find(g['id'])}
+  end
   # def director
   #   @director ||= film.credits.crew.find {|member| member['job']=='Director'}
   #   @director ? @director['name'] : ''

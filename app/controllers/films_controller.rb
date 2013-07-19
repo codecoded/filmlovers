@@ -23,11 +23,11 @@ class FilmsController < ApplicationController
     render partial: 'list_view'
   end
 
-  def actioned
-    results_page = Films.paged_actioned(params[:user_action], params[:order],  params[:by], params[:page].to_i, 50)
-    @films_page = FilmsPagePresenter.new current_user, results_page, params[:user_action]
-    render 'index'
-  end
+  # def actioned
+  #   results_page = Films.paged_actioned(params[:user_action], params[:order],  params[:by], params[:page].to_i, 50)
+  #   @films_page = FilmsPagePresenter.new current_user, results_page, params[:user_action]
+  #   render 'index'
+  # end
 
   def summary
     @film_view = FilmPresenter.new current_user, film
@@ -37,7 +37,7 @@ class FilmsController < ApplicationController
 
   def coming_soon
     @films ||= page_results Films.coming_soon, :release_date, :asc
-    render 'index'
+    request.xhr? ? render('index', layout:nil) : render('index')
   end
 
   def in_cinemas
@@ -47,7 +47,7 @@ class FilmsController < ApplicationController
 
   def popular
     @films ||= page_results Film, :popularity, :desc
-    render 'index'
+    request.xhr? ? render('index', layout:nil) : render('index')
   end
 
   def search

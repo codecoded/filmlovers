@@ -15,7 +15,7 @@
 //= require knockout
 //= require_directory ./vendor
 //= require FL
-
-
+//= require masonry/jquery.masonry
+//= jquery.infinitescroll
 //= require_directory .
 

@@ -13,5 +13,6 @@
  *= require font-awesome
  *= require_tree ./fonts
  *= require foundation
+ *= require 'masonry/infinitescroll'
  *= require_directory .
  */

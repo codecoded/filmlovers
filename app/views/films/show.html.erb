@@ -51,8 +51,8 @@
         <div class="margin-bottom">
           <h4>Genres</h4>
           <ul class="button-list">
-            <% film.genres.each do |genre| %>
-              <li><%= genre_link genre %> </li>
+            <% presenter.genres.each do |genre| %>
+              <li> <%= link_to genre.name, genre_path(genre), alt: "view films in genre category #{genre}"  %></li>
             <% end %>
           </ul>
         </div>

@@ -22,6 +22,7 @@ class Film
   index({ title: 1}, { name: "film_title_index", background: false })
   index({ release_date: 1}, { name: "film_release_date_index", background: false })
   index({ popularity: 1}, { name: "film_popularity_index", background: false })
+  index({ genres: 1}, { name: "film_genres_index", background: true })
 
   def self.fetch(id)
     FilmRepository.find id
@@ -172,9 +173,7 @@ class Film
     uk_release['certification'] if @uk_release
   end
 
-  def self.search(query, field=:title, order=:title, by=:asc)
-    order_by([order, by]).any_of({title: /#{query}/i}, {original_title: /#{query}/i}).where(adult: false)
-  end
+
 
   def starring(count=3)
     credits.cast.take(count).map(&:name)

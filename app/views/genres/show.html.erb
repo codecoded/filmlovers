@@ -1,15 +1,9 @@
 
 <% description "View all films within the genre #{genre.name} and discover more" %>
 <% title " #{genre.name} films" %>
-<div class="row margin-bottom">
-  <h2><%= "#{@films_page.results_page.total_results} #{genre.name} films" %></h2>
 
-  <div id="filmsIndex">
-    <div id="search-results">
-      <div class="large-12 columns text-center">
-        <%#= paginate @films, remote: true %>
-      </div>    
-    <%= render partial: 'films/films' %>
-    </div>
-  </div>
+<div class="row">
+  <h2><%= "#{@films.count} films within genre #{genre.name}" %></h2>
 </div>
+
+<%= render partial: 'films/films', locals: {films:  @films} %>

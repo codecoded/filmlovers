@@ -49,7 +49,7 @@ FL.Films = {
         nextSelector : "span.next a",       
         itemSelector : "div.films .film",          
         animate: false,
-        bufferPx: 100
+        bufferPx: 40
       });
   },
 

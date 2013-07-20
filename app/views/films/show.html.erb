@@ -55,9 +55,6 @@
           <li class="owned"><%= presenter.action_count(:owned) %> own this film</li>
         </ul>
       </div>
-      <div class="margin-bottom banner">
-        <%= render partial: 'adverts/google_336x280', alt: 'google adverts' %>
-      </div>
       <%if film.genres? %>
         <div class="margin-bottom">
           <h4>Genres</h4>
@@ -78,6 +75,9 @@
           </ul>
         </div>
       <% end %>
+      <div class="margin-bottom banner">
+        <%= render partial: 'adverts/google_336x280', alt: 'google adverts' %>
+      </div>
     </div>
   </div>
 <% end %>

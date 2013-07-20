@@ -14,6 +14,14 @@ module Api
 
       end
 
+      def search
+        find_films Films.search(params[:query])
+      end
+
+      def popular
+        find_films Film
+      end
+
       protected
 
       def find_films(query, sort_by=:popularity, direction=:desc)

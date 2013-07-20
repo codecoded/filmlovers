@@ -74,10 +74,6 @@ module Films
     Film.only(:poster_path, :name, :title, :release_date, :trailers).order_by([order, by]).limit(count).find(film_ids)
   end
 
-  def search(query, field=:title, order=:title, by=:asc)
-    Film.where(field => /\b#{query}\b/i)
-  end
-
   def cast_search(name)
     Film.only(:poster_path, :name, :title, :release_date, :trailers).where('casts.cast.name'=>/#{name}/i)
   end
@@ -93,7 +89,7 @@ module Films
   end
 
   def search(query, field=:title)
-    Film.any_of({title: /#{query}/i}, {original_title: /#{query}/i})
+    Film.or({title: /#{query}/i}, {original_title: /#{query}/i})
   end
 
   def by_genre(genres)

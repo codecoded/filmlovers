@@ -4,11 +4,9 @@ class FilmsController < ApplicationController
   respond_to :html, :json
 
   def index
-    # render_template
   end
 
   def show
-    # render_template
   end
 
   def view
@@ -36,26 +34,15 @@ class FilmsController < ApplicationController
   end
 
   def coming_soon
-    @films ||= page_results Films.coming_soon, :release_date, :asc
-    request.xhr? ? render('index', layout:nil) : render('index')
+    render_films Films.coming_soon, :release_date, :asc
   end
 
   def in_cinemas
-    @films ||= page_results Films.in_cinemas, :release_date, :desc
-    render 'index'
+    render_films Films.in_cinemas, :release_date, :desc
   end
 
   def popular
-    @films ||= page_results Film, :popularity, :desc
-    request.xhr? ? render('index', layout:nil) : render('index')
-  end
-
-  def search
-    present(perform_search, params[:query]) and render_template :index
-  end
-
-  def inline_search
-    respond_with present(perform_search, params[:q])
+    render_films Film, :popularity, :desc
   end
 
   def users
@@ -67,6 +54,10 @@ class FilmsController < ApplicationController
   protected
 
 
+  def render_films(query, order, by)
+    @films ||= page_results query, order, by
+    request.xhr? ? render('index', layout:nil) : render('index')
+  end
 
   def perform_search
     # page_size = 28
@@ -75,13 +66,6 @@ class FilmsController < ApplicationController
     TmdbFilmsSearch.new.search(params[:q] || params[:query], page_options)
   end
 
-  def page_options
-    params[:page] ? {page: page_no} : {} 
-  end
-
-  def present(results_page, description='')
-    @films_page = FilmsPagePresenter.new(current_user, results_page, description)
-  end
 
   def film
     @film ||= Film.fetch(params[:id])

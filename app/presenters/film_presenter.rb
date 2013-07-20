@@ -161,6 +161,14 @@ class FilmPresenter < BasePresenter
   def genres
     film.genres.map {|g| Genre.find(g['id'])}
   end
+
+  def imdb_link
+    return unless film.imdb_id
+    content_tag :a,  href: "http://www.imdb.com/title/#{film.imdb_id}",  alt:"IMDB link for #{film.title}", target: '_blank' do 
+      image_tag 'imdb_logo.png'
+    end
+  end
+
   # def director
   #   @director ||= film.credits.crew.find {|member| member['job']=='Director'}
   #   @director ? @director['name'] : ''

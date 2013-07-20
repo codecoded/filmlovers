@@ -45,7 +45,18 @@
     <div class="large-4 small-12 columns">
       <%= render partial: 'action_panel', locals: {presenter: presenter} if logged_in?%>
       <div class="margin-bottom banner">
-        <%= image_tag "content/300x250-banner.jpg", size: '300x250', alt: "Banner" %>
+        <%= render partial: 'adverts/lovefilm_300x250', alt: 'lovefilm advert' %>
+      </div>
+      <div class="margin-bottom">
+        <h4>filmlovers who...</h4>
+        <ul class="button-list">
+          <li class="watched"><%= presenter.action_count(:watched) %> watched this film</li>
+          <li class="loved"><%= presenter.action_count(:loved) %> loved this film</li>
+          <li class="owned"><%= presenter.action_count(:owned) %> own this film</li>
+        </ul>
+      </div>
+      <div class="margin-bottom banner">
+        <%= render partial: 'adverts/google_336x280', alt: 'google adverts' %>
       </div>
       <%if film.genres? %>
         <div class="margin-bottom">
@@ -67,14 +78,6 @@
           </ul>
         </div>
       <% end %>
-      <div class="margin-bottom">
-        <h4>filmlovers who...</h4>
-        <ul class="button-list">
-          <li class="watched"><%= presenter.action_count(:watched) %> watched this film</li>
-          <li class="loved"><%= presenter.action_count(:loved) %> loved this film</li>
-          <li class="owned"><%= presenter.action_count(:owned) %> own this film</li>
-        </ul>
-      </div>
     </div>
   </div>
 <% end %>

@@ -105,7 +105,7 @@ class Film
   end
 
   def backdrops
-    images_library.backdrops
+    images_library ? images_library.backdrops : []
   end
 
   def has_trailer?(source=:youtube)
@@ -176,7 +176,7 @@ class Film
 
 
   def starring(count=3)
-    credits.cast.take(count).map(&:name)
+    credits.cast.take(count).map(&:name) if credits
   end
 
   def alternative_titles

@@ -3,15 +3,15 @@ object false
 node :header do
   {
     version:    'v1',
-    #domain:     'http://www.filmlovers.co.uk',
+    domain:     "#{request.protocol}#{request.host}:#{request.port}",
     timestamp:  Time.now.utc
   }
 end
 
 node :pages do
   {
-    :previous       => page_no > 1 ? page_coming_soon_api_v1_films_url(page_no - 1) : nil,
-    :next           => @total_pages > page_no ? page_coming_soon_api_v1_films_url(page_no + 1) : nil,
+    :previous       => page_no > 1 ? url_for(params.merge({page: page_no-1}))  : nil,
+    :next           => @total_pages > page_no ?  url_for(params.merge({page: page_no+1})) : nil,
     :page_no        => page_no,
     :total_results  => @films_count,
     :page_size      => AdminConfig.instance.page_size,

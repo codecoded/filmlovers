@@ -89,7 +89,7 @@ class Film
   end
 
   def release_date
-    @release_date ||= self['release_date'].to_date if self['release_date'] and !self['release_date'].empty?
+    @release_date ||= self['release_date'].to_date if self['release_date'] and !self['release_date'].blank?
   end
 
   def duration
@@ -101,7 +101,7 @@ class Film
   end
   
   def has_backdrop?
-    !backdrops.empty?
+    !backdrops.blank?
   end
 
   def backdrops_urls_for(size)
@@ -136,11 +136,11 @@ class Film
   end
 
   def cast?
-    credits and !credits.cast.empty?
+    credits and !credits.cast.blank?
   end
 
   def crew?
-    credits and !credits.crew.empty?
+    credits and !credits.crew.blank?
   end
 
   def trailer(source=:youtube)
@@ -158,7 +158,7 @@ class Film
   end
 
   def similar?
-    !similar_movies['results'].empty?
+    !similar_movies['results'].blank?
   end
 
   def similar
@@ -194,11 +194,11 @@ class Film
   end
 
   def studios?
-    !production_companies.empty?
+    !production_companies.blank?
   end
 
   def locations?
-    !production_countries.empty?
+    !production_countries.blank?
   end
 
   def genres?
@@ -222,7 +222,7 @@ class Film
   end
 
   def release_for(country_code)
-    return unless !releases['countries'].empty?
+    return unless !releases['countries'].blank?
     releases['countries'].find {|r| r['iso_3166_1']=='GB'}
   end
 end

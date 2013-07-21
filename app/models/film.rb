@@ -213,6 +213,10 @@ class Film
     self['spoken_languages']
   end
 
+  def not_allowed?
+    !release_date || self['adult']
+  end
+
   def release_for(country_code)
     return unless !releases['countries'].empty?
     releases['countries'].find {|r| r['iso_3166_1']=='GB'}

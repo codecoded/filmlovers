@@ -15,6 +15,10 @@ module Api
         query.order_by([order || default_order, by]).page(page_no).per AdminConfig.instance.page_size
       end
 
+      def page_size
+        20
+      end
+
       def page_no
         params[:page] ? params[:page].to_i : 1
       end
@@ -27,7 +31,7 @@ module Api
         params[:order]
       end
 
-      helper_method :current_user, :page_no, :by, :order
+      helper_method :current_user, :page_no, :by, :order, :page_size
     end
   end
 end

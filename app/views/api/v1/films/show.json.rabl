@@ -1,12 +1,13 @@
 object @film
 
-
-node :header do
-  {
-    version:    'v1',
-    domain:     "#{request.protocol}#{request.host}:#{request.port}",
-    timestamp:  Time.now.utc
-  }
+if !locals[:hide_header]
+  node :header do
+    {
+      version:    'v1',
+      domain:     "#{request.protocol}#{request.host}:#{request.port}",
+      timestamp:  Time.now.utc
+    }
+  end 
 end
 
 node :film do |film|

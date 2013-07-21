@@ -36,6 +36,7 @@ class FilmRepository
   def fetch
     id = film ? film._id : film_id
     _film = Film.new Tmdb::Movie.find(id)
+    return nil if _film.not_allowed?
     _film.fetched = Time.now.utc
     _film.upsert
     _film

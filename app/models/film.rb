@@ -224,6 +224,10 @@ class Film
   def production_countries
     self['production_countries']
   end
+
+  def status
+    self['status']
+  end
   
   def release_for(country_code)
     return unless !releases['countries'].blank?

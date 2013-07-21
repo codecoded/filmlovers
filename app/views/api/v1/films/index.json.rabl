@@ -1,6 +1,6 @@
 object false
 
-cache url_for(params), expires_in: 12.hours
+
 node :header do
   {
     version:    'v1',

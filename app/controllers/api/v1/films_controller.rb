@@ -29,7 +29,10 @@ module Api
       protected
 
       def find_films(query, sort_by=:popularity, direction=:desc)
-        @films = page_results query, sort_by, direction
+
+        @films = Rails.cache.fetch url_for(params), expires_in: 12.hours do
+          page_results query, sort_by, direction
+        end
         @films_count = @films.count
         @total_pages = (@films_count / page_size) + 1
         render :index, formats: :json

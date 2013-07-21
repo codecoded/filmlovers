@@ -42,17 +42,6 @@ class AdminConfig
 
     end
 
-
-    def update_counters
-      FilmUserAction.distinct(:film_id).each do |id|
-        film = Film.find id
-        next unless film
-        [:watched, :loved, :owned].each do |action|
-          film.counters.set(action, film.actions_for(action).count)
-        end
-      end
-    end
-
   end
 
 end

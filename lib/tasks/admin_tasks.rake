@@ -42,4 +42,11 @@ namespace :admin do
     Films.invalid.delete_all
     Log.info "#{Films.invalid.count} invalid films remaining"
   end  
+
+  desc "Update film coutners"
+  task :update_counters => :environment do
+    Log.info "Updating film counters"
+    AppConfig.update_counters
+    Log.info "Updating film counters done"
+  end  
 end

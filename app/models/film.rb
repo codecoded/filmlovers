@@ -221,6 +221,10 @@ class Film
     self['production_companies']
   end
 
+  def production_countries
+    self['production_countries']
+  end
+  
   def release_for(country_code)
     return unless !releases['countries'].blank?
     releases['countries'].find {|r| r['iso_3166_1']=='GB'}

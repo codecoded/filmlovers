@@ -88,10 +88,6 @@ class Film
     AppConfig.image_uri_for([size, backdrops[0]['file_path']]) if has_backdrop?
   end
 
-  def studios?
-    production_companies and production_companies.length > 0
-  end
-
   def release_date
     @release_date ||= self['release_date'].to_date if self['release_date'] and !self['release_date'].empty?
   end
@@ -215,6 +211,10 @@ class Film
 
   def not_allowed?
     !release_date || self['adult']
+  end
+
+  def production_companies
+    self['production_companies']
   end
 
   def release_for(country_code)

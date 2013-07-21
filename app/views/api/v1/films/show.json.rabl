@@ -33,9 +33,13 @@ node :film do |film|
     },
     cast:film.credits.cast.map {|p| {url: nil, name: p.name, description: p.character} },
     crew: film.credits.crew.map {|p| {url: nil, name: p.name, description: p.job} },
-    languages: if false then film.spoken_languages.map {|l| l['name']} end,
+    languages: if film.spoken_languages then film.spoken_languages.map {|l| l['name']} end,
     genres: if film.genres? then film.genres.map {|g| {url: api_v1_genre_path(Genre.find(g['id'])), name:g['name']}} end,
-    popularity: film.popularity
+    studios: if film.studios? then film.production_companies.map {|s| {url: '', name: s['name']}} end,
+    locations: if film.locations? then film.production_countries.map {|s| {url: '', name: s['name']}} end,
+    original_title: if film.original_title != film.title then film.original_title end, 
+    status: if film.status != 'Released' then film.status end,
+    popularity: film.popularity,
   }
 end
 

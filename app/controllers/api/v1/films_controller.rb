@@ -2,6 +2,10 @@ module Api
   module V1
     class FilmsController < BaseController
 
+      def show
+        @film = Film.fetch params[:id]
+      end
+
       def coming_soon
         find_films Films.coming_soon
       end

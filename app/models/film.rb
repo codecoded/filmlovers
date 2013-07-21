@@ -40,6 +40,10 @@ class Film
     self['title']
   end
 
+  def budget
+    self['budget']
+  end
+
   def users
     @lists ||= FilmLoverLists.new("film:#{id}:users")
   end
@@ -102,6 +106,10 @@ class Film
   
   def has_backdrop?
     !backdrops.empty?
+  end
+
+  def backdrops_urls_for(size)
+    backdrops.map {|b| AppConfig.image_uri_for [size, b['file_path']] } if has_backdrop?
   end
 
   def backdrops
@@ -173,8 +181,6 @@ class Film
     uk_release['certification'] if @uk_release
   end
 
-
-
   def starring(count=3)
     credits.cast.take(count).map(&:name) if credits
   end
@@ -197,6 +203,14 @@ class Film
 
   def genres?
     self['genres']
+  end
+
+  def genres
+    self['genres']
+  end
+
+  def spoken_languages
+    self['spoken_languages']
   end
 
   def release_for(country_code)

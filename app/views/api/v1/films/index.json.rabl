@@ -24,15 +24,12 @@ end
 node :films do 
   @films.map do |film|
     {
-      id: film._title_id,
+      url: api_v1_film_path(film),
       title: film.title,
       director: film.director,
       release_date: film.uk_release_date,
-      backdrop: film.backdrop,
-      poster: film.poster,
-      overview: film.overview,
+      backdrop: film.backdrop('w92'),
       starring: film.starring,
-      budget: film.budget,
       runtime: film.runtime,
       trailer: film.trailer,
       counters:{

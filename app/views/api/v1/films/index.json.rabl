@@ -31,7 +31,16 @@ node :films do
       backdrop: film.backdrop,
       poster: film.poster,
       overview: film.overview,
-      starring: film.starring
+      starring: film.starring,
+      budget: film.budget,
+      runtime: film.runtime,
+      trailer: film.trailer,
+      counters:{
+        watched: film.counters.watched,
+        loved: film.counters.loved,
+        owned: film.counters.owned
+      },
+      popularity: film.popularity
     }
   end
 end

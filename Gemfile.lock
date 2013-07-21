@@ -64,6 +64,7 @@ GEM
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
     daemons (1.1.9)
+    dalli (2.6.4)
     debug_inspector (0.0.2)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
@@ -119,6 +120,7 @@ GEM
       treetop (~> 1.4.8)
     masonry-rails (0.2.0)
       rails
+    memcachier (0.0.2)
     meta-tags (1.5.0)
       actionpack
     metaclass (0.0.1)
@@ -265,6 +267,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
   compass-rails
+  dalli
   devise
   eventmachine (~> 1.0.3)
   execjs
@@ -281,6 +284,7 @@ DEPENDENCIES
   letter_opener
   log4r
   masonry-rails
+  memcachier
   meta-tags
   minitest
   mocha

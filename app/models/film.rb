@@ -135,6 +135,10 @@ class Film
     credits.crew.find {|member| member['job']==job}
   end
 
+  def cast?
+    credits and !credits.cast.empty?
+  end
+
   def crew?
     credits and !credits.crew.empty?
   end

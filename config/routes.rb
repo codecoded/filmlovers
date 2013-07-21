@@ -28,6 +28,7 @@ Filmlovers::Application.routes.draw do
           get 'coming_soon'
           get 'search'
           get 'popular'
+          get 'popular/page/:page', action: 'popular', as: 'page_popular'
           get 'coming_soon/page/:page', action: 'coming_soon', as: 'page_coming_soon'
           get 'in_cinemas'
           get 'in_cinemas/page/:page',  action: 'in_cinemas',  as: 'page_in_cinemas'

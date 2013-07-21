@@ -30,7 +30,7 @@ node :films do
       release_date: film.uk_release_date,
       backdrop: film.backdrop('w92'),
       starring: film.starring,
-      runtime: film.runtime,
+      runtime: if film.runtime and film.runtime > 0 then film.runtime end,
       trailer: film.trailer,
       counters:{
         watched: film.counters.watched,

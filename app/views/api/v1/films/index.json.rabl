@@ -1,14 +1,14 @@
 object false
 
-if !locals[:hide_header]
-  node :header do
-    {
-      version:    'v1',
-      domain:     "#{request.protocol}#{request.host}:#{request.port}",
-      timestamp:  Time.now.utc
-    }
-  end 
-end
+cache url_for(params), expires_in: 12.hours
+node :header do
+  {
+    version:    'v1',
+    domain:     "#{request.protocol}#{request.host}:#{request.port}",
+    timestamp:  Time.now.utc,
+    url:        url_for(params)
+  }
+end 
 
 node :pages do
   {

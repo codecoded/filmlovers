@@ -162,7 +162,7 @@ class Film
   end
 
   def similar
-    similar_movies['results'].compact.map {|f| Film.find(f['id']) || Film.create(f)}
+    similar_movies['results'].compact.map {|f| Film.new(f)}
   end
 
   def actions_for(action)

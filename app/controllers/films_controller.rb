@@ -34,11 +34,11 @@ class FilmsController < ApplicationController
   end
 
   def coming_soon
-    render_films Films.coming_soon, :release_date, :asc
+    render_films FilmCollection.coming_soon.films, :release_date, :asc
   end
 
   def in_cinemas
-    render_films Films.in_cinemas, :release_date, :desc
+    render_films FilmCollection.in_cinemas.films, :release_date, :desc
   end
 
   def popular

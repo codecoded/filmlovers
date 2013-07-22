@@ -83,9 +83,9 @@ module Films
   end
 
   def in_cinemas
-    ids ||= Rotten::Movies.in_cinemas.map(&:film_id).compact.uniq
+    @in_cinemas ||= Rotten::Movies.in_cinemas.map(&:film_id).compact.uniq
     # ids = Cinema.all.map {|c| c.daily_schedules.current.map {|d| d.show_times.map {|s| s.film_id} }}.flatten.compact.uniq
-    Film.in id: ids
+    # Film.in id: ids
   end
 
   def search(query, field=:title)

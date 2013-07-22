@@ -7,11 +7,11 @@ module Api
       end
 
       def coming_soon
-        find_films Films.coming_soon
+        find_films FilmCollection.coming_soon.films
       end
 
       def in_cinemas
-        find_films Films.in_cinemas
+        find_films FilmCollection.in_cinemas.films
       end
 
       def categories

@@ -159,7 +159,7 @@ class FilmPresenter < BasePresenter
   end
 
   def genres
-    film.genres.map {|g| Genre.find(g['id'])}
+    film.genres.map {|g| Genre.cached.find(g['id'])}
   end
 
   def imdb_link

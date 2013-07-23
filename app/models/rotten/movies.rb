@@ -2,21 +2,15 @@ module Rotten
   class Movies
 
     def self.in_cinemas
-      Rails.cache.fetch 'rotten_in_cinemas', expires_in: 4.hours do
-        import Rotten::Client.in_cinemas
-      end
+      import Rotten::Client.in_cinemas
     end
 
     def self.upcoming
-      Rails.cache.fetch 'rotten_upcoming', expires_in: 4.hours do
-        import Rotten::Client.upcoming
-      end
+      import Rotten::Client.upcoming
     end
 
     def self.opening
-      Rails.cache.fetch 'rotten_opening', expires_in: 4.hours do
-        import Rotten::Client.opening
-      end
+      import Rotten::Client.opening
     end
 
     def self.import(films)

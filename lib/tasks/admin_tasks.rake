@@ -49,4 +49,13 @@ namespace :admin do
     AppConfig.update_counters
     Log.info "Updating film counters done"
   end  
+
+  desc "Update film collections"
+  task :update_film_collections => :environment do
+    Log.info "Updating film collections"
+    FilmCollection.populate_coming_soon
+    Log.info "Updating films coming soon done. There are #{FilmCollection.coming_soon.film_ids.count} films found coming soon"
+    FilmCollection.populate_in_cinemas
+    Log.info "Updating films in cinemas done. There are #{FilmCollection.in_cinemas.film_ids.count} films found in cinemas"
+  end
 end

@@ -12,6 +12,14 @@ FL.Search = {
 
   initListeners: function(){
     $(document).on('ajax:success', 'nav.pagination', search.displayContent);
+
+    $('#quick_search_header').smartSuggest({
+      src: '/search/smart',
+      fillBox: true,
+      fillBoxWith: 'primary',
+      executeCode: false,
+    });
+
   },
 
   displayContent: function(event, data, status, xhr){

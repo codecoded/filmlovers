@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def page_results(query, default_order, by=by)
-    query.order_by([order || default_order, by]).page(page_no).per AdminConfig.instance.page_size
+  def page_results(query, default_order, by=by, page_size=AdminConfig.instance.page_size)
+    query.order_by([order || default_order, by]).page(page_no).per page_size
   end
 
   def page_no

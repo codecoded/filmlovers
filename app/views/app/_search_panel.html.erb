@@ -7,7 +7,7 @@
       <%= form_tag(search_index_path, method: :get, id: 'search') do%>
         <div class="large-9 small-12 columns">
           <label for="searchinput"></label>
-          <%= text_field_tag 'query', params[:query], tabindex: 9, placeholder:"Enter your search", id: 'quick_search_header'  %>
+          <%= text_field_tag 'q', params[:q], tabindex: 9, placeholder:"Enter your search", id: 'quick_search_header', class: "ss-input" %>
         </div>
         <div class="large-3 small-12 columns">
           <input type="submit" name="searchbutton" id="searchbutton" value="Search" tabindex="10">

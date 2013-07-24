@@ -53,38 +53,6 @@ FL.Films = {
       });
   },
 
-  endlessScroll: function(){
-    var self = this
-    var loading = false
-    var threshold = 600
-
-    $(window).scroll(function()
-    {
-      var currentPos = $(window).scrollTop() + threshold 
-      var totalHeight = $(document).height() - $(window).height()
-      if(currentPos >= totalHeight && !loading)
-      {
-        next = $('#filmsLinkNext').attr('href')
-        if(!next) return false
-          
-        loading = true
-        $.ajax({
-          url: next,
-          success: function(html){
-            loading = false
-            
-            if(!html)
-              return $('div#loadmoreajaxloader').html('<center>No more posts to show.</center>');
-        
-            $('#filmsLinkNext').remove()
-            $("#filmsContent").append($(html).find('.film'))
-            $("#filmsContent").append($(html).find('#filmsLinkNext'))
-          } 
-        })
-      }
-    })
-  },
-
   sortUserFilms: function(){
     var url = $(this).attr('value')
     $('#contentHolder').load(url + ' #filmsContent')

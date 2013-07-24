@@ -18,6 +18,7 @@ node :film do |film|
     release_date: film.uk_release_date,
     backdrop: film.backdrop,
     poster: film.poster,
+    tagline: film.tagline,
     overview: film.overview,
     starring: film.starring,
     budget: film.budget,
@@ -31,8 +32,8 @@ node :film do |film|
     images:{
       backdrops: film.backdrops_urls_for('w300')
     },
-    cast: if film.cast? then film.credits.cast.map {|p| {url: nil, name: p.name, description: p.character} } end,
-    crew: if film.crew? then film.credits.crew.map {|p| {url: nil, name: p.name, description: p.job} } end,
+    cast: if film.cast? then film.credits.cast.map {|p| {url: nil, name: p.name, description: p.character, image: p.profile('w92')} } end,
+    crew: if film.crew? then film.credits.crew.map {|p| {url: nil, name: p.name, description: p.job, image: p.profile('w92')} } end,
     languages: if film.spoken_languages then film.spoken_languages.map {|l| l['name']} end,
     genres: if film.genres? then film.genres.map {|g| {url: api_v1_genre_path(Genre.find_by_id(g['id'])), name:g['name']}} end,
     studios: if film.studios? then film.production_companies.map {|s| {url: '', name: s['name']}} end,

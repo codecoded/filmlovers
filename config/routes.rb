@@ -68,7 +68,11 @@ Filmlovers::Application.routes.draw do
     end
   end
 
-  resources 'search', only: [:show, :index]
+  resources 'search', only: [:show, :index] do
+    collection do
+      get 'smart'
+    end
+  end
 
   resources 'persons', only: [:show, :index] do
     collection do 

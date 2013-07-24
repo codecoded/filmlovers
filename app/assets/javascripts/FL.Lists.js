@@ -12,7 +12,6 @@ FL.Lists = {
   initListeners: function(){
     $(document).on('click', ".overview-toggle", FL.Lists.overviewToggle)
     $(document).on('click', "button[data-action=delete-film-item]", FL.Lists.deleteFilmItem)
-    $('#quick_search').smartSuggest({src: '/films/inline_search', showImages: true })
   },
 
   initSort: function(sorter){

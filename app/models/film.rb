@@ -13,6 +13,7 @@ class Film
   field :rating, type: Integer, default: 0
   field :tms_id, type: String
   field :rotten_id, type: String
+  field :netflix_id, type: String
   field :uk_rating, type: String
 
   FilmLists = [:watched, :loved, :unloved, :queued]
@@ -227,6 +228,10 @@ class Film
 
   def status
     self['status']
+  end
+
+  def tagline
+    self['tagline']
   end
   
   def release_for(country_code)

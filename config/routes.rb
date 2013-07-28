@@ -84,6 +84,7 @@ Filmlovers::Application.routes.draw do
   resources 'channels' do
     collection do
       get 'facebook'
+      get 'netflix'
     end
   end
 

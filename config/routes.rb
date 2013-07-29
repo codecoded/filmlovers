@@ -34,6 +34,8 @@ Filmlovers::Application.routes.draw do
           get 'in_cinemas/page/:page',  action: 'in_cinemas',  as: 'page_in_cinemas'
         end
       end
+
+      resources :persons,  only: :show
     end
   end
 

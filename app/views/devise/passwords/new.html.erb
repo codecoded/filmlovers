@@ -1,25 +1,25 @@
-
-
-<div class="row">
-  <div class="large-4 large-offset-2 small-12 columns">
-    <h2>Try an alternative sign in...</h2>
-    <ul class="signup-options">
-      <%= passport_link :facebook, "Facebook" %>
-      <%= passport_link :twitter, "Twitter" %>
-      <%= passport_link :netflix, "Netflix" %>      
-      <%= passport_link :google_oauth2, "Google" %>
-    </ul>
-  </div>
-  <div class="large-4 small-12 columns end">
-    <h2>or request new password...</h2>
-      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }, remote: true) do |f| %>
-      <label for="email"></label>
-      <%= f.input :username, autofocus: true, placeholder: 'Your email', hint: false, label: false%>
-      <div class="row">
-        <div class="large-6 small-6 columns">
-          <input type="submit" name="sendinstructions" id="sendinstructions" value="Send reset password instructions" tabindex="2">
+<div class="full-row green-row panels margin-bottom" >
+  <div class="row">
+    <div class="large-4 large-offset-2 small-12 columns">
+      <h2>Try an alternative sign in...</h2>
+      <ul class="signup-options">
+        <%= passport_link :facebook, "Facebook" %>
+        <%= passport_link :twitter, "Twitter" %>
+        <%= passport_link :netflix, "Netflix" %>      
+        <%= passport_link :google_oauth2, "Google" %>
+      </ul>
+    </div>
+    <div class="large-4 small-12 columns end">
+      <h2>or request new password...</h2>
+        <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+        <label for="email"></label>
+        <%= f.input :username, autofocus: true, placeholder: 'Your email', hint: false, label: false%>
+        <div class="row">
+          <div class="large-6 small-6 columns">
+            <input type="submit" name="sendinstructions" id="sendinstructions" value="Send reset password instructions" tabindex="2">
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

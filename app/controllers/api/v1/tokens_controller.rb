@@ -1,6 +1,6 @@
 module Api
   module V1
-    class TokensController  < ApplicationController 
+    class TokensController  < BaseController 
       skip_before_filter :verify_authenticity_token
       respond_to :json
       
@@ -32,8 +32,8 @@ module Api
           return
         end
 
-        @user.ensure_authentication_token!
-        render :status=>200, :json=>{:token=>@user.authentication_token} 
+        @user.ensure_authentication_token!        
+        @current_user = @user
       end
       
       def destroy

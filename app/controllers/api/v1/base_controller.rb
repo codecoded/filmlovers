@@ -5,10 +5,21 @@ module Api
       layout false
       respond_to :json
      
-
+      before_filter :skip_trackable, :authenticate
       protected
+
+      def authenticate
+        if user = authenticate_with_http_token { |token, options| User.find_by authentication_token: token }
+          @current_user = user
+        end
+      end
+
       def current_user
-        @current_user ||= PlayerSession.current_player(cookies)
+        @current_user
+      end
+
+      def skip_trackable
+        request.env['devise.skip_trackable'] = true
       end
 
       def page_results(query, default_order, by=by)

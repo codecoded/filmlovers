@@ -10,13 +10,13 @@
       </ul>
     </div>
     <div class="large-4 small-12 columns end">
-      <h2>or request new password...</h2>
+      <h2>or reset your password...</h2>
         <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
         <label for="email"></label>
         <%= f.input :username, autofocus: true, placeholder: 'Your email', hint: false, label: false%>
         <div class="row">
           <div class="large-6 small-6 columns">
-            <input type="submit" name="sendinstructions" id="sendinstructions" value="Send reset password instructions" tabindex="2">
+            <input type="submit" name="sendinstructions" id="sendinstructions" value="Send instructions" tabindex="2">
           </div>
         </div>
       <% end %>

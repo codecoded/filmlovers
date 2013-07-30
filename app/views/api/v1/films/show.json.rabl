@@ -1,13 +1,7 @@
 object @film
 
 if !locals[:hide_header]
-  node :header do
-    {
-      version:    'v1',
-      domain:     "#{request.protocol}#{request.host}:#{request.port}",
-      timestamp:  Time.now.utc
-    }
-  end 
+  extends 'api/v1/shared/header'
 end
 
 node :film do |film|

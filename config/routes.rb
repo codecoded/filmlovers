@@ -2,6 +2,8 @@ Filmlovers::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "sessions", :registrations => "registrations"}
 
+
+  
   root :to => 'app#index'
 
   match 'auth/:provider/callback',  to: 'sessions#create'
@@ -16,8 +18,10 @@ Filmlovers::Application.routes.draw do
 
   match 'templates/:action' => "templates#:action", as: 'templates'
 
-  namespace :api, defaults: {format: 'json'}  do
+  namespace :api do
     namespace :v1 do
+      resources :registrations, :only => [:create, :update]
+      resources :tokens, :only => [:create, :destroy, :index]
 
       resources :films do
         collection do

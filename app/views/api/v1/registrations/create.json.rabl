@@ -1,5 +1,6 @@
 object false
 
+
 extends 'api/v1/shared/header'
 
 node :pages do
@@ -14,6 +15,9 @@ node :pages do
     :by             => by,
   }
 end
+
+
+
 
 node :films do 
   @films.map do |film|

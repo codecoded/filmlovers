@@ -5,7 +5,7 @@ class User
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable#, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :token_authenticatable#, :validatable
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -39,7 +39,7 @@ class User
   # field :locked_at,       :type => Time
 
   ## Token authenticatable
-  # field :authentication_token, :type => String
+  field :authentication_token, :type => String
   include Mongoid::Timestamps
   include Gravtastic
 
@@ -57,7 +57,7 @@ class User
   validates_length_of :password, :within => Devise.password_length, too_short: 'Password must be a minimun of 8 characters', too_long: 'Password must be a maximum of 128 characters'
   validates_presence_of   :password, :on=>:create
 
-
+  before_save :ensure_authentication_token
   # validates_presence_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
 
   field :username,              :type => String, :default => ""

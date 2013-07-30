@@ -1,12 +1,6 @@
 object false
 
-node :header do
-  {
-    version:    'v1',
-    #domain:     'http://www.filmlovers.co.uk',
-    timestamp:  Time.now.utc
-  }
-end
+extends 'api/v1/shared/header'
 
 node :pages do
   {

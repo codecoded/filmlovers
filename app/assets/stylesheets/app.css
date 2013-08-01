@@ -502,6 +502,26 @@ p.forgotten {
   
 }
 
+.pod.actions p {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.pod.actions .button {
+  background-color: #F9F9F6;
+  color: #B7242E;
+}
+
+.pod.actions .button:hover, .pod.actions .button:focus {
+  background-color: #20B6A8;
+  color: #fff;
+}
+
+.pod.actions p.create {
+  width: 100%;
+  color: #fff;
+}
+
 /* Homepage figures */
 
 p.lovers, p.watched, p.loved, p.owned {
@@ -890,11 +910,11 @@ p.lovers, p.watched, p.loved, p.owned {
 }
 
 @media only screen and (max-width: 768px) {
-	
-	.inner-hero {
-		height: auto;
-	}
-	
+  
+  .inner-hero {
+    height: auto;
+  }
+  
 }
 
 .inner-hero .left-fade {
@@ -1078,7 +1098,7 @@ ul.button-list li.owned a {
 }
 
 .actions ul li a:hover {
-	opacity: 0.8;
+  opacity: 0.7;
 }
 
 .actions ul li.complete.watched a {

@@ -1,9 +1,20 @@
-<div class="margin-bottom pod actions">
-  <ul>
-    <%= presenter.action_list_item :watched, 'Watched' %>
-    <%= presenter.action_list_item :loved, 'Loved' %>
-    <%= presenter.action_list_item :owned, 'Own' %>
-    <li class="add"><a href="#">Add</a></li>
-    <li class="share"><a href="#">Share</a></li>
-  </ul>
-</div>
+<% if logged_in? %>
+  <div class="margin-bottom pod actions">
+    <ul>
+      <%= presenter.action_list_item :watched, 'Watched' %>
+      <%= presenter.action_list_item :loved, 'Loved' %>
+      <%= presenter.action_list_item :owned, 'Own' %>
+      <li class="add"><a href="#">Add</a></li>
+      <li class="share"><a href="#">Share</a></li>
+    </ul>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="large-5 small-12 columns">
+      <p class="text-right"><a href="#" class="showPanel primary button" data-rel="signup">Join</a></p>
+    </div>
+    <div class="large-7 small-12 columns end">
+      <p class="text-left create">Create a <strong>FREE</strong> account to share this film!</p>
+    </div>
+  </div>
+<% end %>

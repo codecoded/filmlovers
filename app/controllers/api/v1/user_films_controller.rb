@@ -32,7 +32,7 @@ module Api
       end
 
       def film 
-        Film.find_by _title_id: params[:film_id]
+        @film ||= Film.find_by _title_id: params[:film_id]
       end
 
       helper_method :user_action, :film

@@ -6,7 +6,6 @@ module Netflix
     # after_create :set_film_id
 
     # field :_id, type: String, default: ->{ self.TMSId }
-    field :film_id, type: Integer
     field :year, type: Integer
     field :title, type: String
     field :title_id, type: String, default: ->{"#{title.parameterize}-#{release_year}"}

@@ -2,7 +2,6 @@ class FilmUserAction
   include Mongoid::Document
   include Mongoid::Timestamps
 
-
   field :_id, type: String, default: -> { to_param }
   field :action
   field :facebook_id

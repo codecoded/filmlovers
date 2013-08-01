@@ -10,4 +10,13 @@ class FilmCounters
   def set(action, score)
     update_attribute action, score
   end
+
+  def to_json
+    {
+      film_id: film._title_id,
+      watched: watched,
+      loved: loved,
+      owned: owned
+    }
+  end
 end

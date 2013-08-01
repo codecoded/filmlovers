@@ -40,6 +40,19 @@ Filmlovers::Application.routes.draw do
       end
 
       resources :persons,  only: :show
+
+      scope ':user_id', :constraints => { :user_id => /.*/ } do
+        resources :films, :only => [:index, :show], to: 'users#show', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 
+            member do 
+              put ':film_id',     to: 'user_films#update',  as: 'update'
+              delete ':film_id',  to: 'user_films#destroy', as: 'update'
+            end
+          end
+        resources :lists,         to: 'user_lists',         as: 'user_lists', :only => [:show, :index]
+        match 'queue/:action',    to: "queue",              as: 'queue',:constraints => {:action => /list|recommend|show/},  via: :get
+        # get '', to: 'show'
+      end
+
     end
   end
 

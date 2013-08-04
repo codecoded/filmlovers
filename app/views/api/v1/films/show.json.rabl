@@ -4,9 +4,9 @@ if !locals[:hide_header]
   extends 'api/v1/shared/header'
 end
 
- user_actions = current_user.film_user_actions.where(film: @film).distinct(:action) if current_user
 
 node :film do |film|
+  user_actions = current_user.film_user_actions.where(film: film).distinct(:action) if current_user
   {
     user: if current_user
     {

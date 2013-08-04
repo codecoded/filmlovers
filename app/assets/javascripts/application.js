@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require knockout
 //= require_directory ./vendor
 //= require FL
 //= require masonry/jquery.masonry

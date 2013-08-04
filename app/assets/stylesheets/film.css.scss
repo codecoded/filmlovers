@@ -32,225 +32,225 @@ ul.credits{
   }
 }
 
-.films{
-  height:auto;
-  // margin:1px;
-  width:auto;
-  // padding:10px 0px;
-  // float:left;
+// .films{
+//   height:auto;
+//   // margin:1px;
+//   width:auto;
+//   // padding:10px 0px;
+//   // float:left;
 
 
 
-  .film
-  {
-    margin: 1px 3px;
-    float:left;
-    width: 154px;
-    // border:  solid 4px transparent;
-    border-radius: 5px;
-    position: relative;
-    &.watched{
-      // border-radius: 7px;
-      // border-color:   $watchedColor;
-    }
-    // &:hover{
-    //   // border-color: #9CD6EC;
-    // }
-    &.empty{
-      height: 271px;
-      border: dashed;
-    }
-    &:hover .film-title{
-       opacity: 1;  
-    }
+//   .film
+//   {
+//     margin: 1px 3px;
+//     float:left;
+//     width: 154px;
+//     // border:  solid 4px transparent;
+//     border-radius: 5px;
+//     position: relative;
+//     &.watched{
+//       // border-radius: 7px;
+//       // border-color:   $watchedColor;
+//     }
+//     // &:hover{
+//     //   // border-color: #9CD6EC;
+//     // }
+//     &.empty{
+//       height: 271px;
+//       border: dashed;
+//     }
+//     &:hover .film-title{
+//        opacity: 1;  
+//     }
 
-    &:hover .film-director{
-      opacity: 1;
-    }
+//     &:hover .film-director{
+//       opacity: 1;
+//     }
 
-    .film-info{
-      height: 231px;
+//     .film-info{
+//       height: 231px;
 
-      h4{
-        font-size:10pt;
-        // color: white;
-        padding-left:8px;
-        margin-bottom:2px;
-      }
-      p{
-        // color: #ddd;
-        font-style: italic;
-        margin: 0px;
-        padding-left:8px;
-      }
-      a{
-        // color:white;
-      }
+//       h4{
+//         font-size:10pt;
+//         // color: white;
+//         padding-left:8px;
+//         margin-bottom:2px;
+//       }
+//       p{
+//         // color: #ddd;
+//         font-style: italic;
+//         margin: 0px;
+//         padding-left:8px;
+//       }
+//       a{
+//         // color:white;
+//       }
 
-      img{
-        height:100%;
-        width:154px;
-        // border-radius: 0px 5px 0px 0px;
-        // border: 4px solid transparent;
-      }
-      &:hover .film-action-buttons{
-        opacity: 0.8
-      }
-      .film-action-list{
-        width: 34px;
-        color: white;
-        background-color: #1D1C1C;
-        float: left;
-        height: 100%;
-        text-align: center;
-        // border: solid 2px #4E4848;
-        border-right: none;
-        border-bottom: none;
-        border-collapse: collapse;
-        // border-radius: 5px 0px 0px 0px;
-        label{
-          padding-top: 15px;
-          cursor: default;
-          color: #FFFFA8;
-        }
-        i{
-          font-size: 1.4em;
-          opacity: 0.7;
-          border-bottom: 1px solid gray;
-          padding-bottom: 10px;
-          &[data-action]:hover{
-            opacity: 1
-          }
-          &:active{
-            -webkit-transform: scale(2,4); /* Safari and Chrome */
-          }
+//       img{
+//         height:100%;
+//         width:154px;
+//         // border-radius: 0px 5px 0px 0px;
+//         // border: 4px solid transparent;
+//       }
+//       &:hover .film-action-buttons{
+//         opacity: 0.8
+//       }
+//       .film-action-list{
+//         width: 34px;
+//         color: white;
+//         background-color: #1D1C1C;
+//         float: left;
+//         height: 100%;
+//         text-align: center;
+//         // border: solid 2px #4E4848;
+//         border-right: none;
+//         border-bottom: none;
+//         border-collapse: collapse;
+//         // border-radius: 5px 0px 0px 0px;
+//         label{
+//           padding-top: 15px;
+//           cursor: default;
+//           color: #FFFFA8;
+//         }
+//         i{
+//           font-size: 1.4em;
+//           opacity: 0.7;
+//           border-bottom: 1px solid gray;
+//           padding-bottom: 10px;
+//           &[data-action]:hover{
+//             opacity: 1
+//           }
+//           &:active{
+//             -webkit-transform: scale(2,4); /* Safari and Chrome */
+//           }
 
-        }
-      }
-      .film-action-buttons{
-        position: relative;
-        text-align: center;
-        bottom: 38px;
-        opacity: 0;
-        a{
-          color:black;
-        }
-        i{
-          bottom: 10px;
-          font-size: 14pt !important;
-          border: solid 1px #000;
-          background-color: #FFF;
-          padding: 3px;
-          width: 28px;
-          height: 26px;
-          display: inline-block;
-          text-align: center;
-          border-radius: 5px;
+//         }
+//       }
+//       .film-action-buttons{
+//         position: relative;
+//         text-align: center;
+//         bottom: 38px;
+//         opacity: 0;
+//         a{
+//           color:black;
+//         }
+//         i{
+//           bottom: 10px;
+//           font-size: 14pt !important;
+//           border: solid 1px #000;
+//           background-color: #FFF;
+//           padding: 3px;
+//           width: 28px;
+//           height: 26px;
+//           display: inline-block;
+//           text-align: center;
+//           border-radius: 5px;
 
-          &:hover{
-            cursor: pointer;
-          }
-        }
-      }
-    }
-    .film-heading-border{
-      height: 20px;
-      text-align: center;
-      color: white;
-      background-color: #1D1C1C;
-      font-size: 0.7em !important;
-      width: 100%;
-      line-height: 2em;
-      font-style: normal;
-      opacity: 0;  
-      overflow: hidden;
-      span{
-        font-size: 8pt;
-        color: #919191 !important;
-        a{
-          color:#919191;
-        }
-        &:hover{
-          color:white !important;
-          cursor: pointer;
-          label{
-            color: white;
-          }
-          i{
-            color: white;
-          }
-        }
-        label{
-          display: inline;
-          font-size: 8pt;
-          color: #919191 ;
-        }
-        i{
-          padding: 0px 3px;
-          font-size: 9pt !important;
-        }
-      }
-      &.film-title{
-        border-radius: 5px 5px 0px 0px
-      }
-      &.film-director{
-        border-radius: 0px 0px 5px 5px;
-        opacity: 1;
-        color: #444;
-      }    
-      .film-actions-menu{
-          display: none;
-          background-color: black;
-          position: relative;
-          width: 123px;
-          opacity: 0.8;
-          list-style: none;
-          text-align: left;
-          padding: 10px;
-          padding-top: 10px;
-          margin: 0px 48px;
-          border-radius: 0px 0px 10px 10px;
-          // height: 100px;
-          line-height: 2em;
+//           &:hover{
+//             cursor: pointer;
+//           }
+//         }
+//       }
+//     }
+//     .film-heading-border{
+//       height: 20px;
+//       text-align: center;
+//       color: white;
+//       background-color: #1D1C1C;
+//       font-size: 0.7em !important;
+//       width: 100%;
+//       line-height: 2em;
+//       font-style: normal;
+//       opacity: 0;  
+//       overflow: hidden;
+//       span{
+//         font-size: 8pt;
+//         color: #919191 !important;
+//         a{
+//           color:#919191;
+//         }
+//         &:hover{
+//           color:white !important;
+//           cursor: pointer;
+//           label{
+//             color: white;
+//           }
+//           i{
+//             color: white;
+//           }
+//         }
+//         label{
+//           display: inline;
+//           font-size: 8pt;
+//           color: #919191 ;
+//         }
+//         i{
+//           padding: 0px 3px;
+//           font-size: 9pt !important;
+//         }
+//       }
+//       &.film-title{
+//         border-radius: 5px 5px 0px 0px
+//       }
+//       &.film-director{
+//         border-radius: 0px 0px 5px 5px;
+//         opacity: 1;
+//         color: #444;
+//       }    
+//       .film-actions-menu{
+//           display: none;
+//           background-color: black;
+//           position: relative;
+//           width: 123px;
+//           opacity: 0.8;
+//           list-style: none;
+//           text-align: left;
+//           padding: 10px;
+//           padding-top: 10px;
+//           margin: 0px 48px;
+//           border-radius: 0px 0px 10px 10px;
+//           // height: 100px;
+//           line-height: 2em;
 
-          &:hover{
-            display: block;
-          }
-          a{
-            color: white;
-            font-size: 1em;
-            line-height: 1em;
-            &:hover, &:hover i{
-              opacity: 1;
-              font-weight: bold;
-            }
-          }
-          i{
-            border-bottom: none;
+//           &:hover{
+//             display: block;
+//           }
+//           a{
+//             color: white;
+//             font-size: 1em;
+//             line-height: 1em;
+//             &:hover, &:hover i{
+//               opacity: 1;
+//               font-weight: bold;
+//             }
+//           }
+//           i{
+//             border-bottom: none;
 
-          }
-        }
-          &:hover .film-actions-menu{
-            display: block;
-          }
-    }
-  }
-  .film-small{
-    margin: 1px;
-    display: block;
-    float: left;
-    img{
-      height: 90px;
-      width: 60px; 
-    }
-    .tiled{
-      opacity: 0
-    }
-    &:hover .tiled{
-      opacity: 1
-    }
-  }
-}
+//           }
+//         }
+//           &:hover .film-actions-menu{
+//             display: block;
+//           }
+//     }
+//   }
+//   .film-small{
+//     margin: 1px;
+//     display: block;
+//     float: left;
+//     img{
+//       height: 90px;
+//       width: 60px; 
+//     }
+//     .tiled{
+//       opacity: 0
+//     }
+//     &:hover .tiled{
+//       opacity: 1
+//     }
+//   }
+// }
 
 .film-w130{
   margin: 1px;

@@ -28,9 +28,7 @@ class FilmsController < ApplicationController
   # end
 
   def summary
-    @film_view = FilmPresenter.new current_user, film
-    @thumbnail_size = 'w45'
-    render partial: 'summary'
+    render layout: false
   end
 
   def coming_soon

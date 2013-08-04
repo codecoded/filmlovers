@@ -42,12 +42,6 @@ GEM
     bson_ext (1.9.1)
       bson (~> 1.9.1)
     builder (3.0.4)
-    capistrano (2.15.5)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
     chunky_png (1.2.8)
     coderay (1.0.9)
     coffee-rails (3.2.2)
@@ -66,7 +60,7 @@ GEM
     daemons (1.1.9)
     dalli (2.6.4)
     debug_inspector (0.0.2)
-    devise (3.0.0)
+    devise (3.0.1)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -82,14 +76,11 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
-    font-awesome-rails (3.2.1.2)
-      railties (>= 3.2, < 5.0)
     fssm (0.2.10)
     geocoder (1.1.8)
     google_movies (0.0.4)
     gravtastic (3.2.6)
     hashie (2.0.5)
-    highline (1.6.19)
     hike (1.2.3)
     httpauth (0.2.0)
     i18n (0.6.4)
@@ -103,8 +94,6 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    knockoutjs-rails (2.3.0)
-      railties (>= 3.1, < 4.1)
     koala (1.6.0)
       addressable (~> 2.2)
       faraday (~> 0.8)
@@ -137,15 +126,8 @@ GEM
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
     moped (1.5.0)
-    multi_json (1.7.7)
+    multi_json (1.7.8)
     multipart-post (1.2.0)
-    net-scp (1.1.2)
-      net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.6.8)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
     newrelic_rpm (3.5.6.55)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
@@ -264,7 +246,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bson_ext
-  capistrano
   coffee-rails (~> 3.2.1)
   compass-rails
   dalli
@@ -273,13 +254,11 @@ DEPENDENCIES
   execjs
   fb-channel-file
   figaro
-  font-awesome-rails
   geocoder
   google_movies
   gravtastic
   jquery-rails
   kaminari
-  knockoutjs-rails
   koala
   letter_opener
   log4r

@@ -13,12 +13,11 @@ FL.Films = {
   },
 
   initListeners: function(){
-    $(document).on('ajax:success', 'a[data-action="link"]', FL.Films.displayContent)
-    $(document).on('click', 'div.film-action', FL.Films.btnFilmActionClicked)
-    $(document).on('click', '.film-action-buttons i[data-action]', FL.Films.iconFilmActionClicked)
-    $(document).on('click', 'a[data-modal="signup"], a.display-modal', FL.Films.displayModal)
+    // $(document).on('ajax:success', 'a[data-action="link"]', FL.Films.displayContent)
+    // $(document).on('click', 'div.film-action', FL.Films.btnFilmActionClicked)
+    // $(document).on('click', '.film-action-buttons i[data-action]', FL.Films.iconFilmActionClicked)
     $(document).on('click', 'a[data-action]', FL.Films.lnkFilmsActionClicked)
-    $(document).on('click', '#filmsIndex .counter a', FL.Films.lnkUsersFilmsClicked)
+    // $(document).on('click', '#filmsIndex .counter a', FL.Films.lnkUsersFilmsClicked)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
   },
@@ -79,67 +78,16 @@ FL.Films = {
     })
   },
 
-  btnFilmActionClicked: function(e){
-    var button = $(this)
-
-    var href = button.data('href')
-    var method = button.data('method')
-    var to_action = method == 'put'
-    var incr = to_action ? 1 : -1
-    var action = button.attr('name')
-    $.ajax({
-      url: href,
-      type: method,
-      dataType: 'json',
-      success: function(xhr, data, status){
-        button.data('method', (to_action ? 'delete' : 'put'))
-        button.find('i').toggleClass('actioned unactioned')  
-        // if(action=='watched')
-        //   button.parents('.film').toggleClass('watched')
-      }  
-    })
-  },
-
-  iconFilmActionClicked: function(event){
-    var icon = $(this)
-    
-    var href = icon.data('href')
-    var method = icon.data('method')
-    var id = icon.data('id')
-
-    var to_action = method == 'put'
-    var incr = to_action ? 1 : -1
-    var action = icon.data('action')
-    $.ajax({
-      url: href,
-      type: method,
-      dataType: 'json',
-      success: function(xhr, data, status){
-        icon.data('method', (to_action ? 'delete' : 'put'))
-        var film_counters = $("[data-id='" + id + "'][data-action='" + action + "']")
-        film_counters.toggleClass('actioned unactioned') 
-
-        if(!to_action)
-          $(document).trigger('film:' + action + ':unactioned', [icon.parents('.film')])
-
-        if(action=='queued')
-          return
-        // counter = icon.prev('label')
-        counter = $("label[for='" + id + "'][data-counter='" + action + "']")
-        counter.text(parseInt(counter.text()) + incr)
-      }  
-    })
-  },
 
   lnkFilmsActionClicked: function(event){
     event.preventDefault();
-    var anchor = $(this);
-    var href = anchor.attr('href');
-    var method = anchor.data('method');
-    var id = anchor.data('id');
-    var to_action = method == 'put'
-    var incr = to_action ? 1 : -1
-    var action = anchor.data('action')
+    var anchor = $(this), 
+        href = anchor.attr('href'),
+        method = anchor.data('method'),
+        id = anchor.data('id'),
+        to_action = method == 'put',
+        incr = to_action ? 1 : -1,
+        action = anchor.data('action');
 
     $.ajax({
       url: href,
@@ -150,7 +98,7 @@ FL.Films = {
         anchor.closest('li').toggleClass('complete') 
         if(action=='queued')
           return
-        FL.counter(id).change(incr)
+        FL.counter(id + '_' + action).change(incr)
       }  
     })
 

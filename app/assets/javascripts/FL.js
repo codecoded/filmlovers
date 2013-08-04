@@ -3,7 +3,7 @@ FL = {
     var self = this;
     self.id = id;
 
-    var counter = $("label[for='" + id + "']");
+    var counter = $("[data-counter='" + id + "']");
 
     self.val = function(){
       return parseInt(counter.text());

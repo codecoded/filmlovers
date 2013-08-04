@@ -1,0 +1,44 @@
+<% present(film, FilmPresenter) do |presenter| %>
+  <%= div_for film do %>
+
+    <div class="film-heading-border film-title">
+       <%= presenter.title_with_year %>
+    </div>
+
+    <div class="film-info">
+      <% if film.has_trailer? %>
+        <span class="play-trailer">
+          <%= link_to trailer_popup_film_path(film), :class=>'display-modal' do %>
+            <%= awesome 'play-sign' %>
+          <% end %>
+        </span>
+      <% end %>
+      <%= poster_link film %>
+
+      <% if logged_in? %>
+        <div class="film-action-buttons">
+          <% [:watched, :loved, :owned].each do |action| %>
+            <%= presenter.action_icon action%>
+          <% end %>
+          <%= link_to queue_path(current_user, :list, film_ids: film), :class=>'display-modal unactioned' do %>
+            <%= awesome 'list' %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="film-heading-border film-director">
+      <% [:watched, :loved, :owned].each do |action| %>
+        <span>
+          <%= link_to users_film_path(film, action) do %>
+            <%= presenter.film_action_counter action %>
+            <%= label_tag film.id, data: {counter: action} do %> 
+            <%= film.counters[action] %>
+              <%#= presenter.count_for(action) %>
+            <% end %>
+          <% end %>
+        </span>
+      <% end %>
+    </div> 
+  <% end %>
+<% end %>
+

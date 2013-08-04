@@ -1,44 +1,30 @@
 <% present(film, FilmPresenter) do |presenter| %>
-  <%= div_for film do %>
+  <%= div_for film, class: 'large-2 small-6 columns' do %>
+    <div class="flip-container">
+      <div class="upper">
+         <%= poster film %>
+        <!-- <img src="img/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" /> -->
+      </div>
 
-    <div class="film-heading-border film-title">
-       <%= presenter.title_with_year %>
+      <div class="lower">
+        <% if logged_in? %>
+          <ul>
+            <%= presenter.action_list_item :watched, 'Watched' %>
+            <%= presenter.action_list_item :loved, 'Loved' %>
+            <%= presenter.action_list_item :owned, 'Owned' %>
+          </ul>
+        <% end %>
+        <p>
+          <%= link_to 'More Info', summary_film_path(film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
+        </p>
+      </div>
     </div>
-
-    <div class="film-info">
-      <% if film.has_trailer? %>
-        <span class="play-trailer">
-          <%= link_to trailer_popup_film_path(film), :class=>'display-modal' do %>
-            <%= awesome 'play-sign' %>
-          <% end %>
-        </span>
-      <% end %>
-      <%= poster_link film %>
-
-      <% if logged_in? %>
-        <div class="film-action-buttons">
-          <% [:watched, :loved, :owned].each do |action| %>
-            <%= presenter.action_icon action%>
-          <% end %>
-          <%= link_to queue_path(current_user, :list, film_ids: film), :class=>'display-modal unactioned' do %>
-            <%= awesome 'list' %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-    <div class="film-heading-border film-director">
+    <ul class="user-rankings">
       <% [:watched, :loved, :owned].each do |action| %>
-        <span>
-          <%= link_to users_film_path(film, action) do %>
-            <%= presenter.film_action_counter action %>
-            <%= label_tag film.id, data: {counter: action} do %> 
-            <%= film.counters[action] %>
-              <%#= presenter.count_for(action) %>
-            <% end %>
-          <% end %>
-        </span>
+        <%= content_tag :li, class: action do %>
+          <%= link_to film.counters[action] ,film_path(film), data: {counter: "#{film.id}_#{action}"} %>
+        <% end %>
       <% end %>
-    </div> 
+    </ul>
   <% end %>
 <% end %>
-

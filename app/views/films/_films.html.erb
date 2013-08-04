@@ -1,14 +1,50 @@
-<div class="row margin-bottom">
-  <div id="search-results-container">
-    <div id="search-results">
-      <div class="large-12 columns text-center">
-        <%= paginate films, remote: true %>
-      </div>    
-      <div class="large-10 columns films" id="films-content">
-        <% films.each do |film| %>
-          <%= render partial: 'films/film', object: film %>
-        <% end %>
-      </div>
+<div class="full-row page-title">
+  <div class="row">
+    <div class="large-12 small-12 columns">
+      <h1>Films coming soon...</h1>
     </div>
   </div>
 </div>
+<div class="full-row filter margin-bottom">
+  <div class="row">
+    <form id="filter" action="">
+      <div class="large-4 small-6 large-offset-2 columns">
+        <div class="large-3 small-12 columns">
+          <p>Sort by</p>
+        </div>
+        <div class="large-9 small-12 columns">
+          <select name="filterlist" id="filterlist">
+            <option selected>Title (A-Z)</option>
+            <option>Title (Z-A)</option>
+            <option>Most Loved</option>
+            <option>Most Watched</option>
+          </select>
+        </div>
+      </div>
+      <div class="large-4 small-6 end columns">
+        <div class="large-5 small-12 columns">
+          <p>Hide my films</p>
+        </div>
+          <div class="large-7 small-12 columns">
+            <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+              <label class="onoffswitch-label" for="myonoffswitch">
+                <div class="onoffswitch-inner"></div>
+                <div class="onoffswitch-switch"></div>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+
+<div class="row margin-bottom">
+  <div class="large-12 columns text-center">
+    <%= paginate films, remote: true %>
+  </div> 
+  <% films.each do |film| %>
+    <%= render partial: 'films/film', object: film %>
+  <% end %>
+</div>
+

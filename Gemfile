@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-if RUBY_VERSION =~ /1.9/
-  Encoding.default_external = Encoding::UTF_8
-  Encoding.default_internal = Encoding::UTF_8
-end
+# if RUBY_VERSION =~ /1.9/
+#   Encoding.default_external = Encoding::UTF_8
+#   Encoding.default_internal = Encoding::UTF_8
+# end
 
 gem 'rails'
 gem 'thin'
@@ -27,7 +27,7 @@ gem 'log4r'
 gem 'fb-channel-file'
 #gem 'state_machine' # allow states on models
 gem 'pusher'
-gem 'knockoutjs-rails' 
+# gem 'knockoutjs-rails' 
 gem 'jquery-rails'#, '2.1.4'
 # gem 'jquery-ui-rails'
 gem 'compass-rails'
@@ -71,7 +71,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
   # gem 'zurb-foundation', '~> 4.0.0'
-  gem "font-awesome-rails"
+  # gem "font-awesome-rails"
 
   # gem 'turbolinks'
   
@@ -107,7 +107,7 @@ end
 
 
 # Deploy with Capistrano
-gem 'capistrano'
+# gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'

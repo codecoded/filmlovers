@@ -11,10 +11,11 @@
       <div class="large-8 small-12 columns">
         <h1><%= film.title %></h1>
         <h2><%= presenter.year_and_director %></h2>
-        <hr />
+         <hr />
         <h3>Synopsis</h3>
         <p><%= film.overview %></p>
-        <%= show_details 'Original title', presenter.original_title%>
+         <%= show_details 'Starring', presenter.starring %>
+        <%= show_details 'Original title', presenter.original_title %>
         <%= show_details 'Runtime', presenter.runtime %>
         <%= show_details 'Status', presenter.status %>
         <%= show_details 'Release Date', presenter.release_date %>

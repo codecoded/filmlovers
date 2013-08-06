@@ -5,7 +5,7 @@ class AdminConfig
   field :name, type: String
   field :fetched_index, type: Integer, default: 1
   field :changes_since, type: DateTime, default: 15.days.ago
-  field :page_size, type: Integer, default: 28
+  field :page_size, type: Integer, default: 30
   field :netflix_last_import, type: DateTime
 
   class << self

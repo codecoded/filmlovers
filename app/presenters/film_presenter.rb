@@ -64,7 +64,7 @@ class FilmPresenter < BasePresenter
     method =  actioned ? :delete : :put
     css = "#{action} #{action_css}"  
     content_tag :li, :class => css  do
-      link_to text, url, data: {method: method, action: action, remote: true, id: film.id }
+      link_to text, url, data: {method: method, action: action, remote: true, id: film.id, counter: "#{film.id}_#{action}" }
     end
   end
 
@@ -167,6 +167,24 @@ class FilmPresenter < BasePresenter
     content_tag :a,  href: "http://www.imdb.com/title/#{film.imdb_id}",  alt:"IMDB link for #{film.title}", target: '_blank' do 
       image_tag 'imdb_logo.png'
     end
+  end
+
+
+
+  def poster(size='w185')
+    src = has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
+    image_tag src, :title=>film.title, alt: "poster for #{film.title}"
+  end
+
+  def poster_link(film, size='w154')
+    link_to film_path(film), title: film.title do
+      poster film, size
+    end
+  end
+
+
+  def starring
+    "#{film.starring.join(', ')}" if film.casts
   end
 
   # def director

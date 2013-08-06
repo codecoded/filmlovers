@@ -2,28 +2,29 @@
   <%= div_for film, class: 'large-2 small-6 columns' do %>
     <div class="flip-container">
       <div class="upper">
-         <%= poster film %>
+         <%= presenter.poster %>
         <!-- <img src="img/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" /> -->
       </div>
 
-      <div class="lower">
+      <div class="lower actions">
         <% if logged_in? %>
           <ul>
-            <%= presenter.action_list_item :watched, 'Watched' %>
-            <%= presenter.action_list_item :loved, 'Loved' %>
-            <%= presenter.action_list_item :owned, 'Owned' %>
+            <li class="share"><a href="#">Share</a></li>
+            <li class="add"><a href="#">Add</a></li>            
+            <li class="shop"><a href="#">Shop</a></li>
           </ul>
         <% end %>
         <p>
           <%= link_to 'More Info', summary_film_path(film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
+          <%= link_to 'Trailer', summary_film_path(film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
         </p>
+
       </div>
     </div>
     <ul class="user-rankings">
       <% [:watched, :loved, :owned].each do |action| %>
-        <%= content_tag :li, class: action do %>
-          <%= link_to film.counters[action] ,film_path(film), data: {counter: "#{film.id}_#{action}"} %>
-        <% end %>
+          <%= presenter.action_list_item action, film.counters[action] %>
+          <%#= link_to film.counters[action] ,film_path(film), data: {counter: "#{film.id}_#{action}"} %>
       <% end %>
     </ul>
   <% end %>

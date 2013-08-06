@@ -13,17 +13,14 @@ FL.Films = {
   },
 
   initListeners: function(){
-    // $(document).on('ajax:success', 'a[data-action="link"]', FL.Films.displayContent)
-    // $(document).on('click', 'div.film-action', FL.Films.btnFilmActionClicked)
-    // $(document).on('click', '.film-action-buttons i[data-action]', FL.Films.iconFilmActionClicked)
+    $(document).on('ajax:success', 'nav.pagination', FL.Films.displayContent);
     $(document).on('click', 'a[data-action]', FL.Films.lnkFilmsActionClicked)
-    // $(document).on('click', '#filmsIndex .counter a', FL.Films.lnkUsersFilmsClicked)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
   },
 
-  displayContent: function(xhr, data, status){
-    $('#container').html(data)
+  displayContent: function(event, data, status, xhr){
+    $('#films-container').replaceWith(data);
   },
 
   displayModal: function(e){

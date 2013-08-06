@@ -1179,6 +1179,7 @@ form#filter {
   -o-border-radius: 4px;
   -ms-border-radius: 4px;
   overflow: hidden;
+  font-size: 0.9em;
 }
 
 .flip-container.actioned {
@@ -1188,7 +1189,6 @@ form#filter {
 .flip-container {
   text-align: center;
   overflow: hidden;
-  height: 254px;
 }
 
 .lt-ie9 .flip-container {
@@ -1200,7 +1200,6 @@ form#filter {
   left: 0;
   top: 0;
   width: 100%;
-  height: 254px;
   padding: 0px;
   -webkit-transition:0.5s ease-in-out;
   -moz-transition:0.5s ease-in-out;
@@ -1223,6 +1222,7 @@ form#filter {
   transform:perspective(800px) rotateY(180deg);
   background-color: #f9f6f3;
   padding: 0.6em;
+  height: 100%;
 }
 
 .flip-container > div.lower ul, .flip-container > div.lower ul li {
@@ -1242,6 +1242,7 @@ form#filter {
   display: inline-block;
   position: relative;
   height: 40px;
+  background-image: none;
 }
 
 .flip-container > div.lower ul li a {
@@ -1303,7 +1304,6 @@ form#filter {
 
 .lt-ie9 .flip-container > div.lower {
   float: right;
-  height: 254px;
 }
 
 .flip-container > div.upper {
@@ -1313,6 +1313,7 @@ form#filter {
   -moz-transform:perspective(800px) rotateY(0deg);
   -webkit-transform:perspective(800px) rotateY(0deg);
   transform:perspective(800px) rotateY(0deg);
+  position: relative;
 }
 
 .lt-ie9 .flip-container > div.upper {
@@ -1335,10 +1336,6 @@ form#filter {
 }
 
 @media only screen and (max-width: 768px) {
-  
-  .flip-container, .flip-container > div {
-    height: 320px;
-  }
   
   .flip-container > div img {
     width: 100%;

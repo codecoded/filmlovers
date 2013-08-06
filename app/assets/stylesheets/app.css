@@ -10,8 +10,8 @@
 .lt-ie9 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -15px; }
 .lt-ie9 .row .row.large-collapse { margin: 0; }
  
-.lt-ie9 .column, .columns { float: left; min-height: 1px; padding: 0 15px; position: relative; }
-.lt-ie9 .column.large-centered, .columns.large-centered { float: none; margin: 0 auto; }
+.lt-ie9 .column, .lt-ie9 .columns { float: left; min-height: 1px; padding: 0 15px; position: relative; }
+.lt-ie9 .column.large-centered, .lt-ie9 .columns.large-centered { float: none; margin: 0 auto; }
  
 .lt-ie9 [class*="column"] + [class*="column"]:last-child { float: right; }
 .lt-ie9 [class*="column"] + [class*="column"].end { float: left; }
@@ -1225,24 +1225,28 @@ form#filter {
   height: 100%;
 }
 
-.flip-container > div.lower ul, .flip-container > div.lower ul li {
+.flip-container > div.lower ul {
   display: inline-block;
   width: 100%;
   margin: 0px 0px 10px 0px;
   padding: 0px;
   list-style: none;
-  text-align: left;
+  text-align: center;
 }
 
-.flip-container > div.lower ul {
-  padding-left: 5%;
+.flip-container > div.upper img {
+	min-height: 260px;
 }
 
 .flip-container > div.lower ul li {
   display: inline-block;
   position: relative;
-  height: 40px;
+  float: left;
+  text-align: center;
+  width: 33%;
+  height: 30px;
   background-image: none;
+  margin: 0;
 }
 
 .flip-container > div.lower ul li a {
@@ -1250,13 +1254,15 @@ form#filter {
   position: relative;
   color: #68212d;
   font-size: 0.8em;
-  background-position: 0px 0px;
+  background-position: top center;
   background-repeat: no-repeat;
-  background-size: 40px 40px;
-  padding: 0px 0px 0px 50px;
-  height: 40px;
-  line-height: 40px;
+  background-size: 30px 30px;
+  padding: 0px;
+  height: 30px;
+  line-height: 30px;
   vertical-align: middle;
+  text-align: left;
+  text-indent: -9999px;
 }
 
 .flip-container > div.lower ul li.watched a {
@@ -1269,6 +1275,10 @@ form#filter {
 
 .flip-container > div.lower ul li.owned a {
   background-image: url(site-basics/own-icon-red.svg);
+}
+
+.flip-container > div.lower ul li.shop a {
+  background-image: url(site-basics/shop-icon-red.svg);
 }
 
 .flip-container > div.lower ul li.complete a {
@@ -1291,10 +1301,15 @@ form#filter {
   background-image: url(site-basics/own-icon-white.svg);
 }
 
+.flip-container > div.lower ul li.complete.shop a {
+  background-image: url(site-basics/shop-icon-white.svg);
+}
+
 .flip-container > div.lower .button {
   font-size: 0.8em;
   background-color: #f9f9f6;
   color: #b6212d;
+  width: 100%;
 }
 
 .flip-container > div.lower .button:hover, .flip-container > div.lower .button:focus {

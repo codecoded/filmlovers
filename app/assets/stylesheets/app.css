@@ -1201,9 +1201,9 @@ form#filter {
   top: 0;
   width: 100%;
   padding: 0px;
-/*  -webkit-transition:0.5s ease-in-out;
+  -webkit-transition:0.5s ease-in-out;
   -moz-transition:0.5s ease-in-out;
-  transition:0.5s ease-in-out;*/
+  transition:0.5s ease-in-out;
 }
 
 .lt-ie9 .flip-container > div {
@@ -1221,7 +1221,7 @@ form#filter {
   -webkit-transform:perspective(800px) rotateY(180deg);
   transform:perspective(800px) rotateY(180deg);*/
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0.32);
+  background-color: rgba(0, 0, 0, 0.5);
   /*padding: 0.6em;*/
   height: 100%;
 }
@@ -1381,19 +1381,19 @@ ul.user-rankings li.owned a {
   background-image: url(site-basics/owned-icon-red.svg);
 }
 
-ul.user-rankings li.actioned a {
+ul.user-rankings li.actioned a, ul.user-rankings li a:hover {
 	color: #20B6A8;	
 }
 
-ul.user-rankings li.complete.watched a {
+ul.user-rankings li.complete.watched a, ul.user-rankings li.watched a:hover {
   background-image: url(site-basics/watched-icon.svg);
 }
 
-ul.user-rankings li.complete.loved a {
+ul.user-rankings li.complete.loved a, ul.user-rankings li.loved a:hover {
   background-image: url(site-basics/loved-icon.svg);
 }
 
-ul.user-rankings li.complete.owned a {
+ul.user-rankings li.complete.owned a, ul.user-rankings li.owned a:hover {
   background-image: url(site-basics/owned-icon.svg);
 }
 
@@ -1611,4 +1611,41 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
   -webkit-border-radius: 6px;
   -o-border-radius: 6px;
   -ms-border-radius: 6px;
+}
+
+.pagination {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  margin: 0px 0px 30px 0px;
+  font-size: 0.8em;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  padding: 6px 12px;
+  box-shadow: inset 0px 1px 0px rgba(0,0,0,0.15);
+  -moz-box-shadow: inset 0px 1px 0px rgba(0,0,0,0.15);
+  -webkit-box-shadow: inset 0px 1px 0px rgba(0,0,0,0.15);
+  -o-box-shadow: inset 0px 1px 0px rgba(0,0,0,0.15);
+  -ms-box-shadow: inset 0px 1px 0px rgba(0,0,0,0.15);
+}
+
+.pagination .page a, .pagination .next a, .pagination .last a, .pagination .current, .pagination .gap, .pagination .prev a, .pagination .first a {
+  display: inline-block;
+  float: left;
+  padding: 0 8px;
+  margin: 0px 2px;
+  position: relative;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+}
+
+.pagination .current, .pagination a:hover {
+	background-color: #2FB5A8;
+	color: #fff;
 }

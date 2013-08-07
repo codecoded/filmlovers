@@ -1381,8 +1381,8 @@ ul.user-rankings li.owned a {
   background-image: url(site-basics/owned-icon-red.svg);
 }
 
-ul.user-rankings li.actioned a, ul.user-rankings li a:hover {
-	color: #20B6A8;	
+ul.user-rankings li.complete a, ul.user-rankings li a:hover {
+	color: #2FB5A8;	
 }
 
 ul.user-rankings li.complete.watched a, ul.user-rankings li.watched a:hover {

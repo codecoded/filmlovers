@@ -1388,6 +1388,7 @@ ul.user-rankings li a {
   background-size: 30px 30px;
   font-size: 0.8em;
   padding: 30px 0px 0px 0px;
+  color: #B6212D;
 }
 
 ul.user-rankings li.watched a {
@@ -1399,6 +1400,22 @@ ul.user-rankings li.loved a {
 }
 
 ul.user-rankings li.owned a {
+  background-image: url(site-basics/owned-icon.svg);
+}
+
+ul.user-rankings li.actioned a {
+	color: #20B6A8;	
+}
+
+ul.user-rankings li.actioned.watched a {
+  background-image: url(site-basics/watched-icon.svg);
+}
+
+ul.user-rankings li.actioned.loved a {
+  background-image: url(site-basics/loved-icon.svg);
+}
+
+ul.user-rankings li.actioned.owned a {
   background-image: url(site-basics/owned-icon.svg);
 }
 

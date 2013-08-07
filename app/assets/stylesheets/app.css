@@ -1392,15 +1392,15 @@ ul.user-rankings li a {
 }
 
 ul.user-rankings li.watched a {
-  background-image: url(site-basics/watched-icon.svg);
+  background-image: url(site-basics/watched-icon-red.svg);
 }
 
 ul.user-rankings li.loved a {
-  background-image: url(site-basics/loved-icon.svg);
+  background-image: url(site-basics/loved-icon-red.svg);
 }
 
 ul.user-rankings li.owned a {
-  background-image: url(site-basics/owned-icon.svg);
+  background-image: url(site-basics/owned-icon-red.svg);
 }
 
 ul.user-rankings li.actioned a {

@@ -1029,7 +1029,7 @@ ul.button-list li.loved a {
 
 ul.button-list li.owned a {
   padding-left: 36px;
-  background-image: url(site-basics/own-icon-red.svg);
+  background-image: url(site-basics/owned-icon-red.svg);
   background-repeat: no-repeat;
   background-position: top left;
   background-size: 26px auto;
@@ -1082,7 +1082,7 @@ ul.button-list li.owned a {
 }
 
 .actions ul li.owned a {
-  background-image: url(site-basics/own-icon-red.svg);
+  background-image: url(site-basics/owned-icon-red.svg);
 }
 
 .actions ul li.add a {
@@ -1110,7 +1110,7 @@ ul.button-list li.owned a {
 }
 
 .actions ul li.complete.owned a {
-  background-image: url(site-basics/own-icon-white.svg);
+  background-image: url(site-basics/owned-icon-white.svg);
 }
 
 .actions ul li.complete.add a {
@@ -1201,9 +1201,9 @@ form#filter {
   top: 0;
   width: 100%;
   padding: 0px;
-  -webkit-transition:0.5s ease-in-out;
+/*  -webkit-transition:0.5s ease-in-out;
   -moz-transition:0.5s ease-in-out;
-  transition:0.5s ease-in-out;
+  transition:0.5s ease-in-out;*/
 }
 
 .lt-ie9 .flip-container > div {
@@ -1214,25 +1214,33 @@ form#filter {
 }
 
 .flip-container > div.lower {
-  -moz-backface-visibility:hidden;
+/*  -moz-backface-visibility:hidden;
   -webkit-backface-visibility:hidden;
   backface-visibility:hidden;
   -moz-transform:perspective(800px) rotateY(180deg);
   -webkit-transform:perspective(800px) rotateY(180deg);
-  transform:perspective(800px) rotateY(180deg);
-  background-color: #f9f6f3;
-  padding: 0.6em;
+  transform:perspective(800px) rotateY(180deg);*/
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.32);
+  /*padding: 0.6em;*/
   height: 100%;
 }
 
 .flip-container > div.lower ul {
   display: inline-block;
   width: 100%;
-  margin: 0px 0px 10px 0px;
+  margin: 10px 0px 0px 0px;
   padding: 0px;
   list-style: none;
   text-align: center;
 }
+
+.flip-container > div.lower p {
+  position: absolute;
+  bottom: 0px;
+  padding: 0.6em;
+}
+
 
 .flip-container > div.upper img {
 	min-height: 260px;
@@ -1265,20 +1273,16 @@ form#filter {
   text-indent: -9999px;
 }
 
-.flip-container > div.lower ul li.watched a {
-  background-image: url(site-basics/watched-icon-red.svg);
+.flip-container > div.lower ul li.add a {
+  background-image: url(site-basics/list-icon-white.svg);
 }
 
-.flip-container > div.lower ul li.loved a {
-  background-image: url(site-basics/loved-icon-red.svg);
-}
-
-.flip-container > div.lower ul li.owned a {
-  background-image: url(site-basics/own-icon-red.svg);
+.flip-container > div.lower ul li.share a {
+  background-image: url(site-basics/share-icon-white.svg);
 }
 
 .flip-container > div.lower ul li.shop a {
-  background-image: url(site-basics/shop-icon-red.svg);
+  background-image: url(site-basics/shop-icon-white.svg);
 }
 
 .flip-container > div.lower ul li.complete a {
@@ -1289,21 +1293,6 @@ form#filter {
   opacity: 0.7;
 }
 
-.flip-container > div.lower ul li.complete.watched a {
-  background-image: url(site-basics/watched-icon-white.svg);
-}
-
-.flip-container > div.lower ul li.complete.loved a {
-  background-image: url(site-basics/loved-icon-white.svg);
-}
-
-.flip-container > div.lower ul li.complete.owned a {
-  background-image: url(site-basics/own-icon-white.svg);
-}
-
-.flip-container > div.lower ul li.complete.shop a {
-  background-image: url(site-basics/shop-icon-white.svg);
-}
 
 .flip-container > div.lower .button {
   font-size: 0.8em;
@@ -1322,12 +1311,6 @@ form#filter {
 }
 
 .flip-container > div.upper {
-  -moz-backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  -moz-transform:perspective(800px) rotateY(0deg);
-  -webkit-transform:perspective(800px) rotateY(0deg);
-  transform:perspective(800px) rotateY(0deg);
   position: relative;
 }
 
@@ -1337,17 +1320,12 @@ form#filter {
 }
 
 .flip-container:hover > div.lower {
-  -moz-transform:perspective(800px) rotateY(0);
+/*  -moz-transform:perspective(800px) rotateY(0);
   -webkit-transform:perspective(800px) rotateY(0);
-  transform:perspective(800px) rotateY(0);
-  background-color: #B6212D;
-  color: #fff;
-}
-
-.flip-container:hover > div.upper {
-  -webkit-transform:perspective(800px) rotateY(-179.9deg);
-  -moz-transform:perspective(800px) rotateY(-179.9deg);
-  transform:perspective(800px) rotateY(-179.9deg);
+  transform:perspective(800px) rotateY(0);*/
+  opacity: 1;
+/*  background-color: #B6212D;
+  color: #fff;*/
 }
 
 @media only screen and (max-width: 768px) {
@@ -1407,15 +1385,15 @@ ul.user-rankings li.actioned a {
 	color: #20B6A8;	
 }
 
-ul.user-rankings li.actioned.watched a {
+ul.user-rankings li.complete.watched a {
   background-image: url(site-basics/watched-icon.svg);
 }
 
-ul.user-rankings li.actioned.loved a {
+ul.user-rankings li.complete.loved a {
   background-image: url(site-basics/loved-icon.svg);
 }
 
-ul.user-rankings li.actioned.owned a {
+ul.user-rankings li.complete.owned a {
   background-image: url(site-basics/owned-icon.svg);
 }
 

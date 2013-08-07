@@ -1201,9 +1201,9 @@ form#filter {
   top: 0;
   width: 100%;
   padding: 0px;
-  -webkit-transition:0.5s ease-in-out;
-  -moz-transition:0.5s ease-in-out;
-  transition:0.5s ease-in-out;
+  -webkit-transition:0.35s ease-in-out;
+  -moz-transition:0.35s ease-in-out;
+  transition:0.35s ease-in-out;
 }
 
 .lt-ie9 .flip-container > div {

@@ -1361,6 +1361,10 @@ ul.user-rankings li a {
   color: #B6212D;
 }
 
+ul.user-rankings li a:hover {
+	opacity: 0.7;
+}
+
 ul.user-rankings li.watched a {
   background-image: url(site-basics/watched-icon-red.svg);
 }
@@ -1373,19 +1377,19 @@ ul.user-rankings li.owned a {
   background-image: url(site-basics/owned-icon-red.svg);
 }
 
-ul.user-rankings li.complete a, ul.user-rankings li a:hover {
+ul.user-rankings li.complete a {
 	color: #2FB5A8;	
 }
 
-ul.user-rankings li.complete.watched a, ul.user-rankings li.watched a:hover {
+ul.user-rankings li.complete.watched a {
   background-image: url(site-basics/watched-icon.svg);
 }
 
-ul.user-rankings li.complete.loved a, ul.user-rankings li.loved a:hover {
+ul.user-rankings li.complete.loved a {
   background-image: url(site-basics/loved-icon.svg);
 }
 
-ul.user-rankings li.complete.owned a, ul.user-rankings li.owned a:hover {
+ul.user-rankings li.complete.owned a {
   background-image: url(site-basics/owned-icon.svg);
 }
 
@@ -1622,6 +1626,7 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
   -webkit-box-shadow: inset 0px 1px 0px rgba(0,0,0,0.15);
   -o-box-shadow: inset 0px 1px 0px rgba(0,0,0,0.15);
   -ms-box-shadow: inset 0px 1px 0px rgba(0,0,0,0.15);
+  background-color: #fff;
 }
 
 .pagination .page a, .pagination .next a, .pagination .last a, .pagination .current, .pagination .gap, .pagination .prev a, .pagination .first a {

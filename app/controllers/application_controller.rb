@@ -11,20 +11,28 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def page_results(query, default_order, deafult_by=:desc, page_size=AdminConfig.instance.page_size)
-    query.order_by([order || default_order, by || default_by]).page(page_no).per page_size
+  def page_results(query, default_sort_order, page_size=AdminConfig.instance.page_size)
+    query.order_by(sorted_by || default_sort_order).page(page_no).per page_size
   end
 
   def page_no
     params[:page] ? params[:page].to_i : 1
   end
 
-  def by
-    params[:by] || :desc
+  def sorted_by
+    sort_orders[params[:sorted_by].to_sym] if params[:sorted_by]
   end
 
-  def order
-    params[:order]
+  def sort_orders
+    {
+      title:                  [:title, :asc], 
+      release_date:           [:release_date, :desc],
+      earliest_release_date:  [:release_date, :asc],
+      popularity:             [:popularity, :desc],
+      watched:                ['counters.watched', :desc], 
+      loved:                  ['counters.loved', :desc],
+      owned:                  ['counters.owned', :desc] 
+    }
   end
 
   private

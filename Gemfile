@@ -31,34 +31,24 @@ gem 'pusher'
 gem 'jquery-rails'#, '2.1.4'
 # gem 'jquery-ui-rails'
 gem 'compass-rails'
-
 gem 'bson_ext'
 gem 'mongo'
 gem 'rest-client'
 gem "mongoid"
 gem 'newrelic_rpm', '3.5.6.55'
-
 gem 'rabl'
 gem "eventmachine", "~> 1.0.3"
 gem 'meta-tags', :require => 'meta_tags'
 gem 'gravtastic'
 gem 'sitemap_generator'
 gem 'devise'
-
-# gem 'client_side_validations'#, github: 'bcardarella/client_side_validations', branch: '3-2-stable'
-# gem 'client_side_validations-mongoid'
 gem 'figaro'
 gem 'state_machine'
 gem 'execjs'
 gem 'simple_form'
-# gem 'libv8'
-
 gem 'masonry-rails'
-
-gem 'therubyracer'
-  
+gem 'therubyracer'  
 gem 'kaminari' #for pagination
-
 gem 'geocoder' # for postcode lookup
 
 gem 'dalli'

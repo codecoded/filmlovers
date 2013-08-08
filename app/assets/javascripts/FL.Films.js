@@ -15,7 +15,7 @@ FL.Films = {
   initListeners: function(){
     $(document).on('ajax:success', 'nav.pagination', FL.Films.displayContent);
     $(document).on('click', 'a[data-action]', FL.Films.lnkFilmsActionClicked)
-    $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
+    $(document).on('change', '#filterlist', FL.Films.sortFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
 
     $(document).on('touchstart', '.flip-container', function() {FL.Films.touchMove = false;});
@@ -59,9 +59,10 @@ FL.Films = {
       });
   },
 
-  sortUserFilms: function(){
-    var url = $(this).attr('value')
-    $('#contentHolder').load(url + ' #filmsContent')
+  sortFilms: function(){
+    var url = $(this).find(':selected').attr('value')
+    window.location = url;
+    // $('#films-content').load(url + ' #films-content')
   },
 
   navigateToOption: function(){
@@ -69,7 +70,7 @@ FL.Films = {
   },
 
   addFilmTolist: function(){
-    var url = $(this).attr('value')
+    var url = $(this).find(':selected').attr('value')
     $.ajax({
       url: url,
       type: 'put',
@@ -110,6 +111,7 @@ FL.Films = {
         FL.counter(id + '_' + action).change(incr)
       }  
     })
+
 
   },
 

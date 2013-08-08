@@ -10,4 +10,9 @@ module FilmsHelper
   def user_films_sort_option(user, action, order=:title, by=:asc, text)
     content_tag :option, text, value: user_film_path(user, action, order: order, by: by)
   end
+
+  def films_sort_option(action, sorted_by, text)
+    path = category_films_url(action: action, sorted_by: sorted_by)
+    content_tag :option, text, value: category_films_path(action: action, sorted_by: sorted_by), selected: current_url == path
+  end
 end

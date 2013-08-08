@@ -60,8 +60,8 @@ Filmlovers::Application.routes.draw do
     collection do
       resources 'genres',   only: [:show, :index]
 
-      get ':action(/page/:page)(/by/:by)(/order/:order)(/filter(/genres/*genres)(/year/:year)(/decade/:decade))', 
-        :constraints => {:action => /in_cinemas|coming_soon|popular/, :by => /asc|desc/}, as: 'category'
+      get ':action(/sorted_by/:sorted_by)(/filter_by(/year/:year)(/decade/:decade)(/genres/*genres))', 
+        :constraints => {:action => /in_cinemas|coming_soon|popular/, :sorted_by => /title|release_date|earliest_release_date|loved|watched|owned|popularity/}, as: 'category'
       # get ':action/page/:page', :constraints => {:action => /in_cinemas|coming_soon|popular/}, as: 'page_category'
       get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'
       post ':id' => redirect("/films/%{id}")  

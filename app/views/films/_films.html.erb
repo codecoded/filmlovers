@@ -14,10 +14,13 @@
         </div>
         <div class="large-9 small-12 columns">
           <select name="filterlist" id="filterlist">
-            <option selected>Title (A-Z)</option>
-            <option>Title (Z-A)</option>
-            <option>Most Loved</option>
-            <option>Most Watched</option>
+            <%= films_sort_option params[:action], :title, 'Title (A-Z)' %>
+            <%= films_sort_option params[:action], :release_date, 'Release Date (Latest)' %>
+            <%= films_sort_option params[:action], :earliest_release_date, 'Release Date (Earliest)' %>
+            <%= films_sort_option params[:action], :popularity, 'Popularity' %>
+            <%= films_sort_option params[:action], :loved, 'Loved' %>
+            <%= films_sort_option params[:action], :watched, 'Watched' %>
+            <%= films_sort_option params[:action], :owned, 'Owned' %>
           </select>
         </div>
       </div>
@@ -39,7 +42,7 @@
     </div>
 </div>
 
-<div class="row margin-bottom">
+<div class="row margin-bottom" id="films-content">
   <div class="large-12 columns text-center">
     <%= paginate films, remote: true %>
   </div> 

@@ -3,6 +3,7 @@ class FilmsController < ApplicationController
 
   respond_to :html, :json
 
+  scopes = 
   def index
   end
 
@@ -32,15 +33,15 @@ class FilmsController < ApplicationController
   end
 
   def coming_soon
-    render_films FilmCollection.coming_soon.films, :release_date, :asc
+    render_films FilmCollection.coming_soon.films, sort_orders[:release_date]
   end
 
   def in_cinemas
-    render_films FilmCollection.in_cinemas.films, :release_date, :desc
+    render_films FilmCollection.in_cinemas.films, sort_orders[:earliest_release_date]
   end
 
   def popular
-    render_films Film, :popularity, :desc
+    render_films Film, sort_orders[:popularity]
   end
 
   def users
@@ -52,8 +53,8 @@ class FilmsController < ApplicationController
   protected
 
 
-  def render_films(query, order, by)
-    @films ||= page_results query, order, by
+  def render_films(query, sort_order)
+    @films ||= page_results query, sort_order
     request.xhr? ? render('index', layout:nil) : render('index')
   end
 

@@ -5,7 +5,7 @@ FL.Friendships = {
   init: function(){
     
     if(friendships.initialised) return
-    friendships.initListeners();
+    //friendships.initListeners();
     friendships.initialised = true;
   },
 

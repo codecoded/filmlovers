@@ -5,7 +5,7 @@ FL.Lists = {
     if(FL.Lists.initialised) return
 
     // FL.Lists.initSort($('.sortable'))
-    FL.Lists.initListeners()
+    //FL.Lists.initListeners()
     FL.Lists.initialised = true
   },
 

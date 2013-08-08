@@ -23,9 +23,6 @@ module FilmHelper
     "Directed by: #{film.director}" if film.director
   end
 
-  def starring(film)
-   "Starring: #{film.starring.join(', ')}" if film.casts
-  end
 
   def film_action_counter(film, action)
     action_css = actioned?(film, action) ? 'actioned' : 'unactioned'

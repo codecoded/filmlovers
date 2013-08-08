@@ -1214,15 +1214,8 @@ form#filter {
 }
 
 .flip-container > div.lower {
-/*  -moz-backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  -moz-transform:perspective(800px) rotateY(180deg);
-  -webkit-transform:perspective(800px) rotateY(180deg);
-  transform:perspective(800px) rotateY(180deg);*/
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  /*padding: 0.6em;*/
   height: 100%;
 }
 
@@ -1319,21 +1312,20 @@ form#filter {
   padding: 0;
 }
 
-.flip-container:hover > div.lower {
-/*  -moz-transform:perspective(800px) rotateY(0);
-  -webkit-transform:perspective(800px) rotateY(0);
-  transform:perspective(800px) rotateY(0);*/
+.flip-container.touched > div.lower {
   opacity: 1;
-/*  background-color: #B6212D;
-  color: #fff;*/
+}
+
+@media only screen{
+  .flip-container:hover > div.lower {
+    opacity: 1;
+  }
 }
 
 @media only screen and (max-width: 768px) {
-  
   .flip-container > div img {
     width: 100%;
   }
-
 }
 
 ul.user-rankings {

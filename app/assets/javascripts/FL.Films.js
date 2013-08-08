@@ -17,6 +17,16 @@ FL.Films = {
     $(document).on('click', 'a[data-action]', FL.Films.lnkFilmsActionClicked)
     $(document).on('change', '#sort-option', FL.Films.sortUserFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
+
+    $(document).on('touchstart', '.flip-container', function() {FL.Films.touchMove = false;});
+    $(document).on('touchmove', '.flip-container', function() {FL.Films.touchMove = true;});
+    $(document).on('touchend', '.flip-container', FL.Films.toggleActionsForMobile);
+  },
+
+  toggleActionsForMobile: function(e){
+    if(FL.Films.touchMove) return;
+    $('.flip-container').not(this).removeClass('touched')
+    $(this).toggleClass('touched');
   },
 
   displayContent: function(event, data, status, xhr){
@@ -78,20 +88,22 @@ FL.Films = {
 
   lnkFilmsActionClicked: function(event){
     event.preventDefault();
+    event.stopPropagation();
     var anchor = $(this), 
         href = anchor.attr('href'),
-        method = anchor.data('method'),
+        method = anchor.data('method-type'),
         id = anchor.data('id'),
         to_action = method == 'put',
         incr = to_action ? 1 : -1,
         action = anchor.data('action');
 
+    if(href==='#') return false;
     $.ajax({
       url: href,
       type: method,
       dataType: 'json',
       success: function(xhr, data, status){
-        anchor.data('method', (to_action ? 'delete' : 'put'))
+        anchor.data('method-type', (to_action ? 'delete' : 'put'))
         anchor.closest('li').toggleClass('complete') 
         if(action=='queued')
           return

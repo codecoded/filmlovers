@@ -23,7 +23,7 @@
     </div>
     <ul class="user-rankings">
       <% [:watched, :loved, :owned].each do |action| %>
-          <%= presenter.action_list_item action, film.counters[action] %>
+          <%= presenter.action_list_item action, film.counters[action], true %>
           <%#= link_to film.counters[action] ,film_path(film), data: {counter: "#{film.id}_#{action}"} %>
       <% end %>
     </ul>

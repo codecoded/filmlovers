@@ -56,15 +56,18 @@ class FilmPresenter < BasePresenter
     end
   end
 
-  def action_list_item(action, text)
-    return content_tag(:li,nil,  :class => icons[action]) unless current_user
+  def action_list_item(action, text, is_counter = false)
     actioned = user_actioned? action
     action_css = actioned ? 'complete' : nil 
-    url = update_user_film_path(current_user, action, film)
+    url = current_user ? update_user_film_path(current_user, action, film) : '#'
     method =  actioned ? :delete : :put
     css = "#{action} #{action_css}"  
     content_tag :li, :class => css  do
-      link_to text, url, data: {method: method, action: action, remote: true, id: film.id, counter: "#{film.id}_#{action}" }
+      if is_counter
+        link_to text, url, data: {'method-type'=> method, action: action,  id: film.id, counter: "#{film.id}_#{action}" }
+      else
+        link_to text, url, data: {'method-type'=> method, action: action,  id: film.id }
+      end
     end
   end
 

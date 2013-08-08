@@ -46,5 +46,8 @@
   <% films.each do |film| %>
     <%= render partial: 'films/film', object: film %>
   <% end %>
+  <div class="large-12 columns text-center">
+    <%= paginate films, remote: true %>
+  </div>   
 </div>
 

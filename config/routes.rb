@@ -59,16 +59,12 @@ Filmlovers::Application.routes.draw do
   resources 'films',        only: [:show, :index] do
     collection do
       resources 'genres',   only: [:show, :index]
-      resources 'trends',   only: [:show, :index], :constraints => {:id => /now_playing|latest|upcoming/}
 
-      get 'in_cinemas'
-      get 'coming_soon'
-      get 'popular'
-      get 'coming_soon/page/:page', action: 'coming_soon',  as: 'page_coming_soon'
-      get 'in_cinemas/page/:page',  action: 'in_cinemas',   as: 'page_in_cinemas'
-      get 'popular/page/:page',     action: 'popular',      as: 'page_popular'   
+      get ':action(/page/:page)(/by/:by)(/order/:order)(/filter(/genres/*genres)(/year/:year)(/decade/:decade))', 
+        :constraints => {:action => /in_cinemas|coming_soon|popular/, :by => /asc|desc/}, as: 'category'
+      # get ':action/page/:page', :constraints => {:action => /in_cinemas|coming_soon|popular/}, as: 'page_category'
       get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'
-      post ':id' => redirect("/films/%{id}")
+      post ':id' => redirect("/films/%{id}")  
     end
     member do
       get ':view',          to: 'films#view', :constraints => { :view => /images|overview|cast|trailer|similar/ }, as: 'view'

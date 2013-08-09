@@ -1335,6 +1335,18 @@ ul.user-rankings {
   list-style: none;
   margin: 0px 0px 30px 0px;
   padding: 0;
+  padding: 5%;
+  background-color: #f9f9f6;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  box-shadow: 0px 3px 0px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 3px 0px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 0px 3px 0px rgba(0,0,0,0.2);
+  -o-box-shadow: 0px 3px 0px rgba(0,0,0,0.2);
+  -ms-box-shadow: 0px 3px 0px rgba(0,0,0,0.2);
 }
 
 ul.user-rankings li {
@@ -1645,4 +1657,55 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
 .pagination .current, .pagination a:hover {
 	background-color: #2FB5A8;
 	color: #fff;
+}
+
+/* Person bio */
+
+.default-image {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 250px;
+  background-image: url(../img/site-basics/default.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #ebebeb;
+  padding: 20% 5% 5% 5%;
+  margin: 0px 0px 20px 0px;
+  text-align: center;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border: 2px solid #fff;
+}
+
+.film-poster {
+  display: inline-block;
+  position: relative;
+  float: left;
+  width: 100%;
+  border: 1px solid #d2d2d2;
+  background-color: #f9f9f6;
+  padding: 2px;
+  margin: 0px 0px 10px 0px;
+  width: 100%;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  overflow: hidden;
+  font-size: 0.9em;
+}
+
+.character h5, .character p {
+  margin: 0;
+  padding: 0;
+}
+
+.character {
+  margin-bottom: 10px;
 }

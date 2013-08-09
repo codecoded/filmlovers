@@ -53,6 +53,7 @@ namespace :tmdb do
     results_page.results.each do |film_id| 
       begin
         film = force ?  Film.force_fetch(film_id['id']) : Film.fetch(film_id.id)
+        film.update_counters
         Log.debug "Film #{index} of #{results_page.results.count}: #{film.title}"
       rescue
          Log.debug "Film #{film_id} failed"

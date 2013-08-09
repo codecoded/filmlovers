@@ -20,10 +20,7 @@ module AppConfig
   def update_counters
     FilmUserAction.distinct(:film_id).each do |id|
       film = Film.find id
-      next unless film
-      [:watched, :loved, :owned].each do |action|
-        film.counters.set(action, film.actions_for(action).count)
-      end
+      film.update_counters if film
     end
   end
 end

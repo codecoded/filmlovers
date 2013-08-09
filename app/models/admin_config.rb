@@ -21,6 +21,7 @@ class AdminConfig
         current_index = instance.fetched_index 
         begin
           film = Film.fetch current_index
+          film.update_counters
           Log.debug "Film #{current_index} of #{end_index}: #{film.title}"
         rescue
           Log.debug "Film Id failed: #{current_index}"
@@ -30,18 +31,18 @@ class AdminConfig
       end
     end
 
-    def fetch_changed_movies()
-      @tmdb_changes = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
-      results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes
-      fetch_films(results_page, true)
+    # def fetch_changed_movies()
+    #   @tmdb_changes = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
+    #   results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes
+    #   fetch_films(results_page, true)
 
-      while results_page.more_pages? do
-        tmdb_changes = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no+=1}
-        results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes
-        fetch_films results_page, true
-      end
+    #   while results_page.more_pages? do
+    #     tmdb_changes = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no+=1}
+    #     results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes
+    #     fetch_films results_page, true
+    #   end
 
-    end
+    # end
 
   end
 

@@ -4,7 +4,8 @@ class GenresController < ApplicationController
   end
   
   def show
-    @films ||= page_results Films.by_genre(genre.name), :popularity, :desc
+    @films ||= page_results Film.by_genre(genre.name), :popularity
+    request.xhr? ? render('show', layout:nil) : render('show')
   end
 
   protected

@@ -12,26 +12,32 @@ class ApplicationController < ActionController::Base
   protected
 
   def page_results(query, default_sort_order, page_size=AdminConfig.instance.page_size)
-    query.order_by(sorted_by || default_sort_order).page(page_no).per page_size
+    sort_order = sort_orders[sort_by || default_sort_order]
+    query.order_by(sort_order).page(page_no).per page_size
   end
 
   def page_no
     params[:page] ? params[:page].to_i : 1
   end
 
-  def sorted_by
-    sort_orders[params[:sorted_by].to_sym] if params[:sorted_by]
+  def sort_by
+    params[:sort_by]
   end
+
+  def genre
+    @genre ||= Genre.find_by_name params[:genres]
+  end
+
 
   def sort_orders
     {
-      title:                  [:title, :asc], 
-      release_date:           [:release_date, :desc],
-      earliest_release_date:  [:release_date, :asc],
-      popularity:             [:popularity, :desc],
-      watched:                ['counters.watched', :desc], 
-      loved:                  ['counters.loved', :desc],
-      owned:                  ['counters.owned', :desc] 
+      'title'                 =>  [:title, :asc], 
+      'release_date'          =>  [:release_date, :desc],
+      'earliest_release_date' =>  [:release_date, :asc],
+      'popularity'            =>  [:popularity, :desc],
+      'watched'               =>  ['counters.watched', :desc], 
+      'loved'                 =>  ['counters.loved', :desc],
+      'owned'                 =>  ['counters.owned', :desc] 
     }
   end
 

@@ -42,6 +42,10 @@ class Film
     between(release_date: Date.new(decade.to_i).to_s..Date.new(decade.to_i+10).to_s)
   end
 
+  def self.by_genres(genres)
+    any_in('genres.name' => genres)
+  end
+
   def title
     self['title']
   end
@@ -242,6 +246,12 @@ class Film
   def release_for(country_code)
     return unless !releases['countries'].blank?
     releases['countries'].find {|r| r['iso_3166_1']=='GB'}
+  end
+
+  def update_counters
+    FilmLists.each do |action|
+        counters.set(action, actions_for(action).count)
+    end
   end
 end
 

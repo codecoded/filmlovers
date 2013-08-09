@@ -1,26 +1,6 @@
 <% present(film, FilmPresenter) do |presenter| %>
   <%= div_for film, class: 'large-2 small-6 columns' do %>
-    <div class="flip-container">
-      <div class="upper">
-         <%= presenter.poster 'w185' %>
-        <!-- <img src="img/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" /> -->
-      </div>
-
-      <div class="lower actions">
-        <% if logged_in? %>
-          <ul>
-            <li class="share"><a href="#">Share</a></li>
-            <li class="add"><a href="#">Add</a></li>            
-            <li class="shop"><a href="#">Shop</a></li>
-          </ul>
-        <% end %>
-        <p>
-          <%= link_to 'More Info', summary_film_path(film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
-          <%= link_to 'Trailer', summary_film_path(film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
-        </p>
-
-      </div>
-    </div>
-    <%= render partial: 'films/user_actions', locals: {presenter: presenter} %>    
+    <%= render partial: 'films/film_container', locals: {presenter: presenter} %>    
+    <%= render partial: 'films/film_actions', locals: {presenter: presenter} %>    
   <% end %>
 <% end %>

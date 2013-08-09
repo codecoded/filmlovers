@@ -7,7 +7,7 @@
         <ul class="button-list">
           <% Genre.each do |genre| %>
           <li>
-            <%= link_to genre.name, genre_path(genre), alt: "view films in genre category #{genre}"  %>
+            <%= link_to genre.name, category_films_url(action: :popular, sort_by: :popularity, genres: genre), alt: "view films in genre category #{genre}"  %>
           </li>
           <% end %>
         </ul>

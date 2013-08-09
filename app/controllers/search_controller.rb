@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   respond_to :html, :json, :js
   
   def index
-    @results = page_results searcher.search, :popularity, :desc 
+    @results = page_results searcher.search, :popularity 
     render layout:nil if request.xhr?   
   end
 

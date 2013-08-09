@@ -46,17 +46,15 @@ class FilmsController < ApplicationController
   protected
 
 
-  def render_films(query, sort_order)
-
-    @sort_order = params[:sorted_by] || sort_order
-    @films ||= page_results apply_film_filters(query), sort_orders[sort_order]
+  def render_films(query, default_sort_order)
+    @sort_order = sort_by || default_sort_order
+    @films ||= page_results apply_film_filters(query), @sort_order
     request.xhr? ? render('index', layout:nil) : render('index')
   end
 
   def apply_film_filters(query)
-    if params[:decade]
-      query = query.by_decade params[:decade]
-    end
+    query = query.by_decade params[:decade] if params[:decade]
+    query = query.by_genres genre.name if genre
 
     query
   end

@@ -34,9 +34,9 @@
                         <p><%= film_presenter.character %></p>
                       </div>
                       <div class="film-poster">
-                        <%= film_presenter.poster_link %>
+                        <%= render partial: 'films/film_container', locals: {presenter: film_presenter} %>
                       </div>
-                      <%= render partial: 'films/user_actions', locals: {presenter: film_presenter} %>                   
+                      <%= render partial: 'films/film_actions', locals: {presenter: film_presenter} %>                   
                     </div>
                   <% end %>
                 </div>
@@ -53,9 +53,9 @@
                         <p><%= film_presenter.job %></p>
                       </div>
                       <div class="film-poster">
-                        <%= film_presenter.poster_link %>
+                        <%= render partial: 'films/film_container', locals: {presenter: film_presenter} %>
                       </div>
-                      <%= render partial: 'films/user_actions', locals: {presenter: film_presenter} %>                   
+                      <%= render partial: 'films/film_actions', locals: {presenter: film_presenter} %>                   
                     </div>
                   <% end %>
                 </div>

@@ -1,80 +1,78 @@
-<div class="full-row page-title">
-  <div class="row">
-    <div class="large-12 small-12 columns">
-      <h1>Films coming soon...</h1>
+<div id="films-container">
+  <div class="full-row page-title">
+    <div class="row">
+      <div class="large-12 small-12 columns">
+        <h1>Films coming soon...</h1>
+      </div>
     </div>
   </div>
-</div>
-<div class="full-row filter margin-bottom">
-  <div class="row">
-    <form id="filter" action="">
-      <div class="large-4 small-6 large-offset-2 columns">
-        <div class="large-3 small-12 columns">
-          <p>Sort by</p>
-        </div>
-        <div class="large-9 small-12 columns">
-          <select name="filterlist" id="filterlist">
-            <%= sort_option params[:action], :title, 'Title (A-Z)' %>
-            <%= sort_option params[:action], :release_date, 'Release Date (Latest)' %>
-            <%= sort_option params[:action], :earliest_release_date, 'Release Date (Earliest)' %>
-            <%= sort_option params[:action], :popularity, 'Popularity' %>
-            <%= sort_option params[:action], :loved, 'Loved' %>
-            <%= sort_option params[:action], :watched, 'Watched' %>
-            <%= sort_option params[:action], :owned, 'Owned' %>
-          </select>
-        </div>
-      </div>
-      <div class="large-4 small-6 end columns">
-        <div class="large-5 small-12 columns">
-          <p>Hide my films</p>
-        </div>
-          <div class="large-7 small-12 columns">
-            <div class="onoffswitch">
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-              <label class="onoffswitch-label" for="myonoffswitch">
-                <div class="onoffswitch-inner"></div>
-                <div class="onoffswitch-switch"></div>
-              </label>
-            </div>
+  <div class="full-row filter margin-bottom">
+    <div class="row">
+      <form id="filter" action="">
+        <div class="large-4 small-6 large-offset-2 columns">
+          <div class="large-3 small-12 columns">
+            <p>Sort by</p>
+          </div>
+          <div class="large-9 small-12 columns">
+            <select name="filterlist" id="filterlist">
+              <%= sort_option params[:action], :title, 'Title (A-Z)' %>
+              <%= sort_option params[:action], :release_date, 'Release Date (Latest)' %>
+              <%= sort_option params[:action], :earliest_release_date, 'Release Date (Earliest)' %>
+              <%= sort_option params[:action], :popularity, 'Popularity' %>
+              <%= sort_option params[:action], :loved, 'Loved' %>
+              <%= sort_option params[:action], :watched, 'Watched' %>
+              <%= sort_option params[:action], :owned, 'Owned' %>
+            </select>
           </div>
         </div>
-      </form>
-    </div>
+        <div class="large-4 small-6 end columns">
+          <div class="large-5 small-12 columns">
+            <p>Hide my films</p>
+          </div>
+            <div class="large-7 small-12 columns">
+              <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                <label class="onoffswitch-label" for="myonoffswitch">
+                  <div class="onoffswitch-inner"></div>
+                  <div class="onoffswitch-switch"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
 
-  <div class="row sky-test">
-    <div class="large-12 small-6 columns">
-      <dl>
-        <dt>Genres</dt>
-        <dd><button class="small">Action</button></dd>
-        <dd><button class="small">Drama</button></dd>
-        <dd><button class="small">Comedy</button></dd>
-        <dd><button class="small">Thriller</button></dd>
-      </dl>
+    <div class="row sky-test">
+      <div class="large-12 small-6 columns">
+        <dl>
+          <dt>Genres</dt>
+          <% Genre.limit(9).each do |genre| %>
+            <dd><%= filter_genre params[:action], params[:sorted_by], genre %></dd>
+          <% end %>
+        </dl>
+      </div>
+    </div>
+    <div class="row sky-test">
+      <div class="large-12 small-6 columns">
+        <dl>
+          <dt>Decade</dt>
+          <% 14.times.each do |d| %>
+            <dd><%= filter_decade params[:action], params[:sorted_by], 1880+(d*10) %></dd>
+          <% end %>
+        </dl>
+      </div>
     </div>
   </div>
-  <div class="row sky-test">
-    <div class="large-12 small-6 columns">
-      <dl>
-        <dt>Decade</dt>
-        <dd><%= filter_decade params[:action], params[:sorted_by], '1970' %></dd>
-        <dd><%= filter_decade params[:action], params[:sorted_by], '1980' %></dd>
-        <dd><%= filter_decade params[:action], params[:sorted_by], '1990' %></dd>
-        <dd><%= filter_decade params[:action], params[:sorted_by], '2000' %></dd>
-        <dd><%= filter_decade params[:action], params[:sorted_by], '2010' %></dd>
-      </dl>
-    </div>
+
+  <div class="row margin-bottom" id="films-content">
+    <div class="large-12 columns text-center">
+      <%= paginate films, remote: true %>
+    </div> 
+    <% films.each do |film| %>
+      <%= render partial: 'films/film', object: film %>
+    <% end %>
+    <div class="large-12 columns text-center">
+      <%= paginate films, remote: true %>
+    </div>   
   </div>
 </div>
-
-<div class="row margin-bottom" id="films-content">
-  <div class="large-12 columns text-center">
-    <%= paginate films, remote: true %>
-  </div> 
-  <% films.each do |film| %>
-    <%= render partial: 'films/film', object: film %>
-  <% end %>
-  <div class="large-12 columns text-center">
-    <%= paginate films, remote: true %>
-  </div>   
-</div>
-

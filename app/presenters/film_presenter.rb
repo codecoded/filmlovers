@@ -17,7 +17,11 @@ class FilmPresenter < BasePresenter
 
   def year_and_director
     # ("#{film.year} - Directed by " << link_to(film.director, person_path(film.director))).html_safe
-     "#{film.year} - Directed by #{film.director}"
+    if director
+      ("#{film.year} - Directed by " << link_to(film.director, person_path(director.id))).html_safe
+    else
+      film..year
+    end
   end
 
   def alternative_titles
@@ -144,7 +148,7 @@ class FilmPresenter < BasePresenter
 
 
   def poster(size='w185')
-    src = has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
+    src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
     image_tag src, :title=>film.title, alt: "poster for #{film.title}"
   end
 
@@ -172,6 +176,10 @@ class FilmPresenter < BasePresenter
 
   def counter(action)
     film.counters[action]
+  end
+
+  def director
+    @director ||= film.crew_member 'Director'
   end
 
 end

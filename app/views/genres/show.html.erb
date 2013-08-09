@@ -1,9 +1,3 @@
 
-<% description "View all films within the genre #{genre.name} and discover more" %>
-<% title " #{genre.name} films" %>
-
-<div class="row">
-  <h2><%= "#{@films.count} films within genre #{genre.name}" %></h2>
-</div>
 
 <%= render partial: 'films/films', locals: {films:  @films} %>

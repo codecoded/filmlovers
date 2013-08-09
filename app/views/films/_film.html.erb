@@ -2,7 +2,7 @@
   <%= div_for film, class: 'large-2 small-6 columns' do %>
     <div class="flip-container">
       <div class="upper">
-         <%= presenter.poster %>
+         <%= presenter.poster 'w185' %>
         <!-- <img src="img/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" /> -->
       </div>
 
@@ -21,11 +21,6 @@
 
       </div>
     </div>
-    <ul class="user-rankings">
-      <% [:watched, :loved, :owned].each do |action| %>
-          <%= presenter.action_list_item action, film.counters[action], true %>
-          <%#= link_to film.counters[action] ,film_path(film), data: {counter: "#{film.id}_#{action}"} %>
-      <% end %>
-    </ul>
+    <%= render partial: 'films/user_actions', locals: {presenter: presenter} %>    
   <% end %>
 <% end %>

@@ -3,7 +3,6 @@ class FilmsController < ApplicationController
 
   respond_to :html, :json
 
-  scopes = 
   def index
   end
 
@@ -22,30 +21,24 @@ class FilmsController < ApplicationController
     render partial: 'list_view'
   end
 
-  # def actioned
-  #   results_page = Films.paged_actioned(params[:user_action], params[:order],  params[:by], params[:page].to_i, 50)
-  #   @films_page = FilmsPagePresenter.new current_user, results_page, params[:user_action]
-  #   render 'index'
-  # end
-
   def summary
     render layout: false
   end
 
   def coming_soon
-    render_films FilmCollection.coming_soon.films, sort_orders[:release_date]
+    render_films FilmCollection.coming_soon.films, :release_date
   end
 
   def in_cinemas
-    render_films FilmCollection.in_cinemas.films, sort_orders[:earliest_release_date]
+    render_films FilmCollection.in_cinemas.films, :earliest_release_date
   end
 
   def popular
-    render_films Film, sort_orders[:popularity]
+    render_films Film, :popularity
   end
 
   def users
-    @users =film.actions_for(user_action).map &:user
+    @users = film.actions_for(user_action).map &:user
     params[:view] = 'users'
     render 'show'
   end
@@ -54,14 +47,21 @@ class FilmsController < ApplicationController
 
 
   def render_films(query, sort_order)
-    @films ||= page_results query, sort_order
+
+    @sort_order = params[:sorted_by] || sort_order
+    @films ||= page_results apply_film_filters(query), sort_orders[sort_order]
     request.xhr? ? render('index', layout:nil) : render('index')
   end
 
+  def apply_film_filters(query)
+    if params[:decade]
+      query = query.by_decade params[:decade]
+    end
+
+    query
+  end
+
   def perform_search
-    # page_size = 28
-    # films = Film.search(params[:query], :title, :release_date, :desc).page(page_no).per(page_size)
-    # ResultsPage.new films, films.count, page_size, page_no
     TmdbFilmsSearch.new.search(params[:q] || params[:query], page_options)
   end
 

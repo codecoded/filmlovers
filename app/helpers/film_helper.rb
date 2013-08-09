@@ -88,7 +88,7 @@ module FilmHelper
     image_tag src, :title=>film.title, alt: "poster for #{film.title}", size: '185x278'
   end
 
-  def poster_link(film, size='w154')
+  def poster_link(film, size='w185')
     link_to film_path(film), title: film.title do
       poster film, size
     end

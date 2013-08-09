@@ -6,18 +6,6 @@ class FilmPresenter < BasePresenter
 
   def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?, :overview, :score
 
-
-  def self.icons
-    @icons ||= {
-      watched:  'icon-eye-open', 
-      loved:    'icon-heart', 
-      owned:    'icon-home', 
-      queued:   'icon-pushpin',
-      list:     'icon-list'
-    }
-  end
-
-
   def title_with_year
     "#{film.title} " << year
   end
@@ -113,24 +101,6 @@ class FilmPresenter < BasePresenter
     film.spoken_languages.map {|l| l['name']}
   end
 
-  # def actioned?(action)
-  #   return false unless user
-  #   user.film_actioned? film, action
-  # end
-
-  # def stats(action)
-  #   film.users[action].count
-  # end
-
-  # def thumbnail(size='w154')
-  #   size = size ? size : 'w154'
-  #   has_poster? ? film.poster(size ? size : thumbnail_size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
-  # end
-
-  # def backdrop(size='original')
-  #   film.backdrop(size)
-  # end
-
   def release_date
     film.uk_release_date.to_date.strftime('%d %B %Y') if film.release_date
   end
@@ -173,40 +143,35 @@ class FilmPresenter < BasePresenter
   end
 
 
-
   def poster(size='w185')
     src = has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
     image_tag src, :title=>film.title, alt: "poster for #{film.title}"
   end
 
-  def poster_link(film, size='w154')
+  def poster_link(size='w185')
     link_to film_path(film), title: film.title do
-      poster film, size
+      poster size
     end
   end
-
 
   def starring
     "#{film.starring.join(', ')}" if film.casts
   end
 
-  # def director
-  #   @director ||= film.credits.crew.find {|member| member['job']=='Director'}
-  #   @director ? @director['name'] : ''
-  # end
+  def character
+    film['character']
+  end
 
-  # def year
-  #   @year ||= (Date.parse(film.release_date).year if film.release_date)
-  # end
+  def department
+    film['department']
+  end
 
-  # def similar_films?
-  #   film.similar_movies
-  # end
+  def job
+    film['job']
+  end
 
-  # def similar_films
-  #   return unless similar_films?
-  #   film.similar_movies['results'].compact.map {|f| FilmPresenter.new user, Film.new(f), 'w92'}
-  # end
-
+  def counter(action)
+    film.counters[action]
+  end
 
 end

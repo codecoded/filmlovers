@@ -1,79 +1,80 @@
-
-    
-  <!-- Header and Nav -->
-  <div class="twelve columns">
-  <div class="row collapse">
-    <div class="seven columns">
-      <h1><%= person.name %> </h1>
-      
+ <% present(person, PersonPresenter) do |presenter| %>
+  <div class="full-row margin-bottom page-title">
+    <div class="row">
+      <div class="large-12 small-12 columns">
+        <h1><%= person.name %></h1>
+      </div>
     </div>
   </div>
-  
-
-  <div class="row " id="biography">
-    <div class="three columns">
-     <%= image_tag person.profile('w342') %>
+  <div class="row margin-bottom">
+    <div class="large-3 small-12 columns">
+      <div class="default-image">
+        <%= image_tag person.profile('w342') %>
+      </div>
+      <h4>Bio</h4>
+      <p>
+        <%= presenter.short_bio %> <br />
+        <a href="#" data-reveal-id="fullbio">Read more...</a>
+      </p>
+      <%= show_details 'Place of birth', person.place_of_birth %>
+      <%= show_details 'Birthday', presenter.dob %>
     </div>
-    <div class="five columns">
-      <h4>Biography</h4>
+    <div class="large-9 small-12 columns">
+      <div class="margin-bottom">
+        <div class="inner-tabs">
+          <div class="section-container auto" data-section>
+            <section>
+              <p class="title" data-section-title><a href="#panel1">Starred in</a></p>
+              <div class="content" data-section-content>
+                <div class="row">
+                  <% presenter.films_starred_in.each do |film_presenter| %>
+                    <div class="large-3 small-6 columns text-center">
+                      <div class="character">
+                        <h5>Character played</h5>
+                        <p><%= film_presenter.character %></p>
+                      </div>
+                      <div class="film-poster">
+                        <%= film_presenter.poster_link %>
+                      </div>
+                      <%= render partial: 'films/user_actions', locals: {presenter: film_presenter} %>                   
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </section>
+            <section>
+              <p class="title" data-section-title><a href="#panel2">Worked on</a></p>
+              <div class="content" data-section-content>
+                <div class="row">
+                  <% presenter.films_worked_on.each do |film_presenter| %>
+                    <div class="large-3 small-6 columns text-center">
+                      <div class="character">
+                        <h5><%= film_presenter.department %></h5>
+                        <p><%= film_presenter.job %></p>
+                      </div>
+                      <div class="film-poster">
+                        <%= film_presenter.poster_link %>
+                      </div>
+                      <%= render partial: 'films/user_actions', locals: {presenter: film_presenter} %>                   
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id="fullbio" class="reveal-modal medium">
+  <div class="row">
+    <div class="large-12 small-12 columns">
+      <h1><%= person.name %></h1>
       <p><%= person.biography %></p>
     </div>
-     <div class="four columns credits" id="credits">
-      <dl class="tabs">
-        <dd class="active"><a href="#cast">Cast</a></dd>
-        <dd><a href="#crew">Crew</a></dd>
-        <dd><a href="#films">Films</a></dd>
-      </dl>
-      <ul class="tabs-content">
-        <li class="active" id="castTab">
-          <div class="row">
-            <div class="twelve columns crew">
-              <ul class="disc credits">
-                <% person.portfolio.cast.each do |person| %>
-                <li style="border-bottom: dotted 1px lightblue;">
-                  <%= link_to film_path(person.id) do %>
-                    <%= content_tag :span, person.title, {:class => 'person link'} %>
-                  <% end %>
-                  <span class="right"> <%= person.character %> </span>
-                </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        </li>
-        <li id="crewTab">
-          <div class="row">
-            <div class="twelve columns crew">
-              <ul class="disc credits">
-              <% person.portfolio.crew.each do |person| %>
-                <li style="border-bottom: dotted 1px lightblue;">
-                  <%= link_to film_path(person.id) do %>
-                    <%= content_tag :span, person.title, {:class => 'person link'} %>
-                  <% end %>
-                  <span class="right"> <%= person.job %> </span>
-                </li>
-                <% end %>
-              </ul> 
-            </div>
-          </div>
-        </li>
-        <li id="filmsTab">
-          <div class="row" id="similar">
-            <div class="twelve columns crew">
-              <ul class="disc credits films">
-              <% person.films.each do |film| %>
-                <div class="film">
-                <% if film.id %>
-                  <%= poster_link film, 'w154' %>
-                  <!-- <span class="right"> <%#= film.title %> </span> -->
-                <% end %>
-                </div>
-              <% end %>
-              </ul>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
   </div>
+  <a class="close-reveal-modal">&#215;</a>
 </div>
+<% end %>
+

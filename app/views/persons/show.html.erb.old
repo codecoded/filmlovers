@@ -1,0 +1,79 @@
+
+    
+  <!-- Header and Nav -->
+  <div class="twelve columns">
+  <div class="row collapse">
+    <div class="seven columns">
+      <h1><%= person.name %> </h1>
+      
+    </div>
+  </div>
+  
+
+  <div class="row " id="biography">
+    <div class="three columns">
+     <%= image_tag person.profile('w342') %>
+    </div>
+    <div class="five columns">
+      <h4>Biography</h4>
+      <p><%= person.biography %></p>
+    </div>
+     <div class="four columns credits" id="credits">
+      <dl class="tabs">
+        <dd class="active"><a href="#cast">Cast</a></dd>
+        <dd><a href="#crew">Crew</a></dd>
+        <dd><a href="#films">Films</a></dd>
+      </dl>
+      <ul class="tabs-content">
+        <li class="active" id="castTab">
+          <div class="row">
+            <div class="twelve columns crew">
+              <ul class="disc credits">
+                <% person.portfolio.cast.each do |person| %>
+                <li style="border-bottom: dotted 1px lightblue;">
+                  <%= link_to film_path(person.id) do %>
+                    <%= content_tag :span, person.title, {:class => 'person link'} %>
+                  <% end %>
+                  <span class="right"> <%= person.character %> </span>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li id="crewTab">
+          <div class="row">
+            <div class="twelve columns crew">
+              <ul class="disc credits">
+              <% person.portfolio.crew.each do |person| %>
+                <li style="border-bottom: dotted 1px lightblue;">
+                  <%= link_to film_path(person.id) do %>
+                    <%= content_tag :span, person.title, {:class => 'person link'} %>
+                  <% end %>
+                  <span class="right"> <%= person.job %> </span>
+                </li>
+                <% end %>
+              </ul> 
+            </div>
+          </div>
+        </li>
+        <li id="filmsTab">
+          <div class="row" id="similar">
+            <div class="twelve columns crew">
+              <ul class="disc credits films">
+              <% person.films.each do |film| %>
+                <div class="film">
+                <% if film.id %>
+                  <%= poster_link film, 'w154' %>
+                  <!-- <span class="right"> <%#= film.title %> </span> -->
+                <% end %>
+                </div>
+              <% end %>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

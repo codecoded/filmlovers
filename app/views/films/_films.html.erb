@@ -14,13 +14,13 @@
         </div>
         <div class="large-9 small-12 columns">
           <select name="filterlist" id="filterlist">
-            <%= films_sort_option params[:action], :title, 'Title (A-Z)' %>
-            <%= films_sort_option params[:action], :release_date, 'Release Date (Latest)' %>
-            <%= films_sort_option params[:action], :earliest_release_date, 'Release Date (Earliest)' %>
-            <%= films_sort_option params[:action], :popularity, 'Popularity' %>
-            <%= films_sort_option params[:action], :loved, 'Loved' %>
-            <%= films_sort_option params[:action], :watched, 'Watched' %>
-            <%= films_sort_option params[:action], :owned, 'Owned' %>
+            <%= sort_option params[:action], :title, 'Title (A-Z)' %>
+            <%= sort_option params[:action], :release_date, 'Release Date (Latest)' %>
+            <%= sort_option params[:action], :earliest_release_date, 'Release Date (Earliest)' %>
+            <%= sort_option params[:action], :popularity, 'Popularity' %>
+            <%= sort_option params[:action], :loved, 'Loved' %>
+            <%= sort_option params[:action], :watched, 'Watched' %>
+            <%= sort_option params[:action], :owned, 'Owned' %>
           </select>
         </div>
       </div>
@@ -40,6 +40,30 @@
         </div>
       </form>
     </div>
+
+  <div class="row sky-test">
+    <div class="large-12 small-6 columns">
+      <dl>
+        <dt>Genres</dt>
+        <dd><button class="small">Action</button></dd>
+        <dd><button class="small">Drama</button></dd>
+        <dd><button class="small">Comedy</button></dd>
+        <dd><button class="small">Thriller</button></dd>
+      </dl>
+    </div>
+  </div>
+  <div class="row sky-test">
+    <div class="large-12 small-6 columns">
+      <dl>
+        <dt>Decade</dt>
+        <dd><%= filter_decade params[:action], params[:sorted_by], '1970' %></dd>
+        <dd><%= filter_decade params[:action], params[:sorted_by], '1980' %></dd>
+        <dd><%= filter_decade params[:action], params[:sorted_by], '1990' %></dd>
+        <dd><%= filter_decade params[:action], params[:sorted_by], '2000' %></dd>
+        <dd><%= filter_decade params[:action], params[:sorted_by], '2010' %></dd>
+      </dl>
+    </div>
+  </div>
 </div>
 
 <div class="row margin-bottom" id="films-content">

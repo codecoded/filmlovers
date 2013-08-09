@@ -14,7 +14,7 @@ namespace :tmdb do
   end
 
   task :update_changes, [:start_date, :page_no] => :environment do |t, args|
-    start_date = args[:start_date] ? eval(args[:start_date]) : 3.days.ago
+    start_date = args[:start_date] ? eval(args[:start_date]) : 36.hours.ago
     fetch_changed_movies start_date, (args[:page_no] || 1).to_i
   end
 

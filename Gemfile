@@ -72,8 +72,8 @@ group :assets do
 end
 
 group :test do
-  gem 'turn', require: false # SR - for pretty test output 
-  gem 'minitest' # SR - test suite for benchmarks
+  # gem 'turn', require: false # SR - for pretty test output 
+  # gem 'minitest' # SR - test suite for benchmarks
   gem 'mocha', require: false
 end
 

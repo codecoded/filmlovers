@@ -1,0 +1,608 @@
+
+// $watchedColor:       #379437;
+// $lovedColor:         #ff3333;
+// $unlovedColor:       #ff3333;
+// $queuedColor:        #861949;
+// $ownedColor:         #4387BD;
+// $actionedHover:      #bbb;
+
+// .orbit-wrapper  { 
+//   margin-bottom: 10px;
+//   box-shadow: 5px 5px 30px #222
+// }
+
+// // #featured.orbit img { display: block; }
+
+// .film-title{
+//   // font-style: italic;
+//   margin-top: 0px;
+//   margin-bottom: 0px;
+//   font-size: 1.5em;
+//   a{
+//     color: black;
+//   }
+// }
+
+// ul.credits{
+//   height:400px;
+//   overflow-x: hidden;
+//   overflow-y: scroll;
+//   span{
+//     font-size: 10pt;
+//   }
+// }
+
+// // .films{
+// //   height:auto;
+// //   // margin:1px;
+// //   width:auto;
+// //   // padding:10px 0px;
+// //   // float:left;
+
+
+
+// //   .film
+// //   {
+// //     margin: 1px 3px;
+// //     float:left;
+// //     width: 154px;
+// //     // border:  solid 4px transparent;
+// //     border-radius: 5px;
+// //     position: relative;
+// //     &.watched{
+// //       // border-radius: 7px;
+// //       // border-color:   $watchedColor;
+// //     }
+// //     // &:hover{
+// //     //   // border-color: #9CD6EC;
+// //     // }
+// //     &.empty{
+// //       height: 271px;
+// //       border: dashed;
+// //     }
+// //     &:hover .film-title{
+// //        opacity: 1;  
+// //     }
+
+// //     &:hover .film-director{
+// //       opacity: 1;
+// //     }
+
+// //     .film-info{
+// //       height: 231px;
+
+// //       h4{
+// //         font-size:10pt;
+// //         // color: white;
+// //         padding-left:8px;
+// //         margin-bottom:2px;
+// //       }
+// //       p{
+// //         // color: #ddd;
+// //         font-style: italic;
+// //         margin: 0px;
+// //         padding-left:8px;
+// //       }
+// //       a{
+// //         // color:white;
+// //       }
+
+// //       img{
+// //         height:100%;
+// //         width:154px;
+// //         // border-radius: 0px 5px 0px 0px;
+// //         // border: 4px solid transparent;
+// //       }
+// //       &:hover .film-action-buttons{
+// //         opacity: 0.8
+// //       }
+// //       .film-action-list{
+// //         width: 34px;
+// //         color: white;
+// //         background-color: #1D1C1C;
+// //         float: left;
+// //         height: 100%;
+// //         text-align: center;
+// //         // border: solid 2px #4E4848;
+// //         border-right: none;
+// //         border-bottom: none;
+// //         border-collapse: collapse;
+// //         // border-radius: 5px 0px 0px 0px;
+// //         label{
+// //           padding-top: 15px;
+// //           cursor: default;
+// //           color: #FFFFA8;
+// //         }
+// //         i{
+// //           font-size: 1.4em;
+// //           opacity: 0.7;
+// //           border-bottom: 1px solid gray;
+// //           padding-bottom: 10px;
+// //           &[data-action]:hover{
+// //             opacity: 1
+// //           }
+// //           &:active{
+// //             -webkit-transform: scale(2,4); /* Safari and Chrome */
+// //           }
+
+// //         }
+// //       }
+// //       .film-action-buttons{
+// //         position: relative;
+// //         text-align: center;
+// //         bottom: 38px;
+// //         opacity: 0;
+// //         a{
+// //           color:black;
+// //         }
+// //         i{
+// //           bottom: 10px;
+// //           font-size: 14pt !important;
+// //           border: solid 1px #000;
+// //           background-color: #FFF;
+// //           padding: 3px;
+// //           width: 28px;
+// //           height: 26px;
+// //           display: inline-block;
+// //           text-align: center;
+// //           border-radius: 5px;
+
+// //           &:hover{
+// //             cursor: pointer;
+// //           }
+// //         }
+// //       }
+// //     }
+// //     .film-heading-border{
+// //       height: 20px;
+// //       text-align: center;
+// //       color: white;
+// //       background-color: #1D1C1C;
+// //       font-size: 0.7em !important;
+// //       width: 100%;
+// //       line-height: 2em;
+// //       font-style: normal;
+// //       opacity: 0;  
+// //       overflow: hidden;
+// //       span{
+// //         font-size: 8pt;
+// //         color: #919191 !important;
+// //         a{
+// //           color:#919191;
+// //         }
+// //         &:hover{
+// //           color:white !important;
+// //           cursor: pointer;
+// //           label{
+// //             color: white;
+// //           }
+// //           i{
+// //             color: white;
+// //           }
+// //         }
+// //         label{
+// //           display: inline;
+// //           font-size: 8pt;
+// //           color: #919191 ;
+// //         }
+// //         i{
+// //           padding: 0px 3px;
+// //           font-size: 9pt !important;
+// //         }
+// //       }
+// //       &.film-title{
+// //         border-radius: 5px 5px 0px 0px
+// //       }
+// //       &.film-director{
+// //         border-radius: 0px 0px 5px 5px;
+// //         opacity: 1;
+// //         color: #444;
+// //       }    
+// //       .film-actions-menu{
+// //           display: none;
+// //           background-color: black;
+// //           position: relative;
+// //           width: 123px;
+// //           opacity: 0.8;
+// //           list-style: none;
+// //           text-align: left;
+// //           padding: 10px;
+// //           padding-top: 10px;
+// //           margin: 0px 48px;
+// //           border-radius: 0px 0px 10px 10px;
+// //           // height: 100px;
+// //           line-height: 2em;
+
+// //           &:hover{
+// //             display: block;
+// //           }
+// //           a{
+// //             color: white;
+// //             font-size: 1em;
+// //             line-height: 1em;
+// //             &:hover, &:hover i{
+// //               opacity: 1;
+// //               font-weight: bold;
+// //             }
+// //           }
+// //           i{
+// //             border-bottom: none;
+
+// //           }
+// //         }
+// //           &:hover .film-actions-menu{
+// //             display: block;
+// //           }
+// //     }
+// //   }
+// //   .film-small{
+// //     margin: 1px;
+// //     display: block;
+// //     float: left;
+// //     img{
+// //       height: 90px;
+// //       width: 60px; 
+// //     }
+// //     .tiled{
+// //       opacity: 0
+// //     }
+// //     &:hover .tiled{
+// //       opacity: 1
+// //     }
+// //   }
+// // }
+
+// .film-w130{
+//   margin: 1px;
+//   display: block;
+//   float: left;
+//   img{
+//     width: 130px;
+//     height: 195px;
+//   }
+// }
+
+
+// .film-w92{
+//   margin: 1px;
+//   display: block;
+//   float: left;
+//   img{
+//     width: 92px;
+//     height: 139px;
+//   }
+// }
+
+// .film-w154{
+//   margin: 1px;
+//   display: block;
+//   float: left;
+//   img{
+//     width: 154px;
+//     height: 231px;
+//   }
+// }
+
+// .film-selected{
+//   border: solid 1px;
+// }
+
+// .film-actions{
+//   color:white;
+//   list-style: none;
+//   left: 8px;
+//   top: 200px;
+//   position: absolute;
+//   li{
+//     float:left;
+//     // background-color: black;
+//   }
+// }
+
+// .film-actions-queue{
+//   color:white;
+//   list-style: none;
+//   position: absolute;
+//   top: 60px;
+//   margin-left: 15px;
+//   opacity: 0.5;
+//   li{
+//     float:left;
+//     // background-color: black;
+//   }
+  
+// }
+
+// .unactioned{
+//   &:hover{
+//     opacity: 1 ;
+//   }
+// }
+// .icon-eye-open {
+//   &.actioned{
+//     color:$watchedColor;
+//   }
+// }
+
+// .icon-heart {
+//   &.actioned{
+//     color:$lovedColor;
+//   }
+// }
+
+// .icon-heart-empty {
+//   &.actioned{
+//     color:$unlovedColor;
+//   }
+// }
+
+// .icon-pushpin {
+//   &.actioned{
+//     color:$queuedColor;
+//   }
+// }
+
+// .icon-home {
+//   &.actioned{
+//     color:$ownedColor;
+//   }
+// }
+
+// #shopLinks{
+//   padding: 5px;
+//   a{
+//     padding: 2px 0px;
+//   }
+// }
+
+// .film-actions-horizontal{
+//   text-align: center;
+//   button{
+//     border: solid 3px black;
+//     border-radius: 3px;
+//     width: 30px;
+//     height: 30px;
+//     padding-top: 2px;
+//     background-color: white;
+//     opacity: 1;
+//     padding: 0px;
+//   }
+//   i{
+//     position: relative;
+//     top:0px;
+//     font-size:16pt;
+//   }
+// }
+
+// #film-main-actions{
+//   padding: 14px 0px;
+//   .film-actions-vertical{
+//     div.film-action{
+//       margin: 2px 0px;
+//       border: solid 4px black;
+//       padding: 2px;
+//       border-radius: 5px;
+//       width: 60px;
+//       height:60px;
+//       background-color: white;
+//       box-shadow: 7px 7px 30px #222;
+//       label.count{
+//         font-size: 10pt;
+//         position: relative;
+//         bottom: 0px;
+//       }
+//       i{
+//         font-size: 3em;
+//       }
+//       a{
+//         color: black;
+//       }
+//     }
+//   }
+// }
+
+
+// #film-content-trailer{
+//    iframe{
+//       // height: ;
+//       //width: 740px;
+//       // height: 416px;
+//   } 
+// }
+
+
+// #film-content-overview{
+
+
+//   .orbit-prev, .orbit-next, .orbit-timer {
+//     display: block;
+//   }
+
+//   span, p, h5, label{
+//     font-size: 12pt;
+//   }
+//   .link{
+//     padding: 0px 5px;
+//   }
+//   a:nth-child(2) .link{
+//     padding-left:0px;
+//   }
+//   label{
+//     // float:left;
+//     // clear: both;
+//     padding: 10px 0px 5px 0px;
+//     font-weight: bold;
+//   }
+//   a{
+//     color: #0D4050;
+//   }
+//   #featured img{
+//     width: 100%;
+//     max-height: 438px;
+//   }
+// }
+
+
+// #film-content-users{
+
+// }
+
+// #film-content-similar{
+
+// }
+
+
+// #filmsActioned{
+//   padding-top: 10px;
+//   h6, h5{
+//     margin-top: 0px;
+//     margin-bottom: 0px;
+//   }
+
+//   .film-title{
+//      font-size: 20pt;
+//      padding-bottom: 5px;
+//   }
+//   .film-banner{
+//     // border-bottom: 2px solid black;
+//     // margin-bottom: 20px;
+//     // position: relative;
+//     // height: 75px;
+
+//   }
+//   .poster img{
+//     box-shadow: 7px 7px 9px #838383;
+//   }
+//   i{
+//     font-size: 2em;
+//   }
+
+
+//   .counter{
+//     a{
+//       color:black;
+//     }
+//     label{
+//       padding-left: 10px;
+//       display: inline;
+//       font-size: 32pt;
+//     }
+
+//   }
+
+
+//   .affiliate{
+//     // height: 21px;
+//   }
+//   .nav-container
+//   {
+//     // height: 100%;
+//     // position: relative;
+//     .sub-nav
+//     {
+//       // position: relative;
+//       // bottom: -50%;
+//       // right: 0px;
+//       i{
+//         font-size: 2em;
+//         box-shadow: 3px 3px 12px #6D6D6D;
+//         background-color: rgba(0, 0, 0, 0);
+//         border-radius: 100px;
+//         padding: 6px;
+//         margin-bottom: 5px;
+//       }
+//     }
+//   }
+//   dd{
+//     display: block;
+//     margin-bottom: 0px;
+//     text-align: center;
+//     width: 70px;
+//     padding: 0px;
+//     margin-right: 0px;
+//     margin-left: 0px;
+//     a{
+//       color: black;
+//       label{
+//         margin-top: 10px;
+//       }
+//     }
+//     a:hover, .actioned
+//     {
+//       color: $ownedColor;
+//       label, .actioned{
+//         color: $ownedColor
+//       }
+//     }
+//   }
+//     dt{
+//       margin-bottom: 0px;
+//     }
+//   p{
+//     text-align: justify;
+//   }
+//   // background:  url(http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w1280/lJz2X8dEM1eiKxupmPUI7WVwEtK.jpg) top center no-repeat;
+// }
+// .external-links{
+//   padding: 10px 0px;
+// }
+
+// p.vignette {
+//   position: relative;
+//   // top: -300px;
+// }
+// p.vignette img {
+//  display: block;
+// }
+// p.vignette:after {
+// -moz-box-shadow: inset 0 0 10em #666;
+// -webkit-box-shadow: inset 0 0 36em #666;
+// box-shadow: inset 2em -3em 30em 11em #fff;
+// position: absolute;
+// top: 0;
+// left: 0;
+// width: 100%;
+// height: 100%;
+// z-index: 10000;
+// content: "";
+// }
+// p.vignette:before {
+//   height: 400px;
+// }
+
+
+// span.play-trailer
+// {
+//   position: absolute;
+//   right: 9px;
+//   top: 27px;
+
+//   i{
+//     font-size: 14pt;
+//     color: #D6D6D6;
+//   }
+// }
+
+// #filmTrailersModal{
+//   background-color: #0F0F0F;
+//   opacity: 0.8;
+//   border-radius: 20px;
+//   border: solid 1px #FFF;
+//   width: 780px;
+//   height: 600px;
+//   iframe{
+//     width: 640px;
+//     height: 360px;
+//   } 
+//   // .flex-video{
+//   //   height: 345px ;
+//   //   padding-bottom: 0px;
+//   //   margin-bottom: 0px;
+//   // }
+// }
+
+// #film-images{
+//     .orbit-prev, .orbit-next, .orbit-timer {
+//     display: block;
+//   }
+// }

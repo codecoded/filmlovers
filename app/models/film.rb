@@ -25,6 +25,7 @@ class Film
   index({ popularity: 1}, { name: "film_popularity_index", background: false })
   index({ genres: 1}, { name: "film_genres_index", background: true })
 
+
   def self.fetch(id)
     FilmRepository.find id
   end
@@ -35,6 +36,10 @@ class Film
 
   def self.force_fetch(id)
     FilmRepository.new(id).send :fetch
+  end
+
+  def self.by_decade(decade)
+    between(release_date: Date.new(decade.to_i).to_s..Date.new(decade.to_i+10).to_s)
   end
 
   def title

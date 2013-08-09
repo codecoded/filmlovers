@@ -47,7 +47,7 @@
         <dl>
           <dt>Genres</dt>
           <% Genre.limit(9).each do |genre| %>
-            <dd><%= filter_genre params[:action], params[:sorted_by], genre %></dd>
+            <dd><%= filter_genre params[:action], params[:sort_by], genre %></dd>
           <% end %>
         </dl>
       </div>
@@ -57,7 +57,7 @@
         <dl>
           <dt>Decade</dt>
           <% 14.times.each do |d| %>
-            <dd><%= filter_decade params[:action], params[:sorted_by], 1880+(d*10) %></dd>
+            <dd><%= filter_decade params[:action], params[:sort_by], 1880+(d*10) %></dd>
           <% end %>
         </dl>
       </div>

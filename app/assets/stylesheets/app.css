@@ -1180,6 +1180,7 @@ form#filter {
   -ms-border-radius: 4px;
   overflow: hidden;
   font-size: 0.9em;
+  max-height: 265px;
 }
 
 .flip-container.actioned {
@@ -1671,7 +1672,7 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
   background-repeat: no-repeat;
   background-position: center center;
   background-color: #ebebeb;
-  padding: 20% 5% 5% 5%;
+  padding: 0;
   margin: 0px 0px 20px 0px;
   text-align: center;
   border-radius: 4px;
@@ -1682,23 +1683,8 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
   border: 2px solid #fff;
 }
 
-.film-poster {
-  display: inline-block;
-  position: relative;
-  float: left;
-  width: 100%;
-  border: 1px solid #d2d2d2;
-  background-color: #f9f9f6;
-  padding: 2px;
-  margin: 0px 0px 10px 0px;
-  width: 100%;
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -o-border-radius: 4px;
-  -ms-border-radius: 4px;
-  overflow: hidden;
-  font-size: 0.9em;
+.default-image p {
+	padding: 5%;
 }
 
 .character h5, .character p {

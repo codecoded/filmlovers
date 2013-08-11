@@ -20,7 +20,7 @@ class FilmPresenter < BasePresenter
     if director
       ("#{film.year} - Directed by " << link_to(film.director, person_path(director.id))).html_safe
     else
-      film..year
+      film.year
     end
   end
 
@@ -85,7 +85,7 @@ class FilmPresenter < BasePresenter
   end
 
   def runtime
-    film.runtime || 0 > 0 ? "#{film.runtime} Mins" : "-- Mins"
+    "#{film.runtime} Mins" if film.runtime > 0
   end
 
   def similar_films

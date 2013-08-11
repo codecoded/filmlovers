@@ -4,6 +4,7 @@ class FilmsController < ApplicationController
   respond_to :html, :json
 
   def index
+    render_films Film, :popularity
   end
 
   def show
@@ -26,14 +27,17 @@ class FilmsController < ApplicationController
   end
 
   def coming_soon
+    @title = 'Films coming soon'
     render_films FilmCollection.coming_soon.films, :release_date
   end
 
   def in_cinemas
+    @title = 'Films in cinemas'
     render_films FilmCollection.in_cinemas.films, :earliest_release_date
   end
 
   def popular
+    @title = 'Films'
     render_films Film, :popularity
   end
 

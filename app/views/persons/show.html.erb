@@ -23,44 +23,46 @@
       <div class="margin-bottom">
         <div class="inner-tabs">
           <div class="section-container auto" data-section>
-            <section>
-              <p class="title" data-section-title><a href="#panel1">Starred in</a></p>
-              <div class="content" data-section-content>
-                <div class="row">
-                  <% presenter.films_starred_in.each do |film_presenter| %>
-                    <div class="large-3 small-6 columns text-center">
-                      <div class="character">
-                        <h5>Character played</h5>
-                        <p><%= film_presenter.character %></p>
+            <% if !presenter.films_starred_in.empty? %>
+              <section>
+                <p class="title" data-section-title><a href="#panel1">Starred in</a></p>
+                <div class="content" data-section-content>
+                  <div class="row">
+                    <% presenter.films_starred_in.each do |film_presenter| %>
+                      <div class="large-3 small-6 columns text-center">
+                        <div class="character">
+                          <h5>Character played</h5>
+                          <p><%= film_presenter.character %></p>
+                        </div>
+                        <%= div_for film_presenter.film do %>
+                          <%= render partial: 'films/film_container', locals: {presenter: film_presenter} %>   
+                        <% end %>              
                       </div>
-                      <div class="film-poster">
-                        <%= render partial: 'films/film_container', locals: {presenter: film_presenter} %>
-                      </div>
-                      <%= render partial: 'films/film_actions', locals: {presenter: film_presenter} %>                   
-                    </div>
-                  <% end %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
-            </section>
-            <section>
-              <p class="title" data-section-title><a href="#panel2">Worked on</a></p>
-              <div class="content" data-section-content>
-                <div class="row">
-                  <% presenter.films_worked_on.each do |film_presenter| %>
-                    <div class="large-3 small-6 columns text-center">
-                      <div class="character">
-                        <h5><%= film_presenter.department %></h5>
-                        <p><%= film_presenter.job %></p>
+              </section>
+            <% end %>
+            <% if !presenter.films_worked_on.empty? %>
+              <section>
+                <p class="title" data-section-title><a href="#panel2">Worked on</a></p>
+                <div class="content" data-section-content>
+                  <div class="row">
+                    <% presenter.films_worked_on.each do |film_presenter| %>
+                      <div class="large-3 small-6 columns text-center">
+                        <div class="character">
+                          <h5><%= film_presenter.department %></h5>
+                          <p><%= film_presenter.job %></p>
+                        </div>
+                        <%= div_for film_presenter.film do %>
+                          <%= render partial: 'films/film_container', locals: {presenter: film_presenter} %>      
+                        <% end %>           
                       </div>
-                      <div class="film-poster">
-                        <%= render partial: 'films/film_container', locals: {presenter: film_presenter} %>
-                      </div>
-                      <%= render partial: 'films/film_actions', locals: {presenter: film_presenter} %>                   
-                    </div>
-                  <% end %>
+                    <% end %>
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
+            <% end %>
           </div>
         </div>
       </div>

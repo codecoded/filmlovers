@@ -159,11 +159,15 @@ class FilmPresenter < BasePresenter
   end
 
   def starring
-    "#{film.starring.join(', ')}" if film.casts
+    return unless film.credits and film.credits.cast
+    @starring = film.credits.cast.take(3).map do |person|
+      link_to person.name, person_path(person.id) 
+    end
+    @starring.join(', ').html_safe
   end
 
   def character
-    film['character']
+    film['character'] if film
   end
 
   def department

@@ -16,3 +16,8 @@
     </p>
   </div>
 </div>
+<ul class="user-rankings">
+  <% [:watched, :loved, :owned].each do |action| %>
+      <%= presenter.action_list_item action, presenter.counter(action), true %>
+  <% end %>
+</ul>

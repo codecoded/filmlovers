@@ -6,18 +6,27 @@ class UserFilms
     @user = user
   end
 
+  def [](action)
+    send action
+  end
+
   def watched
-    @watched ||= user.actions_for(:watched)
+    @watched ||= films_for :watched
   end
 
   def loved
-   @loved ||= user.actions_for(:loved)
+   @loved ||= films_for :loved
   end
 
   def owned
-   @owned ||= user.actions_for(:owned)
+   @owned ||= films_for :owned
   end
 
+  protected
+
+  def films_for(action)
+    Film.in id: user.actions_for(action).map(&:film_id)
+  end
 
 
 end

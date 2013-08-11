@@ -5,6 +5,14 @@ module Api
       before_filter :validate_user
       respond_to :json
 
+      def index
+        render :index, formats: :json
+      end
+
+      def show
+        find_films user.films[user_action]
+      end
+
       def update
         FilmUserAction.do film, user, user_action
       end
@@ -35,7 +43,7 @@ module Api
         @film ||= Film.find_by _title_id: params[:film_id]
       end
 
-      helper_method :user_action, :film
+      helper_method :user_action, :film, :user
     end
   end
 end

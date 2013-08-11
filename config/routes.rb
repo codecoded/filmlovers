@@ -18,31 +18,33 @@ Filmlovers::Application.routes.draw do
 
   match 'templates/:action' => "templates#:action", as: 'templates'
 
-  namespace :api do
+  namespace :api, format: [:json] do
     namespace :v1 do
       resources :registrations, :only => [:create, :update]
       resources :tokens, :only => [:create, :destroy, :index]
 
       resources :films do
         collection do
-          resources 'genres',   only: [:show, :index] do
-            get 'page/:page', :action => :show, :on => :member, as: 'page'
-          end
+          resources 'genres',   only: [:index]
+
+          get '(:action(/sort_by/:sort_by)(/filter_by(/year/:year)(/decade/:decade)(/genres/*genres)))', 
+              :constraints => {:action => /in_cinemas|coming_soon|popular|genres/, :sort_by => /title|release_date|earliest_release_date|loved|watched|owned|popularity/}, as: 'category'
+
           get 'categories'
-          get 'coming_soon'
+          # get 'coming_soon'
           get 'search'
-          get 'popular'
-          get 'popular/page/:page', action: 'popular', as: 'page_popular'
-          get 'coming_soon/page/:page', action: 'coming_soon', as: 'page_coming_soon'
-          get 'in_cinemas'
-          get 'in_cinemas/page/:page',  action: 'in_cinemas',  as: 'page_in_cinemas'
+          # get 'popular'
+          # get 'popular/page/:page', action: 'popular', as: 'page_popular'
+          # get 'coming_soon/page/:page', action: 'coming_soon', as: 'page_coming_soon'
+          # get 'in_cinemas'
+          # get 'in_cinemas/page/:page',  action: 'in_cinemas',  as: 'page_in_cinemas'
         end
       end
 
       resources :persons,  only: :show
 
       scope ':user_id', :constraints => { :user_id => /.*/ } do
-        resources :films, :only => [:index, :show], to: 'users#show', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 
+        resources :films, :only => [:index, :show],  :controller => 'user_films', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 
             member do 
               put ':film_id',     to: 'user_films#update',  as: 'update'
               delete ':film_id',  to: 'user_films#destroy', as: 'update'

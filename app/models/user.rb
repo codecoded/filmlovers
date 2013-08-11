@@ -164,6 +164,9 @@ class User
     @notifier ||= UserNotifier.new(self)
   end
 
+  def films
+    @film ||= UserFilms.new self
+  end
   # def logged_in
   #   sign_in_count = sign_in_count ? sign_in_count+=1 : 1
   #    last_sign_in_at = current_sign_in_at

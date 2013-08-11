@@ -6,6 +6,7 @@ module Api
       respond_to :json
      
       before_filter :skip_trackable, :authenticate
+      
       protected
 
       def authenticate
@@ -17,6 +18,14 @@ module Api
       def current_user
         @current_user
       end
+
+
+      def find_films(query, sort_by=:popularity, direction=:desc)
+        @films = page_results query, sort_by, direction
+        @films_count = @films.count
+        @total_pages = (@films_count / page_size) + 1
+      end
+
 
       def skip_trackable
         request.env['devise.skip_trackable'] = true

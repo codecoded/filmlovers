@@ -1,4 +1,5 @@
 .sky-test{
+  display: none;
   dt{
     float: left;
   }
@@ -6,4 +7,13 @@
     float: left;
     margin: 0px 0px 0px 10px;
   }
+  .filter{
+    &.selected{
+      background-color: #1DA497;
+    }
+  }
+}
+
+.filter-action{
+  width:135px;
 }

@@ -17,6 +17,8 @@ FL.Films = {
     $(document).on('click', 'a[data-action]', FL.Films.lnkFilmsActionClicked)
     $(document).on('change', '#filterlist', FL.Films.sortFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
+    $(document).on('click', '[data-toggle-filters]', FL.Films.toggleFilters )
+    $(document).on('click', '.filter', FL.Films.toggleFilterOption )
 
     $(document).on('touchstart', '.flip-container', function() {FL.Films.touchMove = false;});
     $(document).on('touchmove', '.flip-container', function() {FL.Films.touchMove = true;});
@@ -59,6 +61,31 @@ FL.Films = {
       });
   },
 
+  toggleFilters: function(e){
+    e.preventDefault();
+    var self = $(this);
+    var target = $('#filmFilters');
+    if(target.is(":hidden"))
+    {
+      target.slideDown();
+      $('[data-apply-filters]').fadeIn(function(){ self.text('Hide Filters')});
+    }
+    else{
+      target.slideUp()
+      $('[data-apply-filters]').fadeOut(function(){self.text('Display Filters')});
+    }
+  },
+
+  applyFilter: function(e){
+    e.preventDefault();
+    alert('s')
+  },
+
+  toggleFilterOption: function(e){
+    e.preventDefault();
+    $(this).toggleClass('selected')
+  },
+
   sortFilms: function(){
     var url = $(this).find(':selected').attr('value')
     window.location = url;
@@ -79,9 +106,6 @@ FL.Films = {
         window.setTimeout(function(){
           $('.alert-box').fadeOut(function(){$(this).remove()})
         }, 3500)
-
-        // if($('#queueListModal').length>0)
-        //   $('#queueListModal .close-reveal-modal').click()
       } 
     })
   },

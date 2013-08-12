@@ -17,11 +17,11 @@ module FilmsHelper
   end
 
   def filter_decade(action, sort_by=:popularity, decade)
-    link_to decade, full_path(action, sort_by, decade), class: 'button small'
+    link_to decade, full_path(action, sort_by, decade), class: 'button small filter'
   end
 
   def filter_genre(action, sort_by=:popularity, genre)
-    link_to genre.name, full_path(action, sort_by, params[:decade], genre), class: 'button small'
+    link_to genre.name, full_path(action, sort_by, params[:decade], genre), class: 'button small filter'
   end
 
   def full_path(action, sort_by, decade=params[:decade], genres=params[:genres])

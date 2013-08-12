@@ -10,7 +10,7 @@ gem 'thin'
 gem 'nokogiri'
 gem 'google_movies'
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # gem 'mongo'
 gem 'omniauth-facebook'#, '1.4.0'

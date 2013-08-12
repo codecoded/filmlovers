@@ -31,7 +31,7 @@ class PersonPresenter < BasePresenter
   end
 
   def create_presenter(film_details)
-    return unless main_film = Film.fetch(film_details['id'])
+    return unless main_film = Film.find(film_details['id'])
     film = Film.new(film_details) 
     film.counters = main_film.counters 
     FilmPresenter.new(film, self)

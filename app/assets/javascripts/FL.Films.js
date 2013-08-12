@@ -18,6 +18,8 @@ FL.Films = {
     $(document).on('change', '#filterlist', FL.Films.sortFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
     $(document).on('click', '[data-toggle-filters]', FL.Films.toggleFilters )
+    $(document).on('click', '[data-apply-filters]', filters.apply )
+
     $(document).on('click', '.filter', FL.Films.toggleFilterOption )
 
     $(document).on('touchstart', '.flip-container', function() {FL.Films.touchMove = false;});

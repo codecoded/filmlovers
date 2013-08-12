@@ -21,4 +21,8 @@ class Genre
   def to_param
     name.downcase.parameterize.underscore
   end
+
+  def to_s
+    name
+  end
 end

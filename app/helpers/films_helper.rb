@@ -13,18 +13,21 @@ module FilmsHelper
 
   def sort_option(action, sort_by=:popularity, text)
     path = category_films_url(action: action, sort_by: sort_by, decade: params[:decade], genres: params[:genres])
-    content_tag :option, text, value: full_path(action, sort_by), selected: current_url == path || @sort_order == sort_by
+    content_tag :option, text, value: full_path(), selected: current_url == path || @sort_order == sort_by
   end
 
-  def filter_decade(action, sort_by=:popularity, decade)
-    link_to decade, full_path(action, sort_by, decade), class: 'button small filter'
+  def filter(name, text, value=text)
+    link_to text, full_path({name=>value}), class: 'button small filter', data: {'filter-name' => name, 'filter-value' => value.to_param}
   end
 
-  def filter_genre(action, sort_by=:popularity, genre)
-    link_to genre.name, full_path(action, sort_by, params[:decade], genre), class: 'button small filter'
-  end
-
-  def full_path(action, sort_by, decade=params[:decade], genres=params[:genres])
-    category_films_path(action: action, sort_by: sort_by, decade: decade, genres: genres)
+  def full_path(filter={})
+    filters = {
+      action: params[:action],
+      sort_by: params[:sort_by],
+      decade: filter[:decade] || params[:decade],
+      genres: filter[:genres] || params[:genres],
+      year: filter[:year] || params[:year]
+    }
+    category_films_path(filters)
   end
 end

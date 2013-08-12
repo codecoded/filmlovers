@@ -57,9 +57,15 @@ class FilmsController < ApplicationController
   end
 
   def apply_film_filters(query)
-    query = query.by_decade params[:decade] if params[:decade]
-    query = query.by_genres genre.name if genre
 
+    if params[:year]
+      query = query.by_year params[:year] 
+    else
+      query = query.by_decade params[:decade] if params[:decade]
+    end
+
+    query = query.by_genres genre.name if genre
+    
     query
   end
 

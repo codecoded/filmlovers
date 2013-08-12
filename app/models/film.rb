@@ -39,7 +39,13 @@ class Film
   end
 
   def self.by_decade(decade)
-    between(release_date: Date.new(decade.to_i).to_s..Date.new(decade.to_i+10).to_s)
+    endDate = Date.new(decade.to_i+10)
+    between(release_date: Date.new(decade.to_i).to_s..endDate.to_s)
+  end
+
+  def self.by_year(year)
+    endYear = Date.new(year.to_i) + (1.year)
+    between(release_date: Date.new(year.to_i).to_s...endYear.to_s)
   end
 
   def self.by_genres(genres)

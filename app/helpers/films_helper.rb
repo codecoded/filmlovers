@@ -11,9 +11,9 @@ module FilmsHelper
     content_tag :option, text, value: user_film_path(user, action, order: order, by: by)
   end
 
-  def sort_option(action, sort_by=:popularity, text)
+  def sort_option(action, sort_by=:popularity, text)    
     path = category_films_url(action: action, sort_by: sort_by, decade: params[:decade], genres: params[:genres])
-    content_tag :option, text, value: full_path(), selected: current_url == path || @sort_order == sort_by
+    content_tag :option, text, value: full_path({sort_by: sort_by}), selected: current_url == path || @sort_order == sort_by
   end
 
   def filter(name, text, value=text)
@@ -23,7 +23,7 @@ module FilmsHelper
   def full_path(filter={})
     filters = {
       action: params[:action],
-      sort_by: params[:sort_by],
+      sort_by: filter[:sort_by] || params[:sort_by],
       decade: filter[:decade] || params[:decade],
       genres: filter[:genres] || params[:genres],
       year: filter[:year] || params[:year]

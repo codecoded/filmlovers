@@ -9,25 +9,28 @@ module Api
       end
 
       def coming_soon
-        find_films FilmCollection.coming_soon.films
-        render :index
+        render_films FilmCollection.coming_soon.films
       end
 
       def in_cinemas
-        find_films FilmCollection.in_cinemas.films
-        render :index
+        render_films FilmCollection.in_cinemas.films
+      end
+
+      def popular
+        render_films Film
       end
 
       def categories
-
       end
 
       def search
         find_films Films.search(params[:query])
       end
 
-      def popular
-        find_films Film
+
+      def render_films(query)
+          find_films query
+          render :index
       end
       
     end

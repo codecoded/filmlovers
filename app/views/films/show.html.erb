@@ -6,7 +6,7 @@
       <div class="large-12 small-12 columns">
         <div class="right-fade"></div>
         <div class="left-fade"></div>
-        <%= backdrop(film, film.backdrops[0]) if film.has_backdrop? %>
+        <%= presenter.main_backdrop %>
         <!-- <img src="/assets/content/hero-image-man-of-steel.jpg" width="1280" height="720" alt="Man of Steel" /> -->
       </div>
     </div>
@@ -27,7 +27,7 @@
           <div class="section-container auto" data-section>
             <%= render partial: 'details', locals: {presenter: presenter} %>
             <%= render partial: 'trailer', locals: {presenter: presenter} if film.has_trailer? %>
-            <%= render partial: 'media' if film.has_backdrop? %>
+            <%= render partial: 'media', locals: {presenter: presenter} if film.has_backdrop? %>
           </div>
         </div>
         <div class="margin-bottom">

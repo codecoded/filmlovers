@@ -16,7 +16,6 @@ class FilmPresenter < BasePresenter
   end
 
   def year_and_director
-    # ("#{film.year} - Directed by " << link_to(film.director, person_path(film.director))).html_safe
     if !director.blank?
       ("#{film.year} - Directed by " << link_to(film.director, person_path(director.id))).html_safe
     else
@@ -148,7 +147,7 @@ class FilmPresenter < BasePresenter
 
 
   def poster(size='w185')
-    src = film.has_poster? ? film.poster(size) : "http://placehold.it/#{size.slice(1..-1)}&text=#{film.title}"
+    src = film.has_poster? ? film.poster(size) : "placeholder.jpg"
     image_tag src, :title=>film.title, alt: "poster for #{film.title}"
   end
 
@@ -156,6 +155,15 @@ class FilmPresenter < BasePresenter
     link_to film_path(film), title: film.title do
       poster size
     end
+  end
+
+  def main_backdrop(size = 'w1280')
+     backdrop(film.backdrops[0]) if film.has_backdrop? 
+  end
+
+  def backdrop(backdrop, size = 'w1280')
+    return unless backdrop
+    image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
   end
 
   def starring

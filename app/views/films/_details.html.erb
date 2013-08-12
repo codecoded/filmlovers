@@ -3,7 +3,7 @@
   <div class="content" data-section-content>
     <div class="row">
       <div class="large-4 small-3 columns poster">
-        <%= poster film %>
+        <%= presenter.poster  %>
         <ul class="shop-online">                      
           <li> <%= render partial: 'adverts/amazon_search', locals: {title: "#{film.title} #{film.year}"} %></li>
           <li> <%= render partial: 'adverts/itunes', locals: {title: "#{film.title}"} %></li>

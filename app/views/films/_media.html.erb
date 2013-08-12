@@ -4,8 +4,8 @@
     <div class="row">
       <div class="large-12 small-12 columns">
         <ul data-orbit>
-          <% film.backdrops.each do | backdrop | %>
-            <li><%= backdrop film, backdrop, 'w780'  %></li>
+          <% presenter.film.backdrops.each do | backdrop | %>
+            <li><%= presenter.backdrop backdrop, 'w780'  %></li>
           <% end %>
         </ul>
       </div>

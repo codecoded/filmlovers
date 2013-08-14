@@ -31,6 +31,7 @@ node :films do
       id: film._title_id,
       title: film.title,
       poster: film.poster,
+      backdrop: film.backdrop,
       director: film.director,
       release_date: film.uk_release_date,
       counters:{

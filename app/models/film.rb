@@ -15,6 +15,7 @@ class Film
   field :rotten_id, type: String
   field :netflix_id, type: String
   field :uk_rating, type: String
+  field :uk_release_date, type: Date, default: -> {self.find_uk_release_date}
 
   FilmLists = [:watched, :loved, :unloved, :queued]
 
@@ -51,6 +52,10 @@ class Film
   def self.by_genres(genres)
     any_in('genres.name' => genres)
   end
+
+  def self.search(query, field=:title)
+    self.or({title: /#{query}/i}, {original_title: /#{query}/i})
+  end 
 
   def title
     self['title']
@@ -189,7 +194,7 @@ class Film
     @uk_release ||= release_for 'GB'
   end
 
-  def uk_release_date
+  def find_uk_release_date
     @uk_release ? uk_release['release_date'] : release_date
   end
 

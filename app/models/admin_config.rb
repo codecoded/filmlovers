@@ -20,8 +20,7 @@ class AdminConfig
       while instance.fetched_index < end_index do
         current_index = instance.fetched_index 
         begin
-          film = Film.fetch current_index
-          film.update_counters
+          film = Film.force_fetch current_index
           Log.debug "Film #{current_index} of #{end_index}: #{film.title}"
         rescue
           Log.debug "Film Id failed: #{current_index}"

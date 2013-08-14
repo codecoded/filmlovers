@@ -34,6 +34,7 @@ node :films do
       backdrop: film.backdrop,
       director: film.director,
       release_date: film.uk_release_date,
+      runtime: if film.runtime and film.runtime > 0 then film.runtime end,
       counters:{
         watched: film.counters.watched,
         loved: film.counters.loved,

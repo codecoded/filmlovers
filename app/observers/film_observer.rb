@@ -2,12 +2,12 @@ class FilmObserver < Mongoid::Observer
 
 
   def after_upsert(film)
-    update_counters film
+    # update_counters film
     # update_imdb_info film
   end
 
   def update_counters(film)
-    film.update_counters
+    # film.update_counters
   end
 
   def update_imdb_info(film)

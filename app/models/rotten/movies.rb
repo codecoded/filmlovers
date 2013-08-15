@@ -1,6 +1,12 @@
 module Rotten
   class Movies
 
+    def self.import_all
+      in_cinemas
+      upcoming
+      opening
+    end
+
     def self.in_cinemas
       import Rotten::Client.in_cinemas
     end
@@ -14,7 +20,7 @@ module Rotten
     end
 
     def self.import(films)
-      films.map {|film| Movie.find_or_create film}
+      films.map {|film_json| Movie.from_json film_json}
     end
   end
 

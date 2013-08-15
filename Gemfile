@@ -54,6 +54,7 @@ gem 'geocoder' # for postcode lookup
 gem 'dalli'
 gem 'memcachier'
 
+gem 'netflix4r'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -8,7 +8,7 @@ class Film
   # has_many :film_list_items, validate: false, dependent: :destroy
 
   field :_id, type: Integer, default: ->{ id.to_id if id}
-  field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}"}
+  field :_title_id, type: String, default: ->{"#{title.parameterize}-#{year}" if title}
   field :fetched, type: DateTime, default: nil
   field :rating, type: Integer, default: 0
   field :tms_id, type: String
@@ -20,6 +20,7 @@ class Film
   FilmLists = [:watched, :loved, :unloved, :queued]
 
   has_many :recommendations, as: :recommendable
+  has_many :providers, class_name: 'FilmProvider'
 
   index({ title: 1}, { name: "film_title_index", background: false })
   index({ release_date: 1}, { name: "film_release_date_index", background: false })
@@ -264,5 +265,14 @@ class Film
         counters.set(action, actions_for(action).count)
     end
   end
+
+  def provider_for(name)
+    providers.find_or_initialize_by name: name
+  end
+
+  def has_provider?(name)
+    providers.where(:name => name).exists?
+  end
+
 end
 

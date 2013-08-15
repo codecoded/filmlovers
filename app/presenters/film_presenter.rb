@@ -138,11 +138,29 @@ class FilmPresenter < BasePresenter
     film.genres.map {|g| Genre.find_by_id(g['id'])}
   end
 
-  def imdb_link
-    return unless film.imdb_id
-    content_tag :a,  href: "http://www.imdb.com/title/#{film.imdb_id}",  alt:"IMDB link for #{film.title}", target: '_blank' do 
-      image_tag 'imdb_logo.png'
+  def other_links
+    return unless film.imdb_id || !film.providers.empty?
+
+    other = ''
+    if film.imdb_id
+      other = content_tag :a,  href: "http://www.imdb.com/title/#{film.imdb_id}",  alt:"IMDB link for #{film.title}", target: '_blank' do 
+        image_tag 'imdb_logo.png'
+      end
     end
+
+    if netflix = film.provider_for(:netflix)
+      other << content_tag(:a,  href: netflix.link,  alt:"Netflix link for #{film.title}", target: '_blank') do 
+         image_tag('netflix-n-logo.png') << "#{netflix.rating}<font style='font-size:60%'>/5</font>".html_safe
+      end
+    end
+
+    if rotten = film.provider_for(:rotten)
+      other << content_tag(:a,  href: rotten.link,  alt:"RottenTomatoes link for #{film.title}", target: '_blank') do 
+         image_tag('rotten.png') << "#{rotten.rating}".html_safe
+      end
+    end
+
+    other 
   end
 
 

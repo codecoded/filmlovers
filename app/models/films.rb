@@ -97,8 +97,8 @@ module Films
   end
 
   def coming_soon
-    # Film.where(uk_release_date: Time.now.to_date.to_s..2.months.from_now.to_date.to_s)
-    Film.elem_match('releases.countries' => {'iso_3166_1'=>'GB', release_date: Time.now.to_date.to_s..2.months.from_now.to_date.to_s})
+    Film.where(uk_release_date: Time.now.to_date.to_s..2.months.from_now.to_date.to_s)
+    # Film.elem_match('releases.countries' => {'iso_3166_1'=>'GB', release_date: Time.now.to_date.to_s..2.months.from_now.to_date.to_s})
     # ids ||= Rotten::Movies.opening.map(&:film_id).compact.uniq
     # ids <<  Rotten::Movies.upcoming.map(&:film_id).compact.uniq
     # Film.in id: ids.flatten

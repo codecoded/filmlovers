@@ -1,6 +1,11 @@
 @charset "UTF-8";
 /* CSS Document */
 
+/* fonts */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,300,700italic);
+@import url(http://fonts.googleapis.com/css?family=Satisfy);
+
 /* IE8 fixes */
 
 .lt-ie9 .row { width: 940px; max-width: 100%; min-width: 768px; margin: 0 auto; }
@@ -108,10 +113,6 @@
 .lt-ie9 .main-navigation .main-nav li a {
   font-size: 0.8em;
 }
-
-/* fonts */
-
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,300,700italic);
 
 /* generic styling */
 
@@ -1694,4 +1695,92 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
 
 .character {
   margin-bottom: 10px;
+}
+
+/* User profile */
+
+.pod.account {
+	float: left;
+	width: auto;
+	margin-top: -6em;
+	padding: 1.6em 1.6em 1em 1.6em;
+}
+
+.pod.account img {
+	float: left;
+	display: inline-block;
+	margin-right: 1em;
+	width: 78px;
+	height: 78px;
+	border-radius: 39px;
+	-moz-border-radius: 39px;
+	-webkit-border-radius: 39px;
+	-o-border-radius: 39px;
+	-ms-border-radius: 39px;
+}
+
+.pod.account h2 {
+	float: left;
+	display: inline-block;
+	margin-right: 1em;
+	color: #b6212d;
+	height: 78px;
+	line-height: 78px;
+	vertical-align: middle;
+}
+
+.pod.account .button {
+	margin: 0.8em 0px 0px 0px;
+}
+
+.inner-tabs input[type="text"], .inner-tabs input[type="password"], .inner-tabs input[type="date"], .inner-tabs input[type="datetime"], .inner-tabs input[type="datetime-local"], .inner-tabs input[type="month"], .inner-tabs input[type="week"], .inner-tabs input[type="email"], .inner-tabs input[type="number"], .inner-tabs input[type="search"], .inner-tabs input[type="tel"], .inner-tabs input[type="time"], .inner-tabs input[type="url"], .inner-tabs textarea, .inner-tabs select {
+    display: inline-block;
+	float: left;
+	background-color: #ececec;
+    border: none;
+    box-shadow: inset 0px 2px 0px rgba(0,0,0,0.2);
+  	-moz-box-shadow: inset 0px 2px 0px rgba(0,0,0,0.2);
+  	-webkit-box-shadow: inset 0px 2px 0px rgba(0,0,0,0.2);
+  	-o-box-shadow: inset 0px 2px 0px rgba(0,0,0,0.2);
+  	-ms-box-shadow: inset 0px 2px 0px rgba(0,0,0,0.2);
+    color: #141414;
+}
+
+.inner-tabs form .row {
+	margin-bottom: 1em;
+}
+
+.inner-tabs form label {
+	font-family: 'Open Sans', "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	font-weight: 300;
+	padding-top: 0.3em;
+}
+
+.thanks {
+	text-align: center;
+	padding: 1em;
+	font-family: 'Open Sans', "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+
+.thanks h3 {
+	font-size: 2.4em;
+	font-family: 'Satisfy', 'Open Sans', "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.thanks ul, .thanks ul li {
+	display: inline-block;
+	float: left;
+	width: 100%;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.thanks ul li {
+	padding: 0px 3em 35px 3em;
+	margin: 0px 0px 20px 0px;
+	background: url(../img/site-basics/hr-bg.svg) no-repeat bottom center;
 }

@@ -1,6 +1,8 @@
 class User
   include Mongoid::Document
-
+  include Mongoid::Timestamps
+  include Gravtastic
+  
   exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers friendships friends recommendations recommend)
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -40,8 +42,7 @@ class User
 
   ## Token authenticatable
   field :authentication_token, :type => String
-  include Mongoid::Timestamps
-  include Gravtastic
+
 
   gravtastic
   
@@ -73,9 +74,11 @@ class User
   has_many :recommendations
   has_many :facebook_events
 
+  embeds_one  :profile, class_name: 'UserProfile', autobuild: true
   embeds_many :films_lists
   embeds_many :passports
   embeds_many :friendships
+
 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)

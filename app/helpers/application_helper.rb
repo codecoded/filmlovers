@@ -20,13 +20,6 @@ module ApplicationHelper
      truncate text, separator: ' ', length: truncate_at, :omission => '...'
   end
 
-  def avatar(user, size='normal')
-    if user.passport_provider? :facebook
-      image_tag user.channels[:facebook].facebook.avatar, :class=>"avatar #{size}", title: user.username, alt: "profile picture for #{user.username}"
-    else
-      image_tag user.gravatar_url, :class=>"avatar #{size}", title: user.username, alt: "profile picture for #{user.username}"
-    end
-  end
 
   def advert(name)
     render partial: "adverts/#{name}"

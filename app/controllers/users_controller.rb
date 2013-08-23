@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :validate_username,:except => :create
+  # before_filter :validate_username,:except => :create
 
   #layout 'layouts/user'
   def index
@@ -17,8 +17,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    results_page =  UserService.new(user).paged_list(user_action, order, by, page_no, 70)
-    @films_page = FilmsPagePresenter.new current_user, results_page, user_action
   end
 
   def user

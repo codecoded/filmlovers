@@ -8,7 +8,7 @@ namespace :database do
   
     task :upload_to_staging => :environment do
       system 'mongodump --host localhost -db filmlovers_development -o db/deploys/'
-      system 'mongorestore -h ethan.mongohq.com:10026 -u soultripper -porlando9 --drop -d app16665874 db/deploys/filmlovers_development'
+      system 'mongorestore -h ethan.mongohq.com:10026 -u soultripper -p "(orLando0" --drop -d app16665874 db/deploys/filmlovers_development'
     end
 
   end

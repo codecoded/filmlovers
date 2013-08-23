@@ -79,7 +79,7 @@ module Tmdb
     end
 
     def releases
-      @releases ||= movie_data['releases']
+      @releases ||= movie_data['releases'] || {}
     end
 
     def release_date_for(country)

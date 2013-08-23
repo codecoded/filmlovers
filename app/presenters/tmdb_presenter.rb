@@ -98,15 +98,6 @@ class  TmdbPresenter < BasePresenter
     "#{film_details.runtime} Mins" if film_details.runtime and film_details.runtime > 0
   end
 
-  def similar_films
-    similar.map do |film|
-      {
-        url: film_path(film.id),
-        title: film.title
-      }
-    end
-  end
-
   def status
     film_details.status if film_details.status != 'Released'
   end
@@ -241,14 +232,21 @@ class  TmdbPresenter < BasePresenter
     film_details.trailers[source.to_s][0]['source'] if has_trailer?(source)
   end
 
+  def similar_movies
+    @similar_movies ||= film_details.similar_movies['results'] || {}
+  end
+
   def similar?
-    !film_details.similar_movies['results'].blank?
+    !similar_movies.empty?
   end
 
   def similar
-    film_details.similar_movies['results'].compact.map  do |f| 
-      Film.new(id: Film.create_uuid(f['title'], f['release_date'].to_date.year), title: f['title'], poster: f['poster'], details: f)
+   @similar = similar_movies.map  do |f| 
+      film = Tmdb::Movie.new(f)
+      film unless film.not_allowed?
     end
+
+    Film.find @similar.compact.map(&:title_id)
   end
 
   def starring(count=3)

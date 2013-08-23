@@ -36,7 +36,7 @@ node :films do
       backdrop: presenter.backdrop_uri,
       director: if !presenter.director.blank? then presenter.director.name end,
       release_date: film.release_date,
-      #runtime: if film.runtime and film.runtime > 0 then film.runtime end,
+      runtime: presenter.duration,
       counters:{
         watched: film.counters.watched,
         loved: film.counters.loved,

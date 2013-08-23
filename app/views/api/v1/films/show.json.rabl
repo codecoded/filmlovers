@@ -28,7 +28,7 @@ node :presenter do
     overview: presenter.overview,
     starring: presenter.starring,
     budget: presenter.budget,
-    runtime: presenter.runtime,
+    runtime: presenter.duration,
     trailer: presenter.trailer,
     counters:{
       watched: presenter.film.counters.watched,

@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
       'title'                 =>  [:title, :asc], 
       'release_date'          =>  [:release_date, :desc],
       'earliest_release_date' =>  [:release_date, :asc],
-      'popularity'            =>  [:popularity, :desc],
+      'popularity'            =>  ['details.popularity', :desc],
       'watched'               =>  ['counters.watched', :desc], 
       'loved'                 =>  ['counters.loved', :desc],
       'owned'                 =>  ['counters.owned', :desc] 

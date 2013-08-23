@@ -24,6 +24,10 @@ class FilmUserAction
     # film.counters.inc action, -1 
   end
 
+  def self.total_by(action)
+    self[action].count
+  end
+
   def to_param
     "#{film.id}:#{user.id}:#{action}"
   end

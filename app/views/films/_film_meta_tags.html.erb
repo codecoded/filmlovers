@@ -1,17 +1,17 @@
-<% set_meta_tags title: "#{title_with_year(film)} by #{film.director}" ,description: tagline(film) %>
+<% set_meta_tags title: "#{presenter.title_with_year} by #{presenter.director}" ,description: presenter.tagline %>
 
 <% set_meta_tags :og => {
   :title    => film.title,
   :type     => "video.movie",
   :url      => film_url(film),
-  :image    => film.poster('w342'),
+  :image    => presenter.poster_uri,
   :site_name   =>'filmlovers - find, share, discover',
   # :video    => "http://www.youtube.com/embed/#{film.trailer}",
-  :description => film.overview
+  :description => presenter.overview
 } %>
 
 <% set_meta_tags :video =>{
-  duration: film.duration,
+  duration: presenter.duration,
   # director: film.director,
   release_date: film.release_date
 } %>

@@ -13,7 +13,7 @@ class FilmsList
   scope :viewable, where(is_private: false)
   
   def films 
-    film_ids.map {|id| Film.fetch id}
+    film_ids.map {|id| Film.find id}
   end
 
   def film_ids

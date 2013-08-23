@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 	
-	var slideTime = 500;
+	var slideTime = 700;
 	if (!Modernizr.svg) {
 	  $(".logo img").attr("src", "img/site-basics/filmlovers-logo.png");
 	}

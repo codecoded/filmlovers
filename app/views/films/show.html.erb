@@ -1,6 +1,5 @@
-<%= render 'film_meta_tags' %>
-
-<% present(film, FilmPresenter) do |presenter| %>
+<% present(film.details, film.details_presenter) do |presenter| %>
+  <%= render partial: 'film_meta_tags', locals: {presenter: presenter}  %>
   <div class="full-row inner-hero margin-bottom">
     <div class="row">
       <div class="large-12 small-12 columns">
@@ -14,48 +13,48 @@
   <div class="row margin-bottom">
     <div class="large-8 small-12 columns">
       <div class="pod margin-bottom synopsis">
-        <h1><%= presenter.title %></h1>
+        <h1><%= film.title %></h1>
         <h2><%= presenter.year_and_director %></h2>
         <hr />
 
         <h3>Synopsis</h3>
-        <h4><%= film.tagline %></h4>
-        <p><%= film.overview %></p>
+        <h4><%= presenter.tagline %></h4>
+        <p><%= presenter.overview %></p>
       </div>
       <div class="margin-bottom">
         <div class="inner-tabs">
           <div class="section-container auto" data-section>
             <%= render partial: 'details', locals: {presenter: presenter} %>
-            <%= render partial: 'trailer', locals: {presenter: presenter} if film.has_trailer? %>
-            <%= render partial: 'media', locals: {presenter: presenter} if film.has_backdrop? %>
+            <%= render partial: 'trailer', locals: {presenter: presenter} if film.trailer? %>
+            <%= render partial: 'media', locals: {presenter: presenter} if presenter.backdrops? %>
           </div>
         </div>
         <div class="margin-bottom">
           <div class="inner-tabs">
             <div class="section-container auto" data-section>
-              <%= render partial: 'cast' %>
-              <%= render partial: 'crew' if film.crew? %>
-              <%= render partial: 'studios' if film.studios? %>
-              <%= render partial: 'locations' if film.locations? %>
+              <%= render partial: 'cast', locals: {presenter: presenter} if presenter.cast? %>
+              <%= render partial: 'crew', locals: {presenter: presenter} if presenter.crew? %>
+              <%= render partial: 'studios', locals: {presenter: presenter} if presenter.studios? %>
+              <%= render partial: 'locations', locals: {presenter: presenter} if presenter.locations? %>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="large-4 small-12 columns">
-      <%= render partial: 'action_panel', locals: {presenter: presenter} %>
+      <%= render partial: 'action_panel', locals: {film: film} %>
       <div class="margin-bottom banner">
         <%= render partial: 'adverts/lovefilm_300x250', alt: 'lovefilm advert' %>
       </div>
       <div class="margin-bottom">
         <h4>filmlovers who...</h4>
         <ul class="button-list">
-          <li class="watched"><%= presenter.action_count(:watched) %> watched this film</li>
-          <li class="loved"><%= presenter.action_count(:loved) %> loved this film</li>
-          <li class="owned"><%= presenter.action_count(:owned) %> own this film</li>
+          <li class="watched"><%= film.actions_for(:watched).count %> watched this film</li>
+          <li class="loved"><%= film.actions_for(:loved).count %> loved this film</li>
+          <li class="owned"><%= film.actions_for(:owned).count %> own this film</li>
         </ul>
       </div>
-      <%if film.genres? %>
+      <%if presenter.genres? %>
         <div class="margin-bottom">
           <h4>Genres</h4>
           <ul class="button-list">
@@ -65,7 +64,7 @@
           </ul>
         </div>
       <% end %>
-      <%if film.similar? %>
+      <%if presenter.similar? %>
         <div class="margin-bottom">
           <h4>Similar films</h4>
           <ul class="button-list">

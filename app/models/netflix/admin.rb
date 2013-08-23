@@ -20,7 +20,15 @@ module Netflix
             for_element('average_rating') {movie.rating = inner_xml}
             for_element('link') do 
               if attribute('title')=='web page' 
-                movie.url = attribute('href')
+                movie.link = attribute('href')
+              end
+            end
+
+            inside_element('box_art') do 
+              for_element('link') do 
+                if attribute('rel')=='http://schemas.netflix.com/catalog/titles/box_art/197pix_w' 
+                  movie.poster = attribute('href')
+                end
               end
             end
 
@@ -33,7 +41,7 @@ module Netflix
 
 
           # puts movie
-          movie.upsert if (update and is_movie)
+          movie.film if (true and is_movie)
         end
       end
 

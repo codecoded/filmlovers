@@ -16,7 +16,7 @@ class Searcher
   end
 
   def films
-    @films ||= Films.search(query, :title)
+    @films ||= Film.search(query, :title)
   end
 
   def count

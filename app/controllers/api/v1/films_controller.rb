@@ -5,7 +5,7 @@ module Api
       respond_to :json
 
       def show
-        @film = Film.fetch params[:id]
+        @film = Film.find params[:id]
       end
 
       def coming_soon
@@ -24,13 +24,12 @@ module Api
       end
 
       def search
-        find_films Films.search(params[:query])
+        find_films Film.search(params[:query])
       end
 
-
       def render_films(query)
-          find_films query
-          render :index
+        find_films query
+        render :index
       end
       
     end

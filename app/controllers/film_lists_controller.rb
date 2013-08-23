@@ -42,7 +42,7 @@ class FilmListsController < UsersController
   end
 
   def film
-    @film ||= Film.fetch params[:id]
+    @film ||= Film.find params[:id]
   end
 
   def film_not_found

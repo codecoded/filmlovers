@@ -13,23 +13,7 @@ class AdminConfig
     def instance
        @instance ||= AdminConfig.find_or_create_by(name: "GeneralConfig")
     end
-
-
-    def fetch_all
-      end_index = Tmdb::Client.films(:latest)['id']
-      while instance.fetched_index < end_index do
-        current_index = instance.fetched_index 
-        begin
-          film = Film.force_fetch current_index
-          Log.debug "Film #{current_index} of #{end_index}: #{film.title}"
-        rescue
-          Log.debug "Film Id failed: #{current_index}"
-        end
-
-        instance.inc(:fetched_index, 1) 
-      end
-    end
-
+    
     # def fetch_changed_movies()
     #   @tmdb_changes = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
     #   results_page = ResultsPage.from_tmdb @tmdb_changes['results'], @tmdb_changes

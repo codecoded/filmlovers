@@ -57,7 +57,7 @@ class UserFilmsController < ApplicationController
   end
 
   def film 
-    Film.find_by _title_id: params[:film_id]
+    Film.find params[:film_id]
   end
 
   def order

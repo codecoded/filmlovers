@@ -2,14 +2,22 @@ module Imdb
   class Client
     class << self
 
-      def uri(id)
-        id_path = id.kind_of?(Array) ? "ids=#{id.join(',')}" : "id=#{id}"
-        "http://mymovieapi.com/?release=full&#{id_path}"
+      def uri
+        "http://mymovieapi.com/"
       end
 
-      def request(imdb_id)
-        Log.info "mymovieapi -> IMDB request to #{uri(imdb_id)}"
-        JSON(RestClient.get uri(imdb_id))
+      def request(params)
+        Log.info "mymovieapi -> IMDB request to #{uri}?#{params.to_query}"
+        JSON(RestClient.get  uri, {params: params})
+      end
+
+      def movie(imdb_id)
+        request({release:'full', id: imdb_id})
+      end
+
+      def movies(imdb_ids)
+        ids =  imdb_ids.join(',')
+        request({release:'full', ids: ids})
       end
     end
   end

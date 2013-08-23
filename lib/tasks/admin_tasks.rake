@@ -2,17 +2,17 @@ namespace :admin do
 
   FilmLists = [:watched, :loved, :owned]
 
-  task :migrate => :environment do |t, args|
+  # task :migrate => :environment do |t, args|
     
-    User.all.each do |user|
-      FilmLists.each do |list| 
-        Film.find(user.films[list].members).each do |film|
-          FilmUserAction.do film, user, list 
-          puts "#{film.title} #{list} by #{user}"
-        end
-      end
-    end
-  end
+  #   User.all.each do |user|
+  #     FilmLists.each do |list| 
+  #       Film.find(user.films[list].members).each do |film|
+  #         FilmUserAction.do film, user, list 
+  #         puts "#{film.title} #{list} by #{user}"
+  #       end
+  #     end
+  #   end
+  # end
 
   desc "Exchange Access Tokens"
   task :exchange_tokens => :environment do
@@ -31,8 +31,8 @@ namespace :admin do
 
   desc "Delete all adult film"
   task :delete_adult => :environment do
-    Log.info "Deleting #{Films.adult.count} adult films"
-    Films.adult.delete_all
+    Log.info "Deleting #{Film.adult.count} adult films"
+    Film.adult.delete_all
     Log.info "#{Films.adult.count} adult films remaining"
   end
 
@@ -57,6 +57,37 @@ namespace :admin do
     Log.info "Updating films coming soon done. There are #{FilmCollection.coming_soon.film_ids.count} films found coming soon"
     FilmCollection.populate_in_cinemas
     Log.info "Updating films in cinemas done. There are #{FilmCollection.in_cinemas.film_ids.count} films found in cinemas"
+  end
+
+  desc "Migrate Movies to films"
+  task :migrate_movies => :environment do
+    Movie.each do |m| 
+      next if m.release_date.nil? or m.adult==true
+      release_date_country = m.uk_release ? 'UK' : nil
+      film = Film.new(id: Film.create_uuid(m.title, m.year), 
+        title: m.title, 
+        release_date: m.find_uk_release_date.to_date, 
+        release_date_country: release_date_country,
+        poster: m.poster_path, 
+        counters: m.counters, 
+        details: m, 
+        trailer: m.trailer)
+
+      film.providers.build(name: :imdb, id: m.imdb_id) if m.imdb_id
+      film.providers.build(name: :tmdb, id: m.id, fetched_at: Time.now.utc, link: "http://www.themoviedb.org/movie/#{m.id}", rating: m['vote_average'])
+      film.save
+      film.id
+    end
+  end
+
+  desc "Migrate FilmUser Actions"
+  task :migrate_actions => :environment do
+    FilmUserAction.each {|fua| film = Film.find_by('details._id' => fua.film_id); fua.update_attribute(:film_id, film.id) if film}
+  end
+
+  desc "Migrate providers"
+  task :migrate_providers => :environment do
+    Film.ne('details.imdb_id' => nil).each {|f| f.provider_by(:imdb, f.details.imdb_id).save!}
   end
 
   desc "download netflix db"

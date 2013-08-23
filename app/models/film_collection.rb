@@ -12,7 +12,7 @@ class FilmCollection
 
     def populate_coming_soon
       @coll = coming_soon
-      @coll.film_ids = Films.coming_soon.only(:id).map &:id
+      @coll.film_ids = Film.coming_soon.map &:id
       @coll.save
     end
 
@@ -22,7 +22,11 @@ class FilmCollection
 
     def populate_in_cinemas
       @coll = in_cinemas
-      @coll.film_ids = Films.in_cinemas
+      @coll.film_ids = Film.in_cinemas.map &:id
+      @coll.film_ids.each do |film_id| 
+        next unless tmdb_provider = Film.find(film_id).provider_for(:tmdb)
+        Tmdb::Movie.fetch! tmdb_provider.id
+      end
       @coll.save
     end
   end

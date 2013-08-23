@@ -1,13 +1,15 @@
 <% if logged_in? %>
-  <div class="margin-bottom pod actions">
-    <ul>
-      <%= presenter.action_list_item :watched, 'Watched' %>
-      <%= presenter.action_list_item :loved, 'Loved' %>
-      <%= presenter.action_list_item :owned, 'Own' %>
-      <li class="add"><a href="#">Add</a></li>
-      <li class="share"><a href="#">Share</a></li>
-    </ul>
-  </div>
+  <% present(film, FilmPresenter) do |presenter| %>
+    <div class="margin-bottom pod actions">
+      <ul>
+        <%= presenter.action_list_item :watched, 'Watched' %>
+        <%= presenter.action_list_item :loved, 'Loved' %>
+        <%= presenter.action_list_item :owned, 'Own' %>
+        <li class="add"><a href="#">Add</a></li>
+        <li class="share"><a href="#">Share</a></li>
+      </ul>
+    </div>
+  <% end %>
 <% else %>
   <div class="row">
     <div class="large-5 small-12 columns">

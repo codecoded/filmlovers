@@ -63,7 +63,7 @@ Filmlovers::Application.routes.draw do
       resources 'genres',   only: [:index]
 
       get '(:action(/sort_by/:sort_by)(/filter_by(/year/:year)(/decade/:decade)(/genres/*genres)))', 
-        :constraints => {:action => /in_cinemas|coming_soon|popular|genres/, :sort_by => /title|release_date|earliest_release_date|loved|watched|owned|popularity/}, as: 'category'
+        :constraints => {:action => /in_cinemas|coming_soon|popular|genres|netflix|rotten/, :sort_by => /title|release_date|earliest_release_date|loved|watched|owned|popularity/}, as: 'category'
       get ':user_action',        to: "films#actioned", constraints: {user_action: /search|quick_search|watched|loved|owned/}, as: 'actioned'
       post ':id' => redirect("/films/%{id}")  
     end

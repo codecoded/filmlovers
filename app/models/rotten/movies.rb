@@ -20,7 +20,7 @@ module Rotten
     end
 
     def self.import(films)
-      films.map {|film_json| Movie.from_json film_json}
+      films.map {|film_json| Movie.new(film_json).film}
     end
   end
 

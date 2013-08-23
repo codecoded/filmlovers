@@ -1,5 +1,6 @@
 class FilmCounters
   include Mongoid::Document
+  
   embedded_in :film, autobuild: true
 
   field :watched,     type: Integer, default: 0
@@ -9,6 +10,13 @@ class FilmCounters
 
   def set(action, score)
     update_attribute action, score
+  end
+
+
+  def refresh
+    attributes.except('_id').each do |action|
+      set(action, film.actions_for(action).count)
+    end
   end
 
   def to_json

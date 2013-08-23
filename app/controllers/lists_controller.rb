@@ -35,7 +35,7 @@ class ListsController < UsersController
   protected 
 
   def film
-    Film.fetch params[:film_id]
+    Film.find params[:film_id]
   end
 
   def film_ids

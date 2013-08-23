@@ -31,17 +31,17 @@
     </div>
     <div class="large-3 small-6 columns text-center">
       <p class="watched">
-          <span><%= Films.count_for(:watched) %></span> films watched
+          <span><%= FilmUserAction.total_by(:watched) %></span> films watched
         </p>
     </div>
     <div class="large-3 small-6 columns text-center">
       <p class="loved">
-          <span><%= Films.count_for(:loved) %></span> films loved
+          <span><%= FilmUserAction.total_by(:loved) %></span> films loved
       </p>
     </div>
     <div class="large-3 small-6 columns text-center">
       <p class="owned">
-          <span><%= Films.count_for(:owned) %></span> films owned
+          <span><%= FilmUserAction.total_by(:owned) %></span> films owned
       </p>
     </div>
 </div>

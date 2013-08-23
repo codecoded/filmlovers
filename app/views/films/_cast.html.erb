@@ -4,7 +4,7 @@
     <div class="row">
       <div class="large-12 small-12 columns">
         <ul class="button-list">
-          <% film.credits.cast.each do |person| %>
+          <% presenter.credits.cast.each do |person| %>
             <li><%= link_to person.name, person_path(person.id) %> </li>
           <% end %>
         </ul>

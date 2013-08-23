@@ -7,6 +7,7 @@ module ApplicationHelper
     presenter
   end
 
+
   def passport_link(provider, description)
     content_tag :li do 
       link_to "/auth/#{provider}", alt: "sign in to filmlovers using #{description}" do

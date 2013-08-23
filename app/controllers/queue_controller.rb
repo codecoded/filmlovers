@@ -29,7 +29,7 @@ class QueueController < ApplicationController
   end
 
   def film
-    @film ||= Film.fetch(params[:film_ids])
+    @film ||= Film.find(params[:film_ids])
   end
   helper_method :film
 end

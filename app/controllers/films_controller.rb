@@ -28,17 +28,27 @@ class FilmsController < ApplicationController
 
   def coming_soon
     @title = 'Films coming soon'
-    render_films FilmCollection.coming_soon.films, :release_date
+    render_films FilmCollection.coming_soon.films, :earliest_release_date
   end
 
   def in_cinemas
     @title = 'Films in cinemas'
-    render_films FilmCollection.in_cinemas.films, :earliest_release_date
+    render_films FilmCollection.in_cinemas.films, :release_date
   end
 
   def popular
     @title = 'Films'
     render_films Film, :popularity
+  end
+
+  def netflix
+    @title = 'Films on Netflix'
+    render_films Film.by_provider(:netflix), :release_date
+  end
+
+  def rotten
+    @title = 'Films on Rotten Tomatoes'
+    render_films Film.by_provider(:rotten), :popularity
   end
 
   def users
@@ -69,13 +79,8 @@ class FilmsController < ApplicationController
     query
   end
 
-  def perform_search
-    TmdbFilmsSearch.new.search(params[:q] || params[:query], page_options)
-  end
-
-
   def film
-    @film ||= Film.fetch(params[:id])
+    @film ||= Film.find(params[:id])
   end
 
   def user_action

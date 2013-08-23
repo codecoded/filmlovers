@@ -20,7 +20,7 @@ module AppConfig
   def update_counters
     FilmUserAction.distinct(:film_id).each do |id|
       film = Film.find id
-      film.update_counters if film
+      film.counters.refresh if film
     end
   end
 end

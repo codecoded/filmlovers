@@ -1,0 +1,22 @@
+<div class="full-row green-row panels" id="panelsprofile">
+  <div class="row">
+    <div class="large-4 large-offset-2 small-12 columns">
+        <h2>Your Films</h2>
+        <ul class="signup-options">
+          <li> <%= link_to 'Recommendations', recommendations_path %> </li>
+          <li> <%= link_to 'Lists',  category_films_path('in_cinemas') %> </li>
+          <li> <%= link_to 'Catalogue', category_films_path('popular') %> </li>
+        </ul>
+      </div>
+      <div class="large-4 small-12 columns end">
+        <h2>Your Profile</h2>
+        <ul class="signup-options">
+          <li><a href="/films/genres">Details</a></li>
+          <li><a href="#">Friendships</a></li>
+          <li><a href="#">Settings</a></li>
+          <!-- <li><a href="#">Feed</a></li> -->
+          <!-- <li><%#= link_to 'Cinema', cinemas_path %> </li> -->
+        </ul>
+      </div>
+    </div>
+</div>

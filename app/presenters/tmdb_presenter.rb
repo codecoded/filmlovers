@@ -47,6 +47,10 @@ class  TmdbPresenter < BasePresenter
     end
   end
 
+  def backdrop_sizes
+    @backdrop_sizes  ||= {small: 'w90', medium: 'w185', large: 'w342', original: 'original'}
+  end
+
   def backdrops?
     !backdrops.blank?
   end
@@ -83,8 +87,12 @@ class  TmdbPresenter < BasePresenter
     film_details.alternative_titles.map {|t| t['title']}
   end
   
-  def overview
-    film_details.overview
+  def overview(length=nil)
+    if length
+      truncate film_details.overview, separator: ' ', length: length, :omission => '...'
+    else
+      film_details.overview
+    end
   end
 
   def cast

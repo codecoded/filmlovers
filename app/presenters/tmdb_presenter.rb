@@ -59,7 +59,7 @@ class  TmdbPresenter < BasePresenter
     images_library ? images_library.backdrops : []
   end
 
-  def backdrop(size='original')
+  def backdrop_uri(size='original')
     AppConfig.image_uri_for([size, backdrops[0]['file_path']]) if backdrops?
   end
 
@@ -110,8 +110,13 @@ class  TmdbPresenter < BasePresenter
     film_details.status if film_details.status != 'Released'
   end
 
+  def languages?
+    film_details.spoken_languages
+  end
+
+
   def languages
-    film_details.spoken_languages.map {|l| l['name']}
+    film_details.spoken_languages.map {|l| l['name']} if languages?
   end
 
   def release_date
@@ -202,8 +207,12 @@ class  TmdbPresenter < BasePresenter
   end
 
 
+  def casts
+    @casts ||= film_details['casts']
+  end
+
   def credits
-    @credits ||= Credits.new film_details.casts if film_details.casts
+    @credits ||= Credits.new casts if casts
   end
 
   def director
@@ -211,7 +220,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def director?
-     crew_member 'Director'
+     director
   end
 
   # def director
@@ -269,12 +278,20 @@ class  TmdbPresenter < BasePresenter
     film.details.alternative_titles
   end
 
+  def studios
+    @studios ||= film_details.production_companies
+  end
+
   def studios?
-    !film_details.production_companies.blank?
+    !studios.blank?
+  end
+
+  def locations
+    @locations ||= film_details.production_countries
   end
 
   def locations?
-    !film_details.production_countries.blank?
+    !locations.blank?
   end
 
   def genres?
@@ -283,6 +300,10 @@ class  TmdbPresenter < BasePresenter
 
   def duration
     film_details.runtime if film_details.runtime and film_details.runtime.to_i > 0  
+  end
+
+  def popularity
+    film_details.popularity
   end
 
 end

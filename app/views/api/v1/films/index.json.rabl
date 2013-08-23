@@ -10,7 +10,7 @@ node :pages do
     :total_results  => @films_count,
     :page_size      => page_size,
     :total_pages    => @total_pages,
-    :order          => order,
+    :order          => @order,
     :by             => by,
   }
 end
@@ -18,6 +18,8 @@ end
 node :films do 
   @films.map do |film|
     user_actions = current_user.film_user_actions.where(film: film).distinct(:action) if current_user
+    presenter = present(film.details, film.details_presenter)
+
     {
       user: if current_user
       {
@@ -28,13 +30,13 @@ node :films do
         }
       }
       end,
-      id: film._title_id,
+      id: film.id,
       title: film.title,
-      poster: film.poster,
-      backdrop: film.backdrop,
-      director: film.director,
-      release_date: film.uk_release_date,
-      runtime: if film.runtime and film.runtime > 0 then film.runtime end,
+      poster: presenter.poster_uri,
+      backdrop: presenter.backdrop_uri,
+      director: if !presenter.director.blank? then presenter.director.name end,
+      release_date: film.release_date,
+      #runtime: if film.runtime and film.runtime > 0 then film.runtime end,
       counters:{
         watched: film.counters.watched,
         loved: film.counters.loved,

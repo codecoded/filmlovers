@@ -4,8 +4,8 @@ class FilmDetails
   
   embedded_in :film, autobuild: true
 
-  def method_missing(method, &args)
-    self[method] || super
+  def method_missing(m, *args, &block) 
+    self[m] || super
   end
 
 

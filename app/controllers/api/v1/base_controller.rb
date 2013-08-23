@@ -20,8 +20,8 @@ module Api
       end
 
 
-      def find_films(query, sort_by=:popularity, direction=:desc)
-        @films = page_results query, sort_by, direction
+      def find_films(query, sort_by=:popularity)
+        @films = page_results query, sort_by
         @films_count = @films.count
         @total_pages = (@films_count / page_size) + 1
       end
@@ -31,8 +31,10 @@ module Api
         request.env['devise.skip_trackable'] = true
       end
 
-      def page_results(query, default_order, by=by)
-        query.order_by([order || default_order, by]).page(page_no).per AdminConfig.instance.page_size
+      def page_results(query, default_sort_order, page_size=AdminConfig.instance.page_size)
+        @order = sort_by || default_sort_order.to_s
+        sort_order = sort_orders[@order]
+        query.order_by(sort_order).page(page_no).per page_size
       end
 
       def page_size
@@ -47,11 +49,24 @@ module Api
         params[:by] || :desc
       end
 
-      def order
-        params[:order]
+      def sort_by
+        params[:sort_by]
       end
 
-      helper_method :current_user, :page_no, :by, :order, :page_size
+      def sort_orders
+        {
+          'title'                 =>  [:title, :asc], 
+          'release_date'          =>  [:release_date, :desc],
+          'earliest_release_date' =>  [:release_date, :asc],
+          'popularity'            =>  ['details.popularity', :desc],
+          'watched'               =>  ['counters.watched', :desc], 
+          'loved'                 =>  ['counters.loved', :desc],
+          'owned'                 =>  ['counters.owned', :desc] 
+        }
+      end
+
+
+      helper_method :current_user, :page_no, :by, :order, :page_size, :sort_by
     end
   end
 end

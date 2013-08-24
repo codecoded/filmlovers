@@ -3,7 +3,7 @@ class UserPresenter < BasePresenter
 
   presents :user
 
-  # def_delegators :user, :name, :has_profile?, :id, :biography, :portfolio
+  def_delegators :user, :username
 
 
   def avatar(size='normal')

@@ -1,4 +1,4 @@
-<% present(current_user, UserPresenter) do |presenter| %>
+<% present(user, UserPresenter) do |presenter| %>
   <div class="full-row inner-hero margin-bottom">
     <div class="row">
       <div class="large-12 small-12 columns">
@@ -12,8 +12,12 @@
     <div class="large-12 small-12 columns">
       <div class="pod margin-bottom account">
         <%= presenter.avatar %>
-        <h2><%= current_user.username %> - Your profile</h2>
-        <a href="#" class="secondary button">Log out</a>
+        <% if viewing_own? %>
+          <h2><%= presenter.username %> - Your Profile</h2>
+          <a href="#" class="secondary button">Log out</a>
+        <% else %>
+          <h2><%= presenter.username %></h2>
+        <% end %>
       </div>
     </div>
   </div>
@@ -21,9 +25,6 @@
     <div class="large-12 small-12 columns">
       <div class="inner-tabs">
         <div class="section-container auto" data-section>
-                    <section>
-            <%= render template: 'devise/registrations/edit' %>
-          </section>
           <section>
             <p class="title" data-section-title><a href="#panel1">Films</a></p>
             <div class="content" data-section-content>
@@ -31,7 +32,7 @@
                 <div class="large-2 small-6 columns">
                   <div class="flip-container">
                     <div class="upper">
-                      <img src="img/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
+                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
                     </div>
                     <div class="lower">
                       <ul>
@@ -51,7 +52,7 @@
                 <div class="large-2 small-6 columns">
                   <div class="flip-container">
                     <div class="upper">
-                      <img src="img/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
+                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
                     </div>
                     <div class="lower">
                       <ul>
@@ -71,7 +72,7 @@
                 <div class="large-2 small-6 columns end">
                   <div class="flip-container">
                     <div class="upper">
-                      <img src="img/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
+                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
                     </div>
                     <div class="lower">
                       <ul>
@@ -109,108 +110,11 @@
               <p>Friendships</p>
             </div>
           </section>
-
-            <!-- <p class="title" data-section-title><a href="#panel5">Details</a></p>
-            <div class="content" data-section-content>
-              <div class="row">
-                <div class="large-7 small-12 columns">
-                  <form id="profile-details" action="#">
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <label for="username">Username:</label>
-                      </div>
-                      <div class="large-8 small-12 columns">
-                        <input type="text" name="username" id="username">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <label for="email">Email:</label>
-                      </div>
-                      <div class="large-8 small-12 columns">
-                        <input type="text" name="email" id="email">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <label for="firstname">First name:</label>
-                      </div>
-                      <div class="large-8 small-12 columns">
-                        <input type="text" name="firstname" id="firstname">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <label for="lastname">Last name:</label>
-                      </div>
-                      <div class="large-8 small-12 columns">
-                        <input type="text" name="lastname" id="lastname">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <label for="avatar">Upload an avatar:</label>
-                      </div>
-                      <div class="large-8 small-12 columns">
-                        <input type="text" name="avatar" id="avatar">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <label for="newpassword">New password:</label>
-                      </div>
-                      <div class="large-8 small-12 columns">
-                        <input type="text" name="newpassword" id="newpassword">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <label for="confirmpassword">Confirm password:</label>
-                      </div>
-                      <div class="large-8 small-12 columns">
-                        <input type="text" name="confirmpassword" id="confirmpassword">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <label for="oldpassword">Old password:</label>
-                      </div>
-                      <div class="large-8 small-12 columns">
-                        <input type="text" name="oldpassword" id="oldpassword">
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="large-4 small-12 columns">
-                        <p>Add a passport:</p>
-                      </div>
-                      <div class="large-8 small-12 columns passports">
-                        <i class="icon-netflix actioned"></i>
-                        <i class="icon-vimeo"></i>
-                        <i class="icon-facebook actioned"></i>
-                        <i class="icon-google"></i>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="arge-12 small-12 columns text-center">
-                        <input type="submit" name="update" id="update" value="Update">
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="large-5 small-12 columns">
-                  <div class="thanks">
-                    <h3>Thanks for joining</h3>
-                    <ul>
-                      <li>Create your own film lists to record what you have seen</li>
-                      <li>Share the films you own with friends and family</li>
-                      <li>See who shares the same film tastes as you do</li>
-                      <li>Get personalised recommendations for films you’ve not seen</li>
-                      <li>Find out local cinema times and arrange times to meet your friends</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+          <% if viewing_own? %>
+            <section>
+              <%= render template: 'devise/registrations/edit' %>
+            </section>
+          <% end %>
           <section>
             <p class="title" data-section-title><a href="#panel6">Settings</a></p>
             <div class="content" data-section-content>

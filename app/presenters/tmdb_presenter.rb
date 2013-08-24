@@ -20,6 +20,7 @@ class  TmdbPresenter < BasePresenter
     end
   end
 
+
   def images?
     film_details.images
   end

@@ -67,6 +67,7 @@ module Tmdb
     end
 
     def initial_release_date
+      return unless movie_data['release_date']
       @initial_release_date ||= movie_data['release_date'].to_date
     end
 

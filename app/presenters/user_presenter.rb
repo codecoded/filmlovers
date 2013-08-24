@@ -7,7 +7,7 @@ class UserPresenter < BasePresenter
 
 
   def avatar(size='normal')
-    if user.avatar.file
+    if user.avatar and user.avatar.file
        image_tag user.avatar.url, :class=>"avatar #{size}", title: user.username, alt: "profile picture for #{user.username}"
     elsif user.passport_provider? :facebook
       image_tag user.channels[:facebook].facebook.avatar, :class=>"avatar #{size}", title: user.username, alt: "profile picture for #{user.username}"

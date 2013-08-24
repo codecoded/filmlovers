@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_filter :validate_username,:except => :create
+  before_filter :validate_username,:except => :create
 
   #layout 'layouts/user'
   def index

@@ -28,14 +28,14 @@
                 <p class="title" data-section-title><a href="#panel1">Starred in</a></p>
                 <div class="content" data-section-content>
                   <div class="row">
-                    <% presenter.films_starred_in.each do |film_presenter| %>
+                    <% presenter.films_starred_in.each do |roles| %>
                       <div class="large-3 small-6 columns text-center">
                         <div class="character">
                           <h5>Character played</h5>
-                          <p><%= film_presenter.character %></p>
+                          <p><%= roles[:character] %></p>
                         </div>
-                        <%= div_for film_presenter.film do %>
-                          <%= render partial: 'films/film_container', locals: {presenter: film_presenter} %>   
+                        <%= div_for roles[:film_presenter].film do %>
+                          <%= render partial: 'films/film_container', locals: {presenter: roles[:film_presenter]} %>   
                         <% end %>              
                       </div>
                     <% end %>
@@ -48,14 +48,14 @@
                 <p class="title" data-section-title><a href="#panel2">Worked on</a></p>
                 <div class="content" data-section-content>
                   <div class="row">
-                    <% presenter.films_worked_on.each do |film_presenter| %>
+                    <% presenter.films_worked_on.each do |roles| %>
                       <div class="large-3 small-6 columns text-center">
                         <div class="character">
-                          <h5><%= film_presenter.department %></h5>
-                          <p><%= film_presenter.job %></p>
+                          <h5><%= roles[:department]%></h5>
+                          <p><%= roles[:job]%></p>
                         </div>
-                        <%= div_for film_presenter.film do %>
-                          <%= render partial: 'films/film_container', locals: {presenter: film_presenter} %>      
+                        <%= div_for roles[:film_presenter].film do %>
+                          <%= render partial: 'films/film_container', locals: {presenter: roles[:film_presenter]} %>      
                         <% end %>           
                       </div>
                     <% end %>

@@ -78,10 +78,8 @@ class  TmdbPresenter < BasePresenter
   end
 
   def main_backdrop(size = 'w1280')
-     backdrop(backdrops[0]) if backdrops? 
+    backdrop(backdrops[0]) if backdrops? 
   end
-
-
 
   def alternative_titles
     film_details.alternative_titles.map {|t| t['title']}
@@ -91,7 +89,7 @@ class  TmdbPresenter < BasePresenter
     if length
       truncate film_details.overview, separator: ' ', length: length, :omission => '...'
     else
-      film_details.overview
+      film_details['overview']
     end
   end
 
@@ -137,7 +135,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def youtube_trailers
-    return unless film.trailer?
+    return unless film.trailer? and film_details.trailers
     film_details.trailers['youtube'].map {|t| t['source'] }.select {|s| !s.start_with? 'http'} 
   end
 
@@ -191,7 +189,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def character
-    film_details['character'] if film_details
+    film_details['character']
   end
 
   def department

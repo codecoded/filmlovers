@@ -9,4 +9,16 @@ class FilmProvider
   field :rating,          type: Float
   field :fetched_at,      type: DateTime, default: nil
 
+  def fetch
+    klass.fetch id
+  end
+
+  def fetch!
+    klass.fetch! id
+  end
+
+
+  def klass
+    @klass ||= "#{name.capitalize}::Movie".constantize
+  end
 end

@@ -1669,7 +1669,7 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
   width: 100%;
   height: auto;
   min-height: 250px;
-  background-image: url(../img/site-basics/default.jpg);
+  background-image: url(site-basics/default.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-color: #ebebeb;

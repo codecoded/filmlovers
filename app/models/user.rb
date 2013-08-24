@@ -48,14 +48,14 @@ class User
   
   validates_presence_of   :username, message: 'Please enter a username'
   validates_presence_of   :email, message: 'Please enter an email'
-  validates_presence_of   :password, message: 'Please enter a password'
+  validates_presence_of   :password, message: 'Please enter a password', on: :create
   validates :username, uniqueness: {case_sensitive: false, message: "This username is already taken, please choose another!"}
   validates :username, format: {with: /^[-\w\._@]+$/i,  message: "Usernames can only contain letters, numbers, or .-_@"}
   validates_length_of :username, :within => 3..20, :too_long => "Username is a maximum of 20 characters", :too_short => "Username is a minimum of 3 characters"
   validates :username, exclusion: {:in => exluded_names, message: "Sorry, this username is not available"}
   validates :email, uniqueness: {case_sensitive: false, message: "This email has already been registered!"}, presence: true
   validates_format_of :email, :with  => Devise.email_regexp, message: "Sorry, this doesn't seem to be a valid email"
-  validates_length_of :password, :within => Devise.password_length, too_short: 'Password must be a minimun of 8 characters', too_long: 'Password must be a maximum of 128 characters'
+  validates_length_of :password, :within => Devise.password_length, too_short: 'Password must be a minimun of 8 characters', too_long: 'Password must be a maximum of 128 characters', on: :update, allow_blank: true
   validates_presence_of   :password, :on=>:create
 
   before_save :ensure_authentication_token
@@ -74,11 +74,15 @@ class User
   has_many :recommendations
   has_many :facebook_events
 
+
+  attr_accessible :avatar, :username, :email, :first_name, :last_name
+  mount_uploader :avatar, AvatarUploader  
+
   embeds_one  :profile, class_name: 'UserProfile', autobuild: true
   embeds_many :films_lists
   embeds_many :passports
   embeds_many :friendships
-
+  accepts_nested_attributes_for :profile, :allow_destroy => true
 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)

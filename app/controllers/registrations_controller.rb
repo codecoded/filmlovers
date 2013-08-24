@@ -18,32 +18,42 @@ class RegistrationsController < Devise::RegistrationsController
     
   end
 
-  def edit
+  def edit 
   end
 
   def update
     @user = User.find(current_user.id)
 
+
+    # u.avatar = params[:file]
+    # u.avatar = File.open('somewhere')
+    # u.save!
+    # u.avatar.url # => '/url/to/file.png'
+    # u.avatar.current_path # => 'path/to/file.png'
+    # u.avatar.identifier # => 'file.png'
+
+    # throw params[:user][:profile_a]
     successfully_updated = if needs_password?(@user, params)
       @user.update_with_password(params[:user])
+
     else
       # remove the virtual current_password attribute update_without_password
       # doesn't know how to ignore it
       params[:user].delete(:current_password)
-      @user.update_attributes(params[:user])
+      @user.update_without_password(params[:user])
     end
 
-    if successfully_updated
 
+    if successfully_updated
       # throw ActionMailer::Base.smtp_settings
-      UserMailer.welcome_email(@user).deliver
+      #UserMailer.welcome_email(@user).deliver
 
       set_flash_message :notice, :updated
       # Sign in the user bypassing validation in case his password changed
       sign_in @user, :bypass => true
-      redirect_to after_update_path_for(@user)
+      render nothing: true, status: 200
     else
-      render "edit"
+      render :edit, status: 422
     end
   end
 
@@ -53,6 +63,7 @@ class RegistrationsController < Devise::RegistrationsController
   # ie if password or email was changed
   # extend this as needed
   def needs_password?(user, params)
-    !user.encrypted_password.empty?
+    user.email != params[:user][:email] ||
+      params[:user][:password].present?
   end
 end

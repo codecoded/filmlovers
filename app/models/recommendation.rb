@@ -21,7 +21,7 @@ class Recommendation
   state_machine :initial => :visible do
 
     event :unrecommend do
-      transition :visible => :deleted
+      transition :visible => :removed
     end
 
     event :hide do

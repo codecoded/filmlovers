@@ -1,56 +1,67 @@
-<%= render layout: 'layouts/user_simple' do%>
 
-  <div class="twelve columns">
-    <%= page_entries_info users %>
+<div class="full-row page-title">
+  <div class="row">
+    <div class="large-12 small-12 columns">
+      <h1>Users</h1>
+    </div>
+  </div>
+</div>
+
+  <div class="row margin-bottom" id="films-content">
+    <div class="large-12 columns text-center">
+      <%= paginate users %>
+    </div> 
+ 
     <table class="friends">
       <thead>
         <tr>
           <th></th>
           <th>Username</th>
-          <th><%= icon_for :watched %>
-          <th><%= icon_for :loved %>
-          <th><%= icon_for :owned %>
-          <th><%= icon_for :list %>
+          <th>Watched</th>
+          <th>Loved</th>
+          <th>Owned</th>
+          <th>Lists</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <% users.each do |friend| %>
-          <tr>
-            <td>
-              <%= link_to user_path(friend) do %>
-                <%= avatar friend, 'small' %>
-               <% end %>
-            </td>
-            <td>
-             <%= link_to friend.username, user_path(friend) %>
-            </td>
-            <% [:watched, :loved, :owned].each do |action| %>
+        <% present(friend, UserPresenter) do |presenter| %>
+            <tr>
               <td>
-                <%= link_to user_film_path(friend, action), alt: action, title: action do %>
-                  <label style="display:inline"><%= friend.actions_for(action).count %> </label>
-                 <% end %>              
-              </td>   
-            <% end %> 
-            <td>
-              <%= link_to user_lists_path(friend) do %>
-                <label> <%=friend.films_lists.viewable.count %> </label>
-              <% end %>
-            </td>    
-            <td class="friendship">
-              <% if friendship = current_user.friendship_with(friend)  %>
-                <%= render partial: "friendships/#{friendship.state}", locals: {friend: friend} %>            
-              <% else %>
-                <%= render partial: "friendships/pending", locals: {friend: friend} %>  
-              <% end %>              
-            </td>
-          </tr>
+                <%= link_to user_path(friend) do %>
+                  <%= presenter.avatar %>
+                 <% end %>
+              </td>
+              <td>
+               <%= link_to friend.username, user_path(friend) %>
+              </td>
+              <% [:watched, :loved, :owned].each do |action| %>
+                <td>
+                  <%= link_to user_film_path(friend, action), alt: action, title: action do %>
+                    <label style="display:inline"><%= friend.actions_for(action).count %> </label>
+                   <% end %>              
+                </td>   
+              <% end %> 
+              <td>
+                <%= link_to user_lists_path(friend) do %>
+                  <label> <%=friend.films_lists.viewable.count %> </label>
+                <% end %>
+              </td>    
+              <td class="friendship">
+                <% if friendship = current_user.friendship_with(friend)  %>
+                  <%= render partial: "friendships/#{friendship.state}", locals: {friend: friend} %>            
+                <% else %>
+                  <%= render partial: "friendships/pending", locals: {friend: friend} %>  
+                <% end %>              
+              </td>
+            </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
-    <%= link_to_previous_page users, 'Previous Page' %>
-    <%= link_to_next_page users, 'Next Page', :class=>'right' %>
-
-      </div>
-<% end %>
-
+    <div class="large-12 columns text-center">
+      <%= paginate users %>
+    </div> 
+  </div>
+</div>

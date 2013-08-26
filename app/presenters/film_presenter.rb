@@ -57,7 +57,7 @@ class FilmPresenter < BasePresenter
   def poster
     return blank_poster unless film.poster?
     image_src = case film.details_provider.to_sym
-      when :tmdb then AppConfig.image_uri_for ['w185', film.poster]
+      when :tmdb then AppConfig.image_uri_for ['w154', film.poster]
       else film.poster
     end
 

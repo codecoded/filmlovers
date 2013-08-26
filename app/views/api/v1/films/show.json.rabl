@@ -36,7 +36,7 @@ node :presenter do
       owned: presenter.film.counters.owned
     },
     images:{
-      backdrops: presenter.backdrops_urls_for('w300'),
+      backdrops: presenter.backdrops_urls_for('w500'),
       posters: presenter.posters_urls_for(:medium)
     },
     cast: if presenter.cast? then presenter.credits.cast.map {|p| {url: nil, name: p.name, description: p.character, image: p.profile('w92')} } end,

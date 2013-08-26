@@ -30,7 +30,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def poster_sizes
-    @poster_sizes  ||= {small: 'w90', medium: 'w185', large: 'w342', original: 'original'}
+    @poster_sizes  ||= {small: 'w90', medium: 'w154', large: 'w342', original: 'original'}
   end
 
   def posters
@@ -42,7 +42,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def poster(size=:medium)
-    src = film.poster? ? poster_uri(size) : "placeholder.jpg"
+    src = film.poster? ? poster_uri(film.poster, size) : "placeholder.jpg"
     image_tag src, :title=> film.title, alt: "poster for #{film.title}"
   end
 

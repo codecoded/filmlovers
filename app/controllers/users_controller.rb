@@ -17,7 +17,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @films ||= page_results Film.in(id: user.actions_for(:watched).map(&:film_id)), :popularity
+    @ids ||= user.film_user_actions.only(:film_id).map &:film_id
+    @films ||= page_results Film.in(id: @ids), :popularity
   end
 
   def user

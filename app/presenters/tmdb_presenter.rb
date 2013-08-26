@@ -33,13 +33,25 @@ class  TmdbPresenter < BasePresenter
     @poster_sizes  ||= {small: 'w90', medium: 'w185', large: 'w342', original: 'original'}
   end
 
+  def posters
+    images_library ? images_library.posters : []
+  end
+
+  def posters?
+    !posters.blank?
+  end
+
   def poster(size=:medium)
     src = film.poster? ? poster_uri(size) : "placeholder.jpg"
     image_tag src, :title=> film.title, alt: "poster for #{film.title}"
   end
 
-  def poster_uri(size=:medium)
-    AppConfig.image_uri_for [poster_sizes[size], film.poster] if film.poster?
+  def poster_uri(poster=nil, size=:medium)
+    AppConfig.image_uri_for [poster_sizes[size], poster || film.poster] if film.poster?
+  end
+
+  def posters_urls_for(size=:medium)
+    posters.map {|p| poster_uri(p['file_path'], size)} if posters?
   end
 
   def poster_link(size=:medium)

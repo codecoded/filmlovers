@@ -6,8 +6,8 @@ class Images
     @doc = OpenStruct.new doc
   end
 
-  def posters_library
-    @posters ||= Posters.new doc.posters
+  def posters
+    @posters ||= doc.posters
   end
 
   def backdrops

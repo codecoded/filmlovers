@@ -1,8 +1,8 @@
 <div class="friendship">
-  <%= link_to change_friendship_path(friend, :confirm), method: :put, remote: true, data: {action: :confirm}, :class=>'tiny button radius' do %>
+  <%= link_to change_friendship_path(friend, :confirm), method: :put, remote: true, data: {friendship: :confirm}, :class=>'tiny button radius' do %>
     <span>Confirm</span>
   <% end %>
-  <%= link_to friendship_path(friend), method: :delete, remote: true, data: {action: :delete}, :class=>'tiny button radius secondary' do %>
+  <%= link_to friendship_path(friend), method: :delete, remote: true, data: {friendship: :delete}, :class=>'tiny button radius secondary' do %>
      <span>Delete Request</span>
   <% end %>
 </div>

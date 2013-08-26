@@ -1,12 +1,13 @@
-<div class="user-avatar left">
-  <%= link_to user_path(friend) do %>
-    <%= avatar friend %>
-    <label><%= friend.username %></label>
-  <% end %>
-  <% [:watched, :loved, :owned].each do |action| %>
-    <%= link_to user_film_path(friend, action) do %>
-      <%= icon_for action %>
-      <label style="display:inline"><%= friend.actions_for(action).count %> </label>
+<% present(friend, UserPresenter) do |presenter| %>
+  <div class="user-avatar left">
+    <%= link_to user_path(friend) do %>
+      <%= presenter.avatar %>
+      <label><%= friend.username %></label>
     <% end %>
-  <% end %>
-</div>
+    <% [:watched, :loved, :owned].each do |action| %>
+      <%= link_to user_film_path(friend, action) do %>
+        <label style="display:inline"><%= friend.actions_for(action).count %> </label>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

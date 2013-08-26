@@ -17,6 +17,11 @@
           <a href="#" class="secondary button">Log out</a>
         <% else %>
           <h2><%= presenter.username %></h2>
+          <% if friendship = current_user.friendship_with(presenter.user)  %>
+            <%= render partial: "friendships/#{friendship.state}", locals: {friend: presenter.user} %>            
+          <% else %>
+            <%= render partial: "friendships/pending", locals: {friend: presenter.user} %> 
+          <% end %> 
         <% end %>
       </div>
     </div>
@@ -28,68 +33,7 @@
           <section>
             <p class="title" data-section-title><a href="#panel1">Films</a></p>
             <div class="content" data-section-content>
-              <div class="row">
-                <div class="large-2 small-6 columns">
-                  <div class="flip-container">
-                    <div class="upper">
-                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
-                    </div>
-                    <div class="lower">
-                      <ul>
-                        <li class="complete watched"><a href="#">Watched</a></li>
-                        <li class="loved"><a href="#">Loved</a></li>
-                        <li class="owned"><a href="#">Own</a></li>
-                      </ul>
-                      <p><a href="#" data-reveal-id="filminfo" class="button">More info</a></p>
-                    </div>
-                  </div>
-                  <ul class="user-rankings">
-                    <li class="watched"><a href="#">21</a></li>
-                    <li class="loved"><a href="#">11</a></li>
-                    <li class="owned"><a href="#">2</a></li>
-                  </ul>
-                </div>
-                <div class="large-2 small-6 columns">
-                  <div class="flip-container">
-                    <div class="upper">
-                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
-                    </div>
-                    <div class="lower">
-                      <ul>
-                        <li class="complete watched"><a href="#">Watched</a></li>
-                        <li class="loved"><a href="#">Loved</a></li>
-                        <li class="owned"><a href="#">Own</a></li>
-                      </ul>
-                      <p><a href="#" data-reveal-id="filminfo" class="button">More info</a></p>
-                    </div>
-                  </div>
-                  <ul class="user-rankings">
-                    <li class="watched"><a href="#">21</a></li>
-                    <li class="loved"><a href="#">11</a></li>
-                    <li class="owned"><a href="#">2</a></li>
-                  </ul>
-                </div>
-                <div class="large-2 small-6 columns end">
-                  <div class="flip-container">
-                    <div class="upper">
-                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
-                    </div>
-                    <div class="lower">
-                      <ul>
-                        <li class="complete watched"><a href="#">Watched</a></li>
-                        <li class="loved"><a href="#">Loved</a></li>
-                        <li class="owned"><a href="#">Own</a></li>
-                      </ul>
-                      <p><a href="#" data-reveal-id="filminfo" class="button">More info</a></p>
-                    </div>
-                  </div>
-                  <ul class="user-rankings">
-                    <li class="watched"><a href="#">21</a></li>
-                    <li class="loved"><a href="#">11</a></li>
-                    <li class="owned"><a href="#">2</a></li>
-                  </ul>
-                </div>
-              </div>
+              <%= render partial: 'films', locals: {user_action: :watched, user: user} %>
             </div>
           </section>
           <section>
@@ -107,7 +51,7 @@
           <section>
             <p class="title" data-section-title><a href="#panel4">Friendships</a></p>
             <div class="content" data-section-content>
-              <p>Friendships</p>
+              <%= render partial: 'friendships', locals: {friendships: current_user.friendships} %>
             </div>
           </section>
           <% if viewing_own? %>

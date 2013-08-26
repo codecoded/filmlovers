@@ -1,25 +1,17 @@
 <% set_meta_tags :description => "A complete list of all the films you have #{user_action}" %>
 
-  <div id="contentHolder">
-    <div class="ten columns films centered" id="filmsContent" >
-      <div class="twelve columns">
-        <div class="seven column">
-          <h5> <%= " #{pluralize user.actions_for(user_action).count , 'films'} #{user_action}" %> </h5>
-        </div>
-        <div class="two columns">
-          <label>Sort by</label>
-            <select id="sort-option">
-              <%= user_films_sort_option user, user_action, :release_date, :desc, "Newest Release"  %>
-              <%= user_films_sort_option user, user_action, :release_date, :asc, "Oldest Release"  %>
-              <%= user_films_sort_option user, user_action, :title, :asc, "Title A-Z"  %>
-              <%= user_films_sort_option user, user_action, :title, :desc, "Title Z-A"  %>
-            </select>
-        </div>
-      </div>
-      <%= render partial: 'films/film', collection: @films_page.films %>
-      <%= page_link @films_page.next?, @films_page.next_params, "", "filmsLinkNext" %>
-    </div>
-  </div>
+
+<div class="row margin-bottom" id="films-content">
+  <div class="large-12 columns text-center">
+    <%= paginate @films %>
+  </div> 
+  <% @films.each do |film| %>
+    <%= render partial: 'films/film', object: film %>
+  <% end %>
+  <div class="large-12 columns text-center">
+    <%= paginate @films %>
+  </div>   
+</div>
 
 <% if viewing_own? and current_user %>
 <script>

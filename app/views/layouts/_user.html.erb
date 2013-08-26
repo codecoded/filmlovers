@@ -1,42 +1,125 @@
-<div class="twelve columns user-details">
-
-  <div class="user-banner">
-    <div class="one columns user-image">
-      <%= avatar user %>
-    </div>
-    <div class="six columns user-name">
-       <h3><%= user.username %></h3>
-       <% if logged_in? %>
-         <% if current_user.friendship_with user  %>
-          <%= link_to friendship_path(user), method: :delete, remote: true, data: {action: :friendship}, :class=>'tiny button radius alert' do %>
-            <%= awesome 'remove', 'icon-large' %> <span>remove friendship</span>
-          <% end %>
-         <% else %>
-          <%= link_to friendship_path(user), method: :put, remote: true, data: {action: :friendship}, :class=>'tiny button radius success' do %>
-            <%= awesome 'link', 'icon-large' %> <span>create friendship</span>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="five columns nav-container">
-
-      <dl class="sub-nav right">
-        <% [:watched, :loved, :owned].each do |action| %>
-        <dd>
-            <%= link_to user_film_path(user, action), alt: action, title: action do %>
-              <%= icon_for action %> <label><%= user.actions_for(action).count %></label>
-            <% end %>
-        </dd>
-        <% end %> 
-         <dd>
-          <%= link_to user_lists_path(user) do %>
-            <%= awesome :list %> <label> <%=user_lists.count %> </label>
-          <% end %>
-        </dd>
-      </dl>
+<% present(current_user, UserPresenter) do |presenter| %>
+  <div class="full-row inner-hero margin-bottom">
+    <div class="row">
+      <div class="large-12 small-12 columns">
+        <div class="right-fade"></div>
+        <div class="left-fade"></div>
+        <%= presenter.cover_image %>
+      </div>
     </div>
   </div>
-
-  <%= yield %>
-</div>
-
+  <div class="row margin-bottom">
+    <div class="large-12 small-12 columns">
+      <div class="pod margin-bottom account">
+        <%= presenter.avatar %>
+       
+          <h2><%= presenter.username %> - Your profile</h2>
+          <a href="#" class="secondary button">Log out</a>
+        
+      </div>
+    </div>
+  </div>
+  <div class="row margin-bottom">
+    <div class="large-12 small-12 columns">
+      <div class="inner-tabs">
+        <div class="section-container auto" data-section>
+          <section>
+            <p class="title" data-section-title><a href="#panel1">Films</a></p>
+            <div class="content" data-section-content>
+              <div class="row">
+                <div class="large-2 small-6 columns">
+                  <div class="flip-container">
+                    <div class="upper">
+                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
+                    </div>
+                    <div class="lower">
+                      <ul>
+                        <li class="complete watched"><a href="#">Watched</a></li>
+                        <li class="loved"><a href="#">Loved</a></li>
+                        <li class="owned"><a href="#">Own</a></li>
+                      </ul>
+                      <p><a href="#" data-reveal-id="filminfo" class="button">More info</a></p>
+                    </div>
+                  </div>
+                  <ul class="user-rankings">
+                    <li class="watched"><a href="#">21</a></li>
+                    <li class="loved"><a href="#">11</a></li>
+                    <li class="owned"><a href="#">2</a></li>
+                  </ul>
+                </div>
+                <div class="large-2 small-6 columns">
+                  <div class="flip-container">
+                    <div class="upper">
+                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
+                    </div>
+                    <div class="lower">
+                      <ul>
+                        <li class="complete watched"><a href="#">Watched</a></li>
+                        <li class="loved"><a href="#">Loved</a></li>
+                        <li class="owned"><a href="#">Own</a></li>
+                      </ul>
+                      <p><a href="#" data-reveal-id="filminfo" class="button">More info</a></p>
+                    </div>
+                  </div>
+                  <ul class="user-rankings">
+                    <li class="watched"><a href="#">21</a></li>
+                    <li class="loved"><a href="#">11</a></li>
+                    <li class="owned"><a href="#">2</a></li>
+                  </ul>
+                </div>
+                <div class="large-2 small-6 columns end">
+                  <div class="flip-container">
+                    <div class="upper">
+                      <img src="assets/content/django-unchained.jpg" width="342" height="513" alt="Django Unchained" />
+                    </div>
+                    <div class="lower">
+                      <ul>
+                        <li class="complete watched"><a href="#">Watched</a></li>
+                        <li class="loved"><a href="#">Loved</a></li>
+                        <li class="owned"><a href="#">Own</a></li>
+                      </ul>
+                      <p><a href="#" data-reveal-id="filminfo" class="button">More info</a></p>
+                    </div>
+                  </div>
+                  <ul class="user-rankings">
+                    <li class="watched"><a href="#">21</a></li>
+                    <li class="loved"><a href="#">11</a></li>
+                    <li class="owned"><a href="#">2</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section>
+            <p class="title" data-section-title><a href="#panel2">Recommendations</a></p>
+            <div class="content" data-section-content>
+              <p>Recommendations</p>
+            </div>
+          </section>
+          <section>
+            <p class="title" data-section-title><a href="#panel3">Lists</a></p>
+            <div class="content" data-section-content>
+              <p>Lists</p>
+            </div>
+          </section>
+          <section>
+            <p class="title" data-section-title><a href="#panel4">Friendships</a></p>
+            <div class="content" data-section-content>
+             Friendships
+            </div>
+          </section>
+            <section>
+              <%= render template: 'devise/registrations/edit' %>
+            </section>
+         
+          <section>
+            <p class="title" data-section-title><a href="#panel6">Settings</a></p>
+            <div class="content" data-section-content>
+              <p>Settings</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

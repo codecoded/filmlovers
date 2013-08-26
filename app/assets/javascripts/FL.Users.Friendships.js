@@ -5,7 +5,7 @@ FL.Friendships = {
   init: function(){
     
     if(friendships.initialised) return
-    //friendships.initListeners();
+    friendships.initListeners();
     friendships.initialised = true;
   },
 
@@ -14,23 +14,24 @@ FL.Friendships = {
   },
 
   initListeners: function(){
-    $(document).on('ajax:success', '.friendship a[data-action="request"]', friendships.requested)
-    $(document).on('ajax:success', '.friendship a[data-action="confirm"]', friendships.confirmed)
-    $(document).on('ajax:success', '.friendship a[data-action="ignore"]', friendships.ignored)
-    $(document).on('ajax:success', '.friendship a[data-action="delete"]', friendships.deleted)
-    $(document).on('ajax:success', '.friendship a[data-action="cancel"]', friendships.cancelled)
+    $(document).on('ajax:before', '.friendship a[data-friendship]', function(e){e.preventDefault();e.stopPropagation()})
+    $(document).on('ajax:success', '.friendship a[data-friendship="request"]', friendships.requested)
+    $(document).on('ajax:success', '.friendship a[data-friendship="confirm"]', friendships.confirmed)
+    $(document).on('ajax:success', '.friendship a[data-friendship="ignore"]', friendships.ignored)
+    $(document).on('ajax:success', '.friendship a[data-friendship="delete"]', friendships.deleted)
+    $(document).on('ajax:success', '.friendship a[data-friendship="cancel"]', friendships.cancelled)
 
   },
   
   requested: function(evt, data, status, xhr){
     var link = $(this);
-    link.closest('td').html(data)
+    link.closest('.friendship').replaceWith(data)
     if(link.data('state')==='received') friendships.counter().decr()
   },
 
   cancelled: function(evt, data, status, xhr){
     var link = $(this);
-    link.closest('td').html(data)
+    link.closest('.friendship').replaceWith(data)
   },
 
   confirmed: function(evt, data, status, xhr){

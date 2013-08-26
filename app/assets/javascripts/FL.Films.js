@@ -14,7 +14,7 @@ FL.Films = {
 
   initListeners: function(){
     $(document).on('ajax:success', 'nav.pagination', FL.Films.displayContent);
-    $(document).on('click', 'a[data-action]', FL.Films.lnkFilmsActionClicked)
+    $(document).on('click', 'a[data-film-action]', FL.Films.lnkFilmsActionClicked)
     $(document).on('change', '#filterlist', FL.Films.sortFilms )
     $(document).on('change', '#userListsOptions', FL.Films.addFilmTolist )
     $(document).on('click', '[data-toggle-filters]', FL.Films.toggleFilters )
@@ -122,7 +122,7 @@ FL.Films = {
         id = anchor.data('id'),
         to_action = method == 'put',
         incr = to_action ? 1 : -1,
-        action = anchor.data('action');
+        action = anchor.data('film-action');
 
     if(href==='#') return false;
     $.ajax({

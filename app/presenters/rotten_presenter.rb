@@ -61,12 +61,15 @@ class  RottenPresenter < BasePresenter
 
   def backdrop(backdrop, size = 'w1280')
     return unless backdrop
-    image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
+    # image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
   end
 
+  def backdrop_uri(size='original')
+    # AppConfig.image_uri_for([size, backdrops[0]['file_path']]) if backdrops?
+  end
 
   def backdrops_urls_for(size)
-    backdrops.map {|b| AppConfig.image_uri_for [size, b['file_path']] } if backdrops?
+    # backdrops.map {|b| AppConfig.image_uri_for [size, b['file_path']] } if backdrops?
   end
 
   def homepage

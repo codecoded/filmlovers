@@ -8,15 +8,15 @@ class FilmCounters
   field :owned,       type: Integer, default: 0
   # field :favourited,  type: Integer
 
-  def set(action, score)
-    update_attribute action, score
-  end
-
 
   def refresh
-    attributes.except('_id').each do |action|
+    attributes.except('_id').keys.each do |action|
       set(action, film.actions_for(action).count)
     end
+  end
+
+  def set(action, score)
+    update_attribute action, score
   end
 
   def to_json

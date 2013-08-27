@@ -30,7 +30,7 @@ class UserFilms
 
   def find(action=nil)
     actions = action ? user.actions_for(action) : user.film_user_actions
-    Film.in id: actions.map(&:film_id)
+    Film.without(:details, :providers).in id: actions.map(&:film_id)
   end
 
 

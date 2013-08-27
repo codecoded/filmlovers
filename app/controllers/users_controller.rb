@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @films ||= page_results user.films.all, :popularity
+    @films ||= page_results user.films.all, :release_date
   end
 
   def user

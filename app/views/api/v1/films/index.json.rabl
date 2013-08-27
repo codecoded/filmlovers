@@ -19,7 +19,6 @@ node :films do
   @films.map do |film|
     user_actions = current_user.film_user_actions.where(film: film).distinct(:action) if current_user
     presenter = present(film.details, film.details_presenter)
-
     {
       user: if current_user
       {

@@ -76,7 +76,7 @@ class FilmsController < ApplicationController
 
     query = query.by_genres genre.name if genre
     
-    query
+    query.without(:details, :providers)
   end
 
   def film

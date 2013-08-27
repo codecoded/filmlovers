@@ -27,7 +27,7 @@ class UserPresenter < BasePresenter
 
   def cover_image
     # return unless cover = user.profile.cover_image
-    image_tag "content/hero-image-pacific-rim.jpg", size:"1280x720"
+    image_tag "content/hero-image-ironman.jpg", size:"1600x648"
    end
 
 end

@@ -16,17 +16,8 @@ module Api
       protected 
 
       def user
-        @user ||= User.find_by(username: user_id)
+        @user ||= User.find(params[:id])
       end
-
-      def user_id
-        params[:user_id]
-      end
-
-      def user_action
-        params[:id].to_sym
-      end
-
 
       helper_method :user
     end

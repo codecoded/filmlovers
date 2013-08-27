@@ -43,17 +43,15 @@ Filmlovers::Application.routes.draw do
 
       resources :persons,  only: :show
 
-      scope ':user_id', :constraints => { :user_id => /.*/ } do
-        resources :films, :only => [:index, :show],  :controller => 'user_films', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 
+      resources :users do
+        resources :films, :only => [:index, :show], controller: 'user_films' do 
             member do 
-              put ':film_id',     to: 'user_films#update',  as: 'update'
-              delete ':film_id',  to: 'user_films#destroy', as: 'update'
+              put    ':action_id',  action: :update,  as: 'update',  :constraints => { :action_id => /watched|loved|owned/ }
+              delete ':action_id',  action: :destroy, as: 'update',  :constraints => { :action_id => /watched|loved|owned/ }
             end
           end
         resources :lists,         to: 'user_lists',         as: 'user_lists', :only => [:show, :index]
-        match 'queue/:action',    to: "queue",              as: 'queue',:constraints => {:action => /list|recommend|show/},  via: :get
       end
-      get '/:user_id', to: 'users#show', as: 'user', :constraints => { :user_id => /.*/ }
     end
   end
 
@@ -137,7 +135,7 @@ Filmlovers::Application.routes.draw do
   resources 'recommendations'
 
   scope ':user_id', :constraints => { :user_id => /.*/ } do
-    resources :films, :only => [:index, :show], to: 'users#show', :constraints => { :id => /watched|loved|queued|owned/ }, as: 'user_film' do 
+    resources :films, :only => [:index, :show], to: 'users#show', :constraints => { :id => /watched|loved|owned/ }, as: 'user_film' do 
         member do 
           put ':film_id',     to: 'user_films#update',  as: 'update'
           delete ':film_id',  to: 'user_films#destroy', as: 'update'

@@ -2,11 +2,11 @@ module Api
   module V1
     class UserFilmsController < BaseController
 
-      before_filter :validate_user
+      before_filter :validate_user, only: [:update, :destroy]
       respond_to :json
 
       def index
-        render :index, formats: :json
+        find_films user.films.all, :popularity
       end
 
       def show
@@ -36,12 +36,19 @@ module Api
       end
 
       def user_action
-        params[:id].to_sym
+        params[:action_id].to_sym
       end
 
       def film 
-        @film ||= Film.find_by _title_id: params[:film_id]
+        @film ||= Film.find params[:id]
       end
+
+
+      def render_films(query)
+        find_films query
+        render :index
+      end
+      
 
       helper_method :user_action, :film, :user
     end

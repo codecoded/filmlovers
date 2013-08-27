@@ -10,22 +10,27 @@ class UserFilms
     send action
   end
 
+  def all
+    find
+  end
+
   def watched
-    @watched ||= films_for :watched
+    @watched ||= where :watched
   end
 
   def loved
-   @loved ||= films_for :loved
+   @loved ||= find :loved
   end
 
   def owned
-   @owned ||= films_for :owned
+   @owned ||= find :owned
   end
 
   protected
 
-  def films_for(action)
-    Film.in id: user.actions_for(action).map(&:film_id)
+  def find(action=nil)
+    actions = action ? user.actions_for(action) : user.film_user_actions
+    Film.in id: actions.map(&:film_id)
   end
 
 

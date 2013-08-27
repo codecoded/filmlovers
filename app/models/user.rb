@@ -95,10 +95,6 @@ class User
     user ? user : User.new(passports:[passport])
   end
 
-  def films_queue
-    @queue ||= FilmsQueue.new "user:#{id}:films:queued"
-  end  
-
   def upsert_passport(passport)
     current_passport = find_passport(passport.uid, passport.provider)
     current_passport ? current_passport.update_from_passport(passport) : (passports << passport) 

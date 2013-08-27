@@ -16,8 +16,8 @@ node :user do
     },
     friendships: user.friendships.confirmed.map do |friendship|
     {
-      friend_id: friendship.friend.username,
-      friend_url: user_path(friendship.friend),
+      username: friendship.friend.username,
+      friend_url: api_v1_user_path(friendship.friend.id),
       avator_uri: friendship.friend.avatar.url,
       status: friendship.state
     }

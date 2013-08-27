@@ -87,7 +87,7 @@ module Imdb
     end
 
     def parse_release_date(date)
-      return unless date
+      return unless date and date['year'] and date['month'] and date['day']
       Date.new(date['year'], date['month'], date['day'])
     end
 

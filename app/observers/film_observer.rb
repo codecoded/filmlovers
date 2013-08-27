@@ -32,7 +32,7 @@ class FilmObserver < Mongoid::Observer
     #   return
     # end
 
-    Log.debug "Fetching IMDB info for film: #{film.id}"
+    Log.debug "Finding IMDB info for film: #{film.id}"
 
     return unless imdb_movie = Imdb::Movie.find(imdb_provider.id)
     film.add_provider(:imdb, imdb_movie)

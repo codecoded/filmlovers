@@ -23,7 +23,7 @@ class FilmObserver < Mongoid::Observer
     end
 
     if film.release_date_country == 'UK'
-      Log.debug("Film #{film.id} already has updated release date")
+      Log.debug("Film #{film.id} already has UK release date")
       return
     end
 

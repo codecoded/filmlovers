@@ -15,7 +15,7 @@
         <% if viewing_own? %>
           <h2><%= presenter.username %> - Your profile</h2>
           <a href="#" class="secondary button">Log out</a>
-        <% else %>
+        <% elsif logged_in? %>
           <h2><%= presenter.username %></h2>
           <% if friendship = current_user.friendship_with(presenter.user)  %>
             <%= render partial: "friendships/#{friendship.state}", locals: {friend: presenter.user} %>            
@@ -51,7 +51,7 @@
           <section>
             <p class="title" data-section-title><a href="#panel4">Friendships</a></p>
             <div class="content" data-section-content>
-              <%= render partial: 'friendships', locals: {friendships: current_user.friendships} %>
+              <%= render partial: 'friendships', locals: {friendships: current_user.friendships} if logged_in? %>
             </div>
           </section>
           <% if viewing_own? %>

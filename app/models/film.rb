@@ -76,7 +76,7 @@ class Film
       }) 
       Log.debug "Film #{id} release date set to #{date} for country #{country}"
     else
-      Log.debug "date is nil"
+      Log.debug "No release date found for #{country}"
     end
     self
   end

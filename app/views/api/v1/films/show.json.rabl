@@ -13,8 +13,11 @@ node :film do
     {
       actions: {
         loved: user_actions ? user_actions.include?(:loved) : false,
+        loved_url: update_api_v1_user_film_path(current_user.id, @film.id, :loved),
         watched: user_actions ? user_actions.include?(:watched) : false,
-        owned: user_actions ? user_actions.include?(:owned) : false
+        watched_url: update_api_v1_user_film_path(current_user.id, @film.id, :watched),
+        owned: user_actions ? user_actions.include?(:owned) : false,
+        owned_url: update_api_v1_user_film_path(current_user.id, @film.id, :owned),
       }
     } 
     end,

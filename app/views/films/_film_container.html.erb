@@ -1,4 +1,4 @@
-<div class="flip-container">
+<%= content_tag :div, class: 'flip-container', data: {'film-url'=> film_path(presenter.film)} do %>
   <div class="upper">
      <%= presenter.poster %>
   </div>
@@ -15,7 +15,7 @@
       <%= link_to 'Trailer', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
     </p>
   </div>
-</div>
+<% end %>
 <ul class="user-rankings">
   <% [:watched, :loved, :owned].each do |action| %>
       <%= presenter.action_list_item action, presenter.counter(action), true %>

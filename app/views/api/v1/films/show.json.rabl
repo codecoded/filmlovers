@@ -6,8 +6,8 @@ end
 
 presenter = present(@film.details, @film.details_presenter)
 
-node :presenter do 
-  #user_actions = current_user.presenter_user_actions.where(presenter: presenter.film).distinct(:action) if current_user
+node :film do 
+  user_actions = current_user.film_user_actions.where(film_id: presenter.film.id).distinct(:action) if current_user
   {
     user: if current_user
     {

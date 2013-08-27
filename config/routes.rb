@@ -52,9 +52,8 @@ Filmlovers::Application.routes.draw do
           end
         resources :lists,         to: 'user_lists',         as: 'user_lists', :only => [:show, :index]
         match 'queue/:action',    to: "queue",              as: 'queue',:constraints => {:action => /list|recommend|show/},  via: :get
-        # get '', to: 'show'
       end
-
+      get '/:user_id', to: 'users#show', as: 'user', :constraints => { :user_id => /.*/ }
     end
   end
 

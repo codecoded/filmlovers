@@ -22,6 +22,7 @@ FL.Films = {
 
     $(document).on('click', '.filter', FL.Films.toggleFilterOption )
 
+    $(document).on('dblclick', '.flip-container', function() {window.location = $(this).data('film-url')});
     $(document).on('touchstart', '.flip-container', function() {FL.Films.touchMove = false;});
     $(document).on('touchmove', '.flip-container', function() {FL.Films.touchMove = true;});
     $(document).on('touchend', '.flip-container', FL.Films.toggleActionsForMobile);

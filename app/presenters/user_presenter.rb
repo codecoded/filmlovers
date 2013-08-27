@@ -5,6 +5,14 @@ class UserPresenter < BasePresenter
 
   def_delegators :user, :username
 
+  def counter_for(action)
+    actions.where(action: action).count
+  end
+
+
+  def actions
+    @actions ||= user.film_user_actions
+  end
 
   def avatar(size='normal')
     if user.avatar and user.avatar.file

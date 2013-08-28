@@ -17,7 +17,7 @@ class UserFilmRecommendation
   def recommendable_to?(friend)
     confirmed_friends_with?(friend) and 
     film_not_yet_recommended_to?(friend) and
-    film_not_actioned_by(friend)
+    film_not_actioned_by?(friend)
   end
 
   def confirmed_friends_with?(friend)

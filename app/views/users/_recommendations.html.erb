@@ -4,7 +4,7 @@
     <div class="inner-tabs">
       <div class="section-container auto" data-section>
         <section>
-          <p class="title" data-section-title><a href="#panel1"><%= "Friends recommend (#{presenter.friends_recommmenations.count})" %></a></p>
+          <p class="title" data-section-title><a href="#panel10"><%= "Friends recommend (#{presenter.friends_recommmenations.count})" %></a></p>
           <div class="content" data-section-content>
             <ol >
               <% presenter.friends_recommmenations.each do |recommendation| %>
@@ -14,7 +14,7 @@
           </div>
         </section>
         <section>
-          <p class="title" data-section-title><a href="#panel2"><%= "You recommend (#{presenter.user_recommendations.count})" %></a></p>
+          <p class="title" data-section-title><a href="#panel11"><%= "You recommend (#{presenter.user_recommendations.count})" %></a></p>
           <div class="content" data-section-content>
             <ol >
               <% presenter.user_recommendations.each do |recommendation| %>

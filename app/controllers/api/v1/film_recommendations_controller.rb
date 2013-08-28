@@ -2,13 +2,6 @@ module Api
   module V1
     class FilmRecommendationsController < BaseController
 
-      def index
-        @recommendations = current_user.recommendations.visible
-      end
-
-      def show
-        @sent = current_user.recommendations.
-      end
 
       def create
       end

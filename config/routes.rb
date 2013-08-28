@@ -38,8 +38,16 @@ Filmlovers::Application.routes.draw do
             put     ':film_id',   to: 'user_films#update',  as: 'update'
             delete  ':film_id',   to: 'user_films#destroy', as: 'update'
           end
-        end        
+        end   
+
+        resources :recommendations, only: [:index], to: 'user_recommendations' do
+          collection do
+            get 'sent'
+            get 'received'
+          end
+        end                 
       end
+      
       resources :recommendations do
         collection do
           resources :films, except: [:edit], to: 'film_recommendations'

@@ -14,6 +14,16 @@ class UserPresenter < BasePresenter
     @actions ||= user.film_user_actions
   end
 
+  def avatar_url
+    if user.avatar and user.avatar.file
+       user.avatar.url
+    elsif user.passport_provider? :facebook
+      user.channels[:facebook].facebook.avatar
+    else
+      user.gravatar_url
+    end    
+  end
+
   def avatar(size='normal')
     if user.avatar and user.avatar.file
        image_tag user.avatar.url, :class=>"avatar #{size}", title: user.username, alt: "profile picture for #{user.username}"

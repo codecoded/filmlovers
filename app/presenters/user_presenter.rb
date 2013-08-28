@@ -24,10 +24,18 @@ class UserPresenter < BasePresenter
     end
   end
 
-
   def cover_image
     # return unless cover = user.profile.cover_image
     image_tag "content/hero-image-ironman.jpg", size:"1600x648"
-   end
+  end
+
+
+  def user_recommendations
+    @user_recommendations ||= user.recommendations.order_by(:created_at.desc).visible
+  end
+
+  def friends_recommmenations
+    @friends_recommmenations ||= user.recommended.unwatched
+  end
 
 end

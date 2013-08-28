@@ -1,27 +1,13 @@
-<% set_meta_tags :description => "A complete list of all the films you have #{user_action}" %>
-
-
+<% pagination ||= paginate @films %>
 <div class="row margin-bottom" id="films-content">
   <div class="large-12 columns text-center">
-    <%= paginate @films %>
+    <%= pagination %>
   </div> 
   <% @films.each do |film| %>
     <%= render partial: 'films/film', object: film %>
   <% end %>
   <div class="large-12 columns text-center">
-    <%= paginate @films %>
+    <%= pagination %>
   </div>   
 </div>
 
-<% if viewing_own? and current_user %>
-<script>
- $(document).on('film:<%= user_action.to_sym %>:unactioned', function(event, film){
-    film.toggle(function(){
-      counter = $('#user-films-count')
-      counter.text(parseInt(counter.text()) - 1)
-      film.remove()
-    })
-
-})
-</script>
-<% end %>

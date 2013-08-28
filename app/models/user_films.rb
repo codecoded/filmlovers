@@ -15,7 +15,7 @@ class UserFilms
   end
 
   def watched
-    @watched ||= where :watched
+    @watched ||= find :watched
   end
 
   def loved
@@ -28,8 +28,12 @@ class UserFilms
 
   protected
 
+  def actions_for(action)
+    user.actions_for(action)
+  end
+
   def find(action=nil)
-    actions = action ? user.actions_for(action) : user.film_user_actions
+    actions = action ? actions_for(action) : user.film_user_actions
     Film.without(:details, :providers).in id: actions.map(&:film_id)
   end
 

@@ -12,9 +12,7 @@ module Api
         @user ||= user
       end
 
-
       protected 
-
       def user
         @user ||= User.find(params[:id])
       end

@@ -36,11 +36,11 @@ module Api
       end
 
       def user_action
-        params[:action_id].to_sym
+        params[:id].to_sym
       end
 
       def film 
-        @film ||= Film.find params[:id]
+        @film ||= Film.find params[:film_id]
       end
 
 

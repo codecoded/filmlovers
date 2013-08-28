@@ -33,13 +33,13 @@
           <section>
             <p class="title" data-section-title><a href="#panel1">Films</a></p>
             <div class="content" data-section-content>
-              <%= render partial: 'films', locals: {user_action: :watched, user: user} %>
+              <%= render partial: 'films/films', locals: {films: @films} %>
             </div>
           </section>
           <section>
             <p class="title" data-section-title><a href="#panel2">Recommendations</a></p>
             <div class="content" data-section-content>
-              <p>Recommendations</p>
+              <%= render partial: 'recommendations', locals: {presenter: presenter} %>
             </div>
           </section>
           <section>

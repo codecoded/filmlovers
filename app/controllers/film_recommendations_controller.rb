@@ -22,25 +22,13 @@ class FilmRecommendationsController < ApplicationController
   protected
 
   def friends
-    return current_user.friendships.confirmed.map &:friend
-    @friend ||= User.find(params[:friend_ids])
+    @friend ||= User.find(params[:friend_id])
   end
 
   def film
     @film ||= Film.find params[:id]
   end
 
-  # def recommendation
-  #   @recommendation ||= Recommendation.find params[:id]
-  # end
-
-  # def user_recommendations
-  #   @user_recommendations ||= current_user.recommendations.order_by(:created_at.desc).visible
-  # end
-
-  # def friends_recommmenations
-  #   @friends_recommmenations ||= current_user.recommended.unwatched
-  # end
 
   helper_method :user_recommendations, :friends_recommmenations
 end

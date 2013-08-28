@@ -3,9 +3,11 @@ module Api
     class FilmRecommendationsController < BaseController
 
       def index
+        @recommendations = current_user.recommendations.visible
       end
 
       def show
+        @sent = current_user.recommendations.
       end
 
       def create
@@ -28,6 +30,14 @@ module Api
         @film ||= Film.find params[:id]
       end
 
+      def user_recommendations
+        @user_recommendations ||= current_user.recommendations.order_by(:created_at.desc).visible
+      end
+
+      def friends_recommmenations
+        @friends_recommmenations ||= current_user.recommended.unwatched
+      end
+  
       helper_method :user_recommendations, :friends_recommmenations
     end
   end

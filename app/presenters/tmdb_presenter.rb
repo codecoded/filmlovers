@@ -9,24 +9,28 @@ class  TmdbPresenter < BasePresenter
   end
 
   def title_with_year
-    "#{film.title} - #{film.year}"
+    "#{film.title} - #{year}"
   end
 
   def year_and_director
     if !director.blank?
-      ("#{film.year} - Directed by " << link_to(director.name, person_path(director.id))).html_safe
+      ("#{year} - Directed by " << link_to(director.name, person_path(director.id))).html_safe
     else
-      film.year
+      year
     end
+  end
+
+  def year
+    film.year
   end
 
 
   def images?
-    film_details.images
+    film_details['images']
   end
 
   def images_library
-    @images = Images.new(film_details.images) if images?
+    @images = Images.new(film_details['images']) if images?
   end
 
   def poster_sizes
@@ -61,7 +65,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def backdrop_sizes
-    @backdrop_sizes  ||= {small: 'w90', medium: 'w185', large: 'w342', original: 'original'}
+    @backdrop_sizes  ||= {small: 'w300', medium: 'w780', large: 'w1280', original: 'original'}
   end
 
   def backdrops?
@@ -72,26 +76,25 @@ class  TmdbPresenter < BasePresenter
     images_library ? images_library.backdrops : []
   end
 
-  def backdrop_uri(size='original')
-    AppConfig.image_uri_for([size, backdrops[0]['file_path']]) if backdrops?
-  end
-
-  def backdrop(backdrop, size = 'w1280')
+  def backdrop(backdrop, size = :large)
     return unless backdrop
-    image_tag AppConfig.image_uri_for([size, backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
+    image_tag AppConfig.image_uri_for([backdrop_sizes[size], backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
   end
 
+  def backdrop_uri(size=:large)
+    AppConfig.image_uri_for([backdrop_sizes[size], backdrops[0]['file_path']]) if backdrops?
+  end
 
   def backdrops_urls_for(size)
-    backdrops.map {|b| AppConfig.image_uri_for [size, b['file_path']] } if backdrops?
+    backdrops.map {|b| AppConfig.image_uri_for [backdrop_sizes[size], b['file_path']] } if backdrops?
   end
 
   def homepage
     film_details.homepage
   end
 
-  def main_backdrop(size = 'w1280')
-    backdrop(backdrops[0]) if backdrops? 
+  def main_backdrop(size = :large)
+    backdrop(backdrops[0], size) if backdrops? 
   end
 
   def alternative_titles
@@ -269,7 +272,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def similar
-   @similar = similar_movies.map  do |f| 
+    @similar = similar_movies.map  do |f| 
       film = Tmdb::Movie.new(f)
       film unless film.not_allowed?
     end
@@ -310,7 +313,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def duration
-    film_details.runtime if film_details.runtime and film_details.runtime.to_i > 0  
+    film_details['runtime'] if film_details['runtime'] and film_details['runtime'].to_i > 0  
   end
 
   def popularity

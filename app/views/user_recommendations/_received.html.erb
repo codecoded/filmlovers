@@ -1,0 +1,38 @@
+<% present(film.details, film.details_presenter) do |presenter| %>
+  <li>
+    <div class="one columns">
+       <%= avatar user %>
+    </div>    
+    <div class="two columns">
+      <%= presenter.main_backdrop %>
+    </div>
+    <div class="six columns">
+      <%= link_to film_path(film), title: film.title do %>
+        <label class="title"><%= "#{film.title}" %></label>
+      <% end %>
+      <div class="film-summary" style="max-height:50px;overflow-y:hidden">
+        <p><%=presenter.overview 145%></p>
+      </div>
+      <div class="film-summary" style="display:none">
+        <p><%= presenter.overview %></p>
+        <p><%= presenter.year_and_director%></p>
+        <p><%= presenter.starring %></p>
+        <p><%= presenter.duration %> | <%= presenter.year %></p>
+      </div>
+      <%= link_to 'more info', 'javascript:void(0)', title: film.title, :class=>'overview-toggle' %>
+    </div> 
+    <div class="one columns pagination-centered shop" >
+        <%= render partial: 'shared/amazon_search', locals: {title: "#{film.title} #{film.year}"} %>
+        <%= render partial: 'shared/itunes', locals: {title: "#{film.title}"} %>
+    </div> 
+    <div class="two columns">
+      <div class="film-actions-vertical pagination-centered" >
+        <% [:watched, :loved, :owned].each do |action| %>
+          <button>
+            <%= action_icon action, film %>
+          </button>
+        <% end %>
+      </div>
+    </div>
+  </li>
+<% end %>

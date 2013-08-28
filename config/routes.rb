@@ -33,7 +33,7 @@ Filmlovers::Application.routes.draw do
       end      
       resources :users do
         resources :lists,         to: 'user_lists',         as: 'user_lists', :only => [:show, :index]
-        resources :films, only: [:index, :show], constraints: { :id => /watched|loved|owned/ }, as: 'films' do 
+        resources :films, only: [:index, :show], to: 'user_films', constraints: { :id => /watched|loved|owned/ }, as: 'films' do 
           member do 
             put     ':film_id',   to: 'user_films#update',  as: 'update'
             delete  ':film_id',   to: 'user_films#destroy', as: 'update'
@@ -141,7 +141,13 @@ Filmlovers::Application.routes.draw do
       end
     end
 
-    get 'recommendations',    to: 'users#show'
+    resources :recommendations, only: [:index], to: 'user_recommendations' do
+      collection do
+        get 'sent'
+        get 'received'
+      end
+    end
+
     resources :lists,         to: 'user_lists',         as: 'user_lists', :only => [:show, :index]
     match 'queue/:action',    to: "queue",              as: 'queue', :constraints => {:action => /list|recommend|show/},  via: :get
     # get '', to: 'show'

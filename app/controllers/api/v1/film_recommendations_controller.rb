@@ -21,8 +21,7 @@ module Api
       protected
 
       def friends
-        return current_user.friendships.confirmed.map &:friend
-        @friend ||= User.find(params[:friend_ids])
+        @friends ||= User.find(params[:friend_id])
       end
 
       def film

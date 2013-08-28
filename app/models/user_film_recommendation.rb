@@ -7,15 +7,19 @@ class UserFilmRecommendation
   end
 
   def recommend_to_friends(friends)
-    friends.map {|friend| recommend_to_friend(friend)}
+    friends.map {|friend| recommend_to_friend(friend)}.compact
   end
 
   def recommend_to_friend(friend)
-    recommendations.create(friend: friend, recommendable: film, auto: false) unless friend_actioned_film?(friend)
+    recommendations.create(friend: friend, recommendable: film, auto: false) if recommendable?(friend)
   end
 
-  def friend_actioned_film?(friend)
-    friend.film_user_actions.where(film_id: film.id).exists?
+  def recommendable?(friend)
+    confirmed_friends.include?(friend.id.to_s) and !friend.film_user_actions.where(film_id: film.id).exists? 
+  end
+
+  def confirmed_friends
+    @confirmed_friends ||= user.friendships.confirmed.map &:friend_id
   end
 
   def recommendations

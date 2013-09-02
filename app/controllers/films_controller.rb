@@ -61,18 +61,6 @@ class FilmsController < ApplicationController
     request.xhr? ? render('index', layout:nil) : render('index')
   end
 
-  def apply_film_filters(query)
-
-    if params[:year]
-      query = query.by_year params[:year] 
-    else
-      query = query.by_decade params[:decade] if params[:decade]
-    end
-
-    query = query.by_genres genre.name if genre
-    
-    query.without(:details, :providers)
-  end
 
   def film
     @film ||= Film.find(params[:id])

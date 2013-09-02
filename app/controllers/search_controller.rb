@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   respond_to :html, :json, :js
   
   def index
-    @results = page_results searcher.search, :popularity 
+    @results = page_results apply_film_filters(searcher.search), :popularity 
     render layout:nil if request.xhr?   
   end
 
@@ -11,8 +11,8 @@ class SearchController < ApplicationController
   end
 
   def smart
-    page_size = 50
-    @results = page_results searcher.search, :popularity  , :desc, page_size
+    page_size = 30
+    @results = page_results searcher.search, :popularity
 
     render json:[
       {
@@ -24,8 +24,7 @@ class SearchController < ApplicationController
         data:   @results.map do |film|
           {
             primary: film.title,
-            secondary: film.uk_release_date,
-            image: (film.poster('w45') if film.has_poster?)
+            secondary: film.release_date
           }
         end
         }

@@ -2,8 +2,12 @@
 <%if @searcher.postcode? %>
   <%= render partial: 'cinemas', object: @results %>
 <% else %>
-  <div class="row" id="">
-   <h2><%= "#{@results.count} films containing #{params[:query]}" %></h2>
+  <div class="full-row page-title">
+    <div class="row">
+      <div class="large-12 small-12 columns">
+        <h1><%= "#{@results.count} films containing #{params[:q]}" %></h1>
+      </div>
+    </div>
   </div>
   <%= render partial: 'films/films', locals: {films:  @results} %>
 <% end %>

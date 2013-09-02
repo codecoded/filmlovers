@@ -10,9 +10,15 @@ class ApplicationController < ActionController::Base
     query.order_by(sort_order).page(page_no).per page_size
   end
 
-  def page_film_entries(query, default_sort_order, page_size=AdminConfig.instance.page_size)
-    sort_order = sort_orders[sort_by || default_sort_order.to_s]
-    query.order_by(sort_order).page(page_no).per page_size
+
+  def apply_film_filters(query)
+    if params[:year]
+      query = query.by_year params[:year] 
+    else
+      query = query.by_decade params[:decade] if params[:decade]
+    end
+    query = query.by_genres genre.name if genre    
+    query.without(:details, :providers)
   end
 
   def page_no

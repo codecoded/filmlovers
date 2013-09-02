@@ -18,11 +18,15 @@ class FilmAction
   end
   
   def film
-    @film ||= Film.find(film_id)
+    film_entry.fetch_film
+  end
+
+  def user
+    @user ||= film_entry.fetch_user
   end
 
   def film_id
-    @film_id ||= film_entry.film['_id']
+    @film_id ||= film_entry.film_id
   end
 
   def incr_film_count

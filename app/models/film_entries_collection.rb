@@ -7,7 +7,7 @@ class FilmEntriesCollection
   end
 
   def entries
-    FilmEntry.where('user._id' => user.id)
+    FilmEntry.where(user_id: user.id)
   end
 
   def actioned

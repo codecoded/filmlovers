@@ -16,6 +16,9 @@ class Film
   embeds_one :counters, class_name: "FilmCounters", autobuild: true
   embeds_many :providers, class_name: 'FilmProvider'
 
+  index({ id: 1, release_date: -1, title: 1}, { unique: true, name: "film_index", background: true })
+  index({ 'details._id' => 1}, { unique: true, name: "film_details_index", background: true })
+  index "details.popularity" => -1
   # has_many :film_user_actions, validate: false, dependent: :destroy
   has_many :recommendations, as: :recommendable
 

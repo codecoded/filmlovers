@@ -13,7 +13,7 @@ class FilmEntry
   embeds_many :recommendations, class_name: "FilmRecommendation"
   embeds_many :actions,         class_name: "FilmAction"
 
-  index({ 'user_id'=> -1, 'film_id'=> 1 }, { unique: false, name: "film_entry_index", background: true })
+  index({ user_id: -1, film_id: 1 }, { unique: false, name: "film_entry_index", background: true })
 
   validates_presence_of   :user_id, message: 'A user id must be associated to a film entry'
   validates_presence_of   :film_id, message: 'A film id must be associated to a film entry'
@@ -32,7 +32,7 @@ class FilmEntry
   end
 
   def self.[](film)
-    find_by('film._id'=>film['_id']) || new
+    find_by(film_id: film['_id']) || new
   end
 
   def self.page_and_sort(sort_by=:recent, page_no=1, page_size=AdminConfig.instance.page_size)

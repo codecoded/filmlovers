@@ -1,9 +1,0 @@
-<div class="films_recently_actioned">
-  <% Films.recently_actioned(action, 5).each do |film| %>
-    <div class="film-small">
-      <%= link_to film do %>
-        <%= poster(film, 'w45') %>
-      <% end %>
-    </div>
-  <% end %>
-</div>

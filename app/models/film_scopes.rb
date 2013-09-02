@@ -2,7 +2,7 @@ module FilmScopes
   extend self
 
   def invalid
-    self.or({release_date: nil}, {_title_id: /^-/})
+    self.or({release_date: nil}, {_id: /^-/})
   end
 
   def adult

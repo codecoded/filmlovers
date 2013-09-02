@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :validate_current_user, :only => [:recommendations, :lists, :details, :settings]
-
+  before_filter :validate_username, :except => [:index]
   #layout 'layouts/user'
   def index
   end

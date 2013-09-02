@@ -28,16 +28,16 @@ class FilmEntry
   end
 
   def self.films
-    pluck(:film).map {|f| Film.new f}
+    only(:film).map {|f| Film.new f.film}
   end
 
   def self.[](film)
     find_by(film_id: film['_id']) || new
   end
 
-  def self.page_and_sort(sort_by=:recent, page_no=1, page_size=AdminConfig.instance.page_size)
+  def self.page_and_sort(sort_by=:recent_action, page_no=1, page_size=AdminConfig.instance.page_size)
     sort_order = sort_orders[sort_by.to_s]
-    Kaminari.paginate_array(order_by(sort_order).page(page_no).per(page_size).films).limit(30)
+    order_by(sort_order).page(page_no).per(page_size)
   end
 
   def fetch_film
@@ -97,7 +97,7 @@ class FilmEntry
   def self.sort_orders
     {
       'title'                 =>  ['film.title', :asc], 
-      'recent'                =>  [:updated_at, :desc],
+      'recent_action'         =>  ['actions.updated_at', :desc],
       'release_date'          =>  ['film.release_date', :desc],
       'earliest_release_date' =>  ['film.release_date', :asc]
     }

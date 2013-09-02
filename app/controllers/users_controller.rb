@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     (params[:id] || :watched).to_sym
   end
 
-  def order(default=:release_date)
+  def order(default=:recent_action)
     params[:order] || default
   end
 

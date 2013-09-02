@@ -1,33 +1,35 @@
-<% pagination ||= paginate @film_entries %>
+<% pagination ||= paginate films %>
 <div class="row margin-bottom" id="films-content">
   <div class="large-12 columns text-center">
     <%= pagination %>
   </div> 
-  <% @film_entries.each do |film_entry| %>
-    <%= div_for film_entry, class: 'large-2 small-6 columns' do %>
-      <%= content_tag :div, class: 'flip-container', data: {'film-url'=> film_path(presenter.film)} do %>
-        <div class="upper">
-           <%= presenter.poster %>
-        </div>
-        <div class="lower actions">
-          <% if logged_in? %>
-            <ul>
-              <li class="share"><a href="#">Share</a></li>
-              <li class="add"><a href="#">Add</a></li>            
-              <li class="shop"><a href="#">Shop</a></li>
-            </ul>
-          <% end %>
-          <p>
-            <%= link_to 'More Info', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
-            <%= link_to 'Trailer', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
-          </p>
-        </div>
-      <% end %>
-      <ul class="user-rankings">
-        <% [:watched, :loved, :owned].each do |action| %>
-            <%= presenter.action_list_item action, presenter.counter(action), true %>
+  <% films.films.each do |film| %>
+    <% present(film, FilmPresenter) do |presenter| %>
+      <%= div_for film, class: 'large-2 small-6 columns' do %>
+        <%= content_tag :div, class: 'flip-container', data: {'film-url'=> film_path(presenter.film)} do %>
+          <div class="upper">
+             <%= presenter.poster %>
+          </div>
+          <div class="lower actions">
+            <% if logged_in? %>
+              <ul>
+                <li class="share"><a href="#">Share</a></li>
+                <li class="add"><a href="#">Add</a></li>            
+                <li class="shop"><a href="#">Shop</a></li>
+              </ul>
+            <% end %>
+            <p>
+              <%= link_to 'More Info', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
+              <%= link_to 'Trailer', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
+            </p>
+          </div>
         <% end %>
-      </ul>
+        <ul class="user-rankings">
+          <% [:watched, :loved, :owned].each do |action| %>
+              <%= presenter.action_list_item action, presenter.counter(action), true %>
+          <% end %>
+        </ul>
+      <% end %>
     <% end %>
   <% end %>
   <div class="large-12 columns text-center">

@@ -77,5 +77,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_user, :user_service, :username, :logged_in?, :current_url
+  helper_method :current_user, :user_service, :username, :logged_in?, :current_url, :page_no
 end

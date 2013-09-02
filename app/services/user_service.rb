@@ -11,11 +11,11 @@ class UserService
   end
 
   def list_films(action)
-    user.actions_for(action).map &:film_id
+    user.find_film_entries_by(action).map &:film_id
   end
 
   def list_size(action)
-    user.actions_for(action).count
+    user.find_film_entries_by(action).count
   end
 
   # def paged_list(list, order=:release_date, by = :desc, page_no = 1, page_size = 20)

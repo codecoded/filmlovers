@@ -27,7 +27,7 @@
             <% [:watched, :loved, :owned].each do |action| %>
               <td>
                 <%= link_to user_film_path(friend, action), alt: action, title: action do %>
-                  <label style="display:inline"><%= friend.actions_for(action).count %> </label>
+                  <label style="display:inline"><%= friend.find_film_entries_by_action(action).count %> </label>
                  <% end %>              
               </td>   
             <% end %> 

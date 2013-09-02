@@ -1,0 +1,25 @@
+<% present(film_entry.fetch_film.details, film_entry.fetch_film.details_presenter) do |presenter| %>
+
+  <div class="large-2 small-6 columns">
+    <%= presenter.main_backdrop :small  %>
+    <%= "Recommended to #{pluralize film_entry.recommendations.sent.count, "friend"}" %>
+  </div>
+  <div class="large-10 columns">
+    <%= link_to film_path(presenter.film), title: presenter.title do %>
+      <label class="title"><%= "#{presenter.title}" %></label>
+    <% end %>
+
+    <div class="film-summary" >
+      <p><%= presenter.overview %></p>
+      <p><%= presenter.year_and_director%></p>
+      <p><%= presenter.starring %></p>
+      <p><%= presenter.duration %> | <%= presenter.year %></p>
+    </div>
+    <%#= link_to 'more info', 'javascript:void(0)', title: presenter.title, :class=>'overview-toggle' %>
+  </div> 
+<!--   <div class="one columns pagination-centered shop" >
+      <%#= render partial: 'adverts/amazon_search', locals: {title: "#{presenter.title} #{presenter.year}"} %>
+      <%#= render partial: 'adverts/itunes', locals: {title: "#{presenter.title}"} %>
+  </div>  -->
+
+<% end %>

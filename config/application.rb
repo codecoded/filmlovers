@@ -69,7 +69,7 @@ module Filmlovers
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.mongoid.observers = :film_user_action_observer, :user_observer, :recommendation_observer, :film_observer, :friendship_observer
+    config.mongoid.observers = :film_action_observer, :user_observer, :film_recommendation_observer, :film_observer, :friendship_observer
 
     Mongoid.raise_not_found_error = false
     Mongoid.protect_sensitive_fields = false

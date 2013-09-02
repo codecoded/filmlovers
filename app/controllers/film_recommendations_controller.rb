@@ -1,34 +1,39 @@
 class FilmRecommendationsController < ApplicationController
 
   def index
-  end
-
-  def show
+    current_user.films.recommended
   end
 
   def create
-
+    return head 400 if friend_ids.nil?
+    @recommendations = film_entry.recommend_to(friendships.where(:friend_id.in => friend_ids)).compact
   end
 
-  def update
-    UserFilmRecommendation.new(current_user, film).recommend_to_friends(friends)
-  end
-
-  def destroy
-    recommendation.unrecommend!
-    render nothing: true
+  def new
   end
 
   protected
 
-  def friends
-    @friend ||= User.find(params[:friend_id])
+  def film_recommendation
+    params[:id] ? film_entry.find_by(recommendations: params[:id]) : film_entry.recommendations.new
+  end
+
+  def friendships
+    @friendships ||= film_entry.new_recommendation_friends
+  end
+
+  def film_entry
+    @film_entry ||= current_user.films.find_or_create(film)
+  end
+
+  def friend_ids
+    params[:friend_id]
   end
 
   def film
-    @film ||= Film.find params[:id]
+    @film ||= Film.find params[:film_id]
   end
 
+  helper_method :friendships, :film, :film_recommendation
 
-  helper_method :user_recommendations, :friends_recommmenations
 end

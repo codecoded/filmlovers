@@ -6,19 +6,18 @@ class FilmPresenter < BasePresenter
 
   def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?, :year
 
-  def user_actions
-    @user_actions ||= current_user.film_user_actions.where(film: film).distinct(:action)
+  def film_entry
+    @film_entry ||= current_user.films.find film
   end
 
-
-  def action_count(action)
-    film.actions_for(action).count
+  def film_actions
+    @film_actions ||= film_entry.actions
   end
 
   def action_list_item(action, text, is_counter = false)
     actioned = user_actioned? action
     action_css = actioned ? 'complete' : nil 
-    url = current_user ? update_user_film_path(current_user, action, film) : '#'
+    url = current_user ? film_action_path(film, action) : '#'
     method =  actioned ? :delete : :put
     css = "#{action} #{action_css}"  
     content_tag :li, :class => css  do
@@ -31,7 +30,7 @@ class FilmPresenter < BasePresenter
   end
 
   def user_actioned?(action)
-    current_user ? user_actions.include?(action) : false
+    current_user and film_entry ? film_actions.actioned?(action) : false
   end
 
   def release_date
@@ -54,10 +53,19 @@ class FilmPresenter < BasePresenter
     image_tag "placeholder.jpg", :title=>film.title, alt: "poster for #{film.title}"
   end
 
+  def poster_sizes
+    @poster_sizes  ||= {small: 'w90', medium: 'w185', large: 'w342', original: 'original'}
+  end
+
+  def poster_uri(size=:medium)
+    return film.poster if (film.poster =~ /http/)
+    AppConfig.image_uri_for [poster_sizes[size], film.poster] if film.poster?
+  end
+
   def poster
     return blank_poster unless film.poster?
     image_src = case film.details_provider.to_sym
-      when :tmdb then AppConfig.image_uri_for ['w185', film.poster]
+      when :tmdb then poster_uri
       else film.poster
     end
 
@@ -69,7 +77,15 @@ class FilmPresenter < BasePresenter
   end
 
   def counter(action)
-    film.counters[action]
+    film_counters[action]
+  end
+
+  def film_counters
+    @film_counters ||= if film.counters.new_record?
+        Film.find(film.id).counters
+      else
+        film.counters
+      end
   end
 
 end

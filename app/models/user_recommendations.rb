@@ -19,7 +19,7 @@ class UserRecommendations
   end
 
   def watched_films
-    @watched_films ||= user.actions_for(:watched).map(&:film_id)
+    @watched_films ||= user.find_film_entries_by(:watched).map(&:film_id)
   end
 
   def recommendations

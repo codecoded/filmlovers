@@ -6,7 +6,7 @@
         <%= presenter.action_list_item :loved, 'Loved' %>
         <%= presenter.action_list_item :owned, 'Own' %>
         <li class="add"><a href="#">Add</a></li>
-        <li class="share"><%= link_to 'Share', film_recommendation_path(film), method: 'put' %></li>
+        <li class="share"><%= link_to 'Share', film_recommendation_path(film), method: 'get' %></li>
       </ul>
     </div>
   <% end %>

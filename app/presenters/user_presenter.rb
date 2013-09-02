@@ -9,9 +9,8 @@ class UserPresenter < BasePresenter
     actions.where(action: action).count
   end
 
-
   def actions
-    @actions ||= user.film_user_actions
+    @actions ||= user.film_entries
   end
 
   def avatar_url
@@ -39,13 +38,12 @@ class UserPresenter < BasePresenter
     image_tag "content/hero-image-ironman.jpg", size:"1600x648"
   end
 
-
-  def user_recommendations
-    @user_recommendations ||= user.recommendations.order_by(:created_at.desc).visible
+  def sent_film_recommendations
+    user.films.recommended.where('recommendations.sent'=> true )
   end
 
-  def friends_recommmenations
-    @friends_recommmenations ||= user.recommended.unwatched
+  def received_film_recommmenations
+    user.films.recommended.where('recommendations.sent'=> false )
   end
 
 end

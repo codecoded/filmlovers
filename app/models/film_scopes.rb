@@ -2,7 +2,11 @@ module FilmScopes
   extend self
 
   def invalid
-    self.or({release_date: nil}, {_title_id: /^-*/})
+    self.or({release_date: nil}, {_title_id: /^-/})
+  end
+
+  def adult
+    where('details.adult' => true)
   end
 
   def by_provider(name)
@@ -46,37 +50,6 @@ module FilmScopes
     # ids <<  Rotten::Movies.upcoming.map(&:film_id).compact.uniq
     # Film.in id: ids.flatten
   end
-
-  def adult
-    where('detail.adult' => true)
-  end
-
-
-  # def actioned(action,count=0)
-  #   ids = Films[action].
-  #         order_by([:updated_at.desc]).
-  #         group_by(&:film_id).
-  #         map{|film_id, films| {id: film_id, score: films.length}}.
-  #         take(count).map {|film| film[:id]}
-  # end
-
-  # def recently_actioned(action,count=0)
-  #   ids = Films[action].
-  #         order_by([:updated_at.desc]).
-  #         group_by(&:film_id).
-  #         map{|film_id, actions| {id: film_id, score: actions.length}}.
-  #         take(count).map {|film| film[:id]}
-  # end
-
-  # def recent(count=5)
-  #   ids = FilmUserAction.
-  #       order_by([:updated_at.desc]).
-  #       group_by(&:film_id).
-  #       map{|film_id, actions| {id: film_id, score: actions.length}}.
-  #       take(count).
-  #       map {|film| film[:id]}
-  # end
-
 
   # def cast_search(name)
   #   Film.only(:poster_path, :name, :title, :release_date, :trailers).where('casts.cast.name'=>/#{name}/i)

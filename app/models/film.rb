@@ -1,6 +1,5 @@
 class Film
   extend FilmScopes
-
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -17,7 +16,7 @@ class Film
   embeds_one :counters, class_name: "FilmCounters", autobuild: true
   embeds_many :providers, class_name: 'FilmProvider'
 
-  has_many :film_user_actions, validate: false, dependent: :destroy
+  # has_many :film_user_actions, validate: false, dependent: :destroy
   has_many :recommendations, as: :recommendable
 
   def self.create_uuid(title, year)
@@ -28,8 +27,12 @@ class Film
     find_by('providers.name'=> name.to_s, 'providers._id' => id)
   end
 
+  def entries
+    @entries ||= FilmEntry.where('film._id' => self.id)
+  end
+
   def actions_for(action)
-    film_user_actions.where(action: action)
+    entries.find_by_action(action)
   end
   
   def year
@@ -99,6 +102,9 @@ class Film
     self
   end
 
+  def to_param
+    id
+  end
 
   def method_missing(method, *args)
     details ? details.send(method, args) : super

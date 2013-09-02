@@ -1,4 +1,4 @@
-
+<% if viewing_own? %>
 <div class="row">
   <div class="four columns">
     <dl class="sub-nav">
@@ -10,6 +10,7 @@
     </dl>
   </div>
 </div>
+<% end %>
 <div class="twelve columns">
 
   <table class="friends">
@@ -22,7 +23,7 @@
         <th>Owned</th>
         <th>Lists</th>
         <th>Rating</th>
-        <th>Actions</th>
+         <% if viewing_own? %><th>Actions</th><% end %>
       </tr>
     </thead>
     <tbody>
@@ -39,8 +40,8 @@
           </td>
           <% [:watched, :loved, :owned].each do |action| %>
             <td>
-              <%= link_to user_film_path(friendship.friend, action) do %>
-                <label style="display:inline"><%= friendship.friend.actions_for(action).count %> </label>
+              <%= link_to user_film_entry_path(friendship.friend, action) do %>
+                <label style="display:inline"><%= friendship.friend.films[action].count %> </label>
                <% end %>              
             </td>   
           <% end %> 
@@ -52,9 +53,11 @@
           <td>
            <%= number_to_percentage(current_user.compare_to(friendship.friend).overall, precision: 1) %>
           </td>
-          <td>
-            <%= render partial: "friendships/#{friendship.state}", locals: {friend: friendship.friend} %>            
-          </td>
+          <% if viewing_own? %>
+            <td>
+              <%= render partial: "friendships/#{friendship.state}", locals: {friend: friendship.friend} %>            
+            </td>
+          <% end %>
         </tr>
         <% end %>
       <% end %>

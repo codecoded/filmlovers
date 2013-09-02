@@ -1,0 +1,29 @@
+  <div class="full-row page-title">
+    <div class="row">
+      <div class="large-12 small-12 columns">
+        <h1><%= "Recommend: #{film.title}" %></h1>
+      </div>
+    </div>
+  </div>
+  <div class="full-row margin-bottom">
+    <div class="row">
+      <%= simple_form_for(film_recommendation, as: :film_recommendation,  url: film_recommendation_path(film), html: { method: :post, id: 'newFilmRecommendationsForm'}) do |f| %>
+        <% friendships.each do |friendship| %>
+          <% present(friendship.friend, UserPresenter) do |presenter| %>
+            <div class="large-3 small-6 columns text-center">
+              <div class="character">
+                <h5>Friend</h5>
+                <p><%= presenter.username %></p>
+              </div>
+              <div>
+                <%= presenter.avatar %>
+                <%= check_box_tag('friend_id[]', presenter.user.id)  %>
+              </div>             
+            </div>
+          <% end %>
+         
+        <% end %>
+         <%= f.submit %>
+      <% end %>
+    </div>
+  </div>

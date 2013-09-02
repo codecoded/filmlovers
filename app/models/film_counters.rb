@@ -21,7 +21,7 @@ class FilmCounters
 
   def to_json
     {
-      film_id: film._title_id,
+      film_id: film.id,
       watched: watched,
       loved: loved,
       owned: owned

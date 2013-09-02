@@ -64,15 +64,12 @@ class User
   field :first_name
   field :last_name
   field :name
-  # field :email
-  # field :email
   field :gender
   field :dob, type: DateTime
 
-  has_many :film_user_actions, validate: false, dependent: :destroy
-  has_many :recommendations
+  # has_many :film_user_actions, validate: false, dependent: :destroy
+  # has_many :recommendations
   has_many :facebook_events
-
 
   attr_accessible :avatar, :username, :email, :first_name, :last_name, :password, :confirm_password
   mount_uploader :avatar, AvatarUploader  
@@ -81,6 +78,8 @@ class User
   embeds_many :films_lists
   embeds_many :passports
   embeds_many :friendships
+  # embedded_in :film_entry
+
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
   def self.from_omniauth(auth)
@@ -93,6 +92,10 @@ class User
   def self.find_by_passport(passport)
     user = User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first
     user ? user : User.new(passports:[passport])
+  end
+
+  def self.fetch(id)
+     BSON::ObjectId.legal?(id) ? User.find(id) : User.find_by(username: id)
   end
 
   def upsert_passport(passport)
@@ -133,14 +136,6 @@ class User
      !username.blank? 
   end
 
-  def actions_for(action)
-    film_user_actions.where(action: action)
-  end
-
-  def film_actioned?(film, action)
-    film_user_actions.where(film: film, action: action).exists?
-  end
-
   def friendship_with(user)
     friendships.find_by(friend_id: user.id)
   end
@@ -158,25 +153,14 @@ class User
     Facebook::UserAPI.new @facebook
   end
 
-  def recommended
-    @recommended ||= UserRecommendations.new self
-  end
-  
   def notifier
     @notifier ||= UserNotifier.new(self)
   end
 
   def films
-    @film ||= UserFilms.new self
+    @film ||= FilmEntriesCollection.new self
   end
-  # def logged_in
-  #   sign_in_count = sign_in_count ? sign_in_count+=1 : 1
-  #    last_sign_in_at = current_sign_in_at
-  #   current_sign_in_at = Time.now.utc
-   
-  #   save
-  # end
-
+  
   def notify(notification)
     notifier.message notification
   end

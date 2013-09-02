@@ -3,9 +3,8 @@ object false
 extends 'api/v1/shared/header'
 
 node :recommendations do
-  received.map do |recommendation|
-    next unless recommendation.recommendable
-    film_presenter = present(recommendation.recommendable.details, recommendation.recommendable.details_presenter)
+  @sent.map do |recommendation|
+    film_presenter = present(recommendation.film.details, recommendation.film.details_presenter)
     friend_presenter = present(recommendation.friend, UserPresenter)
     {      
       film:{

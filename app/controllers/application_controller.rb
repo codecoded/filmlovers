@@ -1,17 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :facebook_authenticate
-  skip_before_filter :facebook_authenticate, if: -> {params[:signed_request].nil?}
-
-  # def facebook_authenticate
-  #   return if params[:signed_request] ? facebook_authenticate : logged_in?
-  #   redirect_to_auth
-  # end
+  before_filter :facebook_authenticate, unless: -> {params[:signed_request].nil?}
 
   protected
 
   def page_results(query, default_sort_order, page_size=AdminConfig.instance.page_size)
+    sort_order = sort_orders[sort_by || default_sort_order.to_s]
+    query.order_by(sort_order).page(page_no).per page_size
+  end
+
+  def page_film_entries(query, default_sort_order, page_size=AdminConfig.instance.page_size)
     sort_order = sort_orders[sort_by || default_sort_order.to_s]
     query.order_by(sort_order).page(page_no).per page_size
   end

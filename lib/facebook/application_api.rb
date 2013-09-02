@@ -15,6 +15,8 @@ class Facebook::ApplicationAPI
 
   def self.notifications(recipient_uid, href, template, ref=nil)
     instance.graph.put_connections recipient_uid, 'notifications', template: template, href: href, ref: ref
+  rescue Exception => e
+    Log.error e.message
   end
 
   def delete_request(request_id)

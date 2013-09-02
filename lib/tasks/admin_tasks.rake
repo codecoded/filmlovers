@@ -83,6 +83,7 @@ namespace :admin do
   desc "Migrate FilmUser Actions"
   task :migrate_actions => :environment do
     FilmUserAction.each {|fua| film = Film.find_by('details._id' => fua.film_id); fua.update_attribute(:film_id, film.id) if film}
+    FilmUserAction.each {|fua| fe = FilmEntry.fetch_for(fua.user, fua.film) if (fua.user and fua.film); fe.do_action(fua.action) if fe}
   end
 
   desc "Migrate providers"

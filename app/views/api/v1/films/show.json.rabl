@@ -7,17 +7,17 @@ end
 presenter = present(@film.details, @film.details_presenter)
 
 node :film do 
-  user_actions = current_user.film_user_actions.where(film_id: presenter.film.id).distinct(:action) if current_user
+  film_entry = current_user.films.find(@film) if current_user
   {
     user: if current_user
     {
       actions: {
-        loved: user_actions ? user_actions.include?(:loved) : false,
-        loved_url: update_api_v1_user_film_path(current_user.id, :loved, @film.id ),
-        watched: user_actions ? user_actions.include?(:watched) : false,
-        watched_url: update_api_v1_user_film_path(current_user.id, :watched, @film.id,),
-        owned: user_actions ? user_actions.include?(:owned) : false,
-        owned_url: update_api_v1_user_film_path(current_user.id, :owned, @film.id),
+        loved: film_entry ? film_entry.actioned?(:loved) : false,
+        loved_url: api_v1_film_action_path(current_user.id, :loved, @film.id ),
+        watched: film_entry ? film_entry.actioned?(:watched) : false,
+        watched_url: api_v1_film_action_path(current_user.id, :watched, @film.id,),
+        owned: film_entry ? film_entry.actioned?(:owned) : false,
+        owned_url: api_v1_film_action_path(current_user.id, :owned, @film.id),
       }
     } 
     end,

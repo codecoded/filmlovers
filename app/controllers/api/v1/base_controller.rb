@@ -8,7 +8,6 @@ module Api
       before_filter :skip_trackable, :authenticate
       
       protected
-
       def authenticate
         if user = authenticate_with_http_token { |token, options| User.find_by authentication_token: token }
           @current_user = user
@@ -18,7 +17,6 @@ module Api
       def current_user
         @current_user
       end
-
 
       def find_films(query, sort_by=:popularity)
         @films = page_results query, sort_by
@@ -38,24 +36,25 @@ module Api
       end
 
       def page_size
-        20
+        @page_size ||= 20
       end
 
       def page_no
-        params[:page] ? params[:page].to_i : 1
+        @page_no ||= params[:page] ? params[:page].to_i : 1
       end
 
       def by
-        params[:by] || :desc
+        @by ||= params[:by] || :desc
       end
 
       def sort_by
-        params[:sort_by]
+        @sorty_by ||= params[:sort_by]
       end
 
       def sort_orders
         {
           'title'                 =>  [:title, :asc], 
+          'recent'                =>  [:updated_at, :desc],
           'release_date'          =>  [:release_date, :desc],
           'earliest_release_date' =>  [:release_date, :asc],
           'popularity'            =>  ['details.popularity', :desc],
@@ -64,8 +63,6 @@ module Api
           'owned'                 =>  ['counters.owned', :desc] 
         }
       end
-
-
       helper_method :current_user, :page_no, :by, :order, :page_size, :sort_by
     end
   end

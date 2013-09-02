@@ -30,7 +30,7 @@ class UserComparison
 
   def films_set(user, action)
     Rails.cache.fetch "#{user.username}_#{action}_count", expires_in: 10.minutes do
-      user.actions_for(action).map(&:film_id).to_set
+      user.films[action].map {|fe| fe.film['_id']}.to_set
     end
   end
 

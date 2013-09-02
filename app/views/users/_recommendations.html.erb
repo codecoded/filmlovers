@@ -4,21 +4,21 @@
     <div class="inner-tabs">
       <div class="section-container auto" data-section>
         <section>
-          <p class="title" data-section-title><a href="#panel10"><%= "Friends recommend (#{presenter.friends_recommmenations.count})" %></a></p>
+          <p class="title" data-section-title><a href="#panel10"><%= "Friends recommend (#{presenter.received_film_recommmenations.count})" %></a></p>
           <div class="content" data-section-content>
             <ol >
-              <% presenter.friends_recommmenations.each do |recommendation| %>
-                <%= render partial: 'user_recommendations/received', locals: {film: recommendation.recommendable, user: recommendation.user, recommendation: recommendation} %>
+              <% presenter.received_film_recommmenations.each do |film_entry| %>
+                <%= render partial: 'film_recommendations/sent', locals: {film_entry: film_entry} %>
               <% end %>
             </ol>
           </div>
         </section>
         <section>
-          <p class="title" data-section-title><a href="#panel11"><%= "You recommend (#{presenter.user_recommendations.count})" %></a></p>
+          <p class="title" data-section-title><a href="#panel11"><%= "You recommend (#{presenter.sent_film_recommendations.count})" %></a></p>
           <div class="content" data-section-content>
             <ol >
-              <% presenter.user_recommendations.each do |recommendation| %>
-                <%= render partial: 'user_recommendations/sent', locals: {film: recommendation.recommendable, user: recommendation.friend, recommendation: recommendation} %>
+              <% presenter.sent_film_recommendations.each do |film_entry| %>
+                <%= render partial: 'film_recommendations/sent', locals: {film_entry: film_entry} %>
               <% end %>
             </ol>
           </div>

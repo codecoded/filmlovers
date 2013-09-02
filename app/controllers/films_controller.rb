@@ -51,11 +51,6 @@ class FilmsController < ApplicationController
     render_films Film.by_provider(:rotten), :popularity
   end
 
-  def users
-    @users = film.actions_for(user_action).map &:user
-    params[:view] = 'users'
-    render 'show'
-  end
 
   protected
 
@@ -84,7 +79,7 @@ class FilmsController < ApplicationController
   end
 
   def user_action
-    params[:user_action].to_sym if params[:user_action]
+    params[:action_name].to_sym if params[:action_name]
   end
 
   helper_method :user_action, :film

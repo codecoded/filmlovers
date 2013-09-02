@@ -4,7 +4,7 @@ gem 'rails'
 gem 'thin'
 gem 'nokogiri'
 gem 'google_movies'
-gem 'unicorn'
+# gem 'unicorn'
 gem 'omniauth-facebook'#, '1.4.0'
 gem 'omniauth-netflix'
 gem "omniauth-google-oauth2"

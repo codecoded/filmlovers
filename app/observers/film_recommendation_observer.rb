@@ -10,6 +10,7 @@ class FilmRecommendationObserver < Mongoid::Observer
   end
 
   def after_receive(film_recommendation, transition)
+    push_notification film_recommendation
     create_facebook_notification film_recommendation
   end
 
@@ -20,6 +21,11 @@ class FilmRecommendationObserver < Mongoid::Observer
     message = FacebookPresenter.recommendation_message recommendation
     friend.facebook.notifications Utilities.url_helpers.film_path(recommendation.film)[1..-1], message, "recommendation"
     friend.facebook_events.create content: message, event_type: :notification
+  end
+
+  def push_notification(film_recommendation)
+    Log.debug "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}"
+    film_recommendation.user.notifier.toast "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}"
   end
 
 end

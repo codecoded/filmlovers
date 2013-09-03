@@ -32,7 +32,7 @@ module FilmScopes
   end
 
   def search(query, field=:title)
-    self.or({title: /#{query}/i})
+    self.where({title: /#{query}/i})
   end 
 
   def in_cinemas

@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   respond_to :html, :json, :js
   
   def index
-    @results = page_results apply_film_filters(searcher.search), :popularity 
+    @results = page_results apply_film_filters(Film.search(query)), :title 
     render layout:nil if request.xhr?   
   end
 
@@ -12,7 +12,7 @@ class SearchController < ApplicationController
 
   def smart
     page_size = 30
-    @results = page_results searcher.search, :popularity
+    @results = page_results searcher.search, :title
 
     render json:[
       {

@@ -65,5 +65,6 @@ Filmlovers::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  Rails.logger = Logger.new(STDOUT)
+  Mongoid.logger.level = Logger::DEBUG
+  Moped.logger.level = Logger::DEBUG
 end

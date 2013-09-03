@@ -23,12 +23,14 @@ module Api
       end
 
       def film 
-        @film ||= Film.find params[:film_id]
+        @film||=Film.find params[:film_id]
       end
 
       def action_id
         params[:id].to_sym
       end
+
+      helper_method :film_entry
     end
   end
 end

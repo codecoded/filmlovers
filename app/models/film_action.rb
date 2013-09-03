@@ -14,7 +14,7 @@ class FilmAction
   set_callback :destroy,  :after, :decr_film_count 
 
   def self.actioned?(action)
-    where(action: action).exists?
+    where(action: action.to_sym).exists?
   end
   
   def film

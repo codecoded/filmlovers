@@ -15,6 +15,10 @@ class FilmCounters
     end
   end
 
+  def [](action_id)
+    send action_id
+  end
+
   def set(action, score)
     update_attribute action, score
   end

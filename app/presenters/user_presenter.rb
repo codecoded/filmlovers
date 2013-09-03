@@ -10,7 +10,7 @@ class UserPresenter < BasePresenter
   end
 
   def actions
-    @actions ||= user.film_entries
+    @actions ||= user.films.entries
   end
 
   def avatar_url

@@ -380,7 +380,7 @@ p.forgotten {
   -ms-transition: background-color 300ms ease-out 0s;
 }
 
-#panelssignup, #panelssignin, #panelssearch, #panelsfilms, #panelslowersignup {
+#panelssignup, #panelssignin, #panelssearch, #panelsfilms, #panelslowersignup, #panelsprofile {
   display: none;
 }
 

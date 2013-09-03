@@ -59,7 +59,7 @@
           <h4>Genres</h4>
           <ul class="button-list">
             <% presenter.genres.each do |genre| %>
-              <li> <%= link_to genre.name, category_films_path(action: :popular, genres: genre), alt: "view films in genre category #{genre}"  %></li>
+              <li> <%= link_to genre, category_films_path(action: :popular, genres: genre), alt: "view films in genre category #{genre}"  %></li>
             <% end %>
           </ul>
         </div>

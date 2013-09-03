@@ -14,6 +14,8 @@ class FilmEntry
   embeds_many :actions,         class_name: "FilmAction"
 
   index({ user_id: -1, film_id: 1 }, { unique: false, name: "film_entry_index", background: true })
+  index({ actions: 1 }, { unique: false, name: "film_actions_index", background: true })
+  index({ "actions.updated_at" => 1 }, { unique: false, name: "film_actions_updated_at_index", background: true })
 
   validates_presence_of   :user_id, message: 'A user id must be associated to a film entry'
   validates_presence_of   :film_id, message: 'A film id must be associated to a film entry'

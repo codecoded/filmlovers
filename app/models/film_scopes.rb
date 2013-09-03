@@ -24,7 +24,7 @@ module FilmScopes
   end
 
   def by_genres(genres)
-    any_in('details.genres.name' => genres)
+    any_in(genres: genres)
   end
 
   def by_counter(name)

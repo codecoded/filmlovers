@@ -11,16 +11,22 @@ class Film
   field :poster,                type: String
   field :trailer,               type: String
   field :details_provider,      type: String,   default: :tmdb
+  field :genres,                type: Array
+  field :popularity,            type: Float
 
   embeds_one :details, class_name: "FilmDetails", autobuild: true
   embeds_one :counters, class_name: "FilmCounters", autobuild: true
   embeds_many :providers, class_name: 'FilmProvider'
 
-  index({ id: 1, release_date: -1, title: 1}, { unique: true, name: "film_index", background: true })
+  index({ release_date: -1 }, { unique: false, name: "film_release_date_index", background: true })
+  index({ title: -1 }, { unique: true, name: "film_title_index", background: true })
+  index({ genres: -1 }, { unique: false, name: "film_genres_index", background: true })
+  index({ popularity: -1 }, { unique: false, name: "film_popularity_index", background: true })
   index({ 'details._id' => 1}, { unique: true, name: "film_details_index", background: true })
-  index "details.popularity" => -1
-  # has_many :film_user_actions, validate: false, dependent: :destroy
-  has_many :recommendations, as: :recommendable
+
+  index({ 'counters.watched'=> -1 }, { unique: false, name: "film_counters_watched", background: true })
+  index({ 'counters.loved'  => -1 }, { unique: false, name: "film_counters_loved", background: true })
+  index({ 'counters.owned'  => -1 }, { unique: false, name: "film_counters_owned", background: true })
 
   def self.create_uuid(title, year)
     "#{title.gsub("'","").parameterize}-#{year}" 

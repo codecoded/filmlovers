@@ -57,7 +57,7 @@ module Api
           'recent'                =>  [:updated_at, :desc],
           'release_date'          =>  [:release_date, :desc],
           'earliest_release_date' =>  [:release_date, :asc],
-          'popularity'            =>  ['details.popularity', :desc],
+          'popularity'            =>  [:popularity, :desc],
           'watched'               =>  ['counters.watched', :desc], 
           'loved'                 =>  ['counters.loved', :desc],
           'owned'                 =>  ['counters.owned', :desc] 

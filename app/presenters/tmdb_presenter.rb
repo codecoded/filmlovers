@@ -164,7 +164,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def genres
-    film_details.genres.map {|g| Genre.find_by_id(g['id'])}
+    film.genres
   end
 
   def other_links

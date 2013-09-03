@@ -59,6 +59,7 @@ namespace :admin do
     Log.info "Updating films in cinemas done. There are #{FilmCollection.in_cinemas.film_ids.count} films found in cinemas"
   end
 
+# remember to rename collection and create index and disable IMDB lookup
   desc "Migrate Movies to films"
   task :migrate_movies => :environment do
     Movie.each do |m| 
@@ -71,8 +72,9 @@ namespace :admin do
         poster: m.poster_path, 
         counters: m.counters, 
         details: m, 
+        genres: if m.genres? then  m.genres.map{|g| g['name']} end,
+        popularity: m['popularity'],
         trailer: m.trailer)
-
       film.providers.build(name: :imdb, id: m.imdb_id) if m.imdb_id
       film.providers.build(name: :tmdb, id: m.id, fetched_at: Time.now.utc, link: "http://www.themoviedb.org/movie/#{m.id}", rating: m['vote_average'])
       film.save
@@ -82,13 +84,28 @@ namespace :admin do
 
   desc "Migrate FilmUser Actions"
   task :migrate_actions => :environment do
-    FilmUserAction.each {|fua| film = Film.find_by('details._id' => fua.film_id); fua.update_attribute(:film_id, film.id) if film}
-    FilmUserAction.each {|fua| fe = FilmEntry.fetch_for(fua.user, fua.film) if (fua.user and fua.film); fe.do_action(fua.action) if fe}
+    FilmUserAction.order_by(:film_id, :asc).each do |fua| 
+      film = Film.find_by('details._id' => fua.film_id)
+      next unless film
+      fua.update_attribute(:film_id, film.id) if film
+      fe = FilmEntry.fetch_for(fua.user, film) if fua.user
+      fe.do_action(fua.action) if fe
+    end
   end
 
   desc "Migrate providers"
   task :migrate_providers => :environment do
     Film.ne('details.imdb_id' => nil).each {|f| f.provider_by(:imdb, f.details.imdb_id).save!}
+  end
+
+  desc "Migrate Genres"
+  task :migrate_genres => :environment do
+    Film.each {|f| f.update_attribute(:genres, f.details['genres'].map {|g| g['name']}) if f.details and f.details['genres']}
+  end
+
+  desc "Migrate Popularoty"
+  task :migrate_genres => :environment do
+    Film.each {|f| f.update_attribute(:popularity, f.details['popularity']) if f.details and f.details['popularity']}
   end
 
   desc "download netflix db"

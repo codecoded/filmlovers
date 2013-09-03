@@ -15,6 +15,7 @@ class FilmObserver < Mongoid::Observer
   end
 
   def update_imdb_info(film)
+    return
     imdb_provider = film.provider_for :imdb
 
     unless imdb_provider 

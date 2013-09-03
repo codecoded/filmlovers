@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     else
       query = query.by_decade params[:decade] if params[:decade]
     end
-    query = query.by_genres genre.name if genre    
+    query = query.by_genres genre if genre    
     query.without(:details, :providers)
   end
 
@@ -30,16 +30,16 @@ class ApplicationController < ActionController::Base
   end
 
   def genre
-    @genre ||= Genre.find_by_name params[:genres]
+    @genre ||= params[:genres]
   end
 
 
   def sort_orders
     {
-      'title'                 =>  [:title, :asc], 
+      'title'                 =>  [:_id, :asc], 
       'release_date'          =>  [:release_date, :desc],
       'earliest_release_date' =>  [:release_date, :asc],
-      'popularity'            =>  ['details.popularity', :desc],
+      'popularity'            =>  [:popularity, :desc],
       'watched'               =>  ['counters.watched', :desc], 
       'loved'                 =>  ['counters.loved', :desc],
       'owned'                 =>  ['counters.owned', :desc] 

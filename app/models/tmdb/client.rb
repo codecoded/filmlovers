@@ -17,9 +17,9 @@ module Tmdb
       
       def genre(id, options={})
         cache_key = "genre_#{id}_page_" + (options[:page].to_s || '1')
-        Rails.cache.fetch cache_key, expires_in: 4.hours  do
+        # Rails.cache.fetch cache_key, expires_in: 4.hours  do
           request "genre/#{id}/movies", options
-        end
+        # end
       end
 
       def movie(id, with_attributes=[:all])

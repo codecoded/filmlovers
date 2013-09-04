@@ -28,8 +28,8 @@ module Api
       end
 
       def destroy
-        friendship.delete
-        friend.friendship_with(current_user).delete
+        friendship.friend.friendship_with(current_user).delete
+        friendship.delete        
         head 200
       end
 
@@ -48,11 +48,11 @@ module Api
       end
 
       def friendship
-        @friendship ||= current_user.friendship_with(friend)
+        @friendship ||= friendships.find(params[:id])
       end
 
       def friend
-        @friend ||= User.find_by username: params[:id]
+        @friend ||= User.fetch(params[:id])
       end
 
       def filter

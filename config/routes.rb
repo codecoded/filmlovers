@@ -50,7 +50,7 @@ Filmlovers::Application.routes.draw do
         end
       end 
 
-      resources 'friendships', constraints: { :id => /.*/ } do
+      resources 'friendships' do
         member do
           put ':change_action', to: 'friendships#change', as: 'change', constraints: {type: /confirm|ignore/}
         end

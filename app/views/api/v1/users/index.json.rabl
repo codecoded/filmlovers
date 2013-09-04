@@ -34,9 +34,14 @@ node :users do
       {
         id: presenter.current_friendship.id,
         cancel: if presenter.current_friendship.requested? then api_v1_friendship_path(presenter.current_friendship) end,
-        confirm: if presenter.current_friendship.received? then change_api_v1_friendship(presenter.current_friendship, :confirm) end,
-        ignore: if presenter.current_friendship.received? then change_api_v1_friendship(presenter.current_friendship, :ignore) end,
+        confirm: if presenter.current_friendship.received? then change_api_v1_friendship_path(presenter.current_friendship, :confirm) end,
+        ignore: if presenter.current_friendship.received? then change_api_v1_friendship_path(presenter.current_friendship, :ignore) end,
         state: presenter.current_friendship.state
+      }
+      else
+      {
+        state: nil,
+        request: api_v1_friendship_path(user.id)
       }
       end
     }

@@ -17,6 +17,7 @@ node :pages do
   }
 end
 
+
 node :users do 
   @users.map do |user| 
     presenter = present(user, UserPresenter)

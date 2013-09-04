@@ -98,6 +98,10 @@ class User
      BSON::ObjectId.legal?(id) ? User.find(id) : User.find_by(username: id)
   end
 
+  def self.search(query)
+    where({username: /#{query}/i})
+  end 
+
   def upsert_passport(passport)
     current_passport = find_passport(passport.uid, passport.provider)
     current_passport ? current_passport.update_from_passport(passport) : (passports << passport) 

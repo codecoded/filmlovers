@@ -22,6 +22,7 @@ module Api
         @films = page_results query, sort_by
         @films_count = @films.count
         @total_pages = (@films_count / page_size) + 1
+        @films
       end
 
 
@@ -53,6 +54,7 @@ module Api
 
       def sort_orders
         {
+          'username'              =>  [:username, :asc],
           'title'                 =>  [:title, :asc], 
           'recent'                =>  [:updated_at, :desc],
           'release_date'          =>  [:release_date, :desc],

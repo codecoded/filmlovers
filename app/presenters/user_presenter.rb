@@ -6,11 +6,11 @@ class UserPresenter < BasePresenter
   def_delegators :user, :username
 
   def counter_for(action)
-    actions.where(action: action).count
+    entries.find_by_action(action).count
   end
 
-  def actions
-    @actions ||= user.films.entries
+  def entries
+    @entries ||= user.films.entries
   end
 
   def avatar_url
@@ -46,4 +46,8 @@ class UserPresenter < BasePresenter
     user.films.recommended.where('recommendations.sent'=> false )
   end
 
+  def current_friendship
+    return nil unless current_user
+    @current_friendship ||= current_user.friendship_with user
+  end
 end

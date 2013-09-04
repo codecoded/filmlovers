@@ -5,7 +5,7 @@ module Api
       respond_to :json
 
       def index
-        render :index, formats: :json
+        users
       end
 
       def show
@@ -13,11 +13,21 @@ module Api
       end
 
       protected 
+
+      def users
+        user_query = search_query ? User.search(search_query) : User
+        @users ||= find_films user_query.without(:films_lists), :username
+      end
+
       def user
         @user ||= User.find(params[:id])
       end
 
-      helper_method :user
+      def search_query
+        params[:query]
+      end
+
+      helper_method :users, :user
     end
   end
 end

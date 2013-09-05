@@ -1,9 +1,5 @@
-<a href="#" data-dropdown="drop1" class="tiny success button friendship content">Friends</a>
-<ul id="drop1" class="f-dropdown" data-dropdown-content>
-<li>
-  <%= link_to friendship_path(friend), method: :delete, remote: true, data: {action: :delete} do %>
-    Unfriend
+<div class="friendship">
+  <%= link_to friendship_path(friend), method: :delete, remote: true, data: {friendship: :cancel}, :class=>'tiny button secondary radius alert' do %>
+    <span>Unfriend</span>
   <% end %>
-</li>
-</ul>
-
+</div>

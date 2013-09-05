@@ -8,7 +8,7 @@ module Api
 
       def create
         return head 400 if friend_ids.nil?
-        @recommendations = film_entry.recommend_to(friendships.where(:friend_id.in => friend_ids)).compact
+        @recommendations = film_entry.recommend_to(friendships.where(:friend_id.in => friend_ids), comment).compact
       end
 
       def new
@@ -30,6 +30,10 @@ module Api
 
       def friend_ids
         params[:friend_id]
+      end
+
+      def comment
+        params[:comment]
       end
 
       def film

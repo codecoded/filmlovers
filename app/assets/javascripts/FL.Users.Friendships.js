@@ -18,7 +18,7 @@ FL.Friendships = {
     $(document).on('ajax:success', '.friendship a[data-friendship="request"]', friendships.requested)
     $(document).on('ajax:success', '.friendship a[data-friendship="confirm"]', friendships.confirmed)
     $(document).on('ajax:success', '.friendship a[data-friendship="ignore"]', friendships.ignored)
-    $(document).on('ajax:success', '.friendship a[data-friendship="delete"]', friendships.deleted)
+    $(document).on('ajax:success', 'a[data-friendship="delete"]', friendships.deleted)
     $(document).on('ajax:success', '.friendship a[data-friendship="cancel"]', friendships.cancelled)
 
   },

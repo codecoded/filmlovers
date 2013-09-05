@@ -26,8 +26,8 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    friendship.delete
-    friend.friendship_with(current_user).delete
+    friendship.friend.friendship_with(current_user).delete
+    friendship.delete  
     render partial: "friendships/pending"
   end
 
@@ -50,11 +50,11 @@ class FriendshipsController < ApplicationController
   end
 
   def friendship
-    @friendship ||= current_user.friendship_with(friend)
+    @friendship ||= friendships.find_by(friend_id: friend.id)
   end
 
   def friend
-    @friend ||= User.find_by username: params[:id]
+    @friend ||= User.fetch params[:id]
   end
 
   def filter

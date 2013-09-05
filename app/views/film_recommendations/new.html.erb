@@ -20,10 +20,10 @@
                 <%= check_box_tag('friend_id[]', presenter.user.id)  %>
               </div>             
             </div>
-          <% end %>
-         
+          <% end %>         
         <% end %>
-         <%= f.submit %>
+        <%= f.input :comment %>
+        <%= f.submit %>
       <% end %>
     </div>
   </div>

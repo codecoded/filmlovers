@@ -5,8 +5,8 @@
       <label><%= friend.username %></label>
     <% end %>
     <% [:watched, :loved, :owned].each do |action| %>
-      <%= link_to user_film_path(friend, action) do %>
-        <label style="display:inline"><%= friend.find_film_entries_by_action(action).count %> </label>
+      <%= link_to user_film_entry_path(friend, action) do %>
+        <label style="display:inline"><%= friend.films.entries.find_by_action(action).count %> </label>
       <% end %>
     <% end %>
   </div>

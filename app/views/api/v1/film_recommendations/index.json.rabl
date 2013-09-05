@@ -37,7 +37,8 @@ node :film_recommendations do
         sent: recommendation.sent,
         username: friend_presenter.username,
         friend_url: api_v1_user_path(friend_presenter.user.id),
-        avator_uri: friend_presenter.avatar_url
+        avator_uri: friend_presenter.avatar_url,
+        comment: recommendation.comment
       }
       end  
     }

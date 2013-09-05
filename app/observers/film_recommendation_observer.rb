@@ -4,9 +4,10 @@ class FilmRecommendationObserver < Mongoid::Observer
     film = film_recommendation.film
     friend = film_recommendation.friend
     user = film_recommendation.user
+    comment = film_recommendation.comment
     Log.debug "Film recommendation #{film.title} to #{friend.username} by #{user.username} created"
 
-    friend.films.find_or_create(film).recommendations.create(friend_id: user.id, sent: false).receive
+    friend.films.find_or_create(film).recommendations.create(friend_id: user.id, sent: false, comment: comment).receive
   end
 
   def after_receive(film_recommendation, transition)
@@ -24,8 +25,9 @@ class FilmRecommendationObserver < Mongoid::Observer
   end
 
   def push_notification(film_recommendation)
-    Log.debug "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}"
-    film_recommendation.user.notifier.toast "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}"
+    notice = "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}. #{film_recommendation.comment}"
+    Log.debug notice
+    film_recommendation.user.notifier.toast notice
   end
 
 end

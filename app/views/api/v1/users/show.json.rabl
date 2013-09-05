@@ -14,7 +14,7 @@ node :user do
       loved: presenter.counter_for(:loved),
       owned: presenter.counter_for(:owned)
     },
-    friendships: user.friendships.confirmed.map do |friendship|
+    friendships: user.friendships.map do |friendship|
     {
       username: friendship.friend.username,
       friend_url: api_v1_user_path(friendship.friend.id),

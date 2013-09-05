@@ -5,7 +5,7 @@ module Api
       respond_to :json, :html
 
       def index
-        @friendships = friendships.where(state: filter)
+        find_films friendships, :recent
       end
 
       def show
@@ -44,7 +44,7 @@ module Api
       protected
 
       def friendships
-        current_user.friendships
+        @friendships ||= filter ? current_user.friendships.where(state: filter) : current_user.friendships
       end
 
       def friendship
@@ -56,7 +56,7 @@ module Api
       end
 
       def filter
-        params[:filter] || :confirmed
+        params[:filter] 
       end
 
       helper_method :friendships, :friendship, :friend

@@ -45,7 +45,7 @@ node :film do
     cast: if presenter.cast? then presenter.credits.cast.map {|p| {url: nil, name: p.name, description: p.character, image: p.profile('w92')} } end,
     crew: if presenter.crew? then presenter.credits.crew.map {|p| {url: nil, name: p.name, description: p.job, image: p.profile('w92')} } end,
     languages: if presenter.languages? then presenter.languages.map {|l| l['name']} end,
-    genres: if presenter.genres? then presenter.genres.map {|g| {url: category_api_v1_films_url(action: params[:action], genres: Genre.find_by_id(g['id'])), name:g['name']}} end,
+    genres: if presenter.genres? then presenter.genres.map {|g| {url: category_api_v1_films_url(action: params[:action], genres: g), name:g['name']}} end,
     studios: if presenter.studios? then presenter.studios.map {|s| {url: '', name: s['name']}} end,
     locations: if presenter.locations? then presenter.locations.map {|s| {url: '', name: s['name']}} end,
     original_title: if presenter.original_title != presenter.title then presenter.original_title end, 

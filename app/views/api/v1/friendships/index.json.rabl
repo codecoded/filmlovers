@@ -29,6 +29,7 @@ node :friendships do
       cancel: if friendship.requested? then api_v1_friendship_path(friendship) end,
       confirm: if friendship.received? then change_api_v1_friendship_path(friendship, :confirm) end,
       ignore: if friendship.received? then change_api_v1_friendship_path(friendship, :ignore) end,
+      remove: if friendship.confirmed? then api_v1_friendship_path(friendship) end,
       state: friendship.state,
       counters:{
         watched: presenter.counter_for(:watched),

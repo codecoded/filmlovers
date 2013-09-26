@@ -10,19 +10,20 @@ class Film
   field :fetched_at,            type: DateTime, default: nil
   field :poster,                type: String
   field :trailer,               type: String
-  field :details_provider,      type: String,   default: :tmdb
   field :genres,                type: Array
   field :popularity,            type: Float
+  field :provider_id,           type: Integer
+  field :provider,              type: String,   default: :tmdb
 
-  embeds_one :details, class_name: "FilmDetails", autobuild: true
-  embeds_one :counters, class_name: "FilmCounters", autobuild: true
+  # embeds_one :details, class_name: "FilmDetails", autobuild: true
+  embeds_one  :counters,  class_name: "FilmCounters", autobuild: true
   embeds_many :providers, class_name: 'FilmProvider'
 
   index({ release_date: -1 }, { unique: false, name: "film_release_date_index", background: true })
   index({ title: -1 }, { unique: true, name: "film_title_index", background: true })
   index({ genres: -1 }, { unique: false, name: "film_genres_index", background: true })
   index({ popularity: -1 }, { unique: false, name: "film_popularity_index", background: true })
-  index({ 'details._id' => 1}, { unique: true, name: "film_details_index", background: true })
+  index({ provider: 1, provider_id: 1}, { unique: true, name: "provider_index", background: true })
 
   index({ 'counters.watched'=> -1 }, { unique: false, name: "film_counters_watched", background: true })
   index({ 'counters.loved'  => -1 }, { unique: false, name: "film_counters_loved", background: true })
@@ -36,8 +37,33 @@ class Film
     find_by('providers.name'=> name.to_s, 'providers._id' => id)
   end
 
+  def self.create_from(provider)
+    Log.debug("Creating film '#{provider.title_id}' from provider '#{provider.name}-#{provider._id}'")
+    create(
+      id: provider.title_id, 
+      fetched_at: Time.now.utc,
+      title: provider.title,
+      release_date: provider.release_date, 
+      release_date_country: provider.release_date_country,
+      poster: provider.poster, 
+      genres: provider.genres,
+      trailer: provider.trailer,
+      popularity: provider.popularity,
+      classification: provider.classification,
+      provider_id: provider._id, 
+      provider: provider.name)  
+  end
+
   def entries
-    @entries ||= FilmEntry.where('film._id' => self.id)
+    @entries ||= FilmEntry.where(film_id: self.id)
+  end
+ 
+  def details
+    @details ||= "#{film_provider_class}::Movie".constantize.find provider_id
+  end
+
+  def details_presenter
+    "#{film_provider_class}Presenter".constantize
   end
 
   def actions_for(action)
@@ -62,6 +88,10 @@ class Film
     trailer
   end
 
+  def has_provider?(name)
+    providers.where(:name => name).exists?
+  end
+
   def provider_by(name, id)
     providers.find_or_initialize_by name: name, id: id
   end
@@ -70,8 +100,9 @@ class Film
     providers.find_by name: name
   end
 
-  def add_provider(name, provider)
-    provider_by(name, provider.id).tap do |film_provider|
+  def add_provider(provider)
+    return if has_provider? provider.name
+    provider_by(provider.name, provider.id).tap do |film_provider|
       film_provider.link        = provider.link || film_provider.link
       film_provider.rating      = provider.rating || film_provider.rating
       film_provider.fetched_at  = Time.now.utc
@@ -93,19 +124,16 @@ class Film
     self
   end
 
-  def has_provider?(name)
-    providers.where(:name => name).exists?
+
+  def film_provider_class
+    provider.capitalize
   end
 
-  def details_presenter
-    "#{details_provider.capitalize}Presenter".constantize
-  end
-
-  def update_details(provider, details)
+  def update_film_provider(film_provider)
     update_attributes!({
       fetched_at: Time.now.utc,
-      details_provider: provider, 
-      details: FilmDetails.new(details)
+      provider: film_provider.name, 
+      provider_id: film_provider.id
     })
     notify_observers :film_details_updated
     self
@@ -113,10 +141,6 @@ class Film
 
   def to_param
     id
-  end
-
-  def method_missing(method, *args)
-    details ? details.send(method, args) : super
   end
 
 end

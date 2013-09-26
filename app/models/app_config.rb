@@ -18,7 +18,8 @@ module AppConfig
   end
     
   def update_counters
-    FilmUserAction.distinct(:film_id).each do |id|
+    film_ids = FilmEntry.only(:film_id).pluck(:film_id).uniq    
+    film_ids.each do |id|
       film = Film.find id
       film.counters.refresh if film
     end

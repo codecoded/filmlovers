@@ -1,28 +1,29 @@
 module Tmdb
   class Movie 
+    include Mongoid::Document
+    include Mongoid::Timestamps
 
-    attr_reader :movie_data
-
-    def initialize(movie_data)
-      @movie_data = movie_data
+    def self.find_or_fetch(id)  
+      find(id) || fetch(id)
     end
 
-    def self.find(id)
-      new Client.movie(id)
-    end
-
-    def self.fetch(id)
-      find(id).film
+    def self.fetch(id)  
+      with(safe:false).create(Client.movie(id))
     end
 
     def self.fetch!(id)
-      find(id).set_film_details!
+      fetch(id).set_film_provider!
     end
 
+    def name
+      self.class.name.deconstantize
+    end    
+
     def film
-      @film ||= find_film || create_film
-      @film.add_provider(:tmdb, self)
-      @film.provider_by(:imdb, imdb_id).save if imdb_id?
+      @film ||= (find_film || create_film)
+      return unless @film
+      @film.add_provider(self)
+      @film.provider_by(:Imdb, imdb_id).save if imdb_id?
       @film
     end
 
@@ -30,28 +31,24 @@ module Tmdb
       Film.find title_id
     end
 
-    def id
-      movie_data['id']
-    end
-
     def imdb_id
-      @imdb_id ||= movie_data['imdb_id']
+      @imdb_id ||= self['imdb_id']
     end
 
     def imdb_id?
-      movie_data['imdb_id']
+      self['imdb_id']
     end
 
     def title_id
-      @title_id ||= Film.create_uuid(title, year)
+      Film.create_uuid(title, year)
     end
 
     def title
-      @title ||= movie_data['title']
+      self['title']
     end
 
     def year
-      @year ||= initial_release_date.year
+      initial_release_date.year if initial_release_date
     end
 
     def link
@@ -59,16 +56,20 @@ module Tmdb
     end
 
     def rating
-      movie_data['popularity']
+      self['vote_average']
+    end
+
+    def popularity
+      self['popularity']
     end
 
     def poster
-      @poster ||= movie_data['poster_path']
+      self['poster_path']
     end
 
     def initial_release_date
-      return unless movie_data['release_date']
-      @initial_release_date ||= movie_data['release_date'].to_date
+      return unless self['release_date']
+      self['release_date'].to_date
     end
 
     def release_date
@@ -80,7 +81,11 @@ module Tmdb
     end
 
     def releases
-      @releases ||= movie_data['releases'] || {}
+      self['releases'] || {}
+    end
+
+    def genres
+      (self['genres'] || {}).map{|g| g['name']}
     end
 
     def release_date_for(country)
@@ -88,31 +93,42 @@ module Tmdb
       releases['countries'].find {|r| r['iso_3166_1']==country}
     end
 
-    def not_allowed?
-      !release_date || movie_data['adult']
+    def release_date_country
+      release_date_country = release_date_for('GB') ? 'UK' : nil
     end
 
-    def set_film_details!
+    def classification
+      release_date_for('GB') ? release_date_for('GB')['certification'] : nil
+    end
+
+    def has_trailer?(source=:youtube)
+      trailers and !trailers[source.to_s].blank?
+    end
+
+    def trailers
+      self[:trailers]
+    end
+
+    def trailer(source=:youtube)
+      trailers[source.to_s][0]['source'] if has_trailer?(source)
+    end
+
+    def not_allowed?
+      !release_date || self['adult']
+    end
+
+    def set_film_provider!
       return if not_allowed?
-      film.update_details :tmdb, movie_data
+      film.update_film_provider self
     end
 
     protected
-
     def create_film
-      return nil if not_allowed?
-      Log.debug("Creating film from tmdb data: #{title_id}")
-      Film.create(
-        id: title_id, 
-        fetched_at: Time.now.utc,
-        title: title,
-        release_date: release_date, 
-        poster: poster, 
-        details: FilmDetails.new(movie_data), 
-        details_provider: :tmdb)
+      Film.create_from(self) unless not_allowed?
     end
 
-
-
+    def method_missing(m, *args, &block) 
+      self[m] 
+    end
   end
 end

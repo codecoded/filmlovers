@@ -1,12 +1,13 @@
 class Facebook::UserAPI
   extend ActiveSupport::Concern
   
-  attr_reader :graph, :user
+  attr_reader :graph, :user, :fb_oauth
 
 
   def initialize(user)
     @user = user
     @graph = Koala::Facebook::API.new user.oauth_token
+    @fb_oauth = Koala::Facebook::OAuth.new
   end
 
   def friends(fields='name', limit='')
@@ -27,5 +28,9 @@ class Facebook::UserAPI
 
   def avatar(height=80, width=80)
     "https://graph.facebook.com/#{user.uid}/picture?height=#{height}&width=#{width}"
+  end
+
+  def exchange_token
+    fb_oauth.exchange_access_token user.oauth_token
   end
 end

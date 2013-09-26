@@ -20,6 +20,10 @@ class  TmdbPresenter < BasePresenter
     end
   end
 
+  def title
+    film.title
+  end
+
   def year
     film.year
   end
@@ -90,7 +94,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def homepage
-    film_details.homepage
+    film_details['homepage']
   end
 
   def main_backdrop(size = :large)
@@ -98,34 +102,33 @@ class  TmdbPresenter < BasePresenter
   end
 
   def alternative_titles
-    film_details.alternative_titles.map {|t| t['title']}
+    film_details['alternative_titles'].map {|t| t['title']}
   end
   
   def overview(length=nil)
     if length
-      truncate film_details.overview, separator: ' ', length: length, :omission => '...'
+      truncate film_details['overview'], separator: ' ', length: length, :omission => '...'
     else
       film_details['overview']
     end
   end
 
   def cast
-    film_details.credits.cast.map do |person|
-
+    film_details['credits'].cast.map do |person|
     end
   end
 
   
   def runtime
-    "#{film_details.runtime} Mins" if film_details.runtime and film_details.runtime > 0
+    "#{film_details.runtime} Mins" if film_details['runtime'] and film_details['runtime'] > 0
   end
 
   def status
-    film_details.status if film_details.status != 'Released'
+    film_details['status'] if film_details['status'] != 'Released'
   end
 
   def languages?
-    film_details.spoken_languages
+    film_details['spoken_languages']
   end
 
 
@@ -138,8 +141,8 @@ class  TmdbPresenter < BasePresenter
   end
 
   def budget
-    return unless film_details.budget and film_details.budget > 0
-    Utilities.to_currency film_details.budget ,{precision: 0}
+    return unless film_details['budget'] and film_details['budget'] > 0
+    Utilities.to_currency film_details['budget'] ,{precision: 0}
   end
 
   def original_title
@@ -161,6 +164,10 @@ class  TmdbPresenter < BasePresenter
 
   def iframe_for(trailer)
     content_tag :iframe, nil, src: youttube_url_for(trailer), frameborder: 0, allowfullscreen: true
+  end
+
+  def genres?
+    film.genres
   end
 
   def genres
@@ -193,7 +200,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def tagline
-    film_details.tagline
+    film_details['tagline']
   end
 
   def starring
@@ -264,7 +271,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def similar_movies
-    @similar_movies ||= film_details.similar_movies['results'] || {}
+    @similar_movies ||=  film_details.similar_movies ?  film_details.similar_movies['results'] : {}
   end
 
   def similar?
@@ -308,9 +315,6 @@ class  TmdbPresenter < BasePresenter
     !locations.blank?
   end
 
-  def genres?
-    film_details.genres
-  end
 
   def duration
     film_details['runtime'] if film_details['runtime'] and film_details['runtime'].to_i > 0  

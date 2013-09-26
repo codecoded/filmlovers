@@ -38,7 +38,7 @@ module FilmScopes
   def in_cinemas
     @in_cinemas = Rotten::Movies.in_cinemas
     @opening    = Rotten::Movies.opening
-    (@in_cinemas + @opening).uniq
+    (@in_cinemas + @opening).uniq.map &:film
     # ids = Cinema.all.map {|c| c.daily_schedules.current.map {|d| d.show_times.map {|s| s.film_id} }}.flatten.compact.uniq
     # Film.in id: ids
   end

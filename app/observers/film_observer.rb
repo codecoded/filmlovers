@@ -1,12 +1,12 @@
 class FilmObserver < Mongoid::Observer
 
   def film_details_updated(film)
-    Log.debug "#{film.details_provider} film details updated for film: #{film.id}"
+    Log.debug "#{film.provider} film details updated for film: #{film.id}"
     update_imdb_info film    
   end
 
   def after_create(film)
-    Log.debug "Film #{film.id} created from #{film.details_provider} details"
+    Log.debug "Film #{film.id} created from #{film.provider} details"
     update_imdb_info film
   end
 

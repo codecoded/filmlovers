@@ -32,7 +32,7 @@ module Api
           return
         end
 
-        @user.ensure_authentication_token!        
+        @user.save   
         @current_user = @user
       end
       

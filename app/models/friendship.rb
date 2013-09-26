@@ -25,4 +25,9 @@ class Friendship
     @friend ||= User.find friend_id
   end
 
+  def self.auto_friend(user, friend)
+    return if user.friendship_with friend
+    user.friendships.create(friend_id: friend.id, state: :confirmed)
+    friend.friendships.create(friend_id: user.id, state: :confirmed)
+  end
 end

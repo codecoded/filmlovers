@@ -11,7 +11,7 @@ production:
 staging:   
   sessions:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      uri: <%= ENV['MONGODB_URL'] %>
       options:
         skip_version_check: true
         safe: false
@@ -25,6 +25,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
+      # uri: <%= ENV['MONGODB_URL'] %>
       database: filmlovers_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)

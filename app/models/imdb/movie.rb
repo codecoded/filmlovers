@@ -1,23 +1,20 @@
 module Imdb
   class Movie
+    include Mongoid::Document
+    include Mongoid::Timestamps
 
-    attr_reader :movie_data
-
-    def initialize(movie_data)
-      @movie_data = movie_data
+    def self.find_or_fetch(id)  
+      find(id) || fetch(id)
     end
 
-    def self.find(id)
-      movie_data =  Client.movie(id)
-      new(movie_data) if movie_data and movie_data['imdb_id']
-    end
-
-    def self.fetch(id)
-      find(id).film
+    def self.fetch(id)  
+      movie_data = Client.movie(id)
+      return unless movie_data and movie_data['imdb_id']
+      with(safe:false).create(movie_data)
     end
 
     def self.fetch!(id)
-      find(id).set_film_details!
+      fetch(id).set_film_details!
     end
 
     def self.find_all(ids)
@@ -29,20 +26,22 @@ module Imdb
       find_all(ids).map &:film
     end
 
+    def name
+       self.class.name.deconstantize
+    end
+
     def film
-      @film ||= find_film || create_film
-      @film.add_provider(:imdb, self)
+      @film ||= (find_film || create_film)
+      @film.add_provider(self)
       @film.set_release_date release_date_for('UK'), 'UK'
     end
 
     def find_film
-      Film.or(
-        {'providers.name' => :imdb, 'providers._id' => id},
-        {_id: title_id}).first
+      Film.where(_id: title_id).first || Film.find_by_provider(name, id)
     end
 
     def id
-      movie_data['imdb_id']
+      self['imdb_id']
     end
 
     def title_id
@@ -50,19 +49,19 @@ module Imdb
     end
 
     def title
-      @title ||= movie_data['title']
+      self['title']
     end
 
     def year
-      @year ||= movie_data['year']
+      self['year']
     end
 
     def link
-      movie_data['imdb_url']
+      self['imdb_url']
     end
 
     def rating
-      movie_data['rating']
+      self['rating']
     end
 
     def release_dates?
@@ -70,7 +69,7 @@ module Imdb
     end
 
     def release_dates
-      @release_dates ||= movie_data['release_date'] || {}
+      @release_dates ||= self['release_date'] || {}
     end
 
     def release_date?
@@ -92,11 +91,11 @@ module Imdb
     end
 
     def poster
-      movie_data['poster']['cover']
+      self['poster']['cover']
     end
 
     def set_film_details!
-      film.update_details :imdb, movie_data
+      film.update_film_provider self
     end
 
     protected
@@ -111,10 +110,9 @@ module Imdb
         release_date: release_date, 
         release_date_country: release_date_country,
         poster: poster, 
-        details: FilmDetails.new(movie_data), 
-        details_provider: :imdb)
+        provider_id: _id, 
+        provider: name)
     end
-
 
 
   end

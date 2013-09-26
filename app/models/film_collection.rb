@@ -23,10 +23,6 @@ class FilmCollection
     def populate_in_cinemas
       @coll = in_cinemas
       @coll.film_ids = Film.in_cinemas.map &:id
-      @coll.film_ids.each do |film_id| 
-        next unless tmdb_provider = Film.find(film_id).provider_for(:tmdb)
-        Tmdb::Movie.fetch! tmdb_provider.id
-      end
       @coll.save
     end
   end

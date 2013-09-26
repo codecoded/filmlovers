@@ -1,7 +1,7 @@
 module Netflix
   class Movie
     include Mongoid::Document
-
+    include Mongoid::Timestamps
 
     field :_id, type: String
     field :film_id, type: String
@@ -14,27 +14,21 @@ module Netflix
     field :link, type: String
     field :available_from, type: Date
 
-    attr_reader :movie_data
-
-    # def initialize(movie_data)
-    #   @movie_data = movie_data
-    # end
-
-    def self.find(id)
-      new Client.movie(id)
+    def self.find_or_fetch(id)  
+      find(id) || fetch(id)
     end
 
     def self.fetch(id)
-      find(id).film
+       with(safe:false).create(Client.movie(id))
     end
 
     def self.fetch!(id)
-      find(id).set_film_details!
+      find(id).set_film_provider!
     end
 
     def film
-      @film ||= find_film || create_film
-      @film.add_provider(:netflix, self)
+      @film ||= (find_film || create_film)
+      @film.add_provider(self)
       @film
     end
 
@@ -46,8 +40,8 @@ module Netflix
       @title_id ||= Film.create_uuid(title, release_year)
     end
 
-    def set_film_details!
-      film.update_details :netflix, movie_data
+    def set_film_provider!
+      film.update_film_provider self
     end
 
     protected
@@ -59,10 +53,9 @@ module Netflix
         title: title,
         release_date: Date.new(release_year), 
         poster: poster, 
-        details: self, 
-        details_provider: :netflix)
+        provider_id: _id, 
+        provider: name)
     end
-
 
   end
 end

@@ -1,3 +1,12 @@
+# Rename films to tmdb_movies and run Tmdb::Movie.batch_size(1000).each &:film
+# db.films.renameCollection('tmdb_movies')
+# db.tmdb_movies.reIndex()
+# db.films.ensureIndex({'provider_id':-1, 'provider':1})
+# run film user action migration
+# db.film_entries.ensureIndex({user_id: -1, film_id: 1})
+# AppConfig.update_counters
+
+# delete film user acit
 namespace :admin do
 
   FilmLists = [:watched, :loved, :owned]
@@ -53,60 +62,39 @@ namespace :admin do
   desc "Update film collections"
   task :update_film_collections => :environment do
     Log.info "Updating film collections"
+    FilmCollection.populate_in_cinemas
+    Log.info "Updating films in cinemas done. There are #{FilmCollection.in_cinemas.film_ids.count} films found in cinemas"    
     FilmCollection.populate_coming_soon
     Log.info "Updating films coming soon done. There are #{FilmCollection.coming_soon.film_ids.count} films found coming soon"
-    FilmCollection.populate_in_cinemas
-    Log.info "Updating films in cinemas done. There are #{FilmCollection.in_cinemas.film_ids.count} films found in cinemas"
+
   end
 
-# remember to rename collection and create index and disable IMDB lookup
-  desc "Migrate Movies to films"
-  task :migrate_movies => :environment do
-    Movie.each do |m| 
-      next if m.release_date.nil? or m.adult==true
-      release_date_country = m.uk_release ? 'UK' : nil
-      film = Film.new(id: Film.create_uuid(m.title, m.year), 
-        title: m.title, 
-        release_date: m.find_uk_release_date.to_date, 
-        release_date_country: release_date_country,
-        poster: m.poster_path, 
-        counters: m.counters, 
-        details: m, 
-        genres: if m.genres? then  m.genres.map{|g| g['name']} end,
-        popularity: m['popularity'],
-        trailer: m.trailer)
-      film.providers.build(name: :imdb, id: m.imdb_id) if m.imdb_id
-      film.providers.build(name: :tmdb, id: m.id, fetched_at: Time.now.utc, link: "http://www.themoviedb.org/movie/#{m.id}", rating: m['vote_average'])
-      film.save
-      film.id
-    end
-  end
 
   desc "Migrate FilmUser Actions"
   task :migrate_actions => :environment do
-    FilmUserAction.order_by(:film_id, :asc).each do |fua| 
-      film = Film.find_by('details._id' => fua.film_id)
+    FilmUserAction.order_by([:film_id, :asc]).each do |fua| 
+      film = Film.find_by(provider_id: fua.film_id)
       next unless film
-      fua.update_attribute(:film_id, film.id) if film
+      # fua.update_attribute(:film_id, film.id) if film
       fe = FilmEntry.fetch_for(fua.user, film) if fua.user
       fe.do_action(fua.action) if fe
     end
   end
 
-  desc "Migrate providers"
-  task :migrate_providers => :environment do
-    Film.ne('details.imdb_id' => nil).each {|f| f.provider_by(:imdb, f.details.imdb_id).save!}
-  end
+  # desc "Migrate providers"
+  # task :migrate_providers => :environment do
+  #   Film.ne('details.imdb_id' => nil).each {|f| f.provider_by(:imdb, f.details.imdb_id).save!}
+  # end
 
-  desc "Migrate Genres"
-  task :migrate_genres => :environment do
-    Film.each {|f| f.update_attribute(:genres, f.details['genres'].map {|g| g['name']}) if f.details and f.details['genres']}
-  end
+  # desc "Migrate Genres"
+  # task :migrate_genres => :environment do
+  #   Film.each {|f| f.update_attribute(:genres, f.details['genres'].map {|g| g['name']}) if f.details and f.details['genres']}
+  # end
 
-  desc "Migrate Popularoty"
-  task :migrate_genres => :environment do
-    Film.each {|f| f.update_attribute(:popularity, f.details['popularity']) if f.details and f.details['popularity']}
-  end
+  # desc "Migrate Popularoty"
+  # task :migrate_genres => :environment do
+  #   Film.each {|f| f.update_attribute(:popularity, f.details['popularity']) if f.details and f.details['popularity']}
+  # end
 
   desc "download netflix db"
   task :netflix_download => :environment do

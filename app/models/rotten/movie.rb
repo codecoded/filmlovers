@@ -1,43 +1,37 @@
 module Rotten
   class Movie
+    include Mongoid::Document
+    include Mongoid::Timestamps
 
-    attr_reader :movie_data
+    def name
+      self.class.name.deconstantize
+    end    
 
-    def initialize(movie_data)
-      @movie_data = movie_data
+    def self.find_or_fetch(id)  
+      find(id) || fetch(id)
     end
 
-    def self.find(id)
-      new Client.movie(id)
-    end
-
-    def self.fetch(id)
-      find(id).film
+    def self.fetch(id)  
+      with(safe:false).create(Client.movie(id))
     end
 
     def self.fetch!(id)
-      find(id).set_film_details!
+      fetch(id).set_film_provider!
     end
 
     def film
-      @film ||= find_film || create_film
-      @film.add_provider(:rotten, self)
-      @film.provider_by(:imdb, imdb_id).save if imdb_id?
+      @film = (find_film || create_film)
+      @film.add_provider(self)
+      @film.provider_by(:Imdb, imdb_id).save if imdb_id?
       @film
     end
 
     def find_film
-      Film.or(
-        {'providers.name' => :imdb, 'providers._id' => imdb_id},
-        {_id: title_id}).first
-    end
-
-    def id
-      movie_data['id']
+      Film.where(_id: title_id).first || Film.find_by_provider(:Imdb, imdb_id)
     end
 
     def imdb_id
-      "tt#{movie_data['alternate_ids']['imdb']}" if imdb_id?
+      "tt#{self['alternate_ids']['imdb']}" if imdb_id?
     end
 
     def title_id
@@ -45,51 +39,62 @@ module Rotten
     end
 
     def title
-      @title ||= movie_data['title']
+      self['title']
     end
 
     def year
-      @year ||= movie_data['year']
+      self['year']
     end
 
     def link
-      movie_data['links']['alternate']
+      self['links']['alternate']
     end
 
     def rating
-      movie_data['ratings']['critics_score']
+      self['ratings']['critics_score']
     end
 
     def release_date
-      movie_data['release_dates']['theater'] if movie_data['release_dates']
+      self['release_dates']['theater'] if self['release_dates']
     end
 
     def poster
-      movie_data['posters']['detailed'] if movie_data['posters']
+      self['posters']['detailed'] if self['posters']
     end
 
     def imdb_id?
-      movie_data['alternate_ids'] and movie_data['alternate_ids']['imdb']
+      self['alternate_ids'] and self['alternate_ids']['imdb']
     end
 
-    def set_film_details!
-      film.update_details :tmdb, movie_data
+    def genres
+      self['genres'] || {}
     end
-    
+  
+    def release_date_country
+      nil
+    end
+
+    def trailer
+      nil
+    end
+
+    def popularity
+      0
+    end
+
+    def classification
+      self['mpaa_rating']
+    end
+
+    def set_film_provider!
+      film.update_film_provider self
+    end
+
     protected
-
     def create_film
-      Log.debug("Creating film from Rotten data: #{title_id}")
-      Film.create(
-        id: title_id, 
-        fetched_at: Time.now.utc,
-        title: title, 
-        release_date: release_date, 
-        poster: poster, 
-        details: FilmDetails.new(movie_data), 
-        details_provider: :rotten)
+      Log.debug("Creating film from #{name} data: #{title_id}")
+      Film.create_from(self)
     end
-
 
   end
 end

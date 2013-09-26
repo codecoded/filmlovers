@@ -7,7 +7,7 @@ class User
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :token_authenticatable#, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable#, :validatable
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -82,6 +82,12 @@ class User
 
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+ 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)
     user = find_by_passport passport 
@@ -152,10 +158,10 @@ class User
     UserComparison.new(self, user)
   end
 
-  def facebook
-    return unless @facebook ||= passport_for(:facebook)
-    Facebook::UserAPI.new @facebook
-  end
+  # def facebook
+  #   return unless @facebook ||= passport_for(:facebook)
+  #   Facebook::UserAPI.new @facebook
+  # end
 
   def notifier
     @notifier ||= UserNotifier.new(self)
@@ -171,5 +177,14 @@ class User
 
   def to_param
     username? ? username : id.to_s
+  end
+
+  private
+  
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
+    end
   end
 end

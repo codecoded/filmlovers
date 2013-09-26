@@ -64,7 +64,7 @@ class FilmPresenter < BasePresenter
 
   def poster
     return blank_poster unless film.poster?
-    image_src = case film.details_provider.to_sym
+    image_src = case film.provider.to_sym.downcase
       when :tmdb then poster_uri
       else film.poster
     end

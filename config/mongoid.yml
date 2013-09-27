@@ -11,7 +11,7 @@ production:
 staging:   
   sessions:
     default:
-      uri: <%= ENV['MONGODB_URL'] %>
+      uri: <%= ENV['MONGOHQ_URL'] %>
       options:
         skip_version_check: true
         safe: false

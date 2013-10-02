@@ -10,6 +10,11 @@ class Facebook::UserAPI
     @fb_oauth = Koala::Facebook::OAuth.new
   end
 
+  def self.user_from_token(token)
+     @graph = Koala::Facebook::API.new token
+     @graph.get_object('me')
+  end
+
   def friends(fields='name', limit='')
     graph.get_connections user.uid, 'friends', :fields => fields, limit:limit
   end

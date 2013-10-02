@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Gravtastic
+
+  attr_accessible :avatar, :username, :email, :first_name, :last_name, :password, :confirm_password, :name, :gender, :passports
   
   exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers friendships friends recommendations recommend)
   # Include default devise modules. Others available are:
@@ -71,7 +73,7 @@ class User
   # has_many :recommendations
   has_many :facebook_events
 
-  attr_accessible :avatar, :username, :email, :first_name, :last_name, :password, :confirm_password
+  
   mount_uploader :avatar, AvatarUploader  
 
   embeds_one  :profile, class_name: 'UserProfile', autobuild: true
@@ -96,8 +98,19 @@ class User
   end
 
   def self.find_by_passport(passport)
-    user = User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first
-    user ? user : User.new(passports:[passport])
+    User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first || User.new(passports:[passport])
+  end
+
+  def self.from_facebook_token(access_token)
+    fb_user = Facebook::UserAPI.user_from_token access_token
+    passport = Passport.new({
+        provider: :facebook,
+        oauth_token: access_token,
+        uid: fb_user["id"],
+      })
+    user = find_by_passport passport  
+    user.update_from_facebook_graph(fb_user) if user.new_record?
+    user 
   end
 
   def self.fetch(id)
@@ -124,6 +137,19 @@ class User
     })   
 
     update_username(auth.info.nickname) unless username?
+  end
+
+  def update_from_facebook_graph(fb_user)
+   update_attributes(
+    {
+      first_name: fb_user['first_name'],
+      last_name: fb_user['last_name'],
+      name: fb_user['name'],
+      email: fb_user['email'],
+      gender: fb_user['gender']
+    })   
+
+    update_username(fb_user['username']) unless username?
   end
 
   def passport_provider?(provider)

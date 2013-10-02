@@ -13,7 +13,7 @@ module Api
         end
 
         if @user.valid?
-          @user.ensure_authentication_token!
+          @user.ensure_authentication_token
           @user.save!
           @current_user = @user         
         else

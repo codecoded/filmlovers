@@ -27,16 +27,6 @@ class Passport
       })
   end
 
-
-  def self.from_facebook_token(access_token)
-    user = Facebook::UserAPI.user_from_token access_token
-    passport = Passport.new({
-        provider: :facebook,
-        oauth_token: access_token,
-        uid: user["id"],
-      })
-  end
-
   def update_from_passport(passport)
     update_attributes passport.attributes.slice('oauth_token', 'oauth_expires_at')
   end

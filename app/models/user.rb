@@ -4,7 +4,7 @@ class User
   include Gravtastic
 
   attr_accessible :avatar, :username, :email, :first_name, :last_name, :password, :confirm_password, :name, :gender, :passports
-  
+
   exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers friendships friends recommendations recommend)
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -80,16 +80,13 @@ class User
   embeds_many :films_lists
   embeds_many :passports
   embeds_many :friendships
+  embeds_many :mobile_devices
+
   # embedded_in :film_entry
 
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
-  def ensure_authentication_token
-    if authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-    end
-  end
- 
+
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)
     user = find_by_passport passport 
@@ -197,10 +194,21 @@ class User
     @film ||= FilmEntriesCollection.new self
   end
   
+  def mobile_device_by(name)
+    mobile_devices.find_or_initialize_by provider: name
+  end
+
   def notify(notification)
     notifier.message notification
   end
 
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
+  end
+ 
+ 
   def to_param
     username? ? username : id.to_s
   end

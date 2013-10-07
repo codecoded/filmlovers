@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
+gem 'pg'
 gem 'thin'
 gem 'nokogiri'
 gem 'google_movies'
@@ -43,7 +44,8 @@ gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem "mini_magick"
 gem "fog"
-
+gem 'darstellung'
+gem 'rapns'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

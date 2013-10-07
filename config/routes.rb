@@ -19,6 +19,8 @@ Filmlovers::Application.routes.draw do
       resources :registrations,           only: [:create, :update]
       resources :tokens,                  only: [:create, :destroy, :index]
       resources :persons,                 only: [:show]
+      resources :mobile_devices,          only: [:create, :update]
+
       resources :films,                   only: [:show, :index] do
         resources :film_actions,          only: [:show, :update, :destroy], path: '',  as: 'action', constraints: { id: /watched|loved|owned/ }
         get   'recommend', to: 'film_recommendations#new',     as: 'recommendation'
@@ -35,8 +37,8 @@ Filmlovers::Application.routes.draw do
         end
       end      
       resources :users do
-        resources :lists,  to: 'user_lists',   as: 'user_lists', only: [:show, :index]
-        resources :films,  to: 'film_entries', as: 'films',      only: [:index, :show]              
+        resources :lists,           to: 'user_lists',     only: [:show, :index],  as: 'user_lists'
+        resources :films,           to: 'film_entries',   only: [:index, :show],  as: 'films'
       end
       
       resources :recommendations do
@@ -54,7 +56,9 @@ Filmlovers::Application.routes.draw do
         member do
           put ':change_action', to: 'friendships#change', as: 'change', constraints: {type: /confirm|ignore/}
         end
-      end     
+      end  
+
+
     end
   end
 

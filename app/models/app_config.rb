@@ -1,6 +1,15 @@
 module AppConfig
   extend self
 
+  attr_accessor :ios_app, :page_size
+
+  @ios_app    = 'filmlovr_app'
+  @page_size  = 21
+
+  def setup(&block)
+    yield self if block_given?
+  end
+
   def instance
      @config ||= OpenStruct.new Tmdb::Config.get
   end
@@ -11,10 +20,6 @@ module AppConfig
 
   def image_uri_for(append_to_base)
     File.join [images.base_url, append_to_base]
-  end
-
-  def page_size
-    21
   end
     
   def update_counters

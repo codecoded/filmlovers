@@ -30,6 +30,7 @@ class FilmAction
   end
 
   def incr_film_count
+    film.counters.save if film.counters.new_record?
     film.counters.inc(action, 1)
   end
 

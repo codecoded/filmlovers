@@ -31,4 +31,12 @@ class UserNotifier
     Pusher.trigger(channels, EVENT, {message: message, type: notification_view.type.to_s})    
   end
 
+  def push_to_mobile(message)
+    n = Rapns::Apns::Notification.new
+    n.app = Rapns::Apns::App.find_by_name(AppConfig.ios_app)
+    n.device_token = user.mobile_devices.find_by(provider: 'iPhone').token.gsub(' ','')
+    n.alert = message
+    # n.attributes_for_device = {:foo => :bar}
+    n.save!
+  end
 end

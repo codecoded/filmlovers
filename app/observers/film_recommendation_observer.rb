@@ -17,7 +17,7 @@ class FilmRecommendationObserver < Mongoid::Observer
 
   def create_facebook_notification(recommendation)
     Log.debug "Trying to send FB notification for film recommendation #{recommendation.id}"
-    friend = recommendation.friend
+    friend = recommendation.user
     return unless friend.channels[:facebook] and recommendation.user.channels[:facebook] and friend.facebook_events.recent.count <= 2
     message = FacebookPresenter.recommendation_message recommendation
     friend.channels[:facebook].notifications(Utilities.url_helpers.film_path(recommendation.film)[1..-1], message, "recommendation")

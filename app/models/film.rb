@@ -39,7 +39,7 @@ class Film
 
   def self.create_from(provider)
     Log.debug("Creating film '#{provider.title_id}' from provider '#{provider.name}-#{provider._id}'")
-    create(
+    film = create(
       id: provider.title_id, 
       fetched_at: Time.now.utc,
       title: provider.title,
@@ -51,7 +51,9 @@ class Film
       popularity: provider.popularity,
       classification: provider.classification,
       provider_id: provider._id, 
-      provider: provider.name)  
+      provider: provider.name) 
+    film.counters.save
+    film 
   end
 
   def entries

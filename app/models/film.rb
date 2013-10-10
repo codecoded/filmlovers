@@ -134,6 +134,7 @@ class Film
   def update_film_provider(film_provider)
     update_attributes!({
       fetched_at: Time.now.utc,
+      popularity: film_provider.popularity,
       provider: film_provider.name, 
       provider_id: film_provider.id
     })

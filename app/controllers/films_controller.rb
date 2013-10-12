@@ -38,7 +38,7 @@ class FilmsController < ApplicationController
 
   def popular
     @title = 'Films'
-    render_films Film, :popularity
+    render_films Film.where(:release_date.lt => 1.week.from_now), :popularity
   end
 
   def netflix

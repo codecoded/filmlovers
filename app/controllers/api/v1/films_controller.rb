@@ -17,7 +17,7 @@ module Api
       end
 
       def popular
-        render_films Film
+        render_films Film.where(:release_date.lt => 2.weeks.from_now)
       end
 
       def categories

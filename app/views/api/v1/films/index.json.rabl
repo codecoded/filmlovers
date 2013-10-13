@@ -5,7 +5,6 @@ extends 'api/v1/shared/pages'
 node :films do 
   @films.map do |film|
     begin
-      user_actions = current_user.films.find(film).actions if current_user
       presenter = present(film.details, film.details_presenter)
       {
         id: film.id,

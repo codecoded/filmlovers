@@ -9,7 +9,7 @@ module Api
       end
       
       def show
-        find_films user.films[params[:id]]
+        find_films user.films[params[:id]], :recent_action
       end
 
       protected 

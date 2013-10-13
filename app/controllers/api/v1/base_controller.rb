@@ -30,14 +30,14 @@ module Api
         request.env['devise.skip_trackable'] = true
       end
 
-      def page_results(query, default_sort_order, page_size=AdminConfig.instance.page_size)
+      def page_results(query, default_sort_order, page_size=page_size)
         @order = sort_by || default_sort_order.to_s
         sort_order = sort_orders[@order]
         query.order_by(sort_order).page(page_no).per page_size
       end
 
       def page_size
-        @page_size ||= 20
+        @page_size ||= AdminConfig.instance.page_size
       end
 
       def page_no
@@ -49,7 +49,7 @@ module Api
       end
 
       def sort_by
-        @sorty_by ||= params[:sort_by]
+        @sort_by ||= params[:sort_by]
       end
 
       def sort_orders
@@ -62,7 +62,8 @@ module Api
           'popularity'            =>  [:popularity, :desc],
           'watched'               =>  ['counters.watched', :desc], 
           'loved'                 =>  ['counters.loved', :desc],
-          'owned'                 =>  ['counters.owned', :desc] 
+          'owned'                 =>  ['counters.owned', :desc],
+          'recent_action'         =>  ['actions.updated_at', :desc]
         }
       end
       helper_method :current_user, :page_no, :by, :order, :page_size, :sort_by

@@ -1,7 +1,3 @@
-object false
-
-extends 'api/v1/shared/pages'
-
 node :films do 
   @films.map do |film_entry|
     begin
@@ -17,3 +13,5 @@ node :films do
     end
   end.compact
 end
+
+

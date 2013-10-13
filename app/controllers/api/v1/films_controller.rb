@@ -28,6 +28,7 @@ module Api
       end
 
       def render_films(query, sort_order=:popularity)
+        @page_size = 50
         find_films query.without('details.similar_movies', :providers), sort_order
         render :index
       end

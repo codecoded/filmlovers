@@ -1,0 +1,3 @@
+TODO
+
+Bitmask the Users actions via the API results

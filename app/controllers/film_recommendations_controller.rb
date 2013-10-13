@@ -6,13 +6,17 @@ class FilmRecommendationsController < ApplicationController
 
   def create
     return head 400 if friend_ids.nil?
-    @recommendations = film_entry.recommend_to(friendships.where(:friend_id.in => friend_ids), params[:comment]).compact
+    @recommendations = film_entry.recommend_to(friendships.where(:friend_id.in => friend_ids), comment).compact
   end
 
   def new
   end
 
   protected
+
+  def comment
+    params[:film_recommendation][:comment] if params[:film_recommendation]
+  end
 
   def film_recommendation
     params[:id] ? film_entry.find_by(recommendations: params[:id]) : film_entry.recommendations.new

@@ -13,7 +13,11 @@ class MobileDevice
   validates_presence_of   :token, message: 'Please enter a mobile device token'
   
   def self.by_provider(name)
-    find_or_initialize_by(provider: name)
+    find_or_initialize_by(provider: name.to_s)
+  end
+
+  def self.registered?(provider)
+    where(provider: provider.to_s).exists?
   end
 
   def set_token(value)

@@ -12,6 +12,7 @@ node :recommendations do
         title: film_presenter.film.title,
         poster: film_presenter.poster_uri,
         backdrop: film_presenter.backdrop_uri,
+        overview: film_presenter.overview
       },
       friend:{
         username: friend_presenter.username,

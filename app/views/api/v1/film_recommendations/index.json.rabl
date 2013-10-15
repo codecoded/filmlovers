@@ -21,8 +21,9 @@ node :film_recommendations do
         poster: presenter.poster_uri,
         backdrop: presenter.backdrop_uri,
         director: if !presenter.director.blank? then presenter.director.name end,
-        release_date: presenter.release_date,
+        release_date: presenter.film.release_date,
         runtime: presenter.duration,
+        overview: presenter.overview,
         counters:{
           watched: presenter.film.counters.watched,
           loved: presenter.film.counters.loved,

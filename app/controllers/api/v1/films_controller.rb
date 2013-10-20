@@ -13,7 +13,7 @@ module Api
       end
 
       def in_cinemas
-        render_films FilmCollection.in_cinemas.films, :release_date
+        render_films FilmCollection.in_cinemas.films, :popularity
       end
 
       def popular

@@ -26,6 +26,10 @@ class FilmEntriesCollection
     entries[film]
   end
 
+  def select(film_ids)
+    actioned.in(film_id: film_ids)
+  end
+
   def find_or_create(film)
     entries.fetch_for(user, film)
   end

@@ -66,8 +66,9 @@ class UsersController < ApplicationController
   end
 
   def users
-    User.order_by(:username.asc).page(page_no).per 10
+    options = paging_options sort_by: :username, page_size: 10
+    @results = UserQuery.new(User, options).results
   end
 
-  helper_method :viewing_own?, :user, :user_action, :order, :by, :users, :films
+  helper_method :viewing_own?, :user, :user_action, :users, :films
 end

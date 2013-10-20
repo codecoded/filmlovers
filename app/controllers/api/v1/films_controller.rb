@@ -24,12 +24,12 @@ module Api
       end
 
       def search
-        find_films Film.search(params[:query])
+        render_films Film.search(params[:query])
       end
 
-      def render_films(query, sort_order=:popularity)
-        @page_size = 50
-        find_films query.without('details.similar_movies', :providers), sort_order
+      def render_films(films, sort_order=:popularity)
+        options = paging_options sort_by: sort_order, page_size: 50, without: [:providers]
+        @query = UserQuery.new(films, options)
         render :index
       end
       

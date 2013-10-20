@@ -1,4 +1,5 @@
 class BasePresenter
+  include PageOptions
 
   def initialize(object, template)
     @object = object

@@ -5,7 +5,8 @@ module Api
       respond_to :json, :html
 
       def index
-        find_films friendships, :recent
+        options = paging_options sort_by: :recent, page_size: 50
+        @query = UserQuery.new(friendships, options)
       end
 
       def show

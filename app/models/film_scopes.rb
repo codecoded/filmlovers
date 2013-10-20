@@ -32,7 +32,7 @@ module FilmScopes
   end
 
   def search(query, field=:title)
-    self.where({title: /#{query}/i})
+    where({title: /#{query}/i})
   end 
 
   def in_cinemas
@@ -50,6 +50,24 @@ module FilmScopes
     # ids <<  Rotten::Movies.upcoming.map(&:film_id).compact.uniq
     # Film.in id: ids.flatten
   end
+
+  def filter(filters={})
+    return self if filters.blank?
+    query = self
+    if filters[:year]
+      query = query.by_year filters[:year]
+    else
+      query = query.by_decade filters[:decade] if filters[:decade]
+    end
+    query = query.by_genres filters[:genres] if filters[:genres]    
+    query.without(:details, :providers)    
+  end
+
+  def self.page_results(sort_order, page_size=AdminConfig.instance.page_size)
+    order_by(sort_order).page(page_no).per page_size
+  end
+
+ 
 
   # def cast_search(name)
   #   Film.only(:poster_path, :name, :title, :release_date, :trailers).where('casts.cast.name'=>/#{name}/i)

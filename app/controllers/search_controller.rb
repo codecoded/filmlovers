@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   respond_to :html, :json, :js
   
   def index
-    @results = page_results apply_film_filters(Film.search(query)), :title 
+    @results = create_query(sort_by: :title).results
     render layout:nil if request.xhr?   
   end
 
@@ -11,17 +11,16 @@ class SearchController < ApplicationController
   end
 
   def smart
-    page_size = 30
-    @results = page_results searcher.search, :title
+    @query = create_query(sort_by: :title, page_size: 30)
 
     render json:[
       {
         header: {
           title: 'films search',
-          num: page_size,
-          limit: @results.count
+          num: 30,
+          limit: @query.results_count
         },
-        data:   @results.map do |film|
+        data:   @query.results.map do |film|
           {
             primary: film.title,
             secondary: film.release_date
@@ -39,4 +38,11 @@ class SearchController < ApplicationController
     @searcher ||= Searcher.new(query)
   end
 
+  protected
+
+  def create_query(options)
+    options = paging_options options
+    search_query = Film.filter(film_filters).search(query)
+    UserQuery.new(search_query, options)    
+  end
 end

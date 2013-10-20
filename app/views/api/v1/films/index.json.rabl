@@ -3,7 +3,7 @@ object false
 extends 'api/v1/shared/pages'
 
 node :films do 
-  @films.map do |film|
+  @query.results.map do |film|
     begin
       presenter = present(film.details, film.details_presenter)
       {

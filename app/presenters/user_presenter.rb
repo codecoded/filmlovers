@@ -50,4 +50,10 @@ class UserPresenter < BasePresenter
     return nil unless current_user
     @current_friendship ||= current_user.friendship_with user
   end
+
+
+  def actioned_films
+    options = paging_options.merge sort_by: :recent
+    UserQuery.new(user.films.actioned, options).results
+  end
 end

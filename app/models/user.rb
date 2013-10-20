@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Gravtastic
+  extend Queryable
+  extend FilmScopes
 
   attr_accessible :avatar, :username, :email, :first_name, :last_name, :password, :confirm_password, :name, :gender, :passports
 
@@ -95,7 +97,7 @@ class User
   end
 
   def self.find_by_passport(passport)
-    User.where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first || User.new(passports:[passport])
+    where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first || new(passports:[passport])
   end
 
   def self.from_facebook_token(access_token)
@@ -114,10 +116,7 @@ class User
      BSON::ObjectId.legal?(id) ? User.find(id) : User.find_by(username: id)
   end
 
-  def self.search(query)
-    where({username: /#{query}/i})
-  end 
-
+ 
   def upsert_passport(passport)
     current_passport = find_passport(passport.uid, passport.provider)
     current_passport ? current_passport.update_from_passport(passport) : (passports << passport) 
@@ -207,8 +206,7 @@ class User
       self.authentication_token = generate_authentication_token
     end
   end
- 
- 
+
   def to_param
     username? ? username : id.to_s
   end

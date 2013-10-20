@@ -16,7 +16,9 @@ module Api
 
       def users
         user_query = search_query ? User.search(search_query) : User
-        @users ||= find_films user_query.without(:films_lists), :username
+
+        options = paging_options sort_by: :username, without: [:films_lists, :friendships, :passports, :mobile_devices], page_size: 50
+        @query = UserQuery.new(user_query.filter(user_filters), options)
       end
 
       def user

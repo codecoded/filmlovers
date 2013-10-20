@@ -1,6 +1,7 @@
 module Api
   module V1
     class BaseController < ActionController::Base
+      include PageOptions
 
       layout false
       respond_to :json
@@ -18,55 +19,11 @@ module Api
         @current_user
       end
 
-      def find_films(query, sort_by=:popularity)
-        @films = page_results query, sort_by
-        @films_count = @films.count
-        @total_pages = (@films_count / page_size) + 1
-        @films
-      end
-
-
       def skip_trackable
         request.env['devise.skip_trackable'] = true
       end
 
-      def page_results(query, default_sort_order, page_size=page_size)
-        @order = sort_by || default_sort_order.to_s
-        sort_order = sort_orders[@order]
-        query.order_by(sort_order).page(page_no).per page_size
-      end
-
-      def page_size
-        @page_size ||= AdminConfig.instance.page_size
-      end
-
-      def page_no
-        @page_no ||= params[:page] ? params[:page].to_i : 1
-      end
-
-      def by
-        @by ||= params[:by] || :desc
-      end
-
-      def sort_by
-        @sort_by ||= params[:sort_by]
-      end
-
-      def sort_orders
-        {
-          'username'              =>  [:username, :asc],
-          'title'                 =>  [:title, :asc], 
-          'recent'                =>  [:updated_at, :desc],
-          'release_date'          =>  [:release_date, :desc],
-          'earliest_release_date' =>  [:release_date, :asc],
-          'popularity'            =>  [:popularity, :desc],
-          'watched'               =>  ['counters.watched', :desc], 
-          'loved'                 =>  ['counters.loved', :desc],
-          'owned'                 =>  ['counters.owned', :desc],
-          'recent_action'         =>  ['actions.updated_at', :desc]
-        }
-      end
-      helper_method :current_user, :page_no, :by, :order, :page_size, :sort_by
+      helper_method :current_user
     end
   end
 end

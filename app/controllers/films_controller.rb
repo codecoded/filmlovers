@@ -1,4 +1,3 @@
-require 'results_page'
 class FilmsController < ApplicationController
 
   respond_to :html, :json
@@ -54,11 +53,12 @@ class FilmsController < ApplicationController
 
   protected
 
-
-  def render_films(query, default_sort_order)
-    @sort_order = sort_by || default_sort_order
-    @films ||= page_results apply_film_filters(query), @sort_order
-    request.xhr? ? render('index', layout:nil) : render('index')
+  def render_films(films, default_sort_order)
+    options = paging_options sort_by: default_sort_order, without: [:providers, :counters]
+    films = films.filter(film_filters) if !film_filters.empty?
+    @query = UserQuery.new(films, options)
+    @films ||= @query.results
+    render('index')
   end
 
 

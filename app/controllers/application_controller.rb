@@ -1,53 +1,10 @@
 class ApplicationController < ActionController::Base
+  include PageOptions
   protect_from_forgery
 
   before_filter :facebook_authenticate, unless: -> {params[:signed_request].nil?}
 
-  protected
-
-  def page_results(query, default_sort_order, page_size=AdminConfig.instance.page_size)
-    sort_order = sort_orders[sort_by || default_sort_order.to_s]
-    query.order_by(sort_order).page(page_no).per page_size
-  end
-
-
-  def apply_film_filters(query)
-    if params[:year]
-      query = query.by_year params[:year] 
-    else
-      query = query.by_decade params[:decade] if params[:decade]
-    end
-    query = query.by_genres genre if genre    
-    query.without(:details, :providers)
-  end
-
-  def page_no
-    params[:page] ? params[:page].to_i : 1
-  end
-
-  def sort_by
-    params[:sort_by]
-  end
-
-  def genre
-    @genre ||= params[:genres]
-  end
-
-
-  def sort_orders
-    {
-      'title'                 =>  [:_id, :asc], 
-      'release_date'          =>  [:release_date, :desc],
-      'earliest_release_date' =>  [:release_date, :asc],
-      'popularity'            =>  [:popularity, :desc],
-      'watched'               =>  ['counters.watched', :desc], 
-      'loved'                 =>  ['counters.loved', :desc],
-      'owned'                 =>  ['counters.owned', :desc] 
-    }
-  end
-
   private
-
 
   def facebook_authenticate
     user = FacebookAuth.authenticate(params[:signed_request])
@@ -56,8 +13,7 @@ class ApplicationController < ActionController::Base
 
   def redirect_to_auth
     render('facebook/oauth_redirect', layout:nil)
-  end
-  
+  end 
 
   def logged_in?
     user_signed_in?
@@ -83,5 +39,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_user, :user_service, :username, :logged_in?, :current_url, :page_no
+  helper_method :current_user, :user_service, :username, :logged_in?, :current_url
 end

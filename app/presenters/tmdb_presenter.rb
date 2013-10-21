@@ -279,12 +279,24 @@ class  TmdbPresenter < BasePresenter
   end
 
   def similar
-    @similar = similar_movies.map  do |f| 
+    movies = similar_movies.map  do |f| 
       film = Tmdb::Movie.new(f)
       film unless film.not_allowed?
     end
 
-    Film.find @similar.compact.map(&:title_id)
+    @similar ||= Film.find movies.compact.map(&:title_id).to_a
+  end
+
+  def similar_films
+    return {} unless similar?
+    similar.map do |f|
+      presenter = present(f, FilmPresenter)
+      {
+        id: presenter.id,
+        title: presenter.title,
+        poster: presenter.poster_uri,
+      }
+    end
   end
 
   def starring(count=3)

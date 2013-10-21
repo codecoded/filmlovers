@@ -42,6 +42,7 @@ node :film do
       backdrops: presenter.backdrops_urls_for(:medium),
       posters: presenter.posters_urls_for(:medium)
     },
+    similar: presenter.similar_films, 
     cast: if presenter.cast? then presenter.credits.cast.map {|p| {url: nil, name: p.name, description: p.character, image: p.profile('w92')} } end,
     crew: if presenter.crew? then presenter.credits.crew.map {|p| {url: nil, name: p.name, description: p.job, image: p.profile('w92')} } end,
     languages: if presenter.languages? then presenter.languages.map {|l| l['name']} end,

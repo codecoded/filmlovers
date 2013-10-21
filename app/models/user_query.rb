@@ -16,10 +16,12 @@ class UserQuery
   end
 
   def results?
+    Log.debug __method__
     !results.empty?
   end
 
   def results_count
+    Log.debug __method__
     @results_count ||= all_results.count
   end
 
@@ -36,7 +38,8 @@ class UserQuery
   end
 
   def results(options={})
-    all_results.page(page).per(page_size)
+    Log.debug __method__
+    @results ||= all_results.page(page).per(page_size).to_a
   end
 
   def sort_order

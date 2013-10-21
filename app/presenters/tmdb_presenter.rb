@@ -284,7 +284,7 @@ class  TmdbPresenter < BasePresenter
       film unless film.not_allowed?
     end
 
-    @similar ||= Film.find movies.compact.map(&:title_id).to_a
+    @similar ||= Film.find movies.compact.map(&:title_id)
   end
 
   def similar_films

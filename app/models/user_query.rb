@@ -39,7 +39,7 @@ class UserQuery
 
   def results(options={})
     Log.debug __method__
-    @results ||= all_results.page(page).per(page_size).to_a
+    @results ||= all_results.page(page).per(page_size)
   end
 
   def sort_order

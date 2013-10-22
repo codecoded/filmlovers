@@ -25,7 +25,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      # uri: <%= ENV['MONGODB_URL'] %>
+      # uri: <%= ENV['MONGOHQ_URL'] %>
       database: filmlovers_development
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)

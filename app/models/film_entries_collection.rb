@@ -26,6 +26,10 @@ class FilmEntriesCollection
     entries[film]
   end
 
+  def in(film_ids)
+    entries.in(film_id: film_ids)
+  end
+
   def select(film_ids)
     actioned.in(film_id: film_ids)
   end

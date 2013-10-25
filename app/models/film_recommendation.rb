@@ -15,12 +15,14 @@ class FilmRecommendation
   index({ friend: 1, state: 1},   { unique: true, name: "recommendation_index", background: true })
 
   scope :sent, ->{where(sent: true)}
+
   state_machine :initial => :pending do
-    event(:recommend)    { transition :pending => :recommended}
-    event(:receive)      { transition :pending => :received}
-    event(:unrecommend)  { transition :visible => :removed }
-    event(:hide)         { transition :visible => :hidden}
-    event(:show)         { transition :hidden  => :visible }
+    event(:recommend)    { transition :pending      => :recommended }
+    event(:receive)      { transition :pending      => :received    }
+    event(:unrecommend)  { transition :recommended  => :removed     }
+    event(:approve)      { transition :received     => :approved    }
+    event(:hide)         { transition :received     => :hidden      }
+    event(:show)         { transition :hidden       => :received    }
   end
 
   def self.recommended?(friend)

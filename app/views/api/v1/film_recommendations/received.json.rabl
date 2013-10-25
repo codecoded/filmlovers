@@ -2,24 +2,28 @@ object false
 
 extends 'api/v1/shared/header'
 
-node :recommendations do
-  @received.map do |recommendation|
-    film_presenter = present(recommendation.film.details, recommendation.recommendable.details_presenter)
-    friend_presenter = present(recommendation.friend, UserPresenter)
-    {      
+node :film_recommendations do
+  @film_entries.map do |film_entry|
+    presenter = present(Film.new(film_entry.film), FilmPresenter)
+    {
       film:{
-        id: film_presenter.film.id,
-        title: film_presenter.film.title,
-        poster: film_presenter.poster_uri,
-        backdrop: film_presenter.backdrop_uri,
-        overview: film_presenter.overview
+        id: film_entry.film_id,
+        title: presenter.title,
+        poster: presenter.poster_uri,
+        release_date: presenter.release_date,
       },
-      friend:{
+    recommendations: 
+      film_entry.recommendations.map do |recommendation|
+      friend_presenter = present(recommendation.friend, UserPresenter)
+      {
+        id: recommendation.id,
+        sent: recommendation.sent,
         username: friend_presenter.username,
         friend_url: api_v1_user_path(friend_presenter.user.id),
-        avator_uri: friend_presenter.avatar_url
+        avator_uri: friend_presenter.avatar_url,
+        comment: recommendation.comment
       }
+      end  
     }
   end
 end
-

@@ -6,6 +6,10 @@ module Api
         @film_entries ||= current_user.films.recommended
       end
 
+      def received
+        @film_entries ||= current_user.films.recommended.where('recommendations.state'=>'received')
+      end
+
       def create
         return head 400 if friend_ids.nil?
         @recommendations = film_entry.recommend_to(friendships.where(:friend_id.in => friend_ids), comment).compact

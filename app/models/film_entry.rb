@@ -93,7 +93,7 @@ class FilmEntry
   end
 
   def self.film_fields 
-    ['_id', 'title', 'poster', 'release_date']
+    ['_id', 'title', 'poster', 'release_date', 'genres', 'release_date_country', 'trailer', 'provider', 'provider_id']
   end
 
   def self.sort_orders

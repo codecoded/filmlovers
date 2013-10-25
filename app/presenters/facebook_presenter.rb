@@ -5,11 +5,11 @@ class FacebookPresenter
     sender = recommendation.friend
 
     if !sender.channels[:facebook]
-      return "#{recommendation.sender.username} recommends #{recommendation.film.title}. #{recommendation.comment}" 
+      return "#{sender.username} recommends #{recommendation.film.title}. #{recommendation.comment}" 
     end
 
-    if recommendation.receiver.facebook_events.recent.count < 2
-      "@[#{recommendation.sender.passport_for(:facebook).uid}] recommends #{recommendation.film.title}. #{recommendation.comment}"
+    if receiver.facebook_events.recent.count < 2
+      "@[#{sender.passport_for(:facebook).uid}] recommends #{recommendation.film.title}. #{recommendation.comment}"
     else
       "You have several new film recommendations! Click here to discover new films to watch."
     end

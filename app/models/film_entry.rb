@@ -20,6 +20,7 @@ class FilmEntry
   validates_presence_of   :user_id, message: 'A user id must be associated to a film entry'
   validates_presence_of   :film_id, message: 'A film id must be associated to a film entry'
 
+
   def self.fetch_for(user, film)
     find_by(user_id: user.id, film_id: film.id) || 
     create!(user_id: user.id, user: user.attributes.slice(*user_fields), film_id: film.id, film: film.attributes.slice(*film_fields))
@@ -40,6 +41,14 @@ class FilmEntry
   def self.page_and_sort(sort_by=:recent_action, page_no=1, page_size=AdminConfig.instance.page_size)
     sort_order = sort_orders[sort_by.to_s]
     order_by(sort_order).page(page_no).per(page_size)
+  end
+
+  def self.recommended
+    where(:recommendations.exists => true)
+  end
+
+  def self.actioned
+    where(:actions.not => {"$size"=>0}, :actions.exists => true)
   end
 
   def fetch_film

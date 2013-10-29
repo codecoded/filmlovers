@@ -16,10 +16,12 @@ class FilmRecommendation
 
   scope :sent, ->{where(sent: true)}
 
+  # total sent => recommended
+  # total received => recieved + approved + hidden
   state_machine :initial => :pending do
     event(:recommend)    { transition :pending      => :recommended }
-    event(:receive)      { transition :pending      => :received    }
     event(:unrecommend)  { transition :recommended  => :removed     }
+    event(:receive)      { transition :pending      => :received    }    
     event(:approve)      { transition :received     => :approved    }
     event(:hide)         { transition :received     => :hidden      }
     event(:show)         { transition :hidden       => :received    }
@@ -28,6 +30,8 @@ class FilmRecommendation
   def self.recommended?(friend)
     where(friend: friend).exists?
   end
+
+
 
   def self.recent(limit=5)
     order_by(:created_at.desc).limit(limit)

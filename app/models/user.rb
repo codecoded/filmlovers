@@ -74,6 +74,7 @@ class User
   # has_many :film_user_actions, validate: false, dependent: :destroy
   # has_many :recommendations
   has_many :facebook_events
+  has_many :film_entries
 
   
   mount_uploader :avatar, AvatarUploader  

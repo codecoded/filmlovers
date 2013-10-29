@@ -18,6 +18,16 @@ staging:
   options:
     raise_not_found_error: false
     protect_sensitive_fields: false
+digitalocean:   
+  sessions:
+    default:
+      uri: <%= ENV['MONGODB_URL'] %>
+      options:
+        skip_version_check: true
+        safe: false
+  options:
+    raise_not_found_error: false
+    protect_sensitive_fields: false    
 development:
   # Configure available database sessions. (required)
   sessions:
@@ -55,7 +65,7 @@ development:
     # allow_dynamic_fields: true
 
     # Enable the identity map, needed for eager loading. (default: false)
-    # identity_map_enabled: false
+    identity_map_enabled: true
 
     # Includes the root model name in json serialization. (default: false)
     # include_root_in_json: false

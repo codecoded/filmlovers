@@ -13,7 +13,7 @@ namespace :database do
 
     task :upload_to_do_staging => :environment do
       system 'mongodump --host localhost -db filmlovers_development -o db/deploys/'
-      system 'mongorestore -h 98.199.127.51 -u heroku -p 3b125879b9b3b24823742b3774411831 --drop -d app16665874 db/deploys/filmlovers_development'
+      system 'mongorestore -h 198.199.127.51 -u heroku -p 3b125879b9b3b24823742b3774411831 --drop -d app16665874 db/deploys/filmlovers_development'
     end
 
   end

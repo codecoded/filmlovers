@@ -3,11 +3,19 @@ module Api
     class FilmRecommendationsController < BaseController
 
       def index
-        @film_entries ||= current_user.films.recommended
+        @film_entries ||= user_films.recommended
       end
 
       def received
-        @film_entries ||= current_user.films.recommended.where('recommendations.state'=>'received')
+        @film_entries ||= user_films.received_recommendations
+      end
+
+      def sent
+        @film_entries ||= user_films.sent_recommendations
+      end
+
+      def all_received
+        @film_entries ||= user_films.all_received_recommendations
       end
 
       def create
@@ -20,6 +28,10 @@ module Api
 
       protected
 
+      def user_films
+        current_user.films
+      end
+      
       def film_recommendation
         params[:id] ? film_entry.find_by(recommendations: params[:id]) : film_entry.recommendations.new
       end

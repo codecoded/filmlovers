@@ -51,6 +51,13 @@ production:
   pool: 5
   host: localhost
 
+digitalocean:
+  adapter: postgresql
+  encoding: unicode
+  database: filmlovers_production
+  pool: 5
+  host: localhost
+  
 staging:
   adapter: postgresql
   encoding: unicode

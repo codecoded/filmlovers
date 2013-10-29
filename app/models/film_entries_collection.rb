@@ -11,11 +11,23 @@ class FilmEntriesCollection
   end
 
   def actioned
-    entries.where(:actions.not => {"$size"=>0}, :actions.exists => true)
+    entries.actioned
   end
 
   def recommended
-    entries.where(:recommendations.exists => true)
+    entries.recommended
+  end
+
+  def received_recommendations
+    recommended.where('recommendations.state'=>:received)
+  end
+
+  def sent_recommendations
+    recommended.where('recommendations.state'=>'recommended')
+  end
+
+  def all_received_recommendations
+    recommended.in('recommendations.state'=>[:received, :hidden, :approved] )
   end
 
   def count

@@ -1,7 +1,8 @@
 module RemoteUnzipper
   extend self
 
-  require 'zip/zip'
+  require 'zipruby'
+  require 'fileutils'
 
   def download_unzip_import_file(uri)
     fetch_file URI(uri) do |zipped_file|
@@ -31,13 +32,16 @@ module RemoteUnzipper
 
 
   def unzip(filename)
-    Zip::ZipFile.open(filename) do |zipfile|
-      zipfile.each do |file|
-        path = Tempfile.new([file.name,'.txt'],"#{Rails.root}/tmp").path
-        Log.info "Unzipped #{filename} to #{path}"
-        zipfile.extract(file.name, path) {true}
+    Zip::Archive.open(filename) do |archive|
+      archive.each do |zipfile|
+        path = Tempfile.new([zipfile.name,'.txt'],"#{Rails.root}/tmp").path
+        open(path, 'wb') do |f|
+          f << zipfile.read
+        end
+        Log.info "Unzipped #{zipfile.name} to #{path}"
         yield path if block_given?
       end
+
     end
   end
 

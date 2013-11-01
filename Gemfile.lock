@@ -249,7 +249,6 @@ GEM
       mime-types (>= 1.16)
     ruby-hmac (0.4.0)
     ruby-prof (0.13.0)
-    rubyzip (0.9.9)
     sass (3.2.12)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -295,6 +294,7 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.3)
       rack (>= 1.0)
+    zipruby (0.3.6)
 
 PLATFORMS
   ruby
@@ -349,7 +349,6 @@ DEPENDENCIES
   rapns
   rest-client
   ruby-prof
-  rubyzip
   sass-rails (~> 3.2.3)
   simple_form
   sitemap_generator
@@ -359,3 +358,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unf
   unicorn
+  zipruby

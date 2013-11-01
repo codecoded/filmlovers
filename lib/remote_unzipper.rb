@@ -6,7 +6,7 @@ module RemoteUnzipper
   def download_unzip_import_file(uri)
     fetch_file URI(uri) do |zipped_file|
       unzip zipped_file do |unzipped_filename|
-        yield unzipped_filename
+        yield unzipped_filename if block_given?
       end
     end    
   end
@@ -15,7 +15,8 @@ module RemoteUnzipper
     uri = URI(url)
     Net::HTTP.start(uri.host) do |http|
       Log.info "Downloading #{url}"
-      yield store_zip_file(http.get(uri.path)) if block_given?
+      file = store_zip_file(http.get(uri.path))
+      yield file if block_given?
     end
   end
 

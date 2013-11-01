@@ -1,10 +1,11 @@
 module AppConfig
   extend self
 
-  attr_accessor :ios_app, :page_size
+  attr_accessor :ios_app, :page_size, :itunes_affiliate
 
   @ios_app    = 'filmlovr_app'
   @page_size  = 21
+  @itunes_affiliate = '10lne2'
 
   def setup(&block)
     yield self if block_given?

@@ -88,4 +88,18 @@ class FilmPresenter < BasePresenter
       end
   end
 
+  def provider_links
+    film.providers.map do |p|
+      {
+        id: p.id,
+        name: p.name,
+        link: p.link,
+        rating: p.rating
+      }
+    end
+  end
+
+
+
+
 end

@@ -21,4 +21,16 @@ class FilmProvider
   def klass
     @klass ||= "#{name.capitalize}::Movie".constantize
   end
+
+
+  def aff_link
+    case sym_name
+      when :apple; "#{link}&at=#{AppConfig.itunes_affiliate}"
+      else; link
+    end
+  end
+
+  def sym_name
+    name.downcase.to_sym
+  end
 end

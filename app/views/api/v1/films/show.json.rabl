@@ -56,7 +56,7 @@ node :film do
     {
       id: p.id,
       name: p.name,
-      link: p.link,
+      link: p.aff_link,
       rating: p.rating
     }
     end

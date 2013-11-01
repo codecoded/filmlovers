@@ -43,8 +43,8 @@ node :film do
       posters: presenter.posters_urls_for(:medium)
     },
     similar: presenter.similar_films, 
-    cast: if presenter.cast? then presenter.credits.cast.map {|p| {url: nil, name: p.name, description: p.character, image: p.profile('w92')} } end,
-    crew: if presenter.crew? then presenter.credits.crew.map {|p| {url: nil, name: p.name, description: p.job, image: p.profile('w92')} } end,
+    cast: if presenter.cast? then presenter.credits.cast.map {|p| {id: p.id, name: p.name, description: p.character, image: p.profile('w92')} } end,
+    crew: if presenter.crew? then presenter.credits.crew.map {|p| {id: p.id, name: p.name, description: p.job, image: p.profile('w92')} } end,
     languages: if presenter.languages? then presenter.languages.map {|l| l['name']} end,
     genres: if presenter.genres? then presenter.genres.map {|g| {url: category_api_v1_films_url(action: params[:action], genres: g), name:g['name']}} end,
     studios: if presenter.studios? then presenter.studios.map {|s| {url: '', name: s['name']}} end,

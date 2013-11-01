@@ -20,7 +20,7 @@ module RemoteUnzipper
   end
 
   def store_zip_file(response)
-    tmp_file = Tempfile.new([Time.now.to_i, '.zip'])
+    tmp_file = Tempfile.new([Time.now.to_i, '.zip'], "#{Rails.root}/tmp")
     tmp_file.binmode
     tmp_file.write response.body
     tmp_file.close
@@ -32,7 +32,7 @@ module RemoteUnzipper
   def unzip(filename)
     Zip::ZipFile.open(filename) do |zipfile|
       zipfile.each do |file|
-        path = Tempfile.new([file.name,'.txt']).path
+        path = Tempfile.new([file.name,'.txt'],"#{Rails.root}/tmp").path
         Log.info "Unzipped #{filename} to #{path}"
         zipfile.extract(file.name, path) {true}
         yield path if block_given?

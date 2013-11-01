@@ -1,6 +1,8 @@
 module RemoteUnzipper
   extend self
-  
+
+  require 'zip/zip'
+
   def download_unzip_import_file(uri)
     fetch_file URI(uri) do |zipped_file|
       unzip zipped_file do |unzipped_filename|

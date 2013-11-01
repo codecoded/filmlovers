@@ -8,6 +8,12 @@ module Apple
         end
       end
 
+      def import_pricing_from(url)
+        # RemoteUnzipper.download_unzip_import_file(url) do |filename|
+          AppleEpf::Parser.new(filename).process_rows {|row| Apple::Pricing.upsert row}
+        # end
+      end
+
     end
   end
 end

@@ -25,7 +25,7 @@ class FilmProvider
 
   def aff_link
     case sym_name
-      when :apple; "#{link}&at=#{AppConfig.itunes_affiliate}".gsub('/video/','/movie/')
+      when :apple; "#{link}&at=#{AppConfig.itunes_affiliate}".gsub('/video/','/gb/movie/')
       else; link
     end
   end

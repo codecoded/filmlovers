@@ -4,7 +4,7 @@ class Person
   field :_id, type: String, default: ->{ id }
   field :fetched, type: DateTime, default: nil
   
-  has_many :recommendations, as: :recommendable
+  # has_many :recommendations, as: :recommendable
 
   def self.fetch(id)
     PersonRepository.find id

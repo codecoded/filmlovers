@@ -3,7 +3,7 @@ class PersonPresenter < BasePresenter
 
   presents :person
 
-  def_delegators :person, :name, :has_profile?, :id, :biography, :portfolio
+  def_delegators :person, :name, :has_profile?, :id, :biography, :portfolio, :place_of_birth, :profile
 
 
   # def films
@@ -26,15 +26,15 @@ class PersonPresenter < BasePresenter
     @films_worked_on ||= films_for('crew').compact
   end  
 
-  def films_for(role)
-    person.credits[role].map do |film_details| 
-      movie = Tmdb::Movie.new(film_details)
-      next if movie.not_allowed?
-      next unless film = Film.find(movie.title_id)
-      film.details = film_details 
-      FilmPresenter.new(film, self)
-    end
-  end
+  # def films_for(role)
+  #   person.credits[role].map do |film_details| 
+  #     movie = Tmdb::Movie.new(film_details)
+  #     next if movie.not_allowed?
+  #     next unless film = Film.find(movie.title_id)
+  #     film.details = film_details 
+  #     FilmPresenter.new(film, self)
+  #   end
+  # end
 
   def films_for(role)
     person.credits[role].map do |film_details| 

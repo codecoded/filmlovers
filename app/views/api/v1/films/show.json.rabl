@@ -52,6 +52,14 @@ node :film do
     original_title: if presenter.original_title != presenter.title then presenter.original_title end, 
     status: if presenter.status != 'Released' then presenter.status end,
     popularity: presenter.popularity,
+    providers: presenter.film.providers.map do |p|
+    {
+      id: p.id,
+      name: p.name,
+      link: p.link,
+      rating: p.rating
+    }
+    end
   }
 end
 

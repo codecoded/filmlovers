@@ -9,6 +9,10 @@ module FilmScopes
     where('details.adult' => true)
   end
 
+  def find_by_provider(name, id)
+    find_by('providers.name'=> name, 'providers._id' => id)
+  end
+
   def by_provider(name)
     where('providers.name'=> name)
   end

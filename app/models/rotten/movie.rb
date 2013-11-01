@@ -3,7 +3,7 @@ module Rotten
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    def name
+    def identifier
       self.class.name.deconstantize
     end    
 
@@ -33,6 +33,16 @@ module Rotten
     def imdb_id
       "tt#{self['alternate_ids']['imdb']}" if imdb_id?
     end
+
+
+    def presenter
+      @presenter ||= RottenPresenter.new self, Rotten::Movie
+    end
+
+    def directors_name
+      presenter.director if presenter.director?
+    end
+
 
     def title_id
       Film.create_uuid(title, year)
@@ -92,7 +102,7 @@ module Rotten
 
     protected
     def create_film
-      Log.debug("Creating film from #{name} data: #{title_id}")
+      Log.debug("Creating film from #{identifier} data: #{title_id}")
       Film.create_from(self)
     end
 

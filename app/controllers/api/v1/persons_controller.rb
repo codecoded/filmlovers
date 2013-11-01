@@ -1,10 +1,9 @@
 module Api
   module V1
-    class PersonsController < FilmsController
+    class PersonsController < BaseController
 
       def show
-        @person_view = PersonPresenter.new current_user, Person.fetch(params[:id])
-        render_template
+        @presenter = PersonPresenter.new Person.fetch(params[:id]), Person
       end
       
       protected

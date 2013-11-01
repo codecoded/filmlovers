@@ -46,6 +46,10 @@ gem "mini_magick"
 gem "fog"
 gem 'darstellung'
 gem 'rapns'
+gem 'chronic'
+gem 'unf'
+gem 'curb'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

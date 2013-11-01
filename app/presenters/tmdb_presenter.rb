@@ -250,7 +250,7 @@ class  TmdbPresenter < BasePresenter
   # end
 
   def crew_member(job)
-    return '' unless crew?
+    return nil unless crew?
     credits.crew.find {|member| member['job']==job}
   end
 

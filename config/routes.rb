@@ -21,6 +21,13 @@ Filmlovers::Application.routes.draw do
       resources :persons,                 only: [:show]
       resources :mobile_devices,          only: [:create, :update]
 
+      resources :persons, only: [:show, :index] do
+        collection do 
+          get 'search'
+          get 'quick_search'
+        end
+      end
+  
       resources :films,                   only: [:show, :index] do
         resources :film_actions,          only: [:show, :update, :destroy], path: '',  as: 'action', constraints: { id: /watched|loved|owned/ }
         get   'recommend', to: 'film_recommendations#new',     as: 'recommendation'

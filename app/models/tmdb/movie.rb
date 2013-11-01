@@ -15,7 +15,7 @@ module Tmdb
       fetch(id).set_film_provider!
     end
 
-    def name
+    def identifier
       self.class.name.deconstantize
     end    
 
@@ -78,6 +78,14 @@ module Tmdb
       else
         initial_release_date
       end
+    end
+
+    def presenter
+      @presenter ||= TmdbPresenter.new self, Tmdb::Movie
+    end
+
+    def directors_name
+      presenter.director.name if presenter.director?
     end
 
     def releases

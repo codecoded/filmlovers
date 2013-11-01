@@ -26,7 +26,7 @@ module Imdb
       find_all(ids).map &:film
     end
 
-    def name
+    def identifier
        self.class.name.deconstantize
     end
 
@@ -37,7 +37,7 @@ module Imdb
     end
 
     def find_film
-      Film.where(_id: title_id).first || Film.find_by_provider(name, id)
+      Film.where(_id: title_id).first || Film.find_by_provider(identifier, id)
     end
 
     def id

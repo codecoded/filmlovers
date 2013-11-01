@@ -203,12 +203,17 @@ class  RottenPresenter < BasePresenter
     film_details['abridged_cast']
   end
 
+  def directors
+    film_details['abridged_directors']
+  end
+
+
   def director
-    
+    directors[0]['name'] if director?
   end
 
   def director?
-     
+    directors and directors.length > 0
   end
 
   # def director

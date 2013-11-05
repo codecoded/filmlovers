@@ -28,7 +28,7 @@ module Tmdb
     end
 
     def find_film
-      Film.find title_id
+      Film.find title_id if title_id
     end
 
     def imdb_id
@@ -44,7 +44,7 @@ module Tmdb
     end
 
     def title
-      self['title']
+      self['title'] || self['original_title']
     end
 
     def year
@@ -122,7 +122,7 @@ module Tmdb
     end
 
     def not_allowed?
-      !release_date || self['adult']
+      !release_date || self['adult'] || !title_id
     end
 
     def set_film_provider!

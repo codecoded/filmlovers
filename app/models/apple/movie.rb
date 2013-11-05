@@ -27,12 +27,14 @@ module Apple
     field :long_description, type:String
     field :episode_production_number, type:String
     field :title_id, type: String, default: ->{ Film.create_uuid(self.name, self.year) if self.year}
-
+    field :title_director, type: String
     index({ title_id: 1 }, { unique: true, name: "apple_title_id_index", background: true })
 
-    def self.upsert(row)
+    def self.import(row)
       i=0
-      new(export_date: row[i],
+      return unless movie?(row[1].to_i)
+       
+      create(export_date: row[i],
           id: row[i+=1],
           name: row[i+=1],
           title_version: row[i+=1],
@@ -53,7 +55,13 @@ module Apple
           p_line: row[i+=1],
           short_description: row[i+=1],
           long_description: row[i+=1],
-          episode_production_number: row[i+=1]).upsert
+          episode_production_number: row[i+=1])
+     Log.debug "#{row[2]}"
+     nil
+    end
+
+    def self.movie?(video_id)
+      GenreVideo.video_ids.include?(video_id)
     end
 
     def self.itunes_date(value)
@@ -82,6 +90,10 @@ module Apple
 
     def title
       name
+    end
+
+    def directors_name
+      artist_display_name
     end
 
     def year
@@ -126,6 +138,10 @@ module Apple
 
     def set_film_provider!
       film.update_film_provider self
+    end
+
+    def title_director_key
+      "#{title}__#{directors_name}".parameterize
     end
 
     protected

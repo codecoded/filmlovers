@@ -16,24 +16,39 @@ class Film
   field :popularity,            type: Float
   field :provider_id,           type: Integer
   field :provider,              type: String,   default: :tmdb
+  field :title_director,        type: String
 
   # embeds_one :details, class_name: "FilmDetails", autobuild: true
   embeds_one  :counters,  class_name: "FilmCounters", autobuild: true
-  embeds_many :providers, class_name: 'FilmProvider'
+  has_many    :providers, class_name: 'FilmProvider'
 
-  index({ release_date: -1 }, { unique: false, name: "film_release_date_index", background: true })
-  index({ title: -1 }, { unique: true, name: "film_title_index", background: true })
-  index({ genres: -1 }, { unique: false, name: "film_genres_index", background: true })
-  index({ popularity: -1 }, { unique: false, name: "film_popularity_index", background: true })
-  index({ provider: 1, provider_id: 1}, { unique: true, name: "provider_index", background: true })
+  index({ release_date: -1 },           { unique: false, name: "film_release_date_index", background: true })
+  index({ title: -1 },                  { unique: true,  name: "film_title_index", background: true })
+  index({ genres: -1 },                 { unique: false, name: "film_genres_index", background: true })
+  index({ popularity: -1 },             { unique: false, name: "film_popularity_index", background: true })
+  index({ provider: 1, provider_id: 1}, { unique: true,  name: "provider_index", background: true })
+  index({ title_director: -1 },         { unique: true,  name: "film_title_director_index", background: true })
 
-  index({ 'counters.watched'=> -1 }, { unique: false, name: "film_counters_watched", background: true })
-  index({ 'counters.loved'  => -1 }, { unique: false, name: "film_counters_loved", background: true })
-  index({ 'counters.owned'  => -1 }, { unique: false, name: "film_counters_owned", background: true })
+  index({ 'counters.watched'=> -1 },    { unique: false, name: "film_counters_watched", background: true })
+  index({ 'counters.loved'  => -1 },    { unique: false, name: "film_counters_loved", background: true })
+  index({ 'counters.owned'  => -1 },    { unique: false, name: "film_counters_owned", background: true })
 
   def self.create_uuid(title, year)
-    "#{title.gsub("'","").parameterize}-#{year}" 
+    title = title.gsub("'","").parameterize
+    "#{title}-#{year}"  if !title.empty?
   end
+
+
+  # def self.find_or_create_from_provider(movie, create=true)
+  #   film = find(movie.title_id) if movie.title_id
+  #   film = if !film and create
+  #     create_from(movie) unless movie.not_allowed?
+  #   end
+  #   return unless film
+  #   film.add_provider(movie)
+  #   film.provider_by(:Imdb, movie.imdb_id).save if movie.imdb_id?
+  #   film
+  # end
 
   def self.create_from(provider)
     Log.debug("Creating film '#{provider.title_id}' from provider '#{provider.identifier}-#{provider._id}'")
@@ -50,10 +65,14 @@ class Film
       popularity: provider.popularity,
       classification: provider.classification,
       provider_id: provider._id, 
-      provider: provider.identifier) 
+      provider: provider.identifier,
+      title_director: title_director_key) 
     film.counters.save
     film 
+  rescue 
+    Log.error "Could not create film of id: #{provider.id}, title_id: #{provider.title_id}"
   end
+
 
   def entries
     @entries ||= FilmEntry.where(film_id: self.id)
@@ -101,15 +120,19 @@ class Film
     providers.find_by name: identifier
   end
 
-  def add_provider(provider)
-    return if has_provider? provider.identifier
-    provider_by(provider.identifier, provider.id).tap do |film_provider|
-      film_provider.link        = provider.link || film_provider.link
-      film_provider.rating      = provider.rating || film_provider.rating
-      film_provider.fetched_at  = Time.now.utc
+  def add_provider(movie)
+    # return if has_provider? provider.identifier
+    provider_by(movie.identifier, movie.id).tap do |film_provider|
+      film_provider.link            = movie.link || film_provider.link
+      film_provider.rating          = movie.rating || film_provider.rating
+      film_provider.fetched_at      = Time.now.utc
       film_provider.save
     end    
     self
+  end
+
+  def title_director_key
+    "#{title}__#{director}".parameterize
   end
 
   def set_release_date(date=nil, country)

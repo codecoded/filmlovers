@@ -13,6 +13,7 @@ module Apple
 
     def self.import(row)
       i=0
+      return unless movie?(row[1].to_i)
       create(export_date: row[i],
           genre_id: row[i+=1],
           video_id: row[i+=1],
@@ -20,5 +21,16 @@ module Apple
           )
     end 
 
+    def self.movie_genre_ids
+       @movie_genre_ids ||= Apple::Genre.where(parent_id: 33).map &:genre_id
+    end
+
+    def self.movie?(genre_id)
+      genre_id == 33 or movie_genre_ids.include?(genre_id)
+    end
+
+    def self.video_ids
+      @video_ids ||= distinct(:video_id).to_a
+    end
   end
 end

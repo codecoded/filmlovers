@@ -45,5 +45,13 @@ module Apple
       self.class.name.deconstantize
     end    
 
+    def self.storefront_ids_for(video_id)
+      ids = where(video_id: video_id).map(&:storefront_id)
+      ids.empty? ? nil : ids.flatten.compact
+    end
+
+    def video
+      @video ||= Apple::Movie.find video_id
+    end
   end
 end

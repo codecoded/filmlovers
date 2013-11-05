@@ -4,7 +4,7 @@ class FilmPresenter < BasePresenter
   presents :film
 
 
-  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?, :year
+  def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?, :year, :director
 
   def film_entry
     @film_entry ||= current_user.films.find film
@@ -57,6 +57,10 @@ class FilmPresenter < BasePresenter
     @poster_sizes  ||= {small: 'w90', medium: 'w185', large: 'w342', original: 'original'}
   end
 
+  def backdrop_sizes
+    @backdrop_sizes  ||= {small: 'w300', medium: 'w780', large: 'w1280', original: 'original'}
+  end
+
   def poster_uri(size=:medium)
     return film.poster if (film.poster =~ /http/)
     AppConfig.image_uri_for [poster_sizes[size], film.poster] if film.poster?
@@ -70,6 +74,11 @@ class FilmPresenter < BasePresenter
     end
 
     image_tag image_src, :title=>film.title, alt: "poster for #{film.title}"
+  end
+
+  def backdrop_uri(size=:original)
+    return film.backdrop if (film.backdrop =~ /http/)
+    AppConfig.image_uri_for [backdrop_sizes[size], film.backdrop] if film.backdrop?
   end
 
   def poster_link

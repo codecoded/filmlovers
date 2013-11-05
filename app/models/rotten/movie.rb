@@ -72,6 +72,10 @@ module Rotten
       self['posters']['detailed'] if self['posters']
     end
 
+    def backdrop
+    end
+    
+
     def imdb_id?
       self['alternate_ids'] and self['alternate_ids']['imdb']
     end

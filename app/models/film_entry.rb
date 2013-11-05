@@ -51,6 +51,11 @@ class FilmEntry
     where(:actions.not => {"$size"=>0}, :actions.exists => true)
   end
 
+  def update_film
+    film_details = fetch_film
+    update_attribute :film, film_details.attributes.slice(*FilmEntry.film_fields)
+  end
+
   def fetch_film
     @film ||= Film.find(film_id)
   end
@@ -102,7 +107,7 @@ class FilmEntry
   end
 
   def self.film_fields 
-    ['_id', 'title', 'poster', 'release_date', 'genres', 'release_date_country', 'trailer', 'provider', 'provider_id']
+    ['_id', 'title', 'poster', 'release_date', 'genres', 'release_date_country', 'trailer', 'provider', 'provider_id', 'director', 'backdrop']
   end
 
   def self.sort_orders

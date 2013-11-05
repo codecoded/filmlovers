@@ -11,6 +11,7 @@ class Film
   field :release_date_country,  type: String
   field :fetched_at,            type: DateTime, default: nil
   field :poster,                type: String
+  field :backdrop,              type: String
   field :trailer,               type: String
   field :genres,                type: Array
   field :popularity,            type: Float
@@ -106,6 +107,10 @@ class Film
 
   def trailer?
     trailer
+  end
+
+  def backrop?
+    backrop
   end
 
   def has_provider?(name)

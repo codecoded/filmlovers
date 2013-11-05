@@ -67,6 +67,10 @@ module Tmdb
       self['poster_path']
     end
 
+    def backdrop
+      self['backdrop_path']
+    end
+
     def initial_release_date
       return unless self['release_date']
       self['release_date'].to_date

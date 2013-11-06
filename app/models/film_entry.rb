@@ -53,6 +53,7 @@ class FilmEntry
 
   def update_film
     film_details = fetch_film
+    return unless film_details
     update_attribute :film, film_details.attributes.slice(*FilmEntry.film_fields)
   end
 

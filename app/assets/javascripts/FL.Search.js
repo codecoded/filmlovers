@@ -18,6 +18,7 @@ FL.Search = {
       fillBox: true,
       fillBoxWith: 'primary',
       executeCode: false,
+      timeoutLength: 100
     });
 
   },

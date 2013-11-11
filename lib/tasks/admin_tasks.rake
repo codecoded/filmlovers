@@ -105,15 +105,18 @@ namespace :admin do
   desc 'AW data feed'
   task :lovefilm_download => :environment do
     "http://datafeed.api.productserve.com/datafeed/download/apikey/1f1765b2311360c1f37fc5807d3b484c/mid/2605/columns/merchant_id,merchant_name,aw_product_id,merchant_product_id,product_name,description,category_id,category_name,merchant_category,aw_deep_link,aw_image_url,search_price,currency,delivery_cost,merchant_deep_link,merchant_image_url,aw_thumb_url,brand_id,brand_name,commission_amount,commission_group,condition,delivery_time,display_price,ean,in_stock,is_hotpick,isbn,is_for_sale,language,merchant_thumb_url,model_number,mpn,parent_product_id,pre_order,product_type,promotional_text,rrp_price,specifications,stock_quantity,store_price,upc,valid_from,valid_to,warranty,web_offer/format/xml/compression/gzip/"
+    # "mongoimport --collection lovefilm_movies --file tmp/lovefilm/datafeed_171645.csv --type csv --db filmlovers_development --headerline"
   end
 
   desc 'Blink data feed'
   task :blinkbox_download => :environment do
     "http://datafeed.api.productserve.com/datafeed/download/apikey/1f1765b2311360c1f37fc5807d3b484c/mid/2481/columns/merchant_id,merchant_name,aw_product_id,merchant_product_id,product_name,description,category_id,category_name,merchant_category,aw_deep_link,aw_image_url,search_price,currency,delivery_cost,merchant_deep_link,merchant_image_url,aw_thumb_url,brand_id,brand_name,commission_amount,commission_group,condition,delivery_time,display_price,ean,in_stock,is_hotpick,isbn,is_for_sale,language,merchant_thumb_url,model_number,mpn,parent_product_id,pre_order,product_type,promotional_text,rrp_price,specifications,stock_quantity,store_price,upc,valid_from,valid_to,warranty,web_offer/format/xml/compression/gzip/"  
+    # "mongoimport --collection blinkbox_movies --file tmp/blinkbox/datafeed_171645.csv --type csv --db filmlovers_development --headerline"
   end
 
   desc 'Zavvi data feed'
   task :zavvi_download => :environment do
     "http://datafeed.api.productserve.com/datafeed/download/apikey/1f1765b2311360c1f37fc5807d3b484c/mid/2549/columns/merchant_id,merchant_name,aw_product_id,merchant_product_id,product_name,description,category_id,category_name,merchant_category,aw_deep_link,aw_image_url,search_price,currency,delivery_cost,merchant_deep_link,merchant_image_url,aw_thumb_url,brand_id,brand_name,commission_amount,commission_group,condition,delivery_time,display_price,ean,in_stock,is_hotpick,isbn,is_for_sale,language,merchant_thumb_url,model_number,mpn,parent_product_id,pre_order,product_type,promotional_text,rrp_price,specifications,stock_quantity,store_price,upc,valid_from,valid_to,warranty,web_offer/format/xml/compression/gzip/"
+    "mongoimport --collection zavvi_movies --file tmp/zavvi/datafeed_171645.csv --type csv --db filmlovers_development --headerline"
   end
 end

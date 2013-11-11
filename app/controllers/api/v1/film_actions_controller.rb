@@ -4,6 +4,11 @@ module Api
       
       before_filter :validate_current_user, only: [:update, :destroy]
 
+      def show
+        options = paging_options sort_by: :username, without: [:providers, :counters]
+        @query = UserQuery.new(film_entries, options)
+      end
+
       def update
         film_entry.do_action action_id
       end
@@ -28,6 +33,10 @@ module Api
 
       def action_id
         params[:id].to_sym
+      end
+
+      def film_entries
+        @film_entries ||= film.entries.find_by_action(action_id)
       end
 
       helper_method :film_entry

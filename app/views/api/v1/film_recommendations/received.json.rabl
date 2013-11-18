@@ -21,7 +21,10 @@ node :film_recommendations do
         username: friend_presenter.username,
         friend_url: api_v1_user_path(friend_presenter.user.id),
         avator_uri: friend_presenter.avatar_url,
-        comment: recommendation.comment
+        comment: recommendation.comment,
+        status: recommendation.state,
+        approve: change_api_v1_film_recommendation_path(recommendation, 'approve'),
+        hide: change_api_v1_film_recommendation_path(recommendation, 'hide')
       }
       end  
     }

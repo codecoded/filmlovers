@@ -50,10 +50,13 @@ Filmlovers::Application.routes.draw do
       
       resources :recommendations do
         collection do
-          resources :films, except: [:edit], to: 'film_recommendations' do
+          resources :films, except: [:edit], to: 'film_recommendations', as:'film_recommendations' do
             collection do
               get 'received'
               get 'sent'
+            end
+            member do
+              put ':change_action', to: 'film_recommendations#change', as: 'change', constraints: {type: /approve|hide|unrecommend/}
             end
           end
         end

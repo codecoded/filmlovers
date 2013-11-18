@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails'
 gem 'pg'
-gem 'thin'
+gem 'puma'
 gem 'nokogiri'
 gem 'google_movies'
 gem 'unicorn'

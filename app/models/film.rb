@@ -87,6 +87,10 @@ class Film
     "#{film_provider_class}Presenter".constantize
   end
 
+  def presenter
+    details_presenter.new(self, details_presenter)
+  end
+
   def actions_for(action)
     entries.find_by_action(action)
   end

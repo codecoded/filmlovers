@@ -26,6 +26,11 @@ module Api
       def new
       end
 
+      def change
+        film_recommendation.send params[:change_action]
+        head 200
+      end
+
       protected
 
       def user_films
@@ -33,7 +38,7 @@ module Api
       end
       
       def film_recommendation
-        params[:id] ? film_entry.find_by(recommendations: params[:id]) : film_entry.recommendations.new
+        params[:id] ? current_user.films.select_recommendation(params[:id]) : film_entry.recommendations.new
       end
 
       def friendships

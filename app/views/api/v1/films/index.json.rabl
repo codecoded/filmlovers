@@ -21,10 +21,8 @@ node :films do
         title: film.title,
         poster: presenter.poster_uri,
         #backdrop: presenter.backdrop_uri,
-        director: '',
-        #director: if !presenter.director.blank? then presenter.director.name end,
-        release_date: film.release_date,
-        runtime: 0
+        director: film.director,
+        release_date: film.release_date
       }
     rescue
       Rails.logger.error "film: #{film.title} caused a problem in index.json.rabl"

@@ -46,6 +46,11 @@ class FilmEntriesCollection
     actioned.in(film_id: film_ids)
   end
 
+  def select_recommendation(id)
+    object_id =  Moped::BSON::ObjectId(id)
+    entries.where('recommendations._id'=>object_id).first.recommendations.find  object_id
+  end 
+
   def find_or_create(film)
     entries.fetch_for(user, film)
   end

@@ -32,7 +32,7 @@ node :film do
     starring: presenter.starring,
     budget: presenter.budget,
     runtime: presenter.duration,
-    trailer: presenter.trailer,
+    trailer: presenter.youtube_trailers,
     counters:{
       watched: presenter.film.counters.watched,
       loved: presenter.film.counters.loved,

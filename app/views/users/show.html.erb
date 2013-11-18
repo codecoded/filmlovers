@@ -36,37 +36,37 @@
               <%= render partial: 'films', locals: {films: presenter.actioned_films} %>
             </div>
           </section>
-          <% if viewing_own? %>
-            <section <%= 'class=active' if params[:action]=='recommendations' %>>
+<!--           <%# if viewing_own? %>
+            <section <%#= 'class=active' if params[:action]=='recommendations' %>>
               <p class="title" data-section-title><a href="#panel2">Recommendations</a></p>
               <div class="content" data-section-content>
-                <%= render partial: 'recommendations', locals: {presenter: presenter} %>
+                <%#= render partial: 'recommendations', locals: {presenter: presenter} %>
               </div>
             </section>
-          <% end %>
-         <section <%= 'class=active' if params[:action]=='lists' %>>
+          <%# end %> -->
+<!--          <section <%#= 'class=active' if params[:action]=='lists' %>>
             <p class="title" data-section-title><a href="#panel3">Lists</a></p>
             <div class="content" data-section-content>
               <p>Lists</p>
             </div>
-          </section>
+          </section> -->
          <section <%= 'class=active' if params[:action]=='friendships' %>>
             <p class="title" data-section-title><a href="#panel4">Friendships</a></p>
             <div class="content" data-section-content>
               <%= render partial: 'friendships', locals: {friendships: presenter.user.friendships} if logged_in? %>
             </div>
           </section>
-          <% if viewing_own? %>
-             <section <%= 'class=active' if params[:action]=='details' %>>
-              <%= render template: 'devise/registrations/edit' %>
+<!--           <%# if viewing_own? %>
+             <section <%#= 'class=active' if params[:action]=='details' %>>
+              <%#= render template: 'devise/registrations/edit' %>
             </section>         
-             <section <%= 'class=active' if params[:action]=='settings' %>>
+             <section <%#= 'class=active' if params[:action]=='settings' %>>
               <p class="title" data-section-title><a href="#panel6">Settings</a></p>
               <div class="content" data-section-content>
                 <p>Settings</p>
               </div>
             </section>
-           <% end %>
+           <%# end %> -->
         </div>
       </div>
     </div>

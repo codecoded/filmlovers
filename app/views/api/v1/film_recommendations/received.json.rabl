@@ -1,9 +1,9 @@
 object false
 
-extends 'api/v1/shared/header'
+extends 'api/v1/shared/pages'
 
 node :film_recommendations do
-  @film_entries.map do |film_entry|
+  @query.results.map do |film_entry|
     presenter = present(Film.new(film_entry.film), FilmPresenter)
     {
       film:{
@@ -11,6 +11,14 @@ node :film_recommendations do
         title: presenter.title,
         poster: presenter.poster_uri,
         release_date: presenter.release_date,
+        providers: presenter.film.providers.apple.map do |p|
+        {
+          id: p.id,
+          name: p.name,
+          link: p.aff_link,
+          rating: p.rating
+        }
+        end,
       },
     recommendations: 
       film_entry.recommendations.map do |recommendation|

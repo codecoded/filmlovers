@@ -7,7 +7,9 @@ module Api
       end
 
       def received
-        @film_entries ||= user_films.received_recommendations
+        options = paging_options sort_by: :recent, page_size: 10
+        @query = UserQuery.new user_films.received_recommendations, options
+        # @film_entries ||= user_films.received_recommendations
       end
 
       def sent

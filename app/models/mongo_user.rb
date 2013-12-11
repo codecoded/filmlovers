@@ -2,7 +2,6 @@ class MongoUser
   include Mongoid::Document
   include Mongoid::Timestamps
   include Gravtastic
-  extend Queryable
   extend UserScopes
 
   attr_accessible :avatar, :username, :email, :first_name, :last_name, :password, :confirm_password, :name, :gender, :passports

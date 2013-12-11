@@ -1,6 +1,5 @@
 class MongoFilm
   extend FilmScopes
-  extend Queryable
   include Mongoid::Document
   include Mongoid::Timestamps
 

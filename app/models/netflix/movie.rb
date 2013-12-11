@@ -1,5 +1,5 @@
-module Netflix < MovieProvider
-  class Movie
+module Netflix 
+  class Movie < MovieProvider
     include Mongoid::Document
     include Mongoid::Timestamps
 

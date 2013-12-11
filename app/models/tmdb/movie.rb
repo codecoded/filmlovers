@@ -14,6 +14,10 @@ module Tmdb
     def self.fetch!(id)
       fetch(id).set_film_provider!
     end
+
+    def self.adult
+      where('adult' => true)
+    end
     
     def imdb_id
       @imdb_id ||= self['imdb_id']

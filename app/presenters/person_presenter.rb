@@ -53,7 +53,7 @@ class PersonPresenter < BasePresenter
     movies.map do |movie|
       film = films.find {|f| f.id==movie[:film_id]}
       {
-        film_presenter: FilmPresenter.new(film, self),
+        film_presenter: if film then FilmPresenter.new(film, self) else nil end,
         film_id: movie[:film_id],
         character: movie[:film_details]['character'],
         department: movie[:film_details]['department'],

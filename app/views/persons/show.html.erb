@@ -54,9 +54,11 @@
                           <h5><%= roles[:department]%></h5>
                           <p><%= roles[:job]%></p>
                         </div>
-                        <%= div_for roles[:film_presenter].film do %>
-                          <%= render partial: 'films/film_container', locals: {presenter: roles[:film_presenter]} %>      
-                        <% end %>           
+                        <% if roles[:film_presenter] %>
+                          <%= div_for roles[:film_presenter].film do %>
+                            <%= render partial: 'films/film_container', locals: {presenter: roles[:film_presenter]} %>      
+                          <% end %>             
+                        <% end %>
                       </div>
                     <% end %>
                   </div>

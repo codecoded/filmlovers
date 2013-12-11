@@ -1,4 +1,4 @@
-class FilmObserver < Mongoid::Observer
+class FilmObserver < ActiveModel::Observer
 
   def film_details_updated(film)
     Log.debug "#{film.provider} film details updated for film: #{film.id}"

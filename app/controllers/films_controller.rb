@@ -37,7 +37,7 @@ class FilmsController < ApplicationController
 
   def popular
     @title = 'Films'
-    render_films Film.where(:release_date.lt => 1.week.from_now), :popularity
+    render_films Film.popular, :popularity
   end
 
   def netflix
@@ -54,16 +54,15 @@ class FilmsController < ApplicationController
   protected
 
   def render_films(films, default_sort_order)
-    options = paging_options sort_by: default_sort_order, without: [:providers, :counters]
-    films = films.filter(film_filters) if !film_filters.empty?
-    @query = UserQuery.new(films, options)
-    @films ||= @query.results
+    options = paging_options sort_by: default_sort_order
+    # films = films.with_entries_for(current_user)
+    @query ||= ActiveUserQuery.new(films.filter(film_filters), options)
     render('index')
   end
 
 
   def film
-    @film ||= Film.find(params[:id])
+    @film ||= Film.includes(:providers).with_entries_for(current_user).find(params[:id])
   end
 
   def user_action

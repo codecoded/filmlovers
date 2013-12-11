@@ -15,8 +15,8 @@ module Tmdb
           else
              Log.debug "Film #{current_index} not saved"
             end
-        rescue
-          Log.debug "Film Id failed: #{current_index}"
+        rescue => msg
+          Log.debug "Film Id failed: #{current_index}. #{msg}"
         end
 
         config.inc(:fetched_index, 1) 
@@ -27,15 +27,14 @@ module Tmdb
       results_page = tmdb_results(start_date, page_no) 
       fetch_films(results_page)
       while results_page.more_pages? do
-        results_page = tmdb_results(start_date, page_no+=1) 
-        fetch_films results_page
+        fetch_films tmdb_results(start_date, page_no+=1) 
       end
     end
 
     protected
     def tmdb_results(start_date, page_no)
       results = Tmdb::Client.changes :movie, {start_date: start_date, end_date: Time.now, page: page_no}
-      ResultsPage.new results['results'], results['total_results'], 100, page_no
+      ResultsPage.new results
     end
 
     def fetch_films(results_page)
@@ -45,8 +44,8 @@ module Tmdb
         begin
           film = Tmdb::Movie.fetch! film_id['id']
           Log.debug "Film #{index} of #{results_page.results.count}: #{film.title}"
-        rescue
-           Log.debug "Film #{film_id} failed"
+        rescue => msg
+          Log.debug "Film #{film_id} failed: #{msg}"
         end
         index+=1
       end

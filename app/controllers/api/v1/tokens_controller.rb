@@ -18,7 +18,7 @@ module Api
           return
         end
         
-        @user = User.find_by username: username.downcase
+        @user = User.find_by_username username.downcase
         
         if @user.nil?
           Log.info("User #{username} failed signin, user cannot be found.")

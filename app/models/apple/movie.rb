@@ -1,5 +1,5 @@
 module Apple
-  class Movie
+  class Movie < MovieProvider
     include Mongoid::Document
     include Mongoid::Timestamps
 
@@ -70,24 +70,6 @@ module Apple
       value
     end
 
-    def identifier
-      self.class.name.deconstantize
-    end    
-
-    def film
-      return unless @film = find_film
-      @film.add_provider(self)
-      @film
-    end
-
-    def find_film
-      Film.where(_id: title_id).first
-    end
-
-    # def title_id
-    #   Film.create_uuid(title, year)
-    # end
-
     def title
       name
     end
@@ -104,50 +86,9 @@ module Apple
       view_url
     end
 
-    def rating
-      0
-    end
-
-    def release_date
-      
-    end
-
     def poster
       artwork_url
     end
 
-    def genres
-      {}
-    end
-  
-    def release_date_country
-      nil
-    end
-
-    def trailer
-      nil
-    end
-
-    def popularity
-      0
-    end
-
-    def classification
-      nil
-    end
-
-    def set_film_provider!
-      film.update_film_provider self
-    end
-
-    def title_director_key
-      "#{title}__#{directors_name}".parameterize
-    end
-
-    protected
-    def create_film
-      Log.debug("Creating film from #{identifier} data: #{title_id}")
-      Film.create_from(self)
-    end
   end
 end

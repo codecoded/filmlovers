@@ -1,15 +1,14 @@
-class Friendship
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class Friendship < ActiveRecord::Base
 
-  embedded_in :user
+  belongs_to :user
+  belongs_to :friend, class_name: 'User'
 
-  field :friend_id, type: String
+  attr_accessible :state, :friend_id
 
-  validates :user,    uniqueness: {message: "you are already friends", scope: :friend}, presence: true
-  validates_presence_of :friend
+  # validates :user,    uniqueness: {message: "you are already friends", scope: :friend_id}, presence: true
+  # validates_presence_of :friend
 
-  index({ user: 1, friend: 1}, { unique: true, name: "friendship_index", background: true })
+  # index({ user: 1, friend: 1}, { unique: true, name: "friendship_index", background: true })
 
   scope :confirmed, -> {where state: :confirmed}
   scope :received, -> {where state: :received}
@@ -21,13 +20,17 @@ class Friendship
     event(:confirm) { transition any - :confirmed => :confirmed }
   end
 
-  def friend
-    @friend ||= User.find friend_id
-  end
+  # def friend
+  #   @friend ||= User.find friend_id
+  # end
 
+  def self.for_friend(id)
+    where(friend_id: id).first
+  end
+  
   def self.auto_friend(user, friend)
     return if user.friendship_with friend
     user.friendships.create(friend_id: friend.id, state: :confirmed)
     friend.friendships.create(friend_id: user.id, state: :confirmed)
-  end
+  end  
 end

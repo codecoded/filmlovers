@@ -1,10 +1,10 @@
-module Rotten
-  class Movie
+module Rotten 
+  class Movie < MovieProvider
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    def identifier
-      self.class.name.deconstantize
+    def provider
+      self.class.name.deconstantize.downcase
     end    
 
     def self.find_or_fetch(id)  
@@ -19,21 +19,9 @@ module Rotten
       fetch(id).set_film_provider!
     end
 
-    def film
-      @film = (find_film || create_film)
-      @film.add_provider(self)
-      @film.provider_by(:Imdb, imdb_id).save if imdb_id?
-      @film
-    end
-
-    def find_film
-      Film.where(_id: title_id).first || Film.find_by_provider(:Imdb, imdb_id)
-    end
-
     def imdb_id
       "tt#{self['alternate_ids']['imdb']}" if imdb_id?
     end
-
 
     def presenter
       @presenter ||= RottenPresenter.new self, Rotten::Movie
@@ -41,11 +29,6 @@ module Rotten
 
     def directors_name
       presenter.director if presenter.director?
-    end
-
-
-    def title_id
-      Film.create_uuid(title, year)
     end
 
     def title
@@ -72,10 +55,6 @@ module Rotten
       self['posters']['detailed'] if self['posters']
     end
 
-    def backdrop
-    end
-    
-
     def imdb_id?
       self['alternate_ids'] and self['alternate_ids']['imdb']
     end
@@ -83,31 +62,9 @@ module Rotten
     def genres
       self['genres'] || {}
     end
-  
-    def release_date_country
-      nil
-    end
-
-    def trailer
-      nil
-    end
-
-    def popularity
-      0
-    end
 
     def classification
       self['mpaa_rating']
-    end
-
-    def set_film_provider!
-      film.update_film_provider self
-    end
-
-    protected
-    def create_film
-      Log.debug("Creating film from #{identifier} data: #{title_id}")
-      Film.create_from(self)
     end
 
   end

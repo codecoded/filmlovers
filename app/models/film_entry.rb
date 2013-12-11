@@ -1,123 +1,77 @@
-class FilmEntry
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class FilmEntry < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :film
+  attr_accessible :watched, :loved, :owned, :facebook_id, :film_id
 
-  # belongs_to  :film, validate: false
-  # belongs_to  :user, validate: false
+  # validates :action, uniqueness: {message: "This film has already been actioned!"}, presence: true
+  validates_uniqueness_of :film_id, uniqueness: {message: "This film has already been actioned!"}, presence: true, :scope => [:user_id]
 
-  field :user,      type: Hash
-  field :film,      type: Hash
-  field :user_id,   type: String
-  field :film_id,   type: String
+  set_callback :save,     :after, :destroy_if_unactioned
 
-  embeds_many :recommendations, class_name: "FilmRecommendation"
-  embeds_many :actions,         class_name: "FilmAction"
-
-  index({ user_id: -1, film_id: 1 }, { unique: false, name: "film_entry_index", background: true })
-  index({ actions: 1 }, { unique: false, name: "film_actions_index", background: true })
-  index({ "actions.updated_at" => 1 }, { unique: false, name: "film_actions_updated_at_index", background: true })
-
-  validates_presence_of   :user_id, message: 'A user id must be associated to a film entry'
-  validates_presence_of   :film_id, message: 'A film id must be associated to a film entry'
-
-
-  def self.fetch_for(user, film)
-    find_by(user_id: user.id, film_id: film.id) || 
-    create!(user_id: user.id, user: user.attributes.slice(*user_fields), film_id: film.id, film: film.attributes.slice(*film_fields))
+  def self.counts
+    select("coalesce(sum(watched::int),0) as watched_count, coalesce(sum(loved::int),0) as loved_count, coalesce(sum(owned::int),0) as owned_count").first
   end
 
-  def self.find_by_action(id)
-    where("actions.action"=>id.to_sym)
+  def self.for_user(id)
+    where(user_id: id).first_or_initialize
   end
 
-  def self.films
-    only(:film).map {|f| Film.new f.film}
+  def self.counts_for_film(id)
+    where(film_id: id).counts
   end
 
-  def self.[](film)
-    find_by(film_id: film['_id']) || new
+
+  def self.counts_for_user(id)
+    where(user_id: id).counts
   end
 
-  def self.page_and_sort(sort_by=:recent_action, page_no=1, page_size=AdminConfig.instance.page_size)
-    sort_order = sort_orders[sort_by.to_s]
-    order_by(sort_order).page(page_no).per(page_size)
+  def self.count_for(action)
+     where(action=>true).count
   end
 
-  def self.recommended
-    where(:recommendations.exists => true)
+  def self.for_film(id)
+    where(film_id: id).first_or_initialize
+  end 
+
+  def self.find_by_action(action)
+    where(action=>true)
   end
 
-  def self.actioned
-    where(:actions.not => {"$size"=>0}, :actions.exists => true)
+  def set(action)
+    return if set? action
+    update_attribute action.to_sym, true
+    film.increment! "#{action}_counter"
   end
 
-  def update_film
-    film_details = fetch_film
-    return unless film_details
-    update_attribute :film, film_details.attributes.slice(*FilmEntry.film_fields)
+  def unset(action)
+    return unless set? action
+    update_attribute action.to_sym, false
+    film.decrement! "#{action}_counter"
   end
 
-  def fetch_film
-    @film ||= Film.find(film_id)
+  def incr_film_count
+    film.counters.save if film.counters.new_record?
+    film.counters.inc(action, 1)
   end
 
-  def fetch_user
-    @user ||= User.find(user_id)
+  def decr_film_count
+    film.counters.inc(action, -1)
   end
 
-  def do_action(action)
-    !actions.find_or_create_by(action: action).new_record?
+  def set?(action)
+    send(action) == true
   end
 
-  def undo_action(action)
-    actions.where(action: action).destroy
+
+  def actioned?
+    watched || loved || owned
   end
 
-  def recommend_to(friendships, comment=nil)
-    friendships.to_a.map do |friendship| 
-      recommendation = recommendations.create(friend: friendship.friend, comment: comment) if recommend?(friendship)
-      recommendation.recommend
-      recommendation
-    end
+
+  protected
+  def destroy_if_unactioned
+    destroy unless actioned?
   end
 
-  def new_recommendation_friends
-    fetch_user.friendships.confirmed.where(:friend_id.nin => recommendations.map(&:friend_id))
-  end
-
-  def recommend?(friendship)
-    friendship.confirmed? and 
-    !recommended?(friendship.friend)
-  end
-
-  def actioned?(action)
-    actions.actioned? action
-  end
-
-  def recommended?(friend)
-    recommendations.recommended? friend
-  end
-
-  # def friend_actioned_film?(friend)
-  #   friend.actioned_film(film)
-  # end
-
-  private
-  def self.user_fields
-    ['_id', 'username']
-  end
-
-  def self.film_fields 
-    ['_id', 'title', 'poster', 'release_date', 'genres', 'release_date_country', 'trailer', 'provider', 'provider_id', 'director', 'backdrop']
-  end
-
-  def self.sort_orders
-    {
-      'title'                 =>  ['film.title', :asc], 
-      'recent_action'         =>  ['actions.updated_at', :desc],
-      'release_date'          =>  ['film.release_date', :desc],
-      'earliest_release_date' =>  ['film.release_date', :asc]
-    }
-  end
 
 end

@@ -1,4 +1,4 @@
-class UserObserver < Mongoid::Observer
+class UserObserver < ActiveModel::Observer
 
   def after_create(user)
     

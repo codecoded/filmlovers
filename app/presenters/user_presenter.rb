@@ -5,13 +5,14 @@ class UserPresenter < BasePresenter
 
   def_delegators :user, :username
 
-  def counter_for(action)
-    entries.find_by_action(action).count
+  def counts
+    @counts ||= user.film_entries.counts
   end
 
-  def entries
-    @entries ||= user.films.entries
+  def counter_for(action)
+    counts.send "#{action}_count"
   end
+
 
   def avatar_url
     if user.avatar and user.avatar.file
@@ -52,8 +53,13 @@ class UserPresenter < BasePresenter
   end
 
 
-  def actioned_films
+  def film_entries
     options = paging_options.merge sort_by: :recent
-    UserQuery.new(user.films.actioned, options).results
+    @film_entries ||= ActiveUserQuery.new(user.film_entries.includes(:film), options).results
   end
+
+  # def films_entries_presenter
+  #   @films_entries_presenter ||= FilmEntriesPresenter.new(user, film_entries)
+  # end
+
 end

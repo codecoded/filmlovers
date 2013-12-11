@@ -1,54 +1,19 @@
-class User
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class User < ActiveRecord::Base
+  attr_accessible :authentication_token, :current_sign_in_ip, :current_sign_in_at, :dob, :email, 
+                  :encrypted_password, :first_name, :gender, :last_name, :last_sign_in_at, 
+                  :last_sign_in_ip, :name, :remember_created_at, :reset_password_sent_at, 
+                  :reset_password_token, :sign_in_count, :username, :password
+
   include Gravtastic
-  extend Queryable
   extend UserScopes
 
-  attr_accessible :avatar, :username, :email, :first_name, :last_name, :password, :confirm_password, :name, :gender, :passports
+  gravtastic
+  mount_uploader :avatar, AvatarUploader  
 
   exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers friendships friends recommendations recommend)
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable#, :validatable
 
-  ## Database authenticatable
-  field :email,              :type => String, :default => ""
-  field :encrypted_password, :type => String, :default => ""
-  
-  ## Recoverable
-  field :reset_password_token,   :type => String
-  field :reset_password_sent_at, :type => Time
-
-  ## Rememberable
-  field :remember_created_at, :type => Time
-
-  ## Trackable
-  field :sign_in_count,      :type => Integer, :default => 0
-  field :current_sign_in_at, :type => Time
-  field :last_sign_in_at,    :type => Time
-  field :current_sign_in_ip, :type => String
-  field :last_sign_in_ip,    :type => String
-
-  index({ username: 1}, { unique: true, name: "user_username_index", background: true })
-
-  ## Confirmable
-  # field :confirmation_token,   :type => String
-  # field :confirmed_at,         :type => Time
-  # field :confirmation_sent_at, :type => Time
-  # field :unconfirmed_email,    :type => String # Only if using reconfirmable
-
-  ## Lockable
-  # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
-  # field :unlock_token,    :type => String # Only if unlock strategy is :email or :both
-  # field :locked_at,       :type => Time
-
-  ## Token authenticatable
-  field :authentication_token, :type => String
-
-
-  gravtastic
+  default_scope order(:created_at)
   
   validates_presence_of   :username, message: 'Please enter a username'
   validates_presence_of   :email, message: 'Please enter an email'
@@ -62,33 +27,22 @@ class User
   validates_length_of :password, :within => Devise.password_length, too_short: 'Password must be a minimun of 8 characters', too_long: 'Password must be a maximum of 128 characters', on: :create, allow_blank: true
 
   before_save :ensure_authentication_token
-  # validates_presence_of :username, :with => /^[-\w\._@]+$/i, :allow_blank => true, :message => "should only contain letters, numbers, or .-_@"
 
-  field :username,              :type => String, :default => ""
-  field :first_name
-  field :last_name
-  field :name
-  field :gender
-  field :dob, type: DateTime
-
-  # has_many :film_user_actions, validate: false, dependent: :destroy
-  # has_many :recommendations
   has_many :facebook_events
   has_many :film_entries
-
-  
-  mount_uploader :avatar, AvatarUploader  
-
-  embeds_one  :profile, class_name: 'UserProfile', autobuild: true
-  embeds_many :films_lists
-  embeds_many :passports
-  embeds_many :friendships
-  embeds_many :mobile_devices
+  has_many :film_recommendations
+  has_many :recommended_films, class_name: 'FilmRecommendation', foreign_key: :friend_id
+  has_many :films_lists
+  has_many :passports
+  has_one  :profile, class_name: 'UserProfile'
+  has_many :friendships
+  has_many :mobile_devices
 
   # embedded_in :film_entry
 
   accepts_nested_attributes_for :profile, :allow_destroy => true
 
+  set_callback :create,   :after, :create_profile 
 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)
@@ -98,7 +52,13 @@ class User
   end
 
   def self.find_by_passport(passport)
-    where("passports.uid" => passport.uid, "passports.provider" => passport.provider).first || new(passports:[passport])
+    passport = Passport.where(uid: passport.uid, provider: passport.provider).first
+    passport ? passport.user : new(passports:[passport])
+  end
+
+  def create_profile
+    profile = UserProfile.new
+    save!
   end
 
   def self.from_facebook_token(access_token)
@@ -114,7 +74,7 @@ class User
   end
 
   def self.fetch(id)
-     BSON::ObjectId.legal?(id) ? User.find(id) : User.find_by(username: id)
+    id.is_a?(Integer) ? User.find(id) : User.find_by_username(id)
   end
 
  
@@ -154,7 +114,7 @@ class User
   end
 
   def passport_for(provider)
-    passports.find_by(provider: provider.to_s)
+    passports.find_by_provider provider.to_s
   end
 
   def update_username(username)
@@ -162,7 +122,7 @@ class User
   end
 
   def find_passport(uid, provider)
-     passports.find_by(uid: uid, provider: provider)
+     passports.where(uid: uid, provider: provider).first
   end
 
   def username?
@@ -170,7 +130,7 @@ class User
   end
 
   def friendship_with(user)
-    friendships.find_by(friend_id: user.id)
+    friendships.find_by_friend_id user.id
   end
 
   def channels
@@ -190,12 +150,12 @@ class User
     @notifier ||= UserNotifier.new(self)
   end
 
-  def films
-    @film ||= FilmEntriesCollection.new self
-  end
+  # def films
+  #   @film ||= FilmEntriesCollection.new self
+  # end
   
   def mobile_device_by(name)
-    mobile_devices.find_or_initialize_by provider: name
+    mobile_devices.where(provider: name).first_or_initialize
   end
 
   def notify(notification)
@@ -212,6 +172,18 @@ class User
     username? ? username : id.to_s
   end
 
+  def film_entry_for(film_id)
+    film_entries.for_film film_id
+  end
+
+  def film_recommendation_for(film_id)
+    film_recommendations.for_film film_id
+  end
+
+  def film_recommender(film)
+    FilmRecommendationService.new self, film
+  end
+  
   private
   
   def generate_authentication_token

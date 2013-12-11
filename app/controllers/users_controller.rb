@@ -42,11 +42,7 @@ class UsersController < ApplicationController
   end
 
   def user
-    if BSON::ObjectId.legal? user_id
-      @user ||= User.find(user_id)
-    else
-      @user ||= User.find_by(username: user_id)
-    end
+    @user ||= User.fetch(user_id)
   end
 
   def user_id
@@ -67,7 +63,7 @@ class UsersController < ApplicationController
 
   def users
     options = paging_options sort_by: :username, page_size: 10
-    @results = UserQuery.new(User, options).results
+    @results = ActiveUserQuery.new(User, options).results
   end
 
   helper_method :viewing_own?, :user, :user_action, :users, :films

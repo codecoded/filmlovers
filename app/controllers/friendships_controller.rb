@@ -50,7 +50,7 @@ class FriendshipsController < ApplicationController
   end
 
   def friendship
-    @friendship ||= friendships.find_by(friend_id: friend.id)
+    @friendship ||= friendships.for_friend friend.id
   end
 
   def friend

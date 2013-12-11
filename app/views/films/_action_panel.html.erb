@@ -1,12 +1,12 @@
 <% if logged_in? %>
-  <% present(film, FilmPresenter) do |presenter| %>
+  <% present(film_entry, FilmEntryPresenter) do |presenter| %>
     <div class="margin-bottom pod actions">
       <ul>
         <%= presenter.action_list_item :watched, 'Watched' %>
         <%= presenter.action_list_item :loved, 'Loved' %>
         <%= presenter.action_list_item :owned, 'Own' %>
         <!-- <li class="add"><a href="#">Add</a></li> -->
-        <!-- <li class="share"><%= link_to 'Recommend', film_recommendation_path(film), method: 'get' %></li> -->
+        <li class="share"><%= link_to 'Recommend', film_recommendation_path(film), method: 'get' %></li>
       </ul>
     </div>
   <% end %>

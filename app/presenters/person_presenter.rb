@@ -37,17 +37,30 @@ class PersonPresenter < BasePresenter
   # end
 
   def films_for(role)
-    person.credits[role].map do |film_details| 
+    movies = person.credits[role].map do |film_details| 
       movie = Tmdb::Movie.new(film_details)
       next if movie.not_allowed?
-      next unless film = Film.find(movie.title_id)
       {
-        film_presenter: FilmPresenter.new(film, self),
-        character: film_details['character'],
-        department: film_details['department'],
-        job: film_details['job']
+        film_id: movie.title_id,
+        film_details: film_details
       }
     end
+
+    film_ids = movies.compact.map {|m| m[:film_id]}
+
+    films = Film.with_entries_for(current_user).where(id: film_ids).compact
+
+    movies.map do |movie|
+      film = films.find {|f| f.id==movie[:film_id]}
+      {
+        film_presenter: FilmPresenter.new(film, self),
+        film_id: movie[:film_id],
+        character: movie[:film_details]['character'],
+        department: movie[:film_details]['department'],
+        job: movie[:film_details]['job']
+      }
+    end
+
   end
 
   # def create_presenter(film_details)

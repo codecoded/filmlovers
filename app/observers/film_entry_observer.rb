@@ -1,7 +1,7 @@
-class FilmActionObserver < Mongoid::Observer
+class FilmEntryObserver < ActiveModel::Observer
 
-  def after_create(film_action)
-    Log.debug 'film action created'
+  def after_update(film_entry)
+    Log.debug 'film entry created'
     # return unless film_user_action.action == :loved
     # Log.debug "Created film_user_action: #{film_user_action}"
     # comparer = ComparisonService.new film_user_action.user

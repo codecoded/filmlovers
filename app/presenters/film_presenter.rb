@@ -6,32 +6,10 @@ class FilmPresenter < BasePresenter
 
   def_delegators :film, :title, :has_poster?, :id, :has_backdrop?, :has_trailer?, :year, :director
 
-  def film_entry
-    @film_entry ||= current_user.films.find film
+  def counts
+    @counts ||= FilmEntry.counts_for_film(film.id)
   end
 
-  def film_actions
-    @film_actions ||= film_entry.actions
-  end
-
-  def action_list_item(action, text, is_counter = false)
-    actioned = user_actioned? action
-    action_css = actioned ? 'complete' : nil 
-    url = current_user ? film_action_path(film, action) : '#'
-    method =  actioned ? :delete : :put
-    css = "#{action} #{action_css}"  
-    content_tag :li, :class => css  do
-      if is_counter
-        link_to text, url, data: {'method-type'=> method, "film-action"=>  action,  id: film.id, counter: "#{film.id}_#{action}" }
-      else
-        link_to text, url, data: {'method-type'=> method, "film-action"=> action,  id: film.id }
-      end
-    end
-  end
-
-  def user_actioned?(action)
-    current_user and film_entry ? film_actions.actioned?(action) : false
-  end
 
   def release_date
     film.release_date.strftime('%d %B %Y') if film.release_date
@@ -85,20 +63,13 @@ class FilmPresenter < BasePresenter
     link_to poster, film_path(film), title: film.title
   end
 
-  def counter(action)
-    film_counters[action]
-  end
 
-  def film_counters
-    @film_counters ||= if film.counters.new_record?
-        Film.find(film.id).counters
-      else
-        film.counters
-      end
+  def providers
+    @providers ||= film.providers.to_a
   end
 
   def provider_links
-    film.providers.map do |p|
+    providers.map do |p|
       {
         id: p.id,
         name: p.name,
@@ -108,7 +79,46 @@ class FilmPresenter < BasePresenter
     end
   end
 
+  def apple_affiliate_link(storefront_id=143444)
+    itunes_url = "http://ax.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=movie&country=GB&term=#{film.title}"
+    apple_provider = providers.find {|p| p.name == 'apple' and p.reference == storefront_id.to_s}
+    apple_provider ?  apple_provider.aff_link :  "http://clkuk.tradedoubler.com/click?p=23708&a=2247239&g=19223668&url=#{itunes_url}&partnerId=2003"   
+  end
 
+  def find_provider(name)
+    providers.find {|p| p.name.downcase==name.to_s.downcase}
+  end
 
+  def other_links
+    return if providers.empty?
+
+    other = ''
+
+    if tmdb = find_provider(:tmdb)
+      other = content_tag :a,  href: tmdb.link,  alt:"TMDB link for #{film.title}", target: '_blank' do 
+        image_tag 'tmdb_logo.png', width: "80px"
+      end
+    end
+
+    if imdb = find_provider(:imdb)
+      other += content_tag :a,  href: "http://www.imdb.com/title/#{imdb.reference}",  alt:"IMDB link for #{film.title}", target: '_blank' do 
+        image_tag 'imdb_logo.png'
+      end
+    end
+
+    if netflix = find_provider(:netflix)
+      other += content_tag(:a,  href: netflix.link,  alt:"Netflix link for #{film.title}", target: '_blank') do 
+         image_tag('netflix-n-logo.png') << "#{netflix.rating}<font style='font-size:60%'>/5</font>".html_safe
+      end
+    end
+
+    if rotten = find_provider(:rotten)
+      other += content_tag(:a,  href: rotten.link,  alt:"RottenTomatoes link for #{film.title}", target: '_blank') do 
+         image_tag('rotten.png') << "#{rotten.rating}".html_safe
+      end
+    end
+
+    other 
+  end
 
 end

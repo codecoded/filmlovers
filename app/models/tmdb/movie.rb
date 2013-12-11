@@ -1,5 +1,5 @@
 module Tmdb
-  class Movie 
+  class Movie < MovieProvider
     include Mongoid::Document
     include Mongoid::Timestamps
 
@@ -14,33 +14,13 @@ module Tmdb
     def self.fetch!(id)
       fetch(id).set_film_provider!
     end
-
-    def identifier
-      self.class.name.deconstantize
-    end    
-
-    def film
-      @film ||= (find_film || create_film)
-      return unless @film
-      @film.add_provider(self)
-      @film.provider_by(:Imdb, imdb_id).save if imdb_id?
-      @film
-    end
-
-    def find_film
-      Film.find title_id if title_id
-    end
-
+    
     def imdb_id
       @imdb_id ||= self['imdb_id']
     end
 
     def imdb_id?
       self['imdb_id']
-    end
-
-    def title_id
-      Film.create_uuid(title, year)
     end
 
     def title
@@ -129,15 +109,7 @@ module Tmdb
       !release_date || self['adult'] || !title_id
     end
 
-    def set_film_provider!
-      return if not_allowed?
-      film.update_film_provider self
-    end
-
     protected
-    def create_film
-      Film.create_from(self) unless not_allowed?
-    end
 
     def method_missing(m, *args, &block) 
       self[m] 

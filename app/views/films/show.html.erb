@@ -1,3 +1,4 @@
+<% film_presenter = present(film) %>
 <% present(film.details, film.details_presenter) do |presenter| %>
   <%= render partial: 'film_meta_tags', locals: {presenter: presenter}  %>
   <div class="full-row inner-hero margin-bottom">
@@ -24,7 +25,7 @@
       <div class="margin-bottom">
         <div class="inner-tabs">
           <div class="section-container auto" data-section>
-            <%= render partial: 'details', locals: {presenter: presenter} %>
+            <%= render partial: 'details', locals: {presenter: presenter, film_presenter: film_presenter} %>
             <%= render partial: 'trailer', locals: {presenter: presenter} if film.trailer? %>
             <%= render partial: 'media', locals: {presenter: presenter} if presenter.backdrops? %>
           </div>
@@ -42,16 +43,16 @@
       </div>
     </div>
     <div class="large-4 small-12 columns">
-      <%= render partial: 'action_panel', locals: {film: film} %>
+      <%= render partial: 'action_panel', locals: {film_entry: film.entries.for_user(current_user)} %>
       <div class="margin-bottom banner">
         <%= render partial: 'adverts/lovefilm_300x250', alt: 'lovefilm advert' %>
       </div>
       <div class="margin-bottom">
         <h4>filmlovers who...</h4>
         <ul class="button-list">
-          <li class="watched"><%= film.actions_for(:watched).count %> watched this film</li>
-          <li class="loved"><%= film.actions_for(:loved).count %> loved this film</li>
-          <li class="owned"><%= film.actions_for(:owned).count %> own this film</li>
+          <li class="watched"><%= film_presenter.counts.watched_count %> watched this film</li>
+          <li class="loved"><%= film_presenter.counts.loved_count %> loved this film</li>
+          <li class="owned"><%= film_presenter.counts.owned_count %> own this film</li>
         </ul>
       </div>
       <%if presenter.genres? %>

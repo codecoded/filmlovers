@@ -1,8 +1,39 @@
-sky:
-  id: 1
-  uid: 537020179
-  username: 'sky'
-ju:
-  id: 2
-  uid: 99999
-  username: 'nassar'
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  username: MyString
+  email: MyString
+  first_name: MyString
+  last_name: MyString
+  encrypted_password: MyString
+  reset_password_token: MyString
+  reset_password_sent_at: 2013-11-25 16:17:12
+  remember_created_at: 2013-11-25 16:17:12
+  sign_in_count: 1
+  current_sign_it_at: 2013-11-25 16:17:12
+  last_sign_in_at: 2013-11-25 16:17:12
+  current_sign_in_ip: MyString
+  last_sign_in_ip: MyString
+  authentication_token: MyString
+  name: MyString
+  gender: MyString
+  dob: 2013-11-25 16:17:12
+
+two:
+  username: MyString
+  email: MyString
+  first_name: MyString
+  last_name: MyString
+  encrypted_password: MyString
+  reset_password_token: MyString
+  reset_password_sent_at: 2013-11-25 16:17:12
+  remember_created_at: 2013-11-25 16:17:12
+  sign_in_count: 1
+  current_sign_it_at: 2013-11-25 16:17:12
+  last_sign_in_at: 2013-11-25 16:17:12
+  current_sign_in_ip: MyString
+  last_sign_in_ip: MyString
+  authentication_token: MyString
+  name: MyString
+  gender: MyString
+  dob: 2013-11-25 16:17:12

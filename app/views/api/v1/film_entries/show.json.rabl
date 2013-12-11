@@ -5,16 +5,16 @@ extends 'api/v1/shared/pages'
 node :films do 
   @query.results.map do |film_entry|
     begin
-    presenter = present(Film.new(film_entry.film), FilmPresenter)
+    presenter = present(film_entry)
     {
-      id: presenter.id,
+      id: presenter.film.id,
       title: presenter.title,
       poster: presenter.poster_uri,
       director: presenter.director,
       backdrop: presenter.backdrop_uri,
     }
-    rescue
-      Rails.logger.error "film: #{film_entry.title} caused a problem in film_entries/index.json.rabl"
+    rescue => msg
+      Rails.logger.error "film: #{film_entry.title} erorred in film_entries/index.json.rabl. #{msg}"
       nil
     end
   end.compact

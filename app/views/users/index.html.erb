@@ -20,7 +20,7 @@
           <th>Watched</th>
           <th>Loved</th>
           <th>Owned</th>
-          <th>Lists</th>
+          <!-- <th>Lists</th> -->
           <th>Actions</th>
         </tr>
       </thead>
@@ -39,13 +39,13 @@
               <% [:watched, :loved, :owned].each do |action| %>
                 <td>
                   <%= link_to user_film_entry_path(friend, action), alt: action, title: action do %>
-                    <label style="display:inline"><%= friend.films.find_by_action(action).count %> </label>
+                    <label style="display:inline"><%= friend.film_entries.count_for(action) %> </label>
                    <% end %>              
                 </td>   
               <% end %> 
               <td>
                 <%= link_to user_lists_path(friend) do %>
-                  <label> <%=friend.films_lists.viewable.count %> </label>
+                  <label> <%#=friend.films_lists.viewable.count %> </label>
                 <% end %>
               </td>    
               <td class="friendship">

@@ -29,7 +29,7 @@ Filmlovers::Application.routes.draw do
       end
   
       resources :films,                   only: [:show, :index] do
-        resources :film_actions,          only: [:show, :update, :destroy], path: '',  as: 'action', constraints: { id: /watched|loved|owned/ }
+        resources :film_entries,          only: [:show, :update, :destroy], path: '',  as: 'action', constraints: { id: /watched|loved|owned/ }
         get   'recommend', to: 'film_recommendations#new',     as: 'recommendation'
         post  'recommend', to: 'film_recommendations#create',  as: 'recommendation'
         collection do
@@ -73,7 +73,7 @@ Filmlovers::Application.routes.draw do
   end
 
   resources :films,                   only:   [:show, :index] do
-    resources :film_actions,          only:   [:show, :update, :destroy], path: '',  as: 'action', constraints: { id: /watched|loved|owned/ }
+    resources :film_entries,          only: [:show, :update, :destroy], path: '',  as: 'action', constraints: { id: /watched|loved|owned/ }
       get   'recommend', to: 'film_recommendations#new',     as: 'recommendation'
       post  'recommend', to: 'film_recommendations#create',  as: 'recommendation'
     collection do

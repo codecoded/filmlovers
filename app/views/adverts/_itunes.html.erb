@@ -1,5 +1,6 @@
-<%= link_to film.providers.apple_affiliate_link(film), target: 'itunes_store' do %>
-  <%= image_tag "site-basics/apple-icon.png", size:'30', alt:"Buy online with Apple" %>
-  <!-- <img src="http://impgb.tradedoubler.com/imp?type(img)g(19223668)a(2247239)" border=0> -->
+<% present(film) do |presenter| %>
+  <%= link_to presenter.apple_affiliate_link, target: 'itunes_store' do %>
+    <%= image_tag "site-basics/apple-icon.png", size:'30', alt:"Buy online with Apple" %>
+    <!-- <img src="http://impgb.tradedoubler.com/imp?type(img)g(19223668)a(2247239)" border=0> -->
+  <% end %>
 <% end %>
-

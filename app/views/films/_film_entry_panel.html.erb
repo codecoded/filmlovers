@@ -1,0 +1,7 @@
+<% present(film_entry, FilmEntryPresenter) do |film_entry_presenter| %>
+  <ul class="user-rankings">
+    <% [:watched, :loved, :owned].each do |action| %>
+        <%= film_entry_presenter.counter_link action %>
+    <% end %>
+  </ul>
+<% end %>

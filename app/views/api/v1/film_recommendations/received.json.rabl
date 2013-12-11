@@ -1,13 +1,13 @@
 object false
 
-extends 'api/v1/shared/pages'
+extends 'api/v1/shared/header'
 
 node :film_recommendations do
-  @query.results.map do |film_entry|
-    presenter = present(Film.new(film_entry.film), FilmPresenter)
+  @results.map do |film_view|
+    presenter = present(film_view, FilmPresenter)
     {
       film:{
-        id: film_entry.film_id,
+        id: presenter.id,
         title: presenter.title,
         poster: presenter.poster_uri,
         release_date: presenter.release_date,
@@ -21,19 +21,18 @@ node :film_recommendations do
         end,
       },
     recommendations: 
-      film_entry.recommendations.map do |recommendation|
-      friend_presenter = present(recommendation.friend, UserPresenter)
-      {
-        id: recommendation.id,
-        sent: recommendation.sent,
-        username: friend_presenter.username,
-        friend_url: api_v1_user_path(friend_presenter.user.id),
-        avator_uri: friend_presenter.avatar_url,
-        comment: recommendation.comment,
-        status: recommendation.state,
-        approve: change_api_v1_film_recommendation_path(recommendation, 'approve'),
-        hide: change_api_v1_film_recommendation_path(recommendation, 'hide')
-      }
+      current_user.recommended_films.includes(:user).where(film_id: film_view.id).map do |recommendation|
+        friend_presenter = present(recommendation.user, UserPresenter)
+        {
+          id: recommendation.id,
+          username: friend_presenter.username,
+          friend_url: api_v1_user_path(recommendation.user_id),
+          avator_uri: friend_presenter.avatar_url,
+          comment: recommendation.comment,
+          status: recommendation.state,
+          approve: change_api_v1_film_recommendation_path(recommendation, 'approve'),
+          hide: change_api_v1_film_recommendation_path(recommendation, 'hide')
+        }
       end  
     }
   end

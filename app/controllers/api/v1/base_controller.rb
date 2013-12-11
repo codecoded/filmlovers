@@ -10,7 +10,7 @@ module Api
       
       protected
       def authenticate
-        if user = authenticate_with_http_token { |token, options| User.find_by authentication_token: token }
+        if user = authenticate_with_http_token { |token, options| User.find_by_authentication_token token }
           @current_user = user
         end
       end

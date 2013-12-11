@@ -3,7 +3,7 @@ object false
 extends 'api/v1/shared/pages'
 
 node :films do 
-  @entries = current_user.films.select(@query.results.map &:id).to_a
+  @entries = current_user.film_entries.where(film_id: @query.results.map(&:id)).to_a if current_user
   @query.results.map do |film|
     begin
       entry = @entries.find {|fe| fe.film_id == film.id}
@@ -12,9 +12,9 @@ node :films do
         user: 
         {
           actions: {
-            loved: entry ? entry.actioned?(:loved) : false,
-            watched: entry ? entry.actioned?(:watched) : false,
-            owned: entry ? entry.actioned?(:owned) : false
+            loved: entry ? entry.set?(:loved) : false,
+            watched: entry ? entry.set?(:watched) : false,
+            owned: entry ? entry.set?(:owned) : false
           }
         },
         id: film.id,
@@ -24,8 +24,8 @@ node :films do
         director: film.director,
         release_date: film.release_date
       }
-    rescue
-      Rails.logger.error "film: #{film.title} caused a problem in index.json.rabl"
+    rescue => msg
+      Rails.logger.error "film: #{film.title} caused a problem in index.json.rabl. #{msg}"
       nil
     end    
   end.compact

@@ -23,7 +23,7 @@ class FilmActionsController < ApplicationController
   end
 
   def film_entry
-    @film_entry ||= current_user.films.find_or_create(film)
+    @film_entry ||= current_user.film_actions_for params[:film_id]]
   end
 
   def film 

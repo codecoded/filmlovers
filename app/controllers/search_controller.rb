@@ -43,6 +43,6 @@ class SearchController < ApplicationController
   def create_query(options)
     options = paging_options options
     search_query = Film.filter(film_filters).search(query)
-    UserQuery.new(search_query, options)    
+    ActiveUserQuery.new(search_query, options)    
   end
 end

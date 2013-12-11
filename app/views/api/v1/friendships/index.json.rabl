@@ -11,10 +11,10 @@ node :friendships do
       username: presenter.username,
       avator_uri: presenter.avatar_url,
       friend_url: api_v1_user_path(friendship.friend.id),
-      cancel: if friendship.requested? then api_v1_friendship_path(friendship) end,
-      confirm: if friendship.received? then change_api_v1_friendship_path(friendship, :confirm) end,
+      cancel: if (friendship.requested? or friendship.ignored?) then api_v1_friendship_path(friendship) end,
+      confirm: if (friendship.received? or friendship.ignored?) then change_api_v1_friendship_path(friendship, :confirm) end,
       ignore: if friendship.received? then change_api_v1_friendship_path(friendship, :ignore) end,
-      remove: if friendship.confirmed? then api_v1_friendship_path(friendship) end,
+      remove: if (friendship.confirmed? or friendship.ignored?) then api_v1_friendship_path(friendship) end,
       state: friendship.state,
       counters:{
         watched: presenter.counter_for(:watched),

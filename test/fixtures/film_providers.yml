@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  film: 
+  name: MyString
+  provider_key: MyString
+  link: MyString
+  rating: 1.5
+  fetched_at: 2013-11-27 10:07:46
+
+two:
+  film: 
+  name: MyString
+  provider_key: MyString
+  link: MyString
+  rating: 1.5
+  fetched_at: 2013-11-27 10:07:46

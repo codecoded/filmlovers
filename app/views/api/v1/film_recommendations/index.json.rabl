@@ -3,7 +3,7 @@ object false
 extends 'api/v1/shared/header'
 
 node :film_recommendations do
-  @film_entries.map do |film_entry|
+  @film_recommendations.map do |film_recommendation|
     user_actions = film_entry.actions
     presenter = present(film_entry.fetch_film.details, film_entry.fetch_film.details_presenter)
     {

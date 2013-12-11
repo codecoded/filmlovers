@@ -1,4 +1,4 @@
-class FriendshipObserver < Mongoid::Observer
+class FriendshipObserver < ActiveModel::Observer
 
 
   def after_request(friendship, transition)

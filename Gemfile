@@ -51,6 +51,9 @@ gem 'unf'
 gem 'curb'
 gem 'zipruby'
 
+gem 'foreigner'
+# gem 'activerecord-postgres-hstore'
+gem 'activerecord-postgres-array', '0.0.9'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -71,7 +74,8 @@ end
 group :development, :test do
   gem 'ruby-prof' # SR - for profiling / benchmarking
   gem "awesome_print"
-  gem 'better_errors'
+  # gem 'better_errors'
   gem "binding_of_caller"
   gem "letter_opener"
+
 end

@@ -8,6 +8,7 @@ class  TmdbPresenter < BasePresenter
     @film ||= film_details.film
   end
 
+
   def title_with_year
     "#{film.title} - #{year}"
   end
@@ -167,37 +168,14 @@ class  TmdbPresenter < BasePresenter
   end
 
   def genres?
-    film.genres
+    genres
   end
 
   def genres
     film.genres
   end
 
-  def other_links
-    return if film.providers.empty?
 
-    other = ''
-    if imdb = film.provider_for(:imdb)
-      other = content_tag :a,  href: "http://www.imdb.com/title/#{imdb.id}",  alt:"IMDB link for #{film.title}", target: '_blank' do 
-        image_tag 'imdb_logo.png'
-      end
-    end
-
-    if netflix = film.provider_for(:netflix)
-      other << content_tag(:a,  href: netflix.link,  alt:"Netflix link for #{film.title}", target: '_blank') do 
-         image_tag('netflix-n-logo.png') << "#{netflix.rating}<font style='font-size:60%'>/5</font>".html_safe
-      end
-    end
-
-    if rotten = film.provider_for(:rotten)
-      other << content_tag(:a,  href: rotten.link,  alt:"RottenTomatoes link for #{film.title}", target: '_blank') do 
-         image_tag('rotten.png') << "#{rotten.rating}".html_safe
-      end
-    end
-
-    other 
-  end
 
   def tagline
     film_details['tagline']
@@ -284,7 +262,7 @@ class  TmdbPresenter < BasePresenter
       film unless film.not_allowed?
     end
 
-    @similar ||= Film.find movies.compact.map(&:title_id)
+    @similar ||= Film.where(id: movies.compact.map(&:title_id))
   end
 
   def similar_films

@@ -27,6 +27,14 @@ class AdminConfig
 
     # end
 
+    def update_counters
+      FilmEntry.find_in_batches(batch_size: 5000).each do |entry|
+        if film = Film.find_by_id(entry.film_id)
+          film.update_counters
+        end
+      end
+    end
+
   end
 
 end

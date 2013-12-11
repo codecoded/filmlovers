@@ -1,13 +1,6 @@
-class Passport
-  include Mongoid::Document
-
-  field :provider
-  field :uid
-  field :oauth_token
-  field :oauth_expires_at, type: DateTime
-
-  embedded_in :user
-
+class Passport < ActiveRecord::Base
+  belongs_to :user
+  attr_accessible :oauth_expires_at, :oauth_token, :provider, :uid
 
   def self.from_omniauth(auth)
     passport = Passport.new(
@@ -34,4 +27,5 @@ class Passport
   def to_s
     "{passport: {provider: #{provider}, uid: #{uid}, oauth_expires_at: #{oauth_expires_at}}}"
   end
+    
 end

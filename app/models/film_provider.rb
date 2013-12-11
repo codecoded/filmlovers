@@ -1,16 +1,34 @@
-class FilmProvider
-  include Mongoid::Document
-  include Mongoid::Timestamps
-
+class FilmProvider < ActiveRecord::Base
   belongs_to :film
-
-  field :name,            type: String
-  field :link,            type: String
-  field :rating,          type: Float
-  field :fetched_at,      type: DateTime, default: nil
+  attr_accessible :fetched_at, :link, :name, :reference, :rating
 
   def self.apple(storefront_id=143444)
-    where(name: 'Apple').in(storefront_ids: storefront_id) || []
+    where(name: :apple, reference: storefront_id.to_s)
+  end
+
+  def self.find_by(name, reference)
+    where(name: name, reference: reference.to_s).first_or_initialize
+  end
+
+
+  def self.find_or_create(provider, reference)
+    return unless reference
+    where(name: provider, reference: reference.to_s).first_or_create
+  end
+
+  def self.exists_for?(provider)
+    where(name: provider).exists?
+  end
+
+  def self.update_from(movie)
+    # return if has_provider? provider.provider
+    find_by(movie.provider, movie.id.to_s).tap do |film_provider|
+      film_provider.link            = movie.link    || film_provider.link
+      film_provider.rating          = movie.rating  || film_provider.rating
+      film_provider.fetched_at      = Time.now.utc
+      film_provider.save
+    end    
+    self
   end
 
   def fetch
@@ -21,11 +39,9 @@ class FilmProvider
     klass.fetch! id
   end
 
-
   def klass
     @klass ||= "#{name.capitalize}::Movie".constantize
   end
-
 
   def aff_link
     case sym_name
@@ -38,9 +54,4 @@ class FilmProvider
     name.downcase.to_sym
   end
 
-  def self.apple_affiliate_link(film, storefront_id=143444)
-    itunes_url = "http://ax.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=movie&country=GB&term=#{film.title}"
-    apple_provider = apple(143444).first
-    apple_provider ?  apple_provider.aff_link :  "http://clkuk.tradedoubler.com/click?p=23708&a=2247239&g=19223668&url=#{itunes_url}&partnerId=2003"   
-  end
 end

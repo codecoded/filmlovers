@@ -1,16 +1,7 @@
-class FilmRecommendationObserver < Mongoid::Observer
+class FilmRecommendationObserver < ActiveRecord::Observer
+  observe :film_recommendation
 
-  def after_recommend(film_recommendation, transition)
-    film = film_recommendation.film
-    friend = film_recommendation.friend
-    user = film_recommendation.user
-    comment = film_recommendation.comment
-    Log.debug "Film recommendation #{film.title} to #{friend.username} by #{user.username} created"
-
-    friend.films.find_or_create(film).recommendations.create(friend_id: user.id, sent: false, comment: comment).receive
-  end
-
-  def after_receive(film_recommendation, transition)
+  def after_create(film_recommendation)
     push_desktop_notification film_recommendation
     push_facebook_notification film_recommendation
     push_ios_notification film_recommendation
@@ -22,7 +13,7 @@ class FilmRecommendationObserver < Mongoid::Observer
     sender = recommendation.friend
 
     return unless receiver.channels[:facebook] and receiver.facebook_events.recent.count <= 2
-    message = FacebookPresenter.recommendation_message recommendation
+    message = FacebookPresenter.recommendation_message(recommendation).html_safe
     receiver.channels[:facebook].notifications(Utilities.url_helpers.film_path(recommendation.film)[1..-1], message, "recommendation")
     receiver.facebook_events.create content: message, event_type: :notification
   end

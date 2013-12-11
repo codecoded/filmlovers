@@ -24,7 +24,11 @@ module FilmScopes
 
   def by_year(year)
     endYear = Date.new(year.to_i) + (1.year)
-    between(release_date: Date.new(year.to_i)...endYear)
+    where(release_date: Date.new(year.to_i)...endYear)
+  end
+
+  def popular
+    where('release_date < ? and popularity > ?', 1.week.from_now, 0.45)
   end
 
   def by_genres(genres)
@@ -32,17 +36,17 @@ module FilmScopes
   end
 
   def by_counter(name)
-    order_by("counters.#{name}" => :desc)
+    order("#{name}_counter desc")
   end
 
   def search(query, field=:title)
-    where({title: /#{query}/i})
+    where('title ilike ?', "%#{query}%")
   end 
 
   def in_cinemas
     @in_cinemas = Rotten::Movies.in_cinemas
     @opening    = Rotten::Movies.opening
-    (@in_cinemas + @opening).uniq.map &:film
+    (@in_cinemas + @opening).uniq.compact.map &:film
     # ids = Cinema.all.map {|c| c.daily_schedules.current.map {|d| d.show_times.map {|s| s.film_id} }}.flatten.compact.uniq
     # Film.in id: ids
   end
@@ -56,22 +60,20 @@ module FilmScopes
   end
 
   def filter(filters={})
-    return self if filters.blank?
-    query = self
+    return scoped if filters.blank? or filters.empty?
+    query = scoped
     if filters[:year]
       query = query.by_year filters[:year]
     else
       query = query.by_decade filters[:decade] if filters[:decade]
     end
-    query = query.by_genres filters[:genres] if filters[:genres]    
-    query.without(:details, :providers)    
+    query = query.by_genres filters[:genres] if filters[:genres]  
+    query    
   end
 
-  def self.page_results(sort_order, page_size=AdminConfig.instance.page_size)
-    order_by(sort_order).page(page_no).per page_size
+  def recommendations_view_for(user_id, state=:recommended)
+    joins(:recommendations).group('films.id').where('film_recommendations.friend_id = ? and film_recommendations.state = ?', user_id, state).select('films.*, count(film_recommendations.id) as total').order('count(*) desc')    
   end
-
- 
 
   # def cast_search(name)
   #   Film.only(:poster_path, :name, :title, :release_date, :trailers).where('casts.cast.name'=>/#{name}/i)

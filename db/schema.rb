@@ -11,7 +11,125 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131006183628) do
+ActiveRecord::Schema.define(:version => 20131129131422) do
+
+  create_table "facebook_events", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "facebook_id"
+    t.string   "event_type"
+    t.string   "content"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "facebook_events", ["user_id"], :name => "index_facebook_events_on_user_id"
+
+  create_table "film_entries", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "film_id"
+    t.integer  "facebook_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "watched",     :default => false, :null => false
+    t.boolean  "loved",       :default => false, :null => false
+    t.boolean  "owned",       :default => false, :null => false
+  end
+
+  add_index "film_entries", ["film_id", "user_id"], :name => "index_film_entries_film_and_user"
+  add_index "film_entries", ["user_id", "film_id"], :name => "index_film_entries_on_user_id_and_film_id"
+  add_index "film_entries", ["user_id"], :name => "index_film_actions_on_user_id"
+  add_index "film_entries", ["watched", "loved", "owned"], :name => "index_film_entries_on_watched_and_loved_and_owned"
+
+  create_table "film_providers", :force => true do |t|
+    t.string   "film_id"
+    t.string   "name"
+    t.string   "reference"
+    t.string   "link"
+    t.float    "rating"
+    t.datetime "fetched_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "film_providers", ["film_id"], :name => "index_film_providers_on_film_id"
+
+  create_table "film_recommendations", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "film_id"
+    t.boolean  "auto"
+    t.boolean  "sent"
+    t.text     "comment"
+    t.integer  "friend_id"
+    t.string   "state"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "film_recommendations", ["friend_id"], :name => "index_film_recommendations_on_friend_id"
+  add_index "film_recommendations", ["user_id"], :name => "index_film_recommendations_on_user_id"
+
+  create_table "films", :id => false, :force => true do |t|
+    t.string       "id",                                                 :null => false
+    t.string       "title"
+    t.string       "classification"
+    t.string       "director"
+    t.date         "release_date"
+    t.string       "release_date_country"
+    t.datetime     "fetched_at"
+    t.string       "poster"
+    t.string       "backdrop"
+    t.string       "trailer"
+    t.string_array "genres",               :limit => 255
+    t.float        "popularity"
+    t.integer      "provider_id"
+    t.string       "provider"
+    t.string       "title_director"
+    t.integer      "watched_counter",                     :default => 0, :null => false
+    t.integer      "loved_counter",                       :default => 0, :null => false
+    t.integer      "owned_counter",                       :default => 0, :null => false
+    t.datetime     "created_at",                                         :null => false
+    t.datetime     "updated_at",                                         :null => false
+  end
+
+  add_index "films", ["id"], :name => "index_films_on_id", :unique => true
+  add_index "films", ["release_date"], :name => "index_films_release_date"
+  add_index "films", ["title"], :name => "index_films_title"
+  add_index "films", ["watched_counter", "loved_counter", "owned_counter"], :name => "index_films_counters"
+
+  create_table "friendships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.string   "state"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
+  add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
+
+  create_table "mobile_devices", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.datetime "token_expires_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "mobile_devices", ["user_id"], :name => "index_mobile_devices_on_user_id"
+
+  create_table "passports", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "passports", ["user_id"], :name => "index_passports_on_user_id"
 
   create_table "rapns_apps", :force => true do |t|
     t.string   "name",                       :null => false
@@ -61,5 +179,38 @@ ActiveRecord::Schema.define(:version => 20131006183628) do
   end
 
   add_index "rapns_notifications", ["app_id", "delivered", "failed", "deliver_after"], :name => "index_rapns_notifications_multi"
+
+  create_table "user_profiles", :force => true do |t|
+    t.string   "avatar"
+    t.string   "cover_image"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "user_profiles", ["user_id"], :name => "index_user_profiles_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "encrypted_password"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "authentication_token"
+    t.string   "name"
+    t.string   "gender"
+    t.datetime "dob"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.string   "avatar"
+  end
 
 end

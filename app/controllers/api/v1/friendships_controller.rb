@@ -6,7 +6,7 @@ module Api
 
       def index
         options = paging_options sort_by: :recent, page_size: 50
-        @query = UserQuery.new(friendships, options)
+        @query = ActiveUserQuery.new(friendships, options)
       end
 
       def show

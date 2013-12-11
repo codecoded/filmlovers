@@ -21,7 +21,7 @@
         <th>Watched</th>
         <th>Loved</th>
         <th>Owned</th>
-        <th>Lists</th>
+        <!-- <th>Lists</th> -->
         <th>Rating</th>
          <% if viewing_own? %><th>Actions</th><% end %>
       </tr>
@@ -41,15 +41,15 @@
           <% [:watched, :loved, :owned].each do |action| %>
             <td>
               <%= link_to user_film_entry_path(friendship.friend, action) do %>
-                <label style="display:inline"><%= friendship.friend.films[action].count %> </label>
+                <label style="display:inline"><%= friendship.friend.film_entries.count_for action %> </label>
                <% end %>              
             </td>   
           <% end %> 
-          <td>
-            <%= link_to user_lists_path(friendship.friend) do %>
-              <label> <%=friendship.friend.films_lists.viewable.count %> </label>
-            <% end %>
-          </td>    
+<!--           <td>
+            <%#= link_to user_lists_path(friendship.friend) do %>
+              <label> <%#=friendship.friend.films_lists.viewable.count %> </label>
+            <%# end %>
+          </td>    --> 
           <td>
            <%= number_to_percentage(current_user.compare_to(friendship.friend).overall, precision: 1) %>
           </td>

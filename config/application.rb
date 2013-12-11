@@ -32,7 +32,7 @@ module Filmlovers
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
-    # config.active_record.observers = :recommendation_observer, :film_user_action_observer
+    config.active_record.observers =  :film_entry_observer, :user_observer, :film_recommendation_observer, :film_observer, :friendship_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -71,7 +71,7 @@ module Filmlovers
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.mongoid.observers = :film_action_observer, :user_observer, :film_recommendation_observer, :film_observer, :friendship_observer
+    # config.mongoid.observers = :film_action_observer, :user_observer, :film_recommendation_observer, :film_observer, :friendship_observer
 
     Mongoid.raise_not_found_error = false
     Mongoid.protect_sensitive_fields = false

@@ -1,5 +1,5 @@
 module Imdb
-  class Movie
+  class Movie < MovieProvider
     include Mongoid::Document
     include Mongoid::Timestamps
 
@@ -14,7 +14,7 @@ module Imdb
     end
 
     def self.fetch!(id)
-      fetch(id).set_film_details!
+      fetch(id).set_film_provider!
     end
 
     def self.find_all(ids)
@@ -26,28 +26,15 @@ module Imdb
       find_all(ids).map &:film
     end
 
-    def identifier
-       self.class.name.deconstantize
-    end
-
     def film
-      @film ||= (find_film || create_film)
-      @film.add_provider(self)
+      @film = super
       @film.set_release_date release_date_for('UK'), 'UK'
-    end
-
-    def find_film
-      Film.where(_id: title_id).first || Film.find_by_provider(identifier, id)
     end
 
     def id
       self['imdb_id']
     end
-
-    def title_id
-      Film.create_uuid(title, year)
-    end
-
+    
     def title
       self['title']
     end
@@ -93,27 +80,5 @@ module Imdb
     def poster
       self['poster']['cover']
     end
-
-    def set_film_details!
-      film.update_film_provider self
-    end
-
-    protected
-    def create_film
-      Log.debug("Creating film from IMDB data: #{title_id}")
-      release_date_country = 'UK' if release_date_for('UK')
-
-      Film.create(
-        id: title_id, 
-        fetched_at: Time.now.utc,
-        title: title, 
-        release_date: release_date, 
-        release_date_country: release_date_country,
-        poster: poster, 
-        provider_id: _id, 
-        provider: name)
-    end
-
-
   end
 end

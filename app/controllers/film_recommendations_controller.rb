@@ -6,7 +6,7 @@ class FilmRecommendationsController < ApplicationController
 
   def create
     return head 400 if friend_ids.nil?
-    @recommendations = film_entry.recommend_to(friendships.where(:friend_id.in => friend_ids), comment).compact
+    @recommendations = film_recommendation_service.recommend_to selected_friends, comment
   end
 
   def new
@@ -14,20 +14,28 @@ class FilmRecommendationsController < ApplicationController
 
   protected
 
+  def film_recommendation_service
+    FilmRecommendationService.new(current_user, film)
+  end
+
+  def selected_friends
+    friendships.where(friend_id: friend_ids)
+  end
+
   def comment
     params[:film_recommendation][:comment] if params[:film_recommendation]
   end
 
   def film_recommendation
-    params[:id] ? film_entry.find_by(recommendations: params[:id]) : film_entry.recommendations.new
+    params[:id] ? FilmRecommendation.find(params[:id]) : film.recommendations.new(user_id: current_user.id)
   end
 
   def friendships
-    @friendships ||= film_entry.new_recommendation_friends
+    @friendships ||= film_recommendation_service.available_friends
   end
 
-  def film_entry
-    @film_entry ||= current_user.films.find_or_create(film)
+  def film_id
+    params[:film_id]
   end
 
   def friend_ids
@@ -35,7 +43,7 @@ class FilmRecommendationsController < ApplicationController
   end
 
   def film
-    @film ||= Film.find params[:film_id]
+    @film ||= Film.find film_id
   end
 
   helper_method :friendships, :film, :film_recommendation

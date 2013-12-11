@@ -1,57 +1,52 @@
-class FilmRecommendation
-  include Mongoid::Document
-  include Mongoid::Timestamps
+class FilmRecommendation < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :film
+  belongs_to :friend, class_name: 'User'
 
-  embedded_in :film_entry  
-  belongs_to  :friend, :class_name => "User"
+  attr_accessible :auto, :comment, :film_id, :sent, :state, :friend_id
+  
+  validates_uniqueness_of :friend_id, uniqueness: {message: "This film has already been recommended to this friend!"}, presence: true, :scope => [:film_id]
 
-  field :auto,      type: Boolean, default: false
-  field :sent,      type: Boolean, default: true
-  field :comment,   type: String
+  # index({ friend: 1, state: 1},   { unique: true, name: "recommendation_index", background: true })
 
-  validates :friend, uniqueness:  {message: "this friend has already been sent a recommendation", scope: [:friend]}, presence: true
-  validate  :film_recommendable, on: :create
+  scope :recommended,  -> {where state: :recommended}
+  scope :sent,      -> {where(sent: true)}
+  scope :received,  -> {where state: :received}
 
-  index({ friend: 1, state: 1},   { unique: true, name: "recommendation_index", background: true })
+  state_machine :initial => :recommended do
+    event(:unrecommend)  { transition :recommended                => :removed     }  
+    event(:approve)      { transition [:recommended, :hidden]     => :approved    }
+    event(:hide)         { transition :recommended                => :hidden      }
+    event(:show)         { transition :hidden                     => :recommended    }
+  end
 
-  scope :sent, ->{where(sent: true)}
+  def self.for_user(id)
+    where(user_id: id)
+  end 
 
-  # total sent => recommended
-  # total received => recieved + approved + hidden
-  state_machine :initial => :pending do
-    event(:recommend)    { transition :pending      => :recommended }
-    event(:unrecommend)  { transition :recommended  => :removed     }
-    event(:receive)      { transition :pending      => :received    }    
-    event(:approve)      { transition :received     => :approved    }
-    event(:hide)         { transition :received     => :hidden      }
-    event(:show)         { transition :hidden       => :received    }
+  def self.for_friend(id)
+    where(friend_id: id)
+  end 
+
+  def self.for_film(id)
+    where(film_id: id)
+  end 
+
+  def self.view_by_film
+    includes(:film).select(:film_id).group(:film_id)
+  end
+
+  def self.view_by_friends
+    includes(:friend).select(:friend_id).group(:friend_id)
   end
 
   def self.recommended?(friend)
     where(friend: friend).exists?
   end
 
-
-
   def self.recent(limit=5)
-    order_by(:created_at.desc).limit(limit)
+    order('created_at desc').limit(limit)
   end
 
-  def film
-    @film ||= film_entry.fetch_film
-  end
-
-  def user
-    @user ||= film_entry.fetch_user
-  end
-
-  # def self.fetch_by(friend, comment=\nil)
-  #   find_by(friend: friend) || create(friend: friend, comment: comment)
-  # end
-
-  private
-  def film_recommendable
-    !friend.films.actioned?(film_entry.film)
-  end
 
 end

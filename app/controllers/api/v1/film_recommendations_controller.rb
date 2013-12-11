@@ -2,13 +2,15 @@ module Api
   module V1
     class FilmRecommendationsController < BaseController
 
-      def index
-        @film_entries ||= user_films.recommended
-      end
-
       def received
-        options = paging_options sort_by: :recent, page_size: 10
-        @query = UserQuery.new user_films.received_recommendations, options
+        # options = paging_options sort_by: :total, page_size: 10
+        # @query = ActiveUserQuery.new Film.recommendations_view_for(current_user.id, :recommended), options
+        if friends_view?
+          @results = User.recommendations_view_for(current_user.id, :recommended)
+          render 'received_friends'
+        else
+          @results = Film.recommendations_view_for(current_user.id, :recommended)
+        end
         # @film_entries ||= user_films.received_recommendations
       end
 
@@ -22,7 +24,7 @@ module Api
 
       def create
         return head 400 if friend_ids.nil?
-        @recommendations = film_entry.recommend_to(friendships.where(:friend_id.in => friend_ids), comment).compact
+        @recommendations = film_recommendation_service.recommend_to selected_friends, comment
       end
 
       def new
@@ -35,32 +37,44 @@ module Api
 
       protected
 
-      def user_films
-        current_user.films
-      end
-      
-      def film_recommendation
-        params[:id] ? current_user.films.select_recommendation(params[:id]) : film_entry.recommendations.new
+      def friends_view?
+        params[:view_by] == 'friend'
       end
 
-      def friendships
-        @friendships ||= film_entry.new_recommendation_friends
+      def film_recommendations
+        @film_recommendations ||= current_user.recommended_films
       end
 
-      def film_entry
-        @film_entry ||= current_user.films.find_or_create(film)
+      def film_recommendation_service
+        current_user.film_recommender film
       end
 
-      def friend_ids
-        params[:friend_id]
+      def selected_friends
+        friendships.where(friend_id: friend_ids)
       end
 
       def comment
         params[:comment]
       end
 
+      def film_recommendation
+        params[:id] ? FilmRecommendation.find(params[:id]) : film.recommendations.new(user_id: current_user.id)
+      end
+
+      def friendships
+        @friendships ||= film_recommendation_service.available_friends
+      end
+
+      def film_id
+        params[:film_id]
+      end
+
+      def friend_ids
+        params[:friend_id]
+      end
+
       def film
-        @film ||= Film.find params[:film_id]
+        @film ||= Film.find film_id
       end
 
       helper_method :friendships, :film

@@ -17,7 +17,7 @@ module Api
       end
 
       def popular
-        render_films Film.where(:release_date.lt => 2.weeks.from_now)
+        render_films Film.popular, :popularity
       end
 
       def categories
@@ -28,8 +28,8 @@ module Api
       end
 
       def render_films(films, sort_order=:popularity)
-        options = paging_options sort_by: sort_order, page_size: 50, without: [:providers]
-        @query = UserQuery.new(films, options)
+        options = paging_options sort_by: sort_order, page_size: 50
+        @query ||= ActiveUserQuery.new(films, options)
         render :index
       end
       

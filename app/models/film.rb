@@ -1,84 +1,79 @@
-class Film
+class Film < ActiveRecord::Base
+
+  self.primary_key = :id
+  attr_accessible :id, :backdrop, :classification, :director, :fetched_at, 
+                  :genres, :id, :popularity, :poster, :provider, :provider_id, 
+                  :release_date, :release_date_country, :title, :title_director, :trailer,
+                  :watched_counter, :loved_counter, :owned_counter
+
   extend FilmScopes
-  extend Queryable
-  include Mongoid::Document
-  include Mongoid::Timestamps
 
-  field :title,                 type: String
-  field :classification,        type: String
-  field :director,              type: String
-  field :release_date,          type: Date
-  field :release_date_country,  type: String
-  field :fetched_at,            type: DateTime, default: nil
-  field :poster,                type: String
-  field :backdrop,              type: String
-  field :trailer,               type: String
-  field :genres,                type: Array
-  field :popularity,            type: Float
-  field :provider_id,           type: Integer
-  field :provider,              type: String,   default: :tmdb
-  field :title_director,        type: String
+  # extend Queryable
 
-  # embeds_one :details, class_name: "FilmDetails", autobuild: true
-  embeds_one  :counters,  class_name: "FilmCounters", autobuild: true
-  has_many    :providers, class_name: 'FilmProvider'
+  has_many    :providers,         class_name: 'FilmProvider'
+  has_many    :entries,           class_name: 'FilmEntry',          :inverse_of => :film
+  has_many    :recommendations,   class_name: 'FilmRecommendation', :inverse_of => :film
 
-  index({ release_date: -1 },           { unique: false, name: "film_release_date_index", background: true })
-  index({ title: -1 },                  { unique: true,  name: "film_title_index", background: true })
-  index({ genres: -1 },                 { unique: false, name: "film_genres_index", background: true })
-  index({ popularity: -1 },             { unique: false, name: "film_popularity_index", background: true })
-  index({ provider: 1, provider_id: 1}, { unique: true,  name: "provider_index", background: true })
-  index({ title_director: -1 },         { unique: true,  name: "film_title_director_index", background: true })
+  validates_presence_of :provider
+  validates_presence_of :provider_id
+  validates_presence_of :title
+  validates_presence_of :release_date
+  
 
-  index({ 'counters.watched'=> -1 },    { unique: false, name: "film_counters_watched", background: true })
-  index({ 'counters.loved'  => -1 },    { unique: false, name: "film_counters_loved", background: true })
-  index({ 'counters.owned'  => -1 },    { unique: false, name: "film_counters_owned", background: true })
+  # has_one :user_entry, class_name: 'FilmEntry', :conditions => lambda {|u| "film_entries.user_id = #{u.id}"}
+
+
+  before_create :set_title_director
+
+  def self.with_entries_for(user)
+    user ? includes(:entries).joins("left outer join film_entries on films.id = film_entries.film_id and film_entries.user_id = #{ActiveRecord::Base.sanitize(user.id)} ") : self
+  end
 
   def self.create_uuid(title, year)
     title = title.gsub("'","").parameterize
-    "#{title}-#{year}"  if !title.empty?
+    "#{title}-#{year}" if (!title.empty? and year)
+  end
+
+  def self.fetch_from(movie)
+    return unless movie 
+    find_provider(movie) || create_from(movie)
+  end
+
+  def self.find_provider(movie)
+    film = find_by_id(movie.title_id) if movie.title_id
+    return film if film
+
+    return unless movie.respond_to? :imdb_id 
+    FilmProvider.find_by(:imdb, movie.imdb_id).film unless movie.imdb_id.blank?
   end
 
 
-  # def self.find_or_create_from_provider(movie, create=true)
-  #   film = find(movie.title_id) if movie.title_id
-  #   film = if !film and create
-  #     create_from(movie) unless movie.not_allowed?
-  #   end
-  #   return unless film
-  #   film.add_provider(movie)
-  #   film.provider_by(:Imdb, movie.imdb_id).save if movie.imdb_id?
-  #   film
-  # end
+  def self.create_from(movie)
+    return unless title_id = movie.title_id and movie.allowed?
 
-  def self.create_from(provider)
-    Log.debug("Creating film '#{provider.title_id}' from provider '#{provider.identifier}-#{provider._id}'")
+    Log.debug("Creating film '#{title_id}' from provider '#{movie.provider}-#{movie._id}'")
     film = create(
-      id: provider.title_id, 
+      id: title_id, 
       fetched_at: Time.now.utc,
-      title: provider.title,
-      director: provider.directors_name,
-      release_date: provider.release_date, 
-      release_date_country: provider.release_date_country,
-      poster: provider.poster, 
-      genres: provider.genres,
-      trailer: provider.trailer,
-      popularity: provider.popularity,
-      classification: provider.classification,
-      provider_id: provider._id, 
-      provider: provider.identifier,
-      title_director: title_director_key) 
-    film.counters.save
-    film 
+      title: movie.title,
+      director: movie.directors_name,
+      release_date: movie.release_date, 
+      release_date_country: movie.release_date_country,
+      poster: movie.poster, 
+      backdrop: movie.backdrop,
+      genres: movie.genres,
+      trailer: movie.trailer,
+      popularity: movie.popularity.to_f,
+      classification: movie.classification,
+      provider_id: movie._id, 
+      provider: movie.provider.downcase)
+    film.add_provider movie
+    film
   rescue 
-    Log.error "Could not create film of id: #{provider.id}, title_id: #{provider.title_id}"
+    Log.error "Could not create film of movie id: #{movie.id}, title_id: #{title_id}"
+    nil
   end
 
-
-  def entries
-    @entries ||= FilmEntry.where(film_id: self.id)
-  end
- 
   def details
     @details ||= "#{film_provider_class}::Movie".constantize.find provider_id
   end
@@ -88,11 +83,7 @@ class Film
   end
 
   def presenter
-    details_presenter.new(self, details_presenter)
-  end
-
-  def actions_for(action)
-    entries.find_by_action(action)
+    details_presenter.new(details, details_presenter)
   end
   
   def year
@@ -100,44 +91,31 @@ class Film
   end
 
   def score
-    watched = actions_for(:watched).count
-    return 0 unless watched > 0
-    ((actions_for(:loved).count / watched) * 100).round(0)
+    counts = entries.counts
+    return 0 unless counts.watched > 0
+    ((counts.loved.to_f / counts.watched.to_f) * 100).round(0)
   end
 
-  def poster?
-    poster
+
+  def provider_for(name)
+    providers.find_by_name name
   end
 
-  def trailer?
-    trailer
-  end
-
-  def backrop?
-    backrop
-  end
-
-  def has_provider?(name)
-    providers.where(:name => name).exists?
-  end
-
-  def provider_by(identifier, id)
-    providers.find_or_initialize_by name: identifier, id: id
-  end
-
-  def provider_for(identifier)
-    providers.find_by name: identifier
+  def has_provider?(provider)
+    providers.exists_for? provider
   end
 
   def add_provider(movie)
-    # return if has_provider? provider.identifier
-    provider_by(movie.identifier, movie.id).tap do |film_provider|
-      film_provider.link            = movie.link || film_provider.link
-      film_provider.rating          = movie.rating || film_provider.rating
-      film_provider.fetched_at      = Time.now.utc
-      film_provider.save
-    end    
-    self
+    providers.update_from(movie)
+    set_imdb(movie.imdb_id) if movie.respond_to? :imdb_id
+  end
+
+  def set_imdb(id)
+    providers.find_or_create(:imdb, id) if id
+  end
+
+  def set_title_director
+    self.title_director = title_director_key
   end
 
   def title_director_key
@@ -157,21 +135,39 @@ class Film
     self
   end
 
-
   def film_provider_class
     provider.capitalize
   end
 
   def update_film_provider(film_provider)
+
+    return if film_provider.respond_to? :not_allowed? and film_provider.not_allowed?
+
     update_attributes!({
       fetched_at: Time.now.utc,
-      popularity: film_provider.popularity,
-      provider: film_provider.identifier, 
+      poster: film_provider.poster || poster,
+      release_date: film_provider.release_date || release_date,
+      release_date_country: film_provider.release_date_country || release_date_country,
+      trailer: film_provider.trailer || trailer,
+      genres: film_provider.genres || genres,
+      backdrop: film_provider.backdrop || backdrop,
+      classification: film_provider.classification || classification,
+      popularity: film_provider.popularity || popularity,
+      provider: film_provider.provider, 
       provider_id: film_provider.id
     })
     notify_observers :film_details_updated
     self
   end
+
+  def update_counters
+    counts = entries.counts
+    self.watched_counter = counts.watched_count
+    self.loved_counter = counts.loved_count
+    self.owned_counter = counts.owned_count
+    save
+  end
+
 
   def to_param
     id

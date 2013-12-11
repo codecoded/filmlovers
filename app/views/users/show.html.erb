@@ -33,7 +33,7 @@
           <section <%= 'class=active' if params[:action]=='film_entries' %>>
             <p class="title" data-section-title><a href="#panel1">Films</a></p>
             <div class="content" data-section-content>
-              <%= render partial: 'films', locals: {films: presenter.actioned_films} %>
+              <%= render partial: 'films', locals: {presenter: presenter} %>
             </div>
           </section>
 <!--           <%# if viewing_own? %>
@@ -56,17 +56,17 @@
               <%= render partial: 'friendships', locals: {friendships: presenter.user.friendships} if logged_in? %>
             </div>
           </section>
-<!--           <%# if viewing_own? %>
-             <section <%#= 'class=active' if params[:action]=='details' %>>
-              <%#= render template: 'devise/registrations/edit' %>
+          <% if viewing_own? %>
+             <section <%= 'class=active' if params[:action]=='details' %>>
+              <%= render template: 'devise/registrations/edit' %>
             </section>         
-             <section <%#= 'class=active' if params[:action]=='settings' %>>
+ <!--             <section <%#= 'class=active' if params[:action]=='settings' %>>
               <p class="title" data-section-title><a href="#panel6">Settings</a></p>
               <div class="content" data-section-content>
                 <p>Settings</p>
               </div>
-            </section>
-           <%# end %> -->
+            </section> -->
+           <% end %> 
         </div>
       </div>
     </div>

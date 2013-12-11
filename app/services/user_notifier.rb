@@ -34,9 +34,11 @@ class UserNotifier
   def push_to_mobile(message)
     n = Rapns::Apns::Notification.new
     n.app = Rapns::Apns::App.find_by_name(AppConfig.ios_app)
-    n.device_token = user.mobile_devices.find_by(provider: 'iPhone').token.gsub(' ','')
+    n.device_token = user.mobile_devices.find_by_provider('iPhone').token.gsub(' ','')
     n.alert = message
     # n.attributes_for_device = {:foo => :bar}
     n.save!
+  rescue => msg
+    Log.error "Unable to send to user #{user.username} mobile message #{message}. #{msg}"
   end
 end

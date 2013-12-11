@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user: 
+  facebook_id: MyString
+  event_type: MyString
+  content: MyString
+
+two:
+  user: 
+  facebook_id: MyString
+  event_type: MyString
+  content: MyString

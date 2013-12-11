@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: MyString
+  title: MyString
+  classification: MyString
+  director: MyString
+  release_date: 2013-11-26
+  release_date_country: MyString
+  fetched_at: 2013-11-26 01:33:53
+  poster: MyString
+  backdrop: MyString
+  trailer: MyString
+  genres: 
+  popularity: 1.5
+  provider_id: 1
+  provider: MyString
+  title_director: MyString
+
+two:
+  id: MyString
+  title: MyString
+  classification: MyString
+  director: MyString
+  release_date: 2013-11-26
+  release_date_country: MyString
+  fetched_at: 2013-11-26 01:33:53
+  poster: MyString
+  backdrop: MyString
+  trailer: MyString
+  genres: 
+  popularity: 1.5
+  provider_id: 1
+  provider: MyString
+  title_director: MyString

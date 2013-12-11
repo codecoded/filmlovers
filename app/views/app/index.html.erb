@@ -31,17 +31,17 @@
     </div>
     <div class="large-3 small-6 columns text-center">
       <p class="watched">
-          <span><%= FilmEntry.find_by_action(:watched).count %></span> films watched
+          <span><%= FilmEntry.counts.watched_count %></span> films watched
         </p>
     </div>
     <div class="large-3 small-6 columns text-center">
       <p class="loved">
-          <span><%= FilmEntry.find_by_action(:loved).count %></span> films loved
+          <span><%= FilmEntry.counts.loved_count %></span> films loved
       </p>
     </div>
     <div class="large-3 small-6 columns text-center">
       <p class="owned">
-          <span><%= FilmEntry.find_by_action(:owned).count %></span> films owned
+          <span><%= FilmEntry.counts.owned_count %></span> films owned
       </p>
     </div>
 </div>

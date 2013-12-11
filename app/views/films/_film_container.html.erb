@@ -16,8 +16,5 @@
     </p>
   </div>
 <% end %>
-<ul class="user-rankings">
-  <% [:watched, :loved, :owned].each do |action| %>
-      <%= presenter.action_list_item action, presenter.counter(action), true %>
-  <% end %>
-</ul>
+
+<%= render partial: 'films/film_entry_panel', locals: {film_entry: presenter.film.entries.for_user(current_user)} %>

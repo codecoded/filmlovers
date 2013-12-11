@@ -22,13 +22,13 @@ class FilmCollection
 
     def populate_in_cinemas
       @coll = in_cinemas
-      @coll.film_ids = Film.in_cinemas.map &:id
+      @coll.film_ids = Film.in_cinemas.compact.map &:id
       @coll.save
     end
   end
 
   def films
-    @films ||= Film.in(id: film_ids)
+    @films ||= Film.where(id: film_ids)
   end
 
 end

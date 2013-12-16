@@ -49,17 +49,17 @@
                 <div class="content" data-section-content>
                   <div class="row">
                     <% presenter.films_worked_on.each do |roles| %>
+                    <% if roles[:film_presenter] %>
                       <div class="large-3 small-6 columns text-center">
                         <div class="character">
                           <h5><%= roles[:department]%></h5>
                           <p><%= roles[:job]%></p>
                         </div>
-                        <% if roles[:film_presenter] %>
-                          <%= div_for roles[:film_presenter].film do %>
-                            <%= render partial: 'films/film_container', locals: {presenter: roles[:film_presenter]} %>      
-                          <% end %>             
-                        <% end %>
+                        <%= div_for roles[:film_presenter].film do %>
+                          <%= render partial: 'films/film_container', locals: {presenter: roles[:film_presenter]} %>      
+                        <% end %>             
                       </div>
+                      <% end %>
                     <% end %>
                   </div>
                 </div>

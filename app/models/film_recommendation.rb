@@ -5,7 +5,7 @@ class FilmRecommendation < ActiveRecord::Base
 
   attr_accessible :auto, :comment, :film_id, :sent, :state, :friend_id
   
-  validates_uniqueness_of :friend_id, uniqueness: {message: "This film has already been recommended to this friend!"}, presence: true, :scope => [:film_id]
+  # validates_uniqueness_of :friend_id, uniqueness: {message: "This film has already been recommended to this friend!"}, presence: true, :scope => [:film_id]
 
   # index({ friend: 1, state: 1},   { unique: true, name: "recommendation_index", background: true })
 

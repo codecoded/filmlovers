@@ -50,7 +50,7 @@ class PersonPresenter < BasePresenter
 
     films = Film.with_entries_for(current_user).where(id: film_ids).compact
 
-    movies.map do |movie|
+    @films = movies.map do |movie|
       film = films.find {|f| f.id==movie[:film_id]}
       {
         film_presenter: if film then FilmPresenter.new(film, self) else nil end,
@@ -61,6 +61,7 @@ class PersonPresenter < BasePresenter
       }
     end
 
+    @films.select! {|m| m[:film_presenter]} || []
   end
 
   # def create_presenter(film_details)

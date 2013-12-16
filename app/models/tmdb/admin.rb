@@ -27,7 +27,7 @@ module Tmdb
       results_page = tmdb_results(start_date, page_no) 
       fetch_films(results_page)
       while results_page.more_pages? do
-        fetch_films tmdb_results(start_date, page_no+=1) 
+        results_page = fetch_films(tmdb_results(start_date, page_no+=1)) 
       end
     end
 

@@ -16,6 +16,7 @@ node :film_recommendations do
           presenter = present(recommendation.film, FilmPresenter)
           {
             id: recommendation.id,
+            film_id: presenter.id,
             title: presenter.title,
             poster: presenter.poster_uri,
             release_date: presenter.release_date,

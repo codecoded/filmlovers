@@ -2,7 +2,7 @@ module UserScopes
   extend self
 
   def search(query)
-    self.where('username ilike ?', query)
+    self.where("lower(username) like ?", "#{query.downcase}%")
   end 
 
   # def filter(filters={})

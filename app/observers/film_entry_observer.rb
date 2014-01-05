@@ -1,4 +1,5 @@
-class FilmEntryObserver < ActiveModel::Observer
+class FilmEntryObserver < ActiveRecord::Observer
+  observe :film_entry
 
   def after_update(film_entry)
     Log.debug 'film entry created'

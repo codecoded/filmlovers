@@ -9,8 +9,8 @@ class FilmRecommendationObserver < ActiveRecord::Observer
 
   def push_facebook_notification(recommendation)
     Log.debug "Trying to send FB notification for film recommendation #{recommendation.id}"
-    receiver = recommendation.user
-    sender = recommendation.friend
+    receiver = recommendation.friend
+    sender = recommendation.user
 
     return unless receiver.channels[:facebook] and receiver.facebook_events.recent.count <= 2
     message = FacebookPresenter.recommendation_message(recommendation).html_safe
@@ -22,7 +22,7 @@ class FilmRecommendationObserver < ActiveRecord::Observer
     Log.debug "Trying to send iOS notification for film recommendation #{film_recommendation.id}"
     notice = "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}. #{film_recommendation.comment}"
     Log.debug notice
-    friend = film_recommendation.user
+    friend = film_recommendation.friend
     return unless friend.mobile_devices.registered? :iPhone
     friend.notifier.push_to_mobile notice
     Log.debug 'iOS film recommendation recorded - ensure daemon is running'
@@ -31,7 +31,7 @@ class FilmRecommendationObserver < ActiveRecord::Observer
   def push_desktop_notification(film_recommendation)
     notice = "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}. #{film_recommendation.comment}"
     Log.debug notice
-    film_recommendation.user.notifier.toast notice
+    film_recommendation.friend.notifier.toast notice
   end
 
 end

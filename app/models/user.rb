@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
   attr_accessible :authentication_token, :current_sign_in_ip, :current_sign_in_at, :dob, :email, 
                   :encrypted_password, :first_name, :gender, :last_name, :last_sign_in_at, 
                   :last_sign_in_ip, :name, :remember_created_at, :reset_password_sent_at, 
-                  :reset_password_token, :sign_in_count, :username, :password
-
+                  :reset_password_token, :sign_in_count, :username, :password, :password_confirmation, :remember_me
+                  
   include Gravtastic
   extend UserScopes
 

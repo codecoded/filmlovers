@@ -50,19 +50,19 @@
           <%# end %>
           <div class="row">
             <div class="large-4 small-12 columns">
-              <%#= f.label  :password, 'new password' %>  
+              <%= f.label  :password, 'new password' %>  
             </div>
             <div class="large-8 small-12 columns">
-              <%#= f.input :password,  :autocomplete => "off" %>
+              <%= f.input :password,  :autocomplete => "off" , label: false%>
             </div>
           </div>
 
           <div class="row">
             <div class="large-4 small-12 columns">
-              <%#= f.label :password_confirmation, 'confirm new password', hint: false, label: false  %>
+              <%= f.label :password_confirmation, 'confirm new password', hint: false, label: false  %>
             </div>
             <div class="large-8 small-12 columns">
-              <%#= f.input :password_confirmation, placeholder: 'eg. X8df!90EO', hint: false, label: false  %>
+              <%= f.input :password_confirmation, placeholder: 'eg. X8df!90EO', hint: false, label: false  %>
             </div>
           </div>
 

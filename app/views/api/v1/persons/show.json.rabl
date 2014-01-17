@@ -1,18 +1,20 @@
-object @presenter
+object false
 
 if !locals[:hide_header]
   extends 'api/v1/shared/header'
 end
 
-node :person do |person|
+presenter = present(person, PersonPresenter)
+
+node :person do
   {
-    id: person.id,
-    name: person.name,
-    biography: person.biography,
-    place_of_birth: person.place_of_birth,
-    birthday: person.dob,
-    profile_path: person.profile('w342'),
-    starred_in: person.films_starred_in.map do |roles|
+    id: presenter.id,
+    name: presenter.name,
+    biography: presenter.biography,
+    place_of_birth: presenter.place_of_birth,
+    birthday: presenter.dob,
+    profile_path: presenter.profile('w342'),
+    starred_in: presenter.films_starred_in.map do |roles|
       {
         character: roles[:character],
         id: roles[:film_presenter].id,
@@ -20,7 +22,7 @@ node :person do |person|
         poster: roles[:film_presenter].poster_uri
       }
     end,
-    worked_on: person.films_worked_on.map do |roles|
+    worked_on: presenter.films_worked_on.map do |roles|
       {
         department: roles[:department],
         job: roles[:job],

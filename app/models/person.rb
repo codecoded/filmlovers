@@ -21,9 +21,40 @@ class Person
   # end
 
   def films
-    cast_films = credits['cast'].map {|f| Film.find(f['id']) || Film.create(f)}
-    crew_films =  credits['crew'].map {|f| Film.find(f['id']) || Film.create(f)}
+    cast_films_id = credits['cast'].map {|film| film['id']}.compact
+    crew_films_id = credits['crew'].map {|film| film['id']}.compact
+    cast_films = Film.where(provider_id: cast_films_id, provider: :tmdb)
+    crew_films = Film.where(provider_id: crew_films_id, provider: :tmdb)
     @films ||= (cast_films + crew_films).uniq
+  end
+
+  def films_starred_in
+    films_id = credits['cast'].
+      select{|film| film['adult']==false}.
+      map {|film| film['id']}.compact
+
+    films = Film.where(provider_id: films_id, provider: :tmdb).to_a
+    credits['cast'].map do |cast_film|
+      {
+        character: cast_film['character'],
+        film: films.find {|film| film.provider_id == cast_film['id']}
+      }
+    end
+  end
+
+  def films_worked_on
+    films_id = credits['crew'].
+      select{|film| film['adult']==false}.
+      map {|film| film['id']}.compact
+      
+    films = Film.where(provider_id: films_id, provider: :tmdb).to_a
+    credits['crew'].map do |cast_film|
+      {
+        department: cast_film['department'],
+        job: cast_film['job'],
+        film: films.find {|film| film.provider_id == cast_film['id']}
+      }
+    end
   end
 
   def has_profile?

@@ -1,7 +1,7 @@
 class FilmEntry < ActiveRecord::Base
   belongs_to :user
   belongs_to :film
-  attr_accessible :watched, :loved, :owned, :facebook_id, :film_id
+  attr_accessible :watched, :loved, :owned, :facebook_id, :film_id, :user_id
 
   # validates :action, uniqueness: {message: "This film has already been actioned!"}, presence: true
   validates_uniqueness_of :film_id, uniqueness: {message: "This film has already been actioned!"}, presence: true, :scope => [:user_id]

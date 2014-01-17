@@ -3,7 +3,7 @@ module Api
     class PersonsController < BaseController
 
       def show
-        @presenter = PersonPresenter.new Person.fetch(params[:id]), Person
+        # @presenter = PersonPresenter.new Person.fetch(params[:id]), Person
       end
       
       protected

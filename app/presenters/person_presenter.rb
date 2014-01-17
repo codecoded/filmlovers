@@ -19,12 +19,45 @@ class PersonPresenter < BasePresenter
   end
 
   def films_starred_in
-    @films_starred_in ||= films_for('cast').compact
+    @films_starred_in ||= starred_in.map do |film|
+      film.merge film_presenter: FilmPresenter.new(film[:film], self) 
+    end
   end
 
   def films_worked_on
-    @films_worked_on ||= films_for('crew').compact
+    @films_worked_on ||= worked_on.map do |film|
+      film.merge film_presenter: FilmPresenter.new(film[:film], self)
+    end    
   end  
+
+  def starred_in
+    films_id = person.credits['cast'].
+      select{|film| film['adult']==false}.
+      map {|film| film['id']}.compact
+
+    films = Film.with_entries_for(current_user).where(provider_id: films_id, provider: :tmdb).to_a
+    person.credits['cast'].map do |cast_film|
+      {
+        character: cast_film['character'],
+        film: films.find {|film| film.provider_id == cast_film['id']}
+      }
+    end
+  end
+
+  def worked_on
+    films_id = person.credits['crew'].
+      select{|film| film['adult']==false}.
+      map {|film| film['id']}.compact
+      
+    films = Film.with_entries_for(current_user).where(provider_id: films_id, provider: :tmdb).to_a
+    person.credits['crew'].map do |cast_film|
+      {
+        department: cast_film['department'],
+        job: cast_film['job'],
+        film: films.find {|film| film.provider_id == cast_film['id']}
+      }
+    end
+  end
 
   # def films_for(role)
   #   person.credits[role].map do |film_details| 
@@ -36,33 +69,7 @@ class PersonPresenter < BasePresenter
   #   end
   # end
 
-  def films_for(role)
-    movies = person.credits[role].map do |film_details| 
-      movie = Tmdb::Movie.new(film_details)
-      next if movie.not_allowed?
-      {
-        film_id: movie.title_id,
-        film_details: film_details
-      }
-    end
 
-    film_ids = movies.compact.map {|m| m[:film_id]}
-
-    films = Film.with_entries_for(current_user).where(id: film_ids).compact
-
-    @films = movies.map do |movie|
-      film = films.find {|f| f.id==movie[:film_id]}
-      {
-        film_presenter: if film then FilmPresenter.new(film, self) else nil end,
-        film_id: movie[:film_id],
-        character: movie[:film_details]['character'],
-        department: movie[:film_details]['department'],
-        job: movie[:film_details]['job']
-      }
-    end
-
-    @films.select! {|m| m[:film_presenter]} || []
-  end
 
   # def create_presenter(film_details)
   #   @similar = similar_movies.map  do |f| 

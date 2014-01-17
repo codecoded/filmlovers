@@ -10,6 +10,9 @@ class FilmPresenter < BasePresenter
     @counts ||= FilmEntry.counts_for_film(film.id)
   end
 
+  def film_entry
+    film.entries.first || current_user.film_entries.new(film_id: film.id)
+  end
 
   def release_date
     film.release_date.strftime('%d %B %Y') if film.release_date

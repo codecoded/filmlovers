@@ -7,7 +7,7 @@ module Api
 
 
       def show
-        options = paging_options sort_by: :user_id, page_size: 50
+        options = paging_options sort_by: sort_by || :updated_at, page_size: 50
         @query = ActiveUserQuery.new(film_entries, options)  
       end
 

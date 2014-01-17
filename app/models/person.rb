@@ -30,14 +30,14 @@ class Person
 
   def films_starred_in
     films_id = credits['cast'].
-      select{|film| film['adult']==false}.
-      map {|film| film['id']}.compact
+      select {|film| film['adult']==false}.
+      map    {|film| film['id']}.compact
 
     films = Film.where(provider_id: films_id, provider: :tmdb).to_a
     credits['cast'].map do |cast_film|
       {
         character: cast_film['character'],
-        film: films.find {|film| film.provider_id == cast_film['id']}
+        film: films.find {|film| film.provider_id == cast_film['id'] }
       }
     end
   end
@@ -52,7 +52,7 @@ class Person
       {
         department: cast_film['department'],
         job: cast_film['job'],
-        film: films.find {|film| film.provider_id == cast_film['id']}
+        film: films.find {|film| film.provider_id == cast_film['id']} 
       }
     end
   end

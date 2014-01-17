@@ -19,15 +19,13 @@ class PersonPresenter < BasePresenter
   end
 
   def films_starred_in
-    @films_starred_in ||= starred_in.map do |film|
-      film.merge film_presenter: FilmPresenter.new(film[:film], self) 
-    end
+    @films_starred_in ||= starred_in.select {|film| film[:film]}.
+                                     map    {|film| film.merge film_presenter: FilmPresenter.new(film[:film], self) }
   end
 
   def films_worked_on
-    @films_worked_on ||= worked_on.map do |film|
-      film.merge film_presenter: FilmPresenter.new(film[:film], self)
-    end    
+    @films_worked_on ||= worked_on.select {|film| film[:film]}.
+                                   map    {|film| film.merge film_presenter: FilmPresenter.new(film[:film], self) }
   end  
 
   def starred_in

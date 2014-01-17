@@ -34,6 +34,7 @@
                           <h5>Character played</h5>
                           <p><%= roles[:character] %></p>
                         </div>
+                        <%= throw roles unless roles[:film_presenter].film %>
                         <%= div_for roles[:film_presenter].film do %>
                           <%= render partial: 'films/film_container', locals: {presenter: roles[:film_presenter]} %>   
                         <% end %>              

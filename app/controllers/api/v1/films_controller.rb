@@ -8,6 +8,11 @@ module Api
         @film = Film.find params[:id]
       end
 
+      def entries
+        options = paging_options sort_by: sort_by || :updated_at, page_size: 50
+        @query = ActiveUserQuery.new(film_entries, options)  
+      end
+
       def coming_soon
         render_films FilmCollection.coming_soon.films, :earliest_release_date
       end

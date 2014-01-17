@@ -28,7 +28,7 @@ Filmlovers::Application.routes.draw do
         end
       end
   
-      resources :films,                   only: [:show, :index] do
+      resources :films,                   only: [:show, :index, :entries] do
         resources :film_entries,          only: [:show, :update, :destroy], path: '',  as: 'action', constraints: { id: /watched|loved|owned/ }
         get   'recommend', to: 'film_recommendations#new',     as: 'recommendation'
         post  'recommend', to: 'film_recommendations#create',  as: 'recommendation'
@@ -47,8 +47,11 @@ Filmlovers::Application.routes.draw do
         collection do 
           get 'me'
         end        
-        resources :lists,           to: 'user_lists',     only: [:show, :index],  as: 'user_lists'
-        resources :films,           to: 'film_entries',   only: [:index, :show],  as: 'films'
+        member do 
+           get 'films/:action_id', to: 'users#film_entries', constraints: { action_id: /watched|loved|owned/ }
+        end
+        resources :lists,           to: 'user_lists',           only: [:show, :index],  as: 'user_lists'
+        resources :films,           to: 'users',                only: [:index, :show] 
       end
       
       resources :recommendations do

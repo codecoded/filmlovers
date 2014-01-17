@@ -27,12 +27,12 @@ class FilmsController < ApplicationController
 
   def coming_soon
     @title = 'Films coming soon'
-    render_films FilmCollection.coming_soon.films, :earliest_release_date
+    render_films FilmCollection.coming_soon.films, :popularity
   end
 
   def in_cinemas
     @title = 'Films in cinemas'
-    render_films FilmCollection.in_cinemas.films, :release_date
+    render_films FilmCollection.in_cinemas.films, :popularity
   end
 
   def popular

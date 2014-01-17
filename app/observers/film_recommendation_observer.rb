@@ -2,9 +2,11 @@ class FilmRecommendationObserver < ActiveRecord::Observer
   observe :film_recommendation
 
   def after_create(film_recommendation)
-    push_desktop_notification film_recommendation
-    push_facebook_notification film_recommendation
-    push_ios_notification film_recommendation
+    Thread.new do 
+      push_desktop_notification film_recommendation
+      push_facebook_notification film_recommendation
+      push_ios_notification film_recommendation
+    end
   end
 
   def push_facebook_notification(recommendation)

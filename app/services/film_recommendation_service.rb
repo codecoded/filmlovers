@@ -20,7 +20,7 @@ class FilmRecommendationService
 
   def create(friendship, comment)
     return unless recommendable_to?(friendship)
-    film_recommendations.create(friend_id: friendship.friend_id, comment: comment, sent:true) 
+    film_recommendations.create(friend_id: friendship.friend_id, comment: CGI.unescape(comment), sent:true) 
   end
 
   def recommendable_to?(friendship)

@@ -29,7 +29,7 @@ class FilmRecommendationObserver < ActiveRecord::Observer
   end
 
   def push_desktop_notification(film_recommendation)
-    notice = "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}. #{film_recommendation.comment}"
+    notice = "#{film_recommendation.user.username} recommended #{film_recommendation.film.title}. #{film_recommendation.comment}"
     Log.debug notice
     film_recommendation.friend.notifier.toast notice
   end

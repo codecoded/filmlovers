@@ -5,7 +5,7 @@ class FacebookPresenter
     sender = recommendation.friend
 
     if !sender.channels[:facebook]
-      return "#{sender.username} recommends #{recommendation.film.title}. #{recommendation.comment}" 
+      return "#{receiver.username} recommends #{recommendation.film.title}. #{recommendation.comment}" 
     end
 
     if receiver.facebook_events.recent.count < 2

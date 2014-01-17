@@ -6,13 +6,16 @@ module Api
       before_filter :validate_current_user, only: [:update, :destroy]
 
 
+      def show
+        options = paging_options sort_by: :user_id, page_size: 50
+        @query = ActiveUserQuery.new(film_entries, options)  
+      end
+
+
       def index
         create_query user.films.actioned
       end
       
-      def show
-        create_query user.film_entries.includes(:film).find_by_action action_id
-      end
 
       def update
         film_entry.set action_id
@@ -25,15 +28,22 @@ module Api
 
       protected 
 
+      def film 
+        @film||=Film.find params[:film_id]
+      end
+
+      def action_id
+        params[:id].to_sym
+      end
+
+      def film_entries
+        @film_entries ||= film.entries.find_by_action(action_id)
+      end
+
       def validate_current_user
         redirect_to root_path unless current_user
       end
 
-
-      def create_query(films)
-        options = paging_options sort_by: :recent_action, without: [:recommendations, :actions], page_size: 50
-        @query = ActiveUserQuery.new(films, options)
-      end
 
       def action_id
         params[:id].to_sym
@@ -44,7 +54,7 @@ module Api
       end
 
       def user
-        @user ||= User.fetch(params[:user_id].to_i)
+        @user ||= User.find(params[:user_id].to_i)
       end
 
       helper_method :user, :film_entry

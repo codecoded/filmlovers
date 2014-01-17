@@ -40,7 +40,9 @@ class User < ActiveRecord::Base
 
   # embedded_in :film_entry
 
+  attr_accessible :passports
   accepts_nested_attributes_for :profile, :allow_destroy => true
+  accepts_nested_attributes_for :passports
 
   set_callback :create,   :after, :create_profile 
 
@@ -52,8 +54,8 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_passport(passport)
-    passport = Passport.where(uid: passport.uid, provider: passport.provider).first
-    passport ? passport.user : new(passports:[passport])
+    found_passport = Passport.where(uid: passport.uid, provider: passport.provider).first
+    found_passport ? found_passport.user : new(passports:[passport])
   end
 
   def create_profile

@@ -53,11 +53,11 @@ module Api
       end
 
       def friend
-        @friend ||= User.fetch(params[:id])
+        @friend ||= User.find(params[:id].to_i)
       end
 
       def filter
-        params[:filter] 
+        params[:filter]
       end
 
       helper_method :friendships, :friendship, :friend

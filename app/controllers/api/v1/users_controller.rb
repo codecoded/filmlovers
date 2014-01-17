@@ -4,6 +4,9 @@ module Api
 
       respond_to :json
 
+      def me        
+      end
+
       def index
         users
       end

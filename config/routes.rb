@@ -44,6 +44,9 @@ Filmlovers::Application.routes.draw do
         end
       end      
       resources :users do
+        collection do 
+          get 'me'
+        end        
         resources :lists,           to: 'user_lists',     only: [:show, :index],  as: 'user_lists'
         resources :films,           to: 'film_entries',   only: [:index, :show],  as: 'films'
       end

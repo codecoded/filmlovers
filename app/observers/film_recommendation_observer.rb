@@ -20,7 +20,7 @@ class FilmRecommendationObserver < ActiveRecord::Observer
 
   def push_ios_notification(film_recommendation)
     Log.debug "Trying to send iOS notification for film recommendation #{film_recommendation.id}"
-    notice = "#{film_recommendation.friend.username} recommended #{film_recommendation.film.title}. #{film_recommendation.comment}"
+    notice = "#{film_recommendation.user.username} recommended #{film_recommendation.film.title}. #{film_recommendation.comment}"
     Log.debug notice
     friend = film_recommendation.friend
     return unless friend.mobile_devices.registered? :iPhone

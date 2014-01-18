@@ -11,6 +11,7 @@ node :film_recommendations do
         title: presenter.title,
         poster: presenter.poster_uri,
         release_date: presenter.release_date,
+        director: presenter.director,
         providers: presenter.film.providers.apple.map do |p|
         {
           id: p.id,

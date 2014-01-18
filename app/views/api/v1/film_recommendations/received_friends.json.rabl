@@ -20,6 +20,7 @@ node :film_recommendations do
             title: presenter.title,
             poster: presenter.poster_uri,
             release_date: presenter.release_date,
+            director: presenter.director,
             comment: recommendation.comment,
             status: recommendation.state,
             approve: change_api_v1_film_recommendation_path(recommendation, 'approve'),

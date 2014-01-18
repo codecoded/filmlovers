@@ -38,7 +38,7 @@ module Api
       protected
 
       def state
-        params[:state] || :recommended
+        @state ||= (params[:state] || :recommended)
       end
 
       def friends_view?

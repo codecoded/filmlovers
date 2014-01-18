@@ -12,7 +12,7 @@ node :film_recommendations do
         avator_uri: friend_presenter.avatar_url,
       },
       recommendations: 
-        current_user.recommended_films.includes(:film).where(user_id: user.id, state: :recommended).map do |recommendation|
+        current_user.recommended_films.includes(:film).where(user_id: user.id, state: @state).map do |recommendation|
           presenter = present(recommendation.film, FilmPresenter)
           {
             id: recommendation.id,

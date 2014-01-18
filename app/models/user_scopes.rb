@@ -16,7 +16,7 @@ module UserScopes
   end
 
   def recommendations_view_for(user_id, state=:recommended)
-    joins(:film_recommendations).group('users.id').where('film_recommendations.friend_id = ? and film_recommendations.state = ?', user_id, :recommended).select('users.*, count(film_recommendations.id)')
+    joins(:film_recommendations).group('users.id').where('film_recommendations.friend_id = ? and film_recommendations.state = ?', user_id, state).select('users.*, count(film_recommendations.id)')
   end
 
   # def cast_search(name)

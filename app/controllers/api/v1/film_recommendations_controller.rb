@@ -8,6 +8,8 @@ module Api
         if friends_view?
           @results = User.recommendations_view_for(current_user.id, :recommended)
           render 'received_friends'
+        elsif approved_view?
+          @results = Film.recommendations_view_for(current_user.id, :approved)
         else
           @results = Film.recommendations_view_for(current_user.id, :recommended)
         end
@@ -36,6 +38,10 @@ module Api
       end
 
       protected
+
+      def apprvoed_view?
+        params[:view_by] == 'approved'
+      end
 
       def friends_view?
         params[:view_by] == 'friend'

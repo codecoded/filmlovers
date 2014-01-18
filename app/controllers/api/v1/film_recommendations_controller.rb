@@ -39,7 +39,7 @@ module Api
 
       protected
 
-      def apprvoed_view?
+      def approved_view?
         params[:view_by] == 'approved'
       end
 

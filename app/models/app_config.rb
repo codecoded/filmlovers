@@ -6,6 +6,7 @@ module AppConfig
   @ios_app    = 'filmlovr_app'
   @page_size  = 21
   @itunes_affiliate = '10lne2'
+  @itunes_partner_id = 2003
 
   def setup(&block)
     yield self if block_given?

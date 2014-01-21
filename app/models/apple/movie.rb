@@ -90,5 +90,15 @@ module Apple
       artwork_url
     end
 
+    def storefront_ids
+      @storefront_ids ||= Apple::Pricing.storefront_ids_for id
+    end
+
+    def add_film_provider
+      @film = film
+      film.add_provider self
+    end
+
+
   end
 end

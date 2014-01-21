@@ -52,12 +52,13 @@ node :film do
     original_title: if presenter.original_title != presenter.title then presenter.original_title end, 
     status: if presenter.status != 'Released' then presenter.status end,
     popularity: presenter.popularity,
-    providers: presenter.film.providers.apple.map do |p|
+    providers: presenter.film.providers.map do |p|
     {
       id: p.id,
       name: p.name,
       link: p.aff_link,
-      rating: p.rating
+      rating: p.rating,
+      storefront_ids: p.storefront_ids
     }
     end
   }

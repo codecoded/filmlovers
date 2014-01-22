@@ -29,7 +29,7 @@ class MovieProvider
   end
 
   def add_movie_provider
-    film.add_provider self
+    film.add_provider(self) if film
   end
 
   def title; end

@@ -20,7 +20,11 @@ module Rotten
     end
 
     def self.import(films)
-      films.map {|film_json| Movie.find_or_fetch(film_json['id'].to_i)}
+      films.map do |film_json| 
+        movie = Movie.find_or_fetch(film_json['id'].to_i)
+        movie.add_movie_provider
+        movie
+      end
     end
   end
 

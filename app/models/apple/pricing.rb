@@ -20,6 +20,7 @@ module Apple
 
     def self.import(row)
       i=0
+      return unless movie?(row[1].to_i)
       create(export_date: row[i],
           video_id: row[i+=1],
           retail_price: row[i+=1],
@@ -32,6 +33,10 @@ module Apple
           sd_rental_price: row[i+=1],
           hd_rental_price: row[i+=1]
           )
+    end
+
+    def self.movie?(video_id)
+      GenreVideo.video_ids.include?(video_id)
     end
 
     def self.itunes_date(value)

@@ -25,7 +25,7 @@ node :film_recommendations do
             status: recommendation.state,
             approve: change_api_v1_film_recommendation_path(recommendation, 'approve'),
             hide: change_api_v1_film_recommendation_path(recommendation, 'hide'),            
-            providers: presenter.film.providers.apple.map do |p|
+            providers: presenter.film.providers.map do |p|
             {
               id: p.id,
               name: p.name,

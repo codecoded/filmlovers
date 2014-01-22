@@ -64,6 +64,7 @@ class FilmProvider < ActiveRecord::Base
       # when :apple; "#{link}&at=#{AppConfig.itunes_affiliate}".gsub('/video/','/gb/movie/')
       # when :apple; "#{link}&partnerId=2003".gsub('/video/','/gb/movie/')
       when :apple; "http://clkuk.tradedoubler.com/click?p=23708&a=2247239&&url=#{CGI.escape(link + '&partnerId=2003')}"
+      when :imdb; "http://www.imdb.com/title/#{reference}"
       else; link
     end
   end

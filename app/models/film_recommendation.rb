@@ -12,6 +12,7 @@ class FilmRecommendation < ActiveRecord::Base
   scope :recommended,  -> {where state: :recommended}
   scope :sent,      -> {where(sent: true)}
   scope :received,  -> {where state: :received}
+  scope :approved,  -> {where state: :approved}
 
   state_machine :initial => :recommended do
     event(:unrecommend)  { transition :recommended                => :removed     }  
@@ -43,6 +44,7 @@ class FilmRecommendation < ActiveRecord::Base
   def self.recommended?(friend)
     where(friend: friend).exists?
   end
+
 
   def self.recent(limit=5)
     order('created_at desc').limit(limit)

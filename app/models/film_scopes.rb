@@ -72,7 +72,11 @@ module FilmScopes
   end
 
   def recommendations_view_for(user_id, state=:recommended)
-    joins(:recommendations).group('films.id').where('film_recommendations.friend_id = ? and film_recommendations.state = ?', user_id, state).select('films.*, count(film_recommendations.id) as total').order('count(*) desc')    
+    joins(:recommendations).
+    group('films.id').
+    where('film_recommendations.friend_id = ? and film_recommendations.state = ?', user_id, state).
+    select('films.*, count(film_recommendations.id) as total').
+    order('count(*) desc')    
   end
 
   # def cast_search(name)

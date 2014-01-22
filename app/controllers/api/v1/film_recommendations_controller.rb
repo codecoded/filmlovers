@@ -5,11 +5,18 @@ module Api
       def received
         # options = paging_options sort_by: :total, page_size: 10
         # @query = ActiveUserQuery.new Film.recommendations_view_for(current_user.id, :recommended), options
+
+
         if friends_view?
           @results = User.recommendations_view_for(current_user.id, state)
           render 'received_friends'
         else
-          @results = Film.recommendations_view_for(current_user.id, state)
+          if state.to_sym == :approved
+            @results = FilmRecommendation.for_friend(current_user.id).approved.view_by_film.map &:film
+            render 'approved'
+          else
+            @results = Film.recommendations_view_for(current_user.id, state)
+          end
         end
         # @film_entries ||= user_films.received_recommendations
       end

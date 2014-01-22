@@ -32,5 +32,9 @@ module Apple
     def self.video_ids
       @video_ids ||= distinct(:video_id).to_a
     end
+
+    def movie
+      @movie ||= Apple::Movie.find video_id
+    end
   end
 end

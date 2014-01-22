@@ -51,8 +51,8 @@ class Film < ActiveRecord::Base
   def self.create_from(movie)
     return unless title_id = movie.title_id and movie.allowed?
 
-    Log.debug("Creating film '#{title_id}' from provider '#{movie.provider}-#{movie._id}'")
-    film = create(
+    Log.debug("Creating film '#{title_id}' from provider '#{movie.provider}-#{movie.id}'")
+    film = create!(
       id: title_id, 
       fetched_at: Time.now.utc,
       title: movie.title,
@@ -67,10 +67,10 @@ class Film < ActiveRecord::Base
       classification: movie.classification,
       provider_id: movie._id, 
       provider: movie.provider.downcase)
-    film.add_provider movie
+    film.add_provider(movie) if film
     film
-  rescue 
-    Log.error "Could not create film of movie id: #{movie.id}, title_id: #{title_id}"
+  rescue => msg
+    Log.error "Could not create film of movie id: #{movie.id}, title_id: #{title_id}. #{msg}"
     nil
   end
 
@@ -107,7 +107,7 @@ class Film < ActiveRecord::Base
 
   def add_provider(movie)
     providers.update_from(movie)
-    set_imdb(movie.imdb_id) if movie.respond_to? :imdb_id
+    set_imdb(movie.imdb_id) if movie.respond_to?(:imdb_id)
   end
 
   def set_imdb(id)

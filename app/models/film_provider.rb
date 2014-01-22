@@ -23,7 +23,7 @@ class FilmProvider < ActiveRecord::Base
 
 
   def self.find_or_create(provider, reference)
-    return unless reference
+    return if reference.blank?
     where(name: provider, reference: reference.to_s).first_or_create
   end
 

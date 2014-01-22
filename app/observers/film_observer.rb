@@ -15,7 +15,6 @@ class FilmObserver < ActiveModel::Observer
   end
 
   def update_imdb_info(film)
-    return
     imdb_provider = film.provider_for :imdb
 
     unless imdb_provider 
@@ -35,10 +34,15 @@ class FilmObserver < ActiveModel::Observer
 
     Log.debug "Finding IMDB info for film: #{film.id}"
 
-    return unless imdb_movie = Imdb::Movie.find(imdb_provider.id)
-    film.add_provider(:imdb, imdb_movie)
-    film.set_release_date(imdb_movie.release_date_for('UK'), 'UK')
+
+    return unless imdb_movie = Imdb::Movie.find_or_fetch(imdb_provider.reference)
+    imdb_movie.add_movie_provider
+    # film.set_release_date(imdb_movie.release_date_for('UK'), 'UK')
     film
+
+    rescue Exception => msg
+      Log.error "Unable to update IMDB details: #{msg}"
+      film
   end
 
 

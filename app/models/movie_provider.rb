@@ -20,16 +20,16 @@ class MovieProvider
     "#{title}__#{directors_name}".parameterize
   end
 
-  def rating; 
-    0.0
-  end
-
   def not_allowed?
     false
   end
 
   def allowed?
     !not_allowed?
+  end
+
+  def add_movie_provider
+    film.add_provider self
   end
 
   def title; end
@@ -42,6 +42,8 @@ class MovieProvider
   def genres; end
   def release_date_country; end
   def trailer; end
+  def popularity; end
+  def rating; end
   def classification; end
 
 end

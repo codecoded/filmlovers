@@ -3,22 +3,18 @@ module Imdb
     class << self
 
       def uri
-        "http://mymovieapi.com/"
+        "http://www.omdbapi.com/"
       end
 
       def request(params)
-        Log.info "mymovieapi -> IMDB request to #{uri}?#{params.to_query}"
+        Log.info "omdbapi -> IMDB request to #{uri}?#{params.to_query}"
         JSON(RestClient.get  uri, {params: params})
       end
 
       def movie(imdb_id)
-        request({release:'full', id: imdb_id})
+        request({plot:'full', i: imdb_id})
       end
 
-      def movies(imdb_ids)
-        ids =  imdb_ids.join(',')
-        request({release:'full', ids: ids})
-      end
     end
   end
 end

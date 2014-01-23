@@ -3,6 +3,7 @@ class FriendshipObserver < ActiveModel::Observer
 
   def after_request(friendship, transition)
     friendship.friend.friendships.create(friend_id: friendship.user.id).receive
+    push_ios_notification friendship
   end
 
   def after_receive(friendship, transition)
@@ -16,5 +17,12 @@ class FriendshipObserver < ActiveModel::Observer
     requesting_friendship.user.notifier.toast "#{friendship.user.username} has accepted your friend request"
   end
 
+
+  def push_ios_notification(friendship)
+    Thread.new do
+      Log.debug "Trying to send iOS notification for friendship request: #{friendship.id}"
+      friendship.friend.notifier.push_to_mobile "You have a friend request from #{friendship.user.username}!"   
+    end
+  end
 
 end

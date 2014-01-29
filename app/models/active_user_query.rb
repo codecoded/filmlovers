@@ -16,12 +16,10 @@ class ActiveUserQuery
   end
 
   def results?
-    Log.debug __method__
     !results.empty?
   end
 
   def results_count
-    Log.debug __method__
     @results_count ||= all_results.size
   end
 
@@ -38,7 +36,6 @@ class ActiveUserQuery
   end
 
   def results(options={})
-    Log.debug __method__
     @results ||= all_results.page(page).per(page_size)
   end
 

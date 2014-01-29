@@ -8,6 +8,10 @@ class MovieProvider
     @film ||= Film.fetch_from self
   end
 
+  def film_by_reference
+    FilmProvider.find_by(provider, id).film
+  end
+
   def title_id
     Film.create_uuid(title, year)
   end

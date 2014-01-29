@@ -7,7 +7,7 @@ namespace :imdb do
     count = count <= 0 ? 1000 : count
     FilmProvider.where("name = 'imdb' and rating is null").find_each do |imdb_provider|
       movie = Imdb::Movie.find_or_fetch(imdb_provider.reference)
-      film = movie.film_by_reference
+      film = movie.film_by_reference if film
       film.add_provider(movie) if film
       pos += 1
       return if pos == count

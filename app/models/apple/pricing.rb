@@ -20,7 +20,10 @@ module Apple
 
     def self.import(row)
       i=0
-      return unless movie?(row[1].to_i)
+      unless movie?(row[1].to_i)
+        Log.debug "Not a movie: #{row}"
+        return
+      end
       create(export_date: row[i],
           video_id: row[i+=1],
           retail_price: row[i+=1],

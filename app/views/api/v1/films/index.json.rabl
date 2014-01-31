@@ -4,9 +4,9 @@ extends 'api/v1/shared/pages'
 
 node :films do 
   @entries = current_user.film_entries.where(film_id: @query.results.map(&:id)).to_a if current_user
-  @query.results.map do |film|
+  @query.results.order('coalesce(popularity,0) desc').map do |film|
     begin
-      entry = @entries.find {|fe| fe.film_id == film.id}
+      entry = @entries.find {|fe| fe.film_id == film.id} if @entries
       presenter = present(film, FilmPresenter)
       {
         user: 

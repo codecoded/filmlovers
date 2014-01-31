@@ -2,15 +2,15 @@ module Apple
   class Client
     class << self
 
-      def import_videos_from(url)
-        RemoteUnzipper.download_unzip_import_file(url) do |filename|
-          AppleEpf::Parser.new(filename).process_rows {|row| Apple::Movie.upsert row}
-        end
+      def import_videos_from(filename)
+        # RemoteUnzipper.download_unzip_import_file(url) do |filename|
+          AppleEpf::Parser.new(filename).process_rows {|row| Apple::Movie.import row}
+        # end
       end
 
-      def import_pricing_from(url)
+      def import_pricing_from(filename)
         # RemoteUnzipper.download_unzip_import_file(url) do |filename|
-          AppleEpf::Parser.new(filename).process_rows {|row| Apple::Pricing.upsert row}
+          AppleEpf::Parser.new(filename).process_rows {|row| Apple::Pricing.import row}
         # end
       end
 

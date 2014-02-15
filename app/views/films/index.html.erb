@@ -79,5 +79,5 @@
       </div>
     </div>
   </div>
-  <%= render partial:'films', object: @query.results %>
+  <%= render partial:'films', object: @query.results.order('coalesce(popularity,0) desc') %>
 </div>

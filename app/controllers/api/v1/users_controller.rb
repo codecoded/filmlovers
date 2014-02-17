@@ -33,7 +33,7 @@ module Api
 
       def users
         user_query = search_query ? User.search(search_query) : User
-        options = paging_options(sort_by: :username, page_size: 50)
+        options = paging_options(sort_by: :username, page_size: 100)
         @query = ActiveUserQuery.new(user_query, options)
 
       end

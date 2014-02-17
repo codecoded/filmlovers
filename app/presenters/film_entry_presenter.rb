@@ -40,7 +40,13 @@ class FilmEntryPresenter < BasePresenter
     }
   end
 
+  def own_films?
+    user.id == current_user.id if current_user
+  end
+
   def logged_in_action(action)
+    film_entry = current_user.film_entry_for(film.id) if !own_films?
+
     if film_entry.set?(action)
       {
         css: "#{action} complete"  ,

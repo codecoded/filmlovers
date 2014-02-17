@@ -45,9 +45,13 @@ class FilmEntryPresenter < BasePresenter
   end
 
   def logged_in_action(action)
-    film_entry = current_user.film_entry_for(film.id) if !own_films?
+    if !own_films?
+      user_film_entry = current_user.film_entry_for(film.id) 
+    else
+      user_film_entry = film_entry
+    end
 
-    if film_entry.set?(action)
+    if user_film_entry.set?(action)
       {
         css: "#{action} complete"  ,
         url: film_action_path(film, action),

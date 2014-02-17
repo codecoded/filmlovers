@@ -53,14 +53,15 @@ node :film do
     status: if presenter.status != 'Released' then presenter.status end,
     popularity: presenter.popularity,
     providers: presenter.film.providers.map do |p|
-    {
-      id: p.id,
-      name: p.name,
-      link: p.aff_link,
-      rating: p.rating,
-      storefront_ids: p.storefront_ids
-    }
-    end
+      next if p.name =='apple' and (p.storefront_ids.blank? or !p.storefront_ids.include?(143444))
+      {
+        id: p.id,
+        name: p.name,
+        link: p.aff_link,
+        rating: p.rating,
+        storefront_ids: p.storefront_ids
+      }
+    end.compact
   }
 end
 

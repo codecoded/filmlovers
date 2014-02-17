@@ -28,6 +28,8 @@ module Apple
     field :episode_production_number, type:String
     field :title_id, type: String, default: ->{ Film.create_uuid(self.name, self.year) if self.year}
     field :title_director, type: String
+    field :match_status, type: String
+
     index({ title_id: 1 }, { unique: true, name: "apple_title_id_index", background: true })
 
     def self.import(row)
@@ -74,6 +76,11 @@ module Apple
       name
     end
 
+    def release_date
+      original_release_date
+    end
+
+
     def directors_name
       artist_display_name
     end
@@ -92,6 +99,15 @@ module Apple
 
     def storefront_ids
       @storefront_ids ||= Apple::Pricing.storefront_ids_for id
+    end
+
+    def try_match
+      if film = Film.find_provider(self)
+        film.add_provider self 
+        update_attribute :match_status, 'matched'
+      else
+        update_attribute :match_status, 'failed'
+      end
     end
 
   end

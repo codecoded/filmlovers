@@ -13,13 +13,15 @@ node :film_recommendations do
         release_date: presenter.release_date,
         director: presenter.director,
         providers: presenter.film.providers.map do |p|
-        {
-          id: p.id,
-          name: p.name,
-          link: p.aff_link,
-          rating: p.rating
-        }
-        end,
+          next if p.name =='apple' and (p.storefront_ids.blank? or !p.storefront_ids.include?('143444'))
+          {
+            id: p.id,
+            name: p.name,
+            link: p.aff_link,
+            rating: p.rating,
+            storefront_ids: p.storefront_ids
+          }
+        end.compact,
       },
     recommendations: 
       current_user.recommended_films.includes(:user).where(film_id: film_view.id).map do |recommendation|

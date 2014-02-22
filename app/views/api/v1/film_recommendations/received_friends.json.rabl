@@ -26,13 +26,15 @@ node :film_recommendations do
             approve: change_api_v1_film_recommendation_path(recommendation, 'approve'),
             hide: change_api_v1_film_recommendation_path(recommendation, 'hide'),            
             providers: presenter.film.providers.map do |p|
-            {
-              id: p.id,
-              name: p.name,
-              link: p.aff_link,
-              rating: p.rating
-            }
-            end,
+              next if p.name =='apple' and (p.storefront_ids.blank? or !p.storefront_ids.include?('143444'))
+              {
+                id: p.id,
+                name: p.name,
+                link: p.aff_link,
+                rating: p.rating,
+                storefront_ids: p.storefront_ids
+              }
+            end.compact
           }
         end  
       }

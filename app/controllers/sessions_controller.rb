@@ -4,6 +4,8 @@ class SessionsController < ApplicationController
     passport = Passport.from_omniauth(env["omniauth.auth"])
     Log.debug "Passport: #{passport}"
     user = current_user ? current_user : User.from_omniauth(env["omniauth.auth"])
+    existing_user = User.where(email: user.email).first
+    user =  existing_user if existing_user
     user.upsert_passport passport
     env['warden'].set_user(user)
     redirect_to root_url

@@ -83,7 +83,7 @@ class FilmPresenter < BasePresenter
   end
 
   def apple_link(storefront_id=143444)
-    apple_provider = providers.find {|p| p.name == 'apple' and and p.storefront_ids and p.storefront_ids.include?(storefront_id.to_s)}
+    apple_provider = providers.find {|p| p.name == 'apple' and p.storefront_ids and p.storefront_ids.include?(storefront_id.to_s)}
     return {} unless apple_provider.storefront_ids.include?(storefront_id.to_s) 
     {
       id: apple_provider.id,

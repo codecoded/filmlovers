@@ -71,7 +71,12 @@ class User < ActiveRecord::Base
         uid: fb_user["id"],
       })
     user = find_by_passport passport  
-    user.update_from_facebook_graph(fb_user) if user.new_record?
+
+    if user.new_record?
+      user.update_from_facebook_graph(fb_user) 
+      user.channels[:facebook].create_friends_in_app if user.channels[:facebook]
+    end
+    
     user 
   end
 

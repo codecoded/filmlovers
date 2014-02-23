@@ -83,7 +83,7 @@ class FilmPresenter < BasePresenter
   end
 
   def apple_link(storefront_id=143444)
-    apple_provider = providers.find {|p| p.name == 'apple' and p.storefront_ids.include?(storefront_id.to_s)}
+    apple_provider = providers.find {|p| p.name == 'apple' and and p.storefront_ids and p.storefront_ids.include?(storefront_id.to_s)}
     return {} unless apple_provider.storefront_ids.include?(storefront_id.to_s) 
     {
       id: apple_provider.id,
@@ -95,7 +95,7 @@ class FilmPresenter < BasePresenter
 
   def apple_affiliate_link(storefront_id=143444)
     itunes_url = "http://ax.itunes.apple.com/WebObjects/MZSearch.woa/wa/search?media=movie&country=GB&term=#{film.title}"
-    apple_provider = providers.find {|p| p.name == 'apple' and p.storefront_ids.include?(storefront_id.to_s)}
+    apple_provider = providers.find {|p| p.name == 'apple' and p.storefront_ids and p.storefront_ids.include?(storefront_id.to_s)}
     apple_provider ?  apple_provider.aff_link :  "http://clkuk.tradedoubler.com/click?p=23708&a=2247239&g=19223668&url=#{itunes_url}&partnerId=2003"   
   end
 

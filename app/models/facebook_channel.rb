@@ -11,12 +11,15 @@ class FacebookChannel
 
   def app_friends
     ids  = have_installed.map { |d| d['id']}
-    User.where( "passports.provider" => :facebook).in("passports.uid" => ids)
+    user_ids = Passport.where("provider = 'facebook' and uid in (?)", ids ).pluck :user_id
+    User.where(id: user_ids)
   end
 
   def registered_friends
     ids  = all.map { |d| d['id']}
-    User.where( "passports.provider" => :facebook).in("passports.uid" => ids)
+    user_ids = Passport.where("provider = 'facebook' and uid in (?)", ids ).pluck :user_id
+    User.where(id: user_ids)
+    # User.where( "passports.provider" => :facebook).in("passports.uid" => ids)
   end
 
   def all

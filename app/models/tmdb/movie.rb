@@ -8,7 +8,9 @@ module Tmdb
     end
 
     def self.fetch(id)  
-      with(safe:false).create(Client.movie(id))
+      movie = with(safe:false).new(Client.movie(id))
+      movie.upsert
+      movie
     end
 
     def self.fetch!(id)

@@ -78,6 +78,10 @@ class Film < ActiveRecord::Base
     @details ||= "#{film_provider_class}::Movie".constantize.find provider_id
   end
 
+  def reload!
+    "#{film_provider_class}::Movie".constantize.fetch! provider_id
+  end
+
   def details_presenter
     "#{film_provider_class}Presenter".constantize
   end

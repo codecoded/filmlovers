@@ -5,6 +5,7 @@ if !locals[:hide_header]
 end
 
 presenter = present(@film.details, @film.details_presenter)
+film_presenter = present(@film, FilmPresenter)
 
 node :film do 
   film_entry = current_user.film_entries.for_film(@film.id) if current_user
@@ -25,7 +26,7 @@ node :film do
     title: presenter.film.title,
     director: if presenter.director? then presenter.director.name end,
     release_date: presenter.film.release_date,
-    backdrop: presenter.backdrop_uri,
+    backdrop: film_presenter.backdrop_uri(:medium),
     poster: presenter.poster_uri,
     tagline: presenter.tagline,
     overview: presenter.overview,

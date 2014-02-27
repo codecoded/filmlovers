@@ -48,7 +48,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: filmlovers_production
-  pool: 5
+  pool: 20
   host: localhost
 
 digitalocean:

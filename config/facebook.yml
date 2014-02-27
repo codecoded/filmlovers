@@ -7,9 +7,9 @@ test:
   secret_key: '55bbf0c81bbfaeaaa1bbeacced2c1feb'
   namespace: 'filmlovr'
 staging:
-  app_id: '116125521892926'
-  secret_key: '55bbf0c81bbfaeaaa1bbeacced2c1feb'
-  namespace: 'filmlovr'
+  app_id: '297061670415783'
+  secret_key: '0a7a99c66ac1c5107a252797091155ab'
+  namespace: 'filmlovr-staging'
 digitalocean:
   app_id: '116125521892926'
   secret_key: '55bbf0c81bbfaeaaa1bbeacced2c1feb'

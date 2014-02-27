@@ -55,7 +55,7 @@ gem 'foreigner'
 gem 'activerecord-postgres-array', '0.0.9'
 # Gems used only for assets and not required
 # in production environments by default.
-
+gem 'bugsnag'
 gem 'rack-block'
 
 group :assets do

@@ -6,16 +6,19 @@ namespace :imdb do
     pos, count = 0, args[:count].to_i
     count = count <= 0 ? 1000 : count
     FilmProvider.where("name = 'imdb' and rating is null").find_each do |imdb_provider|
-      movie = Imdb::Movie.find_or_fetch(imdb_provider.reference)
-      if film = imdb_provider.film
-        film.add_provider(movie) if movie
-      else
-        imdb_provider.delete
+      begin
+        movie = Imdb::Movie.find_or_fetch(imdb_provider.reference)
+        if film = imdb_provider.film
+          film.add_provider(movie) if movie
+        else
+          imdb_provider.delete
+        end
+      rescue  => msg
+        Log.error msg
+      ensure   
+        pos += 1
+        return if pos == count
       end
-      # film = movie.film_by_reference if movie
-      
-      pos += 1
-      return if pos == count
     end
   end
 

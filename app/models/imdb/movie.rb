@@ -10,7 +10,7 @@ module Imdb
     def self.fetch(id)  
       movie_data = Client.movie(id)
       return unless movie_data and movie_data['imdbID']
-      movie = with(safe:false).new(Client.movie(id))
+      movie = with(safe:false).new(movie_data)
       movie.upsert
       movie
     end

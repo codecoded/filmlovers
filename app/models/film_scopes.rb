@@ -40,7 +40,7 @@ module FilmScopes
   end
 
   def search(query, field=:title)
-    where('title ilike ?', "%#{query}%")
+    where('title ilike ?', "%#{query.strip}%")
   end 
 
   def in_cinemas

@@ -1,67 +1,63 @@
-<% if viewing_own? %>
+<%# if viewing_own? %>
+<!-- <div class="row">
+  <form id="filter" action="">
+    <div class="large-4 small-6 large-offset-8 columns">
+      <div class="large-3 small-12 columns">
+        <p>Filter</p>
+      </div>
+      <div class="large-9 small-12 columns">
+        <select name="filterlist" id="filterlist">
+          <option selected>All</option>
+          <option>Received</option>
+          <option>Approved</option>
+          <option>Rejected</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div> -->
+<%# end %>
+
 <div class="row">
-  <div class="four columns">
-    <dl class="sub-nav">
-      <dt>Filter:</dt>
-      <%= nav_link 'Confirmed', friendships_path(filter: :confirmed) %>
-      <%= nav_link 'Received', friendships_path(filter: :received) %>
-      <%= nav_link 'Requested', friendships_path(filter: :requested) %>
-      <%= nav_link 'Ignored', friendships_path(filter: :ignored) %>
-    </dl>
+  <div class="large-12 medium-12 small-12 columns">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td>Friend's username</td>
+            <td align="center">Watched</td>
+            <td align="center">Loved</td>
+            <td align="center">Owned</td>
+            <td align="center">Similarity</td>
+            <% if viewing_own? %><td align="center">Actions</td><% end %>
+          </tr>
+          <% friendships.each do |friendship| %>
+          <% present(friendship.friend, UserPresenter) do |presenter| %>
+            <tr>
+              <td>
+                <%= link_to user_path(friendship.friend) do %>
+                  <%= presenter.avatar %>
+                  <%= friendship.friend.username %>
+                <% end %>
+              </td>
+              <% [:watched, :loved, :owned].each do |action| %>
+                <td align="center">
+                  <%= link_to user_film_entry_path(friendship.friend, action) do %>
+                    <%= friendship.friend.film_entries.count_for action %> 
+                  <% end %>              
+                </td>   
+              <% end %> 
+              <td align="center">
+               <%= number_to_percentage(current_user.compare_to(friendship.friend).overall, precision: 1) %>
+              </td>
+              <% if viewing_own? %>
+                <td align="center">
+                  <p>
+                  <%= render partial: "friendships/#{friendship.state}", locals: {friend: friendship.friend} %>  
+                  </p>          
+                </td>
+              <% end %>
+            </tr>
+        <% end %>
+        <% end %>
+      </table>
   </div>
 </div>
-<% end %>
-<div class="twelve columns">
-
-  <table class="friends">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Username</th>
-        <th>Watched</th>
-        <th>Loved</th>
-        <th>Owned</th>
-        <!-- <th>Lists</th> -->
-        <th>Rating</th>
-         <% if viewing_own? %><th>Actions</th><% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% friendships.each do |friendship| %>
-      <% present(friendship.friend, UserPresenter) do |presenter| %>
-        <tr>
-          <td>
-            <%= link_to user_path(friendship.friend) do %>
-              <%= presenter.avatar %>
-             <% end %>
-          </td>
-          <td>
-            <%= link_to friendship.friend.username, user_path(friendship.friend) %>
-          </td>
-          <% [:watched, :loved, :owned].each do |action| %>
-            <td>
-              <%= link_to user_film_entry_path(friendship.friend, action) do %>
-                <label style="display:inline"><%= friendship.friend.film_entries.count_for action %> </label>
-               <% end %>              
-            </td>   
-          <% end %> 
-<!--           <td>
-            <%#= link_to user_lists_path(friendship.friend) do %>
-              <label> <%#=friendship.friend.films_lists.viewable.count %> </label>
-            <%# end %>
-          </td>    --> 
-          <td>
-           <%= number_to_percentage(current_user.compare_to(friendship.friend).overall, precision: 1) %>
-          </td>
-          <% if viewing_own? %>
-            <td>
-              <%= render partial: "friendships/#{friendship.state}", locals: {friend: friendship.friend} %>            
-            </td>
-          <% end %>
-        </tr>
-        <% end %>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-

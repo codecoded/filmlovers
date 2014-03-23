@@ -1,6 +1,5 @@
 <div class="friendship">
-  <%= link_to friendship_path(friend), method: :put, remote: true, data: {friendship: :request}, :class=>'tiny secondary button radius' do %>
-    <span>Add friend</span>
+  <%= link_to friendship_path(friend), method: :put, remote: true, data: {friendship: :request}, :class=>'button' do %>
+    Add friend
   <% end %>
 </div>
-

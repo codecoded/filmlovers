@@ -5,7 +5,7 @@ FL.Users = {
 
   init: function(){
     
-    if(FL.Users.initialised) return
+    if(FL.Users.initialised) return;
 
     FL.Users.initListeners()
     FL.Users.initialised = true

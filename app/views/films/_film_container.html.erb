@@ -1,6 +1,9 @@
-<%= content_tag :div, class: 'flip-container', data: {'film-url'=> film_path(presenter.film)} do %>
+<%= content_tag :div, class: 'flip-container', data: {'film-url'=> film_path(presenter.film)}, itemscope:'', itemtype:"http://schema.org/Movie" do %>
   <div class="upper">
      <%= presenter.poster %>
+      <meta itemprop="name" content='<%=presenter.film.title%>' />
+      <meta itemprop="director" content='<%=presenter.film.director%>' />
+      <meta itemprop="datePublished" content='<%=presenter.film.release_date%>' />
   </div>
   <div class="lower actions">
     <% if logged_in? %>
@@ -12,7 +15,7 @@
     <% end %>
     <p>
       <%= link_to 'More Info', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
-      <%= link_to 'Trailer', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
+      <%#= link_to 'Trailer', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
     </p>
   </div>
 <% end %>

@@ -37,7 +37,5 @@ Filmlovers::Application.configure do
   config.assets.debug = true
   config.action_mailer.default_url_options = { :host => 'localhost:4000' }
 
-  config.action_controller.asset_host = "dzzhe2eu0uq74.cloudfront.net"
-
   Rails.logger = Logger.new(STDOUT)
 end

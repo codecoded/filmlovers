@@ -11,16 +11,16 @@
       </div>
     </div>
   </div>
-  <div class="row margin-bottom">
+  <div class="row margin-bottom"  itemscope itemtype="http://schema.org/Movie">
     <div class="large-8 small-12 columns">
       <div class="pod margin-bottom synopsis">
-        <h1><%= film.title %></h1>
-        <h2><%= presenter.year_and_director %></h2>
+        <h1 itemprop="name"><%= film.title %></h1>
+        <h2 ><%= presenter.year_and_director %></h2>
         <hr />
 
         <h3>Synopsis</h3>
-        <h4><%= presenter.tagline %></h4>
-        <p><%= presenter.overview %></p>
+        <h4 itemprop="headline"><%= presenter.tagline %></h4>
+        <p itemprop="about"><%= presenter.overview %></p>
       </div>
       <div class="margin-bottom">
         <div class="inner-tabs">
@@ -50,8 +50,8 @@
       <div class="margin-bottom">
         <h4>filmlovers who...</h4>
         <ul class="button-list">
-          <li class="watched"><%= film_presenter.counts.watched_count %> watched this film</li>
-          <li class="loved"><%= film_presenter.counts.loved_count %> loved this film</li>
+          <li class="watched" itemprop="interactionCount" content='<%="UserPlays:#{film_presenter.counts.watched_count}"%>'><%= film_presenter.counts.watched_count %> watched this film</li>
+          <li class="loved" itemprop="interactionCount" content='<%="UserLikes:#{film_presenter.counts.loved_count}"%>'><%= film_presenter.counts.loved_count %> loved this film</li>
           <li class="owned"><%= film_presenter.counts.owned_count %> own this film</li>
         </ul>
       </div>
@@ -60,7 +60,7 @@
           <h4>Genres</h4>
           <ul class="button-list">
             <% presenter.genres.each do |genre| %>
-              <li> <%= link_to genre, category_films_path(action: :popular, genres: genre), alt: "view films in genre category #{genre}"  %></li>
+              <li > <%= link_to genre, category_films_path(action: :popular, genres: genre), alt: "view films in genre category #{genre}", itemprop:"genre"  %></li>
             <% end %>
           </ul>
         </div>

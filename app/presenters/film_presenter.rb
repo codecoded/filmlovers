@@ -27,7 +27,7 @@ class FilmPresenter < BasePresenter
   end
 
   def iframe_for(trailer)
-    content_tag :iframe, nil, src: trailer, frameborder: 0, allowfullscreen: true
+    content_tag :iframe, nil, src: trailer, frameborder: 0, allowfullscreen: true, itemprop: 'embedUrl'
   end
 
   def blank_poster
@@ -54,7 +54,7 @@ class FilmPresenter < BasePresenter
       else film.poster
     end
 
-    image_tag image_src, :title=>film.title, alt: "poster for #{film.title}"
+    image_tag image_src, :title=>film.title, alt: "poster for #{film.title}", itemprop: 'thumbnailUrl'
   end
 
   def backdrop_uri(size=:original)

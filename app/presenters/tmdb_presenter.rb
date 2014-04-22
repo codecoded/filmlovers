@@ -52,7 +52,7 @@ class  TmdbPresenter < BasePresenter
 
   def poster(size=:medium)
     src = film.poster? ? poster_uri(film.poster, size) : "placeholder.jpg"
-    image_tag src, :title=> film.title, alt: "poster for #{film.title}"
+    image_tag src, :title=> film.title, alt: "poster for #{film.title}", itemprop: 'thumbnailUrl'
   end
 
   def poster_uri(poster=nil, size=:medium)
@@ -83,7 +83,7 @@ class  TmdbPresenter < BasePresenter
 
   def backdrop(backdrop, size = :large)
     return unless backdrop
-    image_tag AppConfig.image_uri_for([backdrop_sizes[size], backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}"
+    image_tag AppConfig.image_uri_for([backdrop_sizes[size], backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}", itemprop:"image"
   end
 
   def backdrop_uri(size=:large)

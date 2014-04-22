@@ -4,10 +4,11 @@ module FilmHelper
   #   film.details.tagline ? film.details.tagline :  "Overview"
   # end
 
-  def show_details(title, detail)
+  def show_details(title, detail, itemprop = nil)
     return unless !detail.blank?
     detail = detail.kind_of?(Array) ? detail.join('<br/>').html_safe : detail
-    content_tag(:h4, title) + content_tag(:p, detail)
+    itemprop = {itemprop: itemprop} if itemprop
+    content_tag(:h4, title) + content_tag(:p, detail.html_safe, itemprop)
   end
 
   # def film_entry_action(film_entry, action, text, is_counter = false)

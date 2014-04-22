@@ -36,7 +36,11 @@ class ApplicationController < ActionController::Base
   end
 
   def user_location
-    session[:user_location] ||= request.location
+    return session[:user_location] if session[:user_location]
+    location = request.location
+    session[:user_location] = location
+    Log.info "User logged in from #{location.city}, #{location.data['country_name']} (#{location.data['country_code']})}" if user_location?
+    location    
   rescue => msg
     Log.error "Unable to find users location. Msg: #{msg}"
   end

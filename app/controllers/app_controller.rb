@@ -7,7 +7,6 @@ class AppController < ApplicationController
   end
 
   def index
-    Log.debug "User logged in from #{user_location.city}, #{user_location.data['country_name']} (#{user_location.data['country_code']})}" if user_location?
     @user = User.new
   end
 

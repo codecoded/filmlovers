@@ -27,20 +27,23 @@ class FilmsController < ApplicationController
 
   def coming_soon
     @title = 'Films coming soon'
+    @met_title = 'Films coming soon'
     @meta_desc = 'Discover the latest films coming soon, and keep ahead of your friends for films to love'
     @meta_key = 'films coming soon, movies coming soon, latest films, new movies, latest releases, recommend films'
     render_films FilmCollection.coming_soon.films, :popularity
   end
 
   def in_cinemas
-    @title = 'Films now showing in UK cinemas'
+    @title ="Films in cinemas"
+    @met_title = 'Films now showing in UK cinemas'
     @meta_desc = 'Found out what films are showing currently in cinemas across the UK and discover which films are currently trending to help you decide what to film to see next!'
     @meta_key = 'films in cinema, movies being screened, latest films, new movies, latest releases, most popular films showing, UK cinemas, films now playing, recommend films'
     render_films FilmCollection.in_cinemas.films, :popularity
   end
 
   def popular
-    @title = 'Discover films to love and recommend to friends'
+    @title ="Films"
+    @met_title = 'Discover films to love and recommend to friends'
     @meta_desc = 'Browse from over 100,000 films and find out which films are most loved, watched or even owned! Start building your own films library now!'
     @meta_key = 'popular films, films library, movie catalogue, browse films, discover films, movies, films list, movies, filmlovers, recommend films'
     render_films Film.popular, :popularity

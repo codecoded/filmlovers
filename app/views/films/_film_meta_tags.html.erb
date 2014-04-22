@@ -1,11 +1,11 @@
-<% set_meta_tags title: "#{presenter.title_with_year} by #{presenter.director}" ,description: presenter.tagline %>
+<% set_meta_tags title: "#{presenter.title_with_year} by #{presenter.film.director}" , description: presenter.tagline %>
 
 <% set_meta_tags :og => {
   :title    => film.title,
   :type     => "video.movie",
   :url      => film_url(film),
   :image    => presenter.poster_uri,
-  :site_name   =>'filmlovers - find, share, discover',
+  :site_name   =>'filmlovr.com - find, share, discover',
   # :video    => "http://www.youtube.com/embed/#{film.trailer}",
   :description => presenter.overview
 } %>

@@ -1,8 +1,9 @@
+ <span itemscope itemtype="http://schema.org/Person">
  <% present(person, PersonPresenter) do |presenter| %>
   <div class="full-row margin-bottom page-title">
     <div class="row">
       <div class="large-12 small-12 columns">
-        <h1><%= person.name %></h1>
+        <h1 itemprop="name"><%= person.name %></h1>
       </div>
     </div>
   </div>
@@ -17,7 +18,7 @@
         <a href="#" data-reveal-id="fullbio">Read more...</a>
       </p>
       <%= show_details 'Place of birth', person.place_of_birth %>
-      <%= show_details 'Birthday', presenter.dob %>
+      <%= show_details 'Birthday', presenter.dob, 'birthDate' %>
     </div>
     <div class="large-9 small-12 columns">
       <div class="margin-bottom">
@@ -34,7 +35,6 @@
                           <h5>Character played</h5>
                           <p><%= roles[:character] %></p>
                         </div>
-                        <%= throw roles unless roles[:film_presenter].film %>
                         <%= div_for roles[:film_presenter].film do %>
                           <%= render partial: 'films/film_container', locals: {presenter: roles[:film_presenter]} %>   
                         <% end %>              
@@ -71,7 +71,7 @@
       </div>
     </div>
   </div>
-
+</span>
 <div id="fullbio" class="reveal-modal medium">
   <div class="row">
     <div class="large-12 small-12 columns">

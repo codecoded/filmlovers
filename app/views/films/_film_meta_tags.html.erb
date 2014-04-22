@@ -1,4 +1,4 @@
-<% set_meta_tags title: "#{presenter.title_with_year} by #{presenter.film.director}" , description: presenter.tagline %>
+<% set_meta_tags title: "#{presenter.title_with_year} by #{presenter.film.director}: #{presenter.tagline}" , description: presenter.overview %>
 
 <% set_meta_tags :og => {
   :title    => film.title,

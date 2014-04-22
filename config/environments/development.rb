@@ -34,7 +34,8 @@ Filmlovers::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false 
+  config.assets.logger = false
   config.action_mailer.default_url_options = { :host => 'localhost:4000' }
 
   Rails.logger = Logger.new(STDOUT)

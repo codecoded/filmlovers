@@ -15,7 +15,8 @@ class  TmdbPresenter < BasePresenter
 
   def year_and_director
     if !director.blank?
-      ("#{year} - Directed by " << link_to(director.name, person_path(director.id))).html_safe
+      content = "<span itemprop='director' itemscope itemtype='http://schema.org/Person'><span itemprop='name'>#{director.name}</span></span>"
+      ("#{year} - Directed by " << link_to(content.html_safe, person_path(director.id))).html_safe
     else
       year
     end

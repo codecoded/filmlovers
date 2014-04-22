@@ -35,5 +35,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def user_location
+    session[:user_location] ||= request.location
+  rescue => msg
+    Log.error "Unable to find users location. Msg: #{msg}"
+  end
+
+  def user_location?
+    !user_location.nil? and user_location.latitude != 0
+  end
+
   helper_method :current_user, :username, :logged_in?, :current_url
 end

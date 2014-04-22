@@ -4,4 +4,6 @@ Rails.application.config.to_prepare do
     config.page_size = 21
     config.itunes_affiliate = '10lne2'
   end
+
+  Geocoder.configure(:cache => $redis)
 end

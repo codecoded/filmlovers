@@ -14,9 +14,17 @@
   <div class="row margin-bottom"  itemscope itemtype="http://schema.org/Movie">
     <div class="large-8 small-12 columns">
       <div class="pod margin-bottom synopsis">
-        <meta itemprop="datePublished" content='<%=presenter.film.release_date%>'>
+        <meta >
         <h1 itemprop="name"><%= film.title %></h1>
-        <h2 ><%= presenter.year_and_director %></h2>
+        <h2 >
+          <span itemprop="datePublished" content='<%=presenter.film.release_date%>'><%= presenter.year %></span>
+          -
+          <span itemprop="director" itemscope itemtype='http://schema.org/Person'>
+            <%= link_to(person_path(presenter.director.id), itemprop: 'url') do %>
+            <span itemprop='name'><%=presenter.director.name%></span>
+            <% end %>
+          </span>
+          </h2>
         <hr />
 
         <h3>Synopsis</h3>

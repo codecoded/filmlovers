@@ -63,7 +63,7 @@ class FilmPresenter < BasePresenter
   end
 
   def poster_link
-    link_to poster, film_path(film), title: film.title
+    link_to poster, film_path(film), title: film.title, itemprop: 'url'
   end
 
 

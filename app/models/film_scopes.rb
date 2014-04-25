@@ -19,7 +19,7 @@ module FilmScopes
 
   def by_decade(decade)
     endDate = Date.new(decade.to_i+10)
-    between(release_date: Date.new(decade.to_i).to_s..endDate.to_s)
+    where(release_date: Date.new(decade.to_i).to_s..endDate.to_s)
   end
 
   def by_year(year)

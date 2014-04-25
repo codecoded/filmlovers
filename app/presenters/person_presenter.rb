@@ -15,7 +15,7 @@ class PersonPresenter < BasePresenter
   end
 
   def dob
-    person.birthday.to_date.strftime('%B %d, %Y') if person.birthday
+    person.birthday.to_date.strftime('%B %d, %Y') if person.birthday and person.birthday.to_date
   end
 
   def films_starred_in

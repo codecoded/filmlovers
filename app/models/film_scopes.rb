@@ -32,7 +32,8 @@ module FilmScopes
   end
 
   def by_genres(genres)
-    any_in(genres: genres)
+    query = genres.split('/').map {|g| " '#{g}' = ANY(genres)"}.join(' AND ')
+    where(query)
   end
 
   def by_counter(name)

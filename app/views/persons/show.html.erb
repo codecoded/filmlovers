@@ -1,5 +1,6 @@
  <span itemscope itemtype="http://schema.org/Person">
  <% present(person, PersonPresenter) do |presenter| %>
+  <% set_meta_tags title: "#{person.name} #{presenter.dob} - filmography" , description: presenter.short_bio %>
   <div class="full-row margin-bottom page-title">
     <div class="row">
       <div class="large-12 small-12 columns">

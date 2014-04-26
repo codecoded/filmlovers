@@ -6,13 +6,13 @@
       <meta itemprop="datePublished" content='<%=presenter.film.release_date%>' />
   </div>
   <div class="lower actions">
-    <% if logged_in? %>
-      <ul>
+    <%# if logged_in? %>
+     <!--  <ul>
         <li class="share"><a href="#">Share</a></li>
         <li class="add"><a href="#">Add</a></li>            
         <li class="shop"><a href="#">Shop</a></li>
-      </ul>
-    <% end %>
+      </ul> -->
+    <%# end %>
     <p>
       <%= link_to 'More Info', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>
       <%#= link_to 'Trailer', summary_film_path(presenter.film), class: 'button', data: {'reveal-id' => 'filminfo', 'reveal-ajax' => true} %>

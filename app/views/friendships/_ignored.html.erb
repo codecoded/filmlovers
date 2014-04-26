@@ -1,8 +1,8 @@
 <div class="friendship">
   <%= link_to change_friendship_path(friend, :confirm), method: :put, remote: true, data: {friendship: :confirm, state: :received} do %>
-    <img src="site-basics/approve-button.png" width="52" height="52" alt="Approve" />
+    <%= image_tag "site-basics/approve-button.png", width: 52, height: 52, alt: 'Approve' %>
   <% end %>
   <%= link_to friendship_path(friend), method: :delete, remote: true, data: {friendship: :delete, state: :received} do %>
-    <img src="site-basics/remove-button.png" width="52" height="52" alt="Remove" />
+    <%= image_tag "site-basics/remove-button.png", width: 52, height: 52, alt: 'Remove' %>
   <% end %>
 </div>

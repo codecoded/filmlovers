@@ -118,7 +118,7 @@
 
 body {
   font-family: 'Open Sans', "Helvetica Neue", Arial, Helvetica, sans-serif;
-  background: url(site-basics/bg-tile.gif) repeat top left #efefeb;
+  background: url(<%= asset_path 'site-basics/bg-tile.gif' %> ) repeat top left #efefeb;
   color: #141414;
   line-height: 1.5em;
   font-size: 1em;
@@ -189,8 +189,8 @@ hr {
   width: 60%;
   margin: 10px 20% 30px 20%;
   background-color: transparent;
-  background-image: url(site-basics/hr-bg.png);
-  background-image: url(site-basics/hr-bg.svg);
+  background-image: url(<%= asset_path 'site-basics/hr-bg.png' %>);
+  background-image: url(<%= asset_path 'site-basics/hr-bg.svg' %>);
   background-position: center 16px;
   background-repeat: no-repeat;
   height: 25px;
@@ -208,7 +208,7 @@ p.create {
   margin-top: 0.4em;
   padding-left: 25px;
   width: 65%;
-  background: url(site-basics/create-arrow.gif) no-repeat left center;
+  background: url(<%= asset_path 'site-basics/create-arrow.gif' %>) no-repeat left center;
 }
 
 @media only screen and (max-width: 768px) {
@@ -552,19 +552,19 @@ p.lovers, p.watched, p.loved, p.owned {
 }
 
 .lovers {
-  background-image: url(site-basics/lovers-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/lovers-icon.svg' %>);
 }
 
 .watched {
-  background-image: url(site-basics/watched-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/watched-icon.svg' %>);
 }
 
 .loved {
-  background-image: url(site-basics/loved-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/loved-icon.svg' %>);
 }
 
 .owned {
-  background-image: url(site-basics/owned-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/owned-icon.svg' %>);
 }
 
 @media only screen and (max-width: 1100px) {
@@ -1007,7 +1007,7 @@ ul.button-list li {
 
 ul.button-list li.watched a {
   padding-left: 36px;
-  background-image: url(site-basics/watched-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/watched-icon-red.svg' %>);
   background-repeat: no-repeat;
   background-position: top left;
   background-size: 26px auto;
@@ -1019,7 +1019,7 @@ ul.button-list li.watched a {
 
 ul.button-list li.loved a {
   padding-left: 36px;
-  background-image: url(site-basics/loved-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/loved-icon-red.svg' %>);
   background-repeat: no-repeat;
   background-position: top left;
   background-size: 26px auto;
@@ -1031,7 +1031,7 @@ ul.button-list li.loved a {
 
 ul.button-list li.owned a {
   padding-left: 36px;
-  background-image: url(site-basics/owned-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/owned-icon-red.svg' %>);
   background-repeat: no-repeat;
   background-position: top left;
   background-size: 26px auto;
@@ -1076,23 +1076,23 @@ ul.button-list li.owned a {
 }
 
 .actions ul li.watched a {
-  background-image: url(site-basics/watched-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/watched-icon-red.svg' %>);
 }
 
 .actions ul li.loved a {
-  background-image: url(site-basics/loved-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/loved-icon-red.svg' %>);
 }
 
 .actions ul li.owned a {
-  background-image: url(site-basics/owned-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/owned-icon-red.svg' %>);
 }
 
 .actions ul li.add a {
-  background-image: url(site-basics/list-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/list-icon-red.svg' %>);
 }
 
 .actions ul li.share a {
-  background-image: url(site-basics/share-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/share-icon-red.svg' %>);
 }
 
 .actions ul li.complete a {
@@ -1104,23 +1104,23 @@ ul.button-list li.owned a {
 }
 
 .actions ul li.complete.watched a {
-  background-image: url(site-basics/watched-icon-white.svg);
+  background-image: url(<%= asset_path 'site-basics/watched-icon-white.svg' %>);
 }
 
 .actions ul li.complete.loved a {
-  background-image: url(site-basics/loved-icon-white.svg);
+  background-image: url(<%= asset_path 'site-basics/loved-icon-white.svg' %>);
 }
 
 .actions ul li.complete.owned a {
-  background-image: url(site-basics/owned-icon-white.svg);
+  background-image: url(<%= asset_path 'site-basics/owned-icon-white.svg)' %>;
 }
 
 .actions ul li.complete.add a {
-  background-image: url(site-basics/list-icon-white.svg);
+  background-image: url(<%= asset_path 'site-basics/list-icon-white.svg' %>);
 }
 
 .actions ul li.complete.share a {
-  background-image: url(site-basics/share-icon-white.svg);
+  background-image: url(<%= asset_path 'site-basics/share-icon-white.svg' %>);
 }
 
 /* Film list page */
@@ -1270,15 +1270,15 @@ form#filter {
 }
 
 .flip-container > div.lower ul li.add a {
-  background-image: url(site-basics/list-icon-white.svg);
+  background-image: url(<%= asset_path 'site-basics/list-icon-white.svg' %>);
 }
 
 .flip-container > div.lower ul li.share a {
-  background-image: url(site-basics/share-icon-white.svg);
+  background-image: url(<%= asset_path 'site-basics/share-icon-white.svg' %>);
 }
 
 .flip-container > div.lower ul li.shop a {
-  background-image: url(site-basics/shop-icon-white.svg);
+  background-image: url(<%= asset_path 'site-basics/shop-icon-white.svg' %>);
 }
 
 .flip-container > div.lower ul li.complete a {
@@ -1381,15 +1381,15 @@ ul.user-rankings li a:hover {
 }
 
 ul.user-rankings li.watched a {
-  background-image: url(site-basics/watched-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/watched-icon-red.svg' %>);
 }
 
 ul.user-rankings li.loved a {
-  background-image: url(site-basics/loved-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/loved-icon-red.svg' %>);
 }
 
 ul.user-rankings li.owned a {
-  background-image: url(site-basics/owned-icon-red.svg);
+  background-image: url(<%= asset_path 'site-basics/owned-icon-red.svg' %>);
 }
 
 ul.user-rankings li.complete a {
@@ -1397,15 +1397,15 @@ ul.user-rankings li.complete a {
 }
 
 ul.user-rankings li.complete.watched a {
-  background-image: url(site-basics/watched-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/watched-icon.svg' %>);
 }
 
 ul.user-rankings li.complete.loved a {
-  background-image: url(site-basics/loved-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/loved-icon.svg' %>);
 }
 
 ul.user-rankings li.complete.owned a {
-  background-image: url(site-basics/owned-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/owned-icon.svg' %>);
 }
 
 /* Forms & buttons */
@@ -1596,18 +1596,18 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
 }
 
 .social li.facebook a {
-  background-image: url(site-basics/facebook-icon.png);
-  background-image: url(site-basics/facebook-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/facebook-icon.png' %>);
+  background-image: url(<%= asset_path 'site-basics/facebook-icon.svg' %>);
 }
 
 .social li.twitter a {
-  background-image: url(site-basics/twitter-icon.png);
-  background-image: url(site-basics/twitter-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/twitter-icon.png' %>);
+  background-image: url(<%= asset_path 'site-basics/twitter-icon.svg' %>);
 }
 
 .social li.google a {
-  background-image: url(site-basics/google-plus-icon.png);
-  background-image: url(site-basics/google-plus-icon.svg);
+  background-image: url(<%= asset_path 'site-basics/google-plus-icon.png' %>);
+  background-image: url(<%= asset_path 'site-basics/google-plus-icon.svg' %>);
 }
 
 .reveal-modal-bg {
@@ -1670,7 +1670,7 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
   width: 100%;
   height: auto;
   min-height: 250px;
-  background-image: url(site-basics/default.jpg);
+  background-image: url(<%= asset_path 'site-basics/default.jpg' %>);
   background-repeat: no-repeat;
   background-position: center center;
   background-color: #ebebeb;
@@ -1783,7 +1783,7 @@ button:hover, .button:hover, input[type="button"]:hover, input[type="submit"]:ho
 .thanks ul li {
 	padding: 0px 3em 35px 3em;
 	margin: 0px 0px 20px 0px;
-	background: url(site-basics/hr-bg.svg) no-repeat bottom center;
+	background: url(<%= asset_path 'site-basics/hr-bg.svg' %>) no-repeat bottom center;
 }
 
 /* Friendships */

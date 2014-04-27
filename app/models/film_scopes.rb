@@ -44,6 +44,10 @@ module FilmScopes
     where('title ilike ?', "%#{query.strip}%")
   end 
 
+  def recently_actioned(limit)
+    FilmEntry.includes(:film).order('created_at DESC').limit(limit).map &:film
+  end
+
   def in_cinemas
     @in_cinemas = Rotten::Movies.in_cinemas
     @opening    = Rotten::Movies.opening

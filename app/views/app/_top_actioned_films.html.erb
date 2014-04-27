@@ -1,10 +1,10 @@
 <section >
   <p class="title" data-section-title>
-    <a href="#panel1"><%= "Most #{action.capitalize}" %></a>
+    <a href="#panel1"><%= title %></a>
   </p>
   <div class="content" data-section-content>
       <ul class="large-block-grid-5 small-block-grid-2 film-tabs text-center">
-        <% Film.by_counter(action).limit(5).each_with_index do |film, index| %>
+        <% films.each_with_index do |film, index| %>
           <% present(film, FilmPresenter) do |presenter| %>
             <li itemscope itemtype="http://schema.org/Movie">
                <%= presenter.poster_link %>

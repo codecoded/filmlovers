@@ -49,9 +49,12 @@
   <div class="row">
     <div class="large-12 small-12 columns">
         <div class="section-container auto" data-section>
-          <%= render partial: 'top_actioned_films', locals: {action: :watched} %>
-          <%= render partial: 'top_actioned_films', locals: {action: :loved} %>
-          <%= render partial: 'top_actioned_films', locals: {action: :owned} %>
+
+          <%= render partial: 'top_actioned_films', locals: {films: Film.recently_actioned(5), title: 'Recently Actioned'} %>
+
+          <% [:watched, :loved, :owned].each do |action| %>
+            <%= render partial: 'top_actioned_films', locals: {films: Film.by_counter(action).limit(5), title: "#{action.capitalize}" } %>
+          <% end %>
         </div>
       </div>
   </div>

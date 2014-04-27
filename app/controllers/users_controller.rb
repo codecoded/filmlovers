@@ -63,7 +63,8 @@ class UsersController < ApplicationController
 
   def users
     options = paging_options sort_by: :username, page_size: 10
-    @results = ActiveUserQuery.new(User, options).results
+    all_users = logged_in? ? User.where('id != ?', current_user.id) : User
+    @results = ActiveUserQuery.new(all_users, options).results
   end
 
   helper_method :viewing_own?, :user, :user_action, :users, :films

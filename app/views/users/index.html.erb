@@ -20,6 +20,7 @@
           <td align="center">Watched</td>
           <td align="center">Loved</td>
           <td align="center">Owned</td>
+          <td align="center">Friends</td>
           <% if logged_in? %>
             <td align="center">Similarity</td>
             <!-- <td>Lists</td> -->
@@ -42,6 +43,9 @@
                    <% end %>              
                 </td>   
               <% end %> 
+               <td align="center">
+                <%= friend.friendships.count %>
+               </td>
               <% if logged_in? %>
                 <td align="center">
                   <%= number_to_percentage(current_user.compare_to(friend).overall, precision: 1) %>

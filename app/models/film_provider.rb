@@ -18,13 +18,13 @@ class FilmProvider < ActiveRecord::Base
   end
 
   def self.find_by(name, reference)
-    where(name: name, reference: reference.to_s).first_or_initialize
+    where(name: name.downcase, reference: reference.to_s).first_or_initialize
   end
 
 
   def self.find_or_create(provider, reference)
     return if reference.blank?
-    where(name: provider, reference: reference.to_s).first_or_create
+    where(name: provider.downcase, reference: reference.to_s).first_or_create
   end
 
   def self.exists_for?(provider)

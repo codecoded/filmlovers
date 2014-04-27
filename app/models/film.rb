@@ -150,6 +150,7 @@ class Film < ActiveRecord::Base
     update_attributes!({
       fetched_at: Time.now.utc,
       poster: film_provider.poster || poster,
+      director: film_provider.directors_name || director,
       release_date: film_provider.release_date || release_date,
       release_date_country: film_provider.release_date_country || release_date_country,
       trailer: film_provider.trailer || trailer,
@@ -157,7 +158,7 @@ class Film < ActiveRecord::Base
       backdrop: film_provider.backdrop || backdrop,
       classification: film_provider.classification || classification,
       popularity: film_provider.popularity || popularity,
-      provider: film_provider.provider, 
+      provider: film_provider.provider.downcase, 
       provider_id: film_provider.id
     })
     notify_observers :film_details_updated

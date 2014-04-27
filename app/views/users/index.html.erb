@@ -19,9 +19,11 @@
           <td align="center">Watched</td>
           <td align="center">Loved</td>
           <td align="center">Owned</td>
-          <td align="center">Similarity</td>
-          <!-- <td>Lists</td> -->
-           <td align="center">Actions</td>
+          <% if logged_in? %>
+            <td align="center">Similarity</td>
+            <!-- <td>Lists</td> -->
+             <td align="center">Actions</td>
+          <% end %>
         </tr>
         <% users.each do |friend| %>
         <% present(friend, UserPresenter) do |presenter| %>
@@ -39,19 +41,19 @@
                    <% end %>              
                 </td>   
               <% end %> 
-              <td align="center">
-                <% if logged_in? %>
-                <%= number_to_percentage(current_user.compare_to(friend).overall, precision: 1) %>
-                <% end %>
-              </td>
+              <% if logged_in? %>
+                <td align="center">
+                  <%= number_to_percentage(current_user.compare_to(friend).overall, precision: 1) %>
+                </td>
 
-               <td align="center">
-                <% if friendship = current_user.friendship_with(friend)  %>
-                  <%= render partial: "friendships/#{friendship.state}", locals: {friend: friend} %>            
-                <% else %>
-                  <%= render partial: "friendships/pending", locals: {friend: friend} %>  
-                <% end %>              
-              </td>
+                 <td align="center">                
+                  <% if friendship = current_user.friendship_with(friend)  %>
+                    <%= render partial: "friendships/#{friendship.state}", locals: {friend: friend} %>            
+                  <% else %>
+                    <%= render partial: "friendships/pending", locals: {friend: friend} %>  
+                  <% end %>     
+                </td>
+              <% end %>
             </tr>
           <% end %>
         <% end %>

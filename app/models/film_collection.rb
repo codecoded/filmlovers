@@ -28,7 +28,7 @@ class FilmCollection
   end
 
   def films
-    @films ||= Film.where(id: film_ids)
+    @films ||= Film.where(id: film_ids).where('poster is not null')
   end
 
 end

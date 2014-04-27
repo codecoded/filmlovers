@@ -28,7 +28,7 @@ module FilmScopes
   end
 
   def popular
-    where('release_date < ? and popularity > ?', 1.week.from_now, 0.45)
+    where('release_date < ? and popularity > ? and poster is not null', 1.week.from_now, 0.45)
   end
 
   def by_genres(genres)

@@ -45,7 +45,17 @@ module FilmScopes
   end 
 
   def recently_actioned(limit)
-    FilmEntry.joins(:film).includes(:film).where('films.poster is not null').order('film_entries.created_at DESC').limit(limit).map &:film
+    sql = "
+      SELECT f.* FROM films f
+      JOIN 
+      (SELECT film_id, ROW_NUMBER() OVER(PARTITION BY film_id ) AS row_number
+      FROM film_entries
+      ORDER BY updated_at DESC) AS T1
+      ON T1.film_id = f.id
+      WHERE T1.row_number = 1 AND poster IS NOT NULL
+      LIMIT #{limit.to_i}
+    "
+    Film.find_by_sql sql 
   end
 
   def in_cinemas

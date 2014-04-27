@@ -17,12 +17,14 @@
         <h1 itemprop="name"><%= film.title %></h1>
         <h2 >
           <span itemprop="datePublished" content='<%=presenter.film.release_date%>'><%= presenter.year %></span>
-          -
-          <span itemprop="director" itemscope itemtype='http://schema.org/Person'>
-            <%= link_to(person_path(presenter.director.id), itemprop: 'url') do %>
-            <span itemprop='name'><%=presenter.director.name%></span>
-            <% end %>
-          </span>
+          <% if presenter.director %>
+            -
+            <span itemprop="director" itemscope itemtype='http://schema.org/Person'>
+              <%= link_to(person_path(presenter.director.id), itemprop: 'url') do %>
+              <span itemprop='name'><%=presenter.director.name%></span>
+              <% end %>
+            </span>
+          <% end %>
           </h2>
         <hr />
 

@@ -45,7 +45,7 @@ module FilmScopes
   end 
 
   def recently_actioned(limit)
-    FilmEntry.includes(:film).order('created_at DESC').limit(limit).map &:film
+    FilmEntry.joins(:film).includes(:film).where('films.poster is not null').order('film_entries.created_at DESC').limit(limit).map &:film
   end
 
   def in_cinemas

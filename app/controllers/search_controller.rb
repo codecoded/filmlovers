@@ -23,7 +23,8 @@ class SearchController < ApplicationController
         data:   @query.results.map do |film|
           {
             primary: film.title,
-            secondary: film.release_date
+            secondary: film.release_date,
+            onclick: "window.location.href = '/films/#{film.id}'"
           }
         end
         }

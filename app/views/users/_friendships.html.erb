@@ -46,7 +46,9 @@
                 </td>   
               <% end %> 
               <td align="center">
-               <%= number_to_percentage(current_user.compare_to(friendship.friend).overall, precision: 1) %>
+                <% if logged_in? %>
+                <%= number_to_percentage(current_user.compare_to(friendship.friend).overall, precision: 1) %>
+               <% end %>
               </td>
               <% if viewing_own? %>
                 <td align="center">

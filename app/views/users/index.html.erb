@@ -13,42 +13,39 @@
     </div> 
  
     <table class="friends">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Username</th>
-          <th>Watched</th>
-          <th>Loved</th>
-          <th>Owned</th>
-          <!-- <th>Lists</th> -->
-          <th>Actions</th>
-        </tr>
-      </thead>
       <tbody>
+        <tr>
+          <td>Username</td>
+          <td align="center">Watched</td>
+          <td align="center">Loved</td>
+          <td align="center">Owned</td>
+          <td align="center">Similarity</td>
+          <!-- <td>Lists</td> -->
+           <td align="center">Actions</td>
+        </tr>
         <% users.each do |friend| %>
         <% present(friend, UserPresenter) do |presenter| %>
             <tr>
               <td>
                 <%= link_to user_path(friend) do %>
                   <%= presenter.avatar %>
+                  <%= friend.username %>
                  <% end %>
               </td>
-              <td>
-               <%= link_to friend.username, user_path(friend) %>
-              </td>
               <% [:watched, :loved, :owned].each do |action| %>
-                <td>
+                 <td align="center">
                   <%= link_to user_film_entry_path(friend, action), alt: action, title: action do %>
                     <label style="display:inline"><%= friend.film_entries.count_for(action) %> </label>
                    <% end %>              
                 </td>   
               <% end %> 
-              <td>
-                <%= link_to user_lists_path(friend) do %>
-                  <label> <%#=friend.films_lists.viewable.count %> </label>
+              <td align="center">
+                <% if logged_in? %>
+                <%= number_to_percentage(current_user.compare_to(friend).overall, precision: 1) %>
                 <% end %>
-              </td>    
-              <td class="friendship">
+              </td>
+
+               <td align="center">
                 <% if friendship = current_user.friendship_with(friend)  %>
                   <%= render partial: "friendships/#{friendship.state}", locals: {friend: friend} %>            
                 <% else %>

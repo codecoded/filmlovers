@@ -17,7 +17,7 @@ FL.Search = {
       src: '/search/smart',
       fillBox: true,
       fillBoxWith: 'primary',
-      executeCode: false,
+      executeCode: true,
       timeoutLength: 100
     });
 

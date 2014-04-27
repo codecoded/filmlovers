@@ -29,7 +29,7 @@
               <section>
                 <p class="title" data-section-title><a href="#panel1">Starred in</a></p>
                 <div class="content" data-section-content>
-                  <div class="row">
+                  <div class="row filmography">
                     <% presenter.films_starred_in.each do |roles| %>
                       <div class="large-3 small-6 columns text-center">
                         <div class="character">
@@ -49,7 +49,7 @@
               <section>
                 <p class="title" data-section-title><a href="#panel2">Worked on</a></p>
                 <div class="content" data-section-content>
-                  <div class="row">
+                  <div class="row filmography">
                     <% presenter.films_worked_on.each do |roles| %>
                     <% if roles[:film_presenter] %>
                       <div class="large-3 small-6 columns text-center">

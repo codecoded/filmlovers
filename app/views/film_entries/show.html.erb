@@ -1,0 +1,73 @@
+
+<div class="full-row page-title  margin-bottom">
+  <div class="row">
+    <div class="large-12 small-12 columns">
+      <h1><%= "Filmlovers who #{action_id} #{film.title}"%></h1>
+    </div>
+  </div>
+</div>
+
+  <div class="row margin-bottom" id="films-content">
+    <div class="large-12 columns text-center">
+      <%#= paginate users %>
+    </div> 
+ <div class="row">
+  <div class="large-12 medium-12 small-12 columns">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td>Username</td>
+          <td align="center">Watched</td>
+          <td align="center">Loved</td>
+          <td align="center">Owned</td>
+          <td align="center">Friends</td>
+          <% if logged_in? %>
+            <td align="center">Similarity</td>
+            <!-- <td>Lists</td> -->
+             <td align="center">Actions</td>
+          <% end %>
+        </tr>
+        <% users.each do |friend| %>
+        <% present(friend, UserPresenter) do |presenter| %>
+            <tr>
+              <td>
+                <%= link_to user_path(friend) do %>
+                  <%= presenter.avatar %>
+                  <%= friend.username %>
+                 <% end %>
+              </td>
+              <% [:watched, :loved, :owned].each do |action| %>
+                 <td align="center">
+                  <%= link_to user_film_entry_path(friend, action), alt: action, title: action do %>
+                    <label style="display:inline"><%= friend.film_entries.count_for(action) %> </label>
+                   <% end %>              
+                </td>   
+              <% end %> 
+               <td align="center">
+                <%= friend.friendships.confirmed.count %>
+               </td>
+              <% if logged_in? %>
+                <td align="center">
+                  <%= number_to_percentage(current_user.compare_to(friend).overall, precision: 1) %>
+                </td>
+
+                 <td align="center">                
+                  <% if friendship = current_user.friendship_with(friend)  %>
+                    <%= render partial: "friendships/#{friendship.state}", locals: {friend: friend} %>            
+                  <% else %>
+                    <%= render partial: "friendships/pending", locals: {friend: friend} %>  
+                  <% end %>     
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+    <div class="large-12 columns text-center">
+      <%#= paginate users %>
+    </div> 
+  </div>
+</div>

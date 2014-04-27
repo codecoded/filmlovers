@@ -31,6 +31,14 @@ class FilmEntriesController < ApplicationController
     @user ||= User.fetch(params[:user_id])
   end
 
+  def users
+    film_entries.map &:user
+  end
+
+  def film
+    @film ||= Film.find(params[:film_id])
+  end
+
   def validate_current_user
     redirect_to root_path unless current_user
   end
@@ -43,10 +51,10 @@ class FilmEntriesController < ApplicationController
     params[:id].to_sym
   end
 
-  # def film_entries
-  #   @film_entries ||= film.entries.find_by_action(action_id)
-  # end
+  def film_entries
+    @film_entries ||= film.entries.find_by_action(action_id)
+  end
 
 
-  helper_method :user
+  helper_method :user, :users, :action_id, :film
 end

@@ -53,7 +53,7 @@
           <%= render partial: 'top_actioned_films', locals: {films: Film.recently_actioned(5), title: 'Recently Actioned'} %>
 
           <% [:watched, :loved, :owned].each do |action| %>
-            <%= render partial: 'top_actioned_films', locals: {films: Film.by_counter(action).limit(5), title: "#{action.capitalize}" } %>
+            <%= render partial: 'top_actioned_films', locals: {films: Film.by_counter(action).limit(5), title: "Most #{action.capitalize}" } %>
           <% end %>
         </div>
       </div>

@@ -1,7 +1,7 @@
 Filmlovers::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  config.action_controller.asset_host = "http://cdn.staging.filmlovr.com"
+  config.action_controller.asset_host = "d24t10pcbjfk4f.cloudfront.net"
 
   # Code is not reloaded between requests
   config.cache_classes = true

@@ -34,17 +34,17 @@ class User < ActiveRecord::Base
   has_many :recommended_films, class_name: 'FilmRecommendation', foreign_key: :friend_id
   has_many :films_lists
   has_many :passports
-  has_one  :profile, class_name: 'UserProfile'
+  # has_one  :profile, class_name: 'UserProfile'
   has_many :friendships
   has_many :mobile_devices
 
   # embedded_in :film_entry
 
   attr_accessible :passports
-  accepts_nested_attributes_for :profile, :allow_destroy => true
+  # accepts_nested_attributes_for :profile, :allow_destroy => true
   accepts_nested_attributes_for :passports
 
-  set_callback :create,   :after, :create_profile 
+  # set_callback :create,   :after, :create_profile 
 
   def self.from_omniauth(auth)
     passport = Passport.from_omniauth(auth)
@@ -58,10 +58,10 @@ class User < ActiveRecord::Base
     found_passport ? found_passport.user : new(passports:[passport])
   end
 
-  def create_profile
-    profile = UserProfile.new
-    save!
-  end
+  # def create_profile
+  #   profile = UserProfile.new
+  #   save!
+  # end
 
   def self.from_facebook_token(access_token)
     fb_user = Facebook::UserAPI.user_from_token access_token

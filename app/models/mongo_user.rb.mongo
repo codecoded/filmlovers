@@ -76,7 +76,7 @@ class MongoUser
   has_many :film_entries
 
   
-  mount_uploader :avatar, AvatarUploader  
+  # mount_uploader :avatar, AvatarUploader  
 
   embeds_one  :profile, class_name: 'UserProfile', autobuild: true
   embeds_many :films_lists

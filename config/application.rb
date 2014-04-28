@@ -9,6 +9,7 @@ require 'rails/all'
 # require "sprockets/railtie"
 
 
+
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
@@ -76,5 +77,8 @@ module Filmlovers
     Mongoid.raise_not_found_error = false
     Mongoid.protect_sensitive_fields = false
     RestClient.log = Rails.logger
+    ActiveSupport.on_load :active_record do
+      require "active_record_postgres_array/active_record"
+    end
   end
 end

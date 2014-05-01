@@ -9,7 +9,7 @@ gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
 
 gem 'puma'
 gem 'nokogiri'
-gem 'google_movies'
+# gem 'google_movies'
 # gem 'unicorn'
 gem 'omniauth-facebook'#, '1.4.0'
 gem 'omniauth-netflix'
@@ -21,7 +21,7 @@ gem 'rack-iframe'
 gem 'log4r'
 gem 'fb-channel-file'
 gem 'pusher'
-gem 'jquery-rails'#, '2.1.4'
+
 # gem 'bson_ext'
 # gem 'jruby-win32ole', '~> 0.8.5'
 gem 'mongo'
@@ -32,22 +32,22 @@ gem 'rabl'
 gem "eventmachine", "~> 1.0.3"
 gem 'meta-tags', :require => 'meta_tags'
 gem 'gravtastic'
-gem 'sitemap_generator'
+gem 'sitemap_generator', require: false
 gem 'devise'
 gem 'figaro'
 gem 'state_machine'
 gem 'execjs'
 gem 'simple_form'
-gem 'masonry-rails'
+
 gem 'therubyrhino'  
 gem 'kaminari' #for pagination
 gem 'geocoder' # for postcode lookup
 gem 'dalli'
 gem 'memcachier'
-gem 'netflix4r'
+gem 'netflix4r', require: false
 gem 'carrierwave'
 # gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
-gem "mini_magick"
+gem "mini_magick", require: false
 gem "fog"
 gem 'darstellung'
 gem 'rapns'
@@ -57,7 +57,7 @@ gem 'unf'
 # gem 'zipruby'
 
 
-gem 'foreigner'
+gem 'foreigner', require: false
 # gem 'activerecord-postgres-hstore'
 # gem 'activerecord-postgres-array', '0.0.10'
 # gem "jruby-activerecord-postgres-array", git: 'https://github.com/dalton/jruby-activerecord-postgres-array.git'
@@ -67,10 +67,12 @@ gem 'bugsnag'
 gem 'rack-block'
 
 group :assets do
+  gem 'jquery-rails'#, '2.1.4'
   gem 'sass-rails',   '~> 3.2.3'
   # gem 'coffee-rails', '~> 3.2.1'
   # gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'masonry-rails'
   # gem 'turbolinks'
 
 end

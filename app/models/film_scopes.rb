@@ -50,7 +50,7 @@ module FilmScopes
       FROM films f
       JOIN 
       (
-        SELECT film_id, ROW_NUMBER() OVER(PARTITION BY film_id ) AS row_number
+        SELECT film_id, ROW_NUMBER() OVER(PARTITION BY film_id ORDER BY updated_at DESC) AS row_number
         FROM film_entries
         ORDER BY updated_at DESC 
         LIMIT 30) AS T1

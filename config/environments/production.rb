@@ -4,7 +4,7 @@ Filmlovers::Application.configure do
   # Code is not reloaded between requests
   config.cache_classes = true
 
-  config.action_controller.asset_host = "cdn.filmlovr.com"
+  config.action_controller.asset_host = "dzzhe2eu0uq74.cloudfront.net"
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
@@ -42,7 +42,7 @@ Filmlovers::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  config.cache_store = :dalli_store
+  config.cache_store = :dalli_store, {compress: true, value_max_bytes: 2097152}
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"

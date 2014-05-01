@@ -15,6 +15,16 @@ module Api
         end
       end
 
+      def user_location
+        Rails.cache.fetch request.remote_ip, expires_in: 24.hours do 
+          loc = UserLocation.new(request.location)
+          Log.info loc.to_s
+          loc
+        end        
+      rescue => msg
+        Log.error "Unable to find users location. Msg: #{msg}"
+      end
+
       def current_user
         @current_user
       end
@@ -23,7 +33,7 @@ module Api
         request.env['devise.skip_trackable'] = true
       end
 
-      helper_method :current_user
+      helper_method :current_user, :user_location
     end
   end
 end

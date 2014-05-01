@@ -60,7 +60,7 @@ class FilmProvider < ActiveRecord::Base
   end
 
   def aff_link
-    case sym_name
+    case sym_name.to_sym
       when :apple; "#{link}&at=#{AppConfig.itunes_affiliate}".gsub('/video/','/gb/movie/')
       # when :apple; (link.index('?') ? "#{link}&partnerId=2003&TDUID=UK2247239" : "#{link}?partnerId=2003&TDUID=UK2247239").gsub('/video/','/gb/movie/')
       # when :apple; "http://clkuk.tradedoubler.com/click?p=23708&a=2247239&&url=#{CGI.escape(link + '&partnerId=2003')}"

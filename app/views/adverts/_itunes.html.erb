@@ -1,6 +1,5 @@
 <% present(film) do |presenter| %>
-  <%= link_to presenter.apple_affiliate_link, target: 'itunes_store' do %>
+  <%= link_to presenter.apple_affiliate_link(user_location.apple_storefront_id), target: 'itunes_store' do %>
     <%= image_tag "site-basics/apple-icon.png", size:'30', alt:"Buy online with Apple" %>
-    <!-- <img src="http://impgb.tradedoubler.com/imp?type(img)g(19223668)a(2247239)" border=0> -->
   <% end %>
 <% end %>

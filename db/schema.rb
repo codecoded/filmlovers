@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131129131422) do
+ActiveRecord::Schema.define(:version => 20140501165452) do
+
+  create_table "country_codes", :force => true do |t|
+    t.string "name"
+    t.string "iso_name"
+    t.string "iso2"
+    t.string "iso3"
+    t.string "numcode"
+  end
 
   create_table "facebook_events", :force => true do |t|
     t.integer  "user_id"
@@ -40,18 +48,8 @@ ActiveRecord::Schema.define(:version => 20131129131422) do
   add_index "film_entries", ["user_id"], :name => "index_film_actions_on_user_id"
   add_index "film_entries", ["watched", "loved", "owned"], :name => "index_film_entries_on_watched_and_loved_and_owned"
 
-  create_table "film_providers", :force => true do |t|
-    t.string   "film_id"
-    t.string   "name"
-    t.string   "reference"
-    t.string   "link"
-    t.float    "rating"
-    t.datetime "fetched_at"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "film_providers", ["film_id"], :name => "index_film_providers_on_film_id"
+# Could not dump table "film_providers" because of following StandardError
+#   Unknown type 'character varying(255)[]' for column 'storefront_ids'
 
   create_table "film_recommendations", :force => true do |t|
     t.integer  "user_id"
@@ -68,33 +66,8 @@ ActiveRecord::Schema.define(:version => 20131129131422) do
   add_index "film_recommendations", ["friend_id"], :name => "index_film_recommendations_on_friend_id"
   add_index "film_recommendations", ["user_id"], :name => "index_film_recommendations_on_user_id"
 
-  create_table "films", :id => false, :force => true do |t|
-    t.string       "id",                                                 :null => false
-    t.string       "title"
-    t.string       "classification"
-    t.string       "director"
-    t.date         "release_date"
-    t.string       "release_date_country"
-    t.datetime     "fetched_at"
-    t.string       "poster"
-    t.string       "backdrop"
-    t.string       "trailer"
-    t.string_array "genres",               :limit => 255
-    t.float        "popularity"
-    t.integer      "provider_id"
-    t.string       "provider"
-    t.string       "title_director"
-    t.integer      "watched_counter",                     :default => 0, :null => false
-    t.integer      "loved_counter",                       :default => 0, :null => false
-    t.integer      "owned_counter",                       :default => 0, :null => false
-    t.datetime     "created_at",                                         :null => false
-    t.datetime     "updated_at",                                         :null => false
-  end
-
-  add_index "films", ["id"], :name => "index_films_on_id", :unique => true
-  add_index "films", ["release_date"], :name => "index_films_release_date"
-  add_index "films", ["title"], :name => "index_films_title"
-  add_index "films", ["watched_counter", "loved_counter", "owned_counter"], :name => "index_films_counters"
+# Could not dump table "films" because of following StandardError
+#   Unknown type 'character varying(255)[]' for column 'genres'
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"

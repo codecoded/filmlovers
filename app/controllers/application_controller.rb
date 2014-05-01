@@ -36,18 +36,14 @@ class ApplicationController < ActionController::Base
   end
 
   def user_location
-    return session[:user_location] if session[:user_location]
-    location = request.location
-    session[:user_location] = location
-    Log.info "User logged in from #{location.city}, #{location.data['country_name']} (#{location.data['country_code']})}" if user_location?
-    location    
+    Rails.cache.fetch request.remote_ip, expires_in: 24.hours do 
+      loc = UserLocation.new(request.location)
+      Log.info loc.to_s
+      loc
+    end        
   rescue => msg
     Log.error "Unable to find users location. Msg: #{msg}"
   end
 
-  def user_location?
-    !user_location.nil? and user_location.latitude != 0
-  end
-
-  helper_method :current_user, :username, :logged_in?, :current_url
+  helper_method :current_user, :username, :logged_in?, :current_url, :user_location
 end

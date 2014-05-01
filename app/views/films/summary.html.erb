@@ -10,7 +10,19 @@
       </div>
       <div class="large-8 small-12 columns">
         <h1><%= film.title %></h1>
-        <h2><%= presenter.year_and_director %></h2>
+        <h2 >
+          <span itemprop="datePublished" content='<%=presenter.film.release_date%>'>
+            <%= link_to(presenter.year, category_films_path(action: :popular, year: presenter.year))  %>
+          </span>
+          <% if presenter.director %>
+            -
+            <span itemprop="director" itemscope itemtype='http://schema.org/Person'>
+              <%= link_to(person_path(presenter.director.id), itemprop: 'url') do %>
+              <span itemprop='name'><%=presenter.director.name%></span>
+              <% end %>
+            </span>
+          <% end %>
+          </h2>
          <hr />
         <h3>Synopsis</h3>
         <p><%= presenter.overview %></p>

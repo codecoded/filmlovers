@@ -17,6 +17,19 @@ module PageOptions
     }.reject{|k,v| v==nil}
   end
 
+  def filters_desc
+    return '' unless !film_filters.empty?
+
+    text = []
+    text << ("year '#{film_filters[:year]}'") if film_filters[:year].to_i > 0
+    text << ("decade '#{film_filters[:decade]}'") if film_filters[:decade].to_i > 0
+
+    text << ("genres '#{film_filters[:genres].capitalize}'") if !film_filters[:genres].blank?
+
+    " filtered by " + text.join(', ')
+  end
+
+
   def user_filters
     {}
   end

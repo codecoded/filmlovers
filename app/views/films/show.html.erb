@@ -16,7 +16,9 @@
         <meta >
         <h1 itemprop="name"><%= film.title %></h1>
         <h2 >
-          <span itemprop="datePublished" content='<%=presenter.film.release_date%>'><%= presenter.year %></span>
+          <span itemprop="datePublished" content='<%=presenter.film.release_date%>'>
+            <%= link_to(presenter.year, category_films_path(action: :popular, year: presenter.year))  %>
+          </span>
           <% if presenter.director %>
             -
             <span itemprop="director" itemscope itemtype='http://schema.org/Person'>

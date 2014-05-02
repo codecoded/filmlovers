@@ -10,11 +10,11 @@ module FilmScopes
   end
 
   def find_by_provider(name, id)
-    find_by('providers.name'=> name, 'providers._id' => id)
+    joins(:providers).where(film_providers: {reference: id, name: name.downcase}).first
   end
 
   def by_provider(name)
-    where('providers.name'=> name)
+    joins(:providers).where(film_providers: {name: name.downcase})
   end
 
   def by_decade(decade)

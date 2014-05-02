@@ -9,7 +9,7 @@ module Tmdb
 
     def self.fetch(id)  
       movie = with(safe:false).new(Client.movie(id))
-      movie.upsert
+      movie.upsert unless movie.not_allowed?
       movie
     end
 

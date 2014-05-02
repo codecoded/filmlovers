@@ -40,14 +40,18 @@ namespace :admin do
 
   desc "Delete all adult film"
   task :delete_adult => :environment do
-    Log.info "Deleting #{Film.adult.count} adult films"
+    Log.info "Deleting #{Tmdb::Movie.adult.count} adult films"
     Tmdb::Movie.adult.each do |movie|
-      film = movie.film
-      next unless film
-      film.delete
+      if movie.title_id
+        film = movie.film
+      else
+        film = Film.where(provider_id: movie.id, provider: :tmdb).first
+      end
+      film.delete if film
       movie.delete
+      
     end
-    Log.info "#{Films.adult.count} adult films remaining"
+    Log.info "#{Tmdb::Movie.adult.count} adult films remain"
   end
 
   desc "Delete all invalid films "

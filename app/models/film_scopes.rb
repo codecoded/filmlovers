@@ -41,7 +41,7 @@ module FilmScopes
   end
 
   def search(query, field=:title)
-    where('title ilike ?', "%#{query.strip}%")
+    where('title ilike ?', "%#{query.strip}%").order('popularity DESC')
   end 
 
   def recently_actioned(limit)

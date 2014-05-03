@@ -81,13 +81,17 @@ class  TmdbPresenter < BasePresenter
     images_library ? images_library.backdrops : []
   end
 
-  def backdrop(backdrop, size = :large)
+  def backdrop(backdrop, size = :large, options={})
     return unless backdrop
-    image_tag AppConfig.image_uri_for([backdrop_sizes[size], backdrop['file_path']]), title: film.title, alt: "backdrop for #{film.title}", itemprop:"image"
+    src = AppConfig.image_uri_for([backdrop_sizes[size], backdrop['file_path']])
+    options.merge! title: film.title, alt: "backdrop for #{film.title}", itemprop:"image"
+    image_tag src, options
   end
 
   def backdrop_uri(size=:large)
-    AppConfig.image_uri_for([backdrop_sizes[size], backdrops[0]['file_path']]) if backdrops?
+    return unless backdrops?
+    index = backdrops.length > 1 ? 1 : 0
+    AppConfig.image_uri_for([backdrop_sizes[size], backdrops[index]['file_path']]) if backdrops?
   end
 
   def backdrops_urls_for(size)
@@ -99,7 +103,7 @@ class  TmdbPresenter < BasePresenter
   end
 
   def main_backdrop(size = :large)
-    backdrop(backdrops[0], size) if backdrops? 
+    backdrop(backdrops[0], size, class: 'film_hero') if backdrops? 
   end
 
   def alternative_titles

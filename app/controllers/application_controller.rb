@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     if user.new_record?
       redirect_to_auth 
     else
-      throw user
       env['warden'].set_user(user)
     end
   end

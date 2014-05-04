@@ -2,7 +2,7 @@ Filmlovers::Application.routes.draw do
 
   constraints(:subdomain => /^cdn\b/) do
     root :to => redirect("http://filmlovr.com")
-    match '/*path', :to => redirect {|params| "http://filmlovr.com/#{params[:path]}"}
+    match '/*path', :to => redirect {|params, request| "http://filmlovr.com/#{params[:path]}"}
   end
 
 

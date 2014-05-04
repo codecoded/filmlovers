@@ -1,5 +1,11 @@
 Filmlovers::Application.routes.draw do
 
+  constraints(:subdomain => /^cdn\b/) do
+    root :to => redirect("http://filmlovr.com")
+    match '/*path', :to => redirect {|params| "http://filmlovr.com/#{params[:path]}"}
+  end
+
+
   root to: 'app#index'
 
   devise_for :users, controllers: { omniauth_callbacks: "sessions", registrations: "registrations"}

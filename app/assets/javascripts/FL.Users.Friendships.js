@@ -14,12 +14,14 @@ FL.Friendships = {
   },
 
   initListeners: function(){
+
     $(document).on('ajax:before', '.friendship a[data-friendship]', function(e){e.preventDefault();e.stopPropagation()})
     $(document).on('ajax:success', '.friendship a[data-friendship="request"]', friendships.requested)
     $(document).on('ajax:success', '.friendship a[data-friendship="confirm"]', friendships.confirmed)
     $(document).on('ajax:success', '.friendship a[data-friendship="ignore"]', friendships.ignored)
     $(document).on('ajax:success', 'a[data-friendship="delete"]', friendships.deleted)
     $(document).on('ajax:success', '.friendship a[data-friendship="cancel"]', friendships.cancelled)
+    $(document).on('click', '.friendships-content img[data-invite-facebook]', FacebookAPI.openInviteDialog)
 
   },
   

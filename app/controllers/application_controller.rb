@@ -8,10 +8,16 @@ class ApplicationController < ActionController::Base
 
   def facebook_authenticate
     user = FacebookAuth.authenticate(params[:signed_request])
-    !user.new_record? ? env['warden'].set_user(user) : redirect_to_auth
+    if user.new_record?
+      redirect_to_auth 
+    else
+      throw user
+      env['warden'].set_user(user)
+    end
   end
 
   def redirect_to_auth
+    params.reject! {|k,v| k.to_sym==:signed_request}
     render('facebook/oauth_redirect', layout:nil)
   end 
 

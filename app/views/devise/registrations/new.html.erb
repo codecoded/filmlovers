@@ -1,9 +1,9 @@
 <div class="row">
   <div class="large-4 small-12 columns">
 
-    <h2>Don't be afraid...it’s free!</h2>
+    <h2>Welcome filmlover!</h2>
     <p>After you have signed up, you can start keeping a history of films you have watched, the ones you love, even the ones you own!</p>
-    <p>And creating your own film lists is a great way to recommend films to friends, and discover new ones yourself!</p>
+    <p>By adding friends, you can recommend films you think they will love, and get recommendations yourself!</p>
   </div>
   <div class="large-4 small-12 columns">
   <h2>Join simply in one click...</h2>
@@ -17,6 +17,7 @@
   <div class="large-4 small-12 columns">
     <h2>or more traditionally...</h2>
     <%= simple_form_for(@user || User.new, url: '/users', html:{id: 'signupform'}, remote: true) do |f| %>
+      <input type="hidden" name="invite_code" value="<%= params[:invite_code] %>"/>
       <label for="username"></label>
       <%= f.input :username, tabindex: 1, placeholder: 'Username', hint: false, label: false%>
       <label for="email"></label>

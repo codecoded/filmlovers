@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :authentication_token, :current_sign_in_ip, :current_sign_in_at, :dob, :email, 
                   :encrypted_password, :first_name, :gender, :last_name, :last_sign_in_at, 
                   :last_sign_in_ip, :name, :remember_created_at, :reset_password_sent_at, 
-                  :reset_password_token, :sign_in_count, :username, :password, :password_confirmation, :remember_me
+                  :reset_password_token, :sign_in_count, :username, :password, :password_confirmation, :remember_me, :uuid, :avatar
                   
   include Gravtastic
   extend UserScopes
@@ -25,18 +25,21 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: {case_sensitive: false, message: "This email has already been registered!"}, presence: true
   validates_format_of :email, :with  => Devise.email_regexp, message: "Sorry, this doesn't seem to be a valid email"
   validates_length_of :password, :within => Devise.password_length, too_short: 'Password must be a minimun of 8 characters', too_long: 'Password must be a maximum of 128 characters', on: :create, allow_blank: true
+  
 
-  before_save :ensure_authentication_token
 
-  has_many :facebook_events
-  has_many :film_entries
-  has_many :film_recommendations
-  has_many :recommended_films, class_name: 'FilmRecommendation', foreign_key: :friend_id
-  has_many :films_lists
-  has_many :passports
+  before_save :ensure_authentication_token, :ensure_uuid
+
+  has_many :facebook_events, dependent: :delete_all
+  has_many :film_entries, dependent: :delete_all
+  has_many :film_recommendations, dependent: :delete_all
+  has_many :recommended_films, class_name: 'FilmRecommendation', foreign_key: :friend_id, dependent: :delete_all
+  # has_many :films_lists, dependent: :delete_all
+  has_many :passports, dependent: :delete_all
   # has_one  :profile, class_name: 'UserProfile'
-  has_many :friendships
-  has_many :mobile_devices
+  has_many :friendships, dependent: :delete_all
+  has_many :followers, class_name: 'Friendship', foreign_key: :friend_id, dependent: :delete_all
+  has_many :mobile_devices, dependent: :delete_all
 
   # embedded_in :film_entry
 
@@ -74,10 +77,13 @@ class User < ActiveRecord::Base
 
     if user.new_record?
       user.update_from_facebook_graph(fb_user) 
-      user.channels[:facebook].create_friends_in_app if user.channels[:facebook]
+      user.auto_friend
     end
-    
     user 
+  end
+
+  def auto_friend
+    channels[:facebook].create_friends_in_app if channels[:facebook]
   end
 
   def self.fetch(id)
@@ -172,6 +178,12 @@ class User < ActiveRecord::Base
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
+    end
+  end
+
+  def ensure_uuid
+    if uuid.blank?
+      self.uuid = SecureRandom.hex(10)
     end
   end
 

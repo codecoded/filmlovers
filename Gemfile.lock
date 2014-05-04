@@ -91,7 +91,7 @@ GEM
     httparty (0.13.0)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
-    httpauth (0.2.0)
+    httpauth (0.2.1)
     httpclient (2.3.4.1)
     i18n (0.6.5)
     jdbc-postgres (9.3.1101)
@@ -103,7 +103,7 @@ GEM
       bouncy-castle-java (>= 1.5.0147)
     json (1.8.1)
     json (1.8.1-java)
-    jwt (0.1.8)
+    jwt (0.1.11)
       multi_json (>= 1.5)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -167,8 +167,8 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
-    omniauth-facebook (1.5.1)
-      omniauth-oauth2 (~> 1.1.0)
+    omniauth-facebook (1.4.0)
+      omniauth-oauth2 (~> 1.0.2)
     omniauth-google-oauth2 (0.2.1)
       omniauth (~> 1.0)
       omniauth-oauth2
@@ -178,7 +178,7 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
-    omniauth-oauth2 (1.1.1)
+    omniauth-oauth2 (1.0.3)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     omniauth-twitter (1.0.1)

@@ -16,7 +16,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -25,17 +25,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
     ActionController::Base.helpers.asset_path("content/user-avator.jpg")
   end
 
-  # version :print do
-  #   version :thumb    { process :resize_to_fit => [32, 32] }
-  #   version :preview  { process :resize_to_fit => [256, 256] }
-  #   version :full     { process :resize_to_fit => [2048, 2048] }
-  # end
- 
-  # version :web do
-  #   version :thumb    { process :resize_to_fit => [32, 32] }
-  #   version :preview  { process :resize_to_fit => [128, 128] }
-  #   version :full     { process :resize_to_fit => [1024, 768] }
-  # end
 
   # Process files as they are uploaded:
   # process :scale => [200, 300]
@@ -45,8 +34,16 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process :scale => [50, 50]
+  # version :large do
+  #   process resize_to_fill: [256, 256]
+  # end
+
+  # version :medium, :from_version => :large do
+  #   process resize_to_fill: [128, 128]
+  # end
+
+  # version :thumb, :from_version => :medium do
+  #   process resize_to_fill: [90, 90]
   # end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -57,8 +54,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    "avatar_#{model.id}.#{file.extension}" if original_filename
+  end
 
 end

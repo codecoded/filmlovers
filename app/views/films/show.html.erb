@@ -1,3 +1,5 @@
+<% set_meta_tags canonical: film_url(film) %>
+
 <% film_presenter = present(film) %>
 <% present(film.details, film.details_presenter) do |presenter| %>
   <%= render partial: 'film_meta_tags', locals: {presenter: presenter}  %>

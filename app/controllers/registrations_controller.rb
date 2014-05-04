@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
 
+
   layout false
 
   def new
@@ -11,6 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
     if @user.valid?
       @user.save!
       sign_in @user
+      check_invite_code @user
       render nothing: true, status: 200
     else
       render :new, status: 422
@@ -58,6 +60,14 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
+  def check_invite_code(user)
+    return unless code = params[:invite_code]
+    return unless inviter = User.find_by_uuid(code)
+    Friendship.auto_friend user, inviter
+    rescue => msg
+      Log.error "Unable to auto friend #{user} with inviter #{inviter}, code: #{code}: #{msg}"
+  end
 
   # check if we need password to update user data
   # ie if password or email was changed

@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+  skip_filter :facebook_authenticate, :only => :create
+
   def create
     passport = Passport.from_omniauth(env["omniauth.auth"])
     Log.debug "Passport: #{passport}"
@@ -8,6 +10,7 @@ class SessionsController < ApplicationController
     user =  existing_user if existing_user
     user.upsert_passport passport
     env['warden'].set_user(user)
+    user.auto_friend
     redirect_to root_url
   end
 

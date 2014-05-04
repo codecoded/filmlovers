@@ -55,7 +55,7 @@
           </section> -->
          <section <%= 'class=active' if params[:action]=='friendships' %>>
             <p class="title" data-section-title><a href="#panel4">Friendships</a></p>
-            <div class="content" data-section-content>
+            <div class="content friendships-content" data-section-content>
               <%= render partial: 'friendships', locals: {friendships: presenter.user.friendships} if logged_in? %>
             </div>
           </section>

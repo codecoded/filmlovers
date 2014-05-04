@@ -1,7 +1,7 @@
 class FacebookAuth
   
   def self.authenticate(signed_request)
-    user = User.find_by_passport Passport.from_facebook_request signed_request
+    user = User.find_by_passport Passport.from_facebook_request(signed_request)
     # validate_player(user) ? user : false
   end
 

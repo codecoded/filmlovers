@@ -10,8 +10,8 @@ class PersonPresenter < BasePresenter
   #   @films ||= person.credits['cast'].map {|f| Film.new(f)}
   # end
 
-  def short_bio
-    shorten biography
+  def short_bio(length=180)
+    shorten biography, length
   end
 
   def dob

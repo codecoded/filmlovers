@@ -47,7 +47,7 @@ gem 'memcachier'
 gem 'netflix4r', require: false
 gem 'carrierwave'
 # gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
-gem "mini_magick", require: false
+gem "mini_magick"#, require: false
 gem "fog"
 gem 'darstellung'
 gem 'rapns'

@@ -18,6 +18,14 @@
 </div> -->
 <%# end %>
 
+<% if viewing_own? %>
+<div class="row">
+  <div class="large-12 small-6  columns text-center small-margin-bottom">
+      <%= image_tag 'site-basics/facebook-icon-colour.png', size: '32x32', alt: 'Invite friends via facebook', data: {invite_facebook:''} %>
+  </div>
+</div>
+<% end %>
+
 <div class="row">
   <div class="large-12 medium-12 small-12 columns">
       <table width="100%" border="0" cellspacing="0" cellpadding="0">

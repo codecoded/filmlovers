@@ -63,5 +63,17 @@ var FacebookAPI = {
         console.log(response)
       }
     );
+  },
+
+  openInviteDialog: function(){
+    FB.ui({method: 'apprequests',
+            message: 'Hey! Please join me at filmlovr.com so we can recommend and discover films together',
+            filters: ['app_non_users']
+        }, FacebookAPI.requestCallback);
+  },
+
+  requestCallback: function(response){
+
   }
+
 }

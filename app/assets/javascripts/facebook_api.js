@@ -67,7 +67,7 @@ var FacebookAPI = {
 
   openInviteDialog: function(){
     FB.ui({method: 'apprequests',
-            message: 'Hey! Please join me at filmlovr.com so we can recommend and discover films together',
+            message: 'Please join me at filmlovr.com, so we can recommend films to each other and more!',
             filters: ['app_non_users']
         }, FacebookAPI.requestCallback);
   },

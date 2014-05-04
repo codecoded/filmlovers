@@ -53,12 +53,14 @@
               <p>Lists</p>
             </div>
           </section> -->
-         <section <%= 'class=active' if params[:action]=='friendships' %>>
-            <p class="title" data-section-title><a href="#panel4">Friendships</a></p>
-            <div class="content friendships-content" data-section-content>
-              <%= render partial: 'friendships', locals: {friendships: presenter.user.friendships} if logged_in? %>
-            </div>
-          </section>
+          <% if logged_in? %>
+           <section <%= 'class=active' if params[:action]=='friendships' %>>
+              <p class="title" data-section-title><a href="#panel4">Friendships</a></p>
+              <div class="content friendships-content" data-section-content>
+                <%= render partial: 'friendships', locals: {friendships: presenter.user.friendships}%>
+              </div>
+            </section>
+          <% end %>
           <% if viewing_own? %>
              <section <%= 'class=active' if params[:action]=='details' %>>
               <%= render template: 'devise/registrations/edit' %>

@@ -169,14 +169,22 @@ Filmlovers::Application.routes.draw do
     end
   end
 
+  scope 'user' do 
+    get 'details',                  to: 'users#details',          as:   'user_details'
+    get 'settings',                 to: 'users#settings',         as:   'user_settings'
+    get 'friendships',              to: 'users#friendships',      as:   'user_friendships'
+    get :films,                     to: 'users#film_entries',     as:   'user_film_entries'
+
+  end
+
   scope ':user_id', constraints: { user_id: /.*/ } do
     resources :recommendations,     to: 'users#recommendations',  as: 'user_recommendations', only: [:index, :show]
     resources :films,               to: 'users#film_entries',     as: 'user_film_entries', only: [:index, :show]
     resources :lists,               to: 'users#lists',            as: 'user_lists', only: [:show, :index]
     resources :friendships,         to: 'users#friendships',      as: 'user_friendships', only: [:show, :index]
-    get 'details',                  to: 'users#details',          as:   'user_details'
-    get 'settings',                 to: 'users#settings',         as:   'user_settings'
-    # get 'queue/:action',  to: "queue",      as: 'queue',      constraints: {action: /list|recommend|show/}
+    # get 'details',                  to: 'users#details',          as:   'user_details'
+    # get 'settings',                 to: 'users#settings',         as:   'user_settings'
+    # # get 'queue/:action',  to: "queue",      as: 'queue',      constraints: {action: /list|recommend|show/}
   end
 
   get '/:user_id', to: 'users#show', as: 'user', constraints: { :user_id => /.*/ }

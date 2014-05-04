@@ -73,6 +73,7 @@ group :assets do
   # gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
   gem 'masonry-rails'
+  gem 'remotipart', '~> 1.2'
   # gem 'turbolinks'
 
 end

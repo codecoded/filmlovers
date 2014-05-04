@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
   gravtastic
   mount_uploader :avatar, AvatarUploader  
 
-  exluded_names = %w(films lists users login current_user persons channels queue site auth signout admin filmlovers friendships friends recommendations recommend)
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable#, :validatable
+  exluded_names = %w(films lists users user login current_user persons channels queue site auth signout admin filmlovers friendships friends recommendations recommend)
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   default_scope order(:created_at)
   

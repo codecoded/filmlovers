@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def user_id
-    params[:user_id]
+    params[:user_id] || current_user.id
   end
   
   def viewing_own?

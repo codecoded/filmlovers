@@ -33,4 +33,15 @@ module ApplicationHelper
     end
   end
 
+  def alert_msg
+    case params[:msg]
+      when 'profile' then 'Profile details updated'
+    end
+  end
+
+  def error_msg
+    case params[:err]
+      when 'profile' then 'Unable to update your profile details'
+    end
+  end
 end

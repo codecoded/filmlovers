@@ -35,9 +35,10 @@ class RegistrationsController < Devise::RegistrationsController
     # u.avatar.identifier # => 'file.png'
 
     # throw params[:user][:profile_a]
-    successfully_updated = if needs_password?(@user, params)
+    successfully_updated = if needs_password?(@user, params) 
       @user.update_with_password(params[:user])
-      @user.save
+      @user.errors.delete :current_password
+      @user.errors.count > 0 ? false : @user.save
     else
       # remove the virtual current_password attribute update_without_password
       # doesn't know how to ignore it
@@ -74,5 +75,6 @@ class RegistrationsController < Devise::RegistrationsController
   # extend this as needed
   def needs_password?(user, params)
     user.email != params[:user][:email] || params[:user][:password].present?
+    # false
   end
 end

@@ -13,9 +13,10 @@ FL.Users = {
 
   initListeners: function(){
     $(document).on('ajax:success', '#signupform, #signinform', function(){window.location = '/'})
-    $(document).on('ajax:success', '#profileDetailsForm', function(data, xhr, response){
-      window.location = '/'}
-    )
+    $(document).on('ajax:success', '#profileDetailsForm', function(data, xhr, response){ 
+      window.location.reload();
+      // $('#profileDetailsForm').replaceWith($('#profileDetailsForm', xhr.responseText))  
+    })
     $(document).on('ajax:error', '#signupform', users.registrationError)
     $(document).on('ajax:error', '#profileDetailsForm', users.profileDetailsError)
     $(document).on('ajax:error', '#signinform', users.loginError)

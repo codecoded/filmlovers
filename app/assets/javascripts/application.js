@@ -16,5 +16,6 @@
 //= require FL
 //= require masonry/jquery.masonry
 //= jquery.infinitescroll
+//= require jquery.remotipart
 //= require_directory .
 

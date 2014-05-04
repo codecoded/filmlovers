@@ -34,10 +34,12 @@
             <td align="center">Watched</td>
             <td align="center">Loved</td>
             <td align="center">Owned</td>
+            <td align="center">Friends</td>
             <td align="center">Similarity</td>
             <% if viewing_own? %><td align="center">Actions</td><% end %>
           </tr>
-          <% friendships.each do |friendship| %>
+          <% @friends = viewing_own? ? friendships : friendships.confirmed %>
+          <% @friends.each do |friendship| %>
           <% present(friendship.friend, UserPresenter) do |presenter| %>
             <tr>
               <td>
@@ -53,6 +55,9 @@
                   <% end %>              
                 </td>   
               <% end %> 
+              <td align="center">
+                <%= friendship.friend.friendships.confirmed.count %>
+               </td>
               <td align="center">
                 <% if logged_in? %>
                 <%= number_to_percentage(current_user.compare_to(friendship.friend).overall, precision: 1) %>

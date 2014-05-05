@@ -1,12 +1,12 @@
-<% pagination ||= paginate presenter.film_entries %>
+<% pagination ||= paginate user_presenter.film_entries %>
 
-<%# films_entries_presenter =presenter.films_entries_presenter %>
+<%# films_entries_presenter =user_presenter.films_entries_presenter %>
 
 <div class="row margin-bottom" id="films-content">
   <div class="large-12 columns text-center">
     <%= pagination %>
   </div> 
-  <% presenter.film_entries.each do |film_entry| %>
+  <% user_presenter.film_entries.each do |film_entry| %>
     <% present(film_entry) do |film_entry_presenter| %>
         <%= div_for film_entry.film, class: 'large-2 small-6 columns' do %>
           <%= content_tag :div, class: 'flip-container', data: {'film-url'=> film_path(film_entry.film)} do %>
@@ -27,11 +27,13 @@
               </p>
             </div>
           <% end %>
-          <ul class="user-rankings">
-            <% [:watched, :loved, :owned].each do |action| %>
-                <%= film_entry_presenter.counter_link action %>
-            <% end %>
-          </ul>
+          <% if current_user %>
+            <ul class="user-rankings">
+              <% [:watched, :loved, :owned].each do |action| %>
+                  <%= film_entry_presenter.counter_link action %>
+              <% end %>
+            </ul>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

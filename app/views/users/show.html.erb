@@ -36,7 +36,7 @@
           <section <%= 'class=active' if params[:action]=='film_entries' %>>
             <p class="title" data-section-title><a href="#panel1">Films</a></p>
             <div class="content" data-section-content>
-              <%= render partial: 'films', locals: {presenter: presenter} %>
+              <%= render partial: 'films', locals: {user_presenter: presenter} %>
             </div>
           </section>
 <!--           <%# if viewing_own? %>

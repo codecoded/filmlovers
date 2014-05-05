@@ -185,12 +185,12 @@ class  TmdbPresenter < BasePresenter
     film_details['tagline']
   end
 
-  def starring
-    return unless film_details.credits and film_details.credits.cast
-    @starring = film_details.credits.cast.take(3).map do |person|
+  def starring(count=3)
+    return unless credits
+    @starring = credits.cast.take(count).map do |person|
       link_to person.name, person_path(person.id) 
     end
-    @starring.join(', ').html_safe
+    # @starring.join(', ').html_safe
   end
 
   def character
@@ -281,9 +281,9 @@ class  TmdbPresenter < BasePresenter
     end
   end
 
-  def starring(count=3)
-    credits.cast.take(count).map(&:name) if credits
-  end
+  # def starring(count=3)
+  #   credits.cast.take(count).map(&:name) if credits
+  # end
 
   def alternative_titles
     presenter.alternative_titles['titles'] if alternative_titles?

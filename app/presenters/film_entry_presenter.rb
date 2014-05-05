@@ -10,25 +10,6 @@ class FilmEntryPresenter < BasePresenter
     @film_presenter ||= FilmPresenter.new(film, @template)
   end
 
-  def rating_count
-    @rating_count = film.entries.count
-  end
-
-  def loved
-    counter_for :loved
-  end
-
-  def watched
-    counter_for :watched
-  end
-
-  def filmlovr_rating
-    loved_count = (loved > watched ? watched : loved)
-    return 0 if watched <= 0 
-    ((loved_count / watched.to_f) * 100.0).round
-  end
-
-
   def self.from_films(films, template)
 
     current_user = template.current_user

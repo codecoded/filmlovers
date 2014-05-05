@@ -1,12 +1,7 @@
 <% present(film_entry, FilmEntryPresenter) do |film_entry_presenter| %>
-  <ul class="user-rankings" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+  <ul class="user-rankings">
     <% [:watched, :loved, :owned].each do |action| %>
         <%= film_entry_presenter.counter_link action %>
     <% end %>
-    <meta itemprop="reviewCount" content="<%= film_entry_presenter.film_presenter.rating_count %>">
-    <meta itemprop="worstRating" content = "1">
-    <meta itemprop="ratingValue" content="<%= film_entry_presenter.filmlovr_rating %>" /> 
-    <meta itemprop="bestRating" content = "100">
-    <meta itemprop="name" content="filmlovr rating">
   </ul>
 <% end %>

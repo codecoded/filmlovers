@@ -19,7 +19,12 @@
 
     <%= favicon_link_tag 'favicon.ico' %>
 
-    <%= display_meta_tags :site => "filmlovr.com",title: "Discover films with friends" , description: "filmlovr.com allows you to discover new films by directly recommending the films you love to friends. Including lists of films in cinema, coming soon and most popular, this site is for all filmlovers!", keywords: 'filmlovers, film recommendations, latest movies, discover films, filmlovr, movie lovers, latest films, in cinemas, now showing, popular films, film library, film catalogue'  %>
+    <%= display_meta_tags site: "filmlovr.com", 
+                          reverse: true,
+                          title: "Discover films with friends" , 
+                          description: "filmlovr.com allows you to discover new films by directly recommending the films you love to friends. Including lists of films in cinema, coming soon and most popular, this site is for all filmlovers!", 
+                          keywords: 'filmlovers, film recommendations, latest movies, discover films, filmlovr, movie lovers, latest films, in cinemas, now showing, popular films, film library, film catalogue',
+                          publisher: "https://www.google.com/+FilmlovrCom"  %>
 
     <%= stylesheet_link_tag    "application" %>
 

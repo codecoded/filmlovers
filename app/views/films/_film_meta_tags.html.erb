@@ -1,4 +1,4 @@
-<% @tagline = presenter.tagline ? presenter.tagline : "Synopsis, Trailer, Photos, Cast + Crew" %>
+<% @tagline = !presenter.tagline.empty? ? presenter.tagline : "Synopsis, Trailer, Photos, Cast + Crew" %>
 <% set_meta_tags title: "#{film.title} (#{film.year}) directed by #{presenter.film.director} • #{@tagline}" , description: presenter.overview, canonical: film_url(film)  %>
 
 <% set_meta_tags :og => {

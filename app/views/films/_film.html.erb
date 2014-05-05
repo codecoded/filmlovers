@@ -1,5 +1,5 @@
 <% present(film, FilmPresenter) do |presenter| %>
-  <%= div_for film, class: 'large-2 small-6 columns' do %>
+  <%= div_for film, class: 'large-2 small-6 columns', itemscope:'', itemtype:"http://schema.org/Movie"  do %>
     <%= render partial: 'films/film_container', locals: {presenter: presenter} %>  
   <% end %>
 <% end %>

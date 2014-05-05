@@ -9,7 +9,7 @@ class  RottenPresenter < BasePresenter
   end
 
   def title_with_year
-    "#{film.title} - #{film.year}"
+    "#{film.title} (#{film.year})"
   end
 
   def year_and_director

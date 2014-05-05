@@ -1,4 +1,4 @@
-<%= content_tag :div, class: 'flip-container', data: {'film-url'=> film_path(presenter.film)}, itemscope:'', itemtype:"http://schema.org/Movie" do %>
+<%= content_tag :div, class: 'flip-container', data: {'film-url'=> film_path(presenter.film)} do %>
   <div class="upper">
      <%= presenter.poster %>
       <meta itemprop="name" content='<%=presenter.film.title%>' />

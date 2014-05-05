@@ -9,6 +9,28 @@ class FilmPresenter < BasePresenter
   def counts
     @counts ||= FilmEntry.counts_for_film(film.id)
   end
+  
+  def rating_count
+    @rating_count = film.entries.count
+  end
+
+  def loved
+    counts.loved_count
+  end
+
+  def watched
+    counts.watched_count
+  end
+
+  def owned
+    counts.owned_count
+  end
+
+  def filmlovr_rating
+    loved_count = (loved > watched ? watched : loved)
+    return 0 if watched <= 0 
+    ((loved_count / watched.to_f) * 100.0).round
+  end
 
   def film_entry
     film.entries.first || current_user.film_entries.new(film_id: film.id)

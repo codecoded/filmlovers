@@ -1,5 +1,3 @@
-<% set_meta_tags canonical: film_url(film) %>
-
 <% film_presenter = present(film) %>
 <% present(film.details, film.details_presenter) do |presenter| %>
   <%= render partial: 'film_meta_tags', locals: {presenter: presenter}  %>
@@ -16,7 +14,6 @@
   <div class="row margin-bottom"  itemscope itemtype="http://schema.org/Movie">
     <div class="large-8 small-12 columns">
       <div class="pod margin-bottom synopsis">
-        <meta >
         <h1 itemprop="name"><%= film.title %></h1>
         <h2 >
           <span itemprop="datePublished" content='<%=presenter.film.release_date%>'>
@@ -64,10 +61,15 @@
       </div>
       <div class="margin-bottom">
         <h4>filmlovers who...</h4>
-        <ul class="button-list">
-          <li class="watched" itemprop="interactionCount" content='<%="UserPlays:#{film_presenter.counts.watched_count}"%>'><%= film_presenter.counts.watched_count %> watched this film</li>
-          <li class="loved" itemprop="interactionCount" content='<%="UserLikes:#{film_presenter.counts.loved_count}"%>'><%= film_presenter.counts.loved_count %> loved this film</li>
-          <li class="owned"><%= film_presenter.counts.owned_count %> own this film</li>
+        <ul class="button-list" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+          <li class="watched" itemprop="interactionCount" content='<%="UserPlays:#{film_presenter.watched}"%>'><%= film_presenter.watched %> watched this film</li>
+          <li class="loved" itemprop="interactionCount" content='<%="UserLikes:#{film_presenter.loved}"%>'><%= film_presenter.loved %> loved this film</li>
+          <li class="owned"><%= film_presenter.owned %> own this film</li>
+          <meta itemprop="reviewCount" content="<%= film_presenter.rating_count %>">
+          <meta itemprop="worstRating" content = "1">
+          <meta itemprop="ratingValue" content="<%= film_presenter.filmlovr_rating %>" /> 
+          <meta itemprop="bestRating" content = "100">
+          <meta itemprop="name" content="filmlovr rating">
         </ul>
       </div>
       <%if presenter.genres? %>

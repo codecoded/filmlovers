@@ -10,7 +10,7 @@ class  TmdbPresenter < BasePresenter
 
 
   def title_with_year
-    "#{film.title} - #{year}"
+    "#{film.title} (#{year})"
   end
 
   def year_and_director

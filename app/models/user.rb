@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   exluded_names = %w(films lists users user login current_user persons channels queue site auth signout admin filmlovers friendships friends recommendations recommend)
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
-  default_scope order(:created_at)
+  default_scope order('created_at desc')
   
   validates_presence_of   :username, message: 'Please enter a username'
   validates_presence_of   :email, message: 'Please enter an email'

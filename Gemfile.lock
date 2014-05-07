@@ -119,8 +119,8 @@ GEM
     masonry-rails (0.2.0)
       rails
     memcachier (0.0.2)
-    meta-tags (1.5.0)
-      actionpack
+    meta-tags (2.0.0)
+      actionpack (>= 3.0.0)
     metaclass (0.0.1)
     mime-types (1.25)
     mini_magick (3.6.0)
@@ -308,7 +308,7 @@ DEPENDENCIES
   log4r
   masonry-rails
   memcachier
-  meta-tags
+  meta-tags (~> 2.0.0)
   mini_magick
   mocha
   mongo

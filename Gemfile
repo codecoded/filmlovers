@@ -30,7 +30,7 @@ gem "mongoid"
 gem 'newrelic_rpm', '3.5.6.55'
 gem 'rabl'
 gem "eventmachine", "~> 1.0.3"
-gem 'meta-tags', :require => 'meta_tags'
+gem 'meta-tags', "~> 2.0.0", :require => 'meta_tags'
 gem 'gravtastic'
 gem 'sitemap_generator', require: false
 gem 'devise'

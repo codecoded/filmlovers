@@ -50,5 +50,5 @@ class ApplicationController < ActionController::Base
     Log.error "Unable to find users location. Msg: #{msg}"
   end
 
-  helper_method :current_user, :username, :logged_in?, :current_url, :user_location
+  helper_method :current_user, :username, :logged_in?, :current_url, :user_location, :page
 end

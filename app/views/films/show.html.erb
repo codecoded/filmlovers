@@ -62,8 +62,8 @@
       <div class="margin-bottom">
         <h4>filmlovers who...</h4>
         <ul class="button-list" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-          <li class="watched" itemprop="interactionCount" content='<%="UserPlays:#{film_presenter.watched}"%>'><%= film_presenter.watched %> watched this film</li>
-          <li class="loved" itemprop="interactionCount" content='<%="UserLikes:#{film_presenter.loved}"%>'><%= film_presenter.loved %> loved this film</li>
+          <li class="watched"><%= film_presenter.watched %> watched this film</li>
+          <li class="loved"><%= film_presenter.loved %> loved this film</li>
           <li class="owned"><%= film_presenter.owned %> own this film</li>
           <meta itemprop="reviewCount" content="<%= film_presenter.rating_count %>">
           <meta itemprop="worstRating" content = "1">

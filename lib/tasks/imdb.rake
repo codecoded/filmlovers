@@ -8,8 +8,8 @@ namespace :imdb do
     FilmProvider.where("name = 'imdb' and rating is null").find_each do |imdb_provider|
       begin
         movie = Imdb::Movie.find_or_fetch(imdb_provider.reference)
-        if film = imdb_provider.film
-          film.add_provider(movie) if movie
+        if film = imdb_provider.film and movie
+          film.add_provider(movie)
         else
           imdb_provider.delete
         end

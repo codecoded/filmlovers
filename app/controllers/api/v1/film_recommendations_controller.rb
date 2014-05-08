@@ -3,10 +3,6 @@ module Api
     class FilmRecommendationsController < BaseController
 
       def received
-        # options = paging_options sort_by: :total, page_size: 10
-        # @query = ActiveUserQuery.new Film.recommendations_view_for(current_user.id, :recommended), options
-
-
         if friends_view?
           @results = User.recommendations_view_for(current_user.id, state)
           render 'received_friends'
@@ -18,7 +14,9 @@ module Api
             @results = Film.recommendations_view_for(current_user.id, state)
           end
         end
-        # @film_entries ||= user_films.received_recommendations
+      rescue => msg
+        Log.error "Api::V1::FilmRecommendationsController => #{msg}, user: {current_user}"
+        @results = {}
       end
 
       def sent

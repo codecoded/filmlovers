@@ -50,6 +50,8 @@ class FacebookChannel
     passport.save!
     Log.info "User '#{user.username}' token exchanged"     
     passport   
+  rescue => msg
+    Log.error "FacebookChannel:exchange_token --- User Id=#{user.id}, Msg: #{msg}"
   end
 
 end

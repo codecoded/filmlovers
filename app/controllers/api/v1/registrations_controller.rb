@@ -12,14 +12,12 @@ module Api
             @user = User.from_facebook_token(access_token)
             @user.channels[:facebook].exchange_token
           rescue Koala::Facebook::AuthenticationError => e
-            return render_error('Facebook', ['OAuth Token', 'Facebook token invalid. Please close the filmlovr app and try again'], "User: #{@user}, Msg: #{e}")
+            return render_error('Facebook', ['AuthenticationError', 'Facebook token invalid. Please close the filmlovr app and try again'], "User: #{@user}, Msg: #{e}")
           end
         else
-
+          return if invalid_details? 
           @user = User.new(user_details)
         end
-
-        return if invalid_details? 
 
         if @user.valid?
           @user.ensure_authentication_token
@@ -41,6 +39,7 @@ module Api
       end
 
       protected
+
       def access_token
         @token ||= params[:access_token]
       end

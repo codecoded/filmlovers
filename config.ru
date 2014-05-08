@@ -12,7 +12,7 @@ use Rack::Block do
   ip_pattern '144.76.95.232' do halt 404 end
   ip_pattern '5.255.75.47' do halt 404 end
   ip_pattern '217.79.181.76' do halt 404 end
-  ip_pattern '50.28.15.25 ' do halt 404 end
+  ip_pattern '50.28.15.25' do halt 404 end
   ip_pattern '67.20.61.120' do halt 404 end
 end
     

@@ -10,15 +10,16 @@ module Api
         if access_token
           begin
             @user = User.from_facebook_token(access_token)
+            @user.channels[:facebook].exchange_token
           rescue Koala::Facebook::AuthenticationError => e
-            return render_error('Facebook', ['OAuth Token', 'Facebook token invalid. Please close the filmlovr app and try again'], e)
+            return render_error('Facebook', ['OAuth Token', 'Facebook token invalid. Please close the filmlovr app and try again'], "User: #{@user}, Msg: #{e}")
           end
         else
-          if params[:user].blank?
-            return render_error('User', ['User', 'Username, email and password required'], 'User details are blank')
-          end
-          @user = User.new(params[:user].slice(:username, :password, :email))
+
+          @user = User.new(user_details)
         end
+
+        return if invalid_details? 
 
         if @user.valid?
           @user.ensure_authentication_token
@@ -43,6 +44,37 @@ module Api
       def access_token
         @token ||= params[:access_token]
       end
+
+      def user_details
+        params[:user].slice(:username, :password, :email) if params[:user]
+      end
+
+      def username
+        user_details[:username]
+      end
+
+      def email
+        user_details[:email]
+      end
+
+      def password
+        user_details[:password]
+      end
+
+      def invalid_details?
+        if user_details.blank? 
+          return render_error('User', ['Username, email and password required'], 'User details are blank')
+        elsif email.blank?
+          return render_error('User', ['Email required'], 'Email missing')
+        elsif username.blank?
+          return render_error('User', ['Username required, minimum 3 characters'], 'Username missing')
+        elsif password.blank?
+          return render_error('User', ['Password required, minimum 6 characters'], 'Password missing')
+        elsif !(email =~  Devise.email_regexp)
+          return render_error('User', ["Sorry, this doesn't seem to be a valid email" ], 'Invalid email')
+        end
+      end
+
     end  
   end
 end

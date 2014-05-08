@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   validates :username, exclusion: {:in => exluded_names, message: "Sorry, this username is not available"}
   validates :email, uniqueness: {case_sensitive: false, message: "This email has already been registered!"}, presence: true
   validates_format_of :email, :with  => Devise.email_regexp, message: "Sorry, this doesn't seem to be a valid email"
-  validates_length_of :password, :within => Devise.password_length, too_short: 'Password must be a minimun of 8 characters', too_long: 'Password must be a maximum of 128 characters', on: :create, allow_blank: true
+  # validates_length_of :password, :within => Devise.password_length, too_short: 'Password must be a minimun of 6 characters', too_long: 'Password must be a maximum of 128 characters', on: :create, allow_blank: true
   
 
 

@@ -67,7 +67,7 @@ module Api
           return render_error('User', ['Email required'], 'Email missing')
         elsif username.blank?
           return render_error('User', ['Username required, minimum 3 characters'], 'Username missing')
-        elsif password.blank? or password.length < 6
+        elsif password.blank? or !Devise.password_length.include?(password.length)
           return render_error('User', ['Password required, minimum 6 characters'], 'Password missing')
         elsif !(email =~  Devise.email_regexp)
           return render_error('User', ["Sorry, this doesn't seem to be a valid email" ], 'Invalid email')

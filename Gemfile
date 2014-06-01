@@ -21,7 +21,7 @@ gem 'rack-iframe'
 gem 'log4r'
 gem 'fb-channel-file'
 gem 'pusher'
-
+# gem 'turbolinks'
 # gem 'bson_ext'
 # gem 'jruby-win32ole', '~> 0.8.5'
 gem 'mongo'

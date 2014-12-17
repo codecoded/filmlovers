@@ -31,7 +31,7 @@ class Facebook::UserAPI
     graph.delete_object request_id
   end
 
-  def avatar(height=80, width=80)
+  def avatar(height=90, width=90)
     "https://graph.facebook.com/#{user.uid}/picture?height=#{height}&width=#{width}"
   end
 

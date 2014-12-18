@@ -1,5 +1,6 @@
-require 'arjdbc/jdbc/adapter'
-# require 'active_record/connection_adapters/postgresql_adapter'
+
+#require 'arjdbc/jdbc/adapter'
+require 'active_record/connection_adapters/postgresql_adapter'
 require "active_record_postgres_array/string"
 require "active_record_postgres_array/array"
 

@@ -28,8 +28,8 @@ class FilmPresenter < BasePresenter
 
   def filmlovr_rating
     loved_count = (loved > watched ? watched : loved)
-    return 0 if watched <= 0 
-    ((loved_count / watched.to_f) * 100.0).round
+    return 0 if watched.to_i <= 0 
+    ((loved_count.to_i / watched.to_f) * 100.0).round
   end
 
   def film_entry

@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.12'
+#ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.12'
+ruby '2.1.2'
+gem 'rails', '3.2.15'
 
-
-gem 'rails'
-# gem 'pg'
-gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
+gem 'pg'
+#gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
 
 gem 'puma'
 gem 'nokogiri'
@@ -29,7 +29,7 @@ gem 'rest-client'
 gem "mongoid"
 gem 'newrelic_rpm', '3.5.6.55'
 gem 'rabl'
-gem "eventmachine", "~> 1.0.3"
+#gem "eventmachine", "~> 1.0.3"
 gem 'meta-tags', "~> 2.0.0", :require => 'meta_tags'
 gem 'gravtastic'
 gem 'sitemap_generator', require: false
@@ -39,7 +39,8 @@ gem 'state_machine'
 gem 'execjs'
 gem 'simple_form'
 
-gem 'therubyrhino'  
+#gem 'therubyrhino'  
+
 gem 'kaminari' #for pagination
 gem 'geocoder' # for postcode lookup
 gem 'dalli'
@@ -59,7 +60,7 @@ gem 'unf'
 
 gem 'foreigner', require: false
 # gem 'activerecord-postgres-hstore'
-# gem 'activerecord-postgres-array', '0.0.10'
+gem 'activerecord-postgres-array', '0.0.10'
 # gem "jruby-activerecord-postgres-array", git: 'https://github.com/dalton/jruby-activerecord-postgres-array.git'
 # Gems used only for assets and not required
 # in production environments by default.
@@ -76,6 +77,8 @@ group :assets do
   gem 'remotipart', '~> 1.2'
   # gem 'turbolinks'
 
+  # gem 'therubyracer', :platforms => :ruby
+  # gem 'libv8', '~> 3.11.8'  # Update version number as needed
 end
 
 group :test do
